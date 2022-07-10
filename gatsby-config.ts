@@ -1,9 +1,11 @@
 import type { GatsbyConfig } from "gatsby";
 
+const siteUrl = "https://belarusians.nl";
+
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `Belarusians NL`,
-    siteUrl: `https://belarusians.nl`,
+    siteUrl,
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
@@ -13,14 +15,30 @@ const config: GatsbyConfig = {
     "gatsby-plugin-vanilla-extract",
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-image",
+    {
+      resolve: "gatsby-plugin-react-i18next",
+      options: {
+        languages: ["nl", "be", "ru"],
+        defaultLanguage: "be",
+        siteUrl, // for helmet
+      },
+    },
     "gatsby-plugin-sharp",
     "gatsby-transformer-remark",
     "gatsby-transformer-sharp",
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/locales`,
+        name: "locale",
+      },
+      __key: "locale",
+    },
+    {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "pages",
-        path: "./src/pages/",
+        path: `${__dirname}/src/pages/`,
       },
       __key: "pages",
     },

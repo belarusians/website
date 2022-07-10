@@ -8,7 +8,7 @@ const padding = {
   extraLarge: "400px",
 };
 
-const properties = defineProperties({
+const responsiveProperties = defineProperties({
   conditions: {
     xs: {},
     sm: { "@media": "screen and (min-width: 768px)" },
@@ -18,7 +18,7 @@ const properties = defineProperties({
   },
   defaultCondition: "lg",
   properties: {
-    display: ["none", "flex", "block", "inline"],
+    display: ["none", "flex", "block"],
     flexDirection: ["row", "column"],
     justifyContent: [
       "stretch",
@@ -33,8 +33,8 @@ const properties = defineProperties({
     paddingBottom: padding,
     paddingLeft: padding,
     paddingRight: padding,
-    height: ["auto", "100%", "50px", "100px", "200px", "300px"],
-    width: ["auto", "100%", "50px", "100px", "200px", "300px"],
+    height: ["auto", "50px", "100px", "200px", "300px"],
+    width: ["auto", "50px", "100px", "200px", "300px"],
   },
   shorthands: {
     padding: ["paddingTop", "paddingBottom", "paddingLeft", "paddingRight"],
@@ -44,5 +44,4 @@ const properties = defineProperties({
   },
 });
 
-export const sprinkles = createSprinkles(properties);
-export type Sprinkles = Parameters<typeof sprinkles>[0];
+export const sprinkles = createSprinkles(responsiveProperties);

@@ -1,6 +1,7 @@
+import { style } from "@vanilla-extract/css";
 import { sprinkles } from "./sprinkles.css";
 
-export const section = sprinkles({
+const ui = sprinkles({
   paddingX: {
     xs: "extraSmall",
     sm: "small",
@@ -9,3 +10,5 @@ export const section = sprinkles({
     xl: "extraLarge",
   },
 });
+
+export const section = style([ui]);
