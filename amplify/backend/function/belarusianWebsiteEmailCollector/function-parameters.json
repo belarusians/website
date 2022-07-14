@@ -1,0 +1,10 @@
+{
+  "permissions": {},
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "s3Bucket",
+      "environmentVariableName": "S3_BUCKET"
+    }
+  ]
+}

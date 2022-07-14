@@ -1,0 +1,24 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-amplifyb4fce2a897214-staging-135412-authRole",
+      "UnauthRoleArn": "arn:aws:iam::381434666938:role/amplify-amplifyb4fce2a897214-staging-135412-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::381434666938:role/amplify-amplifyb4fce2a897214-staging-135412-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-amplifyb4fce2a897214-staging-135412-deployment",
+      "UnauthRoleName": "amplify-amplifyb4fce2a897214-staging-135412-unauthRole",
+      "StackName": "amplify-amplifyb4fce2a897214-staging-135412",
+      "StackId": "arn:aws:cloudformation:eu-central-1:381434666938:stack/amplify-amplifyb4fce2a897214-staging-135412/470a6ae0-02b3-11ed-a408-02106cecd228",
+      "AmplifyAppId": "d3q3cg059wqnha"
+    },
+    "categories": {
+      "function": {
+        "belarusianWebsiteEmailCollector": {
+          "s3Bucket": "belarusians-emails",
+          "deploymentBucketName": "amplify-amplifyb4fce2a897214-staging-135412-deployment",
+          "s3Key": "amplify-builds/belarusianWebsiteEmailCollector-78384b2f3368684f3853-build.zip"
+        }
+      }
+    }
+  }
+}
