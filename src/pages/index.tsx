@@ -4,7 +4,6 @@ import { graphql } from "gatsby";
 import { Amplify } from "aws-amplify";
 
 import { Layout } from "../components/layout";
-import "./index.css";
 
 // markup
 const IndexPage = () => {

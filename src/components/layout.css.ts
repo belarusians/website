@@ -1,5 +1,11 @@
 import { style } from "@vanilla-extract/css";
+import { globalStyle } from "@vanilla-extract/css";
+
 import { sprinkles } from "./sprinkles.css";
+
+globalStyle("body, body *", {
+  fontFamily: "'Work Sans', sans-serif;",
+});
 
 const ui = sprinkles({
   paddingX: {
