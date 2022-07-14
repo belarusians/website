@@ -11,7 +11,7 @@ const responsiveProperties = defineProperties({
   conditions: {
     xs: {},
     sm: { "@media": "screen and (min-width: 768px)" },
-    md: { "@media": "screen and (min-width: 1200px)" },
+    md: { "@media": "screen and (min-width: 1024px)" },
     lg: { "@media": "screen and (min-width: 1400px)" },
     xl: { "@media": "screen and (min-width: 2000px)" },
   },
