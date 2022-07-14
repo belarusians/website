@@ -1,11 +1,10 @@
 import { defineProperties, createSprinkles } from "@vanilla-extract/sprinkles";
 
 const padding = {
-  extraSmall: "10px",
+  none: "0",
   small: "40px",
   medium: "80px",
   large: "160px",
-  extraLarge: "400px",
 };
 
 const responsiveProperties = defineProperties({
@@ -20,21 +19,16 @@ const responsiveProperties = defineProperties({
   properties: {
     display: ["none", "flex", "block"],
     flexDirection: ["row", "column"],
-    justifyContent: [
-      "stretch",
-      "flex-start",
-      "center",
-      "flex-end",
-      "space-around",
-      "space-between",
-    ],
+    justifyContent: ["stretch", "flex-start", "center", "flex-end", "space-around", "space-between"],
     alignItems: ["stretch", "flex-start", "center", "flex-end"],
     paddingTop: padding,
     paddingBottom: padding,
     paddingLeft: padding,
     paddingRight: padding,
-    height: ["auto", "50px", "100px", "200px", "300px"],
-    width: ["auto", "50px", "100px", "200px", "300px"],
+    height: ["auto", "50px", "100px", "150px", "200px", "300px"],
+    width: ["auto", "87px", "173px", "200px", "260px", "300px"],
+    fontSize: ["1rem", "1.2rem", "1.5rem", "2rem", "3rem"],
+    maxWidth: ["75rem", "100rem", "150rem"],
   },
   shorthands: {
     padding: ["paddingTop", "paddingBottom", "paddingLeft", "paddingRight"],
