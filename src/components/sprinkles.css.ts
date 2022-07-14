@@ -1,6 +1,8 @@
+import { createTheme } from "@vanilla-extract/css";
 import { defineProperties, createSprinkles } from "@vanilla-extract/sprinkles";
 
 const padding = {
+  smallButton: "10px",
   none: "0",
   small: "40px",
   medium: "80px",
@@ -9,7 +11,7 @@ const padding = {
 
 const responsiveProperties = defineProperties({
   conditions: {
-    xs: {},
+    xs: { "@media": "screen" },
     sm: { "@media": "screen and (min-width: 768px)" },
     md: { "@media": "screen and (min-width: 1024px)" },
     lg: { "@media": "screen and (min-width: 1400px)" },
@@ -35,6 +37,16 @@ const responsiveProperties = defineProperties({
     paddingX: ["paddingLeft", "paddingRight"],
     paddingY: ["paddingTop", "paddingBottom"],
     placeItems: ["justifyContent", "alignItems"],
+  },
+});
+
+export const [themeClass, vars] = createTheme({
+  color: {
+    red: "#ff0000",
+  },
+  shadows: {
+    small: "0 3px 6px 1px #9494944d",
+    medium: "0 3px 6px 3px #9494944d",
   },
 });
 
