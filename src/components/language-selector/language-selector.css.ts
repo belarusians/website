@@ -23,7 +23,12 @@ export const li = style({});
 export const button = style([
   sprinkles({
     padding: {
-      xs: "smallButton",
+      xs: "extraSmallButton",
+      sm: "smallButton",
+    },
+    fontSize: {
+      xs: "0.8rem",
+      sm: "1rem",
     },
   }),
   {

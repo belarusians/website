@@ -10,7 +10,7 @@ globalStyle("body, body *", {
 const ui = sprinkles({
   paddingX: {
     xs: "small",
-    md: "none",
+    sm: "medium",
   },
 });
 

@@ -2,16 +2,17 @@ import { createTheme } from "@vanilla-extract/css";
 import { defineProperties, createSprinkles } from "@vanilla-extract/sprinkles";
 
 const padding = {
+  extraSmallButton: "5px",
   smallButton: "10px",
   none: "0",
-  small: "40px",
-  medium: "80px",
-  large: "160px",
+  small: "20px",
+  medium: "40px",
+  large: "80px",
 };
 
 const responsiveProperties = defineProperties({
   conditions: {
-    xs: { "@media": "screen" },
+    xs: {},
     sm: { "@media": "screen and (min-width: 768px)" },
     md: { "@media": "screen and (min-width: 1024px)" },
     lg: { "@media": "screen and (min-width: 1400px)" },
@@ -27,9 +28,12 @@ const responsiveProperties = defineProperties({
     paddingBottom: padding,
     paddingLeft: padding,
     paddingRight: padding,
-    height: ["auto", "50px", "100px", "150px", "200px", "300px"],
-    width: ["auto", "87px", "173px", "200px", "260px", "300px"],
-    fontSize: ["1rem", "1.2rem", "1.5rem", "2rem", "3rem"],
+    marginTop: [0, "10px"],
+    height: ["auto", "30px", "50px", "70px", "100px", "150px", "200px"],
+    minHeight: ["auto", "30px", "50px", "70px", "100px", "150px", "200px"],
+    width: ["auto", "52px", "87px", "173px", "260px", "300px"],
+    minWidth: ["auto", "52px", "87px", "173px", "260px", "300px"],
+    fontSize: ["0.6rem", "0.8rem", "1rem", "1.2rem", "1.5rem", "2rem", "3rem"],
     maxWidth: ["75rem", "100rem", "150rem"],
   },
   shorthands: {
