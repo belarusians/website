@@ -30,16 +30,26 @@ export const subscribeTitle = style([
 ]);
 
 export const subscribeInput = style([
-  sprinkles({}),
+  sprinkles({
+    fontSize: {
+      xs: "0.8rem",
+      sm: "1.5rem",
+    },
+    paddingY: {
+      xs: "small",
+      sm: "medium",
+    },
+    paddingX: {
+      xs: "medium",
+      sm: "large",
+    },
+  }),
   {
-    all: "unset",
     textAlign: "center",
-    padding: "0.8rem 1.2rem",
-    minWidth: "20rem",
+    minWidth: "15rem",
     border: `1px solid ${vars.color.white}`,
     borderRadius: "5px",
     boxShadow: vars.shadows.small,
-    fontSize: "1.5rem",
     selectors: {
       "&:focus": {
         outline: "none",
@@ -58,12 +68,22 @@ export const subscribeInput = style([
 
 // TODO: spinner is written ugly, fix it
 export const subscribeButton = style([
-  sprinkles({}),
+  sprinkles({
+    paddingY: {
+      xs: "small",
+      sm: "medium",
+    },
+    paddingX: {
+      xs: "medium",
+      sm: "large",
+    },
+  }),
   {
-    all: "unset",
+    fontSize: "1rem",
+    backgroundColor: vars.color.white,
+    border: "none",
     marginTop: "1.5rem",
     cursor: "pointer",
-    padding: "0.8rem 1rem",
     borderRadius: "5px",
     boxShadow: vars.shadows.small,
     selectors: {

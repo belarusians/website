@@ -4,7 +4,7 @@ import { sprinkles, vars } from "../sprinkles.css";
 
 export const header = style([
   {
-    minHeight: "70px",
+    minHeight: "100px",
     display: "flex",
     alignItems: "center",
   },
@@ -13,22 +13,22 @@ export const header = style([
 export const image = style([
   sprinkles({
     minHeight: {
-      xs: "30px",
+      xs: "50px",
       md: "100px",
       lg: "150px",
     },
     height: {
-      xs: "30px",
+      xs: "50px",
       md: "100px",
       lg: "150px",
     },
     minWidth: {
-      xs: "52px",
+      xs: "87px",
       md: "173px",
       lg: "260px",
     },
     width: {
-      xs: "52px",
+      xs: "87px",
       md: "173px",
       lg: "260px",
     },
@@ -54,8 +54,8 @@ export const title = style([
 export const titleDescription = style([
   sprinkles({
     fontSize: {
-      xs: "0.6rem",
-      md: "1rem",
+      xs: "0.8rem",
+      lg: "1rem",
     },
     marginTop: {
       xs: 0,
@@ -70,8 +70,7 @@ export const titleDescription = style([
 export const titleHeading = style([
   sprinkles({
     fontSize: {
-      xs: "1rem",
-      md: "1.2rem",
+      xs: "1.2rem",
       lg: "2rem",
     },
   }),

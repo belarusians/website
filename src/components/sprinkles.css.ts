@@ -2,12 +2,15 @@ import { createTheme } from "@vanilla-extract/css";
 import { defineProperties, createSprinkles } from "@vanilla-extract/sprinkles";
 
 const padding = {
-  extraSmallButton: "5px",
-  smallButton: "10px",
   none: "0",
-  small: "20px",
-  medium: "40px",
-  large: "80px",
+  extraSmall: "0.3rem",
+  small: "0.6rem",
+  medium: "0.8rem",
+  large: "1rem",
+  extraLarge: "1.2rem",
+  // @deprecated
+  smallOld: "20px",
+  mediumOld: "40px",
 };
 
 const responsiveProperties = defineProperties({
