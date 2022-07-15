@@ -3,20 +3,28 @@ import { Trans } from "react-i18next";
 import * as React from "react";
 import { FormEvent, HTMLAttributes } from "react";
 import { API } from "aws-amplify";
-import { fakeInput, subscribe, subscribeButton, subscribeInput, subscribeTitle } from "./subscribe.css";
+import { fakeInput, subscribe, subscribeButton, subscribeInput, subscribeTitle, spinner } from "./subscribe.css";
+
+const fakeInputId = "fake-input-id";
+
+function updateWith(event: FormEvent<HTMLInputElement>): void {
+  const fakeEl = document.getElementById(fakeInputId) as HTMLDivElement;
+  fakeEl.innerHTML = event.currentTarget.value;
+
+  const fakeStyles = window.getComputedStyle(fakeEl);
+  event.currentTarget.style.width = fakeStyles.width;
+}
 
 export function Subscribe(props: HTMLAttributes<HTMLElement>): JSX.Element {
   const emailInputId = "email-input";
-  const fakeInputId = "fake-input-id";
 
-  function updateWidth(event: FormEvent<HTMLInputElement>): void {
-    const fakeEl = document.getElementById(fakeInputId) as HTMLDivElement;
-    // @ts-ignore
-    fakeEl.innerHTML = event.target.value;
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [isValid, setIsValid] = React.useState(true);
 
-    const fakeStyles = window.getComputedStyle(fakeEl);
-    // @ts-ignore
-    event.target.style.width = fakeStyles.width;
+  function onInput(event: FormEvent<HTMLInputElement>): void {
+    updateWith(event);
+
+    setIsValid(isValidInput(event.currentTarget));
   }
 
   const submit = (event: React.MouseEvent) => {
@@ -24,16 +32,20 @@ export function Subscribe(props: HTMLAttributes<HTMLElement>): JSX.Element {
 
     const emailInput = document.getElementById(emailInputId) as HTMLInputElement;
     if (!isValidInput(emailInput)) {
+      setIsValid(false);
       return;
     }
 
+    setIsLoading(true);
     API.post("subscribe", "/subscribe", {
       body: { email: emailInput.value },
     })
       .then((resp) => {
+        setIsLoading(false);
         console.log("subscribed", resp);
       })
       .catch((e) => {
+        setIsLoading(false);
         console.error(e.toJSON());
       });
   };
@@ -43,9 +55,10 @@ export function Subscribe(props: HTMLAttributes<HTMLElement>): JSX.Element {
       <h2 className={subscribeTitle}>
         <Trans>subscribe-title</Trans>
       </h2>
-      <input onInput={updateWidth} className={subscribeInput} id={emailInputId} name="email" type="text" />
+      <input onInput={onInput} className={subscribeInput + " " + (isValid ? "valid" : "invalid")} id={emailInputId} name="email" type="text" />
       <div className={fakeInput} id={fakeInputId}></div>
-      <button className={subscribeButton} onClick={submit}>
+      <button disabled={isLoading || !isValid} className={subscribeButton + " " + (isLoading ? "loading" : "")} onClick={submit}>
+        <div className={spinner + " " + (isLoading ? "show" : "hide")}></div>
         <Trans>subscribe-button</Trans>
       </button>
     </section>

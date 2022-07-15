@@ -46,6 +46,7 @@ const responsiveProperties = defineProperties({
 
 export const [themeClass, vars] = createTheme({
   color: {
+    white: "#ffffff",
     red: "#ff0000",
     black: "#333333",
   },
