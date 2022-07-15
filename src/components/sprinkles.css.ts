@@ -28,7 +28,7 @@ const responsiveProperties = defineProperties({
     paddingBottom: padding,
     paddingLeft: padding,
     paddingRight: padding,
-    marginTop: [0, "10px"],
+    marginTop: [0, "5px", "10px"],
     height: ["auto", "30px", "50px", "70px", "100px", "150px", "200px"],
     minHeight: ["auto", "30px", "50px", "70px", "100px", "150px", "200px"],
     width: ["auto", "52px", "87px", "173px", "260px", "300px"],
@@ -47,10 +47,12 @@ const responsiveProperties = defineProperties({
 export const [themeClass, vars] = createTheme({
   color: {
     red: "#ff0000",
+    black: "#333333",
   },
   shadows: {
     small: "0 3px 6px 1px #9494944d",
     medium: "0 3px 6px 3px #9494944d",
+    large: "0 3px 6px 5px #9494944d",
   },
 });
 

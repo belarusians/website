@@ -1,10 +1,11 @@
 import { style } from "@vanilla-extract/css";
 import { globalStyle } from "@vanilla-extract/css";
 
-import { sprinkles } from "./sprinkles.css";
+import { sprinkles, vars } from "./sprinkles.css";
 
 globalStyle("body, body *", {
   fontFamily: "'Work Sans', sans-serif;",
+  color: vars.color.black,
 });
 
 const ui = sprinkles({
@@ -18,6 +19,7 @@ export const section = style([
   ui,
   {
     maxWidth: "75rem",
-    margin: "0 auto",
+    marginLeft: "auto",
+    marginRight: "auto",
   },
 ]);
