@@ -1,9 +1,10 @@
 import { Construct } from "constructs";
-import * as cdk from "aws-cdk-lib/core";
+import * as cdk from "aws-cdk-lib";
 import * as amplify from "aws-cdk-lib/aws-amplify";
+import * as s3 from "aws-cdk-lib/aws-s3";
 
 export class AmplifyStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+  constructor(scope: Construct, id: string, props: cdk.StackProps) {
     super(scope, id, props);
 
     const amplifyApp = new amplify.CfnApp(this, "belarusians-website", {
@@ -30,6 +31,10 @@ export class AmplifyStack extends cdk.Stack {
           prefix: "www",
         },
       ],
+    });
+
+    new s3.Bucket(this, "belarusians-emails-bucket", {
+      bucketName: "belarusians-emails",
     });
   }
 }
