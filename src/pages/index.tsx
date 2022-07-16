@@ -6,7 +6,6 @@ import { Amplify } from "aws-amplify";
 import { Layout } from "../components/layout";
 import { SEO } from "../components/SEO";
 
-// markup
 const IndexPage = () => {
   return (
     <>
