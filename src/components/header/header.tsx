@@ -8,7 +8,7 @@ import { LanguageSelector } from "../language-selector/language-selector";
 
 export function Header(props: HTMLAttributes<HTMLElement>): JSX.Element {
   return (
-    <header className={props.className + " " + header}>
+    <div className={props.className + " " + header}>
       <StaticImage className={image} src="../../images/logo.jpeg" alt="Belarusians NL logo" />
       <div className={title}>
         <h3 className={titleHeading}>
@@ -19,6 +19,6 @@ export function Header(props: HTMLAttributes<HTMLElement>): JSX.Element {
         </p>
       </div>
       <LanguageSelector className={languageSelector} />
-    </header>
+    </div>
   );
 }

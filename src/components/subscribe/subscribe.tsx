@@ -1,4 +1,3 @@
-import { section } from "../layout.css";
 import { Trans } from "react-i18next";
 import * as React from "react";
 import { FormEvent, HTMLAttributes } from "react";
@@ -51,7 +50,7 @@ export function Subscribe(props: HTMLAttributes<HTMLElement>): JSX.Element {
   };
 
   return (
-    <section className={props.className + " " + subscribe}>
+    <div className={props.className + " " + subscribe}>
       <h2 className={subscribeTitle}>
         <Trans>subscribe-title</Trans>
       </h2>
@@ -61,7 +60,7 @@ export function Subscribe(props: HTMLAttributes<HTMLElement>): JSX.Element {
         <div className={spinner + " " + (isLoading ? "show" : "hide")}></div>
         <Trans>subscribe-button</Trans>
       </button>
-    </section>
+    </div>
   );
 }
 
