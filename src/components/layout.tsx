@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { Header } from "./header/header";
 import { Subscribe } from "./subscribe/subscribe";
-import { Footer } from "./footer";
+import { Footer } from "./footer/footer";
 
 import { section } from "./layout.css";
 import { themeClass } from "./sprinkles.css";
