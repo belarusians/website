@@ -5,5 +5,7 @@
   "title": "Мара",
   "description": "сообщество беларусов в Нидерландах",
   "subscribe-title": "Мы разрабатываем портал нашей организации. Подписывайтесь, чтобы быть в курсе",
-  "subscribe-button": "Подписаться"
+  "subscribe-input-placeholder": "email",
+  "subscribe-button": "Подписаться",
+  "subscribed-text": "Спасибо за вашу заинтересованность!"
 }

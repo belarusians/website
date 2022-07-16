@@ -5,5 +5,7 @@
   "title": "Мара",
   "description": "суполка беларусаў у Нідэрландах",
   "subscribe-title": "Мы распрацоўваем партал нашай арганізацыі. Падпісвайцеся, каб быць у курсе",
-  "subscribe-button": "Падпісацца"
+  "subscribe-input-placeholder": "email",
+  "subscribe-button": "Падпісацца",
+  "subscribed-text": "Дзякуй за вашу зацікаўленнасць!"
 }

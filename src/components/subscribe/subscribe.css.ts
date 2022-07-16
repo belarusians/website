@@ -29,21 +29,43 @@ export const subscribeTitle = style([
   },
 ]);
 
+const subscribedPlaceholder = sprinkles({
+  fontSize: {
+    xs: "0.8rem",
+    sm: "1.5rem",
+  },
+  paddingY: {
+    xs: "small",
+    sm: "medium",
+  },
+  paddingX: {
+    xs: "medium",
+    sm: "large",
+  },
+});
+
+export const success = style([subscribedPlaceholder]);
+
+const shake = keyframes({
+  "0%": {
+    transform: "translateX(0)",
+  },
+  "25%": {
+    transform: "translateX(5px)",
+  },
+  "50%": {
+    transform: "translateX(-5px)",
+  },
+  "75%": {
+    transform: "translateX(5px)",
+  },
+  "100%": {
+    transform: "translateX(0)",
+  }
+});
+
 export const subscribeInput = style([
-  sprinkles({
-    fontSize: {
-      xs: "0.8rem",
-      sm: "1.5rem",
-    },
-    paddingY: {
-      xs: "small",
-      sm: "medium",
-    },
-    paddingX: {
-      xs: "medium",
-      sm: "large",
-    },
-  }),
+  subscribedPlaceholder,
   {
     WebkitAppearance: "none",
     textAlign: "center",
@@ -62,6 +84,11 @@ export const subscribeInput = style([
       "&.invalid": {
         border: `1px solid ${vars.color.red}`,
       },
+      "&.shake": {
+        position: "relative",
+        animation: `${shake} .6s ease-in-out`,
+        animationIterationCount: 2,
+      }
     },
     transition: "all 0.15s ease-in-out",
   },
@@ -101,8 +128,6 @@ export const subscribeButton = style([
     transition: "all 0.15s ease-in-out",
   },
 ]);
-
-export const subscribeStatus = style({});
 
 const rotate = keyframes({
   "0%": {
