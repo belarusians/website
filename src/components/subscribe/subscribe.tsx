@@ -84,7 +84,7 @@ export function Subscribe(props: HTMLAttributes<HTMLElement>): JSX.Element {
 
       <div className={fakeInput} id={fakeInputId}></div>
       <button disabled={isLoading || isSuccess} className={subscribeButton + " " + (isLoading ? "loading" : "")} onClick={submit}>
-        <div className={spinner + " " + (isLoading ? "show" : "hide")}></div>
+        <span className={spinner + " " + (isLoading ? "show" : "hide")}></span>
         <Trans>subscribe-button</Trans>
       </button>
     </div>
