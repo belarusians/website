@@ -1,11 +1,14 @@
 import type { GatsbyConfig } from "gatsby";
 
-const siteUrl = "https://belarusians.nl";
+const siteUrl = "https://www.belarusians.nl";
 
 const config: GatsbyConfig = {
   siteMetadata: {
-    title: `Belarusians NL`,
-    siteUrl,
+    title: "Mara - Belarusians NL",
+    description:
+      "Official website of Belarusian diaspora in the Netherlands - MARA",
+    url: siteUrl,
+    image: "src/images/logo.jpeg",
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
