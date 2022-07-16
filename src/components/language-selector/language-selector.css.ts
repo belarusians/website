@@ -33,7 +33,7 @@ export const button = style([
   }),
   {
     backgroundColor: "white",
-    border: "none",
+    border: 0,
     cursor: "pointer",
     selectors: {
       [`${li}:first-child &`]: {

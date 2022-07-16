@@ -45,6 +45,7 @@ export const subscribeInput = style([
     },
   }),
   {
+    WebkitAppearance: "none",
     textAlign: "center",
     minWidth: "15rem",
     border: `1px solid ${vars.color.white}`,
