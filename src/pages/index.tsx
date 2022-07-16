@@ -15,7 +15,7 @@ const IndexPage = () => {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
         <meta name="description" content="Official site of Belarusian diaspora in the Netherlands - MARA" />
-        <meta name="google-site-verification" content="mPWawPyvWeJkr6opEM_csUs4TiSnDsP3tcQKTuaz7cU" />
+        <meta name="google-site-verification" content="hXVTSewNsnJ2_HBXFikyt5I9HeaIv2QypVnUeqcJKvU" />
       </Helmet>
       <Layout></Layout>
     </>
