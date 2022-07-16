@@ -19,6 +19,7 @@
     "aws-amplify": "^4.3.27",
     "gatsby": "^4.18.0",
     "gatsby-plugin-image": "^2.18.0",
+    "gatsby-plugin-manifest": "^4.18.1",
     "gatsby-plugin-react-helmet": "^5.18.0",
     "gatsby-plugin-react-i18next": "^2.0.1",
     "gatsby-plugin-sharp": "^4.18.0",
