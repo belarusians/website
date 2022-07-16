@@ -10,8 +10,10 @@
     "develop": "gatsby develop",
     "start": "gatsby develop",
     "build": "gatsby build",
+    "build:dev": "GATSBY_ENV=development && gatsby build --no-uglify",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
+    "start:clean": "npm run clean && npm run build:dev && npm run serve",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
