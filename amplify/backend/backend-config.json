@@ -1,6 +1,6 @@
 {
   "function": {
-    "belarusianWebsiteEmailCollector": {
+    "belarusiansWebsiteEmailCollector": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
@@ -8,13 +8,13 @@
     }
   },
   "api": {
-    "subscribe": {
+    "prodapi": {
       "service": "API Gateway",
       "providerPlugin": "awscloudformation",
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "belarusianWebsiteEmailCollector",
+          "resourceName": "belarusiansWebsiteEmailCollector",
           "attributes": [
             "Name",
             "Arn"

@@ -14,7 +14,7 @@ export class AmplifyStack extends cdk.Stack {
       repository: "https://github.com/belarusians/website",
     });
 
-    const amplifyBranch = new amplify.CfnBranch(this, "belarusians-website-branch", {
+    const mainBranch = new amplify.CfnBranch(this, "belarusians-website-main-branch", {
       appId: amplifyApp.attrAppId,
       branchName: "main",
     });
@@ -24,11 +24,11 @@ export class AmplifyStack extends cdk.Stack {
       domainName,
       subDomainSettings: [
         {
-          branchName: amplifyBranch.attrBranchName,
+          branchName: mainBranch.attrBranchName,
           prefix: "",
         },
         {
-          branchName: amplifyBranch.attrBranchName,
+          branchName: mainBranch.attrBranchName,
           prefix: "www",
         },
       ]

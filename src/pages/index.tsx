@@ -28,8 +28,8 @@ Amplify.configure({
   API: {
     endpoints: [
       {
-        name: "subscribe",
-        endpoint: "https://x2z9ll0k6i.execute-api.eu-central-1.amazonaws.com/staging",
+        name: "prodapi",
+        endpoint: "https://de31uuzida.execute-api.eu-central-1.amazonaws.com/staging",
       },
     ],
   },

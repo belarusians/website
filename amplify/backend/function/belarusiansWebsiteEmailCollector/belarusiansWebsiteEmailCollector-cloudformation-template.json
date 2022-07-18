@@ -50,12 +50,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "belarusianWebsiteEmailCollector",
+            "belarusiansWebsiteEmailCollector",
             {
               "Fn::Join": [
                 "",
                 [
-                  "belarusianWebsiteEmailCollector",
+                  "belarusiansWebsiteEmailCollector",
                   "-",
                   {
                     "Ref": "env"
@@ -95,12 +95,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "belarusianswebsiteLambdaRole8489f292",
+            "belarusianswebsiteLambdaRoled63d1b19",
             {
               "Fn::Join": [
                 "",
                 [
-                  "belarusianswebsiteLambdaRole8489f292",
+                  "belarusianswebsiteLambdaRoled63d1b19",
                   "-",
                   {
                     "Ref": "env"

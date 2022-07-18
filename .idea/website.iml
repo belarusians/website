@@ -11,6 +11,7 @@
       <excludeFolder url="file://$MODULE_DIR$/amplify/backend/awscloudformation/build" />
       <excludeFolder url="file://$MODULE_DIR$/deploy/cdk.out" />
       <excludeFolder url="file://$MODULE_DIR$/.cache" />
+      <excludeFolder url="file://$MODULE_DIR$/amplify/backend/function/belarusiansWebsiteEmailCollector/dist" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -1,6 +1,6 @@
 export type AmplifyDependentResourcesAttributes = {
     "function": {
-        "belarusianWebsiteEmailCollector": {
+        "belarusiansWebsiteEmailCollector": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",
@@ -8,7 +8,7 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "api": {
-        "subscribe": {
+        "prodapi": {
             "RootUrl": "string",
             "ApiName": "string",
             "ApiId": "string"

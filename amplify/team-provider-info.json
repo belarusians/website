@@ -1,22 +1,22 @@
 {
   "staging": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-amplifyb4fce2a897214-staging-135412-authRole",
-      "UnauthRoleArn": "arn:aws:iam::381434666938:role/amplify-amplifyb4fce2a897214-staging-135412-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::381434666938:role/amplify-amplifyb4fce2a897214-staging-135412-authRole",
+      "AuthRoleName": "amplify-amplifyfc4330bec0c14-staging-135837-authRole",
+      "UnauthRoleArn": "arn:aws:iam::381434666938:role/amplify-amplifyfc4330bec0c14-staging-135837-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::381434666938:role/amplify-amplifyfc4330bec0c14-staging-135837-authRole",
       "Region": "eu-central-1",
-      "DeploymentBucketName": "amplify-amplifyb4fce2a897214-staging-135412-deployment",
-      "UnauthRoleName": "amplify-amplifyb4fce2a897214-staging-135412-unauthRole",
-      "StackName": "amplify-amplifyb4fce2a897214-staging-135412",
-      "StackId": "arn:aws:cloudformation:eu-central-1:381434666938:stack/amplify-amplifyb4fce2a897214-staging-135412/470a6ae0-02b3-11ed-a408-02106cecd228",
-      "AmplifyAppId": "d3q3cg059wqnha"
+      "DeploymentBucketName": "amplify-amplifyfc4330bec0c14-staging-135837-deployment",
+      "UnauthRoleName": "amplify-amplifyfc4330bec0c14-staging-135837-unauthRole",
+      "StackName": "amplify-amplifyfc4330bec0c14-staging-135837",
+      "StackId": "arn:aws:cloudformation:eu-central-1:381434666938:stack/amplify-amplifyfc4330bec0c14-staging-135837/b89f1c90-06a1-11ed-8039-0a918974b996",
+      "AmplifyAppId": "d1p4lkm9rq1jgo"
     },
     "categories": {
       "function": {
-        "belarusianWebsiteEmailCollector": {
+        "belarusiansWebsiteEmailCollector": {
           "s3Bucket": "belarusians-emails",
-          "deploymentBucketName": "amplify-amplifyb4fce2a897214-staging-135412-deployment",
-          "s3Key": "amplify-builds/belarusianWebsiteEmailCollector-78384b2f3368684f3853-build.zip"
+          "deploymentBucketName": "amplify-amplifyfc4330bec0c14-staging-135837-deployment",
+          "s3Key": "amplify-builds/belarusiansWebsiteEmailCollector-574c48352f6c70515065-build.zip"
         }
       }
     }

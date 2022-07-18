@@ -3,7 +3,7 @@
   "paths": {
     "/subscribe": {
       "name": "/subscribe",
-      "lambdaFunction": "belarusianWebsiteEmailCollector",
+      "lambdaFunction": "belarusiansWebsiteEmailCollector",
       "permissions": {
         "setting": "open"
       }

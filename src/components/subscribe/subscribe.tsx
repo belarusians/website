@@ -47,7 +47,7 @@ export function Subscribe(props: HTMLAttributes<HTMLElement>): JSX.Element {
     }
 
     setIsLoading(true);
-    API.post("subscribe", "/subscribe", {
+    API.post("prodapi", "/subscribe", {
       body: { email: emailInput.value },
     })
       .then(() => {
