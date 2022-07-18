@@ -9,7 +9,7 @@ export class AmplifyStack extends cdk.Stack {
 
     const amplifyApp = new amplify.CfnApp(this, "belarusians-website", {
       name: "belarusians-website",
-      accessToken: "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",
+      accessToken: "",
       repository: "https://github.com/belarusians/website",
     });
 
