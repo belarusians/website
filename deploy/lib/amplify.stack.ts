@@ -4,12 +4,13 @@ import * as amplify from "aws-cdk-lib/aws-amplify";
 import * as s3 from "aws-cdk-lib/aws-s3";
 
 export class AmplifyStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props: cdk.StackProps) {
+  constructor(scope: Construct, id: string, props: cdk.StackProps, githubAccessToken: string) {
     super(scope, id, props);
+    const domainName = "belarusians.nl";
 
     const amplifyApp = new amplify.CfnApp(this, "belarusians-website", {
       name: "belarusians-website",
-      accessToken: "",
+      accessToken: githubAccessToken,
       repository: "https://github.com/belarusians/website",
     });
 
@@ -20,7 +21,7 @@ export class AmplifyStack extends cdk.Stack {
 
     new amplify.CfnDomain(this, "belarusians-website-domain", {
       appId: amplifyApp.attrAppId,
-      domainName: "belarusians.nl",
+      domainName,
       subDomainSettings: [
         {
           branchName: amplifyBranch.attrBranchName,
@@ -30,7 +31,7 @@ export class AmplifyStack extends cdk.Stack {
           branchName: amplifyBranch.attrBranchName,
           prefix: "www",
         },
-      ],
+      ]
     });
 
     new s3.Bucket(this, "belarusians-emails-bucket", {
