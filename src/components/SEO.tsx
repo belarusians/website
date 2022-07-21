@@ -14,6 +14,8 @@ export const SEO = (): JSX.Element => {
     <Helmet title={seo.title} htmlAttributes={{
       lang: currentLanguage,
     }}>
+      <meta name="google-site-verification" content="hXVTSewNsnJ2_HBXFikyt5I9HeaIv2QypVnUeqcJKvU" />
+      <meta name="facebook-domain-verification" content="puzhrq5e71epeox7ohkx5oluv6azvd" />
 
       <meta name="description" content={seo.description} />
       <meta name="image" content={logo} />
