@@ -21,18 +21,18 @@ export const SEO = (): JSX.Element => {
       <meta name="facebook-domain-verification" content="puzhrq5e71epeox7ohkx5oluv6azvd" />
 
       <meta name="description" content={seo.description} />
-      <meta name="image" content={`${seo.url}${logo}`} />
+      <meta name="image" content={`${seo.siteUrl}${logo}`} />
 
-      <meta property="og:url" content={seo.url} />
+      <meta property="og:url" content={seo.siteUrl} />
       <meta property="og:title" content={seo.title} />
       <meta property="og:description" content={seo.description} />
-      <meta property="og:image" content={`${seo.url}${logo}`} />
+      <meta property="og:image" content={`${seo.siteUrl}${logo}`} />
 
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:url" content={seo.url} />
+      <meta name="twitter:url" content={seo.siteUrl} />
       <meta name="twitter:title" content={seo.title} />
       <meta name="twitter:description" content={seo.description} />
-      <meta name="twitter:image" content={`${seo.url}${logo}`} />
+      <meta name="twitter:image" content={`${seo.siteUrl}${logo}`} />
     </Helmet>
   );
 };
@@ -43,7 +43,7 @@ const query = graphql`
       siteMetadata {
         title
         description
-        url
+        siteUrl
       }
     }
   }
