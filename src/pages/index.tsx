@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Helmet } from "react-helmet";
-import { graphql } from "gatsby";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Amplify } from "aws-amplify";
 
 import { Layout } from "../components/layout";
@@ -9,12 +8,6 @@ import { SEO } from "../components/SEO";
 const IndexPage = () => {
   return (
     <>
-      <Helmet>
-        <title>Belarusians NL</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
-      </Helmet>
       <SEO />
       <Layout></Layout>
     </>
@@ -34,16 +27,10 @@ Amplify.configure({
   },
 });
 
-export const query = graphql`
-  query ($language: String!) {
-    locales: allLocale(filter: { language: { eq: $language } }) {
-      edges {
-        node {
-          ns
-          data
-          language
-        }
-      }
-    }
+export async function getStaticProps(context: any): Promise<any> {
+  return {
+    props: {
+      ...(await serverSideTranslations(context.locale)),
+    },
   }
-`;
+}

@@ -119,9 +119,6 @@ fabric.properties
 # End of https://www.toptal.com/developers/gitignore/api/intellij
 
 node_modules/
-.cache/
-public
-src/gatsby-types.d.ts
 
 #amplify-do-not-edit-begin
 amplify/\#current-cloud-backend

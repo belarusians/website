@@ -1,22 +1,13 @@
 import React from "react";
-import { Helmet } from "react-helmet";
-import { useStaticQuery, graphql } from "gatsby";
-import { useI18next } from "gatsby-plugin-react-i18next";
+import Head from "next/head";
 // @ts-ignore
-import logo from "../images/logo.jpeg";
+import logo from "../../public/logo.jpeg";
+import seo from "../config";
 
 export const SEO = (): JSX.Element => {
-  const { site } = useStaticQuery(query);
-  const seo = site.siteMetadata;
-  const currentLanguage = useI18next().language;
-
   return (
-    <Helmet
-      title={seo.title}
-      htmlAttributes={{
-        lang: currentLanguage,
-      }}
-    >
+    <Head>
+      <title>{seo.title}</title>
       <meta name="google-site-verification" content="hXVTSewNsnJ2_HBXFikyt5I9HeaIv2QypVnUeqcJKvU" />
       <meta name="facebook-domain-verification" content="puzhrq5e71epeox7ohkx5oluv6azvd" />
 
@@ -33,18 +24,6 @@ export const SEO = (): JSX.Element => {
       <meta name="twitter:title" content={seo.title} />
       <meta name="twitter:description" content={seo.description} />
       <meta name="twitter:image" content={`${seo.siteUrl}${logo}`} />
-    </Helmet>
+    </Head>
   );
 };
-
-const query = graphql`
-  query SEO {
-    site {
-      siteMetadata {
-        title
-        description
-        siteUrl
-      }
-    }
-  }
-`;

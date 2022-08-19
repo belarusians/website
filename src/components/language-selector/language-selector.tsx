@@ -1,25 +1,42 @@
 import * as React from "react";
-import { useI18next } from "gatsby-plugin-react-i18next";
-import { Trans } from "react-i18next";
+import { Trans } from "next-i18next";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 import { active, button, li, list } from "./language-selector.css";
 
-export function LanguageSelector(props: React.HTMLAttributes<HTMLElement>): JSX.Element {
-  const i18n = useI18next();
-  const [lang, setLang] = useState(i18n.language);
+function formFlag(locales: string[]): string[] {
+  const middle = Math.round(locales.length / 2) - 1;
+  const beIndex = locales.indexOf("be");
+  if (middle === beIndex) {
+    return locales;
+  }
+  const copy = locales.slice();
+  const tmp = locales[middle];
+  copy[middle] = copy[beIndex];
+  copy[beIndex] = tmp;
 
-  function onSelectLanguage(lang: string): void {
-    i18n.changeLanguage(lang);
-    setLang(lang);
+  return copy;
+}
+
+export function LanguageSelector(props: React.HTMLAttributes<HTMLElement>): JSX.Element {
+  const router = useRouter();
+  const { locale, locales, route } = router;
+  const [loc, setLoc] = useState(locale);
+
+  const sortedLocales = formFlag(locales || []);
+
+  function onSelectLanguage(l: string): void {
+    router.push(route, route, { locale: l });
+    setLoc(l);
   }
 
   return (
     <div className={props.className}>
       <ul className={list}>
-        {i18n.languages.map((l) => (
+        {sortedLocales.map((l) => (
           <li className={li} key={l}>
-            <button className={`${button} ${lang === l ? active : ""}`} onClick={() => onSelectLanguage(l)}>
+            <button className={`${button} ${loc === l ? active : ""}`} onClick={() => onSelectLanguage(l)}>
               <Trans>{l}</Trans>
             </button>
           </li>

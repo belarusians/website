@@ -35,6 +35,7 @@ export const image = style([
   }),
   {
     boxShadow: vars.shadows.small,
+    position: 'relative',
   },
 ]);
 

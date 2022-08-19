@@ -1,8 +1,9 @@
-import { Trans, useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "next-i18next";
 import * as React from "react";
 import { FormEvent, HTMLAttributes } from "react";
 import { API } from "aws-amplify";
 import { fakeInput, subscribe, subscribeButton, subscribeInput, subscribeTitle, spinner, success } from "./subscribe.css";
+import { ClientOnly } from "../client-only/client-only";
 
 const fakeInputId = "fake-input-id";
 
@@ -27,6 +28,7 @@ export function Subscribe(props: HTMLAttributes<HTMLElement>): JSX.Element {
 
     setIsValid(isValidInput(event.currentTarget));
   }
+
   const inputRef = React.useRef<HTMLInputElement>(null);
 
   const shake = (): void => {
@@ -34,7 +36,7 @@ export function Subscribe(props: HTMLAttributes<HTMLElement>): JSX.Element {
     setTimeout(() => {
       inputRef.current?.classList.remove("shake");
     }, 2000);
-  }
+  };
 
   const submit = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -71,15 +73,17 @@ export function Subscribe(props: HTMLAttributes<HTMLElement>): JSX.Element {
           <Trans>subscribed-text</Trans>
         </div>
       ) : (
-        <input
-          ref={inputRef}
-          onInput={onInput}
-          className={`${subscribeInput} ${(isValid ? "valid" : "invalid")}`}
-          id={emailInputId}
-          name="email"
-          type="email"
-          placeholder={t("subscribe-input-placeholder")}
-        />
+        <ClientOnly>
+          <input
+            ref={inputRef}
+            onInput={onInput}
+            className={`${subscribeInput} ${isValid ? "valid" : "invalid"}`}
+            id={emailInputId}
+            name="email"
+            type="email"
+            placeholder={t("subscribe-input-placeholder")}
+          />
+        </ClientOnly>
       )}
 
       <div className={fakeInput} id={fakeInputId}></div>
