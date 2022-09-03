@@ -1,5 +1,5 @@
 {
-  "name": "deploy",
+  "name": "infra",
   "version": "0.1.0",
   "bin": {
     "deploy": "bin/deploy.js"
@@ -21,8 +21,9 @@
     "typescript": "~3.9.7"
   },
   "dependencies": {
+    "@sls-next/cdk-construct": "~3.7.0",
+    "@sls-next/lambda-at-edge": "~3.7.0",
     "aws-cdk-lib": "2.31.1",
-    "constructs": "^10.0.0",
-    "source-map-support": "^0.5.21"
+    "constructs": "^10.0.0"
   }
 }
