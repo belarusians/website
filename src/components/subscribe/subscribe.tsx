@@ -1,9 +1,9 @@
 import { Trans, useTranslation } from "next-i18next";
 import * as React from "react";
 import { FormEvent, HTMLAttributes } from "react";
-import { API } from "aws-amplify";
 import { fakeInput, subscribe, subscribeButton, subscribeInput, subscribeTitle, spinner, success } from "./subscribe.css";
 import { ClientOnly } from "../client-only/client-only";
+import { isEmailValid } from "../../lib/email";
 
 const fakeInputId = "fake-input-id";
 
@@ -49,17 +49,23 @@ export function Subscribe(props: HTMLAttributes<HTMLElement>): JSX.Element {
     }
 
     setIsLoading(true);
-    API.post("prodapi", "/subscribe", {
-      body: { email: emailInput.value },
+
+    fetch('/api/subscribe', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({ email: emailInput.value })
     })
-      .then(() => {
+      .then((response) => {
         setIsLoading(false);
-        setIsSuccess(true);
-      })
-      .catch(() => {
-        setIsLoading(false);
-        setIsValid(false);
-        shake();
+
+        if (!response.ok) {
+          setIsValid(false);
+          shake();
+        } else {
+          setIsSuccess(true);
+        }
       });
   };
 
@@ -100,7 +106,5 @@ function isValidInput(input: HTMLInputElement): boolean {
     return false;
   }
 
-  const re =
-    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(String(input.value).toLowerCase());
+  return isEmailValid(input.value);
 }

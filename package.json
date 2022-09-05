@@ -4,20 +4,22 @@
   "private": true,
   "description": "belarusians-nl",
   "scripts": {
-    "dev": "next dev",
+    "local": "NODE_OPTIONS='--inspect' NODE_ENV='local' next dev",
+    "dev": "NODE_OPTIONS='--inspect' NODE_ENV='dev' next dev",
     "start": "next start",
     "build": "next build",
-    "clean": "next clean",
-    "start:clean": "npm run clean && npm run build:dev && npm run serve",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "i18next": "^21.8.13",
-    "next": "^12.2.3",
-    "postcss": "^8.4.14",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "next-i18next": "^11.3.0"
+    "aws-sdk": "~2.1209.0",
+    "i18next": "~21.8.13",
+    "next": "~12.2.5",
+    "next-i18next": "~11.3.0",
+    "postcss": "~8.4.14",
+    "react": "~18.1.0",
+    "react-dom": "~18.1.0",
+    "sharp": "~0.30.7",
+    "swr": "^1.3.0"
   },
   "devDependencies": {
     "@types/node": "^17.0.45",
@@ -25,7 +27,6 @@
     "@types/react-dom": "^18.0.5",
     "@vanilla-extract/next-plugin": "^2.0.2",
     "@vanilla-extract/sprinkles": "^1.4.1",
-    "aws-amplify": "^4.3.27",
     "eslint": "^7.32.0",
     "prettier": "^2.7.1",
     "typescript": "^4.7.4"
