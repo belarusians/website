@@ -4,7 +4,7 @@ import matter from "gray-matter";
 import { remark } from 'remark';
 import html from 'remark-html';
 
-import { News } from "../pages/news/types";
+import { News } from "../components/types";
 
 const newsDirectory = path.join(process.cwd(), '_news');
 

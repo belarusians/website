@@ -5,15 +5,15 @@ import * as React from "react";
 
 import { Layout } from "../../components/layout";
 import { getNewsBySlug, getNewsSlugs } from "../../lib/news";
-import { News } from "./types";
-import { newsHeaderImage } from "./news.css";
+import { News } from "../../components/types";
+import { newsHeaderImage } from "../../components/news.css";
 import { Section } from "../../components/section/section";
 
 interface NewsPageProps {
   news?: News;
 }
 
-export default function News(props: NewsPageProps): JSX.Element {
+export default function NewsPage(props: NewsPageProps): JSX.Element {
   if (!props.news) {
     return (
       <Layout>
