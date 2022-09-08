@@ -5,7 +5,6 @@
       <excludeFolder url="file://$MODULE_DIR$/temp" />
       <excludeFolder url="file://$MODULE_DIR$/.tmp" />
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
-      <excludeFolder url="file://$MODULE_DIR$/public" />
       <excludeFolder url="file://$MODULE_DIR$/amplify/backend/function/belarusianWebsiteEmailCollector/dist" />
       <excludeFolder url="file://$MODULE_DIR$/amplify/#current-cloud-backend" />
       <excludeFolder url="file://$MODULE_DIR$/amplify/backend/awscloudformation/build" />

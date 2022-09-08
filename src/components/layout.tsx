@@ -1,18 +1,18 @@
 import * as React from "react";
 
 import { Header } from "./header/header";
-import { Subscribe } from "./subscribe/subscribe";
 import { Footer } from "./footer/footer";
 
 import { section } from "./layout.css";
-import { themeClass } from "./sprinkles.css";
 
-export function Layout(): JSX.Element {
+export function Layout(props: React.PropsWithChildren): JSX.Element {
   return (
     <>
-      <Header className={`${section} ${themeClass}`} />
-      <Subscribe className={`${section} ${themeClass}`} />
-      <Footer className={`${section} ${themeClass}`} />
+      <Header className={section} />
+      <div className={section}>
+        { props.children }
+      </div>
+      <Footer className={section} />
     </>
   );
 }

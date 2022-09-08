@@ -2,13 +2,16 @@ import * as React from "react";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { Layout } from "../components/layout";
-import { SEO } from "../components/SEO";
+import { Subscribe } from "../components/subscribe/subscribe";
+import { section } from "../components/layout.css";
+import { themeClass } from "../components/sprinkles.css";
 
 const IndexPage = () => {
   return (
     <>
-      <SEO />
-      <Layout></Layout>
+      <Layout>
+        <Subscribe className={`${section} ${themeClass}`} />
+      </Layout>
     </>
   );
 };

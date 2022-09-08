@@ -1,9 +1,12 @@
 import { Head, Html, Main, NextScript } from "next/document";
+import { SEO } from "../components/seo/SEO";
+import * as React from "react";
 
 export default function MyDocument() {
   return (
     <Html>
       <Head>
+        <SEO />
         <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
