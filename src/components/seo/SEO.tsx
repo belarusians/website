@@ -13,11 +13,13 @@ export const SEO = (): JSX.Element => {
 
       <meta property="og:url" content={seo.siteUrl} />
       <meta property="og:title" content={seo.title} />
+      <meta property="og:type" content="website" />
       <meta property="og:description" content={seo.description} />
       <meta property="og:image" content={`${seo.siteUrl}${seo.imagePath}`} />
 
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:url" content={seo.siteUrl} />
+      <meta property="twitter:domain" content="belarusians.nl" />
+      <meta property="twitter:url" content={seo.siteUrl} />
       <meta name="twitter:title" content={seo.title} />
       <meta name="twitter:description" content={seo.description} />
       <meta name="twitter:image" content={`${seo.siteUrl}${seo.imagePath}`} />
