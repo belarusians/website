@@ -7,7 +7,7 @@ const padding = {
   small: "0.6rem",
   medium: "0.8rem",
   large: "1rem",
-  extraLarge: "1.2rem",
+  extraLarge: "1.5rem",
   // @deprecated
   smallOld: "20px",
   mediumOld: "40px",
