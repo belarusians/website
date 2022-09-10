@@ -3,8 +3,13 @@ import { style } from "@vanilla-extract/css";
 import { sprinkles, vars } from "../sprinkles.css";
 
 export const header = style([
+  sprinkles({
+    marginTop: {
+      xs: "0.5rem",
+      md: "1rem"
+    }
+  }),
   {
-    minHeight: "100px",
     display: "flex",
     alignItems: "center",
   },
@@ -60,7 +65,7 @@ export const titleDescription = style([
     },
     marginTop: {
       xs: 0,
-      md: "10px",
+      md: "0.5rem",
     },
   }),
   {

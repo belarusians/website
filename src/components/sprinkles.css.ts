@@ -31,7 +31,7 @@ const responsiveProperties = defineProperties({
     paddingBottom: padding,
     paddingLeft: padding,
     paddingRight: padding,
-    marginTop: [0, "5px", "10px"],
+    marginTop: [0, "0.5rem", "1rem", "2rem"],
     marginLeft: [0, "0.5rem", "1rem", "2rem"],
     height: ["auto", "30px", "50px", "70px", "100px", "150px", "200px"],
     minHeight: ["auto", "30px", "50px", "70px", "100px", "150px", "200px"],

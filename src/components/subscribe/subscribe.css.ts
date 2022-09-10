@@ -2,13 +2,8 @@ import { style, keyframes } from "@vanilla-extract/css";
 import { sprinkles, vars } from "../sprinkles.css";
 
 export const subscribe = style([
-  sprinkles({
-    marginTop: {
-      xs: "5px",
-      sm: "10px",
-    },
-  }),
   {
+    marginTop: "0.5rem",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
