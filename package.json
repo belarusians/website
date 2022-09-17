@@ -4,8 +4,7 @@
   "private": true,
   "description": "belarusians-nl",
   "scripts": {
-    "local": "NODE_OPTIONS='--inspect' NODE_ENV='local' next dev",
-    "dev": "NODE_OPTIONS='--inspect' NODE_ENV='dev' next dev",
+    "dev": "NODE_OPTIONS='--inspect' NODE_ENV='development' next dev",
     "start": "next start",
     "build": "next build",
     "typecheck": "tsc --noEmit"

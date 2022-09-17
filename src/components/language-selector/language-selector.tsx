@@ -21,13 +21,13 @@ function formFlag(locales: string[]): string[] {
 
 export function LanguageSelector(props: React.HTMLAttributes<HTMLElement>): JSX.Element {
   const router = useRouter();
-  const { locale, locales, route } = router;
+  const { locale, locales, route, asPath } = router;
   const [loc, setLoc] = useState(locale);
 
   const sortedLocales = formFlag(locales || []);
 
   function onSelectLanguage(l: string): void {
-    router.push(route, route, { locale: l });
+    router.push(route, asPath, { locale: l });
     setLoc(l);
   }
 

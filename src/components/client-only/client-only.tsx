@@ -1,6 +1,6 @@
-import { PropsWithChildren, useEffect, useState } from "react";
+import { HTMLAttributes, PropsWithChildren, useEffect, useState } from "react";
 
-export function ClientOnly({ children, ...delegated}: PropsWithChildren): JSX.Element | null {
+export function ClientOnly({ children, ...delegated}: PropsWithChildren & HTMLAttributes<HTMLElement>): JSX.Element | null {
   const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
