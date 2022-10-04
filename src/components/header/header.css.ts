@@ -1,11 +1,12 @@
 import { style } from "@vanilla-extract/css";
 
-import { sprinkles, vars } from "../sprinkles.css";
+import { sprinkles } from "../sprinkles.css";
+import { vars } from "../styles.css";
 
 export const header = style([
   sprinkles({
     marginTop: {
-      xs: "0.5rem",
+      sm: "0.5rem",
       md: "1rem"
     }
   }),
@@ -17,23 +18,13 @@ export const header = style([
 
 export const image = style([
   sprinkles({
-    minHeight: {
-      xs: "50px",
-      md: "100px",
-      lg: "150px",
-    },
     height: {
-      xs: "50px",
+      sm: "50px",
       md: "100px",
       lg: "150px",
-    },
-    minWidth: {
-      xs: "87px",
-      md: "173px",
-      lg: "260px",
     },
     width: {
-      xs: "87px",
+      sm: "87px",
       md: "173px",
       lg: "260px",
     },
@@ -60,11 +51,11 @@ export const title = style([
 export const titleDescription = style([
   sprinkles({
     fontSize: {
-      xs: "0.8rem",
+      sm: "0.8rem",
       lg: "1rem",
     },
     marginTop: {
-      xs: 0,
+      sm: 0,
       md: "0.5rem",
     },
   }),
@@ -76,7 +67,7 @@ export const titleDescription = style([
 export const titleHeading = style([
   sprinkles({
     fontSize: {
-      xs: "1.2rem",
+      sm: "1.2rem",
       lg: "2rem",
     },
   }),

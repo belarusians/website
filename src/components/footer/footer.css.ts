@@ -1,10 +1,11 @@
 import { style } from "@vanilla-extract/css";
-import { sprinkles, vars } from "../sprinkles.css";
+import { sprinkles } from "../sprinkles.css";
+import { vars } from "../styles.css";
 
 export const footer = style([sprinkles({
   fontSize: {
-    xs: "0.6rem",
-    sm: "1rem",
+    sm: "0.6rem",
+    md: "1rem",
   }
 }),{
   paddingTop: "2rem",
@@ -15,8 +16,8 @@ export const footer = style([sprinkles({
 
 export const github = style([sprinkles({
   marginLeft: {
-    xs: "0.5rem",
-    sm: "1rem",
+    sm: "0.5rem",
+    md: "1rem",
   },
 }), {
   fill: vars.color.black,
@@ -30,8 +31,8 @@ export const github = style([sprinkles({
 
 export const githubIcon = style([sprinkles({
   width: {
-    xs: "1rem",
-    sm: "2rem",
+    sm: "1rem",
+    md: "2rem",
   }
 })]);
 

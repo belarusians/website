@@ -1,24 +1,23 @@
 import { style } from "@vanilla-extract/css";
 import { globalStyle } from "@vanilla-extract/css";
 
-import { sprinkles, vars } from "./sprinkles.css";
+import { sprinkles } from "./sprinkles.css";
+import { vars } from "./styles.css";
 
 globalStyle("body, body *", {
   fontFamily: "'Work Sans', sans-serif;",
   color: vars.color.black,
 });
 
-const ui = sprinkles({
-  paddingX: {
-    xs: "smallOld",
-    sm: "mediumOld",
-  },
-});
-
 export const section = style([
-  ui,
+  sprinkles({
+    paddingX: {
+      sm: "large",
+      md: "extraLarge",
+    },
+  }),
   {
-    maxWidth: "75rem",
+    maxWidth: "80rem",
     marginLeft: "auto",
     marginRight: "auto",
   },

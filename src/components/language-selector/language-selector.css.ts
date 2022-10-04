@@ -1,5 +1,6 @@
 import { style } from "@vanilla-extract/css";
-import { sprinkles, vars } from "../sprinkles.css";
+import { sprinkles } from "../sprinkles.css";
+import { vars } from "../styles.css";
 
 export const list = style({
   color: "white",
@@ -23,12 +24,12 @@ export const li = style({});
 export const button = style([
   sprinkles({
     padding: {
-      xs: "extraSmall",
-      sm: "small",
+      sm: "extraSmall",
+      md: "small",
     },
     fontSize: {
-      xs: "1rem",
-      sm: "1.2rem",
+      sm: "1rem",
+      md: "1.2rem",
     },
   }),
   {
