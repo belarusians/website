@@ -1,28 +1,34 @@
 import * as React from "react";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { SSRConfig } from "next-i18next";
 
 import { Layout } from "../components/layout";
-import { Section } from "../components/section/section";
-import { Subscribe } from "../components/subscribe/subscribe";
-import { section } from "../components/layout.css";
+import { SubscriptionForm } from "../components/subscription-form/subscription-form";
+import { NewsBlock } from "../components/news/block";
+import { NewsMetadata } from "../components/types";
+import { GetStaticPropsResult } from "next/types";
+import { getAllNewsMeta } from "../lib/news";
 
-const IndexPage = () => {
+interface MainPageProps extends SSRConfig {
+  news: NewsMetadata[];
+}
+
+export default function IndexPage(props: MainPageProps): JSX.Element {
   return (
-    <>
-      <Layout>
-        <Section>
-          <Subscribe className={section} />
-        </Section>
-      </Layout>
-    </>
+    <Layout>
+      <NewsBlock news={props.news} />
+
+      <SubscriptionForm />
+
+    </Layout>
   );
-};
+}
 
-export default IndexPage;
-
-export async function getStaticProps(context: any): Promise<any> {
+export async function getStaticProps(context: any): Promise<GetStaticPropsResult<MainPageProps>> {
+  const newsMeta = await getAllNewsMeta();
   return {
     props: {
+      news: newsMeta,
       ...(await serverSideTranslations(context.locale)),
     },
   }

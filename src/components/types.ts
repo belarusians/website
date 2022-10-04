@@ -1,6 +1,10 @@
-export interface News {
+export interface News extends NewsMetadata {
+  content: string;
+}
+
+export interface NewsMetadata {
+  slug: string;
   title: string;
   date: string;
-  content: string;
-  backgroundUrl?: string;
+  backgroundUrl: string;
 }
