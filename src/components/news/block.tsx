@@ -1,6 +1,8 @@
+import { Trans } from "next-i18next";
+
 import { NewsThumbnail } from "./thumbnail";
 import { NewsMetadata } from "../types";
-import { card } from "../styles.css";
+import { card, sectionTitle } from "../styles.css";
 import { row_lg, w_lg_2, w_1, col } from "../grid.css";
 
 interface NewsCarouselProps {
@@ -13,12 +15,17 @@ export function NewsBlock(props: NewsCarouselProps) {
   }
 
   return (
-    <div className={row_lg}>
-      <NewsThumbnail className={`${w_lg_2} ${card}`} news={props.news[0]} />
-      <div className={`${w_1} ${col}`}>
-        <NewsThumbnail className={`${w_1} ${card}`} news={props.news[1]} />
-        <NewsThumbnail className={`${w_1} ${card}`} news={props.news[2]} />
+    <>
+      <h1 className={sectionTitle}>
+        <Trans>news-title</Trans>
+      </h1>
+      <div className={row_lg}>
+        <NewsThumbnail className={`${w_lg_2} ${card}`} news={props.news[0]} />
+        <div className={`${w_1} ${col}`}>
+          <NewsThumbnail className={`${w_1} ${card}`} news={props.news[1]} />
+          <NewsThumbnail className={`${w_1} ${card}`} news={props.news[2]} />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
