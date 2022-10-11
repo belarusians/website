@@ -7,6 +7,8 @@ import { Layout } from "../../components/layout";
 import { getNewsBySlug, getNewsSlugs } from "../../lib/news";
 import { News } from "../../components/types";
 import { newsHeaderImage } from "../../components/news.css";
+import { Section } from "../../components/section/section";
+import { content } from "../../components/styles.css";
 
 interface NewsPageProps {
   news?: News;
@@ -23,11 +25,15 @@ export default function NewsPage(props: NewsPageProps): JSX.Element {
 
   return (
     <Layout>
-        <div className={newsHeaderImage}>
-          <Image layout="fill" src={props.news.backgroundUrl} objectFit="cover" alt={props.news.title} />
+      <Section>
+        <div className={content}>
+          <div className={newsHeaderImage}>
+            <Image layout="fill" src={props.news.backgroundUrl} objectFit="cover" alt={props.news.title} />
+          </div>
+          <h1>{props.news.title}</h1>
+          <div dangerouslySetInnerHTML={{ __html: props.news.content }}></div>
         </div>
-        <h1>{props.news.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: props.news.content }}></div>
+      </Section>
     </Layout>
   );
 }
@@ -49,19 +55,16 @@ export async function getStaticProps({ params, locale }: GetStaticPropsContext):
 }
 
 export function getStaticPaths({ locales }: GetStaticPathsContext): GetStaticPathsResult<{ slug: string }> {
-  const paths = getNewsSlugs().reduce<{ params: { slug: string }; locale?: string }[]>(
-    (acc, file) => {
-      acc.push(...(locales || []).map(
-        locale => ({
-          params: { slug: file },
-          locale,
-        }))
-      );
+  const paths = getNewsSlugs().reduce<{ params: { slug: string }; locale?: string }[]>((acc, file) => {
+    acc.push(
+      ...(locales || []).map((locale) => ({
+        params: { slug: file },
+        locale,
+      }))
+    );
 
-      return acc;
-    },
-    [] as { params: { slug: string }; locale?: string; }[]
-  );
+    return acc;
+  }, [] as { params: { slug: string }; locale?: string }[]);
   return {
     paths,
     fallback: false,

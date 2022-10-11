@@ -4,18 +4,19 @@ import { NewsThumbnail } from "./thumbnail";
 import { NewsMetadata } from "../types";
 import { card, sectionTitle } from "../styles.css";
 import { row_lg, w_lg_2, w_1, col } from "../grid.css";
+import { HTMLAttributes } from "react";
 
 interface NewsCarouselProps {
   news: NewsMetadata[];
 }
 
-export function NewsBlock(props: NewsCarouselProps) {
+export function NewsBlock(props: NewsCarouselProps & HTMLAttributes<HTMLElement>) {
   if (props.news.length === 0) {
     return null;
   }
 
   return (
-    <>
+    <div className={props.className}>
       <h1 className={sectionTitle}>
         <Trans>news-title</Trans>
       </h1>
@@ -26,6 +27,6 @@ export function NewsBlock(props: NewsCarouselProps) {
           <NewsThumbnail className={`${w_1} ${card}`} news={props.news[2]} />
         </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -1,4 +1,4 @@
-import { createTheme, style } from "@vanilla-extract/css";
+import { createTheme, globalStyle, style } from "@vanilla-extract/css";
 import { sprinkles } from "./sprinkles.css";
 
 export const [themeClass, vars] = createTheme({
@@ -14,6 +14,23 @@ export const [themeClass, vars] = createTheme({
     large: "0 3px 6px 5px #9494944d",
   },
 });
+
+globalStyle("body, body *", {
+  fontFamily: "'Work Sans', sans-serif;",
+  color: vars.color.black,
+});
+
+globalStyle("body", {
+  margin: 0,
+});
+
+export const content = style([
+  {
+    maxWidth: "80rem",
+    marginLeft: "auto",
+    marginRight: "auto",
+  }
+]);
 
 export const card = style([
   {

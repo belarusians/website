@@ -8,6 +8,8 @@ import { NewsBlock } from "../components/news/block";
 import { NewsMetadata } from "../components/types";
 import { GetStaticPropsResult } from "next/types";
 import { getAllNewsMeta } from "../lib/news";
+import { Section } from "../components/section/section";
+import { content } from "../components/styles.css";
 
 interface MainPageProps extends SSRConfig {
   news: NewsMetadata[];
@@ -16,10 +18,13 @@ interface MainPageProps extends SSRConfig {
 export default function IndexPage(props: MainPageProps): JSX.Element {
   return (
     <Layout>
-      <NewsBlock news={props.news} />
+      <Section>
+        <NewsBlock className={content} news={props.news} />
+      </Section>
 
-      <SubscriptionForm />
-
+      <Section>
+        <SubscriptionForm className={content} />
+      </Section>
     </Layout>
   );
 }
