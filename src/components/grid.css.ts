@@ -23,6 +23,14 @@ export const row_lg = style([
   },
 ]);
 
+export const row = style([
+  {
+    flexDirection: "row",
+    display: "flex",
+    gap: "1rem",
+  },
+]);
+
 export const w_lg_2 = style([
   sprinkles({
     flexGrow: {
@@ -52,6 +60,10 @@ export const w_1 = style([
     },
   }),
 ]);
+
+export const w_eq = style([{
+  flex: "1 1 0px",
+}]);
 
 // TODO: initial refactoring
 // function rem(n: number): string {

@@ -1,4 +1,5 @@
 import { createTheme, style } from "@vanilla-extract/css";
+import { sprinkles } from "./sprinkles.css";
 
 export const [themeClass, vars] = createTheme({
   color: {
@@ -20,4 +21,55 @@ export const card = style([
     borderRadius: "5px",
     transition: "all 0.15s ease-in-out",
   },
+]);
+
+export const sectionTitle = style([
+  sprinkles({
+    fontSize: {
+      sm: "1.5rem",
+      md: "1.5rem",
+      lg: "2.5rem",
+    },
+    marginBottom: {
+      sm: "0.5rem",
+      md: "0.5rem",
+      lg: "0.5rem",
+    }
+  }),
+  {
+    fontWeight: 600,
+  },
+]);
+
+export const bigText = style([
+  sprinkles({
+    fontSize: {
+      sm: "1rem",
+      md: "1.5rem",
+      lg: "1.5rem",
+    },
+  })
+]);
+
+export const normalText = style([
+  sprinkles({
+    fontSize: {
+      sm: "1rem",
+      md: "1rem",
+      lg: "1rem",
+    },
+  })
+]);
+
+export const smallText = style([
+  sprinkles({
+    fontSize: {
+      sm: "0.6rem",
+      md: "0.8rem",
+      lg: "0.8rem",
+    },
+  }),
+  {
+    fontWeight: 300,
+  }
 ]);
