@@ -41,7 +41,7 @@ export const sectionTitle = style([
   },
 ]);
 
-export const bigText = style([
+export const largeText = style([
   sprinkles({
     fontSize: {
       sm: "1rem",

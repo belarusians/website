@@ -11,8 +11,8 @@ import {
 } from "./subscription-form.css";
 import { ClientOnly } from "../client-only/client-only";
 import { isEmailValid } from "../../lib/email";
-import { bigText, normalText, sectionTitle } from "../styles.css";
-import { col, row } from "../grid.css";
+import { sectionTitle } from "../styles.css";
+import { col } from "../grid.css";
 
 export function SubscriptionForm(): JSX.Element {
   const emailInputId = "email-input";
@@ -71,10 +71,10 @@ export function SubscriptionForm(): JSX.Element {
         <Trans>subscribe-title</Trans>
       </h1>
       <div className={col}>
-        <div className={`${subTitle} ${bigText}`}>
+        <div className={subTitle}>
           <Trans>subscribe-text</Trans>
         </div>
-        <div className={`${subscriptionForm} ${row}`}>
+        <div className={subscriptionForm}>
         {isSuccess ? (
           <div className={success}>
             <Trans>subscribed-text</Trans>
@@ -84,7 +84,7 @@ export function SubscriptionForm(): JSX.Element {
             <input
               ref={inputRef}
               onInput={onInput}
-              className={`${subscribeInput} ${normalText} ${isValid ? "valid" : "invalid"}`}
+              className={`${subscribeInput} ${isValid ? "valid" : "invalid"}`}
               id={emailInputId}
               name="email"
               type="email"

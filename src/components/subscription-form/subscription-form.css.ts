@@ -1,15 +1,10 @@
 import { style, keyframes } from "@vanilla-extract/css";
 import { sprinkles } from "../sprinkles.css";
-import { card, vars } from "../styles.css";
+import { card, largeText, normalText, vars } from "../styles.css";
+import { row } from "../grid.css";
 
 export const subscriptionForm = style([
-  // sprinkles({
-  //   padding: {
-  //     xs: "extraSmall",
-  //     sm: "small",
-  //     md: "large",
-  //   }
-  // }),
+  row,
   {
     marginTop: "0.5rem",
     display: "flex",
@@ -18,6 +13,7 @@ export const subscriptionForm = style([
 ]);
 
 export const subTitle = style([
+  largeText,
   sprinkles({
     maxWidth: {
       sm: "100%",
@@ -65,6 +61,7 @@ const shake = keyframes({
 export const subscribeInput = style([
   subscribedPlaceholder,
   card,
+  normalText,
   sprinkles({
     flex: {
       sm: 1,
