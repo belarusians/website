@@ -4,7 +4,9 @@
   "ru": "RU",
   "title": "Mara",
   "description": "gemeenschap van Belarusen in Nederland",
-  "subscribe-title": "We ontwikkelen een portal voor onze organisatie. Abonneer om op de hoogte te blijven",
+  "news-title": "Nieuws",
+  "subscribe-title": "Abonneer",
+  "subscribe-text": "Wij garanderen anonimiteit. Uw e-mail kan alleen worden gezien door ontwikkelaars",
   "subscribe-input-placeholder": "email",
   "subscribe-button": "Abonneren",
   "subscribed-text": "Bedankt voor je interesse!"

@@ -1,41 +1,44 @@
 import { style, keyframes } from "@vanilla-extract/css";
-import { sprinkles, vars } from "../sprinkles.css";
+import { sprinkles } from "../sprinkles.css";
+import { card, vars } from "../styles.css";
 
-export const subscribe = style([
+export const subscriptionForm = style([
+  // sprinkles({
+  //   padding: {
+  //     xs: "extraSmall",
+  //     sm: "small",
+  //     md: "large",
+  //   }
+  // }),
   {
     marginTop: "0.5rem",
     display: "flex",
-    flexDirection: "column",
     alignItems: "center",
   },
 ]);
 
-export const subscribeTitle = style([
+export const subTitle = style([
   sprinkles({
-    fontSize: {
-      xs: "1rem",
-      md: "2rem",
-    },
-  }),
-  {
-    maxWidth: "50rem",
-    fontWeight: 600,
-    textAlign: "center",
-  },
+    maxWidth: {
+      sm: "100%",
+      md: "100%",
+      lg: "30rem",
+    }
+  })
 ]);
 
 const subscribedPlaceholder = sprinkles({
-  fontSize: {
-    xs: "0.8rem",
-    sm: "1.5rem",
-  },
+  // fontSize: {
+  //   sm: "0.8rem",
+  //   md: "1.5rem",
+  // },
   paddingY: {
-    xs: "small",
-    sm: "medium",
+    sm: "small",
+    md: "medium",
   },
   paddingX: {
-    xs: "medium",
-    sm: "large",
+    sm: "medium",
+    md: "large",
   },
 });
 
@@ -61,13 +64,18 @@ const shake = keyframes({
 
 export const subscribeInput = style([
   subscribedPlaceholder,
+  card,
+  sprinkles({
+    flex: {
+      sm: 1,
+      md: 1,
+      lg: "none"
+    },
+    minWidth: "20rem",
+  }),
   {
     WebkitAppearance: "none",
-    textAlign: "center",
-    minWidth: "15rem",
     border: `1px solid ${vars.color.white}`,
-    borderRadius: "5px",
-    boxShadow: vars.shadows.small,
     selectors: {
       "&:focus": {
         outline: "none",
@@ -85,30 +93,27 @@ export const subscribeInput = style([
         animationIterationCount: 2,
       }
     },
-    transition: "all 0.15s ease-in-out",
   },
 ]);
 
 // TODO: spinner is written ugly, fix it
 export const subscribeButton = style([
+  card,
   sprinkles({
     paddingY: {
-      xs: "small",
-      sm: "medium",
+      sm: "small",
+      md: "medium",
     },
     paddingX: {
-      xs: "medium",
-      sm: "large",
+      sm: "medium",
+      md: "large",
     },
   }),
   {
     fontSize: "1rem",
     backgroundColor: vars.color.white,
     border: "none",
-    marginTop: "1.5rem",
     cursor: "pointer",
-    borderRadius: "5px",
-    boxShadow: vars.shadows.small,
     selectors: {
       "&:hover": {
         boxShadow: vars.shadows.medium,
@@ -120,7 +125,6 @@ export const subscribeButton = style([
         paddingLeft: "2.5rem",
       },
     },
-    transition: "all 0.15s ease-in-out",
   },
 ]);
 
@@ -156,16 +160,4 @@ export const spinner = style({
     },
   },
   transition: "all 0.15s ease-in-out",
-});
-
-export const fakeInput = style({
-  position: "absolute",
-  top: "0",
-  left: "-9999px",
-  overflow: "hidden",
-  visibility: "hidden",
-  whiteSpace: "nowrap",
-  height: "0",
-  padding: "0.8rem 1.5rem",
-  fontSize: "1.5rem",
 });

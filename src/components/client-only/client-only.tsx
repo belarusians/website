@@ -1,6 +1,6 @@
 import { HTMLAttributes, PropsWithChildren, useEffect, useState } from "react";
 
-export function ClientOnly({ children, ...delegated}: PropsWithChildren & HTMLAttributes<HTMLElement>): JSX.Element | null {
+export function ClientOnly({ children }: PropsWithChildren & HTMLAttributes<HTMLElement>): JSX.Element | null {
   const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
@@ -11,5 +11,5 @@ export function ClientOnly({ children, ...delegated}: PropsWithChildren & HTMLAt
     return null;
   }
 
-  return <div {...delegated}>{children}</div>;
+  return <>{children}</>;
 }
