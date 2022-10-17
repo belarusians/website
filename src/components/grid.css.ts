@@ -1,11 +1,17 @@
 import { style } from "@vanilla-extract/css";
 import { sprinkles } from "./sprinkles.css";
 
-export const col = style([
+export const vertical = style([
   {
     display: "flex",
-    gap: "1rem",
     flexDirection: "column",
+  },
+]);
+
+export const col = style([
+  vertical,
+  {
+    gap: "1rem",
   },
 ]);
 
@@ -32,6 +38,9 @@ export const row = style([
 ]);
 
 export const w_lg_2 = style([
+  {
+    display: "flex",
+  },
   sprinkles({
     flexGrow: {
       sm: 1,
@@ -39,7 +48,7 @@ export const w_lg_2 = style([
       lg: 2,
     },
     flexBasis: {
-      sm: "10rem",
+      sm: "8rem",
       md: "10rem",
       lg: "20rem",
     },
@@ -47,6 +56,9 @@ export const w_lg_2 = style([
 ]);
 
 export const w_1 = style([
+    {
+    display: "flex",
+  },
   sprinkles({
     flexGrow: {
       sm: 1,
@@ -54,7 +66,7 @@ export const w_1 = style([
       lg: 1,
     },
     flexBasis: {
-      sm: "10rem",
+      sm: "8rem",
       md: "10rem",
       lg: "10rem",
     },

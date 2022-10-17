@@ -4,7 +4,7 @@ import matter from "gray-matter";
 import { remark } from 'remark';
 import html from 'remark-html';
 
-import { News, NewsMetadata } from "../components/types";
+import { EventMetadata, News, NewsMetadata } from "../components/types";
 
 const newsDirectory = path.join(process.cwd(), '_news');
 
@@ -19,7 +19,7 @@ export async function getAllNewsMeta(): Promise<NewsMetadata[]> {
   return Promise.all(slugs.map(getNewsMetaBySlug));
 }
 
-export async function getNewsMetaBySlug(slug: string): Promise<NewsMetadata & Pick<News, 'content'>> {
+export async function getNewsMetaBySlug(slug: string): Promise<(NewsMetadata | EventMetadata) & Pick<News, 'content'>> {
   const fullPath = path.join(newsDirectory, `${slug}.md`);
   if (!fs.existsSync(fullPath)) {
     throw new Error(`News was not found at ${fullPath}`);
@@ -34,6 +34,7 @@ export async function getNewsMetaBySlug(slug: string): Promise<NewsMetadata & Pi
     date: fileWithParsedFM.data.date,
     backgroundUrl: fileWithParsedFM.data.backgroundUrl,
     content: fileWithParsedFM.content,
+    tags: fileWithParsedFM.data.tags
   };
 }
 

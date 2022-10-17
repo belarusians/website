@@ -6,16 +6,21 @@ export const [themeClass, vars] = createTheme({
     white: "#ffffff",
     red: "#ed1b24",
     trueRed: "#cc0000",
+    darkRed: "#af0000",
     black: "#333333",
+    blackTransparent: "rgba(51,51,51,0.4)",
+    grey: "grey",
   },
   shadows: {
     small: "0 3px 6px 1px #9494944d",
     medium: "0 3px 6px 3px #9494944d",
     large: "0 3px 6px 5px #9494944d",
+    top: "rgba(0, 0, 0, 0.15) 0px 50px 15px -39px inset",
+    bottom: "rgba(0, 0, 0, 0.15) 0px -50px 15px -39px inset",
   },
 });
 
-globalStyle("body, body *", {
+globalStyle("*", {
   fontFamily: "'Work Sans', sans-serif;",
   color: vars.color.black,
 });
@@ -24,7 +29,20 @@ globalStyle("body", {
   margin: 0,
 });
 
-export const content = style([
+const grad1 = `radial-gradient(26.76% 85.52% at 86.73% -12.86%, ${vars.color.darkRed} 6.65%, transparent)`;
+const grad2 = `radial-gradient(farthest-side at bottom left, ${vars.color.darkRed} 6.65%, ${vars.color.red} 100%)`;
+
+export const beautifulGradient = style({
+  background: `${grad1}, ${grad2}`,
+});
+
+export const container = style([
+  sprinkles({
+    paddingX: {
+      sm: "large",
+      md: "extraLarge",
+    },
+  }),
   {
     maxWidth: "80rem",
     marginLeft: "auto",
@@ -36,6 +54,20 @@ export const card = style([
   {
     boxShadow: vars.shadows.small,
     borderRadius: "5px",
+    transition: "all 0.15s ease-in-out",
+    backgroundColor: vars.color.white,
+  },
+]);
+
+export const animatedCard = style([
+  card,
+  {
+    selectors: {
+      "&:hover": {
+        boxShadow: vars.shadows.large,
+        transform: "scale(1.01)",
+      },
+    },
     transition: "all 0.15s ease-in-out",
   },
 ]);

@@ -19,11 +19,11 @@ export default function IndexPage(props: MainPageProps): JSX.Element {
   return (
     <Layout>
       <Section>
-        <NewsBlock className={content} news={props.news} />
+        <NewsBlock news={props.news} />
       </Section>
 
       <Section>
-        <SubscriptionForm className={content} />
+        <SubscriptionForm />
       </Section>
     </Layout>
   );

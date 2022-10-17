@@ -3,9 +3,10 @@ import { sprinkles } from "../sprinkles.css";
 
 export const section = style([
   sprinkles({
-    paddingX: {
-      sm: "large",
-      md: "extraLarge",
+    paddingY: {
+      sm: "medium",
+      md: "large",
+      lg: "extraLarge",
     },
   }),
 ]);

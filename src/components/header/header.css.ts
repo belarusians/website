@@ -18,15 +18,10 @@ export const header = style([
 
 export const image = style([
   sprinkles({
-    height: {
-      sm: "50px",
-      md: "100px",
-      lg: "150px",
-    },
     width: {
-      sm: "87px",
-      md: "173px",
-      lg: "260px",
+      sm: "90px",
+      md: "150px",
+      lg: "200px",
     },
   }),
   {

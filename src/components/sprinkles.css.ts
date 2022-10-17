@@ -18,7 +18,7 @@ const responsiveProperties = defineProperties({
   properties: {
     flexDirection: ["row", "column"],
     flexGrow: [1, 2],
-    flexBasis: ["10rem", "15rem", "20rem"],
+    flexBasis: ["8rem", "10rem", "20rem"],
     flex: [1, 2, 3, "none"],
     alignItems: ["stretch", "flex-start", "center", "flex-end"],
     maxWidth: ["30rem", "100%"],
@@ -31,7 +31,7 @@ const responsiveProperties = defineProperties({
     marginBottom: [0, "0.5rem", "1rem", "2rem"],
     marginLeft: [0, "0.5rem", "1rem", "2rem"],
     height: ["auto", "30px", "50px", "70px", "100px", "150px", "200px"],
-    width: ["1rem", "2rem", "87px", "173px", "260px"],
+    width: ["1rem", "2rem", "90px", "150px", "200px"],
     fontSize: ["0.6rem", "0.8rem", "1rem", "1.2rem", "1.5rem", "2rem", "2.5rem"],
   },
   shorthands: {

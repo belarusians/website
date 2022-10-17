@@ -7,4 +7,5 @@ export interface NewsMetadata {
   title: string;
   date: string;
   backgroundUrl: string;
+  tags: ('featured-main' | 'featured' | 'event')[];
 }
