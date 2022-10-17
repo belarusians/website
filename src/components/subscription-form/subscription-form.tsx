@@ -1,6 +1,6 @@
 import { Trans, useTranslation } from "next-i18next";
 import * as React from "react";
-import { FormEvent, HTMLAttributes } from "react";
+import { FormEvent } from "react";
 import {
   subscriptionForm,
   subscribeButton,
@@ -14,7 +14,7 @@ import { isEmailValid } from "../../lib/email";
 import { sectionTitle } from "../styles.css";
 import { col } from "../grid.css";
 
-export function SubscriptionForm(props: HTMLAttributes<HTMLElement>): JSX.Element {
+export function SubscriptionForm(): JSX.Element {
   const emailInputId = "email-input";
 
   const [t] = useTranslation();
@@ -66,7 +66,7 @@ export function SubscriptionForm(props: HTMLAttributes<HTMLElement>): JSX.Elemen
   };
 
   return (
-    <div className={props.className}>
+    <>
       <h1 className={sectionTitle}>
         <Trans>subscribe-title</Trans>
       </h1>
@@ -99,7 +99,7 @@ export function SubscriptionForm(props: HTMLAttributes<HTMLElement>): JSX.Elemen
         </button>
       </div>
       </div>
-    </div>
+    </>
   );
 }
 
