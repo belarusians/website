@@ -11,7 +11,7 @@ interface NewsCarouselProps {
 }
 
 export function NewsBlock(props: NewsCarouselProps & HTMLAttributes<HTMLElement>) {
-  if (props.news.length === 0) {
+  if (props.news.length < 3) {
     return null;
   }
 

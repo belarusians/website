@@ -2,6 +2,7 @@
 title: "Купалле 2022"
 date: "2022-09-13"
 backgroundUrl: "/news/heart.jpg"
+tags: [featured]
 ---
 
 #### В Нідэрландах прайшло святкаванне Купалля
