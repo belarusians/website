@@ -1,7 +1,6 @@
 import { style } from "@vanilla-extract/css";
 
 import { sprinkles } from "../sprinkles.css";
-import { vars } from "../styles.css";
 
 export const header = style([
   sprinkles({
@@ -19,15 +18,11 @@ export const header = style([
 export const image = style([
   sprinkles({
     width: {
-      sm: "90px",
-      md: "150px",
-      lg: "200px",
+      sm: "10rem",
+      md: "15rem",
+      lg: "25rem",
     },
   }),
-  {
-    boxShadow: vars.shadows.small,
-    position: 'relative',
-  },
 ]);
 
 export const languageSelector = style({

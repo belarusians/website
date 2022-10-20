@@ -8,7 +8,6 @@ import { getNewsBySlug, getNewsSlugs } from "../../lib/news";
 import { News } from "../../components/types";
 import { newsHeaderImage } from "../../components/news.css";
 import { Section } from "../../components/section/section";
-import { content } from "../../components/styles.css";
 
 interface NewsPageProps {
   news?: News;
@@ -26,13 +25,11 @@ export default function NewsPage(props: NewsPageProps): JSX.Element {
   return (
     <Layout>
       <Section>
-        <div className={content}>
-          <div className={newsHeaderImage}>
-            <Image layout="fill" src={props.news.backgroundUrl} objectFit="cover" alt={props.news.title} />
-          </div>
-          <h1>{props.news.title}</h1>
-          <div dangerouslySetInnerHTML={{ __html: props.news.content }}></div>
+        <div className={newsHeaderImage}>
+          <Image layout="fill" src={props.news.backgroundUrl} objectFit="cover" alt={props.news.title} />
         </div>
+        <h1>{props.news.title}</h1>
+        <div dangerouslySetInnerHTML={{ __html: props.news.content }}></div>
       </Section>
     </Layout>
   );

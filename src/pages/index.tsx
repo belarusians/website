@@ -9,7 +9,6 @@ import { NewsMetadata } from "../components/types";
 import { GetStaticPropsResult } from "next/types";
 import { getAllNewsMeta } from "../lib/news";
 import { Section } from "../components/section/section";
-import { content } from "../components/styles.css";
 
 interface MainPageProps extends SSRConfig {
   news: NewsMetadata[];
