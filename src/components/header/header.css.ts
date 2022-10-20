@@ -1,13 +1,15 @@
 import { style } from "@vanilla-extract/css";
 
 import { sprinkles } from "../sprinkles.css";
+import { vars } from "../styles.css";
 
 export const header = style([
   sprinkles({
     marginTop: {
-      sm: "0.5rem",
-      md: "1rem"
-    }
+      sm: "1rem",
+      md: "1rem",
+      lg: "2rem",
+    },
   }),
   {
     display: "flex",
@@ -15,53 +17,56 @@ export const header = style([
   },
 ]);
 
-export const image = style([
+export const logoContainer = style({
+  display: "flex",
+});
+
+export const logo = style([
   sprinkles({
     width: {
-      sm: "10rem",
-      md: "15rem",
-      lg: "25rem",
+      sm: "2rem",
+      md: "4rem",
+      lg: "7rem",
     },
   }),
+]);
+
+export const logoText = style([
+  {
+    paddingTop: "1rem",
+    color: vars.color.red,
+    marginTop: "auto",
+    fontWeight: 700,
+    fontSize: "6rem",
+    lineHeight: "5rem",
+    textTransform: "uppercase",
+  },
+]);
+
+export const logoDescription = style([
+  {
+    fontSize: "0.85rem",
+    marginBottom: "auto",
+    fontWeight: 100,
+    textTransform: "uppercase",
+    paddingLeft: "0.5rem",
+  },
+]);
+
+export const logoTextContainer = style([
+  sprinkles({
+    display: {
+      sm: "none",
+      md: "none",
+      lg: "flex",
+    },
+  }),
+  {
+    marginLeft: "1rem",
+    flexDirection: "column",
+  },
 ]);
 
 export const languageSelector = style({
   marginLeft: "auto",
 });
-
-export const title = style([
-  sprinkles({}),
-  {
-    fontWeight: 400,
-    marginLeft: "20px",
-    marginRight: "20px",
-  },
-]);
-
-export const titleDescription = style([
-  sprinkles({
-    fontSize: {
-      sm: "0.8rem",
-      lg: "1rem",
-    },
-    marginTop: {
-      sm: 0,
-      md: "0.5rem",
-    },
-  }),
-  {
-    fontWeight: 300,
-  },
-]);
-
-export const titleHeading = style([
-  sprinkles({
-    fontSize: {
-      sm: "1.2rem",
-      lg: "2rem",
-    },
-  }),
-  {
-    marginBottom: 0,
-  },
-]);

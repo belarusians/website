@@ -4,7 +4,7 @@ import { sprinkles } from "./sprinkles.css";
 export const [themeClass, vars] = createTheme({
   color: {
     white: "#ffffff",
-    red: "#ed1b24",
+    red: "#ed1c24",
     trueRed: "#cc0000",
     darkRed: "#af0000",
     black: "#333333",
@@ -40,7 +40,8 @@ export const container = style([
   sprinkles({
     paddingX: {
       sm: "large",
-      md: "extraLarge",
+      md: "large",
+      lg: "extraLarge",
     },
   }),
   {
@@ -83,6 +84,11 @@ export const sectionTitle = style([
       sm: "0.5rem",
       md: "0.5rem",
       lg: "0.5rem",
+    },
+    marginTop: {
+      sm: "0.5rem",
+      md: "0.5rem",
+      lg: "0.5rem",
     }
   }),
   {
@@ -122,3 +128,7 @@ export const smallText = style([
     fontWeight: 300,
   }
 ]);
+
+export const removeUnderline = style({
+    textDecoration: "none",
+});
