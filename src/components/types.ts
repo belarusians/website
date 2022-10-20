@@ -9,3 +9,10 @@ export interface NewsMetadata {
   backgroundUrl: string;
   tags: ('featured-main' | 'featured' | 'event')[];
 }
+
+export interface EventMetadata extends NewsMetadata {
+  location: string;
+  eventDate: string;
+}
+
+export interface Event extends News, EventMetadata {}
