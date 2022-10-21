@@ -21,7 +21,8 @@ export const [themeClass, vars] = createTheme({
 });
 
 globalStyle("*", {
-  fontFamily: "'Work Sans', sans-serif;",
+  fontFamily: "'Roboto', sans-serif;",
+  fontWeight: 400,
   color: vars.color.black,
 });
 
@@ -92,7 +93,7 @@ export const sectionTitle = style([
     }
   }),
   {
-    fontWeight: 600,
+    fontWeight: 500,
   },
 ]);
 

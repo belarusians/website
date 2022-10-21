@@ -36,20 +36,23 @@ export const logoText = style([
     paddingTop: "1rem",
     color: vars.color.red,
     marginTop: "auto",
-    fontWeight: 700,
+    fontWeight: 900,
     fontSize: "6rem",
     lineHeight: "5rem",
     textTransform: "uppercase",
+    fontFamily: "'Lato', sans-serif;"
   },
 ]);
 
 export const logoDescription = style([
   {
-    fontSize: "0.85rem",
+    fontSize: "0.95rem",
+    marginTop: "0.3rem",
     marginBottom: "auto",
-    fontWeight: 100,
+    fontWeight: 300,
     textTransform: "uppercase",
-    paddingLeft: "0.5rem",
+    paddingLeft: "0.4rem",
+    fontFamily: "'Roboto', sans-serif;"
   },
 ]);
 
@@ -62,7 +65,7 @@ export const logoTextContainer = style([
     },
   }),
   {
-    marginLeft: "1rem",
+    marginLeft: "0.8rem",
     flexDirection: "column",
   },
 ]);
