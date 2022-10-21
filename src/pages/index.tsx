@@ -25,7 +25,7 @@ export default function IndexPage(props: MainPageProps): JSX.Element {
         <NewsBlock news={props.news} />
       </Section>
 
-      { props.events ?
+      { props.events?.length ?
       <Section className={beautifulGradient}>
         <EventsBlock events={props.events} locale={props.locale} />
       </Section>
