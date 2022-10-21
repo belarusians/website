@@ -20,7 +20,7 @@ export const github = style([sprinkles({
     md: "1rem",
   },
 }), {
-  fill: vars.color.black,
+  fill: vars.color.lightBlack,
   selectors: {
     "&:hover": {
       fill: vars.color.red

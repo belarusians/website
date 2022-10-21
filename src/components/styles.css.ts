@@ -5,9 +5,9 @@ export const [themeClass, vars] = createTheme({
   color: {
     white: "#ffffff",
     red: "#ed1c24",
-    trueRed: "#cc0000",
     darkRed: "#af0000",
-    black: "#333333",
+    black: "#231f20",
+    lightBlack: "#333333",
     blackTransparent: "rgba(51,51,51,0.4)",
     grey: "grey",
   },
@@ -23,7 +23,7 @@ export const [themeClass, vars] = createTheme({
 globalStyle("*", {
   fontFamily: "'Roboto', sans-serif;",
   fontWeight: 400,
-  color: vars.color.black,
+  color: vars.color.lightBlack,
 });
 
 globalStyle("body", {
@@ -97,14 +97,10 @@ export const sectionTitle = style([
       md: "0.5rem",
       lg: "0.5rem",
     },
-    marginTop: {
-      sm: "0.5rem",
-      md: "0.5rem",
-      lg: "0.5rem",
-    }
   }),
   {
     fontWeight: 500,
+    marginTop: 0,
   },
 ]);
 
