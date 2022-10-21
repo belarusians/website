@@ -5,36 +5,54 @@ import { sprinkles } from "../sprinkles.css";
 export const article = style([card, {}]);
 
 export const articleImageContainer = style([
+  sprinkles({
+    height: {
+      sm: "10rem",
+      md: "20rem",
+      lg: "20rem",
+    }
+  }),
   roundedTop,
   {
     position: "relative",
-    height: "20rem",
+    selectors: {
+      "&:before": {
+        zIndex: 100,
+        content: '',
+        backgroundImage: "linear-gradient(to top, rgba(255,255,255,255), rgba(255,255,255,0))",
+        position: "absolute",
+        height: "4rem",
+        right: 0,
+        bottom: 0,
+        left: 0,
+      }
+    }
   },
 ]);
 
 export const articleImage = style([
   roundedTop,
   {
-    // selectors: {
-    //   "&:before": {
-    //     content: '',
-    //     backgroundImage: "linear-gradient(to top, rgba(239,239,239,255), rgba(239,239,239,0))",
-    //     position: "absolute",
-    //     height: "5rem",
-    //     right: 0,
-    //     bottom: 0,
-    //     left: 0,
-    //   }
-    // }
+    objectFit: "cover",
   }
 ]);
 
 export const articleContent = style([
   sprinkles({
-    padding: {
+    paddingX: {
       sm: "large",
       md: "large",
       lg: "extraLarge",
+    },
+    paddingBottom: {
+      sm: "large",
+      md: "large",
+      lg: "extraLarge",
+    },
+    paddingTop: {
+      sm: "medium",
+      md: "medium",
+      lg: "large",
     },
   },),
 ]);

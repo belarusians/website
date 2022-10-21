@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
 import { sprinkles } from "../sprinkles.css";
-import { removeUnderline, roundedBottom, vars } from "../styles.css";
+import { removeUnderline, rounded, roundedBottom, vars } from "../styles.css";
 
 const title = style([
   {
@@ -32,8 +32,9 @@ export const smallTitle = style([
 ]);
 
 export const image = style([
+  rounded,
   {
-    borderRadius: "5px",
+    objectFit: "cover",
     filter: "brightness(0.8)",
   },
 ]);

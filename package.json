@@ -4,9 +4,10 @@
   "private": true,
   "description": "belarusians-nl",
   "scripts": {
-    "dev": "NODE_OPTIONS='--inspect' NODE_ENV='development' next dev",
-    "start": "next start",
+    "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
+    "start": "cross-env next start",
     "build": "next build",
+    "build:profile": "cross-env NODE_ENV=development next build --profile",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -16,7 +17,7 @@
     "@fortawesome/react-fontawesome": "~0.2.0",
     "aws-sdk": "~2.1209.0",
     "i18next": "~21.8.13",
-    "next": "~12.2.5",
+    "next": "~12.3.1",
     "next-i18next": "~11.3.0",
     "next-pwa": "^5.6.0",
     "postcss": "~8.4.14",
@@ -31,6 +32,7 @@
     "@types/react-dom": "^18.0.5",
     "@vanilla-extract/next-plugin": "^2.0.2",
     "@vanilla-extract/sprinkles": "^1.4.1",
+    "cross-env": "~7.0.3",
     "eslint": "^7.32.0",
     "gray-matter": "^4.0.3",
     "prettier": "^2.7.1",

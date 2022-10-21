@@ -52,6 +52,10 @@ export const container = style([
   }
 ]);
 
+export const rounded = style({
+  borderRadius: "5px",
+});
+
 export const roundedTop = style({
   borderRadius: "5px 5px 0 0",
 });
@@ -64,7 +68,6 @@ export const card = style([
   {
     boxShadow: vars.shadows.small,
     borderRadius: "5px",
-    transition: "all 0.15s ease-in-out",
     backgroundColor: vars.color.white,
   },
 ]);

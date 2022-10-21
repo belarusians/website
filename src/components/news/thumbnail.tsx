@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/future/image";
 import Link from "next/link";
 
 import { NewsMetadata } from "../types";
@@ -19,7 +19,7 @@ export function NewsThumbnail(props: NewsThumbnailProps & { className?: string }
     <div className={props.className}>
       <Link href={`/news/${props.news.slug}`}>
         <a className={thumbnail}>
-          <Image className={image} layout="fill" src={props.news.backgroundUrl} objectFit="cover"></Image>
+          <Image className={image} fill src={props.news.backgroundUrl} alt={"test"} />
           <div className={titleContainer}>
             <span className={mapSizeToClass[props.size]}>{props.news.title}</span>
           </div>
