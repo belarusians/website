@@ -4,13 +4,12 @@ import { NewsThumbnail } from "./thumbnail";
 import { NewsMetadata } from "../types";
 import { animatedCard, sectionTitle } from "../styles.css";
 import { row_lg, w_lg_2, w_1, col } from "../grid.css";
-import { HTMLAttributes } from "react";
 
 interface NewsCarouselProps {
   news: NewsMetadata[];
 }
 
-export function NewsBlock(props: NewsCarouselProps & HTMLAttributes<HTMLElement>) {
+export function NewsBlock(props: NewsCarouselProps) {
   if (props.news.length < 3) {
     return null;
   }
@@ -20,7 +19,7 @@ export function NewsBlock(props: NewsCarouselProps & HTMLAttributes<HTMLElement>
   const otherNews = props.news.filter(news => news !== mainNews);
 
   return (
-    <div className={props.className}>
+    <>
       <h1 className={sectionTitle}>
         <Trans>news-title</Trans>
       </h1>
@@ -31,6 +30,6 @@ export function NewsBlock(props: NewsCarouselProps & HTMLAttributes<HTMLElement>
           <NewsThumbnail size={'small'} className={`${w_1} ${animatedCard}`} news={otherNews[1]} />
         </div>
       </div>
-    </div>
+    </>
   );
 }

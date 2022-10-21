@@ -20,7 +20,6 @@ export const thumbnail = style([
   },
 ]);
 
-export const eventsBlock = style([sprinkles({})]);
 export const date = style([
   {
     margin: 0,

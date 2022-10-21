@@ -1,7 +1,6 @@
 import { row } from "../grid.css";
 import { EventMetadata } from "../types";
 import { EventThumbnail } from "./thumbnail";
-import { eventsBlock } from "./thumbnail.css";
 
 export interface EventsBlockProps {
   events: EventMetadata[];
@@ -14,10 +13,8 @@ export function EventsBlock(props: EventsBlockProps & { className?: string }): J
   }
 
   return (
-    <div className={eventsBlock}>
-      <div className={row}>
-        { props.events.map(renderEventThumbnail) }
-      </div>
+    <div className={row}>
+      { props.events.map(renderEventThumbnail) }
     </div>
   );
 }
