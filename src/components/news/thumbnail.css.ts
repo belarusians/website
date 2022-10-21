@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
 import { sprinkles } from "../sprinkles.css";
-import { vars } from "../styles.css";
+import { removeUnderline, vars } from "../styles.css";
 
 const title = style([
   {
@@ -49,11 +49,11 @@ export const titleContainer = style([
 ]);
 
 export const thumbnail = style([
+  removeUnderline,
   {
     position: "relative",
     flexDirection: "column",
     display: "flex",
-    textDecoration: "none",
     flex: "1",
   },
 ]);

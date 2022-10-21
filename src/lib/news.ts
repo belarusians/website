@@ -28,7 +28,7 @@ export async function getNewsMetaBySlug(slug: string): Promise<(NewsMetadata | E
   const file = fs.readFileSync(fullPath, 'utf8');
   const fileWithParsedFM = matter(file);
 
-  return {
+  const newsMeta = {
     slug,
     title: fileWithParsedFM.data.title,
     date: fileWithParsedFM.data.date,
@@ -36,6 +36,16 @@ export async function getNewsMetaBySlug(slug: string): Promise<(NewsMetadata | E
     content: fileWithParsedFM.content,
     tags: fileWithParsedFM.data.tags
   };
+
+  if (newsMeta.tags.includes('event')) {
+    return {
+      ...newsMeta,
+      eventDate: fileWithParsedFM.data.eventDate,
+      location: fileWithParsedFM.data.location,
+    }
+  }
+
+  return newsMeta;
 }
 
 export async function getNewsBySlug(slug: string): Promise<News> {
