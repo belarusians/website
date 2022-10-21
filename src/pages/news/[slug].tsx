@@ -1,19 +1,18 @@
 import { GetStaticPathsContext, GetStaticPathsResult, GetStaticPropsContext, GetStaticPropsResult } from "next/types";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import Image from "next/image";
 import * as React from "react";
 
 import { Layout } from "../../components/layout";
 import { getNewsBySlug, getNewsSlugs } from "../../lib/news";
 import { News } from "../../components/types";
-import { newsHeaderImage } from "../../components/news.css";
 import { Section } from "../../components/section/section";
+import { Article } from "../../components/news/article";
 
 interface NewsPageProps {
   news?: News;
 }
 
-export default function NewsPage(props: NewsPageProps): JSX.Element {
+export default function ArticlePage(props: NewsPageProps): JSX.Element {
   if (!props.news) {
     return (
       <Layout>
@@ -25,11 +24,7 @@ export default function NewsPage(props: NewsPageProps): JSX.Element {
   return (
     <Layout>
       <Section>
-        <div className={newsHeaderImage}>
-          <Image layout="fill" src={props.news.backgroundUrl} objectFit="cover" alt={props.news.title} />
-        </div>
-        <h1>{props.news.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: props.news.content }}></div>
+        <Article news={props.news} />
       </Section>
     </Layout>
   );

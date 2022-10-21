@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
 import { sprinkles } from "../sprinkles.css";
-import { removeUnderline, vars } from "../styles.css";
+import { removeUnderline, roundedBottom, vars } from "../styles.css";
 
 const title = style([
   {
@@ -39,12 +39,12 @@ export const image = style([
 ]);
 
 export const titleContainer = style([
+  roundedBottom,
   {
     padding: "0.5rem",
     zIndex: 500,
     backdropFilter: "blur(10px)",
     marginTop: "auto",
-    borderRadius: "0 0 5px 5px",
   },
 ]);
 
