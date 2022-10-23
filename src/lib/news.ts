@@ -4,23 +4,36 @@ import matter from "gray-matter";
 import { remark } from 'remark';
 import html from 'remark-html';
 
-import { EventMetadata, News, NewsMetadata } from "../components/types";
+import { EventMetadata, Lang, News, NewsMetadata } from "../components/types";
 
 const newsDirectory = path.join(process.cwd(), '_news');
 
-export function getNewsSlugs(): string[] {
-  const news = fs.readdirSync(newsDirectory);
+export function getNewsSlugs(locale?: Lang): string[] {
+  let pathToLocale;
+  if (locale && fs.existsSync(path.join(newsDirectory, locale))) {
+    pathToLocale = path.resolve(newsDirectory, locale);
+  } else {
+    pathToLocale = path.resolve(newsDirectory, 'be');
+  }
+
+  const news = fs.readdirSync(pathToLocale);
   return news.map(f => f.substring(0, f.length-3));
 }
 
-export async function getAllNewsMeta(): Promise<NewsMetadata[]> {
-  const slugs = getNewsSlugs();
+export async function getAllNewsMeta(locale?: Lang): Promise<NewsMetadata[]> {
+  const slugs = getNewsSlugs(locale);
 
-  return Promise.all(slugs.map(getNewsMetaBySlug));
+  return Promise.all(slugs.map(slug => getNewsMetaBySlug(slug, locale)));
 }
 
-export async function getNewsMetaBySlug(slug: string): Promise<(NewsMetadata | EventMetadata) & Pick<News, 'content'>> {
-  const fullPath = path.join(newsDirectory, `${slug}.md`);
+export async function getNewsMetaBySlug(slug: string, locale?: Lang): Promise<(NewsMetadata | EventMetadata) & Pick<News, 'content'>> {
+  let fullPath;
+  if (locale && fs.existsSync(path.join(newsDirectory, locale))) {
+    fullPath = path.resolve(newsDirectory, locale, `${slug}.md`);
+  } else {
+    fullPath = path.resolve(newsDirectory, 'be', `${slug}.md`);
+  }
+
   if (!fs.existsSync(fullPath)) {
     throw new Error(`News was not found at ${fullPath}`);
   }
@@ -48,8 +61,8 @@ export async function getNewsMetaBySlug(slug: string): Promise<(NewsMetadata | E
   return newsMeta;
 }
 
-export async function getNewsBySlug(slug: string): Promise<News> {
-  const { content, ...meta } = await getNewsMetaBySlug(slug);
+export async function getNewsBySlug(slug: string, locale?: Lang): Promise<News> {
+  const { content, ...meta } = await getNewsMetaBySlug(slug, locale);
 
   return {
     ...meta,

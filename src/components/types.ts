@@ -16,3 +16,5 @@ export interface EventMetadata extends NewsMetadata {
 }
 
 export interface Event extends News, EventMetadata {}
+
+export type Lang = 'be' | 'nl' | 'ru';

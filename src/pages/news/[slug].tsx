@@ -4,7 +4,7 @@ import * as React from "react";
 
 import { Layout } from "../../components/layout";
 import { getNewsBySlug, getNewsSlugs } from "../../lib/news";
-import { News } from "../../components/types";
+import { Lang, News } from "../../components/types";
 import { Section } from "../../components/section/section";
 import { Article } from "../../components/news/article";
 
@@ -36,7 +36,7 @@ export async function getStaticProps({ params, locale }: GetStaticPropsContext):
       props: {},
     };
   }
-  const newsPost = await getNewsBySlug(params.slug as string);
+  const newsPost = await getNewsBySlug(params.slug as string, locale as Lang);
 
   return {
     props: {

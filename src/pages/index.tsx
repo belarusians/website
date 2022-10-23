@@ -41,7 +41,7 @@ export default function IndexPage(props: MainPageProps): JSX.Element {
 }
 
 export async function getStaticProps(context: any): Promise<GetStaticPropsResult<MainPageProps>> {
-  const newsMeta = await getAllNewsMeta();
+  const newsMeta = await getAllNewsMeta(context.locale);
 
   const featured = newsMeta.filter(meta => meta.tags.includes('featured'));
   const events = newsMeta.filter(meta => meta.tags.includes('event')) as EventMetadata[];
