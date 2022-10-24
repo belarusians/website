@@ -1,27 +1,21 @@
 import * as React from "react";
-import { HTMLAttributes } from "react";
-import Image from "next/image";
-import { Trans } from "next-i18next";
-// @ts-ignore
-import logo from "../../../public/logo.jpeg";
+import Link from "next/link";
 
-import { header, image, languageSelector, title, titleHeading, titleDescription } from "./header.css";
+import { header, logo, logoContainer, languageSelector } from "./header.css";
 import { LanguageSelector } from "../language-selector/language-selector";
+import { Logo } from "./logo";
+import { removeUnderline } from "../styles.css";
 
-export function Header(props: HTMLAttributes<HTMLElement>): JSX.Element {
+export function Header(props: { className: string, }): JSX.Element {
   return (
     <div className={props.className + " " + header}>
-      <div className={image}>
-        <Image layout="fill" src={logo} objectFit="cover" alt="Belarusians NL logo" />
-      </div>
-      <div className={title}>
-        <h3 className={titleHeading}>
-          <Trans>title</Trans>
-        </h3>
-        <p className={titleDescription}>
-          <Trans>description</Trans>
-        </p>
-      </div>
+      <Link href={"/"}>
+        <a className={removeUnderline}>
+          <div className={logoContainer}>
+            <Logo className={logo}/>
+          </div>
+        </a>
+      </Link>
       <LanguageSelector className={languageSelector} />
     </div>
   );
