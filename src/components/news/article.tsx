@@ -13,10 +13,7 @@ export function Article(props: ArticleProps): JSX.Element {
       <div className={articleImageContainer}>
         <Image className={articleImage} fill src={props.news.backgroundUrl} alt={props.news.title} />
       </div>
-      <div className={articleContent}>
-        <h1>{props.news.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: props.news.content }}></div>
-      </div>
+      <div className={articleContent} dangerouslySetInnerHTML={{ __html: props.news.content }}></div>
     </div>
   );
 }

@@ -22,7 +22,6 @@ export const [themeClass, vars] = createTheme({
 
 globalStyle("*", {
   fontFamily: "'Roboto', sans-serif;",
-  fontWeight: 400,
   color: vars.color.lightBlack,
 });
 
