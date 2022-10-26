@@ -22,11 +22,15 @@ export const [themeClass, vars] = createTheme({
 
 globalStyle("*", {
   fontFamily: "'Roboto', sans-serif;",
-  color: vars.color.lightBlack,
 });
 
 globalStyle("body", {
+  color: vars.color.lightBlack,
   margin: 0,
+});
+
+globalStyle("html", {
+  fontSize: "18px",
 });
 
 const grad1 = `radial-gradient(26.76% 85.52% at 86.73% -12.86%, ${vars.color.darkRed} 6.65%, transparent)`;
@@ -34,6 +38,11 @@ const grad2 = `radial-gradient(farthest-side at bottom left, ${vars.color.darkRe
 
 export const beautifulGradient = style({
   background: `${grad1}, ${grad2}`,
+});
+
+export const darkBackground = style({
+  backgroundColor: vars.color.grey,
+  color: vars.color.white,
 });
 
 export const container = style([
@@ -45,7 +54,7 @@ export const container = style([
     },
   }),
   {
-    maxWidth: "80rem",
+    maxWidth: "75rem",
     marginLeft: "auto",
     marginRight: "auto",
   }

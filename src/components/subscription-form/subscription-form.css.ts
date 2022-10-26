@@ -18,16 +18,12 @@ export const subTitle = style([
     maxWidth: {
       sm: "100%",
       md: "100%",
-      lg: "30rem",
+      lg: "28rem",
     }
   })
 ]);
 
 const subscribedPlaceholder = sprinkles({
-  // fontSize: {
-  //   sm: "0.8rem",
-  //   md: "1.5rem",
-  // },
   paddingY: {
     sm: "small",
     md: "medium",
@@ -68,7 +64,7 @@ export const subscribeInput = style([
       md: 1,
       lg: "none"
     },
-    minWidth: "20rem",
+    minWidth: "18rem",
   }),
   {
     WebkitAppearance: "none",
@@ -136,8 +132,9 @@ const rotate = keyframes({
 
 export const spinner = style({
   position: "absolute",
-  marginLeft: "-1.5rem",
+  marginLeft: "-1.6rem",
   marginRight: "1rem",
+  marginTop: "0.15rem",
   selectors: {
     "&.hide": {
       opacity: "0%",

@@ -28,9 +28,9 @@ export const logoContainer = style({
 export const logo = style([
   sprinkles({
     width: {
-      sm: "10rem",
-      md: "15rem",
-      lg: "25rem",
+      sm: "9rem",
+      md: "14rem",
+      lg: "23rem",
     },
   }),
 ]);

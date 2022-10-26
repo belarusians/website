@@ -7,9 +7,9 @@ export const article = style([card, {}]);
 export const articleImageContainer = style([
   sprinkles({
     height: {
-      sm: "10rem",
-      md: "20rem",
-      lg: "20rem",
+      sm: "9rem",
+      md: "18rem",
+      lg: "18rem",
     }
   }),
   roundedTop,
@@ -49,10 +49,8 @@ export const articleContent = style([
       md: "large",
       lg: "extraLarge",
     },
-    paddingTop: {
-      sm: "medium",
-      md: "medium",
-      lg: "large",
-    },
   },),
+  {
+    lineHeight: "1.5rem",
+  }
 ]);
