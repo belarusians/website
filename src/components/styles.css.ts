@@ -33,6 +33,10 @@ globalStyle("html", {
   fontSize: "18px",
 });
 
+globalStyle("a:link, a:visited, button", {
+  color: vars.color.lightBlack,
+});
+
 const grad1 = `radial-gradient(26.76% 85.52% at 86.73% -12.86%, ${vars.color.darkRed} 6.65%, transparent)`;
 const grad2 = `radial-gradient(farthest-side at bottom left, ${vars.color.darkRed} 6.65%, ${vars.color.red} 100%)`;
 
@@ -98,7 +102,7 @@ export const sectionTitle = style([
     fontSize: {
       sm: "1.5rem",
       md: "1.5rem",
-      lg: "2.5rem",
+      lg: "2rem",
     },
     marginBottom: {
       sm: "0.5rem",

@@ -12,6 +12,7 @@ export const footer = style([
   display: "flex",
   justifyContent: "flex-end",
   alignItems: "center",
+  paddingBottom: "0.5rem",
 }]);
 
 export const link = style({
@@ -26,12 +27,11 @@ export const link = style({
 
 export const icon = style([sprinkles({
   fontSize: {
-    sm: "1rem",
+    sm: "1.5rem",
     md: "1.5rem",
     lg: "2rem",
   }
 }), {
-  color: vars.color.white, // TODO: this has to come from parent styles
   selectors: {
     "&:hover": {
       color: vars.color.red

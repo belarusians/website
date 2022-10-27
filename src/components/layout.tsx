@@ -11,7 +11,7 @@ export function Layout(props: React.PropsWithChildren): JSX.Element {
     <>
       <Header className={container} />
       {props.children}
-      <Section className={darkBackground}>
+      <Section>
         <Footer />
       </Section>
     </>

@@ -64,9 +64,9 @@ export const subscribeInput = style([
       md: 1,
       lg: "none"
     },
-    minWidth: "18rem",
   }),
   {
+    minWidth: "10rem",
     WebkitAppearance: "none",
     border: `1px solid ${vars.color.white}`,
     selectors: {
