@@ -13,9 +13,9 @@ export const largeTitle = style([
   title,
   sprinkles({
     fontSize: {
-      sm: "1.5rem",
-      md: "2rem",
-      lg: "2.5rem",
+      sm: "1.2rem",
+      md: "1.5rem",
+      lg: "2rem",
     },
   }),
 ]);
@@ -24,8 +24,8 @@ export const smallTitle = style([
   title,
   sprinkles({
     fontSize: {
-      sm: "1.5rem",
-      md: "2rem",
+      sm: "1rem",
+      md: "1.2rem",
       lg: "1.5rem",
     },
   }),

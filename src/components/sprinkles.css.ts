@@ -1,12 +1,14 @@
 import { defineProperties, createSprinkles } from "@vanilla-extract/sprinkles";
 
 const padding = {
-  extraSmall: "0.3rem",
-  small: "0.6rem",
-  medium: "0.8rem",
-  large: "1rem",
-  extraLarge: "2rem",
+  extraSmall: "0.28rem",
+  small: "0.55rem",
+  medium: "0.75rem",
+  large: "0.9rem",
+  extraLarge: "1.8rem",
 };
+
+const margin = [0, "0.5rem", "1rem", "2rem"];
 
 const responsiveProperties = defineProperties({
   conditions: {
@@ -19,20 +21,19 @@ const responsiveProperties = defineProperties({
     display: ["none", "flex"],
     flexDirection: ["row", "column"],
     flexGrow: [1, 2],
-    flexBasis: ["8rem", "10rem", "20rem"],
-    flex: [1, 2, 3, "none"],
-    alignItems: ["stretch", "flex-start", "center", "flex-end"],
-    maxWidth: ["30rem", "100%"],
-    minWidth: ["20rem"],
+    flexBasis: ["7rem", "9rem", "18rem"],
+    flex: [1, "none"],
+    maxWidth: ["28rem", "100%"],
+    minWidth: ["18rem"],
     paddingTop: padding,
     paddingBottom: padding,
     paddingLeft: padding,
     paddingRight: padding,
-    marginTop: [0, "0.5rem", "1rem", "2rem"],
-    marginBottom: [0, "0.5rem", "1rem", "2rem"],
-    marginLeft: [0, "0.5rem", "1rem", "2rem"],
-    height: ["10rem", "20rem"],
-    width: ["1rem", "2rem", "4rem", "7rem", "10rem", "15rem", "25rem"],
+    marginTop: margin,
+    marginBottom: margin,
+    marginLeft: margin,
+    height: ["1rem", "2rem", "9rem", "18rem"],
+    width: ["1rem", "2rem", "4rem", "7rem", "9rem", "14rem", "23rem"],
     fontSize: ["0.6rem", "0.8rem", "1rem", "1.2rem", "1.5rem", "2rem", "2.5rem"],
   },
   shorthands: {
