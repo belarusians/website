@@ -36,6 +36,7 @@ export const button = style([
     backgroundColor: "white",
     border: 0,
     cursor: "pointer",
+    textTransform: "uppercase",
     selectors: {
       [`${li}:first-child &`]: {
         borderTopLeftRadius: "5px",

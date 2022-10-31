@@ -8,7 +8,8 @@ export const subscriptionForm = style([
   {
     marginTop: "0.5rem",
     display: "flex",
-    alignItems: "center",
+    textAlign: "center",
+    alignSelf: "center",
   },
 ]);
 
@@ -19,8 +20,12 @@ export const subTitle = style([
       sm: "100%",
       md: "100%",
       lg: "28rem",
-    }
-  })
+    },
+  }),
+  {
+    textAlign: "center",
+    alignSelf: "center",
+  },
 ]);
 
 const subscribedPlaceholder = sprinkles({
@@ -51,7 +56,7 @@ const shake = keyframes({
   },
   "100%": {
     transform: "translateX(0)",
-  }
+  },
 });
 
 export const subscribeInput = style([
@@ -62,7 +67,7 @@ export const subscribeInput = style([
     flex: {
       sm: 1,
       md: 1,
-      lg: "none"
+      lg: "none",
     },
   }),
   {
@@ -84,7 +89,7 @@ export const subscribeInput = style([
         position: "relative",
         animation: `${shake} .6s ease-in-out`,
         animationIterationCount: 2,
-      }
+      },
     },
   },
 ]);

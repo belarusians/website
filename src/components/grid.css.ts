@@ -15,6 +15,20 @@ export const col = style([
   },
 ]);
 
+export const col_lg__row_md = style([
+  sprinkles({
+    flexDirection: {
+      sm: "row",
+      md: "row",
+      lg: "column",
+    },
+  }),
+  {
+    display: "flex",
+    gap: "1rem",
+  },
+]);
+
 export const row_lg = style([
   sprinkles({
     flexDirection: {

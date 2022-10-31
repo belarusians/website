@@ -116,6 +116,13 @@ export const sectionTitle = style([
   },
 ]);
 
+export const centerSectionTitle = style([
+  sectionTitle,
+  {
+    textAlign: "center",
+  }
+]);
+
 export const largeText = style([
   sprinkles({
     fontSize: {

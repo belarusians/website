@@ -3,6 +3,18 @@ import { animatedCard, vars } from "../styles.css";
 import { sprinkles } from "../sprinkles.css";
 
 export const thumbnail = style([
+  sprinkles({
+    width: {
+      sm: "9rem",
+      md: "14rem",
+      lg: "14rem",
+    },
+    fontSize: {
+      sm: "0.8rem",
+      md: "1rem",
+      lg: "1rem",
+    },
+  }),
   animatedCard,
   {
     selectors: {
@@ -14,7 +26,6 @@ export const thumbnail = style([
       },
     },
     maxHeight: "18rem",
-    width: "14rem",
     padding: "1rem",
     textDecoration: "none",
   },
@@ -40,4 +51,4 @@ globalStyle(`${locationText} path`, {
 
 export const locationIcon = style({
   paddingRight: "0.5rem",
-})
+});

@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Trans } from "next-i18next";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
@@ -37,7 +36,7 @@ export function LanguageSelector(props: React.HTMLAttributes<HTMLElement>): JSX.
         {sortedLocales.map((l) => (
           <li className={li} key={l}>
             <button className={`${button} ${loc === l ? active : ""}`} onClick={() => onSelectLanguage(l)}>
-              <Trans>{l}</Trans>
+              {l}
             </button>
           </li>
         ))}

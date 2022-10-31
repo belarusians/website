@@ -15,15 +15,21 @@ export const footer = style([
   paddingBottom: "0.5rem",
 }]);
 
-export const link = style({
-  marginRight: "1.5rem",
+export const link = style([
+  sprinkles({
+    marginRight: {
+      sm: "0.5rem",
+      md: "1rem",
+      lg: "1.5rem",
+    }
+  }), {
   selectors: {
     "&:hover": {
       color: vars.color.red
     }
   },
   transition: "all 0.15s ease-in-out",
-});
+}]);
 
 export const icon = style([sprinkles({
   fontSize: {
