@@ -11,7 +11,7 @@ import {
 } from "./subscription-form.css";
 import { ClientOnly } from "../client-only/client-only";
 import { isEmailValid } from "../../lib/email";
-import { sectionTitle } from "../styles.css";
+import { centerSectionTitle } from "../styles.css";
 import { col } from "../grid.css";
 
 export function SubscriptionForm(): JSX.Element {
@@ -67,7 +67,7 @@ export function SubscriptionForm(): JSX.Element {
 
   return (
     <>
-      <h1 className={sectionTitle}>
+      <h1 className={centerSectionTitle}>
         <Trans>subscribe-title</Trans>
       </h1>
       <div className={col}>
