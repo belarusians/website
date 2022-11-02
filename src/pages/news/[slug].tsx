@@ -41,7 +41,7 @@ export async function getStaticProps({ params, locale }: GetStaticPropsContext):
   return {
     props: {
       news: newsPost,
-      ...(await serverSideTranslations(locale || "be")),
+      ...(await serverSideTranslations(locale || "be", ["common"])),
     },
   };
 }

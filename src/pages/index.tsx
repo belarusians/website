@@ -50,7 +50,7 @@ export async function getStaticProps(context: any): Promise<GetStaticPropsResult
       news: featured,
       events,
       locale: context.locale,
-      ...(await serverSideTranslations(context.locale)),
+      ...(await serverSideTranslations(context.locale, ["common", "main"])),
     },
   }
 }
