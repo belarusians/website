@@ -1,10 +1,5 @@
 {
   "title": "Mara",
   "logo-description": "vereneging belarussen in nederland",
-  "news-title": "Nieuws",
-  "subscribe-title": "Abonneer",
-  "subscribe-text": "Wij garanderen anonimiteit. Uw e-mail kan alleen worden gezien door ontwikkelaars",
-  "subscribe-input-placeholder": "email",
-  "subscribe-button": "Abonneren",
-  "subscribed-text": "Bedankt voor je interesse!"
+  "about-us": "Wie zijn we?"
 }

@@ -1,4 +1,4 @@
-import { Trans, useTranslation } from "next-i18next";
+import { useTranslation } from "next-i18next";
 import * as React from "react";
 import { FormEvent } from "react";
 import {
@@ -17,7 +17,7 @@ import { col } from "../grid.css";
 export function SubscriptionForm(): JSX.Element {
   const emailInputId = "email-input";
 
-  const [t] = useTranslation();
+  const { t } = useTranslation('main');
   const [isLoading, setIsLoading] = React.useState(false);
   const [isValid, setIsValid] = React.useState(true);
   const [isSuccess, setIsSuccess] = React.useState(false);
@@ -68,16 +68,16 @@ export function SubscriptionForm(): JSX.Element {
   return (
     <>
       <h1 className={centerSectionTitle}>
-        <Trans>subscribe-title</Trans>
+          {t('subscribe-title')}
       </h1>
       <div className={col}>
         <div className={subTitle}>
-          <Trans>subscribe-text</Trans>
+          {t('subscribe-text')}
         </div>
         <div className={subscriptionForm}>
         {isSuccess ? (
           <div className={success}>
-            <Trans>subscribed-text</Trans>
+          {t('subscribe-text')}
           </div>
         ) : (
           <ClientOnly>
@@ -95,7 +95,7 @@ export function SubscriptionForm(): JSX.Element {
 
         <button disabled={isLoading || isSuccess} className={`${subscribeButton} ${isLoading ? "loading" : ""}`} onClick={submit}>
           <span className={spinner + " " + (isLoading ? "show" : "hide")}></span>
-          <Trans>subscribe-button</Trans>
+          {t('subscribe-button')}
         </button>
       </div>
       </div>

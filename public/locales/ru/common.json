@@ -1,10 +1,5 @@
 {
   "title": "Мара",
-  "logo-description": "Ассоциацая беларусов в Нидерландах",
-  "news-title": "Новости",
-  "subscribe-title": "Подписывайтесь",
-  "subscribe-text": "Мы гарантируем анонимность. Ваша почта может быть видна только разработчикам",
-  "subscribe-input-placeholder": "email",
-  "subscribe-button": "Подписаться",
-  "subscribed-text": "Спасибо за вашу заинтересованность!"
+  "logo-description": "Ассоциация беларусов в Нидерландах",
+  "about-us": "Кто мы?"
 }
