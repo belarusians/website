@@ -1,20 +1,17 @@
 ---
-title: "Placeholder"
-date: "2022-09-13"
-backgroundUrl: "/news/placeholder.jpg"
-tags: []
+title: "Купалле 2022"
+date: "2022-11-05"
+backgroundUrl: "/news/flowers.jpg"
+tags: [featured]
 ---
 
-#### Lorem ipsum
+# Купалле 2022
+#### Больш за 100 Беларусаў Нідэрландаў, а таксама Бельгіі і Нямеччыны сабраліся разам на Паўночным моры для святкавання Купалля ўжо ў другі раз!
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid debitis eaque eveniet explicabo facilis fugiat illo 
-in minima molestias natus nihil, non pariatur quos sed, sint totam vitae voluptatem voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid debitis eaque eveniet explicabo facilis fugiat illo in minima molestias natus nihil, non pariatur quos sed, sint totam vitae voluptatem voluptatum.
+Пасля паспяховага першага святкавання Купалля ў 2021 годзе мы вырашылі зрабіць гэта традыцыяй і зноў сабраць беларусаў з такой цёплай нагоды.
 
+Было арганізавана пляценне вянкоў, варажба на воску, дзіцячыя гульні і лепка з гліны! Мы мелі ўнікальную магчымасць пачуць як гучыць ліра
+і ўбачыць як на ёй граюць. Мастакі і майстры народных рамёстваў выставілі свае творы на міні-кірмаш. Мы паспелі патанчыць, пазнаёміцца і ўдосталь пагутарыць. 
+Да нашага свята таксама далучыліся бежанцы з Беларусі і Украіны. Не толькі каб падзяліць з намі гэтыя моманты, але і каб прыўзняць дух. 
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid debitis eaque eveniet explicabo facilis fugiat illo
-in minima molestias natus nihil, non pariatur quos sed, sint totam vitae voluptatem voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid debitis eaque eveniet explicabo facilis fugiat illo in minima molestias natus nihil, non pariatur quos sed, sint totam vitae voluptatem voluptatum.
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid debitis eaque eveniet explicabo facilis fugiat illo
-in minima molestias natus nihil, non pariatur quos sed, sint totam vitae voluptatem voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid debitis eaque eveniet explicabo facilis fugiat illo in minima molestias natus nihil, non pariatur quos sed, sint totam vitae voluptatem voluptatum.
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid debitis eaque eveniet explicabo facilis fugiat illo
-in minima molestias natus nihil, non pariatur quos sed, sint totam vitae voluptatem voluptatum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid debitis eaque eveniet explicabo facilis fugiat illo in minima molestias natus nihil, non pariatur quos sed, sint totam vitae voluptatem voluptatum.
-
+Не прапусціце святкаванне ў 2023 годзе! Сачыце за навінамі на нашым сайце і ў сацыяльных сетках.
