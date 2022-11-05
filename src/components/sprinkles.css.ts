@@ -8,7 +8,7 @@ const padding = {
   extraLarge: "1.8rem",
 };
 
-const margin = [0, "0.5rem", "1rem", "1.5rem", "2rem"];
+const margin = [0,  "0.3rem", "0.5rem", "1rem", "1.5rem", "2rem", "4rem"];
 
 const responsiveProperties = defineProperties({
   conditions: {
@@ -18,7 +18,7 @@ const responsiveProperties = defineProperties({
   },
   defaultCondition: "lg",
   properties: {
-    display: ["none", "flex"],
+    display: ["none", "flex", "grid", "block"],
     flexDirection: ["row", "column"],
     flexGrow: [1, 2],
     flexBasis: ["7rem", "9rem", "18rem"],
