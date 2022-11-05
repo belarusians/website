@@ -77,7 +77,7 @@ export function SubscriptionForm(): JSX.Element {
         <div className={subscriptionForm}>
         {isSuccess ? (
           <div className={success}>
-          {t('subscribe-text')}
+          {t('subscribed-text')}
           </div>
         ) : (
           <ClientOnly>
