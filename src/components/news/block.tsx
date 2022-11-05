@@ -1,4 +1,4 @@
-import { Trans } from "next-i18next";
+import { useTranslation } from "next-i18next";
 
 import { NewsThumbnail } from "./thumbnail";
 import { NewsMetadata } from "../types";
@@ -14,6 +14,8 @@ export function NewsBlock(props: NewsCarouselProps) {
     return null;
   }
 
+  const { t } = useTranslation('main');
+
   // TODO: fucking dumb, but I'm in hurry :)
   const mainNews = props.news.find(news => news.tags.includes('featured-main'));
   const otherNews = props.news.filter(news => news !== mainNews);
@@ -21,7 +23,7 @@ export function NewsBlock(props: NewsCarouselProps) {
   return (
     <>
       <h1 className={sectionTitle}>
-        <Trans>news-title</Trans>
+        {t('news-title')}
       </h1>
       <div className={row_lg}>
         <NewsThumbnail size={'large'} className={`${w_lg_2} ${animatedCard}`} news={mainNews || props.news[0]} />
