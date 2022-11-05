@@ -17,14 +17,12 @@ export function EventThumbnail(props: EventThumbnailProps & { className?: string
   useEffect(() => {
     setHydrated(true);
   }, []);
-  
+
   return (
     <Link href={`/news/${props.event.slug}`}>
       <a className={thumbnail}>
         <div className={vertical}>
-          <p className={date}>
-            {hydrated ? clientSideDate(props.event.eventDate, props.locale) : serverSideDate(props.event.eventDate)}
-          </p>
+          <p className={date}>{hydrated ? clientSideDate(props.event.eventDate, props.locale) : serverSideDate(props.event.eventDate)}</p>
           <h3 className={title}>{props.event.title}</h3>
           <p className={locationText}>
             <FontAwesomeIcon className={locationIcon} icon={faLocationDot} />
@@ -38,12 +36,16 @@ export function EventThumbnail(props: EventThumbnailProps & { className?: string
 
 function clientSideDate(eventString: string, locale: string): string {
   const eventDate = new Date(eventString);
-  const eventDateString = eventDate.toLocaleDateString(locale);
+  const eventDateString = eventDate.toLocaleDateString(locale, {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
   const eventTimeString = eventDate.toLocaleTimeString(locale, {
-        hour: "numeric",
-        minute: "numeric",
-        second: undefined,
-      });
+    hour: "numeric",
+    minute: "numeric",
+    second: undefined,
+  });
   return `${eventDateString} ${eventTimeString}`;
 }
 
