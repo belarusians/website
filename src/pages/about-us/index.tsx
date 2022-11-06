@@ -55,20 +55,19 @@ export default function IndexPage(): JSX.Element {
           <div className={whoImage}>
             <Image className={fit} src="/news/heart.jpg" fill alt="" />
           </div>
-
-          <div className={why}>
-            <h2 className={heading}>{t("why-heading")}</h2>
-            <p>{t("why-text")}</p>
-          </div>
-          <div className={whyImage}>
-            <Image className={fit} src="/news/hand.jpg" fill alt="" />
-          </div>
           <div className={what}>
             <h2 className={heading}>{t("what-heading")}</h2>
             <p>{t("what-text")}</p>
           </div>
           <div className={whatImage}>
             <Image className={fit} src="/news/mara.jpg" fill alt="" />
+          </div>
+          <div className={why}>
+            <h2 className={heading}>{t("why-heading")}</h2>
+            <p>{t("why-text")}</p>
+          </div>
+          <div className={whyImage}>
+            <Image className={fit} src="/news/hand.jpg" fill alt="" />
           </div>
           <div className={forMe}>
             <h2 className={heading}>{t("for-me-heading")}</h2>
