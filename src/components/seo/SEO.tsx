@@ -20,7 +20,7 @@ export const SEO = (): JSX.Element => {
       <meta property="og:image:width" content="574" />
 
       <meta name="twitter:card" content="summary_large_image" />
-      <meta property="twitter:domain" content="belarusians.nl" />
+      <meta property="twitter:domain" content={seo.domain} />
       <meta property="twitter:url" content={seo.siteUrl} />
       <meta name="twitter:title" content={seo.title} />
       <meta name="twitter:description" content={seo.description} />
