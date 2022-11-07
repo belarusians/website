@@ -9,7 +9,7 @@ tags: [featured-main, featured]
 #### MARA-communityportaal geopend
 
 **Hallo vrienden! Wij zijn MARA, de vereniging van de Belarusiche diaspora in Nederland. Ons doel is om een representatiestructuur te creëren
-Belarusen van Nederland gaan samenwerken met de staatsorganen van Nieuw-Belarus en het Koninkrijk der Nederlanden.**
+waarin Belarusen van Nederland gaan samenwerken met de staatsorganen van Nieuw-Belarus en het Koninkrijk der Nederlanden.**
 
 We beginnen beetje bij beetje aan momentum te winnen:
 * een site gemaakt
