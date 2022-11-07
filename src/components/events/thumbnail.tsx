@@ -75,6 +75,7 @@ function clientSideDate(eventString: string, locale: string): string {
     hour: "numeric",
     minute: "numeric",
     second: undefined,
+    timeZone: "Europe/Amsterdam",
   });
   return `${eventDateString} ${eventTimeString}`;
 }
