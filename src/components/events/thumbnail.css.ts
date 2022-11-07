@@ -1,5 +1,5 @@
 import { globalStyle, style } from "@vanilla-extract/css";
-import { animatedCard, vars } from "../styles.css";
+import { animatedCard, card, toCenterAll, vars } from "../styles.css";
 import { sprinkles } from "../sprinkles.css";
 
 export const thumbnail = style([
@@ -15,20 +15,41 @@ export const thumbnail = style([
       lg: "1rem",
     },
   }),
-  animatedCard,
   {
-    selectors: {
-      "&:last-child": {
-        marginRight: "auto",
-      },
-      "&:first-child": {
-        marginLeft: "auto",
-      },
-    },
     maxHeight: "18rem",
     padding: "1rem",
     textDecoration: "none",
   },
+]);
+
+export const futureThumbnail = style([
+  toCenterAll,
+  thumbnail,
+  animatedCard,
+]);
+
+export const pastThumbnail = style([
+  thumbnail,
+  card,
+  {
+    cursor: "unset",
+    filter: "brightness(0.55) blur(2px)",
+  }
+]);
+
+export const placeholder = style([
+  {
+    fontSize: "1.3rem",
+    alignSelf: "center",
+    position: "absolute",
+    left: 0,
+    right: 0,
+    textAlign: "center",
+    zIndex: 100,
+    filter: "unset",
+    color: vars.color.white,
+    textTransform: "uppercase",
+  }
 ]);
 
 export const date = style([

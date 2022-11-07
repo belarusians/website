@@ -1,15 +1,21 @@
 import { row } from "../grid.css";
 import { EventMetadata } from "../types";
-import { EventThumbnail } from "./thumbnail";
+import { PastEventThumbnail, FutureEventThumbnail } from "./thumbnail";
 
 export interface EventsBlockProps {
   events: EventMetadata[];
   locale: string;
 }
 
+function isEventPast(eventString: string): boolean {
+  return new Date(eventString).getTime() < Date.now();
+}
+
 export function EventsBlock(props: EventsBlockProps & { className?: string }): JSX.Element {
   function renderEventThumbnail(event: EventMetadata, i: number): JSX.Element {
-    return <EventThumbnail locale={props.locale} event={event} key={i}/>
+    return isEventPast(event.eventDate) ?
+      <PastEventThumbnail locale={props.locale} event={event} key={i}/> :
+      <FutureEventThumbnail locale={props.locale} event={event} key={i}/>
   }
 
   return (

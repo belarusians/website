@@ -4,5 +4,6 @@
   "subscribe-text": "Мы гарантируем анонимность. Ваша почта может быть видна только разработчикам",
   "subscribe-input-placeholder": "email",
   "subscribe-button": "Подписаться",
-  "subscribed-text": "Спасибо за вашу заинтересованность!"
+  "subscribed-text": "Спасибо за вашу заинтересованность!",
+  "past-event-message": "Прошло"
 }

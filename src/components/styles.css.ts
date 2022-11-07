@@ -159,3 +159,17 @@ export const smallText = style([
 export const removeUnderline = style({
     textDecoration: "none",
 });
+
+export const toCenterAll = style([
+  {
+    display: "flex",
+    selectors: {
+      "&:last-child": {
+        marginRight: "auto",
+      },
+      "&:first-child": {
+        marginLeft: "auto",
+      },
+    },
+  }
+])
