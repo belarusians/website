@@ -22,10 +22,10 @@ export const sectionHeading = style([
   animationFadeIn,
   sprinkles({
     fontSize: {
-      sm: "1.2rem"
-    }
+      sm: "1.2rem",
+    },
   }),
-])
+]);
 
 export const heading = style([
   {
@@ -33,9 +33,9 @@ export const heading = style([
   },
   sprinkles({
     fontSize: {
-      sm: "1.2rem"
-    }
-  })
+      sm: "1.2rem",
+    },
+  }),
 ]);
 
 export const aboutUs = style([
@@ -169,6 +169,10 @@ export const fit = style([
   },
 ]);
 
+export const partnerLogo = style({
+  objectFit: "contain",
+});
+
 export const partners = style([
   {
     display: "flex",
@@ -177,6 +181,14 @@ export const partners = style([
     flexWrap: "wrap",
     marginLeft: "auto",
     marginRight: "auto",
+  },
+]);
+
+export const partner = style([
+  {
+    position: "relative",
+    width: "12rem",
+    height: "4rem",
   },
 ]);
 
