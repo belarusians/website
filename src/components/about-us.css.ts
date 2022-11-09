@@ -181,14 +181,23 @@ export const partners = style([
     flexWrap: "wrap",
     marginLeft: "auto",
     marginRight: "auto",
+    gap: "2rem",
   },
 ]);
 
-export const partner = style([
+export const libereco = style([
   {
     position: "relative",
     width: "12rem",
     height: "4rem",
+  },
+]);
+
+export const mfb = style([
+  {
+    position: "relative",
+    width: "5rem",
+    height: "5rem",
   },
 ]);
 

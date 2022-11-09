@@ -19,7 +19,7 @@ import {
   sectionHeading,
   partners,
   partnersHeading,
-  partnerLogo, partner
+  partnerLogo, libereco, mfb
 } from "../../components/about-us.css";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -98,8 +98,13 @@ export default function IndexPage(): JSX.Element {
         <h1 className={partnersHeading}>{t('partners')}</h1>
         <div className={partners}>
           <Link href="https://www.libereco.org/">
-            <a className={partner}>
-              <Image className={partnerLogo} src="/libereco.jpeg" fill alt=""/>
+            <a className={libereco}>
+              <Image className={partnerLogo} src="/partners/libereco.jpeg" fill alt=""/>
+            </a>
+          </Link>
+          <Link href="https://www.facebook.com/musicforbelarus">
+            <a className={mfb}>
+              <Image className={partnerLogo} src="/partners/music-for-belarus.jpg" fill alt=""/>
             </a>
           </Link>
         </div>
