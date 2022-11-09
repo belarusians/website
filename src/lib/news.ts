@@ -13,7 +13,7 @@ export function getNewsSlugs(locale?: Lang): string[] {
   if (locale && fs.existsSync(path.join(newsDirectory, locale))) {
     pathToLocale = path.resolve(newsDirectory, locale);
   } else {
-    pathToLocale = path.resolve(newsDirectory, 'be');
+    pathToLocale = path.resolve(newsDirectory, Lang.be);
   }
 
   const news = fs.readdirSync(pathToLocale);
@@ -31,7 +31,7 @@ export async function getNewsMetaBySlug(slug: string, locale?: Lang): Promise<(N
   if (locale && fs.existsSync(path.join(newsDirectory, locale))) {
     fullPath = path.resolve(newsDirectory, locale, `${slug}.md`);
   } else {
-    fullPath = path.resolve(newsDirectory, 'be', `${slug}.md`);
+    fullPath = path.resolve(newsDirectory, Lang.be, `${slug}.md`);
   }
 
   if (!fs.existsSync(fullPath)) {

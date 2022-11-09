@@ -1,5 +1,6 @@
 import React from "react";
 import seo from "./config";
+import { Lang } from "../types";
 
 export const SEO = (): JSX.Element => {
   return (
@@ -8,13 +9,13 @@ export const SEO = (): JSX.Element => {
       <meta name="google-site-verification" content="hXVTSewNsnJ2_HBXFikyt5I9HeaIv2QypVnUeqcJKvU" />
       <meta name="facebook-domain-verification" content="puzhrq5e71epeox7ohkx5oluv6azvd" />
 
-      <meta name="description" content={seo.description} />
+      <meta name="description" content={seo.description[Lang.be]} />
       <meta name="image" content={`${seo.siteUrl}${seo.imagePath}`} />
 
       <meta property="og:url" content={seo.siteUrl} />
       <meta property="og:title" content={seo.title} />
       <meta property="og:type" content="website" />
-      <meta property="og:description" content={seo.description} />
+      <meta property="og:description" content={seo.description[Lang.be]} />
       <meta property="og:image" content={`${seo.siteUrl}${seo.imagePath}`} />
       <meta property="og:image:height" content="301" />
       <meta property="og:image:width" content="574" />
@@ -23,7 +24,7 @@ export const SEO = (): JSX.Element => {
       <meta property="twitter:domain" content={seo.domain} />
       <meta property="twitter:url" content={seo.siteUrl} />
       <meta name="twitter:title" content={seo.title} />
-      <meta name="twitter:description" content={seo.description} />
+      <meta name="twitter:description" content={seo.description[Lang.be]} />
       <meta name="twitter:image" content={`${seo.siteUrl}${seo.imagePath}`} />
     </>
   );
