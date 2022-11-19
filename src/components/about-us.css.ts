@@ -186,23 +186,54 @@ export const partners = style([
 ]);
 
 export const libereco = style([
+  sprinkles({
+    width: {
+      sm: "9rem",
+      md: "12rem",
+      lg: "12rem",
+    },
+    height: {
+      sm: "3rem",
+      md: "4rem",
+      lg: "4rem",
+    },
+  }),
   {
     position: "relative",
-    width: "12rem",
-    height: "4rem",
   },
 ]);
 
 export const mfb = style([
+  sprinkles({
+    width: {
+      sm: "3rem",
+      md: "5rem",
+      lg: "5rem",
+    },
+    height: {
+      sm: "3rem",
+      md: "5rem",
+      lg: "5rem",
+    },
+  }),
   {
     position: "relative",
-    width: "5rem",
-    height: "5rem",
   },
 ]);
 
-export const partnersHeading = style({
-  marginTop: "3rem",
-  textAlign: "center",
-  fontWeight: 300,
-});
+export const partnersHeading = style([
+  sprinkles({
+    marginTop: {
+      sm: "1rem",
+      md: "1.5rem",
+      lg: "2rem",
+    },
+    fontSize: {
+      sm: "1.5rem",
+    },
+  }),
+  {
+    textAlign: "center",
+    fontWeight: 300,
+  },
+]);
