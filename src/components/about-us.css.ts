@@ -22,10 +22,10 @@ export const sectionHeading = style([
   animationFadeIn,
   sprinkles({
     fontSize: {
-      sm: "1.2rem"
-    }
+      sm: "1.2rem",
+    },
   }),
-])
+]);
 
 export const heading = style([
   {
@@ -33,9 +33,9 @@ export const heading = style([
   },
   sprinkles({
     fontSize: {
-      sm: "1.2rem"
-    }
-  })
+      sm: "1.2rem",
+    },
+  }),
 ]);
 
 export const aboutUs = style([
@@ -169,6 +169,10 @@ export const fit = style([
   },
 ]);
 
+export const partnerLogo = style({
+  objectFit: "contain",
+});
+
 export const partners = style([
   {
     display: "flex",
@@ -177,11 +181,59 @@ export const partners = style([
     flexWrap: "wrap",
     marginLeft: "auto",
     marginRight: "auto",
+    gap: "2rem",
   },
 ]);
 
-export const partnersHeading = style({
-  marginTop: "3rem",
-  textAlign: "center",
-  fontWeight: 300,
-});
+export const libereco = style([
+  sprinkles({
+    width: {
+      sm: "9rem",
+      md: "12rem",
+      lg: "12rem",
+    },
+    height: {
+      sm: "3rem",
+      md: "4rem",
+      lg: "4rem",
+    },
+  }),
+  {
+    position: "relative",
+  },
+]);
+
+export const mfb = style([
+  sprinkles({
+    width: {
+      sm: "3rem",
+      md: "5rem",
+      lg: "5rem",
+    },
+    height: {
+      sm: "3rem",
+      md: "5rem",
+      lg: "5rem",
+    },
+  }),
+  {
+    position: "relative",
+  },
+]);
+
+export const partnersHeading = style([
+  sprinkles({
+    marginTop: {
+      sm: "1rem",
+      md: "1.5rem",
+      lg: "2rem",
+    },
+    fontSize: {
+      sm: "1.5rem",
+    },
+  }),
+  {
+    textAlign: "center",
+    fontWeight: 300,
+  },
+]);

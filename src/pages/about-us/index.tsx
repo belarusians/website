@@ -10,11 +10,21 @@ import {
   forMe,
   help,
   aboutUs,
-  fit, whyImage, whatImage, forMeImage, helpImage, animationFadeIn, sectionHeading
+  fit,
+  whyImage,
+  whatImage,
+  forMeImage,
+  helpImage,
+  animationFadeIn,
+  sectionHeading,
+  partners,
+  partnersHeading,
+  partnerLogo, libereco, mfb
 } from "../../components/about-us.css";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 
 export default function IndexPage(): JSX.Element {
   const { t } = useTranslation("about-us");
@@ -84,6 +94,19 @@ export default function IndexPage(): JSX.Element {
           <div className={helpImage}>
             <Image className={fit} src="/news/flowers.jpg" fill alt="" />
           </div>
+        </div>
+        <h1 className={partnersHeading}>{t('partners')}</h1>
+        <div className={partners}>
+          <Link href="https://www.libereco.org/">
+            <a className={libereco}>
+              <Image className={partnerLogo} src="/partners/libereco.jpeg" fill alt=""/>
+            </a>
+          </Link>
+          <Link href="https://www.facebook.com/musicforbelarus">
+            <a className={mfb}>
+              <Image className={partnerLogo} src="/partners/music-for-belarus.jpg" fill alt=""/>
+            </a>
+          </Link>
         </div>
       </Section>
     </Layout>
