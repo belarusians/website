@@ -12,10 +12,11 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "~6.2.0",
+    "@fortawesome/free-brands-svg-icons": "~6.2.0",
     "@fortawesome/free-regular-svg-icons": "~6.2.0",
     "@fortawesome/free-solid-svg-icons": "~6.2.0",
-    "@fortawesome/free-brands-svg-icons": "~6.2.0",
     "@fortawesome/react-fontawesome": "~0.2.0",
+    "@next/font": "^13.0.4",
     "@vercel/analytics": "~0.1.5",
     "aws-sdk": "~2.1209.0",
     "i18next": "~22.0.6",

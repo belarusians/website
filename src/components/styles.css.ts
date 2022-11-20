@@ -20,10 +20,6 @@ export const [themeClass, vars] = createTheme({
   },
 });
 
-globalStyle("*", {
-  fontFamily: "'Roboto', sans-serif;",
-});
-
 globalStyle("body", {
   color: vars.color.lightBlack,
   margin: 0,
