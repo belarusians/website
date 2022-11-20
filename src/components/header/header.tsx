@@ -12,19 +12,15 @@ export function Header(props: { className: string, }): JSX.Element {
 
   return (
     <div className={props.className + " " + header}>
-      <Link href={"/"}>
-        <a className={removeUnderline}>
-          <div className={logoContainer}>
-            <Logo className={logo} />
-          </div>
-        </a>
+      <Link className={removeUnderline} href={"/"}>
+        <div className={logoContainer}>
+          <Logo className={logo} />
+        </div>
       </Link>
-      <Link href={"/about-us"}>
-        <a className={removeUnderline}>
-          <span className={aboutUs}>
-            {t("about-us")}
-          </span>
-        </a>
+      <Link className={removeUnderline} href={"/about-us"}>
+        <span className={aboutUs}>
+          {t("about-us")}
+        </span>
       </Link>
       <LanguageSelector className={languageSelector} />
     </div>

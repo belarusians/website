@@ -23,17 +23,15 @@ export function FutureEventThumbnail(props: EventThumbnailProps & { className?: 
   }, []);
 
   return (
-    <Link href={`/news/${props.event.slug}`}>
-      <a className={futureThumbnail}>
-        <div className={vertical}>
-          <p className={date}>{hydrated ? clientSideDate(eventDate, props.locale) : serverSideDate(eventDate)}</p>
-          <h3 className={title}>{props.event.title}</h3>
-          <p className={locationText}>
-            <FontAwesomeIcon className={locationIcon} icon={faLocationDot} />
-            {props.event.location}
-          </p>
-        </div>
-      </a>
+    <Link className={futureThumbnail} href={`/news/${props.event.slug}`}>
+      <div className={vertical}>
+        <p className={date}>{hydrated ? clientSideDate(eventDate, props.locale) : serverSideDate(eventDate)}</p>
+        <h3 className={title}>{props.event.title}</h3>
+        <p className={locationText}>
+          <FontAwesomeIcon className={locationIcon} icon={faLocationDot} />
+          {props.event.location}
+        </p>
+      </div>
     </Link>
   );
 }

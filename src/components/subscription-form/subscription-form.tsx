@@ -88,7 +88,7 @@ export function SubscriptionForm(): JSX.Element {
               id={emailInputId}
               name="email"
               type="email"
-              placeholder={t("subscribe-input-placeholder")}
+              placeholder={t("subscribe-input-placeholder") || "subscribe"}
             />
           </ClientOnly>
         )}

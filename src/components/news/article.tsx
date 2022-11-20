@@ -1,4 +1,4 @@
-import Image from "next/future/image";
+import Image from "next/image";
 import * as React from "react";
 import { News } from "../types";
 import { article, articleImage, articleContent, articleImageContainer } from "./article.css";

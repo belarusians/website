@@ -1,4 +1,4 @@
-import Image from 'next/future/image';
+import Image from 'next/image';
 import { Layout } from "../../components/layout";
 import { Section } from "../../components/section/section";
 import {
@@ -97,15 +97,11 @@ export default function IndexPage(): JSX.Element {
         </div>
         <h1 className={partnersHeading}>{t('partners')}</h1>
         <div className={partners}>
-          <Link href="https://www.libereco.org/">
-            <a className={libereco}>
-              <Image className={partnerLogo} src="/partners/libereco.jpeg" fill alt=""/>
-            </a>
+          <Link className={libereco} href="https://www.libereco.org/">
+            <Image className={partnerLogo} src="/partners/libereco.jpeg" fill alt=""/>
           </Link>
-          <Link href="https://www.facebook.com/musicforbelarus">
-            <a className={mfb}>
-              <Image className={partnerLogo} src="/partners/music-for-belarus.jpg" fill alt=""/>
-            </a>
+          <Link className={mfb} href="https://www.facebook.com/musicforbelarus">
+            <Image className={partnerLogo} src="/partners/music-for-belarus.jpg" fill alt=""/>
           </Link>
         </div>
       </Section>
