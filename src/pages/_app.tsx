@@ -1,3 +1,4 @@
+import { Roboto } from "@next/font/google";
 import { AppProps } from "next/app";
 import { appWithTranslation } from "next-i18next";
 import { Analytics } from '@vercel/analytics/react';
@@ -11,9 +12,15 @@ import { config } from '@fortawesome/fontawesome-svg-core'
 import '../../node_modules/@fortawesome/fontawesome-svg-core/styles.css'
 config.autoAddCss = false
 
+const roboto = Roboto({
+  weight: ["300", "400", "500", "900"],
+  subsets: ["latin", "cyrillic"],
+});
+
 function MyApp({ Component, pageProps }: AppProps) {
+  const className = themeClass + ' ' +  roboto.className;
   return (
-    <div className={themeClass}>
+    <div className={className}>
       <Component {...pageProps} />
       <Analytics />
     </div>
