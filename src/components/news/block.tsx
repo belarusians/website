@@ -10,11 +10,10 @@ interface NewsCarouselProps {
 }
 
 export function NewsBlock(props: NewsCarouselProps) {
+  const { t } = useTranslation('main');
   if (props.news.length < 3) {
     return null;
   }
-
-  const { t } = useTranslation('main');
 
   // TODO: fucking dumb, but I'm in hurry :)
   const mainNews = props.news.find(news => news.tags.includes('featured-main'));
