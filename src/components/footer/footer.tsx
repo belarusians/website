@@ -6,13 +6,13 @@ import { faGithub, faFacebook, faInstagram } from "@fortawesome/free-brands-svg-
 export function Footer(): JSX.Element {
   return (
     <div className={footer}>
-      <a className={link} target={'_blank'} href="https://www.instagram.com/marabynl">
+      <a className={link} rel="noreferrer" target={'_blank'} href="https://www.instagram.com/marabynl">
         <FontAwesomeIcon icon={faInstagram} className={icon} />
       </a>
-      <a className={link} target={'_blank'} href="https://www.facebook.com/marabynl">
+      <a className={link} rel="noreferrer" target={'_blank'} href="https://www.facebook.com/marabynl">
         <FontAwesomeIcon icon={faFacebook} className={icon} />
       </a>
-      <a className={link} target={'_blank'} href="https://github.com/belarusians/website">
+      <a className={link} rel="noreferrer" target={'_blank'} href="https://github.com/belarusians/website">
         <FontAwesomeIcon icon={faGithub} className={icon} />
       </a>
       <p className={disclaimer}>Belarusians NL 2022</p>
