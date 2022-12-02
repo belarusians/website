@@ -9,6 +9,7 @@
     "build": "next build",
     "build:profile": "cross-env NODE_ENV=development next build --profile",
     "lint": "next lint",
+    "lint:fix": "eslint --fix .",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -39,6 +40,7 @@
     "cross-env": "~7.0.3",
     "eslint": "^7.32.0",
     "eslint-config-next": "13.0.5",
+    "eslint-config-prettier": "^8.5.0",
     "gray-matter": "^4.0.3",
     "prettier": "^2.7.1",
     "remark": "^14.0.2",
@@ -48,6 +50,7 @@
   "prettier": {
     "printWidth": 150,
     "arrowParens": "always",
+    "trailingComma": "all",
     "tabWidth": 2
   }
 }
