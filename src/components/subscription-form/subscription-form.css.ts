@@ -49,6 +49,16 @@ const subscribedPlaceholder = style([
       lg: "30%",
     },
   }),
+  {
+    selectors: {
+      "&.hide": {
+        display: "none",
+      },
+      "&.show": {
+        display: "initial",
+      },
+    },
+  },
 ]);
 
 export const success = style([subscribedPlaceholder]);
@@ -79,6 +89,7 @@ export const subscribeInput = style([
     minWidth: "0px", // disabling default width on HTML input element
     WebkitAppearance: "none",
     border: `1px solid ${vars.color.white}`,
+    marginLeft: "auto",
     selectors: {
       "&:focus": {
         outline: "none",
@@ -102,7 +113,6 @@ export const subscribeInput = style([
 // TODO: spinner is written ugly, fix it
 export const subscribeButton = style([
   card,
-  toCenterAll,
   sprinkles({
     paddingY: {
       sm: "small",
@@ -115,6 +125,7 @@ export const subscribeButton = style([
   }),
   {
     fontSize: "1rem",
+    marginRight: "auto",
     backgroundColor: vars.color.white,
     border: "none",
     cursor: "pointer",

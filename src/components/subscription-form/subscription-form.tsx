@@ -64,21 +64,18 @@ export function SubscriptionForm(): JSX.Element {
       <div className={col}>
         <div className={subTitle}>{t("subscribe-text")}</div>
         <div className={subscriptionForm}>
-          {isSuccess ? (
-            <div className={success}>{t("subscribed-text")}</div>
-          ) : (
-            <ClientOnly>
-              <input
-                ref={inputRef}
-                onInput={onInput}
-                className={`${subscribeInput} ${isValid ? "valid" : "invalid"}`}
-                id={emailInputId}
-                name="email"
-                type="email"
-                placeholder={t("subscribe-input-placeholder") || "subscribe"}
-              />
-            </ClientOnly>
-          )}
+          <ClientOnly>
+            <div className={`${success} ${isSuccess ? "show" : "hide"}`}>{t("subscribed-text")}</div>
+            <input
+              ref={inputRef}
+              onInput={onInput}
+              className={`${subscribeInput} ${isValid ? "valid" : "invalid"} ${isSuccess ? "hide" : "show"}`}
+              id={emailInputId}
+              name="email"
+              type="email"
+              placeholder={t("subscribe-input-placeholder") || "subscribe"}
+            />
+          </ClientOnly>
 
           <button disabled={isLoading || isSuccess} className={`${subscribeButton} ${isLoading ? "loading" : ""}`} onClick={submit}>
             <span className={spinner + " " + (isLoading ? "show" : "hide")}></span>
