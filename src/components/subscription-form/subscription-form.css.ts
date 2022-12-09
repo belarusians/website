@@ -1,6 +1,6 @@
 import { style, keyframes } from "@vanilla-extract/css";
 import { sprinkles } from "../sprinkles.css";
-import { card, largeText, normalText, vars } from "../styles.css";
+import { card, largeText, normalText, toCenterAll, vars } from "../styles.css";
 import { row } from "../grid.css";
 
 export const subscriptionForm = style([
@@ -8,6 +8,7 @@ export const subscriptionForm = style([
   {
     marginTop: "0.5rem",
     display: "flex",
+    width: "100%",
     textAlign: "center",
     alignSelf: "center",
   },
@@ -28,16 +29,27 @@ export const subTitle = style([
   },
 ]);
 
-const subscribedPlaceholder = sprinkles({
-  paddingY: {
-    sm: "small",
-    md: "medium",
-  },
-  paddingX: {
-    sm: "medium",
-    md: "large",
-  },
-});
+const subscribedPlaceholder = style([
+  toCenterAll,
+  sprinkles({
+    paddingY: {
+      sm: "small",
+      md: "medium",
+    },
+    paddingX: {
+      sm: "medium",
+      md: "large",
+    },
+    flexGrow: {
+      sm: 1,
+      md: 1,
+      lg: 0,
+    },
+    flexBasis: {
+      lg: "30%",
+    },
+  }),
+]);
 
 export const success = style([subscribedPlaceholder]);
 
@@ -63,15 +75,8 @@ export const subscribeInput = style([
   subscribedPlaceholder,
   card,
   normalText,
-  sprinkles({
-    flex: {
-      sm: 1,
-      md: 1,
-      lg: "none",
-    },
-  }),
   {
-    minWidth: "10rem",
+    minWidth: "0px", // disabling default width on HTML input element
     WebkitAppearance: "none",
     border: `1px solid ${vars.color.white}`,
     selectors: {
@@ -97,6 +102,7 @@ export const subscribeInput = style([
 // TODO: spinner is written ugly, fix it
 export const subscribeButton = style([
   card,
+  toCenterAll,
   sprinkles({
     paddingY: {
       sm: "small",
