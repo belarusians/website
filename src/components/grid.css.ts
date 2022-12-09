@@ -70,7 +70,7 @@ export const w_lg_2 = style([
 ]);
 
 export const w_1 = style([
-    {
+  {
     display: "flex",
   },
   sprinkles({
@@ -87,6 +87,8 @@ export const w_1 = style([
   }),
 ]);
 
-export const w_eq = style([{
-  flex: "1 1 0px",
-}]);
+export const w_eq = style([
+  {
+    flex: "1 1 0px",
+  },
+]);
