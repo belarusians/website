@@ -1,4 +1,9 @@
-import Image from 'next/image';
+import Image from "next/image";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useEffect, useRef } from "react";
+import Link from "next/link";
+
 import { Layout } from "../../components/layout";
 import { Section } from "../../components/section/section";
 import {
@@ -15,49 +20,22 @@ import {
   whatImage,
   forMeImage,
   helpImage,
-  animationFadeIn,
   sectionHeading,
   partners,
   partnersHeading,
-  partnerLogo, libereco, mfb
+  partnerLogo,
+  libereco,
+  mfb,
 } from "../../components/about-us.css";
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useEffect, useRef } from "react";
-import Link from "next/link";
 
 export default function IndexPage(): JSX.Element {
   const { t } = useTranslation("about-us");
-
-  const myRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        // If the element is visible
-        if (entry.isIntersecting) {
-          // Add the animation class
-          entry.target.classList.add(animationFadeIn);
-        }
-      });
-    });
-    //@ts-ignore
-    const els = myRef.current.querySelectorAll(':scope > *');
-    //@ts-ignore
-    els.forEach((i) => {
-      if (i) {
-        observer.observe(i);
-      }
-    });
-  });
-
-
 
   return (
     <Layout>
       <Section>
         <h1 className={sectionHeading}>{t("heading")}</h1>
-        <div className={aboutUs} ref={myRef}>
+        <div className={aboutUs}>
           <div className={who}>
             <h2 className={heading}>{t("who-heading")}</h2>
             <p>{t("who-text")}</p>
@@ -89,19 +67,20 @@ export default function IndexPage(): JSX.Element {
           <div className={help}>
             <h2 className={heading}>{t("help-heading")}</h2>
             <p>{t("help-text")}</p>
-            <a href="mailto:mara@belarusians.nl">mara@belarusians.nl</a>, <a href="https://facebook.com/marabynl">facebook</a>, <a href="https://www.instagram.com/marabynl/">instagram</a>
+            <a href="mailto:mara@belarusians.nl">mara@belarusians.nl</a>, <a href="https://facebook.com/marabynl">facebook</a>,{" "}
+            <a href="https://www.instagram.com/marabynl/">instagram</a>
           </div>
           <div className={helpImage}>
             <Image className={fit} src="/news/flowers.jpg" fill alt="" />
           </div>
         </div>
-        <h1 className={partnersHeading}>{t('partners')}</h1>
+        <h1 className={partnersHeading}>{t("partners")}</h1>
         <div className={partners}>
           <Link className={libereco} href="https://www.libereco.org/">
-            <Image className={partnerLogo} src="/partners/libereco.jpeg" fill alt=""/>
+            <Image className={partnerLogo} src="/partners/libereco.jpeg" fill alt="" />
           </Link>
           <Link className={mfb} href="https://www.facebook.com/musicforbelarus">
-            <Image className={partnerLogo} src="/partners/music-for-belarus.jpg" fill alt=""/>
+            <Image className={partnerLogo} src="/partners/music-for-belarus.jpg" fill alt="" />
           </Link>
         </div>
       </Section>

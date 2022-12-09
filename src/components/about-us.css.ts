@@ -1,22 +1,7 @@
-import { keyframes, style } from "@vanilla-extract/css";
+import { style } from "@vanilla-extract/css";
 import { card, rounded, vars } from "./styles.css";
 import { sprinkles } from "./sprinkles.css";
-
-const fadeIn = keyframes({
-  "0%": {
-    opacity: 0,
-    transform: "translateY(50px)",
-  },
-  "100%": {
-    opacity: 1,
-    transform: "translateY(0)",
-  },
-});
-
-export const animationFadeIn = style({
-  animation: `${fadeIn} .6s ease-in-out`,
-  animationFillMode: "forwards",
-});
+import { animationFadeIn, fadeInElementOnScroll } from "../utils/animation.css";
 
 export const sectionHeading = style([
   animationFadeIn,
@@ -77,8 +62,8 @@ export const image = style([
 ]);
 
 export const who = style([
+  fadeInElementOnScroll,
   {
-    opacity: 0,
     alignSelf: "center",
     gridArea: "who",
   },
@@ -87,15 +72,15 @@ export const whoImage = style([
   card,
   rounded,
   image,
+  fadeInElementOnScroll,
   {
-    opacity: 0,
     position: "relative",
     gridArea: "whoImage",
   },
 ]);
 export const why = style([
+  fadeInElementOnScroll,
   {
-    opacity: 0,
     alignSelf: "center",
     gridArea: "why",
   },
@@ -104,49 +89,49 @@ export const whyImage = style([
   image,
   card,
   rounded,
+  fadeInElementOnScroll,
   {
-    opacity: 0,
     position: "relative",
     gridArea: "whyImage",
   },
 ]);
 export const what = style([
+  fadeInElementOnScroll,
   {
-    opacity: 0,
     alignSelf: "center",
     gridArea: "what",
   },
 ]);
 export const whatImage = style([
+  fadeInElementOnScroll,
   image,
   card,
   rounded,
   {
-    opacity: 0,
     position: "relative",
     gridArea: "whatImage",
   },
 ]);
 export const forMe = style([
+  fadeInElementOnScroll,
   {
-    opacity: 0,
     alignSelf: "center",
     gridArea: "forMe",
   },
 ]);
 export const forMeImage = style([
+  fadeInElementOnScroll,
   image,
   card,
   rounded,
   {
-    opacity: 0,
     position: "relative",
     gridArea: "forMeImage",
   },
 ]);
 export const help = style([
+  fadeInElementOnScroll,
   {
-    opacity: 0,
     alignSelf: "center",
     gridArea: "help",
   },
@@ -155,8 +140,8 @@ export const helpImage = style([
   image,
   card,
   rounded,
+  fadeInElementOnScroll,
   {
-    opacity: 0,
     position: "relative",
     gridArea: "helpImage",
   },
