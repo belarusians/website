@@ -10,6 +10,9 @@ const withPWA = require("next-pwa")({
 const nextConfig = {
   i18n,
   reactStrictMode: true,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 module.exports = withPWA(withVanillaExtract(nextConfig));
