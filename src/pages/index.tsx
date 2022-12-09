@@ -1,11 +1,11 @@
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { SSRConfig } from "next-i18next";
-import { GetStaticPropsResult } from "next/types";
+import { GetStaticPropsContext, GetStaticPropsResult } from "next/types";
 
 import { Layout } from "../components/layout";
 import { SubscriptionForm } from "../components/subscription-form/subscription-form";
 import { NewsBlock } from "../components/news/block";
-import { EventMetadata, NewsMetadata } from "../components/types";
+import { EventMetadata, Lang, NewsMetadata } from "../components/types";
 import { getAllNewsMeta } from "../lib/news";
 import { Section } from "../components/section/section";
 import { EventsBlock } from "../components/events/block";
@@ -37,8 +37,8 @@ export default function IndexPage(props: MainPageProps): JSX.Element {
   );
 }
 
-export async function getStaticProps(context: any): Promise<GetStaticPropsResult<MainPageProps>> {
-  const newsMeta = await getAllNewsMeta(context.locale);
+export async function getStaticProps(context: GetStaticPropsContext): Promise<GetStaticPropsResult<MainPageProps>> {
+  const newsMeta = await getAllNewsMeta(context.locale as Lang);
 
   const featured = newsMeta.filter((meta) => meta.tags.includes("featured"));
   const events = newsMeta.filter((meta) => meta.tags.includes("event")) as EventMetadata[];
@@ -46,8 +46,8 @@ export async function getStaticProps(context: any): Promise<GetStaticPropsResult
     props: {
       news: featured,
       events,
-      locale: context.locale,
-      ...(await serverSideTranslations(context.locale, ["common", "main"])),
+      locale: context.locale || Lang.be,
+      ...(await serverSideTranslations(context.locale as Lang, ["common", "main"])),
     },
   };
 }

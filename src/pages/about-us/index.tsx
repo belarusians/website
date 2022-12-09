@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useEffect, useRef } from "react";
 import Link from "next/link";
 
 import { Layout } from "../../components/layout";
@@ -27,6 +26,8 @@ import {
   libereco,
   mfb,
 } from "../../components/about-us.css";
+import { Lang } from "../../components/types";
+import { GetStaticPropsContext } from "next/types";
 
 export default function IndexPage(): JSX.Element {
   const { t } = useTranslation("about-us");
@@ -88,10 +89,10 @@ export default function IndexPage(): JSX.Element {
   );
 }
 
-export async function getStaticProps(context: any) {
+export async function getStaticProps(context: GetStaticPropsContext) {
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, ["common", "about-us"])),
+      ...(await serverSideTranslations(context.locale || Lang.be, ["common", "about-us"])),
     },
   };
 }

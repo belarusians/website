@@ -70,7 +70,7 @@ export const w_lg_2 = style([
 ]);
 
 export const w_1 = style([
-    {
+  {
     display: "flex",
   },
   sprinkles({
@@ -79,6 +79,7 @@ export const w_1 = style([
       md: 1,
       lg: 1,
     },
+    // TODO: I do not like these flex-basis. Makes sense to investigate css grid in this use-case
     flexBasis: {
       sm: "7rem",
       md: "9rem",
@@ -87,6 +88,8 @@ export const w_1 = style([
   }),
 ]);
 
-export const w_eq = style([{
-  flex: "1 1 0px",
-}]);
+export const w_eq = style([
+  {
+    flex: "1 1 0px",
+  },
+]);

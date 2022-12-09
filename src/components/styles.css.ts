@@ -57,7 +57,7 @@ export const container = style([
     maxWidth: "75rem",
     marginLeft: "auto",
     marginRight: "auto",
-  }
+  },
 ]);
 
 export const rounded = style({
@@ -116,7 +116,7 @@ export const centerSectionTitle = style([
   sectionTitle,
   {
     textAlign: "center",
-  }
+  },
 ]);
 
 export const largeText = style([
@@ -126,7 +126,7 @@ export const largeText = style([
       md: "1.5rem",
       lg: "1.5rem",
     },
-  })
+  }),
 ]);
 
 export const normalText = style([
@@ -136,7 +136,7 @@ export const normalText = style([
       md: "1rem",
       lg: "1rem",
     },
-  })
+  }),
 ]);
 
 export const smallText = style([
@@ -149,11 +149,11 @@ export const smallText = style([
   }),
   {
     fontWeight: 300,
-  }
+  },
 ]);
 
 export const removeUnderline = style({
-    textDecoration: "none",
+  textDecoration: "none",
 });
 
 export const toCenterAll = style([
@@ -167,5 +167,5 @@ export const toCenterAll = style([
         marginLeft: "auto",
       },
     },
-  }
-])
+  },
+]);
