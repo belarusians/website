@@ -59,9 +59,9 @@ export function SubscriptionForm(): JSX.Element {
   };
 
   return (
-    <div className={fadeInElementOnScroll}>
+    <>
       <h1 className={centerSectionTitle}>{t("subscribe-title")}</h1>
-      <div className={col}>
+      <div className={`${col} ${fadeInElementOnScroll}`}>
         <div className={subTitle}>{t("subscribe-text")}</div>
         <div className={subscriptionForm}>
           <ClientOnly>
@@ -83,7 +83,7 @@ export function SubscriptionForm(): JSX.Element {
           </button>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
