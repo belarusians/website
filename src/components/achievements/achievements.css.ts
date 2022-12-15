@@ -1,10 +1,14 @@
 import { style } from "@vanilla-extract/css";
 import { toCenterAll, vars } from "../styles.css";
+import { sprinkles } from "../sprinkles.css";
 
 export const counter = style([
-  {
-    fontSize: "5rem",
-  },
+  sprinkles({
+    fontSize: {
+      sm: "3rem",
+      md: "5rem",
+    },
+  }),
 ]);
 
 export const achievementContainer = style([
@@ -18,7 +22,10 @@ export const achievementContainer = style([
 ]);
 
 export const counterText = style([
-  {
-    fontSize: "1.5rem",
-  },
+  sprinkles({
+    fontSize: {
+      sm: "1.2rem",
+      md: "1.5rem",
+    },
+  }),
 ]);
