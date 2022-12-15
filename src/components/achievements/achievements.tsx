@@ -21,7 +21,7 @@ export function AchievementsBlock(): JSX.Element {
     }
     const target = 600;
     const count = +counterRef.current?.innerText;
-    const increment = target / 200;
+    const increment = target / 100;
     if (count < target) {
       counterRef.current.innerText = `${Math.ceil(count + increment)}`;
       setTimeout(updateCounter, 10);
