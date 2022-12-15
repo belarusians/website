@@ -1,3 +1,4 @@
+import * as React from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { SSRConfig } from "next-i18next";
 import { GetStaticPropsResult } from "next/types";
@@ -8,8 +9,8 @@ import { NewsBlock } from "../components/news/block";
 import { EventMetadata, NewsMetadata } from "../components/types";
 import { getAllNewsMeta } from "../lib/news";
 import { Section } from "../components/section/section";
-import { EventsBlock } from "../components/events/block";
 import { beautifulGradient } from "../components/styles.css";
+import { AchievementsBlock } from "../components/achievements/achievements";
 
 interface MainPageProps extends SSRConfig {
   news: NewsMetadata[];
@@ -26,7 +27,7 @@ export default function IndexPage(props: MainPageProps): JSX.Element {
 
       {props.events?.length ? (
         <Section className={beautifulGradient}>
-          <EventsBlock events={props.events} locale={props.locale} />
+          <AchievementsBlock />
         </Section>
       ) : null}
 
