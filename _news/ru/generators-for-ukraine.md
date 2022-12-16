@@ -1,11 +1,11 @@
 ---
-title: "Генератары для украінцаў"
+title: "Цяпло і святло ад беларускай дыяспары для Украіны"
 date: "2022-12-16"
 backgroundUrl: "/news/heart.jpg"
 tags: [featured-main, featured]
 ---
 
-# Генератары для украінцаў
+# Цяпло і святло ад беларускай дыяспары для Украіны
 
 Сябры, мы і беларуская дыяспара Нідэрландаў у асобе кам'юніці ["Беларусы Нидерландов"](https://t.me/nlbychat) арганізуем
 збор сродкаў на пакупку дызель-генератараў для жыхароў Украіны!
@@ -24,10 +24,7 @@ tags: [featured-main, featured]
 
 ---
 
-Send me money with [bunq.me](https://bunq.me)
-
-bunq | bank of The Free
-
+Спасылка для пераводу:
 [https://bunq.me/WarmUkraine](https://bunq.me/WarmUkraine)
 
 Stichting Belarus Solidarity Foundation
