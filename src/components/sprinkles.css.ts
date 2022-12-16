@@ -35,7 +35,7 @@ const responsiveProperties = defineProperties({
     marginRight: margin,
     height: ["1rem", "2rem", "3rem", "4rem", "5rem", "9rem", "18rem"],
     width: ["1rem", "2rem", "3rem", "4rem", "5rem", "7rem", "9rem", "12rem", "14rem", "23rem"],
-    fontSize: ["0.6rem", "0.8rem", "1rem", "1.2rem", "1.5rem", "2rem", "2.5rem"],
+    fontSize: ["0.6rem", "0.8rem", "1rem", "1.2rem", "1.5rem", "2rem", "2.5rem", "3rem", "5rem"],
   },
   shorthands: {
     padding: ["paddingTop", "paddingBottom", "paddingLeft", "paddingRight"],
