@@ -1,11 +1,11 @@
 ---
-title: "Wij zijn samen!"
+title: "Wij zijn samen"
 date: "2022-12-15"
 backgroundUrl: "/news/christmas.jpg"
 tags: [featured]
 ---
 
-# Wij zijn samen!
+# Wij zijn samen
 
 Veel dank aan iedereen die heeft meegewerkt aan het inzamelen van financiële steun voor de aankoop van kaartjes voor het NAVIBAND-concert.
 **600 euro** is al overgemaakt naar Wit-Rusland 🔥
