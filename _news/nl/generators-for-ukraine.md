@@ -1,7 +1,7 @@
 ---
 title: "Warmte en licht uit de Belarusiche diaspora voor Oekraïne"
 date: "2022-12-16"
-backgroundUrl: "/news/heart.jpg"
+backgroundUrl: "/news/ukraine-heart.jpeg"
 tags: [featured-main, featured]
 ---
 

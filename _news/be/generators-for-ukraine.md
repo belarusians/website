@@ -1,7 +1,7 @@
 ---
 title: "Цяпло і святло ад беларускай дыяспары для Украіны"
 date: "2022-12-16"
-backgroundUrl: "/news/heart.jpg"
+backgroundUrl: "/news/ukraine-heart.jpeg"
 tags: [featured-main, featured]
 ---
 
