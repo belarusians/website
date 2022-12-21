@@ -11,8 +11,8 @@ Vrienden, wij en de Belarusiche diaspora van Nederland, vertegenwoordigd door de
 fondsenwerving voor de aanschaf van dieselgeneratoren voor inwoners van Oekraïne!
 
 Heb je ooit zonder licht en warmte geleefd?
-Ons huidige doel is om fondsen te werven voor 2 generatoren, de prijs van één is **1500** euro ([voorbeeld generator](https://www.nize-products.nl/nl/hyundai-diesel-generator-5kw- 418cc.html )).
-Met een donatie van 4-5 euro kunnen we minimaal 2 gezinnen voorzien van elektriciteit en warmte.
+Ons huidige doel is om geld in te zamelen voor 6 generatoren, de prijs van één is **500** euro (we hebben veel feedback gekregen dat de generatoren
+voor 1500 zijn niet nodig door gewone mensen). Met een donatie van 4-5 euro kunnen we minimaal 6 gezinnen voorzien van elektriciteit en warmte.
 Wij - MARA - staan garant voor een gerichte besteding van de gelden.
 Problemen met de distributie van generatoren, het zoeken naar vrijwilligers voor levering aan Oekraïne of aan de grens zullen worden opgelost tijdens het verzamelen van het vereiste bedrag.
 
