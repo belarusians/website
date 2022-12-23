@@ -1,18 +1,19 @@
 ---
-title: "Warmte en licht uit de Belarusiche diaspora voor Oekraïne"
+title: "Warmte en licht voor Oekraïne"
 date: "2022-12-16"
 backgroundUrl: "/news/ukraine-heart.jpeg"
 tags: [featured-main, featured]
 ---
 
-# Warmte en licht uit de Belarusiche diaspora voor Oekraïne
+# Warmte en licht voor Oekraïne
 
 Vrienden, wij en de Belarusiche diaspora van Nederland, vertegenwoordigd door de gemeenschap ["Belarusians of the Netherlands"](https://t.me/nlbychat) organiseren
 fondsenwerving voor de aanschaf van dieselgeneratoren voor inwoners van Oekraïne!
 
 Heb je ooit zonder licht en warmte geleefd?
-Ons huidige doel is om geld in te zamelen voor 6 generatoren, de prijs van één is **500** euro (we hebben veel feedback gekregen dat de generatoren
-voor 1500 zijn niet nodig door gewone mensen). Met een donatie van 4-5 euro kunnen we minimaal 6 gezinnen voorzien van elektriciteit en warmte.
+Ons huidige doel is om geld in te zamelen voor 6 generatoren, de prijs van één is **500** euro (we waren van plan om
+generatoren voor 1500 euro, maar we kregen veel feedback dat zulke generatoren niet nodig zijn voor gewone mensen). Met 
+een donatie van 4-5 euro kunnen we minimaal 6 gezinnen voorzien van elektriciteit en warmte.
 Wij - MARA - staan garant voor een gerichte besteding van de gelden.
 Problemen met de distributie van generatoren, het zoeken naar vrijwilligers voor levering aan Oekraïne of aan de grens zullen worden opgelost tijdens het verzamelen van het vereiste bedrag.
 
