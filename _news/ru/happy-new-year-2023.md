@@ -2,7 +2,7 @@
 title: "С Рождеством и Наступающим Новым Годом!"
 date: "2022-12-30"
 backgroundUrl: "/news/new-year.jpeg"
-tags: [featured-main, featured]
+tags: [featured-main]
 ---
 
 # С Рождеством и Наступающим Новым Годом!

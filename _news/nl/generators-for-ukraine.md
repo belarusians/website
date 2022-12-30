@@ -2,7 +2,7 @@
 title: "Warmte en licht voor Oekraïne"
 date: "2022-12-16"
 backgroundUrl: "/news/ukraine-heart.jpeg"
-tags: []
+tags: [featured]
 ---
 
 # Warmte en licht voor Oekraïne

@@ -2,7 +2,7 @@
 title: "Vrolijk kerstfeest en een gelukkig nieuwjaar!"
 date: "2022-12-30"
 backgroundUrl: "/news/new-year.jpeg"
-tags: [featured-main, featured]
+tags: [featured-main]
 ---
 
 # Vrolijk kerstfeest en een gelukkig nieuwjaar!
