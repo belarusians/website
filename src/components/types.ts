@@ -18,7 +18,7 @@ export interface EventMetadata extends NewsMetadata {
 export interface Event extends News, EventMetadata {}
 
 export enum Lang {
-  be = 'be',
-  nl = 'nl',
-  ru = 'ru',
+  be = "be",
+  nl = "nl",
+  ru = "ru",
 }
