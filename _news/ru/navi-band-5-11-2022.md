@@ -4,7 +4,7 @@ date: "2022-11-05"
 backgroundUrl: "/news/naviband.jpeg"
 eventDate: "2022-11-05T19:00:00.000Z"
 location: "Kerkplein 45, Abcoude"
-tags: [event, featured]
+tags: [event]
 ---
 
 # NAVIBAND в Амстердаме!

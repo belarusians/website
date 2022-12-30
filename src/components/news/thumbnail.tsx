@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useRef } from "react";
+import { forwardRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -7,7 +7,7 @@ import { image, largeTitle, smallTitle, thumbnail, titleContainer } from "./thum
 
 export interface NewsThumbnailProps {
   news: NewsMetadata;
-  size: "large" | "small";
+  size?: "large" | "small";
 }
 
 const mapSizeToClass = {
@@ -20,9 +20,9 @@ export const NewsThumbnail = forwardRef<HTMLDivElement, NewsThumbnailProps & { c
     return (
       <div ref={ref} className={props.className}>
         <Link className={thumbnail} href={`/news/${props.news.slug}`}>
-          <Image className={image} fill src={props.news.backgroundUrl} alt={"test"} />
+          <Image className={image} fill src={props.news.backgroundUrl} alt={props.news.title} />
           <div className={titleContainer}>
-            <span className={mapSizeToClass[props.size]}>{props.news.title}</span>
+            <span className={mapSizeToClass[props.size || "small"]}>{props.news.title}</span>
           </div>
         </Link>
       </div>
