@@ -2,12 +2,18 @@ export interface News extends NewsMetadata {
   content: string;
 }
 
+export enum NewsTags {
+  Main = "featured-main",
+  Secondary = "featured",
+  Event = "event",
+}
+
 export interface NewsMetadata {
   slug: string;
   title: string;
   date: string;
   backgroundUrl: string;
-  tags: ('featured-main' | 'featured' | 'event')[];
+  tags: NewsTags[];
 }
 
 export interface EventMetadata extends NewsMetadata {

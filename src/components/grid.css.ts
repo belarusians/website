@@ -38,6 +38,7 @@ export const row_lg = style([
     },
   }),
   {
+    flexWrap: "wrap",
     display: "flex",
     gap: "1rem",
   },
