@@ -2,7 +2,7 @@
 title: "Мы вместе"
 date: "2022-12-15"
 backgroundUrl: "/news/christmas.jpg"
-tags: [featured]
+tags: []
 ---
 
 # Мы вместе
