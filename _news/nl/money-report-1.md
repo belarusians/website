@@ -2,7 +2,7 @@
 title: "Wij zijn samen"
 date: "2022-12-15"
 backgroundUrl: "/news/christmas.jpg"
-tags: [featured]
+tags: []
 ---
 
 # Wij zijn samen
