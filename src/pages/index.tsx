@@ -5,15 +5,18 @@ import { GetStaticPropsResult } from "next/types";
 
 import { Layout } from "../components/layout";
 import { SubscriptionForm } from "../components/subscription-form/subscription-form";
-import { NewsBlock } from "../components/news/block";
-import { EventMetadata, NewsMetadata } from "../components/types";
+import { FeaturedNewsBlock } from "../components/news/featured-block";
+import { EventMetadata, NewsMetadata, NewsTags } from "../components/types";
 import { getAllNewsMeta } from "../lib/news";
 import { Section } from "../components/section/section";
 import { beautifulGradient } from "../components/styles.css";
 import { AchievementsBlock } from "../components/achievements/achievements";
+import { NewsBlock } from "../components/news/block";
 
 interface MainPageProps extends SSRConfig {
-  news: NewsMetadata[];
+  mainNews: NewsMetadata;
+  secondaryNews: [NewsMetadata, NewsMetadata];
+  otherNews: NewsMetadata[];
   locale: string;
   events?: EventMetadata[];
 }
@@ -22,14 +25,16 @@ export default function IndexPage(props: MainPageProps): JSX.Element {
   return (
     <Layout>
       <Section>
-        <NewsBlock news={props.news} />
+        <FeaturedNewsBlock main={props.mainNews} secondary={props.secondaryNews} />
       </Section>
 
-      {props.events?.length ? (
-        <Section className={beautifulGradient}>
-          <AchievementsBlock />
-        </Section>
-      ) : null}
+      <Section className={beautifulGradient}>
+        <AchievementsBlock />
+      </Section>
+
+      <Section>
+        <NewsBlock news={props.otherNews} />
+      </Section>
 
       <Section>
         <SubscriptionForm />
@@ -38,14 +43,35 @@ export default function IndexPage(props: MainPageProps): JSX.Element {
   );
 }
 
+function hasTwoSecondaryNews(secondaryNews: NewsMetadata[]): secondaryNews is [NewsMetadata, NewsMetadata] {
+  return secondaryNews.length === 2;
+}
+
 export async function getStaticProps(context: any): Promise<GetStaticPropsResult<MainPageProps>> {
   const newsMeta = await getAllNewsMeta(context.locale);
 
-  const featured = newsMeta.filter((meta) => meta.tags.includes("featured"));
-  const events = newsMeta.filter((meta) => meta.tags.includes("event")) as EventMetadata[];
+  const mainNews = newsMeta.find((meta) => meta.tags.includes(NewsTags.Main));
+  if (!mainNews) {
+    throw new Error("There should be at least 1 'featured-main' news");
+  }
+
+  const secondaryNews = newsMeta.filter((meta) => meta.tags.includes(NewsTags.Secondary)).slice(0, 2);
+  if (!hasTwoSecondaryNews(secondaryNews)) {
+    throw new Error("There should be at least 2 'featured' news");
+  }
+
+  // TODO: remove the slice(0, 4). So far we can't render more, because of bad UX
+  const otherNews = newsMeta
+    .filter((meta) => !meta.tags.includes(NewsTags.Main) && !meta.tags.includes(NewsTags.Secondary))
+    .sort((meta1, meta2) => (new Date(meta1.date) < new Date(meta2.date) ? 1 : -1))
+    .slice(0, 4);
+
+  const events = newsMeta.filter((meta) => meta.tags.includes(NewsTags.Event)) as EventMetadata[];
   return {
     props: {
-      news: featured,
+      mainNews,
+      secondaryNews,
+      otherNews,
       events,
       locale: context.locale,
       ...(await serverSideTranslations(context.locale, ["common", "main"])),
