@@ -1,7 +1,6 @@
 import { style } from "@vanilla-extract/css";
 
 import { sprinkles } from "../sprinkles.css";
-import { vars } from "../styles.css";
 
 export const header = style([
   sprinkles({
@@ -34,28 +33,4 @@ export const logo = style([
       lg: "23rem",
     },
   }),
-]);
-
-export const languageSelector = style({
-  marginLeft: "auto",
-});
-
-export const aboutUs = style([
-  sprinkles({
-    fontSize: {
-      sm: "0.6rem",
-      md: "1rem",
-      lg: "1rem",
-    },
-    marginLeft: {
-      sm: "0.3rem",
-      md: "1rem",
-      lg: "1rem",
-    },
-  }),
-  {
-    textTransform: "uppercase",
-    fontWeight: 500,
-    color: vars.color.red,
-  },
 ]);
