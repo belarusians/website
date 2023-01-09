@@ -33,6 +33,7 @@ export const button = style([
     },
   }),
   {
+    color: vars.color.lightBlack,
     backgroundColor: "white",
     border: 0,
     cursor: "pointer",

@@ -31,7 +31,7 @@ globalStyle("html", {
 });
 
 globalStyle("a:link, a:visited, button", {
-  color: vars.color.lightBlack,
+  color: "inherit",
 });
 
 const grad1 = `radial-gradient(26.76% 85.52% at 86.73% -12.86%, ${vars.color.darkRed} 6.65%, transparent)`;
@@ -73,11 +73,65 @@ export const roundedBottom = style({
   borderRadius: "0 0 5px 5px",
 });
 
-export const card = style([
+export const shadowedElement = style([
   {
     boxShadow: vars.shadows.small,
     borderRadius: "5px",
+  },
+]);
+
+export const removeUnderline = style({
+  textDecoration: "none",
+});
+
+/**
+ * @deprecated Use shadowedElement instead
+ */
+export const card = shadowedElement;
+
+export const button = style([
+  shadowedElement,
+  removeUnderline,
+  sprinkles({
+    paddingY: {
+      sm: "small",
+      md: "small",
+    },
+    paddingX: {
+      sm: "medium",
+      md: "medium",
+    },
+  }),
+  {
+    fontSize: "0.8rem",
     backgroundColor: vars.color.white,
+    border: "none",
+    cursor: "pointer",
+    selectors: {
+      "&:hover": {
+        boxShadow: vars.shadows.medium,
+      },
+      "&:active": {
+        boxShadow: vars.shadows.large,
+      },
+    },
+  },
+]);
+
+export const buttonMD = style([
+  button,
+  sprinkles({
+    paddingY: {
+      sm: "small",
+      md: "medium",
+    },
+    paddingX: {
+      sm: "medium",
+      md: "large",
+    },
+  }),
+  {
+    fontSize: "1rem",
   },
 ]);
 
@@ -152,10 +206,6 @@ export const smallText = style([
     fontWeight: 300,
   },
 ]);
-
-export const removeUnderline = style({
-  textDecoration: "none",
-});
 
 export const toCenterAll = style([
   {

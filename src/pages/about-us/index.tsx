@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useEffect, useRef } from "react";
 import Link from "next/link";
 
 import { Layout } from "../../components/layout";
