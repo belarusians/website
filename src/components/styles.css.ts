@@ -135,14 +135,6 @@ export const buttonMD = style([
   },
 ]);
 
-export const redButtonMD = style([
-  buttonMD,
-  {
-    backgroundColor: vars.color.red,
-    color: vars.color.white,
-  },
-]);
-
 export const animatedCard = style([
   card,
   {
