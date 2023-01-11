@@ -95,6 +95,7 @@ export const card = shadowedElement;
 
 export const button = style([
   shadowedElement,
+  rounded,
   removeUnderline,
   sprinkles({
     paddingY: {
@@ -111,6 +112,7 @@ export const button = style([
     backgroundColor: vars.color.white,
     border: "none",
     cursor: "pointer",
+    transition: "all 0.15s ease-in-out",
     selectors: {
       "&:hover": {
         boxShadow: vars.shadows.medium,
@@ -148,7 +150,6 @@ export const animatedCard = style([
         transform: "scale(1.01)",
       },
     },
-    transition: "all 0.15s ease-in-out",
   },
 ]);
 
@@ -224,3 +225,11 @@ export const toCenterAll = style([
     },
   },
 ]);
+
+export const flexToRight = style({
+  marginLeft: "auto",
+});
+
+export const flexToLeft = style({
+  marginRight: "auto",
+});
