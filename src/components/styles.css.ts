@@ -32,6 +32,7 @@ globalStyle("html", {
 
 globalStyle("a:link, a:visited, button", {
   color: "inherit",
+  textDecoration: "none",
 });
 
 const grad1 = `radial-gradient(26.76% 85.52% at 86.73% -12.86%, ${vars.color.darkRed} 6.65%, transparent)`;
@@ -80,6 +81,9 @@ export const shadowedElement = style([
   },
 ]);
 
+/**
+ * @deprecated
+ */
 export const removeUnderline = style({
   textDecoration: "none",
 });
