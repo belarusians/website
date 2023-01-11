@@ -17,8 +17,8 @@ export default function IndexPage(): JSX.Element {
           width="640"
           height="979"
           frameBorder="0"
-          marginHeight="0"
-          marginWidth="0"
+          marginHeight={0}
+          marginWidth={0}
         >
           Loading…
         </iframe>
