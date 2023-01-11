@@ -5,6 +5,15 @@ import { vars } from "../styles.css";
 export const menuItem = style([
   {
     display: "inline-block",
+    borderStyle: "none solid none none",
+    borderWidth: "1px",
+    borderColor: vars.color.red,
+    padding: "0.3rem 0.8rem",
+    selectors: {
+      "&:last-child": {
+        borderRight: "none",
+      },
+    },
   },
 ]);
 
@@ -13,11 +22,6 @@ export const aboutUs = style([
   sprinkles({
     fontSize: {
       sm: "0.6rem",
-      md: "1rem",
-      lg: "1rem",
-    },
-    marginLeft: {
-      sm: "0.3rem",
       md: "1rem",
       lg: "1rem",
     },
@@ -37,13 +41,7 @@ export const menu = style([
 
 export const menuList = style([
   {
-    textDecoration: "none",
-    listStyleType: "none",
     padding: 0,
     margin: 0,
   },
 ]);
-
-export const languageSelector = style({
-  marginLeft: "auto",
-});
