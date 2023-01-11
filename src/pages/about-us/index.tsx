@@ -19,13 +19,13 @@ import {
   whatImage,
   forMeImage,
   helpImage,
-  sectionHeading,
   partners,
   partnersHeading,
   partnerLogo,
   libereco,
   mfb,
 } from "../../components/about-us.css";
+import { sectionHeading } from "../../components/section/section.css";
 
 export default function IndexPage(): JSX.Element {
   const { t } = useTranslation("about-us");

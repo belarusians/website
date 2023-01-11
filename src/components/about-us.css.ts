@@ -1,16 +1,7 @@
 import { style } from "@vanilla-extract/css";
 import { card, rounded, vars } from "./styles.css";
 import { sprinkles } from "./sprinkles.css";
-import { animationFadeIn, fadeInElementOnScroll } from "../utils/animation.css";
-
-export const sectionHeading = style([
-  animationFadeIn,
-  sprinkles({
-    fontSize: {
-      sm: "1.2rem",
-    },
-  }),
-]);
+import { fadeInElementOnScroll } from "../utils/animation.css";
 
 export const heading = style([
   {
