@@ -13,9 +13,9 @@ export default function IndexPage(): JSX.Element {
       <Section>
         <h1 className={sectionHeading}>{t("heading")}</h1>
         <iframe
-          src="https://docs.google.com/forms/d/e/1FAIpQLScDh_yhFZYToDEq-WUrrulGbU65c1fJIuuHCT8_raP-xfqYoQ/viewform?embedded=true"
-          width="640"
-          height="979"
+          src="https://docs.google.com/forms/d/e/1FAIpQLSclnC3o9gft51GR9_lNdFoLY79DhKrdw-rR9JtGQ3bbwFltuw/viewform?embedded=true"
+          width={640}
+          height={1300}
           frameBorder="0"
           marginHeight={0}
           marginWidth={0}
