@@ -1,25 +1,17 @@
-import Link from "next/link";
 import * as React from "react";
-import { useTranslation } from "next-i18next";
 
-import { aboutUs, menu, menuList, languageSelector } from "./menu.css";
-import { removeUnderline } from "../styles.css";
-import { LanguageSelector } from "../language-selector/language-selector";
+import { DesktopMenu } from "./desktop/desktopMenu";
+import { useEffect, useState } from "react";
 
-export function Menu(): JSX.Element {
-  const { t } = useTranslation();
+export function Menu(props: { className?: string }): JSX.Element {
+  const [width, setWidth] = useState(0);
 
-  return (
-    <div className={menu}>
-      <ul className={menuList}>
-        <li className={aboutUs}>
-          <Link className={removeUnderline} href={"/about-us"}>
-            {t("about-us")}
-          </Link>
-        </li>
-      </ul>
+  useEffect(() => {
+    setWidth(window.innerWidth);
+    window.addEventListener("resize", (e) => {
+      setWidth(window.innerWidth);
+    });
+  });
 
-      <LanguageSelector className={languageSelector} />
-    </div>
-  );
+  return <div className={props.className}>{width < 768 ? <DesktopMenu /> : <DesktopMenu />}</div>;
 }
