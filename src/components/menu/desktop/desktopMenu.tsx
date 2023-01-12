@@ -11,6 +11,9 @@ export function DesktopMenu(): JSX.Element {
   return (
     <div className={menu}>
       <div className={menuList}>
+        <Link className={aboutUs} href={"/join-us"}>
+          {t("join-us")}
+        </Link>
         <Link className={aboutUs} href={"/about-us"}>
           {t("about-us")}
         </Link>
