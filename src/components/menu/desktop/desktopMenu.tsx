@@ -3,17 +3,17 @@ import Link from "next/link";
 
 import { menu, menuList } from "../menu.css";
 import { LanguageSelector } from "../../language-selector/language-selector";
-import { languageSelector, menuItem } from "./desktop-menu.css";
+import { marginRight, languageSelector, menuItem } from "./desktop-menu.css";
+import { BeautifulButton } from "../../beautiful-button/beatiful-button";
 
 export function DesktopMenu(): JSX.Element {
   const { t } = useTranslation();
 
   return (
     <div className={menu}>
+      <BeautifulButton className={marginRight} label={t("join-us")} link={"/join-us"} />
+
       <div className={menuList}>
-        <Link className={menuItem} href={"/join-us"}>
-          {t("join-us")}
-        </Link>
         <Link className={menuItem} href={"/about-us"}>
           {t("about-us")}
         </Link>

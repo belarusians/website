@@ -12,6 +12,10 @@ export const languageSelector = style([
   }),
 ]);
 
+export const marginRight = style({
+  marginRight: "1rem",
+});
+
 export const menuItem = style([
   sprinkles({
     fontSize: {
