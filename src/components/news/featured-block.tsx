@@ -2,7 +2,7 @@ import { useTranslation } from "next-i18next";
 
 import { NewsThumbnail } from "./thumbnail";
 import { NewsMetadata } from "../types";
-import { animatedCard, sectionTitle } from "../styles.css";
+import { animatedCard, sectionTitle } from "../common.styles.css";
 import { row_lg, w_lg_2, w_1, col_lg__row_md } from "../grid.css";
 import { fadeInElementOnScroll } from "../../utils/animation.css";
 

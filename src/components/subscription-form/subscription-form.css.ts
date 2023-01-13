@@ -1,6 +1,7 @@
 import { style, keyframes } from "@vanilla-extract/css";
 import { sprinkles } from "../sprinkles.css";
-import { buttonMD, shadowedElement, largeText, normalText, toCenterAll, vars } from "../styles.css";
+import { vars } from "../styles.css";
+import { buttonMD, shadowedElement, largeText, normalText, toCenterAll } from "../common.styles.css";
 import { row } from "../grid.css";
 
 export const subscriptionForm = style([

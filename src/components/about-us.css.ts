@@ -1,5 +1,6 @@
 import { style } from "@vanilla-extract/css";
-import { card, rounded, vars } from "./styles.css";
+import { vars } from "./styles.css";
+import { card, rounded } from "./common.styles.css";
 import { sprinkles } from "./sprinkles.css";
 import { fadeInElementOnScroll } from "../utils/animation.css";
 

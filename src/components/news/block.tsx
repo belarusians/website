@@ -1,6 +1,6 @@
 import { useTranslation } from "next-i18next";
 
-import { animatedCard, sectionTitle } from "../styles.css";
+import { animatedCard, sectionTitle } from "../common.styles.css";
 import { row_lg, w_1 } from "../grid.css";
 import { fadeInElementOnScroll } from "../../utils/animation.css";
 import { NewsMetadata } from "../types";

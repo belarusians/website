@@ -1,5 +1,6 @@
 import { style } from "@vanilla-extract/css";
-import { toCenterAll, vars } from "../styles.css";
+import { vars } from "../styles.css";
+import { toCenterAll } from "../common.styles.css";
 import { sprinkles } from "../sprinkles.css";
 
 export const counter = style([

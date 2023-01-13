@@ -4,7 +4,7 @@ import { Header } from "./header/header";
 import { Footer } from "./footer/footer";
 import { Section } from "./section/section";
 
-import { container } from "./styles.css";
+import { container } from "./common.styles.css";
 import { animateOnIntersection } from "../utils/intersection-animation";
 
 export function Layout(props: PropsWithChildren): JSX.Element {
