@@ -29,7 +29,7 @@ globalStyle("html", {
   overflowY: "scroll",
 });
 
-globalStyle("a", {
+globalStyle("a, button", {
   color: "inherit",
   textDecoration: "none",
 });
