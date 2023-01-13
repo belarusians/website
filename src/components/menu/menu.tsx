@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { MobileMenu } from "./mobile/mobileMenu";
 import { mobileStartsFrom } from "../sprinkles.css";
 
-export function Menu(props: { className?: string; onToggleMenu: (opened: boolean) => void }): JSX.Element {
+export function Menu(props: { className?: string }): JSX.Element {
   const [width, setWidth] = useState(0);
 
   useEffect(() => {
@@ -15,9 +15,5 @@ export function Menu(props: { className?: string; onToggleMenu: (opened: boolean
     });
   }, []);
 
-  return (
-    <div className={props.className}>
-      {width < mobileStartsFrom ? <MobileMenu onToggleMenu={props.onToggleMenu} /> : <DesktopMenu />}
-    </div>
-  );
+  return <div className={props.className}>{width < mobileStartsFrom ? <MobileMenu /> : <DesktopMenu />}</div>;
 }

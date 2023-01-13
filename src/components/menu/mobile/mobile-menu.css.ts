@@ -3,7 +3,7 @@ import { vars } from "../../styles.css";
 
 export const hamburgerLines = style([
   {
-    height: "26px",
+    height: "24px",
     width: "32px",
     cursor: "pointer",
     top: "17px",
@@ -15,27 +15,25 @@ export const hamburgerLines = style([
   },
 ]);
 
+export const bb = style({
+  marginRight: "1rem",
+});
+
 export const line = style([
   {
-    boxShadow: vars.shadows.small,
     display: "block",
-    height: "4px",
+    height: "8px",
     width: "100%",
-    borderRadius: "10px",
-    selectors: {
-      [`${hamburgerLines}:hover &`]: {
-        boxShadow: vars.shadows.large,
-      },
-    },
+    borderRadius: "2px",
+    background: vars.color.white,
   },
 ]);
 
 export const line1 = style([
   line,
   {
-    transformOrigin: "0% 0%",
+    transformOrigin: "6px 6px",
     transition: "transform 0.4s ease-in-out",
-    background: vars.color.white,
   },
 ]);
 
@@ -49,33 +47,22 @@ export const openedLine1 = style([
 export const line2 = style([
   line,
   {
-    transition: "transform 0.2s ease-in-out",
-    background: vars.color.red,
+    transformOrigin: "5px 1px",
+    transition: "transform 0.4s ease-in-out",
   },
 ]);
 
 export const openedLine2 = style([
   line2,
   {
-    transform: "scaleY(0)",
-  },
-]);
-
-export const line3 = style([
-  line,
-  {
-    transformOrigin: "0% 100%",
-    transition: "transform 0.4s ease-in-out",
-    background: vars.color.white,
-  },
-]);
-
-export const openedLine3 = style([
-  line3,
-  {
     transform: "rotate(-45deg)",
   },
 ]);
+
+export const menu = style({
+  display: "flex",
+  alignItems: "center",
+});
 
 export const menuList = style({
   position: "absolute",

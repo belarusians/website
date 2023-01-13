@@ -3,53 +3,52 @@ import { useTranslation } from "next-i18next";
 import { useRef, useState } from "react";
 
 import {
+  bb,
   hamburgerLines,
   line1,
   line2,
-  line3,
+  menu,
   menuItem,
   menuList,
   openedLine1,
   openedLine2,
-  openedLine3,
 } from "./mobile-menu.css";
 import { LanguageSelector } from "../../language-selector/language-selector";
+import { BeautifulButton } from "../../beautiful-button/beatiful-button";
 
-export function MobileMenu(props: { className?: string; onToggleMenu: (opened: boolean) => void }): JSX.Element {
+export function MobileMenu(): JSX.Element {
   const [menuOpened, toggleMenuState] = useState(false);
+  const { t } = useTranslation();
 
   function toggleMenu(): void {
-    if (!firstLine.current || !secondLine.current || !thirdLine.current) {
+    if (!firstLine.current || !secondLine.current) {
       return;
     }
 
     toggleMenuState(!menuOpened);
-    props.onToggleMenu(!menuOpened);
 
     if (menuOpened) {
       firstLine.current.className = line1;
       secondLine.current.className = line2;
-      thirdLine.current.className = line3;
     } else {
       firstLine.current.className = openedLine1;
       secondLine.current.className = openedLine2;
-      thirdLine.current.className = openedLine3;
     }
   }
 
   const firstLine = useRef<HTMLSpanElement>(null);
   const secondLine = useRef<HTMLSpanElement>(null);
-  const thirdLine = useRef<HTMLSpanElement>(null);
 
   return (
-    <>
+    <div className={menu}>
+      <BeautifulButton className={bb} label={t("join-us")} link={"/join-us"} />
+
       <div className={hamburgerLines} onClick={toggleMenu}>
         <span ref={firstLine} className={line1}></span>
         <span ref={secondLine} className={line2}></span>
-        <span ref={thirdLine} className={line3}></span>
       </div>
       {menuOpened ? <OpenedMenu /> : null}
-    </>
+    </div>
   );
 }
 
@@ -58,9 +57,6 @@ function OpenedMenu(): JSX.Element {
   return (
     <div className={menuList}>
       <LanguageSelector className={menuItem} />
-      <Link className={menuItem} href={"/join-us"}>
-        {t("join-us")}
-      </Link>
       <Link className={menuItem} href={"/about-us"}>
         {t("about-us")}
       </Link>

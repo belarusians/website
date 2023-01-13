@@ -18,8 +18,9 @@ export const header = style([
     position: {
       sm: "sticky",
     },
-    boxShadow: {
-      sm: vars.shadows.small,
+    backgroundColor: {
+      sm: vars.color.red,
+      md: vars.color.white,
     },
   }),
   {
@@ -27,13 +28,8 @@ export const header = style([
     alignItems: "center",
     top: 0,
     zIndex: 100,
-    backgroundColor: vars.color.white,
   },
 ]);
-
-export const redBackground = style({
-  backgroundColor: vars.color.red,
-});
 
 export const logoContainer = style({
   display: "flex",

@@ -2,13 +2,15 @@ import { style } from "@vanilla-extract/css";
 import { vars } from "../styles.css";
 import { sprinkles } from "../sprinkles.css";
 
-export const redColor = style({
-  fill: vars.color.red,
-});
-
-export const whiteColor = style({
-  fill: vars.color.white,
-});
+export const fillColor = style([
+  sprinkles({
+    fill: {
+      sm: vars.color.white,
+      md: vars.color.red,
+      lg: vars.color.red,
+    },
+  }),
+]);
 
 export const bottomText = style([
   sprinkles({
