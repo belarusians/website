@@ -28,7 +28,7 @@ export const button = style([
       md: "small",
     },
     fontSize: {
-      sm: "1rem",
+      sm: "1.5rem",
       md: "1.2rem",
     },
   }),

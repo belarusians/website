@@ -1,9 +1,9 @@
 import { useTranslation } from "next-i18next";
-import { aboutUs, menu, menuItem, menuList } from "../menu.css";
 import Link from "next/link";
+
+import { menu, menuList } from "../menu.css";
 import { LanguageSelector } from "../../language-selector/language-selector";
-import * as React from "react";
-import { languageSelector } from "./desktop-menu.css";
+import { languageSelector, menuItem } from "./desktop-menu.css";
 
 export function DesktopMenu(): JSX.Element {
   const { t } = useTranslation();
@@ -11,10 +11,10 @@ export function DesktopMenu(): JSX.Element {
   return (
     <div className={menu}>
       <div className={menuList}>
-        <Link className={aboutUs} href={"/join-us"}>
+        <Link className={menuItem} href={"/join-us"}>
           {t("join-us")}
         </Link>
-        <Link className={aboutUs} href={"/about-us"}>
+        <Link className={menuItem} href={"/about-us"}>
           {t("about-us")}
         </Link>
       </div>
