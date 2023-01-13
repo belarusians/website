@@ -11,9 +11,9 @@ export const [themeClass, vars] = createTheme({
     grey: "grey",
   },
   shadows: {
-    small: "0 3px 6px 1px #9494944d",
-    medium: "0 3px 6px 3px #9494944d",
-    large: "0 3px 6px 5px #9494944d",
+    small: "0 0px 8px 2px #9494944d",
+    medium: "0 0px 8px 4px #9494944d",
+    large: "0 0px 8px 6px #9494944d",
     top: "rgba(0, 0, 0, 0.15) 0px 50px 15px -39px inset",
     bottom: "rgba(0, 0, 0, 0.15) 0px -50px 15px -39px inset",
   },
