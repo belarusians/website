@@ -91,6 +91,42 @@ export const button = style([
   },
 ]);
 
+export const responsiveButton = style([
+  shadowedElement,
+  rounded,
+  sprinkles({
+    paddingY: {
+      sm: "small",
+      md: "medium",
+      lg: "large",
+    },
+    paddingX: {
+      sm: "small",
+      md: "medium",
+      lg: "large",
+    },
+    fontSize: {
+      sm: "0.8rem",
+      md: "1rem",
+      lg: "1.2rem",
+    },
+  }),
+  {
+    backgroundColor: vars.color.white,
+    border: "none",
+    cursor: "pointer",
+    transition: "all 0.15s ease-in-out",
+    selectors: {
+      "&:hover": {
+        boxShadow: vars.shadows.medium,
+      },
+      "&:active": {
+        boxShadow: vars.shadows.large,
+      },
+    },
+  },
+]);
+
 export const buttonMD = style([
   button,
   sprinkles({
