@@ -12,7 +12,9 @@ export const languageSelector = style([
   }),
 ]);
 
-export const marginRight = style({
+export const joinUsButton = style({
+  textTransform: "none",
+  fontWeight: 400,
   marginRight: "1rem",
 });
 

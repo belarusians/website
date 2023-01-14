@@ -3,7 +3,7 @@ import { useTranslation } from "next-i18next";
 import { useRef, useState } from "react";
 
 import {
-  bb,
+  joinUsButton,
   hamburgerLines,
   line1,
   line2,
@@ -41,7 +41,7 @@ export function MobileMenu(): JSX.Element {
 
   return (
     <div className={menu}>
-      <BeautifulButton className={bb} label={t("join-us")} link={"/join-us"} />
+      <BeautifulButton className={joinUsButton} label={t("join-us")} link={"/join-us"} />
 
       <div className={hamburgerLines} onClick={toggleMenu}>
         <span ref={firstLine} className={line1}></span>

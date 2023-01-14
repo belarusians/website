@@ -15,7 +15,7 @@ export const hamburgerLines = style([
   },
 ]);
 
-export const bb = style({
+export const joinUsButton = style({
   marginRight: "1rem",
 });
 

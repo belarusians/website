@@ -9,8 +9,8 @@ interface BeautifulButtonProps {
 
 export function BeautifulButton(props: BeautifulButtonProps): JSX.Element {
   return (
-    <button className={beautifulButton + " " + props.className}>
-      <Link href={props.link}>{props.label}</Link>
-    </button>
+    <Link className={beautifulButton + " " + props.className} href={props.link}>
+      {props.label}
+    </Link>
   );
 }
