@@ -2,18 +2,18 @@ import { S3, config } from "aws-sdk";
 
 export async function saveEmail(email: string) {
   if (!process.env.S3_BUCKET) {
-    throw new Error('S3_BUCKET env variable should be set');
+    throw new Error("S3_BUCKET env variable should be set");
   }
 
   if (!process.env.ACCESS_KEY_AWS || !process.env.SECRET_KEY_AWS || !process.env.REGION_AWS) {
-    throw new Error('AWS credentials variable should be set');
+    throw new Error("AWS credentials variable should be set");
   }
 
   config.update({
     accessKeyId: process.env.ACCESS_KEY_AWS,
     secretAccessKey: process.env.SECRET_KEY_AWS,
     region: process.env.REGION_AWS,
-    signatureVersion: 'v4',
+    signatureVersion: "v4",
   });
 
   const s3 = new S3();

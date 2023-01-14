@@ -8,5 +8,6 @@
     "quotes": "warn",
     "no-duplicate-imports": "off",
     "@typescript-eslint/no-duplicate-imports": "error"
-  }
+  },
+  "ignorePatterns": ["__checks__/**", "next.config.js"]
 }

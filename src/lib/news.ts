@@ -1,12 +1,12 @@
-import * as path from 'path';
-import * as fs from 'fs';
+import * as path from "path";
+import * as fs from "fs";
 import matter from "gray-matter";
-import { remark } from 'remark';
-import html from 'remark-html';
+import { remark } from "remark";
+import html from "remark-html";
 
 import { EventMetadata, Lang, News, NewsMetadata } from "../components/types";
 
-const newsDirectory = path.join(process.cwd(), '_news');
+const newsDirectory = path.join(process.cwd(), "_news");
 
 export function getNewsSlugs(locale?: Lang): string[] {
   let pathToLocale;
@@ -26,7 +26,7 @@ export async function getAllNewsMeta(locale?: Lang): Promise<NewsMetadata[]> {
   return Promise.all(slugs.map(slug => getNewsMetaBySlug(slug, locale)));
 }
 
-export async function getNewsMetaBySlug(slug: string, locale?: Lang): Promise<(NewsMetadata | EventMetadata) & Pick<News, 'content'>> {
+export async function getNewsMetaBySlug(slug: string, locale?: Lang): Promise<(NewsMetadata | EventMetadata) & Pick<News, "content">> {
   let fullPath;
   if (locale && fs.existsSync(path.join(newsDirectory, locale))) {
     fullPath = path.resolve(newsDirectory, locale, `${slug}.md`);
@@ -38,7 +38,7 @@ export async function getNewsMetaBySlug(slug: string, locale?: Lang): Promise<(N
     throw new Error(`News was not found at ${fullPath}`);
   }
 
-  const file = fs.readFileSync(fullPath, 'utf8');
+  const file = fs.readFileSync(fullPath, "utf8");
   const fileWithParsedFM = matter(file);
 
   const newsMeta = {
@@ -50,7 +50,7 @@ export async function getNewsMetaBySlug(slug: string, locale?: Lang): Promise<(N
     tags: fileWithParsedFM.data.tags
   };
 
-  if (newsMeta.tags.includes('event')) {
+  if (newsMeta.tags.includes("event")) {
     return {
       ...newsMeta,
       eventDate: fileWithParsedFM.data.eventDate,
