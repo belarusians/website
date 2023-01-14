@@ -49,7 +49,7 @@
     "typescript": "^4.8.4"
   },
   "prettier": {
-    "printWidth": 150,
+    "printWidth": 120,
     "arrowParens": "always",
     "trailingComma": "all",
     "tabWidth": 2

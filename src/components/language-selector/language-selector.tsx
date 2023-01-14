@@ -2,7 +2,7 @@ import * as React from "react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-import { active, button, li, list } from "./language-selector.css";
+import { active, button, list } from "./language-selector.css";
 
 function formFlag(locales: string[]): string[] {
   const middle = Math.round(locales.length / 2) - 1;
@@ -32,15 +32,13 @@ export function LanguageSelector(props: React.HTMLAttributes<HTMLElement>): JSX.
 
   return (
     <div className={props.className}>
-      <ul className={list}>
+      <div className={list}>
         {sortedLocales.map((l) => (
-          <li className={li} key={l}>
-            <button className={`${button} ${loc === l ? active : ""}`} onClick={() => onSelectLanguage(l)}>
-              {l}
-            </button>
-          </li>
+          <button className={`${button} ${loc === l ? active : ""}`} key={l} onClick={() => onSelectLanguage(l)}>
+            {l}
+          </button>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

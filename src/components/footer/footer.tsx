@@ -3,9 +3,9 @@ import { footer, disclaimer, icon, link } from "./footer.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
 
-export function Footer(): JSX.Element {
+export function Footer(props: { className?: string }): JSX.Element {
   return (
-    <div className={footer}>
+    <div className={props.className + " " + footer}>
       <a className={link} rel="noreferrer" target={"_blank"} href="https://www.instagram.com/marabynl">
         <FontAwesomeIcon icon={faInstagram} className={icon} />
       </a>

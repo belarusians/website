@@ -9,7 +9,7 @@ import { FeaturedNewsBlock } from "../components/news/featured-block";
 import { EventMetadata, NewsMetadata, NewsTags } from "../components/types";
 import { getAllNewsMeta } from "../lib/news";
 import { Section } from "../components/section/section";
-import { beautifulGradient } from "../components/styles.css";
+import { beautifulGradient } from "../components/common.styles.css";
 import { AchievementsBlock } from "../components/achievements/achievements";
 import { NewsBlock } from "../components/news/block";
 

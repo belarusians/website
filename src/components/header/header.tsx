@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { header, logo, logoContainer } from "./header.css";
 import { Logo } from "./logo";
-import { flexToRight } from "../styles.css";
+import { flexToRight } from "../common.styles.css";
 import { Menu } from "../menu/menu";
 
 export function Header(props: { className: string }): JSX.Element {
