@@ -1,9 +1,13 @@
 {
   "extends": [
     "next/core-web-vitals",
-    "prettier"
+    "prettier",
+    "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
-    "quotes": "warn"
-  }
+    "quotes": "warn",
+    "no-duplicate-imports": "off",
+    "@typescript-eslint/no-duplicate-imports": "error"
+  },
+  "ignorePatterns": ["__checks__/**", "next.config.js"]
 }

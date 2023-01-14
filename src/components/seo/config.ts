@@ -30,6 +30,6 @@ const next: SEOConfiguration = {
 };
 
 
-const configuration: SEOConfiguration = process.env.APP_ENV === 'prod' ? prod : next;
+const configuration: SEOConfiguration = process.env.APP_ENV === "prod" ? prod : next;
 
 export default configuration;

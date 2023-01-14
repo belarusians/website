@@ -3,7 +3,7 @@ import * as React from "react";
 import { DesktopMenu } from "./desktop/desktopMenu";
 import { useEffect, useState } from "react";
 import { MobileMenu } from "./mobile/mobileMenu";
-import { mobileStartsFrom } from "../sprinkles.css";
+import { maxMobileWidth } from "../sprinkles.css";
 
 export function Menu(props: { className?: string }): JSX.Element {
   const [width, setWidth] = useState(0);
@@ -15,5 +15,5 @@ export function Menu(props: { className?: string }): JSX.Element {
     });
   }, []);
 
-  return <div className={props.className}>{width < mobileStartsFrom ? <MobileMenu /> : <DesktopMenu />}</div>;
+  return <div className={props.className}>{width < maxMobileWidth ? <MobileMenu /> : <DesktopMenu />}</div>;
 }

@@ -16,13 +16,14 @@ const padding = {
 
 const margin = [0, "0.3rem", "0.5rem", "1rem", "1.5rem", "2rem", "4rem"];
 
-export const mobileStartsFrom = 768;
+export const maxMobileWidth = 768;
+export const minDesktopWidth = 1024;
 
 const responsiveProperties = defineProperties({
   conditions: {
-    sm: { "@media": `screen and (max-width: ${mobileStartsFrom - 1}px)` },
-    md: { "@media": `screen and (min-width: ${mobileStartsFrom}px)` },
-    lg: { "@media": "screen and (min-width: 1024px)" },
+    sm: { "@media": `screen and (max-width: ${maxMobileWidth}px)` },
+    md: { "@media": `screen and (min-width: ${maxMobileWidth + 1}px)` },
+    lg: { "@media": `screen and (min-width: ${minDesktopWidth}px)` },
   },
   defaultCondition: "lg",
   properties: {
