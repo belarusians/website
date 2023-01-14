@@ -22,7 +22,7 @@ poëzie van [@tasha.arlova](https://www.instagram.com/tasha.arlova/) en performa
 
 **Op het menu**: Draniki en andere kerstlekkernijen, en als toetje natuurlijk salo.
 
-Degenen die er niet waren, evenals degenen die het leuk vonden en meer willen, nodigen we je uit op 14 januari in het kerstfeest nummer 2
+Degenen die er niet waren, evenals degenen die het leuk vonden en meer willen, nodigen we je uit in het volgende kerstfeest nummer 2
 Details volgen later.
 
 Heel erg bedankt voor het steunen van MARA dit jaar. Lang leve Belarus 🤍❤️🤍

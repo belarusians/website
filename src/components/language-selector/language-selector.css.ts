@@ -4,7 +4,6 @@ import { vars } from "../styles.css";
 
 export const list = style({
   color: "white",
-  listStyleType: "none",
   margin: 0,
   padding: 0,
   display: "flex",
@@ -19,8 +18,6 @@ export const list = style({
   transition: "all 0.15s ease-in-out",
 });
 
-export const li = style({});
-
 export const button = style([
   sprinkles({
     padding: {
@@ -28,21 +25,22 @@ export const button = style([
       md: "small",
     },
     fontSize: {
-      sm: "1rem",
+      sm: "1.5rem",
       md: "1.2rem",
     },
   }),
   {
+    color: vars.color.lightBlack,
     backgroundColor: "white",
     border: 0,
     cursor: "pointer",
     textTransform: "uppercase",
     selectors: {
-      [`${li}:first-child &`]: {
+      ["&:first-child"]: {
         borderTopLeftRadius: "5px",
         borderBottomLeftRadius: "5px",
       },
-      [`${li}:last-child &`]: {
+      ["&:last-child"]: {
         borderTopRightRadius: "5px",
         borderBottomRightRadius: "5px",
       },

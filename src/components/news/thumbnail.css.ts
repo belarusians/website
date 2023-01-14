@@ -1,6 +1,7 @@
 import { style } from "@vanilla-extract/css";
 import { sprinkles } from "../sprinkles.css";
-import { removeUnderline, rounded, roundedBottom, vars } from "../styles.css";
+import { vars } from "../styles.css";
+import { removeUnderline, rounded, roundedBottom } from "../common.styles.css";
 
 const title = style([
   {

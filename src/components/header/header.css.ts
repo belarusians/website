@@ -5,20 +5,29 @@ import { vars } from "../styles.css";
 
 export const header = style([
   sprinkles({
-    marginTop: {
-      sm: "1rem",
+    paddingTop: {
+      sm: "0.5rem",
       md: "1rem",
       lg: "2rem",
     },
-    marginBottom: {
-      sm: 0,
+    paddingBottom: {
+      sm: "0.5rem",
       md: "0.5rem",
       lg: "1rem",
+    },
+    position: {
+      sm: "sticky",
+    },
+    backgroundColor: {
+      sm: vars.color.red,
+      md: vars.color.white,
     },
   }),
   {
     display: "flex",
     alignItems: "center",
+    top: 0,
+    zIndex: 100,
   },
 ]);
 
@@ -34,28 +43,4 @@ export const logo = style([
       lg: "23rem",
     },
   }),
-]);
-
-export const languageSelector = style({
-  marginLeft: "auto",
-});
-
-export const aboutUs = style([
-  sprinkles({
-    fontSize: {
-      sm: "0.6rem",
-      md: "1rem",
-      lg: "1rem",
-    },
-    marginLeft: {
-      sm: "0.3rem",
-      md: "1rem",
-      lg: "1rem",
-    },
-  }),
-  {
-    textTransform: "uppercase",
-    fontWeight: 500,
-    color: vars.color.red,
-  },
 ]);

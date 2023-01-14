@@ -3,7 +3,7 @@ import * as React from "react";
 import { subscriptionForm, subscribeButton, subscribeInput, spinner, success, subTitle } from "./subscription-form.css";
 import { ClientOnly } from "../client-only/client-only";
 import { isEmailValid } from "../../lib/email";
-import { centerSectionTitle } from "../styles.css";
+import { centerSectionTitle } from "../common.styles.css";
 import { col } from "../grid.css";
 import { fadeInElementOnScroll } from "../../utils/animation.css";
 

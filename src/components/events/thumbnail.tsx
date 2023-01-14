@@ -7,7 +7,7 @@ import { EventMetadata } from "../types";
 import { pastThumbnail, futureThumbnail, date, title, locationText, locationIcon, placeholder } from "./thumbnail.css";
 import { vertical } from "../grid.css";
 import { useTranslation } from "next-i18next";
-import { toCenterAll } from "../styles.css";
+import { toCenterAll } from "../common.styles.css";
 
 export interface EventThumbnailProps {
   event: EventMetadata;

@@ -1,6 +1,7 @@
 import { style, keyframes } from "@vanilla-extract/css";
 import { sprinkles } from "../sprinkles.css";
-import { card, largeText, normalText, toCenterAll, vars } from "../styles.css";
+import { vars } from "../styles.css";
+import { buttonMD, shadowedElement, largeText, normalText, toCenterAll } from "../common.styles.css";
 import { row } from "../grid.css";
 
 export const subscriptionForm = style([
@@ -83,7 +84,7 @@ const shake = keyframes({
 
 export const subscribeInput = style([
   subscribedPlaceholder,
-  card,
+  shadowedElement,
   normalText,
   {
     minWidth: "0px", // disabling default width on HTML input element
@@ -112,30 +113,10 @@ export const subscribeInput = style([
 
 // TODO: spinner is written ugly, fix it
 export const subscribeButton = style([
-  card,
-  sprinkles({
-    paddingY: {
-      sm: "small",
-      md: "medium",
-    },
-    paddingX: {
-      sm: "medium",
-      md: "large",
-    },
-  }),
+  buttonMD,
   {
-    fontSize: "1rem",
     marginRight: "auto",
-    backgroundColor: vars.color.white,
-    border: "none",
-    cursor: "pointer",
     selectors: {
-      "&:hover": {
-        boxShadow: vars.shadows.medium,
-      },
-      "&:active": {
-        boxShadow: vars.shadows.large,
-      },
       "&.loading": {
         paddingLeft: "2.5rem",
       },

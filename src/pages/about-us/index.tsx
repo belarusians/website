@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useEffect, useRef } from "react";
 import Link from "next/link";
 
 import { Layout } from "../../components/layout";
@@ -20,13 +19,13 @@ import {
   whatImage,
   forMeImage,
   helpImage,
-  sectionHeading,
   partners,
   partnersHeading,
   partnerLogo,
   libereco,
   mfb,
 } from "../../components/about-us.css";
+import { sectionHeading } from "../../components/section/section.css";
 
 export default function IndexPage(): JSX.Element {
   const { t } = useTranslation("about-us");

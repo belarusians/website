@@ -1,28 +1,20 @@
 import * as React from "react";
 import Link from "next/link";
 
-import { header, logo, logoContainer, languageSelector, aboutUs } from "./header.css";
-import { LanguageSelector } from "../language-selector/language-selector";
+import { header, logo, logoContainer } from "./header.css";
 import { Logo } from "./logo";
-import { removeUnderline } from "../styles.css";
-import { useTranslation } from "next-i18next";
+import { flexToRight } from "../common.styles.css";
+import { Menu } from "../menu/menu";
 
-export function Header(props: { className: string, }): JSX.Element {
-  const { t } = useTranslation();
-
+export function Header(props: { className: string }): JSX.Element {
   return (
     <div className={props.className + " " + header}>
-      <Link className={removeUnderline} href={"/"}>
+      <Link href={"/"} passHref>
         <div className={logoContainer}>
           <Logo className={logo} />
         </div>
       </Link>
-      <Link className={removeUnderline} href={"/about-us"}>
-        <span className={aboutUs}>
-          {t("about-us")}
-        </span>
-      </Link>
-      <LanguageSelector className={languageSelector} />
+      <Menu className={flexToRight} />
     </div>
   );
 }
