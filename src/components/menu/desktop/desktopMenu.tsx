@@ -17,6 +17,9 @@ export function DesktopMenu(): JSX.Element {
         <Link className={menuItem} href={"/about-us"}>
           {t("about-us")}
         </Link>
+        <Link className={menuItem} href={"https://bunq.me/VerenigingMARA"}>
+          {t("donate-us")}
+        </Link>
       </div>
 
       <LanguageSelector className={languageSelector} />

@@ -22,7 +22,7 @@ export const menuItem = style([
   sprinkles({
     fontSize: {
       sm: "0.6rem",
-      md: "1rem",
+      md: "0.8rem",
       lg: "1rem",
     },
   }),
