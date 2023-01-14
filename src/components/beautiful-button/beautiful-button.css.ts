@@ -6,14 +6,17 @@ const wobble = keyframes({
   "0%": {
     borderRadius: "15px 40px 20px 40px",
   },
-  "25%": {
+  "20%": {
     borderRadius: "40px 15px 40px 20px",
   },
-  "50%": {
-    borderRadius: "20px 40px 15px 40px",
+  "40%": {
+    borderRadius: "50% 50% 40% 40%",
   },
-  "75%": {
-    borderRadius: "40px 20px 40px 15px",
+  "60%": {
+    borderRadius: "40px 20px 40px 20px",
+  },
+  "80%": {
+    borderRadius: "30px 40% 50% 50%",
   },
   "100%": {
     borderRadius: "15px 40px 20px 40px",
@@ -30,9 +33,9 @@ const backgroundRotation = keyframes({
 });
 
 const color = {
-  first: "#f237ff",
-  second: "#b82cef",
-  third: "#15b4d9",
+  first: "#ee2fe3",
+  second: "#ac28e1",
+  third: "#1198b7",
   fourth: "#0cb655",
   fifth: "#b0b60c",
 };
@@ -42,7 +45,7 @@ export const beautifulButton = style([
   {
     color: vars.color.white,
     backgroundImage: `linear-gradient(60deg, ${color.first}, ${color.second}, ${color.third}, ${color.fourth}, ${color.fifth}, ${color.first}, ${color.second}, ${color.third})`,
-    animation: `${backgroundRotation} 3s infinite linear, ${wobble} 1s ease-in-out alternate infinite`,
+    animation: `${backgroundRotation} 4s infinite linear, ${wobble} 5s ease-in-out alternate infinite`,
     backgroundSize: "400% 100%",
   },
 ]);
