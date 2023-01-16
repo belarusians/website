@@ -1,7 +1,7 @@
 import * as React from "react";
 import { footer, disclaimer, icon, link } from "./footer.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub, faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
+import { faGithub, faTwitter, faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 export function Footer(props: { className?: string }): JSX.Element {
   return (
@@ -11,6 +11,9 @@ export function Footer(props: { className?: string }): JSX.Element {
       </a>
       <a className={link} rel="noreferrer" target={"_blank"} href="https://www.facebook.com/marabynl">
         <FontAwesomeIcon icon={faFacebook} className={icon} />
+      </a>
+      <a className={link} rel="noreferrer" target={"_blank"} href="https://twitter.com/BelarusinNL">
+        <FontAwesomeIcon icon={faTwitter} className={icon} />
       </a>
       <a className={link} rel="noreferrer" target={"_blank"} href="https://github.com/belarusians/website">
         <FontAwesomeIcon icon={faGithub} className={icon} />
