@@ -15,8 +15,6 @@ export const footer = style([
     },
     color: {
       sm: vars.color.white,
-      md: vars.color.black,
-      lg: vars.color.black,
     },
     paddingBottom: {
       sm: "0.5rem",
@@ -38,6 +36,9 @@ export const link = style([
       sm: "0.5rem",
       md: "1rem",
       lg: "1.5rem",
+    },
+    color: {
+      sm: vars.color.white,
     },
   }),
 ]);
