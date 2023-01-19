@@ -78,6 +78,7 @@ export const menuList = style({
 });
 
 export const menuItem = style({
+  textDecoration: "none",
   fontSize: "1.5rem",
   color: vars.color.white,
   paddingTop: "1rem",

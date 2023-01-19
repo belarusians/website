@@ -27,6 +27,7 @@ export const menuItem = style([
     },
   }),
   {
+    textDecoration: "none",
     display: "inline-block",
     borderStyle: "none solid none none",
     borderWidth: "1px",
