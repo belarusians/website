@@ -145,8 +145,9 @@ export const buttonMD = style([
 ]);
 
 export const animatedCard = style([
-  card,
+  shadowedElement,
   {
+    transition: "all 0.15s ease-in-out",
     selectors: {
       "&:hover": {
         boxShadow: vars.shadows.large,
