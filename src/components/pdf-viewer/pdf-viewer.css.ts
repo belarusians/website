@@ -22,9 +22,17 @@ export const pageControlsButton = style({
   },
 });
 
-export const documentWrapper = style({
-  display: "flex",
-});
+export const documentWrapper = style([
+  sprinkles({
+    marginTop: {
+      sm: "0.5rem",
+      md: "1rem",
+    },
+  }),
+  {
+    display: "flex",
+  },
+]);
 
 export const pageControls = style([
   sprinkles({

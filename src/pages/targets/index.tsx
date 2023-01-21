@@ -17,6 +17,7 @@ export default function IndexPage(): JSX.Element {
     <Layout>
       <Section>
         <h1 className={sectionHeading}>{t("targets-heading")}</h1>
+        <i>{t("targets-foreword")}</i>
         <PDFViewer />
       </Section>
     </Layout>
