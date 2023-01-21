@@ -3,8 +3,9 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { Layout } from "../../components/layout";
 import { Section } from "../../components/section/section";
-import { form, sectionHeading } from "../../components/section/section.css";
+import { form, formForeword, sectionHeading } from "../../components/section/section.css";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function IndexPage(): JSX.Element {
   const { t } = useTranslation("join-us");
@@ -26,6 +27,11 @@ export default function IndexPage(): JSX.Element {
     <Layout>
       <Section>
         <h1 className={sectionHeading}>{t("heading")}</h1>
+        <div className={formForeword}>
+          <Link target="_blank" href={"/targets"}>
+            {t("targets-text")}
+          </Link>
+        </div>
         <iframe
           className={form}
           src="https://docs.google.com/forms/d/e/1FAIpQLSclnC3o9gft51GR9_lNdFoLY79DhKrdw-rR9JtGQ3bbwFltuw/viewform?embedded=true"
