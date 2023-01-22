@@ -2,12 +2,23 @@ import Link from "next/link";
 import { useTranslation } from "next-i18next";
 import { useRef, useState } from "react";
 
-import { hamburgerLines, line1, line2, menu, menuItem, menuList, openedLine1, openedLine2 } from "./mobile-menu.css";
+import {
+  hamburgerLines,
+  joinUsButton,
+  line1,
+  line2,
+  menu,
+  menuItem,
+  menuList,
+  openedLine1,
+  openedLine2,
+} from "./mobile-menu.css";
 import { LanguageSelector } from "../../language-selector/language-selector";
+import { BeautifulButton } from "../../beautiful-button/beatiful-button";
 
 export function MobileMenu(): JSX.Element {
-  const [menuOpened, toggleMenuState] = useState(false);
   const { t } = useTranslation();
+  const [menuOpened, toggleMenuState] = useState(false);
 
   function toggleMenu(): void {
     if (!firstLine.current || !secondLine.current) {
@@ -30,7 +41,7 @@ export function MobileMenu(): JSX.Element {
 
   return (
     <div className={menu}>
-      {/*<BeautifulButton className={joinUsButton} label={t("join-us")} link={"/join-us"} />*/}
+      <BeautifulButton className={joinUsButton} label={t("join-us")} link={"/join-us"} />
 
       <div className={hamburgerLines} onClick={toggleMenu}>
         <span ref={firstLine} className={line1}></span>
@@ -49,7 +60,7 @@ function OpenedMenu(): JSX.Element {
       <Link className={menuItem} href={"/about-us"}>
         {t("about-us")}
       </Link>
-      <Link className={menuItem} href={"https://bunq.me/VerenigingMARA"}>
+      <Link target="_blank" className={menuItem} href={"https://bunq.me/VerenigingMARA"}>
         {t("donate-us")}
       </Link>
     </div>

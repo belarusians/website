@@ -49,6 +49,7 @@ const responsiveProperties = defineProperties({
     fill: [...Object.values(vars.color)],
     backgroundColor: [...Object.values(vars.color)],
     color: [...Object.values(vars.color)],
+    opacity: [0, 1],
   },
   shorthands: {
     padding: ["paddingTop", "paddingBottom", "paddingLeft", "paddingRight"],

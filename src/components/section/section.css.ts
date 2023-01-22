@@ -21,7 +21,20 @@ export const sectionHeading = style([
   }),
 ]);
 
-// TODO: remove this dirty hack
-export const form = style({
-  marginLeft: "-12px",
-});
+export const form = style([
+  animationFadeIn,
+  {
+    // TODO: remove this dirty hack
+    marginLeft: "-12px",
+  },
+]);
+
+export const formForeword = style([
+  animationFadeIn,
+  sprinkles({
+    marginBottom: {
+      sm: "0.5rem",
+      md: "1rem",
+    },
+  }),
+]);
