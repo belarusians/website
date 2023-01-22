@@ -3,7 +3,6 @@ import { GetStaticPropsContext } from "next/types";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import { Layout } from "../../components/layout";
 import { Section } from "../../components/section/section";
 import { sectionHeading } from "../../components/section/section.css";
 import { Lang } from "../../components/types";
@@ -16,13 +15,11 @@ export default function IndexPage(): JSX.Element {
   const { t } = useTranslation("join-us");
 
   return (
-    <Layout>
-      <Section>
-        <h1 className={sectionHeading}>{t("targets-heading")}</h1>
-        <i>{t("targets-foreword")}</i>
-        <PDFViewer />
-      </Section>
-    </Layout>
+    <Section>
+      <h1 className={sectionHeading}>{t("targets-heading")}</h1>
+      <i>{t("targets-foreword")}</i>
+      <PDFViewer />
+    </Section>
   );
 }
 

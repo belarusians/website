@@ -3,7 +3,6 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { SSRConfig } from "next-i18next";
 import { GetStaticPropsContext, GetStaticPropsResult } from "next/types";
 
-import { Layout } from "../components/layout";
 import { SubscriptionForm } from "../components/subscription-form/subscription-form";
 import { FeaturedNewsBlock } from "../components/news/featured-block";
 import { EventMetadata, Lang, NewsMetadata, NewsTags } from "../components/types";
@@ -23,7 +22,7 @@ interface MainPageProps extends SSRConfig {
 
 export default function IndexPage(props: MainPageProps): JSX.Element {
   return (
-    <Layout>
+    <>
       <Section>
         <FeaturedNewsBlock main={props.mainNews} secondary={props.secondaryNews} />
       </Section>
@@ -39,7 +38,7 @@ export default function IndexPage(props: MainPageProps): JSX.Element {
       <Section>
         <SubscriptionForm />
       </Section>
-    </Layout>
+    </>
   );
 }
 
