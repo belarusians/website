@@ -1,6 +1,10 @@
+import { Lang } from "../types";
+
 export interface SEOConfiguration {
   title: string;
-  description: string;
+  description: {
+    [locale in Lang]: string;
+  };
   siteUrl: string;
   domain: string;
   imageUrl: string;
@@ -8,7 +12,11 @@ export interface SEOConfiguration {
 
 const prod: SEOConfiguration = {
   title: "MARA",
-  description: "Нідэрландская некамерцыйная арганізацыя беларусаў для беларусаў - MARA",
+  description: {
+    be: "Нідэрландская некамерцыйная арганізацыя беларусаў для беларусаў - MARA",
+    nl: "Nederlandse non-profit organisatie van Belarussen voor Belarussen - MARA",
+    ru: "Нидерланская некоммерческая организация беларусов для беларусов - MARA",
+  },
   siteUrl: "https://www.belarusians.nl",
   domain: "belarusians.nl",
   imageUrl: "https://www.belarusians.nl/logo/og-image.jpg",
