@@ -2,7 +2,7 @@
 title: "Сустракайце - MARA!"
 date: "2022-11-05"
 backgroundUrl: "/news/mara.jpg"
-tags: [featured-main, featured]
+tags: [featured]
 ---
 
 # Сустракайце - MARA!

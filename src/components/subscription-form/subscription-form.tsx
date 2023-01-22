@@ -3,7 +3,7 @@ import * as React from "react";
 import { subscriptionForm, subscribeButton, subscribeInput, spinner, success, subTitle } from "./subscription-form.css";
 import { ClientOnly } from "../client-only/client-only";
 import { isEmailValid } from "../../lib/email";
-import { centerSectionTitle } from "../styles.css";
+import { centerSectionTitle } from "../common.styles.css";
 import { col } from "../grid.css";
 import { fadeInElementOnScroll } from "../../utils/animation.css";
 
@@ -59,26 +59,23 @@ export function SubscriptionForm(): JSX.Element {
   };
 
   return (
-    <div className={fadeInElementOnScroll}>
+    <>
       <h1 className={centerSectionTitle}>{t("subscribe-title")}</h1>
-      <div className={col}>
+      <div className={`${col} ${fadeInElementOnScroll}`}>
         <div className={subTitle}>{t("subscribe-text")}</div>
         <div className={subscriptionForm}>
-          {isSuccess ? (
-            <div className={success}>{t("subscribed-text")}</div>
-          ) : (
-            <ClientOnly>
-              <input
-                ref={inputRef}
-                onInput={onInput}
-                className={`${subscribeInput} ${isValid ? "valid" : "invalid"}`}
-                id={emailInputId}
-                name="email"
-                type="email"
-                placeholder={t("subscribe-input-placeholder") || "subscribe"}
-              />
-            </ClientOnly>
-          )}
+          <ClientOnly>
+            <div className={`${success} ${isSuccess ? "show" : "hide"}`}>{t("subscribed-text")}</div>
+            <input
+              ref={inputRef}
+              onInput={onInput}
+              className={`${subscribeInput} ${isValid ? "valid" : "invalid"} ${isSuccess ? "hide" : "show"}`}
+              id={emailInputId}
+              name="email"
+              type="email"
+              placeholder={t("subscribe-input-placeholder") || "subscribe"}
+            />
+          </ClientOnly>
 
           <button disabled={isLoading || isSuccess} className={`${subscribeButton} ${isLoading ? "loading" : ""}`} onClick={submit}>
             <span className={spinner + " " + (isLoading ? "show" : "hide")}></span>
@@ -86,7 +83,7 @@ export function SubscriptionForm(): JSX.Element {
           </button>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

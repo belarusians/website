@@ -19,13 +19,13 @@ import {
   whatImage,
   forMeImage,
   helpImage,
-  sectionHeading,
   partners,
   partnersHeading,
   partnerLogo,
   libereco,
   mfb,
 } from "../../components/about-us.css";
+import { sectionHeading } from "../../components/section/section.css";
 import { Lang } from "../../components/types";
 import { GetStaticPropsContext } from "next/types";
 

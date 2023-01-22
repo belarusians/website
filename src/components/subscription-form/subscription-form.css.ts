@@ -1,6 +1,7 @@
 import { style, keyframes } from "@vanilla-extract/css";
 import { sprinkles } from "../sprinkles.css";
-import { card, largeText, normalText, vars } from "../styles.css";
+import { vars } from "../styles.css";
+import { buttonMD, shadowedElement, largeText, normalText, toCenterAll } from "../common.styles.css";
 import { row } from "../grid.css";
 
 export const subscriptionForm = style([
@@ -8,6 +9,7 @@ export const subscriptionForm = style([
   {
     marginTop: "0.5rem",
     display: "flex",
+    width: "100%",
     textAlign: "center",
     alignSelf: "center",
   },
@@ -28,16 +30,37 @@ export const subTitle = style([
   },
 ]);
 
-const subscribedPlaceholder = sprinkles({
-  paddingY: {
-    sm: "small",
-    md: "medium",
+const subscribedPlaceholder = style([
+  toCenterAll,
+  sprinkles({
+    paddingY: {
+      sm: "small",
+      md: "medium",
+    },
+    paddingX: {
+      sm: "medium",
+      md: "large",
+    },
+    flexGrow: {
+      sm: 1,
+      md: 1,
+      lg: 0,
+    },
+    flexBasis: {
+      lg: "30%",
+    },
+  }),
+  {
+    selectors: {
+      "&.hide": {
+        display: "none",
+      },
+      "&.show": {
+        display: "initial",
+      },
+    },
   },
-  paddingX: {
-    sm: "medium",
-    md: "large",
-  },
-});
+]);
 
 export const success = style([subscribedPlaceholder]);
 
@@ -61,19 +84,13 @@ const shake = keyframes({
 
 export const subscribeInput = style([
   subscribedPlaceholder,
-  card,
+  shadowedElement,
   normalText,
-  sprinkles({
-    flex: {
-      sm: 1,
-      md: 1,
-      lg: "none",
-    },
-  }),
   {
-    minWidth: "10rem",
+    minWidth: "0px", // disabling default width on HTML input element
     WebkitAppearance: "none",
     border: `1px solid ${vars.color.white}`,
+    marginLeft: "auto",
     selectors: {
       "&:focus": {
         outline: "none",
@@ -96,29 +113,10 @@ export const subscribeInput = style([
 
 // TODO: spinner is written ugly, fix it
 export const subscribeButton = style([
-  card,
-  sprinkles({
-    paddingY: {
-      sm: "small",
-      md: "medium",
-    },
-    paddingX: {
-      sm: "medium",
-      md: "large",
-    },
-  }),
+  buttonMD,
   {
-    fontSize: "1rem",
-    backgroundColor: vars.color.white,
-    border: "none",
-    cursor: "pointer",
+    marginRight: "auto",
     selectors: {
-      "&:hover": {
-        boxShadow: vars.shadows.medium,
-      },
-      "&:active": {
-        boxShadow: vars.shadows.large,
-      },
       "&.loading": {
         paddingLeft: "2.5rem",
       },

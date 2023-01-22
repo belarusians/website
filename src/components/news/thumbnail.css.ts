@@ -1,6 +1,7 @@
 import { style } from "@vanilla-extract/css";
 import { sprinkles } from "../sprinkles.css";
-import { removeUnderline, rounded, roundedBottom, vars } from "../styles.css";
+import { vars } from "../styles.css";
+import { removeUnderline, rounded, roundedBottom } from "../common.styles.css";
 
 const title = style([
   {
@@ -21,6 +22,17 @@ export const largeTitle = style([
 ]);
 
 export const smallTitle = style([
+  title,
+  sprinkles({
+    fontSize: {
+      sm: "0.8rem",
+      md: "1rem",
+      lg: "1.2rem",
+    },
+  }),
+]);
+
+export const mediumTitle = style([
   title,
   sprinkles({
     fontSize: {

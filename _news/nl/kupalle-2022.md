@@ -2,7 +2,7 @@
 title: "Kupala 2022"
 date: "2022-11-05"
 backgroundUrl: "/news/flowers.jpg"
-tags: [featured]
+tags: []
 ---
 
 # Kupala 2022
