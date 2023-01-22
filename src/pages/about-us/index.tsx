@@ -56,20 +56,22 @@ export default function IndexPage(): JSX.Element {
             <p>{t("why-text")}</p>
           </div>
           <div className={whyImage}>
-            <Image className={fit} src="/news/hand.jpg" fill alt="" />
+            <Image className={fit} src="/news/other.jpg" fill alt="" />
           </div>
           <div className={forMe}>
             <h2 className={heading}>{t("for-me-heading")}</h2>
             <p>{t("for-me-text")}</p>
           </div>
           <div className={forMeImage}>
-            <Image className={fit} src="/news/other.jpg" fill alt="" />
+            <Image className={fit} src="/news/hand.jpg" fill alt="" />
           </div>
           <div className={help}>
             <h2 className={heading}>{t("help-heading")}</h2>
             <p>{t("help-text")}</p>
-            <a href="mailto:mara@belarusians.nl">mara@belarusians.nl</a>, <a href="https://facebook.com/marabynl">facebook</a>,{" "}
-            <a href="https://www.instagram.com/marabynl/">instagram</a>
+            <a href="mailto:mara@belarusians.nl">mara@belarusians.nl</a>,{" "}
+            <a href="https://facebook.com/marabynl">facebook</a>,{" "}
+            <a href="https://www.instagram.com/marabynl/">instagram</a>,{" "}
+            <a href="https://twitter.com/BelarusinNL">twitter</a>
           </div>
           <div className={helpImage}>
             <Image className={fit} src="/news/flowers.jpg" fill alt="" />

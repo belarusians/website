@@ -4,22 +4,22 @@ import { vars } from "../styles.css";
 
 const wobble = keyframes({
   "0%": {
-    borderRadius: "15px 40px 20px 40px",
+    borderRadius: "10px 30px 15px 30px",
   },
   "20%": {
-    borderRadius: "40px 15px 40px 20px",
+    borderRadius: "30px 10px 30px 15px",
   },
   "40%": {
-    borderRadius: "50% 50% 40% 40%",
+    borderRadius: "30% 30% 20% 20%",
   },
   "60%": {
-    borderRadius: "40px 20px 40px 20px",
+    borderRadius: "30px 15px 30px 15px",
   },
   "80%": {
-    borderRadius: "30px 40% 50% 50%",
+    borderRadius: "30px 20% 30% 30%",
   },
   "100%": {
-    borderRadius: "15px 40px 20px 40px",
+    borderRadius: "10px 30px 15px 30px",
   },
 });
 
@@ -33,19 +33,19 @@ const backgroundRotation = keyframes({
 });
 
 const color = {
-  first: "#ee2fe3",
-  second: "#ac28e1",
+  first: "#ac28e1",
+  second: "#4128e1",
   third: "#1198b7",
-  fourth: "#0cb655",
-  fifth: "#b0b60c",
+  fourth: "#0cb697",
 };
 
 export const beautifulButton = style([
   responsiveButton,
   {
     color: vars.color.white,
-    backgroundImage: `linear-gradient(60deg, ${color.first}, ${color.second}, ${color.third}, ${color.fourth}, ${color.fifth}, ${color.first}, ${color.second}, ${color.third})`,
+    textDecoration: "none",
+    backgroundImage: `linear-gradient(60deg, ${color.first}, ${color.second}, ${color.third}, ${color.fourth}, ${color.first}, ${color.second}, ${color.third})`,
     animation: `${backgroundRotation} 4s infinite linear, ${wobble} 5s ease-in-out alternate infinite`,
-    backgroundSize: "400% 100%",
+    backgroundSize: "350% 100%",
   },
 ]);

@@ -36,8 +36,8 @@ export const aboutUs = style([
     gridTemplateAreas: `
     "who who whoImage whoImage"
     "whatImage what what what"
-    "why why why whyImage"
-    "forMe forMe forMeImage forMeImage"
+    "why why whyImage whyImage"
+    "forMe forMe forMe forMeImage"
     "help helpImage helpImage helpImage"
   `,
   },
