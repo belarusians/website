@@ -74,6 +74,6 @@ export const placeholder = style({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  width: `100vh`,
+  width: "100vh",
   height: "80vh",
 });

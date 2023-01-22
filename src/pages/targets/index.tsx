@@ -1,10 +1,12 @@
 import dynamic from "next/dynamic";
+import { GetStaticPropsContext } from "next/types";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { Layout } from "../../components/layout";
 import { Section } from "../../components/section/section";
 import { sectionHeading } from "../../components/section/section.css";
+import { Lang } from "../../components/types";
 
 const PDFViewer = dynamic(() => import("../../components/pdf-viewer/pdf-viewer").then((mod) => mod.PdfViewer), {
   ssr: false,
@@ -24,10 +26,10 @@ export default function IndexPage(): JSX.Element {
   );
 }
 
-export async function getStaticProps(context: any) {
+export async function getStaticProps(context: GetStaticPropsContext) {
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, ["common", "join-us"])),
+      ...(await serverSideTranslations(context.locale as Lang, ["common", "join-us"])),
     },
   };
 }
