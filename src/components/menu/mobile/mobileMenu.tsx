@@ -17,6 +17,7 @@ import { LanguageSelector } from "../../language-selector/language-selector";
 import { BeautifulButton } from "../../beautiful-button/beatiful-button";
 
 export function MobileMenu(): JSX.Element {
+  const { t } = useTranslation();
   const [menuOpened, toggleMenuState] = useState(false);
 
   function toggleMenu(): void {
