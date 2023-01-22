@@ -8,9 +8,10 @@ import { themeClass } from "../components/styles.css";
  * workaround for flickering FA icon
  * see https://github.com/FortAwesome/react-fontawesome/issues/234
  */
-import { config } from "@fortawesome/fontawesome-svg-core"
-import "../../node_modules/@fortawesome/fontawesome-svg-core/styles.css"
-config.autoAddCss = false
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "../../node_modules/@fortawesome/fontawesome-svg-core/styles.css";
+
+config.autoAddCss = false;
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "900"],
@@ -18,7 +19,7 @@ const roboto = Roboto({
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const className = themeClass + " " +  roboto.className;
+  const className = themeClass + " " + roboto.className;
   return (
     <div className={className}>
       <Component {...pageProps} />
