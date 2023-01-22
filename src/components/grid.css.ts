@@ -80,6 +80,7 @@ export const w_1 = style([
       md: 1,
       lg: 1,
     },
+    // TODO: I do not like these flex-basis. Makes sense to investigate css grid in this use-case
     flexBasis: {
       sm: "7rem",
       md: "9rem",

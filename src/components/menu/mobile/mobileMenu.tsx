@@ -7,7 +7,6 @@ import { LanguageSelector } from "../../language-selector/language-selector";
 
 export function MobileMenu(): JSX.Element {
   const [menuOpened, toggleMenuState] = useState(false);
-  const { t } = useTranslation();
 
   function toggleMenu(): void {
     if (!firstLine.current || !secondLine.current) {

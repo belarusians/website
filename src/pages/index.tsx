@@ -1,12 +1,12 @@
 import * as React from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { SSRConfig } from "next-i18next";
-import { GetStaticPropsResult } from "next/types";
+import { GetStaticPropsContext, GetStaticPropsResult } from "next/types";
 
 import { Layout } from "../components/layout";
 import { SubscriptionForm } from "../components/subscription-form/subscription-form";
 import { FeaturedNewsBlock } from "../components/news/featured-block";
-import { EventMetadata, NewsMetadata, NewsTags } from "../components/types";
+import { EventMetadata, Lang, NewsMetadata, NewsTags } from "../components/types";
 import { getAllNewsMeta } from "../lib/news";
 import { Section } from "../components/section/section";
 import { beautifulGradient } from "../components/common.styles.css";
@@ -17,7 +17,7 @@ interface MainPageProps extends SSRConfig {
   mainNews: NewsMetadata;
   secondaryNews: [NewsMetadata, NewsMetadata];
   otherNews: NewsMetadata[];
-  locale: string;
+  locale: Lang;
   events?: EventMetadata[];
 }
 
@@ -47,8 +47,8 @@ function hasTwoSecondaryNews(secondaryNews: NewsMetadata[]): secondaryNews is [N
   return secondaryNews.length === 2;
 }
 
-export async function getStaticProps(context: any): Promise<GetStaticPropsResult<MainPageProps>> {
-  const newsMeta = await getAllNewsMeta(context.locale);
+export async function getStaticProps(context: GetStaticPropsContext): Promise<GetStaticPropsResult<MainPageProps>> {
+  const newsMeta = await getAllNewsMeta(context.locale as Lang);
 
   const mainNews = newsMeta.find((meta) => meta.tags.includes(NewsTags.Main));
   if (!mainNews) {
@@ -73,8 +73,8 @@ export async function getStaticProps(context: any): Promise<GetStaticPropsResult
       secondaryNews,
       otherNews,
       events,
-      locale: context.locale,
-      ...(await serverSideTranslations(context.locale, ["common", "main"])),
+      locale: context.locale as Lang,
+      ...(await serverSideTranslations(context.locale as Lang, ["common", "main"])),
     },
   };
 }
