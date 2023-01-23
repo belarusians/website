@@ -6,11 +6,9 @@ import { Head } from "./head/head";
 
 import { container } from "./common.styles.css";
 import { animateOnIntersection } from "../utils/intersection-animation";
-import { Lang } from "./types";
+import { CommonPageProps } from "./types";
 
-interface LayoutProps extends PropsWithChildren {
-  lang?: Lang;
-}
+type LayoutProps = PropsWithChildren & CommonPageProps;
 
 export function Layout(props: LayoutProps): JSX.Element {
   const root = useRef<HTMLDivElement>(null);

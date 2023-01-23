@@ -5,18 +5,17 @@ import { GetStaticPropsContext, GetStaticPropsResult } from "next/types";
 
 import { SubscriptionForm } from "../components/subscription-form/subscription-form";
 import { FeaturedNewsBlock } from "../components/news/featured-block";
-import { EventMetadata, Lang, NewsMetadata, NewsTags } from "../components/types";
+import { CommonPageProps, EventMetadata, Lang, NewsMetadata, NewsTags } from "../components/types";
 import { getAllNewsMeta } from "../lib/news";
 import { Section } from "../components/section/section";
 import { beautifulGradient } from "../components/common.styles.css";
 import { AchievementsBlock } from "../components/achievements/achievements";
 import { NewsBlock } from "../components/news/block";
 
-interface MainPageProps extends SSRConfig {
+interface MainPageProps extends SSRConfig, CommonPageProps {
   mainNews: NewsMetadata;
   secondaryNews: [NewsMetadata, NewsMetadata];
   otherNews: NewsMetadata[];
-  locale: Lang;
   events?: EventMetadata[];
 }
 
@@ -72,7 +71,7 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
       secondaryNews,
       otherNews,
       events,
-      locale: context.locale as Lang,
+      lang: context.locale as Lang,
       ...(await serverSideTranslations(context.locale as Lang, ["common", "main"])),
     },
   };

@@ -25,8 +25,8 @@ import {
   mfb,
 } from "../../components/about-us.css";
 import { sectionHeading } from "../../components/section/section.css";
-import { Lang } from "../../components/types";
-import { GetStaticPropsContext } from "next/types";
+import { CommonPageProps, Lang } from "../../components/types";
+import { GetStaticPropsContext, GetStaticPropsResult } from "next/types";
 
 export default function IndexPage(): JSX.Element {
   const { t } = useTranslation("about-us");
@@ -88,9 +88,10 @@ export default function IndexPage(): JSX.Element {
   );
 }
 
-export async function getStaticProps(context: GetStaticPropsContext) {
+export async function getStaticProps(context: GetStaticPropsContext): Promise<GetStaticPropsResult<CommonPageProps>> {
   return {
     props: {
+      lang: context.locale as Lang,
       ...(await serverSideTranslations(context.locale || Lang.be, ["common", "about-us"])),
     },
   };
