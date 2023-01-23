@@ -1,0 +1,7 @@
+//robots.txt
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+Sitemap: https://www.belarusians.nl/sitemap.xml
