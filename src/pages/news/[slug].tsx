@@ -6,6 +6,7 @@ import { getNewsBySlug, getNewsSlugs } from "../../lib/news";
 import { CommonPageProps, Lang, News } from "../../components/types";
 import { Section } from "../../components/section/section";
 import { Article } from "../../components/news/article";
+import { Head } from "../../components/head/head";
 
 interface NewsPageProps extends CommonPageProps {
   news?: News;
@@ -17,9 +18,12 @@ export default function ArticlePage(props: NewsPageProps): JSX.Element {
   }
 
   return (
-    <Section>
-      <Article news={props.news} />
-    </Section>
+    <>
+      <Head lang={props.lang} title={props.news.title} imagePath={props.news.backgroundUrl} />
+      <Section>
+        <Article news={props.news} />
+      </Section>
+    </>
   );
 }
 
