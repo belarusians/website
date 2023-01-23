@@ -5,6 +5,7 @@ export interface SEOConfiguration {
   description: {
     [locale in Lang]: string;
   };
+  siteName: string;
   siteUrl: {
     [locale in Lang]: string;
   };
@@ -14,6 +15,7 @@ export interface SEOConfiguration {
 
 const prod: SEOConfiguration = {
   title: "MARA",
+  siteName: "MARA",
   description: {
     be: "Нідэрландская некамерцыйная арганізацыя беларусаў для беларусаў - MARA",
     nl: "Nederlandse non-profit organisatie van Belarussen voor Belarussen - MARA",
