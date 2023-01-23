@@ -5,7 +5,9 @@ export interface SEOConfiguration {
   description: {
     [locale in Lang]: string;
   };
-  siteUrl: string;
+  siteUrl: {
+    [locale in Lang]: string;
+  };
   domain: string;
   imageUrl: string;
 }
@@ -17,7 +19,11 @@ const prod: SEOConfiguration = {
     nl: "Nederlandse non-profit organisatie van Belarussen voor Belarussen - MARA",
     ru: "Нидерланская некоммерческая организация беларусов для беларусов - MARA",
   },
-  siteUrl: "https://www.belarusians.nl",
+  siteUrl: {
+    be: "https://www.belarusians.nl",
+    nl: "https://www.belarusians.nl/nl",
+    ru: "https://www.belarusians.nl/ru",
+  },
   domain: "belarusians.nl",
   imageUrl: "https://www.belarusians.nl/logo/og-image.jpg",
 };

@@ -6,15 +6,21 @@ import { Head } from "./head/head";
 
 import { container } from "./common.styles.css";
 import { animateOnIntersection } from "../utils/intersection-animation";
+import { Lang } from "./types";
 
-export function Layout(props: PropsWithChildren): JSX.Element {
+interface LayoutProps extends PropsWithChildren {
+  lang?: Lang;
+}
+
+export function Layout(props: LayoutProps): JSX.Element {
   const root = useRef<HTMLDivElement>(null);
   useEffect(() => {
     animateOnIntersection(root.current);
   });
+
   return (
     <div ref={root}>
-      <Head />
+      <Head lang={props.lang} />
       <Header className={container} />
       {props.children}
       <Footer className={container} />

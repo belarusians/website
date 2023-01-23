@@ -4,8 +4,9 @@ import NextHead from "next/head";
 import seo, { SEOConfiguration } from "./config";
 import { Lang } from "../types";
 
-export type HeadProps = Pick<SEOConfiguration, "title" | "siteUrl" | "imageUrl"> & {
+export type HeadProps = Pick<SEOConfiguration, "title" | "imageUrl"> & {
   description?: string;
+  siteUrl?: string;
   lang?: Lang;
 };
 
@@ -17,7 +18,7 @@ export const Head = (props: Partial<HeadProps>): JSX.Element => {
       <meta name="description" content={props.description ?? seo.description[props.lang ?? Lang.be]} />
       <meta name="image" content={props.imageUrl ?? seo.imageUrl} />
 
-      <meta property="og:url" content={props.siteUrl ?? seo.siteUrl} />
+      <meta property="og:url" content={props.siteUrl ?? seo.siteUrl[props.lang ?? Lang.be]} />
       <meta property="og:title" content={props.title ?? seo.title} />
       <meta property="og:type" content="website" />
       <meta property="og:description" content={props.description ?? seo.description[props.lang ?? Lang.be]} />
@@ -27,7 +28,7 @@ export const Head = (props: Partial<HeadProps>): JSX.Element => {
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta property="twitter:domain" content={seo.domain} />
-      <meta property="twitter:url" content={props.siteUrl ?? seo.siteUrl} />
+      <meta property="twitter:url" content={props.siteUrl ?? seo.siteUrl[props.lang ?? Lang.be]} />
       <meta name="twitter:title" content={props.title ?? seo.title} />
       <meta name="twitter:description" content={props.description ?? seo.description[props.lang ?? Lang.be]} />
       <meta name="twitter:image" content={props.imageUrl ?? seo.imageUrl} />
