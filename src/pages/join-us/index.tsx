@@ -9,7 +9,7 @@ import { form, formForeword, sectionHeading } from "../../components/section/sec
 import { CommonPageProps, Lang } from "../../components/types";
 import { Head } from "../../components/head/head";
 
-export default function IndexPage(): JSX.Element {
+export default function IndexPage(props: CommonPageProps): JSX.Element {
   const { t } = useTranslation("join-us");
 
   const [width, setWidth] = useState(0);
@@ -28,6 +28,7 @@ export default function IndexPage(): JSX.Element {
   return (
     <>
       <Head
+        lang={props.lang}
         title={t("meta-title") || undefined}
         description={t("meta-description") || undefined}
         imagePath="/news/heart.jpg"
