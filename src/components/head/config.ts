@@ -1,13 +1,15 @@
 import { Lang } from "../types";
 
-interface SEOConfiguration {
+export interface SEOConfiguration {
   title: string;
   description: {
     [locale in Lang]: string;
   };
-  siteUrl: string;
+  siteUrl: {
+    [locale in Lang]: string;
+  };
   domain: string;
-  imagePath: string;
+  imageUrl: string;
 }
 
 const prod: SEOConfiguration = {
@@ -17,19 +19,19 @@ const prod: SEOConfiguration = {
     nl: "Nederlandse non-profit organisatie van Belarussen voor Belarussen - MARA",
     ru: "Нидерланская некоммерческая организация беларусов для беларусов - MARA",
   },
-  siteUrl: "https://belarusians.nl",
+  siteUrl: {
+    be: "https://www.belarusians.nl",
+    nl: "https://www.belarusians.nl/nl",
+    ru: "https://www.belarusians.nl/ru",
+  },
   domain: "belarusians.nl",
-  imagePath: "/logo/og-image.jpg",
+  imageUrl: "https://www.belarusians.nl/logo/og-image.jpg",
 };
 
-const next: SEOConfiguration = {
+const preview: SEOConfiguration = {
   ...prod,
-  title: "MARA NEXT",
-  siteUrl: "https://next.belarusians.nl",
-  domain: "next.belarusians.nl",
 };
 
-
-const configuration: SEOConfiguration = process.env.APP_ENV === "prod" ? prod : next;
+const configuration: SEOConfiguration = process.env.APP_ENV === "prod" ? prod : preview;
 
 export default configuration;

@@ -3,11 +3,11 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import * as React from "react";
 
 import { getNewsBySlug, getNewsSlugs } from "../../lib/news";
-import { Lang, News } from "../../components/types";
+import { CommonPageProps, Lang, News } from "../../components/types";
 import { Section } from "../../components/section/section";
 import { Article } from "../../components/news/article";
 
-interface NewsPageProps {
+interface NewsPageProps extends CommonPageProps {
   news?: News;
 }
 
@@ -36,6 +36,7 @@ export async function getStaticProps({
 
   return {
     props: {
+      lang: locale as Lang,
       news: newsPost,
       ...(await serverSideTranslations(locale || "be", ["common"])),
     },

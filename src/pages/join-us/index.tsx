@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { GetStaticPropsContext } from "next/types";
+import { GetStaticPropsContext, GetStaticPropsResult } from "next/types";
 import Link from "next/link";
 
 import { Section } from "../../components/section/section";
 import { form, formForeword, sectionHeading } from "../../components/section/section.css";
-import { Lang } from "../../components/types";
+import { CommonPageProps, Lang } from "../../components/types";
 
 export default function IndexPage(): JSX.Element {
   const { t } = useTranslation("join-us");
@@ -47,9 +47,10 @@ export default function IndexPage(): JSX.Element {
   );
 }
 
-export async function getStaticProps(context: GetStaticPropsContext) {
+export async function getStaticProps(context: GetStaticPropsContext): Promise<GetStaticPropsResult<CommonPageProps>> {
   return {
     props: {
+      lang: context.locale as Lang,
       ...(await serverSideTranslations(context.locale as Lang, ["common", "join-us"])),
     },
   };

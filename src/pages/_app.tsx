@@ -19,10 +19,11 @@ const roboto = Roboto({
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const className = themeClass + " " +  roboto.className;
+  const className = themeClass + " " + roboto.className;
+  const { lang } = pageProps;
   return (
     <div className={className}>
-      <Layout>
+      <Layout lang={lang}>
         <Component {...pageProps} />
       </Layout>
       <Analytics />

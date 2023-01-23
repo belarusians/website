@@ -28,3 +28,7 @@ export enum Lang {
   nl = "nl",
   ru = "ru",
 }
+
+export interface CommonPageProps {
+  lang?: Lang;
+}
