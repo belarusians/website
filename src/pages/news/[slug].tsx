@@ -2,7 +2,6 @@ import { GetStaticPathsContext, GetStaticPathsResult, GetStaticPropsContext, Get
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import * as React from "react";
 
-import { Layout } from "../../components/layout";
 import { getNewsBySlug, getNewsSlugs } from "../../lib/news";
 import { Lang, News } from "../../components/types";
 import { Section } from "../../components/section/section";
@@ -14,23 +13,20 @@ interface NewsPageProps {
 
 export default function ArticlePage(props: NewsPageProps): JSX.Element {
   if (!props.news) {
-    return (
-      <Layout>
-        <h1>404</h1>
-      </Layout>
-    );
+    return <h1>404</h1>;
   }
 
   return (
-    <Layout>
-      <Section>
-        <Article news={props.news} />
-      </Section>
-    </Layout>
+    <Section>
+      <Article news={props.news} />
+    </Section>
   );
 }
 
-export async function getStaticProps({ params, locale }: GetStaticPropsContext): Promise<GetStaticPropsResult<NewsPageProps>> {
+export async function getStaticProps({
+  params,
+  locale,
+}: GetStaticPropsContext): Promise<GetStaticPropsResult<NewsPageProps>> {
   if (!params) {
     return {
       props: {},
@@ -52,7 +48,7 @@ export function getStaticPaths({ locales }: GetStaticPathsContext): GetStaticPat
       ...(locales || []).map((locale) => ({
         params: { slug: file },
         locale,
-      }))
+      })),
     );
 
     return acc;

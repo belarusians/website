@@ -11,7 +11,7 @@ export const Favicon = (): JSX.Element => {
       <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#ed1c24" />
       <link rel="shortcut icon" href="/favicon.ico" />
       <meta name="msapplication-TileColor" content="#b91d47" />
-      <meta name="theme-color" content="#ffffff" />
+      <meta name="theme-color" content="#ed1c24" />
     </>
   );
 };
