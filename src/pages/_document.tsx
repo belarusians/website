@@ -9,6 +9,7 @@ export default function MyDocument() {
       <Head>
         <meta name="google-site-verification" content="hXVTSewNsnJ2_HBXFikyt5I9HeaIv2QypVnUeqcJKvU" />
         <meta name="facebook-domain-verification" content="puzhrq5e71epeox7ohkx5oluv6azvd" />
+        <meta property="fb:app_id" content="1246176432634113" />
         <Favicon />
       </Head>
       <body>
