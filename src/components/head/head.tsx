@@ -28,7 +28,10 @@ export const Head = (props: Partial<HeadProps>): JSX.Element => {
     <NextHead>
       <title>{props.title ?? seo.title}</title>
 
-      <meta name="keywords" content="mara, belarus, wit-rusland, belarus diaspora" />
+      <meta
+        name="keywords"
+        content="mara belarus, mara nederland, mara wit-rusland, mara diaspora, belarus diaspora nederland"
+      />
       <meta name="robots" content="index, follow" />
 
       <meta name="description" content={props.description ?? seo.description[lang]} key="meta-description" />
