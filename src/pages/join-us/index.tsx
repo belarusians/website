@@ -22,8 +22,7 @@ export default function IndexPage(props: CommonPageProps): JSX.Element {
   }, []);
 
   // TODO: do something with those magical numbers. Iframe should be well positioned automatically! Without this magic
-  const iframeWidth = width > 640 ? 640 : width - 20;
-  const iframeHeight = width > 640 ? 1450 : 1900;
+  const iframeHeight = width > 640 ? 1490 : 1900;
 
   return (
     <>
@@ -43,7 +42,7 @@ export default function IndexPage(props: CommonPageProps): JSX.Element {
         <iframe
           className={form}
           src="https://docs.google.com/forms/d/e/1FAIpQLSclnC3o9gft51GR9_lNdFoLY79DhKrdw-rR9JtGQ3bbwFltuw/viewform?embedded=true"
-          width={iframeWidth}
+          width="100%"
           height={iframeHeight}
           frameBorder="0"
           marginHeight={0}

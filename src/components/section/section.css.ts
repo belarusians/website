@@ -21,13 +21,7 @@ export const sectionHeading = style([
   }),
 ]);
 
-export const form = style([
-  animationFadeIn,
-  {
-    // TODO: remove this dirty hack
-    marginLeft: "-12px",
-  },
-]);
+export const form = style([animationFadeIn]);
 
 export const formForeword = style([
   animationFadeIn,
