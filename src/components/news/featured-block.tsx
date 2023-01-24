@@ -16,7 +16,7 @@ export function FeaturedNewsBlock(props: FeaturedNewsBlockProps) {
 
   return (
     <>
-      <h1 className={sectionTitle}>{t("news-title")}</h1>
+      <h2 className={sectionTitle}>{t("news-title")}</h2>
       <div className={`${row_lg} ${fadeInElementOnScroll}`}>
         <NewsThumbnail size={"large"} className={`${w_lg_2} ${animatedCard}`} news={props.main} />
         <div className={`${w_1} ${col_lg__row_md}`}>

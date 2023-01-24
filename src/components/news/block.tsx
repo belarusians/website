@@ -16,7 +16,7 @@ export function NewsBlock(props: NewsBlockProps): JSX.Element {
 
   return (
     <>
-      <h1 className={sectionTitle}>{t("other-news-title")}</h1>
+      <h2 className={sectionTitle}>{t("other-news-title")}</h2>
       <div className={`${row_lg} ${fadeInElementOnScroll}`}>
         {props.news.map((n, i) => (
           <NewsThumbnail className={`${w_1} ${newsItem} ${animatedCard}`} size={"small"} key={i} news={n} />

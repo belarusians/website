@@ -60,7 +60,7 @@ export function SubscriptionForm(): JSX.Element {
 
   return (
     <>
-      <h1 className={centerSectionTitle}>{t("subscribe-title")}</h1>
+      <h2 className={centerSectionTitle}>{t("subscribe-title")}</h2>
       <div className={`${col} ${fadeInElementOnScroll}`}>
         <div className={subTitle}>{t("subscribe-text")}</div>
         <div className={subscriptionForm}>
@@ -77,7 +77,11 @@ export function SubscriptionForm(): JSX.Element {
             />
           </ClientOnly>
 
-          <button disabled={isLoading || isSuccess} className={`${subscribeButton} ${isLoading ? "loading" : ""}`} onClick={submit}>
+          <button
+            disabled={isLoading || isSuccess}
+            className={`${subscribeButton} ${isLoading ? "loading" : ""}`}
+            onClick={submit}
+          >
             <span className={spinner + " " + (isLoading ? "show" : "hide")}></span>
             {t("subscribe-button")}
           </button>
