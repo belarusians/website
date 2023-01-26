@@ -1,7 +1,9 @@
 import { Lang } from "../types";
 
 export interface SEOConfiguration {
-  title: string;
+  title: {
+    [locale in Lang]: string;
+  };
   description: {
     [locale in Lang]: string;
   };
@@ -14,12 +16,16 @@ export interface SEOConfiguration {
 }
 
 const prod: SEOConfiguration = {
-  title: "MARA",
-  siteName: "MARA",
+  title: {
+    be: "Аб'яднанне беларусаў у Нідэрландах",
+    nl: "Vereniging Belarussen in Nederland",
+    ru: "Объединение беларусов в Нидерландах",
+  },
+  siteName: "MÁRA",
   description: {
-    be: "Нідэрландская некамерцыйная арганізацыя беларусаў для беларусаў - MARA",
-    nl: "Nederlandse non-profit organisatie van Belarussen voor Belarussen - MARA",
-    ru: "Нидерланская некоммерческая организация беларусов для беларусов - MARA",
+    be: "Некамерцыйная арганізацыя беларусаў Нідэрландаў - MÁRA",
+    nl: "Een non-profit organisatie van Belarussen in Nederland - MÁRA",
+    ru: "Некоммерческая организация беларусов в Нидерландах - MÁRA",
   },
   siteUrl: {
     be: "https://www.belarusians.nl",

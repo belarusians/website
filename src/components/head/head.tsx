@@ -1,11 +1,12 @@
 import React from "react";
 import NextHead from "next/head";
 
-import seo, { SEOConfiguration } from "./config";
+import seo from "./config";
 import { Lang } from "../types";
 import { useRouter } from "next/router";
 
-export type HeadProps = Pick<SEOConfiguration, "title"> & {
+export type HeadProps = {
+  title?: string;
   description?: string;
   siteUrl?: string;
   lang?: Lang;
@@ -35,7 +36,7 @@ export const Head = (props: Partial<HeadProps>): JSX.Element => {
 
   return (
     <NextHead>
-      <title>{props.title ?? seo.title}</title>
+      <title>{props.title ?? seo.title[currentLanguage]}</title>
 
       {currentLanguage === Lang.be ? renderCanonicalLink(asPath) : null}
 
@@ -49,7 +50,7 @@ export const Head = (props: Partial<HeadProps>): JSX.Element => {
       <meta name="image" content={imageUrl} key="meta-image" />
 
       <meta property="og:url" content={props.siteUrl ?? seo.siteUrl[currentLanguage]} key="meta-og:url" />
-      <meta property="og:title" key="meta-og:title" content={props.title ?? seo.title} />
+      <meta property="og:title" key="meta-og:title" content={props.title ?? seo.title[currentLanguage]} />
       <meta property="og:type" content="website" />
       <meta
         property="og:description"
@@ -65,7 +66,7 @@ export const Head = (props: Partial<HeadProps>): JSX.Element => {
       <meta name="twitter:card" content="summary_large_image" />
       <meta property="twitter:domain" key="meta-twitter:domain" content={seo.domain} />
       <meta property="twitter:url" key="meta-twitter:url" content={props.siteUrl ?? seo.siteUrl[currentLanguage]} />
-      <meta name="twitter:title" key="meta-twitter:title" content={props.title ?? seo.title} />
+      <meta name="twitter:title" key="meta-twitter:title" content={props.title ?? seo.title[currentLanguage]} />
       <meta
         name="twitter:description"
         key="meta-twitter:description"
