@@ -22,7 +22,7 @@ const langToLocale = {
 function renderCanonicalLink(path: string) {
   const relativePath = path === "" || path.startsWith("/") ? path : `/${path}`;
 
-  return <link rel="canonical" href={`https://www.belarusians.nl${relativePath}`} />;
+  return <link rel="canonical" key="link-canonical" href={`https://www.belarusians.nl${relativePath}`} />;
 }
 
 export const Head = (props: Partial<HeadProps>): JSX.Element => {

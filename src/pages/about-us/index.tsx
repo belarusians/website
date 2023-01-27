@@ -40,28 +40,28 @@ export default function IndexPage(): JSX.Element {
           <p>{t("who-text")}</p>
         </div>
         <div className={whoImage}>
-          <Image className={fit} src="/news/heart.jpg" fill alt="" />
+          <Image className={fit} src="/news/heart.jpg" fill alt="who we are" />
         </div>
         <div className={what}>
           <h2 className={heading}>{t("what-heading")}</h2>
           <p>{t("what-text")}</p>
         </div>
         <div className={whatImage}>
-          <Image className={fit} src="/news/mara.jpg" fill alt="" />
+          <Image className={fit} src="/news/mara.jpg" fill alt="what is mara" />
         </div>
         <div className={why}>
           <h2 className={heading}>{t("why-heading")}</h2>
           <p>{t("why-text")}</p>
         </div>
         <div className={whyImage}>
-          <Image className={fit} src="/news/other.jpg" fill alt="" />
+          <Image className={fit} src="/news/other.jpg" fill alt="why do we need mara" />
         </div>
         <div className={forMe}>
           <h2 className={heading}>{t("for-me-heading")}</h2>
           <p>{t("for-me-text")}</p>
         </div>
         <div className={forMeImage}>
-          <Image className={fit} src="/news/hand.jpg" fill alt="" />
+          <Image className={fit} src="/news/hand.jpg" fill alt="what is mara for me" />
         </div>
         <div className={help}>
           <h2 className={heading}>{t("help-heading")}</h2>
@@ -72,16 +72,16 @@ export default function IndexPage(): JSX.Element {
           <a href="https://twitter.com/BelarusinNL">twitter</a>
         </div>
         <div className={helpImage}>
-          <Image className={fit} src="/news/flowers.jpg" fill alt="" />
+          <Image className={fit} src="/news/flowers.jpg" fill alt="how can i help" />
         </div>
       </div>
-      <h1 className={partnersHeading}>{t("partners")}</h1>
+      <h2 className={partnersHeading}>{t("partners")}</h2>
       <div className={partners}>
         <Link className={libereco} href="https://www.libereco.org/">
-          <Image className={partnerLogo} src="/partners/libereco.jpeg" fill alt="" />
+          <Image className={partnerLogo} src="/partners/libereco.jpeg" fill alt="libereco partner" />
         </Link>
         <Link className={mfb} href="https://www.facebook.com/musicforbelarus">
-          <Image className={partnerLogo} src="/partners/music-for-belarus.jpg" fill alt="" />
+          <Image className={partnerLogo} src="/partners/music-for-belarus.jpg" fill alt="music for belarus partner" />
         </Link>
       </div>
     </Section>
