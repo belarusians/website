@@ -1,5 +1,5 @@
 ---
-title: "Wij zijn samen"
+title: "Bestedingsoverzicht: december 2022"
 date: "2022-12-15"
 backgroundUrl: "/news/christmas.jpg"
 tags: []

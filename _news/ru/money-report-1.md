@@ -1,5 +1,5 @@
 ---
-title: "Мы вместе"
+title: "Отчёт о потраченных средствах: декабрь 2022"
 date: "2022-12-15"
 backgroundUrl: "/news/christmas.jpg"
 tags: []
