@@ -17,15 +17,15 @@ export interface SEOConfiguration {
 
 const prod: SEOConfiguration = {
   title: {
-    be: "Аб'яднанне беларусаў у Нідэрландах",
-    nl: "Vereniging Belarussen in Nederland",
-    ru: "Объединение беларусов в Нидерландах",
+    be: "MARA: Аб'яднанне беларусаў у Нідэрландах",
+    nl: "MARA: Vereniging Belarussen in Nederland",
+    ru: "MARA: Объединение беларусов в Нидерландах",
   },
   siteName: "MÁRA",
   description: {
-    be: "Некамерцыйная арганізацыя беларусаў Нідэрландаў - MÁRA",
-    nl: "Een non-profit organisatie van Belarussen in Nederland - MÁRA",
-    ru: "Некоммерческая организация беларусов в Нидерландах - MÁRA",
+    be: "MARA - гэта некамерцыйная арганізацыя неабыякавых беларусаў Нідэрландаў, якія мараць аб цудоўнай будучыні для сваёй роднай краіны.",
+    nl: "MARA is een non-profit organisatie van zorgzame Belarussen in Nederland die dromen van een mooie toekomst voor hun vaderland.",
+    ru: "MARA - это некоммерческая организация небезразличных беларусов Нидерландов, которые мечтают о прекрасном будущем для своей родной страны.",
   },
   siteUrl: {
     be: "https://www.belarusians.nl",
