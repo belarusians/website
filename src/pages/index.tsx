@@ -16,7 +16,7 @@ interface MainPageProps extends SSRConfig, CommonPageProps {
   mainNews: NewsMetadata;
   secondaryNews: [NewsMetadata, NewsMetadata];
   otherNews: NewsMetadata[];
-  events?: EventMetadata[];
+  events: EventMetadata[];
 }
 
 export default function IndexPage(props: MainPageProps): JSX.Element {

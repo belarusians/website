@@ -17,6 +17,7 @@ export const thumbnail = style([
     },
   }),
   {
+    backgroundColor: vars.color.white,
     maxHeight: "18rem",
     padding: "1rem",
     textDecoration: "none",

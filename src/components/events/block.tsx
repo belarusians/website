@@ -12,7 +12,7 @@ function isEventPast(eventString: string): boolean {
   return new Date(eventString).getTime() < Date.now();
 }
 
-export function EventsBlock(props: EventsBlockProps & { className?: string }): JSX.Element {
+export function EventsBlock(props: EventsBlockProps): JSX.Element {
   function renderEventThumbnail(event: EventMetadata, i: number): JSX.Element {
     return isEventPast(event.eventDate) ? (
       <PastEventThumbnail locale={props.locale} event={event} key={i} />
