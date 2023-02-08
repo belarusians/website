@@ -19,10 +19,33 @@ const langToLocale = {
   ru: "ru_BY",
 };
 
-function renderCanonicalLink(path: string) {
+function renderCanonicalLink(path: string, language: Lang) {
+  const relativePath = path === "" || path.startsWith("/") ? path : `/${path}`;
+  const langPrefix = language === Lang.be ? "" : `/${language}`;
+
+  return <link rel="canonical" key="link-canonical" href={`https://www.belarusians.nl${langPrefix}${relativePath}`} />;
+}
+
+function renderAlternateLinks(path: string) {
   const relativePath = path === "" || path.startsWith("/") ? path : `/${path}`;
 
-  return <link rel="canonical" key="link-canonical" href={`https://www.belarusians.nl${relativePath}`} />;
+  return (
+    <>
+      <link rel="alternate" key="link-alternate-be" hrefLang="be" href={`https://www.belarusians.nl${relativePath}`} />
+      <link
+        rel="alternate"
+        key="link-alternate-nl"
+        hrefLang="nl"
+        href={`https://www.belarusians.nl/nl${relativePath}`}
+      />
+      <link
+        rel="alternate"
+        key="link-alternate-ru"
+        hrefLang="ru"
+        href={`https://www.belarusians.nl/ru${relativePath}`}
+      />
+    </>
+  );
 }
 
 export const Head = (props: Partial<HeadProps>): JSX.Element => {
@@ -38,7 +61,8 @@ export const Head = (props: Partial<HeadProps>): JSX.Element => {
     <NextHead>
       <title>{props.title ?? seo.title[currentLanguage]}</title>
 
-      {currentLanguage === Lang.be ? renderCanonicalLink(asPath) : null}
+      {renderCanonicalLink(asPath, currentLanguage)}
+      {renderAlternateLinks(asPath)}
 
       <meta
         name="keywords"
