@@ -1,10 +1,14 @@
 import { style } from "@vanilla-extract/css";
-import { card, roundedTop } from "../common.styles.css";
+import { shadowedElement, roundedTop } from "../common.styles.css";
 import { sprinkles } from "../sprinkles.css";
 
-export const article = style([card, {}]);
+export const article = style([shadowedElement]);
 
-export const articleImageContainer = style([
+export const ratio16x9 = style({
+  aspectRatio: "16/9",
+});
+
+export const withoutRatio = style([
   sprinkles({
     height: {
       sm: "9rem",
@@ -12,6 +16,9 @@ export const articleImageContainer = style([
       lg: "18rem",
     },
   }),
+]);
+
+export const articleImageContainer = style([
   roundedTop,
   {
     position: "relative",

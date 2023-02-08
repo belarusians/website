@@ -55,11 +55,6 @@ export const removeUnderline = style({
   textDecoration: "none",
 });
 
-/**
- * @deprecated Use shadowedElement instead
- */
-export const card = shadowedElement;
-
 export const button = style([
   shadowedElement,
   rounded,
