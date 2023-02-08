@@ -2,7 +2,7 @@
 title: "З Калядамі і Новым Годам!"
 date: "2022-12-30"
 backgroundUrl: "/news/new-year.jpeg"
-tags: [featured-main]
+tags: []
 ---
 
 # З Калядамі і Новым Годам!
