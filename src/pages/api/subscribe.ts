@@ -10,7 +10,7 @@ function sendSuccess(res: NextApiResponse, message: string) {
   return res.status(200).json({ message });
 }
 
-export default async function subscribe (req: NextApiRequest, res: NextApiResponse) {
+export default async function (req: NextApiRequest, res: NextApiResponse) {
   if (!req || !req.body || !req.body.email) {
     return sendError(res, 400, "Bad Request", "Request body is missing email");
   }
