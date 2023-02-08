@@ -19,7 +19,12 @@ export default function ArticlePage(props: NewsPageProps): JSX.Element {
 
   return (
     <>
-      <Head lang={props.lang} title={props.news.title} imagePath={props.news.backgroundUrl} />
+      <Head
+        lang={props.lang}
+        description={props.news.description || undefined}
+        title={props.news.title}
+        imagePath={props.news.backgroundUrl}
+      />
       <Section>
         <Article news={props.news} />
       </Section>

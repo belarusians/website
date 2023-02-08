@@ -14,6 +14,7 @@ export interface NewsMetadata {
   date: string;
   backgroundUrl: string;
   tags: NewsTags[];
+  description?: string;
   imageRatio?: string;
 }
 

@@ -57,6 +57,10 @@ export async function getNewsMetaBySlug(
     newsMeta.imageRatio = fileWithParsedFM.data.imageRatio;
   }
 
+  if (fileWithParsedFM.data.description) {
+    newsMeta.description = fileWithParsedFM.data.description;
+  }
+
   if (newsMeta.tags.includes(NewsTags.Event)) {
     return {
       ...newsMeta,
