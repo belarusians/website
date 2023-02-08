@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
 import { vars } from "./styles.css";
-import { card, rounded } from "./common.styles.css";
+import { shadowedElement, rounded } from "./common.styles.css";
 import { sprinkles } from "./sprinkles.css";
 import { fadeInElementOnScroll } from "../utils/animation.css";
 
@@ -61,7 +61,7 @@ export const who = style([
   },
 ]);
 export const whoImage = style([
-  card,
+  shadowedElement,
   rounded,
   image,
   fadeInElementOnScroll,
@@ -79,7 +79,7 @@ export const why = style([
 ]);
 export const whyImage = style([
   image,
-  card,
+  shadowedElement,
   rounded,
   fadeInElementOnScroll,
   {
@@ -97,7 +97,7 @@ export const what = style([
 export const whatImage = style([
   fadeInElementOnScroll,
   image,
-  card,
+  shadowedElement,
   rounded,
   {
     position: "relative",
@@ -114,7 +114,7 @@ export const forMe = style([
 export const forMeImage = style([
   fadeInElementOnScroll,
   image,
-  card,
+  shadowedElement,
   rounded,
   {
     position: "relative",
@@ -130,7 +130,7 @@ export const help = style([
 ]);
 export const helpImage = style([
   image,
-  card,
+  shadowedElement,
   rounded,
   fadeInElementOnScroll,
   {
