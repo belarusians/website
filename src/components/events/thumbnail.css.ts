@@ -1,5 +1,5 @@
 import { globalStyle, style } from "@vanilla-extract/css";
-import { animatedCard, card, toCenterAll } from "../common.styles.css";
+import { animatedCard, shadowedElement, toCenterAll } from "../common.styles.css";
 import { vars } from "../styles.css";
 import { sprinkles } from "../sprinkles.css";
 
@@ -27,7 +27,7 @@ export const futureThumbnail = style([toCenterAll, thumbnail, animatedCard]);
 
 export const pastThumbnail = style([
   thumbnail,
-  card,
+  shadowedElement,
   {
     cursor: "unset",
     filter: "brightness(0.55) blur(2px)",
