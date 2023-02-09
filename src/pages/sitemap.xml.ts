@@ -36,6 +36,7 @@ function generateSiteMap(newsSlugs: string[]) {
             </urlset>`;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 export default function SiteMap() {}
 
 export async function getServerSideProps({ res, locale }: GetServerSidePropsContext) {
