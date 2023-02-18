@@ -11,7 +11,7 @@ export function DesktopMenu(): JSX.Element {
 
   return (
     <div className={menu}>
-      <BeautifulButton className={joinUsButton} label={t("join-us")} link={"/join-us"} />
+      <BeautifulButton className={joinUsButton + " umami--click--join-button"} label={t("join-us")} link={"/join-us"} />
 
       <div className={menuList}>
         <Link className={menuItem} href={"/about-us"}>
