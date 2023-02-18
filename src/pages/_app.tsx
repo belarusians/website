@@ -29,7 +29,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         defer
         src="https://analytics.umami.is/script.js"
         data-website-id="d1f28365-f189-4d4c-bcea-17ee67c90f91"
-        data-domains="belarusians.nl"
+        data-domains="www.belarusians.nl"
       />
       <div className={className}>
         <Layout lang={lang}>
