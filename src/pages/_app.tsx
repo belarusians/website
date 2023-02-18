@@ -1,5 +1,6 @@
 import { Roboto } from "@next/font/google";
 import { AppProps } from "next/app";
+import Script from "next/script";
 import { appWithTranslation } from "next-i18next";
 import { Analytics } from "@vercel/analytics/react";
 import { themeClass } from "../components/styles.css";
@@ -22,12 +23,21 @@ function MyApp({ Component, pageProps }: AppProps) {
   const className = themeClass + " " + roboto.className;
   const { lang } = pageProps;
   return (
-    <div className={className}>
-      <Layout lang={lang}>
-        <Component {...pageProps} />
-      </Layout>
-      <Analytics />
-    </div>
+    <>
+      <Script
+        async
+        defer
+        src="https://analytics.umami.is/script.js"
+        data-website-id="d1f28365-f189-4d4c-bcea-17ee67c90f91"
+        data-domains="belarusians.nl"
+      />
+      <div className={className}>
+        <Layout lang={lang}>
+          <Component {...pageProps} />
+        </Layout>
+        <Analytics />
+      </div>
+    </>
   );
 }
 
