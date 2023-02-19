@@ -1,7 +1,7 @@
 import { style, keyframes } from "@vanilla-extract/css";
 import { sprinkles } from "../sprinkles.css";
 import { vars } from "../styles.css";
-import { buttonMD, shadowedElement, largeText, normalText, toCenterAll } from "../common.styles.css";
+import { shadowedElement, largeText, normalText, toCenterAll } from "../common.styles.css";
 import { row } from "../grid.css";
 
 export const subscriptionForm = style([
@@ -111,50 +111,6 @@ export const subscribeInput = style([
   },
 ]);
 
-// TODO: spinner is written ugly, fix it
-export const subscribeButton = style([
-  buttonMD,
-  {
-    marginRight: "auto",
-    selectors: {
-      "&.loading": {
-        paddingLeft: "2.5rem",
-      },
-    },
-  },
-]);
-
-const rotate = keyframes({
-  "0%": {
-    transform: "rotate(0deg)",
-  },
-  "100%": {
-    transform: "rotate(360deg)",
-  },
-});
-
-export const spinner = style({
-  position: "absolute",
-  marginLeft: "-1.6rem",
-  marginRight: "1rem",
-  marginTop: "0.15rem",
-  selectors: {
-    "&.hide": {
-      opacity: "0%",
-    },
-    "&.show": {
-      opacity: "100%",
-    },
-    "&:after": {
-      content: " ",
-      display: "block",
-      width: "0.54rem",
-      height: "0.54rem",
-      borderRadius: "50%",
-      border: `3px solid ${vars.color.red}`,
-      borderColor: `${vars.color.red} transparent ${vars.color.red} transparent`,
-      animation: `${rotate} 1.2s linear infinite`,
-    },
-  },
-  transition: "all 0.15s ease-in-out",
+export const subscribeButton = style({
+  marginRight: "auto",
 });

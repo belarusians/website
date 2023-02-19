@@ -14,7 +14,7 @@ import {
   openedLine2,
 } from "./mobile-menu.css";
 import { LanguageSelector } from "../../language-selector/language-selector";
-import { BeautifulButton } from "../../beautiful-button/beatiful-button";
+import { BeautifulButton } from "../../beautiful-button/beautiful-button";
 
 export function MobileMenu(): JSX.Element {
   const { t } = useTranslation();
@@ -41,7 +41,7 @@ export function MobileMenu(): JSX.Element {
 
   return (
     <div className={menu}>
-      <BeautifulButton className={joinUsButton + " umami--click--join-button"} label={t("join-us")} link={"/join-us"} />
+      <BeautifulButton className={joinUsButton} trackingName="join-button" label={t("join-us")} link={"/join-us"} />
 
       <div className={hamburgerLines} onClick={toggleMenu}>
         <span ref={firstLine} className={line1}></span>

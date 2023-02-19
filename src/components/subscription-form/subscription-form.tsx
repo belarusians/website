@@ -1,11 +1,12 @@
 import { useTranslation } from "next-i18next";
 import * as React from "react";
-import { subscriptionForm, subscribeButton, subscribeInput, spinner, success, subTitle } from "./subscription-form.css";
+import { subscriptionForm, subscribeButton, subscribeInput, success, subTitle } from "./subscription-form.css";
 import { ClientOnly } from "../client-only/client-only";
 import { isEmailValid } from "../../lib/email";
 import { centerSectionTitle } from "../common.styles.css";
 import { col } from "../grid.css";
 import { fadeInElementOnScroll } from "../../utils/animation.css";
+import { Button } from "../button/button";
 
 export function SubscriptionForm(): JSX.Element {
   const emailInputId = "email-input";
@@ -77,14 +78,12 @@ export function SubscriptionForm(): JSX.Element {
             />
           </ClientOnly>
 
-          <button
-            disabled={isLoading || isSuccess}
-            className={`${subscribeButton} ${isLoading ? "loading" : ""}`}
-            onClick={submit}
-          >
-            <span className={spinner + " " + (isLoading ? "show" : "hide")}></span>
-            {t("subscribe-button")}
-          </button>
+          <Button
+            className={subscribeButton}
+            click={submit}
+            isLoading={isLoading}
+            label={t("subscribe-button")}
+          ></Button>
         </div>
       </div>
     </>
