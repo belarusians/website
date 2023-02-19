@@ -51,6 +51,9 @@ export const icon = style([
       lg: "2rem",
     },
   }),
+  {
+    color: vars.color.red,
+  },
 ]);
 
 export const disclaimer = style([

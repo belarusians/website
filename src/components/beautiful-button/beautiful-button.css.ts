@@ -1,5 +1,4 @@
 import { keyframes, style } from "@vanilla-extract/css";
-import { responsiveButton } from "../common.styles.css";
 import { vars } from "../styles.css";
 
 const wobble = keyframes({
@@ -39,13 +38,9 @@ const color = {
   fourth: "#0cb697",
 };
 
-export const beautifulButton = style([
-  responsiveButton,
-  {
-    color: vars.color.white,
-    textDecoration: "none",
-    backgroundImage: `linear-gradient(60deg, ${color.first}, ${color.second}, ${color.third}, ${color.fourth}, ${color.first}, ${color.second}, ${color.third})`,
-    animation: `${backgroundRotation} 4s infinite linear, ${wobble} 5s ease-in-out alternate infinite`,
-    backgroundSize: "350% 100%",
-  },
-]);
+export const beautifulButton = style({
+  color: vars.color.white,
+  backgroundImage: `linear-gradient(60deg, ${color.first}, ${color.second}, ${color.third}, ${color.fourth}, ${color.first}, ${color.second}, ${color.third})`,
+  animation: `${backgroundRotation} 4s infinite linear, ${wobble} 5s ease-in-out alternate infinite`,
+  backgroundSize: "350% 100%",
+});

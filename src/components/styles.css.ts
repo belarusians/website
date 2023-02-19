@@ -34,5 +34,6 @@ globalStyle("button", {
 });
 
 globalStyle("a", {
-  color: vars.color.red,
+  color: "inherit",
+  textDecoration: "inherit",
 });
