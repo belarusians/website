@@ -1,4 +1,5 @@
 ---
+type: "news"
 title: "З Калядамі і Новым Годам!"
 date: "2022-12-30"
 backgroundUrl: "/news/new-year.jpeg"

@@ -8,6 +8,20 @@ const withPWA = require("next-pwa")({
 });
 
 const nextConfig = {
+  async redirects() {
+    return [
+      {
+        source: "/news/navi-band-5-11-2022",
+        destination: "/events/navi-band-5-11-2022",
+        permanent: true,
+      },
+      {
+        source: "/news/rsp-03-25",
+        destination: "/events/rsp-03-25",
+        permanent: true,
+      },
+    ];
+  },
   i18n,
   reactStrictMode: true,
   eslint: {

@@ -3,12 +3,12 @@ import { useTranslation } from "next-i18next";
 import { animatedCard, sectionTitle } from "../common.styles.css";
 import { row_lg, w_1 } from "../grid.css";
 import { fadeInElementOnScroll } from "../../utils/animation.css";
-import { NewsMetadata } from "../types";
+import { ArticleMeta } from "../types";
 import { NewsThumbnail } from "./thumbnail";
 import { newsItem } from "./block.css";
 
 interface NewsBlockProps {
-  news: NewsMetadata[];
+  news: ArticleMeta[];
 }
 
 export function NewsBlock(props: NewsBlockProps): JSX.Element {

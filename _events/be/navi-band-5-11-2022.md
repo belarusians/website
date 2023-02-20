@@ -1,10 +1,12 @@
 ---
+type: "event"
 title: "NAVIBAND у Амстэрдаме!"
 date: "2022-11-05"
 backgroundUrl: "/news/naviband.jpeg"
 eventDate: "2022-11-05T19:00:00.000Z"
 location: "Kerkplein 45, Abcoude"
-tags: [event]
+ticketsLink: "https://shop.ikbenaanwezig.nl/tickets/event/naviband"
+tags: []
 ---
 
 # NAVIBAND у Амстэрдаме!

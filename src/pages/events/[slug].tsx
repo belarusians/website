@@ -2,19 +2,19 @@ import { GetStaticPathsContext, GetStaticPathsResult, GetStaticPropsContext, Get
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import * as React from "react";
 
-import { getNewsSlugs } from "../../lib/fs";
-import { getNewsBySlug } from "../../lib/articles";
-import { CommonPageProps, Lang, News } from "../../components/types";
+import { getEventBySlug } from "../../lib/articles";
+import { getEventsSlugs } from "../../lib/fs";
+import { CommonPageProps, Lang, Event, News } from "../../components/types";
 import { Section } from "../../components/section/section";
 import { Head } from "../../components/head/head";
 import { NewsArticle } from "../../components/articles/news-article";
 
-interface NewsPageProps extends CommonPageProps {
-  news?: News;
+interface EventPageProps extends CommonPageProps {
+  event?: Event;
 }
 
-export default function ArticlePage(props: NewsPageProps): JSX.Element {
-  if (!props.news) {
+export default function EventPage(props: EventPageProps): JSX.Element {
+  if (!props.event) {
     return <h1>404</h1>;
   }
 
@@ -22,12 +22,12 @@ export default function ArticlePage(props: NewsPageProps): JSX.Element {
     <>
       <Head
         lang={props.lang}
-        description={props.news.description || undefined}
-        title={props.news.title}
-        imagePath={props.news.backgroundUrl}
+        description={props.event.description || undefined}
+        title={props.event.title}
+        imagePath={props.event.backgroundUrl}
       />
       <Section>
-        <NewsArticle news={props.news} />
+        <NewsArticle news={props.event as unknown as News} />
       </Section>
     </>
   );
@@ -36,19 +36,20 @@ export default function ArticlePage(props: NewsPageProps): JSX.Element {
 export async function getStaticProps({
   params,
   locale,
-}: GetStaticPropsContext): Promise<GetStaticPropsResult<NewsPageProps>> {
+}: GetStaticPropsContext): Promise<GetStaticPropsResult<EventPageProps>> {
   if (!params) {
     return {
       props: {},
     };
   }
-  const newsPost = await getNewsBySlug(params.slug as string, locale as Lang);
+  const lang = (locale as Lang) || Lang.be;
+  const event = await getEventBySlug(params.slug as string, lang);
 
   return {
     props: {
-      lang: locale as Lang,
-      news: newsPost,
-      ...(await serverSideTranslations(locale || "be", ["common"])),
+      event,
+      lang,
+      ...(await serverSideTranslations(lang, ["common"])),
     },
   };
 }
@@ -56,7 +57,7 @@ export async function getStaticProps({
 type StaticPaths = { params: { slug: string }; locale?: string }[];
 
 export function getStaticPaths({ locales }: GetStaticPathsContext): GetStaticPathsResult<{ slug: string }> {
-  const paths: StaticPaths = getNewsSlugs().reduce<StaticPaths>((acc, file) => {
+  const paths: StaticPaths = getEventsSlugs().reduce<StaticPaths>((acc, file) => {
     acc.push(
       ...(locales || []).map((locale) => ({
         params: { slug: file },

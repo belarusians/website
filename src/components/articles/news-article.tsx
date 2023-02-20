@@ -7,7 +7,7 @@ interface ArticleProps {
   news: News;
 }
 
-export function Article(props: ArticleProps): JSX.Element {
+export function NewsArticle(props: ArticleProps): JSX.Element {
   return (
     <div className={article}>
       <div className={articleImageContainer + ` ${props.news.imageRatio ? ratio16x9 : withoutRatio}`}>
