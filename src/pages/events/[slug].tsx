@@ -4,10 +4,10 @@ import * as React from "react";
 
 import { getEventBySlug } from "../../lib/articles";
 import { getEventsSlugs } from "../../lib/fs";
-import { CommonPageProps, Lang, Event, News } from "../../components/types";
+import { CommonPageProps, Lang, Event } from "../../components/types";
 import { Section } from "../../components/section/section";
 import { Head } from "../../components/head/head";
-import { NewsArticle } from "../../components/articles/news-article";
+import { EventArticle } from "../../components/articles/event-article";
 
 interface EventPageProps extends CommonPageProps {
   event?: Event;
@@ -27,7 +27,7 @@ export default function EventPage(props: EventPageProps): JSX.Element {
         imagePath={props.event.backgroundUrl}
       />
       <Section>
-        <NewsArticle news={props.event as unknown as News} />
+        <EventArticle event={props.event} />
       </Section>
     </>
   );
@@ -49,7 +49,7 @@ export async function getStaticProps({
     props: {
       event,
       lang,
-      ...(await serverSideTranslations(lang, ["common"])),
+      ...(await serverSideTranslations(lang, ["common", "events"])),
     },
   };
 }
