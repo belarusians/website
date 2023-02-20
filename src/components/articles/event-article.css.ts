@@ -63,11 +63,22 @@ const color = {
   fourth: "#af0000",
 };
 
-export const ticketButton = style({
-  width: "100%",
-  marginTop: "1rem",
-  color: vars.color.white,
-  backgroundImage: `linear-gradient(60deg, ${color.first}, ${color.second}, ${color.third}, ${color.fourth}, ${color.first}, ${color.second}, ${color.third})`,
-  animation: `${backgroundRotation} 4s infinite linear`,
-  backgroundSize: "350% 100%",
-});
+export const ticketButton = style([
+  sprinkles({
+    marginTop: {
+      sm: "2rem",
+      md: "1rem",
+    },
+    fontSize: {
+      sm: "1rem",
+      md: "1.2rem",
+    },
+  }),
+  {
+    width: "100%",
+    color: vars.color.white,
+    backgroundImage: `linear-gradient(60deg, ${color.first}, ${color.second}, ${color.third}, ${color.fourth}, ${color.first}, ${color.second}, ${color.third})`,
+    animation: `${backgroundRotation} 4s infinite linear`,
+    backgroundSize: "350% 100%",
+  },
+]);
