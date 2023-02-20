@@ -22,6 +22,7 @@ export function EventArticle(props: ArticleProps): JSX.Element {
         <div className={eventButtons}>
           <Button
             link={props.event.ticketsLink}
+            target="_blank"
             label={t("buy-ticket")}
             trackingName={`buy-${props.event.slug}-ticket-button`}
             className={ticketButton}
