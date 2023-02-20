@@ -21,6 +21,4 @@ tags: []
 
 Месца: [Kerkplein 45, Abcoude](https://goo.gl/maps/XY1dMkYuyXv5ecGd7)
 
-Квіткі [тут](https://shop.ikbenaanwezig.nl/tickets/event/naviband)
-
 _Канцэрт адбудзецца пры падтрымцы культурнай ініцыятывы “Сядзіба”, а таксама Pianoschool Konstantinova [https://www.pianoschoolkonstantinova.nl/](https://www.pianoschoolkonstantinova.nl/)_

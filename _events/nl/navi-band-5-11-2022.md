@@ -21,6 +21,4 @@ Tijd: 20:00
 
 Locatie: [Kerkplein 45, Abcoude](https://goo.gl/maps/XY1dMkYuyXv5ecGd7)
 
-Tickets [hier](https://shop.ikbenaanwezig.nl/tickets/event/naviband)
-
 _Het concert wordt gegeven met steun van het culturele initiatief “Syadziba”, evenals Pianoschool Konstantinova [https://www.pianoschoolkonstantinova.nl/](https://www.pianoschoolkonstantinova.nl/)_
