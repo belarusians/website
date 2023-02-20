@@ -29,11 +29,11 @@ globalStyle("html", {
   overflowY: "scroll",
 });
 
-globalStyle("button", {
+globalStyle("button > a", {
   color: "inherit",
+  textDecoration: "inherit",
 });
 
 globalStyle("a", {
-  color: "inherit",
-  textDecoration: "inherit",
+  color: vars.color.red,
 });
