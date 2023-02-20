@@ -57,7 +57,4 @@ export const articleContent = style([
       lg: "extraLarge",
     },
   }),
-  {
-    lineHeight: "1.5rem",
-  },
 ]);

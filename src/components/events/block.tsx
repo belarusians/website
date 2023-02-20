@@ -1,10 +1,10 @@
 import { row } from "../grid.css";
-import { EventMetadata } from "../types";
+import { EventMeta } from "../types";
 import { PastEventThumbnail, FutureEventThumbnail } from "./thumbnail";
 import { fadeInElementOnScroll } from "../../utils/animation.css";
 
 export interface EventsBlockProps {
-  events: EventMetadata[];
+  events: EventMeta[];
   locale: string;
 }
 
@@ -13,7 +13,7 @@ function isEventPast(eventString: string): boolean {
 }
 
 export function EventsBlock(props: EventsBlockProps): JSX.Element {
-  function renderEventThumbnail(event: EventMetadata, i: number): JSX.Element {
+  function renderEventThumbnail(event: EventMeta, i: number): JSX.Element {
     return isEventPast(event.eventDate) ? (
       <PastEventThumbnail locale={props.locale} event={event} key={i} />
     ) : (

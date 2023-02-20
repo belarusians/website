@@ -1,4 +1,5 @@
 ---
+type: "news"
 title: "Сустракайце - MARA!"
 date: "2022-11-05"
 backgroundUrl: "/news/mara.jpg"
