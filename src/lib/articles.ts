@@ -64,6 +64,10 @@ export async function getNewsBySlug(slug: string, locale?: Lang): Promise<News> 
     content: await markdownToHTML(fileWithParsedFM.content),
   };
 
+  if (fileWithParsedFM.data.description) {
+    news.description = fileWithParsedFM.data.description;
+  }
+
   return news;
 }
 
@@ -79,6 +83,10 @@ export async function getEventBySlug(slug: string, locale?: Lang): Promise<Event
     ticketsLink: fileWithParsedFM.data.ticketsLink,
     content: await markdownToHTML(fileWithParsedFM.content),
   };
+
+  if (fileWithParsedFM.data.description) {
+    event.description = fileWithParsedFM.data.description;
+  }
 
   return event;
 }
