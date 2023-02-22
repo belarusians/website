@@ -15,7 +15,7 @@ export function Footer(props: { className?: string }): JSX.Element {
       <a className={link} rel="noreferrer" target={"_blank"} href="https://twitter.com/BelarusinNL">
         <FontAwesomeIcon icon={faTwitter} className={icon} />
       </a>
-      <a className={link} rel="noreferrer" target={"_blank"} href="https://github.com/belarusians/website">
+      <a className={link} rel="noreferrer" target={"_blank"} href="https://github.com/belarusians">
         <FontAwesomeIcon icon={faGithub} className={icon} />
       </a>
       <p className={disclaimer}>Belarusians NL 2023</p>
