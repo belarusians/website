@@ -37,9 +37,6 @@ export const link = style([
       md: "1rem",
       lg: "1.5rem",
     },
-    color: {
-      sm: vars.color.white,
-    },
   }),
 ]);
 
@@ -50,10 +47,10 @@ export const icon = style([
       md: "1.5rem",
       lg: "2rem",
     },
+    color: {
+      sm: vars.color.white,
+    },
   }),
-  {
-    color: vars.color.red,
-  },
 ]);
 
 export const disclaimer = style([
