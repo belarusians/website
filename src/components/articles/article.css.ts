@@ -24,7 +24,7 @@ export const articleImageContainer = style([
     position: "relative",
     selectors: {
       "&:before": {
-        zIndex: 100,
+        zIndex: 1,
         content: "",
         backgroundImage: "linear-gradient(to top, rgba(255,255,255,255), rgba(255,255,255,0))",
         position: "absolute",

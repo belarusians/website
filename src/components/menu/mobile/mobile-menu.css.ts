@@ -8,7 +8,7 @@ export const hamburgerLines = style([
     cursor: "pointer",
     top: "17px",
     left: "20px",
-    zIndex: "100",
+    zIndex: 100,
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
