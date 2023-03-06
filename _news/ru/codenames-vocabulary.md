@@ -10,7 +10,7 @@ tags: [featured]
 
 # Словарь для Codenames
 
-Друзья, рады поделиться с вами пакетом слова на беларуском языке для игры на сайте [codenames.game](https://codenames.game)
+Друзья, рады поделиться с вами пакетом слов на беларуском языке для игры на сайте [codenames.game](https://codenames.game)
 
 Скачать можно [с нашего Google Drive](https://drive.google.com/file/d/1Q8FDLU2xzFYesQI3zaF1-myxNofDD4XP/view?usp=sharing).
 
