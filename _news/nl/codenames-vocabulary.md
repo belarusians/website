@@ -12,7 +12,7 @@ tags: [featured]
 
 Vrienden, we zijn blij om een pakket Belarusiche woorden voor het spel op de site [codenames.game](https://codenames.game) met je te kunnen delen.
 
-U kunt downloaden [van onze Google Drive](https://drive.google.com/file/d/1Q8FDLU2xzFYesQI3zaF1-myxNofDD4XP/view?usp=sharing).
+U kunt het downloaden [van onze Google Drive](https://drive.google.com/file/d/1Q8FDLU2xzFYesQI3zaF1-myxNofDD4XP/view?usp=sharing).
 
 **Veel dank aan de maker van dit woordenboek.**
 
