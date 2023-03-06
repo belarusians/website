@@ -8,7 +8,6 @@ import { useRouter } from "next/router";
 export type HeadProps = {
   title?: string;
   description?: string;
-  siteUrl?: string;
   lang?: Lang;
   imagePath?: string;
 };
@@ -23,7 +22,7 @@ function renderCanonicalLink(path: string, language: Lang) {
   const relativePath = path === "" || path.startsWith("/") ? path : `/${path}`;
   const langPrefix = language === Lang.be ? "" : `/${language}`;
 
-  return <link rel="canonical" key="link-canonical" href={`https://www.belarusians.nl${langPrefix}${relativePath}`} />;
+  return <link rel="canonical" key="link-canonical" href={`${seo.siteUrl[Lang.be]}${langPrefix}${relativePath}`} />;
 }
 
 function renderAlternateLinks(path: string) {
@@ -31,19 +30,9 @@ function renderAlternateLinks(path: string) {
 
   return (
     <>
-      <link rel="alternate" key="link-alternate-be" hrefLang="be" href={`https://www.belarusians.nl${relativePath}`} />
-      <link
-        rel="alternate"
-        key="link-alternate-nl"
-        hrefLang="nl"
-        href={`https://www.belarusians.nl/nl${relativePath}`}
-      />
-      <link
-        rel="alternate"
-        key="link-alternate-ru"
-        hrefLang="ru"
-        href={`https://www.belarusians.nl/ru${relativePath}`}
-      />
+      <link rel="alternate" key="link-alternate-be" hrefLang="be" href={`${seo.siteUrl[Lang.be]}${relativePath}`} />
+      <link rel="alternate" key="link-alternate-nl" hrefLang="nl" href={`${seo.siteUrl[Lang.nl]}${relativePath}`} />
+      <link rel="alternate" key="link-alternate-ru" hrefLang="ru" href={`${seo.siteUrl[Lang.ru]}${relativePath}`} />
     </>
   );
 }
@@ -56,6 +45,8 @@ export const Head = (props: Partial<HeadProps>): JSX.Element => {
   }
 
   const { asPath } = useRouter();
+
+  const url = `${seo.siteUrl[currentLanguage]}${asPath}`;
 
   return (
     <NextHead>
@@ -73,7 +64,7 @@ export const Head = (props: Partial<HeadProps>): JSX.Element => {
       <meta name="description" content={props.description ?? seo.description[currentLanguage]} key="meta-description" />
       <meta name="image" content={imageUrl} key="meta-image" />
 
-      <meta property="og:url" content={props.siteUrl ?? seo.siteUrl[currentLanguage]} key="meta-og:url" />
+      <meta property="og:url" content={url} key="meta-og:url" />
       <meta property="og:title" key="meta-og:title" content={props.title ?? seo.title[currentLanguage]} />
       <meta property="og:type" content="website" />
       <meta
@@ -89,7 +80,7 @@ export const Head = (props: Partial<HeadProps>): JSX.Element => {
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta property="twitter:domain" key="meta-twitter:domain" content={seo.domain} />
-      <meta property="twitter:url" key="meta-twitter:url" content={props.siteUrl ?? seo.siteUrl[currentLanguage]} />
+      <meta property="twitter:url" key="meta-twitter:url" content={url} />
       <meta name="twitter:title" key="meta-twitter:title" content={props.title ?? seo.title[currentLanguage]} />
       <meta
         name="twitter:description"
