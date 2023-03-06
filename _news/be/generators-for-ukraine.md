@@ -3,7 +3,7 @@ type: "news"
 title: "Цяпло і святло для Украіны"
 date: "2022-12-16"
 backgroundUrl: "/news/ukraine-heart.jpeg"
-tags: [featured]
+tags: []
 ---
 
 # Цяпло і святло для Украіны

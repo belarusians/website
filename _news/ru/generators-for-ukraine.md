@@ -3,7 +3,7 @@ type: "news"
 title: "Тепло и свет для Украины"
 date: "2022-12-16"
 backgroundUrl: "/news/ukraine-heart.jpeg"
-tags: [featured]
+tags: []
 ---
 
 # Тепло и свет для Украины
