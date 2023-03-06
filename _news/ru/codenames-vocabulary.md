@@ -3,7 +3,7 @@ type: "news"
 title: "Словарь для Codenames"
 date: "2023-03-06"
 backgroundUrl: "/news/codenames.jpg"
-description: "Друзья, рады поделиться с вами пакетом слова на беларуском языке для игры Codenames"
+description: "Друзья, рады поделиться с вами пакетом слов на беларуском языке для игры Codenames"
 imageRatio: "16/9"
 tags: [featured]
 ---
