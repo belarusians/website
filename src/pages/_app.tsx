@@ -12,7 +12,6 @@ import { Layout } from "../components/layout";
  */
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "../../node_modules/@fortawesome/fontawesome-svg-core/styles.css";
-
 config.autoAddCss = false;
 
 const roboto = Roboto({
@@ -32,16 +31,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         data-website-id="d1f28365-f189-4d4c-bcea-17ee67c90f91"
         data-domains="www.belarusians.nl"
       />
-
-      <Script async src="https://www.googletagmanager.com/gtag/js?id=G-N72CH8S7K2" />
-      <Script id="google-tag">
-        {`window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-        
-          gtag('config', 'G-N72CH8S7K2');`}
-      </Script>
-
       <div className={className}>
         <Layout lang={lang}>
           <Component {...pageProps} />
