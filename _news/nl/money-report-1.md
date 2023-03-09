@@ -9,7 +9,7 @@ tags: []
 # Wij zijn samen
 
 Veel dank aan iedereen die heeft meegewerkt aan het inzamelen van financiële steun tijdens de aankoop van kaartjes voor het NAVIBAND-concert.
-**600 euro** is al overgemaakt naar Belarus 🔥
+**600 euro** is al overgemaakt naar een goede doelen fond 🔥
 Het doel van dit geldbedrag is nieuwjaarsgeschenken voor kinderen van wie de ouders nu achter tralies zitten in Belarus,
 evenals feest pakketten voor politieke gevangenen zelf.
 
