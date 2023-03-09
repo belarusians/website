@@ -18,15 +18,27 @@ const langToLocale = {
   ru: "ru_BY",
 };
 
+export function normalizePath(path: string): string {
+  if (path === "/") {
+    return "";
+  }
+
+  if (path === "" || path.startsWith("/")) {
+    return path;
+  }
+
+  return `/${path}`;
+}
+
 function renderCanonicalLink(path: string, language: Lang) {
-  const relativePath = path === "" || path.startsWith("/") ? path : `/${path}`;
+  const relativePath = normalizePath(path);
   const langPrefix = language === Lang.be ? "" : `/${language}`;
 
   return <link rel="canonical" key="link-canonical" href={`${seo.siteUrl[Lang.be]}${langPrefix}${relativePath}`} />;
 }
 
 function renderAlternateLinks(path: string) {
-  const relativePath = path === "" || path.startsWith("/") ? path : `/${path}`;
+  const relativePath = normalizePath(path);
 
   return (
     <>
