@@ -33,7 +33,7 @@ const prod: SEOConfiguration = {
     ru: "https://www.belarusians.nl/ru",
   },
   domain: "belarusians.nl",
-  imageUrl: "https://www.belarusians.nl/logo/og-image.jpg",
+  imageUrl: "https://www.belarusians.nl/logo/og-image.png",
 };
 
 const preview: SEOConfiguration = {
