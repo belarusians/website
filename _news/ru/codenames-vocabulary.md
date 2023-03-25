@@ -5,7 +5,7 @@ date: "2023-03-06"
 backgroundUrl: "/news/codenames.jpg"
 description: "Друзья, рады поделиться с вами пакетом слов на беларуском языке для игры Codenames"
 imageRatio: "16/9"
-tags: [featured]
+tags: []
 ---
 
 # Словарь для Codenames
