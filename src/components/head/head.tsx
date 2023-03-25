@@ -53,7 +53,7 @@ export const Head = (props: Partial<HeadProps>): JSX.Element => {
   const currentLanguage = props.lang ?? Lang.be;
   let imageUrl = seo.imageUrl;
   if (props.imagePath) {
-    imageUrl = `${seo.siteUrl[currentLanguage]}${props.imagePath}`;
+    imageUrl = `${props.imagePath}`;
   }
 
   const { asPath } = useRouter();
