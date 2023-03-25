@@ -4,7 +4,6 @@ title: "Vluchtelingenkinderen in de Efteling"
 date: "2023-03-23"
 backgroundUrl: "/news/efteling.jpg"
 description: "We starten een inzamelingsactie voor kaartjes voor het sprookjespark de Efteling voor Belarusische kinderen die momenteel in een vluchtelingenkamp verblijven."
-imageRatio: "16/9"
 tags: [featured-main]
 ---
 
