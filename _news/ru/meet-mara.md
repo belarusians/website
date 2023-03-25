@@ -3,7 +3,7 @@ type: "news"
 title: "Встречайте - MARA!"
 date: "2022-11-05"
 backgroundUrl: "/news/mara.jpg"
-tags: [featured]
+tags: []
 ---
 
 # Встречайте - MARA!
