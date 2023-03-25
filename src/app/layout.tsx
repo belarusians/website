@@ -34,6 +34,8 @@ function addJsonLd() {
   };
 }
 
+const DISABLE_GOOGLE_TAG = false;
+
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html>
@@ -75,8 +77,24 @@ export default function RootLayout({ children }: PropsWithChildren) {
         />
         <div className={roboto.className}>{children}</div>
         <SpeedInsights />
+        {DISABLE_GOOGLE_TAG ? <GoogleTag /> : null}
       </body>
     </html>
+  );
+}
+
+function GoogleTag(): JSX.Element {
+  return (
+    <>
+      <Script async src="https://www.googletagmanager.com/gtag/js?id=AW-11125506805" />
+      <Script id="google-tag">
+        {`window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'AW-11125506805');`}
+      </Script>
+    </>
   );
 }
 
