@@ -4,7 +4,6 @@ title: "Дзеткі бежанцаў у Efteling"
 date: "2023-03-23"
 backgroundUrl: "/news/efteling.jpg"
 description: "Мы начинаем сбор средств на билеты в парк сказок Эфтелинг для беларуских детей, которые сейчас живут в лагере для беженцев."
-imageRatio: "16/9"
 tags: [featured-main]
 ---
 
