@@ -19,6 +19,8 @@ const roboto = Roboto({
   subsets: ["latin", "cyrillic"],
 });
 
+const DISABLE_GOOGLE_TAG = true;
+
 function MyApp({ Component, pageProps }: AppProps) {
   const className = themeClass + " " + roboto.className;
   const { lang } = pageProps;
@@ -31,6 +33,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         data-website-id="d1f28365-f189-4d4c-bcea-17ee67c90f91"
         data-domains="www.belarusians.nl"
       />
+      {DISABLE_GOOGLE_TAG ? null : <GoogleTag />}
+
       <div className={className}>
         <Layout lang={lang}>
           <Component {...pageProps} />
@@ -42,3 +46,18 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 
 export default appWithTranslation(MyApp);
+
+function GoogleTag(): JSX.Element {
+  return (
+    <>
+      <Script async src="https://www.googletagmanager.com/gtag/js?id=G-GFM2BXYZ27" />
+      <Script id="google-tag">
+        {`window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+      
+        gtag('config', 'G-GFM2BXYZ27');`}
+      </Script>
+    </>
+  );
+}
