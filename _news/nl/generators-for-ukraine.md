@@ -9,7 +9,7 @@ tags: []
 # Warmte en licht voor Oekraïne
 
 Vrienden, wij en de Belarusiche diaspora van Nederland, vertegenwoordigd door de gemeenschap ["Belarusians of the Netherlands"](https://t.me/nlbychat) organiseren
-fondsenwerving voor de aanschaf van dieselgeneratoren voor inwoners van Oekraïne!
+geld inzamelen voor de aanschaf van dieselgeneratoren voor inwoners van Oekraïne!
 
 Heb je ooit zonder licht en warmte geleefd?
 Ons huidige doel is om geld in te zamelen voor 6 generatoren, de prijs van één is **500** euro (we waren van plan om

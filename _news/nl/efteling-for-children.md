@@ -7,7 +7,7 @@ description: "We starten een inzamelingsactie voor kaartjes voor het sprookjespa
 tags: [featured-main]
 ---
 
-# Fondsenwerving voor Efteling-kaartjes voor vluchtelingenkinderen
+# Geld inzamelen voor Efteling-kaartjes voor vluchtelingenkinderen
 
 Beste lezer! We starten een inzamelingsactie voor kaartjes voor het sprookjespark de Efteling voor Belarusische kinderen die momenteel in een vluchtelingenkamp verblijven.
 
