@@ -1,9 +1,7 @@
-const { chromium } = require("playwright");
-const { expect } = require("@playwright/test");
+const { expect, chromium, test } = require("@playwright/test");
 
-async function run() {
+test("screenshot comparison", async ({ page: curPage }) => {
   const browser = await chromium.launch();
-  const curPage = await browser.newPage();
   const newPage = await browser.newPage();
 
   const curUrl = "https://www.belarusians.nl";
@@ -23,6 +21,4 @@ async function run() {
   await newPage.close();
 
   await browser.close();
-}
-
-run();
+});
