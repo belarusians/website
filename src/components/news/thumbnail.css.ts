@@ -46,7 +46,8 @@ export const mediumTitle = style([
 export const image = style([
   rounded,
   {
-    objectFit: "cover",
+    maxWidth: "100%",
+    height: "auto",
     filter: "brightness(0.8)",
   },
 ]);
@@ -54,10 +55,12 @@ export const image = style([
 export const titleContainer = style([
   roundedBottom,
   {
+    position: "absolute",
     padding: "0.5rem",
     zIndex: 500,
-    backdropFilter: "blur(10px)",
-    marginTop: "auto",
+    // backdropFilter: "blur(10px)",
+    bottom: 0,
+    // marginTop: "auto",
   },
 ]);
 
@@ -65,8 +68,5 @@ export const thumbnail = style([
   removeUnderline,
   {
     position: "relative",
-    flexDirection: "column",
-    display: "flex",
-    flex: "1",
   },
 ]);

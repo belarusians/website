@@ -3,6 +3,8 @@ type: "news"
 title: "Kupala 2022: hoe het was"
 date: "2022-11-05"
 backgroundUrl: "/news/flowers.jpg"
+width: 1024
+height: 683
 tags: []
 ---
 

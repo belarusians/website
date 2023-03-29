@@ -3,6 +3,8 @@ type: "news"
 title: "Слоўнік для Codenames"
 date: "2023-03-06"
 backgroundUrl: "/news/codenames.jpg"
+width: 1280
+height: 720
 description: "Сябры, рады падзяліцца з вамі пакетам слоў на беларускай мове для гульні codenames"
 imageRatio: "16/9"
 tags: [featured]

@@ -22,9 +22,9 @@ interface MainPageProps extends SSRConfig, CommonPageProps {
 export default function IndexPage(props: MainPageProps): JSX.Element {
   return (
     <>
-      <Section>
-        <FeaturedNewsBlock main={props.mainNews} secondary={props.secondaryNews} />
-      </Section>
+      {/*<Section>*/}
+      {/*  <FeaturedNewsBlock main={props.mainNews} secondary={props.secondaryNews} />*/}
+      {/*</Section>*/}
 
       <Section className={beautifulGradient}>
         <AchievementsBlock />
@@ -63,8 +63,7 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
   // TODO: remove the slice(0, 4). So far we can't render more, because of bad UX
   const otherNews = articles
     .filter((meta) => !meta.tags.includes(NewsTags.Main) && !meta.tags.includes(NewsTags.Secondary))
-    .sort((meta1, meta2) => (new Date(meta1.date) < new Date(meta2.date) ? 1 : -1))
-    .slice(0, 4);
+    .sort((meta1, meta2) => (new Date(meta1.date) < new Date(meta2.date) ? 1 : -1));
 
   return {
     props: {

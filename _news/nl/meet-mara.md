@@ -3,6 +3,8 @@ type: "news"
 title: "Maak kennis met MARA!"
 date: "2022-11-05"
 backgroundUrl: "/news/mara.jpg"
+width: 1024
+height: 683
 tags: []
 ---
 

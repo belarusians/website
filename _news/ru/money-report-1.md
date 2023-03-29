@@ -3,6 +3,8 @@ type: "news"
 title: "Отчёт о потраченных средствах: декабрь 2022"
 date: "2022-12-15"
 backgroundUrl: "/news/christmas.jpg"
+width: 1024
+height: 683
 tags: []
 ---
 

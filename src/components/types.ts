@@ -15,6 +15,8 @@ export interface ArticleMeta {
   date: string;
   backgroundUrl: string;
   tags: NewsTags[];
+  width: number;
+  height: number;
   imageRatio?: string;
 }
 

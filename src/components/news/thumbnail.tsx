@@ -31,7 +31,13 @@ export const NewsThumbnail = forwardRef<HTMLDivElement, NewsThumbnailProps & { c
     return (
       <div ref={ref} className={props.className}>
         <Link className={thumbnail} href={getLinkToArticle(props.news)}>
-          <Image className={image} fill src={props.news.backgroundUrl} alt={props.news.title} />
+          <Image
+            className={image}
+            width={props.news.width}
+            height={props.news.height}
+            src={props.news.backgroundUrl}
+            alt={props.news.title}
+          />
           <div className={titleContainer}>
             <span className={mapSizeToClass[props.size || "medium"]}>{props.news.title}</span>
           </div>

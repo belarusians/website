@@ -16,7 +16,7 @@ const padding = {
 
 const margin = [0, "0.3rem", "0.5rem", "1rem", "1.5rem", "2rem", "4rem"];
 
-export const maxMobileWidth = 768;
+export const maxMobileWidth = 640;
 export const minDesktopWidth = 1024;
 
 const responsiveProperties = defineProperties({
@@ -50,6 +50,7 @@ const responsiveProperties = defineProperties({
     backgroundColor: [...Object.values(vars.color)],
     color: [...Object.values(vars.color)],
     opacity: [0, 1],
+    columnCount: [1, 2, 3, 4],
   },
   shorthands: {
     padding: ["paddingTop", "paddingBottom", "paddingLeft", "paddingRight"],

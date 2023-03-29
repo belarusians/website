@@ -12,6 +12,8 @@ function parseArticleMeta(file: GrayMatterFile<string>, slug: string): ArticleMe
     title: file.data.title,
     date: file.data.date,
     backgroundUrl: file.data.backgroundUrl,
+    width: file.data.width,
+    height: file.data.height,
     tags: file.data.tags,
   };
 

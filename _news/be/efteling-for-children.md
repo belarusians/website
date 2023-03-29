@@ -3,6 +3,8 @@ type: "news"
 title: "Дзеткі бежанцаў у Efteling"
 date: "2023-03-23"
 backgroundUrl: "/news/efteling.jpg"
+width: 6000
+height: 4000
 description: "Мы распачынаем збор сродкаў на квіткі у казачны парк Efteling для беларускіх дзетак, якія зараз жывуць у лагеры бежанцаў."
 tags: [featured]
 ---

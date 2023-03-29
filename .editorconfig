@@ -1,0 +1,4 @@
+root = true
+
+[*.tsx]
+max_line_length = 140

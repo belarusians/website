@@ -3,6 +3,8 @@ type: "news"
 title: "Woordenboek voor Codenames"
 date: "2023-03-06"
 backgroundUrl: "/news/codenames.jpg"
+width: 1280
+height: 720
 description: "Vrienden, we zijn blij om een pakket Belarusiche woorden voor het Codenames-spel met jullie te delen."
 imageRatio: "16/9"
 tags: [featured]
