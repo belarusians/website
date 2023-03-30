@@ -4,10 +4,14 @@ title: "Vluchtelingenkinderen in de Efteling"
 date: "2023-03-23"
 backgroundUrl: "/news/efteling.jpg"
 description: "We starten een inzamelingsactie voor kaartjes voor het sprookjespark de Efteling voor Belarusische kinderen die momenteel in een vluchtelingenkamp verblijven."
-tags: [featured-main]
+tags: [featured]
 ---
 
 # Geld inzamelen voor Efteling-kaartjes voor vluchtelingenkinderen
+
+**Bijgewerkt!** Dankzij jou hebben we de nodige fondsen verzameld (zelfs **860** euro). We publiceren een verslag zodra de kinderen het park bezoeken.
+
+---
 
 Beste lezer! We starten een inzamelingsactie voor kaartjes voor het sprookjespark de Efteling voor Belarusische kinderen die momenteel in een vluchtelingenkamp verblijven.
 
