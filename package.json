@@ -20,7 +20,7 @@
     "@fortawesome/react-fontawesome": "~0.2.0",
     "@next/font": "~13.1.2",
     "@vercel/analytics": "~0.1.8",
-    "aws-sdk": "~2.1209.0",
+    "aws-sdk": "~2.1354.0",
     "i18next": "~22.4.9",
     "next": "~13.1.2",
     "next-i18next": "~13.0.3",
