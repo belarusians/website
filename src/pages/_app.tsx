@@ -1,8 +1,7 @@
-import { Roboto } from "@next/font/google";
+import { Roboto } from "next/font/google";
 import { AppProps } from "next/app";
 import Script from "next/script";
 import { appWithTranslation } from "next-i18next";
-import { Analytics } from "@vercel/analytics/react";
 import { themeClass } from "../components/styles.css";
 import { Layout } from "../components/layout";
 
@@ -39,7 +38,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Layout lang={lang}>
           <Component {...pageProps} />
         </Layout>
-        <Analytics />
       </div>
     </>
   );
