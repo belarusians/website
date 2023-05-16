@@ -23,7 +23,7 @@ export function FutureEventThumbnail(props: EventThumbnailProps & { className?: 
   }, []);
 
   return (
-    <Link className={futureThumbnail} href={`/news/${props.event.slug}`}>
+    <Link className={futureThumbnail} href={`/events/${props.event.slug}`}>
       <div className={vertical}>
         <p className={date}>{hydrated ? clientSideDate(eventDate, props.locale) : serverSideDate(eventDate)}</p>
         <h3 className={title}>{props.event.title}</h3>
