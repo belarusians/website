@@ -11,6 +11,7 @@ import { Section } from "../components/section/section";
 import { beautifulGradient } from "../components/common.styles.css";
 import { AchievementsBlock } from "../components/achievements/achievements";
 import { NewsBlock } from "../components/news/block";
+import { EventsBlock } from "../components/events/block";
 
 interface MainPageProps extends SSRConfig, CommonPageProps {
   mainNews: ArticleMeta;
@@ -24,6 +25,10 @@ export default function IndexPage(props: MainPageProps): JSX.Element {
     <>
       <Section>
         <FeaturedNewsBlock main={props.mainNews} secondary={props.secondaryNews} />
+      </Section>
+
+      <Section>
+        <EventsBlock events={props.events} locale={props.lang!} />
       </Section>
 
       <Section className={beautifulGradient}>
