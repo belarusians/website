@@ -1,17 +1,17 @@
 ---
 type: "event"
-title: "Купалле на Паўночным моры 2023: Дзень трэці"
+title: "Kupala op de Noordzee 2023: De derde dag"
 date: "2023-05-16"
 backgroundUrl: "/abstract/three-girls.jpg"
 eventDate: "2023-07-01T16:00:00.000Z"
 location: "The Millers Beachclub, Strandslag 7, Den Haag"
 ticketsLink: "https://shop.ikbenaanwezig.nl/tickets/event/kupalle-2023-early-birds"
 tags: []
-description: "Новая нагода сабрацца разам для беларусаў Нідэрландаў і адзначыць Дзень Волі! 25 сакавіка пройдзе канцэрт беларускага гурта РСП."
+description: "De derde dag van het festival van de Belarusische cultuur «Kupala aan de Noordzee 2023»"
 ---
 
-# Трэці дзень Фестываля беларускай культуры “Купалле на Паўночным моры 2023”
+# De derde dag van het festival van de Belarusische cultuur «Kupala aan de Noordzee 2023»
 
-- Традыцыйнае свята  Купалле на беразе Паўночнага мора. Вянкі. Варажба. Кірмаш, майстар клас па кераміцы і цікавосткі ад беларускіх майстроў і мастакоў. 
-   Песні, харагоды, культурная праграма для ўсёй сям’і :)
-- канцэрт гурта NAVIBAND на захадзе сонца.
+Op deze dag vinden plaats:
+- Traditionele feestdag «Kupala aan de Noordzee 2023». Kransen. Waarzeggerij. Beurs, masterclass keramiek en curiosa van Belarusische meesters en kunstenaars. Liederen, carnaval, cultureel programma voor het hele gezin.
+- [NAVIBAND](https://www.instagram.com/naviband/) concert bij zonsondergang.
