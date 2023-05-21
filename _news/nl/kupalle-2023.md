@@ -12,11 +12,11 @@ tags: [featured-main]
 ### Dag één 29.06
 - Opening van een tentoonstelling van hedendaagse Belarusische kunstenaars
 - Concert met klassieke muziek "Music for Belarus"
-- Wit-Russisch diner met nationale gerechten
+- Belarusisch diner met nationale gerechten
 
 ### Dag twee 30.06
 - Muzikale uitvoering op oude Belarusische volksmuziekinstrumenten
-- Wit-Russisch diner met nationale gerechten
+- Belarusisch diner met nationale gerechten
 
 ### [Dag drie 01.07](https://www.belarusians.nl/nl/events/kupalle-2023-3)
 - Traditioneel festival "Kupala op de Noordzee 2023". Kransen. Waarzeggerij. Beurs, masterclass keramiek en rariteiten van Belarusische ambachtslieden en kunstenaars. Liederen, dansen, cultureel programma voor het hele gezin :)
