@@ -18,8 +18,8 @@ tags: [featured-main]
 - Muzikale uitvoering op oude Belarusische volksmuziekinstrumenten
 - Belarusisch diner met nationale gerechten
 
-### [Dag drie 01.07](https://www.belarusians.nl/nl/events/kupalle-2023-3)
-- Traditioneel festival "Kupala op de Noordzee 2023". Kransen. Waarzeggerij. Beurs, masterclass keramiek en rariteiten van Belarusische ambachtslieden en kunstenaars. Liederen, dansen, cultureel programma voor het hele gezin :)
+### Dag drie 01.07 [(koop tickets)](https://www.belarusians.nl/nl/events/kupalle-2023-3)
+- Traditioneel festival "Kupala op de Noordzee 2023". Kransen. Waarzeggerij. Beurs, masterclass keramiek en rariteiten van Belarusische ambachtslieden en kunstenaars. Zingen, dansen, cultureel programma voor het hele gezin :)
 - Concert [NAVIBAND](https://www.instagram.com/naviband/) bij zonsondergang
 
 Locatie: Den Haag. Nederland.

@@ -13,5 +13,5 @@ description: "De derde dag van het festival van de Belarusische cultuur «Kupala
 # De derde dag van het festival van de Belarusische cultuur «Kupala aan de Noordzee 2023»
 
 Op deze dag vinden plaats:
-- Traditionele feestdag «Kupala aan de Noordzee 2023». Kransen. Waarzeggerij. Beurs, masterclass keramiek en curiosa van Belarusische meesters en kunstenaars. Liederen, carnaval, cultureel programma voor het hele gezin.
+- Traditionele feestdag «Kupala aan de Noordzee 2023». Kransen. Waarzeggerij. Beurs, masterclass keramiek en curiosa van Belarusische meesters en kunstenaars. Zingen, carnaval, cultureel programma voor het hele gezin.
 - [NAVIBAND](https://www.instagram.com/naviband/) concert bij zonsondergang.
