@@ -2,7 +2,7 @@
 type: "news"
 title: "Купалье на Северном море 2023"
 date: "2023-05-16"
-backgroundUrl: "/abstract/hand.jpg"
+backgroundUrl: "/abstract/three-girls.jpg"
 description: "Фестиваль беларуской культуры «Купалье на Северном море 2023»"
 tags: [featured-main]
 ---
