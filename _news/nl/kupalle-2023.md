@@ -28,4 +28,4 @@ We verwelkomen Belarusen en iedereen die geïnteresseerd is in onze tradities en
 
 Alle details over ticketprijzen en het festivalprogramma zullen binnen enkele dagen beschikbaar zijn. Volg onze publicaties.
 
-Tot ziens in Kupala!☀️🌾🌸🔥 🤍❤️🤍
+Tot ziens op Kupala!☀️🌾🌸🔥 🤍❤️🤍
