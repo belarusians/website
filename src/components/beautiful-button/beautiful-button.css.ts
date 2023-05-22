@@ -41,6 +41,6 @@ const color = {
 export const beautifulButton = style({
   color: vars.color.white,
   backgroundImage: `linear-gradient(60deg, ${color.first}, ${color.second}, ${color.third}, ${color.fourth}, ${color.first}, ${color.second}, ${color.third})`,
-  animation: `${backgroundRotation} 4s infinite linear, ${wobble} 5s ease-in-out alternate infinite`,
+  animation: `${backgroundRotation} 5s infinite linear, ${wobble} 6s ease-in-out alternate infinite`,
   backgroundSize: "350% 100%",
 });

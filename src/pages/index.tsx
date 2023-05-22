@@ -11,6 +11,7 @@ import { Section } from "../components/section/section";
 import { beautifulGradient } from "../components/common.styles.css";
 import { AchievementsBlock } from "../components/achievements/achievements";
 import { NewsBlock } from "../components/news/block";
+import { EventsBlock } from "../components/events/block";
 
 interface MainPageProps extends SSRConfig, CommonPageProps {
   mainNews: ArticleMeta;
@@ -24,6 +25,10 @@ export default function IndexPage(props: MainPageProps): JSX.Element {
     <>
       <Section>
         <FeaturedNewsBlock main={props.mainNews} secondary={props.secondaryNews} />
+      </Section>
+
+      <Section>
+        <EventsBlock events={props.events} locale={props.lang!} />
       </Section>
 
       <Section className={beautifulGradient}>
@@ -62,6 +67,7 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
 
   // TODO: remove the slice(0, 4). So far we can't render more, because of bad UX
   const otherNews = articles
+    .filter((meta) => meta.type === "news")
     .filter((meta) => !meta.tags.includes(NewsTags.Main) && !meta.tags.includes(NewsTags.Secondary))
     .sort((meta1, meta2) => (new Date(meta1.date) < new Date(meta2.date) ? 1 : -1))
     .slice(0, 4);
