@@ -2,7 +2,7 @@
 type: "news"
 title: "Kupala op de Noordzee 2023"
 date: "2023-05-16"
-backgroundUrl: "/abstract/three-girls.jpg"
+backgroundUrl: "/abstract/ribbons.jpg"
 description: "Festival van de Belarusische cultuur «Kupala aan de Noordzee 2023»"
 tags: [featured-main]
 ---
