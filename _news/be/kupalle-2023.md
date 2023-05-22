@@ -2,7 +2,7 @@
 type: "news"
 title: "Купалле на Паўночным моры 2023"
 date: "2023-05-16"
-backgroundUrl: "/abstract/ribbons.jpg"
+backgroundUrl: "/abstract/hand.jpg"
 description: "Фестываль беларускай культуры «Купалле на Паўночным моры 2023»"
 tags: [featured-main]
 ---

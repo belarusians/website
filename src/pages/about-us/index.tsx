@@ -61,7 +61,7 @@ export default function IndexPage(): JSX.Element {
           <p>{t("for-me-text")}</p>
         </div>
         <div className={forMeImage}>
-          <Image className={fit} src="/news/hand.jpg" fill alt="what is mara for me" />
+          <Image className={fit} src="/abstract/hand.jpg" fill alt="what is mara for me" />
         </div>
         <div className={help}>
           <h2 className={heading}>{t("help-heading")}</h2>

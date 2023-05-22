@@ -2,7 +2,7 @@
 type: "event"
 title: "Купалье на Северном море 2023: третий день"
 date: "2023-05-16"
-backgroundUrl: "/abstract/ribbons.jpg"
+backgroundUrl: "/abstract/hand.jpg"
 eventDate: "2023-07-01T16:00:00.000Z"
 location: "The Millers Beachclub, Strandslag 7, Den Haag"
 ticketsLink: "https://shop.ikbenaanwezig.nl/tickets/event/kupalle-2023-early-birds"
