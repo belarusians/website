@@ -26,6 +26,4 @@ Locatie: Den Haag. Nederland.
 
 We verwelkomen Belarusen en iedereen die geïnteresseerd is in onze tradities en cultuur.
 
-Alle details over ticketprijzen en het festivalprogramma zullen binnen enkele dagen beschikbaar zijn. Volg onze publicaties.
-
 Tot ziens op Kupala!☀️🌾🌸🔥 🤍❤️🤍
