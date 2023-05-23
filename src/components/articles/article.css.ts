@@ -13,7 +13,6 @@ export const withoutRatio = style([
     height: {
       sm: "9rem",
       md: "18rem",
-      lg: "18rem",
     },
   }),
 ]);
@@ -48,12 +47,10 @@ export const articleContent = style([
   sprinkles({
     paddingX: {
       sm: "large",
-      md: "large",
       lg: "extraLarge",
     },
     paddingBottom: {
       sm: "large",
-      md: "large",
       lg: "extraLarge",
     },
   }),

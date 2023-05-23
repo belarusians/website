@@ -8,12 +8,10 @@ export const thumbnail = style([
     width: {
       sm: "9rem",
       md: "14rem",
-      lg: "14rem",
     },
     fontSize: {
       sm: "0.8rem",
       md: "1rem",
-      lg: "1rem",
     },
   }),
   {

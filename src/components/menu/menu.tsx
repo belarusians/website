@@ -3,7 +3,7 @@ import * as React from "react";
 import { DesktopMenu } from "./desktop/desktopMenu";
 import { useEffect, useState } from "react";
 import { MobileMenu } from "./mobile/mobileMenu";
-import { maxMobileWidth } from "../sprinkles.css";
+import { md } from "../sprinkles.css";
 import { ClientOnly } from "../client-only/client-only";
 
 export function Menu(props: { className?: string }): JSX.Element {
@@ -18,7 +18,7 @@ export function Menu(props: { className?: string }): JSX.Element {
 
   return (
     <ClientOnly>
-      <div className={props.className}>{width < maxMobileWidth ? <MobileMenu /> : <DesktopMenu />}</div>
+      <div className={props.className}>{width < md ? <MobileMenu /> : <DesktopMenu />}</div>
     </ClientOnly>
   );
 }

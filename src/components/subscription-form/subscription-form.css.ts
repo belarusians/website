@@ -20,7 +20,6 @@ export const subTitle = style([
   sprinkles({
     maxWidth: {
       sm: "100%",
-      md: "100%",
       lg: "28rem",
     },
   }),
@@ -43,7 +42,6 @@ const subscribedPlaceholder = style([
     },
     flexGrow: {
       sm: 1,
-      md: 1,
       lg: 0,
     },
     flexBasis: {

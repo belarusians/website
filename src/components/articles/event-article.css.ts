@@ -7,16 +7,13 @@ export const eventContainer = style([
     flexDirection: {
       sm: "column",
       md: "row",
-      lg: "row",
     },
     paddingX: {
       sm: "large",
-      md: "large",
       lg: "extraLarge",
     },
     paddingBottom: {
       sm: "large",
-      md: "large",
       lg: "extraLarge",
     },
   }),

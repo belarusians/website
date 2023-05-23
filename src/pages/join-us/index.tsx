@@ -22,7 +22,7 @@ export default function IndexPage(props: CommonPageProps): JSX.Element {
   }, []);
 
   // TODO: do something with those magical numbers. Iframe should be well positioned automatically! Without this magic
-  const iframeHeight = width > 640 ? 1690 : 2280;
+  const iframeHeight = width > 768 ? 1696 : 2280;
 
   return (
     <>

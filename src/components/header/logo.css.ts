@@ -7,7 +7,6 @@ export const fillColor = style([
     fill: {
       sm: vars.color.white,
       md: vars.color.red,
-      lg: vars.color.red,
     },
   }),
 ]);
@@ -16,9 +15,8 @@ export const bottomText = style([
   sprinkles({
     display: {
       sm: "none",
+      md: "block",
     },
-  }),
-  {
     fill: vars.color.black,
-  },
+  }),
 ]);
