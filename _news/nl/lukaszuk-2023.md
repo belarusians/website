@@ -14,7 +14,7 @@ Geachte heer/mevrouw, wij nodigen u van harte uit voor een interview met de bero
 
 Wij zien u graag op zaterdag **3 juni om 18:30** aan de **Laan van Meerdervoort 269, Den Haag**.
 
-Toegang is gratis. Als je een gesigneerd boek wilt kopen, schrijf dan vooraf (vóór 1 juni) naar [tanja.delft@belarusians.nl](tanja.delft@belarusians.nl)
+Toegang is gratis. Als je een gesigneerd boek wilt kopen, schrijf dan vooraf (vóór 1 juni) naar [tanja.delft@belarusians.nl](mailto:tanja.delft@belarusians.nl)
 Het boek kost **€35**.
 Een set van 3 boeken in een Euroradio-tas **€ 110**.
 
