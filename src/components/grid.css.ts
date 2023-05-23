@@ -19,7 +19,6 @@ export const col_lg__row_md = style([
   sprinkles({
     flexDirection: {
       sm: "row",
-      md: "row",
       lg: "column",
     },
   }),
@@ -33,7 +32,6 @@ export const row_lg = style([
   sprinkles({
     flexDirection: {
       sm: "column",
-      md: "column",
       lg: "row",
     },
   }),
@@ -59,7 +57,6 @@ export const w_lg_2 = style([
   sprinkles({
     flexGrow: {
       sm: 1,
-      md: 1,
       lg: 2,
     },
     flexBasis: {
@@ -75,16 +72,11 @@ export const w_1 = style([
     display: "flex",
   },
   sprinkles({
-    flexGrow: {
-      sm: 1,
-      md: 1,
-      lg: 1,
-    },
+    flexGrow: 1,
     // TODO: I do not like these flex-basis. Makes sense to investigate css grid in this use-case
     flexBasis: {
       sm: "7rem",
       md: "9rem",
-      lg: "9rem",
     },
   }),
 ]);

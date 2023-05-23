@@ -39,7 +39,6 @@ export const pageControls = style([
     opacity: {
       sm: 1,
       md: 0,
-      lg: 0,
     },
   }),
   shadowedElement,

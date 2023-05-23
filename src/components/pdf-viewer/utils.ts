@@ -1,11 +1,11 @@
-import { maxMobileWidth, minDesktopWidth } from "../sprinkles.css";
+import { md, lg } from "../sprinkles.css";
 
 export function getFullWidth(windowWidth: number, maxSize?: number): number {
   let possibleSize = 0;
   console.log(windowWidth);
-  if (windowWidth <= maxMobileWidth) {
+  if (windowWidth <= md) {
     possibleSize = windowWidth - 45;
-  } else if (windowWidth < minDesktopWidth) {
+  } else if (windowWidth < lg) {
     possibleSize = windowWidth - 45;
   } else {
     possibleSize = windowWidth - 75;

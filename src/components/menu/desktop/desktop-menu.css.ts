@@ -7,7 +7,6 @@ export const languageSelector = style([
     marginLeft: {
       sm: "0.3rem",
       md: "1rem",
-      lg: "1rem",
     },
   }),
 ]);

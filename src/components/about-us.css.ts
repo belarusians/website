@@ -4,13 +4,14 @@ import { shadowedElement, rounded } from "./common.styles.css";
 import { sprinkles } from "./sprinkles.css";
 import { fadeInElementOnScroll } from "../utils/animation.css";
 
-export const heading = style([
+export const heading2 = style([
   {
     color: vars.color.red,
   },
   sprinkles({
     fontSize: {
       sm: "1.2rem",
+      md: "1.5rem",
     },
   }),
 ]);
@@ -19,7 +20,6 @@ export const aboutUs = style([
   sprinkles({
     display: {
       sm: "block",
-      md: "block",
       lg: "grid",
     },
     marginTop: {
@@ -47,7 +47,6 @@ export const image = style([
   sprinkles({
     display: {
       sm: "none",
-      md: "none",
       lg: "block",
     },
   }),
@@ -167,12 +166,10 @@ export const libereco = style([
     width: {
       sm: "9rem",
       md: "12rem",
-      lg: "12rem",
     },
     height: {
       sm: "3rem",
       md: "4rem",
-      lg: "4rem",
     },
   }),
   {
@@ -185,12 +182,10 @@ export const mfb = style([
     width: {
       sm: "3rem",
       md: "5rem",
-      lg: "5rem",
     },
     height: {
       sm: "3rem",
       md: "5rem",
-      lg: "5rem",
     },
   }),
   {

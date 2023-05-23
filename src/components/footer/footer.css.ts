@@ -11,10 +11,10 @@ export const footer = style([
     backgroundColor: {
       sm: vars.color.red,
       md: vars.color.white,
-      lg: vars.color.white,
     },
     color: {
       sm: vars.color.white,
+      md: vars.color.black,
     },
     paddingBottom: {
       sm: "0.5rem",
@@ -44,11 +44,11 @@ export const icon = style([
   sprinkles({
     fontSize: {
       sm: "1.5rem",
-      md: "1.5rem",
       lg: "2rem",
     },
     color: {
       sm: vars.color.white,
+      md: vars.color.red,
     },
   }),
 ]);

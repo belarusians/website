@@ -16,16 +16,16 @@ const padding = {
 
 const margin = [0, "0.3rem", "0.5rem", "1rem", "1.5rem", "2rem", "4rem"];
 
-export const maxMobileWidth = 768;
-export const minDesktopWidth = 1024;
+export const md = 768;
+export const lg = 1024;
 
 const responsiveProperties = defineProperties({
   conditions: {
-    sm: { "@media": `screen and (max-width: ${maxMobileWidth}px)` },
-    md: { "@media": `screen and (min-width: ${maxMobileWidth + 1}px)` },
-    lg: { "@media": `screen and (min-width: ${minDesktopWidth}px)` },
+    sm: {},
+    md: { "@media": `screen and (min-width: ${md}px)` },
+    lg: { "@media": `screen and (min-width: ${lg}px)` },
   },
-  defaultCondition: "lg",
+  defaultCondition: "sm",
   properties: {
     display: ["none", "flex", "grid", "block"],
     flexDirection: ["row", "column"],
@@ -45,7 +45,7 @@ const responsiveProperties = defineProperties({
     height: ["1rem", "2rem", "3rem", "4rem", "5rem", "9rem", "18rem"],
     width: ["1rem", "2rem", "3rem", "4rem", "5rem", "7rem", "9rem", "12rem", "14rem", "23rem"],
     fontSize: ["0.6rem", "0.8rem", "1rem", "1.2rem", "1.5rem", "2rem", "2.5rem", "3rem", "5rem"],
-    position: ["sticky"],
+    position: ["sticky", "static"],
     fill: [...Object.values(vars.color)],
     backgroundColor: [...Object.values(vars.color)],
     color: [...Object.values(vars.color)],

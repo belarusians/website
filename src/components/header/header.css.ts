@@ -12,19 +12,19 @@ export const header = style([
     },
     paddingBottom: {
       sm: "0.5rem",
-      md: "0.5rem",
       lg: "1rem",
     },
     position: {
       sm: "sticky",
+      md: "static",
     },
     backgroundColor: {
       sm: vars.color.red,
       md: vars.color.white,
     },
+    display: "flex",
   }),
   {
-    display: "flex",
     alignItems: "center",
     top: 0,
     zIndex: 100,

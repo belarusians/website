@@ -17,6 +17,7 @@ export const sectionHeading = style([
   sprinkles({
     fontSize: {
       sm: "1.2rem",
+      md: "2rem",
     },
   }),
 ]);
