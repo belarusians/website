@@ -17,7 +17,7 @@ export const darkBackground = style({
 export const container = style([
   sprinkles({
     paddingX: {
-      sm: "large",
+      sm: "medium",
       lg: "extraLarge",
     },
   }),
