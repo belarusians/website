@@ -23,7 +23,7 @@ export const container = style([
     },
   }),
   {
-    maxWidth: "75rem",
+    maxWidth: "65rem",
     marginLeft: "auto",
     marginRight: "auto",
   },
