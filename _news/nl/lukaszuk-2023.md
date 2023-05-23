@@ -4,7 +4,7 @@ title: "Ontmoeting met Zmitry Lukashuk in Den Haag"
 date: "2023-05-23"
 backgroundUrl: "/news/lukaszuk.webp"
 imageRatio: "16/9"
-description: "Op 3 juni vindt in Den Haag een ontmoeting plaats met de beroemde Belarusische journalist Zmitri Lukashuk. Tijdens de bijeenkomst zal het boek «Belarusian national idea in ballingschap en in oorlog» worden gepresenteerd"
+description: "De beroemde Belarusische journalist Zmiter Lukashuk komt op 3 juni naar Den Haag. Tijdens de bijeenkomst zal het boek «Belarusian national idea in ballingschap en in oorlog» worden gepresenteerd"
 tags: [featured]
 ---
 
