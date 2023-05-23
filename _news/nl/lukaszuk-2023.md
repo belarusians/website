@@ -1,6 +1,6 @@
 ---
 type: "news"
-title: "Ontmoeting met Zmitry Lukashuk in Den Haag"
+title: "Zmitry Lukashuk in Den Haag"
 date: "2023-05-23"
 backgroundUrl: "/news/lukaszuk.webp"
 imageRatio: "16/9"

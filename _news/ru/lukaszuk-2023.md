@@ -1,6 +1,6 @@
 ---
 type: "news"
-title: "Встреча со Змитром Лукашуком в Гааге"
+title: "Змитер Лукашук в Гааге"
 date: "2023-05-23"
 backgroundUrl: "/news/lukaszuk.webp"
 imageRatio: "16/9"
