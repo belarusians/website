@@ -27,6 +27,7 @@ const responsiveProperties = defineProperties({
   },
   defaultCondition: "sm",
   properties: {
+    gap: ["0.75rem", "1rem"],
     display: ["none", "flex", "grid", "block"],
     flexDirection: ["row", "column"],
     flexGrow: [0, 1, 2],

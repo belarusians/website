@@ -21,11 +21,12 @@ export const col_lg__row_md = style([
       sm: "row",
       lg: "column",
     },
-  }),
-  {
+    gap: {
+      sm: "0.75rem",
+      md: "1rem",
+    },
     display: "flex",
-    gap: "1rem",
-  },
+  }),
 ]);
 
 export const row_lg = style([
@@ -34,11 +35,14 @@ export const row_lg = style([
       sm: "column",
       lg: "row",
     },
+    gap: {
+      sm: "0.75rem",
+      md: "1rem",
+    },
+    display: "flex",
   }),
   {
     flexWrap: "wrap",
-    display: "flex",
-    gap: "1rem",
   },
 ]);
 
