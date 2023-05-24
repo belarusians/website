@@ -21,7 +21,7 @@ Net als voorheen nodigen we onze vluchtelingen uit op Kupala. En we zijn erg bli
 1 juli. We beginnen om 16:00 uur en gaan door tot 00:00 uur
 
 ### Plaats
-[De Millers Beachclub]
+[De Millers Beachclub
 Strandslag 7, 2566 DP, Den Haag](https://maps.app.goo.gl/Dach3XgMAyCrBrMRA?g_st=ic)
 
 ### Programma 🌿🌿🌿
@@ -45,7 +45,7 @@ Gelieve de krans samen met het ticket te betalen, niet "voor later" achterlaten.
 #### Wat is inbegrepen in de ticketprijs?
 > De ticketprijs is inclusief
 > * toegang tot het evenement
-> *concert NAVIBAND
+> * concert NAVIBAND
 > * 2 drankjes
 >
 > Workshops worden ter plekke apart contant of via tikkie betaald.
