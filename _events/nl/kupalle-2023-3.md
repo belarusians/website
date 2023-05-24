@@ -12,8 +12,8 @@ description: "Tickets, schema en alle basisinformatie over de derde dag van het 
 
 # Kupala op de Noordzee 2023 met Naviband
 
-Vrienden! Wij, de vzw “MARA - de eerste vereniging van Belarusen in Nederland”, nodigen u traditiegetrouw uit in Kupala aan de Noordzee!
-Dit is een van de mooiste vakanties in Belarus, laten we voor de derde keer samenkomen en onszelf en onze families het gevoel van ons moederland geven.
+Vrienden! Wij, de vzw “MARA - de eerste vereniging van Belarusen in Nederland”, nodigen u uit op Kupala aan de Noordzee!
+Dit is een van de mooiste feesten in Belarus, laten we voor de derde keer samenkomen en onszelf en onze families het gevoel van ons moederland geven.
 
 Net als voorheen nodigen we onze vluchtelingen uit op Kupala. En we zijn erg blij dat Mara de mogelijkheid heeft om de ov-kosten naartoe te betalen voor degenen die in de azielzoekerscentra wonen.
 
@@ -28,7 +28,7 @@ Strandslag 7, 2566 DP, Den Haag](https://maps.app.goo.gl/Dach3XgMAyCrBrMRA?g_st=
 - **16.00** Deuren gaan open
 - **17.00** Aanvang
 - **17:00 - 19:00** Workshop kransen weven, een beurs van Belarusische ambachtslieden die in Nederland wonen, workshops keramiek en een workshop kaarsen voor kinderen, waarzeggerij, Kupala-meditatie voor vrouwen op de kust.
-- **19:00** Opening van de vakantie, traditionele muziek en rondedansen.
+- **19:00** Opening van de feest, traditionele muziek en rondedansen.
 - **20:00 - 21:30** Concert door [NAVIBAND](https://www.instagram.com/naviband/) bij zonsondergang.
 - **21:30 - 00:00** DJ en disco
 
