@@ -9,12 +9,12 @@ tags: [featured-main]
 
 # Kupala op de Noordzee 2023
 
-### Dag één 29.06
+### Dag één 29.06 (binnenkort aangekondigd)
 - Opening van een tentoonstelling van hedendaagse Belarusische kunstenaars
 - Concert met klassieke muziek "Music for Belarus"
 - Belarusisch diner met nationale gerechten
 
-### Dag twee 30.06
+### Dag twee 30.06 (binnenkort aangekondigd)
 - Muzikale uitvoering op oude Belarusische volksmuziekinstrumenten
 - Belarusisch diner met nationale gerechten
 
