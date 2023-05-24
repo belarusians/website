@@ -47,11 +47,14 @@ export const row_lg = style([
 ]);
 
 export const row = style([
-  {
+  sprinkles({
     flexDirection: "row",
     display: "flex",
-    gap: "1rem",
-  },
+    gap: {
+      sm: "0.75rem",
+      md: "1rem",
+    },
+  }),
 ]);
 
 export const w_lg_2 = style([
