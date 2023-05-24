@@ -37,3 +37,14 @@ globalStyle("button > a", {
 globalStyle("a", {
   color: vars.color.red,
 });
+
+globalStyle("blockquote", {
+  marginLeft: "0",
+  paddingLeft: "1rem",
+  marginRight: "0",
+  borderLeft: `0.2rem solid ${vars.color.red}`,
+});
+
+globalStyle("blockquote > ul, blockquote > ol", {
+  paddingLeft: "1.5rem",
+});
