@@ -28,6 +28,7 @@ export const button = style([
       sm: "1.5rem",
       md: "1.2rem",
     },
+    fontWeight: 400,
   }),
   {
     color: vars.color.lightBlack,

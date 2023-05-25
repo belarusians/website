@@ -7,6 +7,7 @@ const grad2 = `radial-gradient(farthest-side at bottom left, ${vars.color.darkRe
 
 export const beautifulGradient = style({
   background: `${grad1}, ${grad2}`,
+  lineHeight: "normal",
 });
 
 export const darkBackground = style({

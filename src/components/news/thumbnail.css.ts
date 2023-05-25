@@ -68,5 +68,6 @@ export const thumbnail = style([
     flexDirection: "column",
     display: "flex",
     flex: "1",
+    lineHeight: "normal",
   },
 ]);

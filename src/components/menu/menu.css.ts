@@ -3,6 +3,7 @@ import { vars } from "../styles.css";
 
 export const menu = style([
   {
+    lineHeight: "normal",
     display: "flex",
     alignItems: "center",
     width: "100%",

@@ -48,6 +48,7 @@ const responsiveProperties = defineProperties({
     height: ["1rem", "2rem", "3rem", "4rem", "5rem", "9rem", "18rem"],
     width: ["1rem", "2rem", "3rem", "4rem", "5rem", "7rem", "9rem", "12rem", "14rem", "18rem", "22rem"],
     fontSize: ["0.6rem", "0.8rem", "1rem", "1.2rem", "1.5rem", "2rem", "2.5rem", "3rem", "5rem"],
+    fontWeight: [400, 500, 600, 700],
     position: ["sticky", "static"],
     fill: [...Object.values(vars.color)],
     backgroundColor: [...Object.values(vars.color)],
