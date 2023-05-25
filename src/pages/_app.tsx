@@ -4,6 +4,7 @@ import Script from "next/script";
 import { appWithTranslation } from "next-i18next";
 import { themeClass } from "../components/styles.css";
 import { Layout } from "../components/layout";
+import "../components/globals.css";
 
 /**
  * workaround for flickering FA icon
