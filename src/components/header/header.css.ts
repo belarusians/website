@@ -40,7 +40,8 @@ export const logo = style([
     width: {
       sm: "9rem",
       md: "14rem",
-      lg: "23rem",
+      lg: "18rem",
+      xl: "22rem",
     },
   }),
 ]);
