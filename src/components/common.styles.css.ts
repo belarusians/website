@@ -21,9 +21,12 @@ export const container = style([
       sm: "medium",
       lg: "extraLarge",
     },
+    maxWidth: {
+      sm: "66.5rem",
+      lg: "68.6rem",
+    },
   }),
   {
-    maxWidth: "65rem",
     marginLeft: "auto",
     marginRight: "auto",
   },

@@ -35,7 +35,7 @@ const responsiveProperties = defineProperties({
     flexGrow: [0, 1, 2],
     flexBasis: ["7rem", "9rem", "18rem", "30%"],
     flex: ["20%", "30%", "70%", "80%", "100%", 1, "none"],
-    maxWidth: ["28rem", "100%"],
+    maxWidth: ["28rem", "66.5rem", "68.6rem", "100%"],
     minWidth: ["18rem"],
     paddingTop: padding,
     paddingBottom: padding,
