@@ -15,23 +15,6 @@ export const darkBackground = style({
   color: vars.color.white,
 });
 
-export const container = style([
-  sprinkles({
-    paddingX: {
-      sm: "medium",
-      lg: "extraLarge",
-    },
-    maxWidth: {
-      sm: "66.5rem",
-      lg: "68.6rem",
-    },
-  }),
-  {
-    marginLeft: "auto",
-    marginRight: "auto",
-  },
-]);
-
 export const rounded = style({
   borderRadius: "5px",
 });

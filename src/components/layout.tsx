@@ -1,10 +1,9 @@
-import { useRef, useEffect, PropsWithChildren } from "react";
+import { useRef, useEffect, PropsWithChildren, JSX } from "react";
 
 import { Header } from "./header/header";
 import { Footer } from "./footer/footer";
 import { Head } from "./head/head";
 
-import { container } from "./common.styles.css";
 import { animateOnIntersection } from "../utils/intersection-animation";
 import { CommonPageProps } from "./types";
 
@@ -19,9 +18,9 @@ export function Layout(props: LayoutProps): JSX.Element {
   return (
     <div ref={root}>
       <Head lang={props.lang} />
-      <Header className={container} />
+      <Header className="lg:container px-3" />
       {props.children}
-      <Footer className={container} />
+      <Footer className="lg:container px-3" />
     </div>
   );
 }
