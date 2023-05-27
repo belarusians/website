@@ -20,16 +20,17 @@ export function Button(props: ButtonProps): JSX.Element {
   if (props.className) {
     className += ` ${props.className}`;
   }
-  if (props.trackingName) {
-    className += ` umami--click--${props.trackingName}`;
-  }
   if (props.isLoading) {
     className += ` ${loadingSpace}`;
+  }
+  const buttonAttributes: { "data-umami-event"?: string } = {};
+  if (props.trackingName) {
+    buttonAttributes["data-umami-event"] = props.trackingName;
   }
 
   if (props.link) {
     return (
-      <Link target={props.target} href={props.link}>
+      <Link target={props.target} href={props.link} {...buttonAttributes}>
         <button className={className} disabled={props.disabled} onClick={props.click}>
           {props.isLoading ? <Spinner /> : null}
           {props.label}
