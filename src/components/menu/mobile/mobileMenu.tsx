@@ -1,18 +1,7 @@
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
-import {
-  hamburgerLines,
-  joinUsButton,
-  line1,
-  line2,
-  menu,
-  menuItem,
-  menuList,
-  openedLine1,
-  openedLine2,
-} from "./mobile-menu.css";
 import { LanguageSelector } from "../../language-selector/language-selector";
 import { BeautifulButton } from "../../beautiful-button/beautiful-button";
 
@@ -20,32 +9,28 @@ export function MobileMenu(): JSX.Element {
   const { t } = useTranslation();
   const [menuOpened, toggleMenuState] = useState(false);
 
-  function toggleMenu(): void {
-    if (!firstLine.current || !secondLine.current) {
-      return;
-    }
-
-    toggleMenuState(!menuOpened);
-
-    if (menuOpened) {
-      firstLine.current.className = line1;
-      secondLine.current.className = line2;
-    } else {
-      firstLine.current.className = openedLine1;
-      secondLine.current.className = openedLine2;
-    }
-  }
-
-  const firstLine = useRef<HTMLSpanElement>(null);
-  const secondLine = useRef<HTMLSpanElement>(null);
-
   return (
-    <div className={menu}>
-      <BeautifulButton className={joinUsButton} trackingName="join-button" label={t("join-us")} link={"/join-us"} />
+    <div className="flex items-center">
+      <BeautifulButton className="mr-4" trackingName="join-button" label={t("join-us")} link={"/join-us"} />
 
-      <div className={hamburgerLines} onClick={toggleMenu}>
-        <span ref={firstLine} className={line1}></span>
-        <span ref={secondLine} className={line2}></span>
+      <div
+        className="flex flex-col justify-between top-[17px] left-[20px] h-[24px] w-[32px] cursor-pointer z-40"
+        onClick={() => toggleMenuState(!menuOpened)}
+      >
+        <span
+          className={
+            menuOpened
+              ? "transition-all duration-300 block bg-white h-[8px] w-full rounded-sm origin-[6px_6px] rotate-45"
+              : "transition-all duration-300 block bg-white h-[8px] w-full rounded-sm origin-[6px_6px]"
+          }
+        ></span>
+        <span
+          className={
+            menuOpened
+              ? "transition-all duration-300 block bg-white h-[8px] w-full rounded-sm origin-[5px_1px] -rotate-45"
+              : "transition-all duration-300 block bg-white h-[8px] w-full rounded-sm origin-[5px_1px]"
+          }
+        ></span>
       </div>
       {menuOpened ? <OpenedMenu /> : null}
     </div>
@@ -55,12 +40,12 @@ export function MobileMenu(): JSX.Element {
 function OpenedMenu(): JSX.Element {
   const { t } = useTranslation();
   return (
-    <div className={menuList}>
-      <LanguageSelector className={menuItem} />
-      <Link className={menuItem} href={"/about-us"}>
+    <div className="bg-red flex flex-col items-center w-full top-[60px] left-0 absolute z-40 divide-solid divide-white divide-y">
+      <LanguageSelector className="text-white py-4" />
+      <Link className="text-white py-4 text-xl" href={"/about-us"}>
         {t("about-us")}
       </Link>
-      <Link target="_blank" className={menuItem} href={"https://bunq.me/VerenigingMARA"}>
+      <Link target="_blank" className="text-white py-4 text-xl" href={"https://bunq.me/VerenigingMARA"}>
         {t("donate-us")}
       </Link>
     </div>

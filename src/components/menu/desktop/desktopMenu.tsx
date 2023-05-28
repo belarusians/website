@@ -1,28 +1,26 @@
 import { useTranslation } from "next-i18next";
 import Link from "next/link";
 
-import { menu, menuList } from "../menu.css";
 import { LanguageSelector } from "../../language-selector/language-selector";
-import { joinUsButton, languageSelector, menuItem } from "./desktop-menu.css";
 import { BeautifulButton } from "../../beautiful-button/beautiful-button";
 
 export function DesktopMenu(): JSX.Element {
   const { t } = useTranslation();
 
   return (
-    <div className={menu}>
-      <BeautifulButton className={joinUsButton} trackingName="join-button" label={t("join-us")} link={"/join-us"} />
+    <div className="flex items-center text-red gap-4">
+      <BeautifulButton className="font-normal" trackingName="join-button" label={t("join-us")} link={"/join-us"} />
 
-      <div className={menuList}>
-        <Link className={menuItem} href={"/about-us"}>
+      <div className="divide-solid divide-red divide-x">
+        <Link className="pr-2" href={"/about-us"}>
           {t("about-us")}
         </Link>
-        <Link className={menuItem} target="_blank" href={"https://bunq.me/VerenigingMARA"}>
+        <Link className="pl-2" target="_blank" href={"https://bunq.me/VerenigingMARA"}>
           {t("donate-us")}
         </Link>
       </div>
 
-      <LanguageSelector className={languageSelector} />
+      <LanguageSelector />
     </div>
   );
 }

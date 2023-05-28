@@ -1,20 +1,17 @@
 import { useTranslation } from "next-i18next";
 import * as React from "react";
-import { subscriptionForm, subscribeButton, subscribeInput, success, subTitle } from "./subscription-form.css";
 import { ClientOnly } from "../client-only/client-only";
 import { isEmailValid } from "../../lib/email";
-import { centerSectionTitle } from "../common.styles.css";
-import { col } from "../grid.css";
-import { fadeInElementOnScroll } from "../../utils/animation.css";
 import { Button } from "../button/button";
 
-export function SubscriptionForm(): JSX.Element {
+export function SubscriptionForm(): React.JSX.Element {
   const emailInputId = "email-input";
 
   const { t } = useTranslation("main");
   const [isLoading, setIsLoading] = React.useState(false);
   const [isValid, setIsValid] = React.useState(true);
   const [isSuccess, setIsSuccess] = React.useState(false);
+  const [isShaking, doShake] = React.useState(false);
 
   function onInput(event: React.FormEvent<HTMLInputElement>): void {
     setIsValid(isValidInput(event.currentTarget));
@@ -23,9 +20,9 @@ export function SubscriptionForm(): JSX.Element {
   const inputRef = React.useRef<HTMLInputElement>(null);
 
   const shake = (): void => {
-    inputRef.current?.classList.add("shake");
+    doShake(true);
     setTimeout(() => {
-      inputRef.current?.classList.remove("shake");
+      doShake(false);
     }, 2000);
   };
 
@@ -61,29 +58,29 @@ export function SubscriptionForm(): JSX.Element {
 
   return (
     <>
-      <h2 className={centerSectionTitle}>{t("subscribe-title")}</h2>
-      <div className={`${col} ${fadeInElementOnScroll}`}>
-        <div className={subTitle}>{t("subscribe-text")}</div>
-        <div className={subscriptionForm}>
+      <h2 className="text-xl text-center font-medium md:text-3xl mb-2">{t("subscribe-title")}</h2>
+      <div className="flex flex-col gap-4 items-center">
+        <div className="text-center md:text-xl lg:w-96 mb-2">{t("subscribe-text")}</div>
+        <div className="flex flex-row gap-3 justify-center md:gap-4 w-full">
           <ClientOnly>
-            <div className={`${success} ${isSuccess ? "show" : "hide"}`}>{t("subscribed-text")}</div>
-            <input
-              ref={inputRef}
-              onInput={onInput}
-              className={`${subscribeInput} ${isValid ? "valid" : "invalid"} ${isSuccess ? "hide" : "show"}`}
-              id={emailInputId}
-              name="email"
-              type="email"
-              placeholder={t("subscribe-input-placeholder") || "subscribe"}
-            />
+            {isSuccess ? (
+              <span className="flex flex-col justify-center">{t("subscribed-text")}</span>
+            ) : (
+              <input
+                ref={inputRef}
+                onInput={onInput}
+                className={`${isShaking ? "animate-shake" : ""} ${
+                  isValid ? "border border-white" : "border border-red"
+                } outline-none transition-all p-2 lg:p-3 bg-white basis-full md:basis-1/3 rounded-md shadow-lg hover:shadow-xl active:shadow-2xl`}
+                id={emailInputId}
+                name="email"
+                type="email"
+                placeholder={t("subscribe-input-placeholder") || "subscribe"}
+              />
+            )}
           </ClientOnly>
 
-          <Button
-            className={subscribeButton}
-            click={submit}
-            isLoading={isLoading}
-            label={t("subscribe-button")}
-          ></Button>
+          <Button click={submit} isLoading={isLoading} label={t("subscribe-button")}></Button>
         </div>
       </div>
     </>

@@ -1,9 +1,7 @@
 import * as React from "react";
 
-import { row } from "../grid.css";
 import { EventMeta } from "../types";
 import { FutureEventThumbnail } from "./thumbnail";
-import { fadeInElementOnScroll } from "../../utils/animation.css";
 
 export interface EventsBlockProps {
   events: EventMeta[];
@@ -19,5 +17,5 @@ export function EventsBlock(props: EventsBlockProps): React.JSX.Element {
     return isEventPast(event.eventDate) ? null : <FutureEventThumbnail locale={props.locale} event={event} key={i} />;
   }
 
-  return <div className={`${row} ${fadeInElementOnScroll}`}>{props.events.map(renderEventThumbnail)}</div>;
+  return <div className="flex justify-center gap-3 md:gap-4">{props.events.map(renderEventThumbnail)}</div>;
 }

@@ -1,20 +1,7 @@
 import { style } from "@vanilla-extract/css";
-import { vars } from "./styles.css";
 import { shadowedElement, rounded } from "./common.styles.css";
 import { sprinkles } from "./sprinkles.css";
 import { fadeInElementOnScroll } from "../utils/animation.css";
-
-export const heading2 = style([
-  {
-    color: vars.color.red,
-  },
-  sprinkles({
-    fontSize: {
-      sm: "1.2rem",
-      md: "1.5rem",
-    },
-  }),
-]);
 
 export const aboutUs = style([
   sprinkles({
@@ -135,77 +122,5 @@ export const helpImage = style([
   {
     position: "relative",
     gridArea: "helpImage",
-  },
-]);
-
-export const fit = style([
-  rounded,
-  {
-    objectFit: "cover",
-  },
-]);
-
-export const partnerLogo = style({
-  objectFit: "contain",
-});
-
-export const partners = style([
-  {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexWrap: "wrap",
-    marginLeft: "auto",
-    marginRight: "auto",
-    gap: "2rem",
-  },
-]);
-
-export const libereco = style([
-  sprinkles({
-    width: {
-      sm: "9rem",
-      md: "12rem",
-    },
-    height: {
-      sm: "3rem",
-      md: "4rem",
-    },
-  }),
-  {
-    position: "relative",
-  },
-]);
-
-export const mfb = style([
-  sprinkles({
-    width: {
-      sm: "3rem",
-      md: "5rem",
-    },
-    height: {
-      sm: "3rem",
-      md: "5rem",
-    },
-  }),
-  {
-    position: "relative",
-  },
-]);
-
-export const partnersHeading = style([
-  sprinkles({
-    marginTop: {
-      sm: "1rem",
-      md: "1.5rem",
-      lg: "2rem",
-    },
-    fontSize: {
-      sm: "1.5rem",
-    },
-  }),
-  {
-    textAlign: "center",
-    fontWeight: 300,
   },
 ]);
