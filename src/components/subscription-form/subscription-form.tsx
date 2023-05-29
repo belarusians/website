@@ -71,7 +71,7 @@ export function SubscriptionForm(): React.JSX.Element {
                 onInput={onInput}
                 className={`${isShaking ? "animate-shake" : ""} ${
                   isValid ? "border border-white" : "border border-red"
-                } outline-none transition-all p-2 lg:p-3 bg-white basis-full md:basis-1/3 rounded-md shadow-lg hover:shadow-xl active:shadow-2xl`}
+                } appearance-none outline-none transition-all p-2 lg:p-3 bg-white basis-full md:basis-1/3 rounded-md shadow-lg hover:shadow-xl active:shadow-2xl`}
                 id={emailInputId}
                 name="email"
                 type="email"
