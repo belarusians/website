@@ -34,7 +34,7 @@ export const NewsThumbnail = forwardRef<HTMLDivElement, NewsThumbnailProps & { c
             <span
               className={
                 props.size === "small"
-                  ? "text-xs md:text-base lg:text-xl"
+                  ? "text-sm md:text-base lg:text-xl"
                   : props.size === "medium"
                   ? "text-base md:text-xl lg:text-2xl"
                   : "text-xl md:text-2xl"
