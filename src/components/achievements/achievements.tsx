@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
-
-import { row } from "../grid.css";
-import { counter, achievementContainer, counterText } from "./achievements.css";
+import { useEffect, useState } from "react";
+import * as React from "react";
 import { useTranslation } from "next-i18next";
 
 export function AchievementsBlock(): JSX.Element {
@@ -34,14 +32,12 @@ export function AchievementsBlock(): JSX.Element {
     updateCounter();
   }
   return (
-    <div className={row}>
-      <div className={achievementContainer}>
-        <span className={counter}>
-          <span ref={counterRef}></span>
-          <span>€</span>
-        </span>
-        <span className={counterText}>{t("counter-text")}</span>
-      </div>
+    <div className="flex justify-center gap-1 md:gap-2 text-white flex-col text-center">
+      <span className="text-5xl md:text-7xl">
+        <span ref={counterRef}></span>
+        <span>€</span>
+      </span>
+      <span className="text-xl md:text-2xl">{t("counter-text")}</span>
     </div>
   );
 }

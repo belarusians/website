@@ -5,7 +5,6 @@ import { GetStaticPropsContext, GetStaticPropsResult } from "next/types";
 import Link from "next/link";
 
 import { Section } from "../../components/section/section";
-import { form, formForeword, sectionHeading } from "../../components/section/section.css";
 import { CommonPageProps, Lang } from "../../components/types";
 import { Head } from "../../components/head/head";
 
@@ -33,14 +32,13 @@ export default function IndexPage(props: CommonPageProps): JSX.Element {
         imagePath="/news/heart.jpg"
       />
       <Section>
-        <h1 className={sectionHeading}>{t("heading")}</h1>
-        <div className={formForeword}>
+        <h1 className="text-xl font-bold md:text-3xl mb-2">{t("heading")}</h1>
+        <div className="mb-2 md:mb-4">
           <Link target="_blank" href={"/targets"}>
             {t("targets-text")}
           </Link>
         </div>
         <iframe
-          className={form}
           src="https://docs.google.com/forms/d/e/1FAIpQLSclnC3o9gft51GR9_lNdFoLY79DhKrdw-rR9JtGQ3bbwFltuw/viewform?embedded=true"
           width="100%"
           height={iframeHeight}

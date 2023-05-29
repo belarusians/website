@@ -2,8 +2,6 @@ import Link from "next/link";
 import * as React from "react";
 import { HTMLAttributeAnchorTarget } from "react";
 
-import { button, loadingSpace, spinner } from "./button.css";
-
 export interface ButtonProps {
   label: string;
   link?: string;
@@ -16,12 +14,9 @@ export interface ButtonProps {
 }
 
 export function Button(props: ButtonProps): JSX.Element {
-  let className = button;
+  let className = "";
   if (props.className) {
-    className += ` ${props.className}`;
-  }
-  if (props.isLoading) {
-    className += ` ${loadingSpace}`;
+    className += `${props.className}`;
   }
   const buttonAttributes: { "data-umami-event"?: string } = {};
   if (props.trackingName) {
@@ -31,22 +26,24 @@ export function Button(props: ButtonProps): JSX.Element {
   if (props.link) {
     return (
       <Link target={props.target} href={props.link} {...buttonAttributes}>
-        <button className={className} disabled={props.disabled} onClick={props.click}>
-          {props.isLoading ? <Spinner /> : null}
+        <button
+          className={className + " transition-all p-2 lg:p-3 shadow-lg hover:shadow-xl active:shadow-2xl rounded-md"}
+          disabled={props.disabled}
+          onClick={props.click}
+        >
           {props.label}
         </button>
       </Link>
     );
   } else {
     return (
-      <button className={className} disabled={props.disabled} onClick={props.click}>
-        {props.isLoading ? <Spinner /> : null}
+      <button
+        className={className + " transition-all p-2 lg:p-3 shadow-lg hover:shadow-xl active:shadow-2xl rounded-md"}
+        disabled={props.disabled}
+        onClick={props.click}
+      >
         {props.label}
       </button>
     );
   }
-}
-
-function Spinner(): JSX.Element {
-  return <span className={spinner}></span>;
 }

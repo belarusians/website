@@ -4,10 +4,6 @@ import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
 import { EventMeta } from "../types";
-import { pastThumbnail, futureThumbnail, date, title, locationText, locationIcon, placeholder } from "./thumbnail.css";
-import { vertical } from "../grid.css";
-import { useTranslation } from "next-i18next";
-import { toCenterAll } from "../common.styles.css";
 
 export interface EventThumbnailProps {
   event: EventMeta;
@@ -23,42 +19,19 @@ export function FutureEventThumbnail(props: EventThumbnailProps & { className?: 
   }, []);
 
   return (
-    <Link className={futureThumbnail} href={`/events/${props.event.slug}`}>
-      <div className={vertical}>
-        <p className={date}>{hydrated ? clientSideDate(eventDate, props.locale) : serverSideDate(eventDate)}</p>
-        <h3 className={title}>{props.event.title}</h3>
-        <p className={locationText}>
-          <FontAwesomeIcon className={locationIcon} icon={faLocationDot} />
+    <Link
+      className="bg-white transition-all shadow-lg hover:shadow-xl hover:scale-101 rounded-md p-4 w-80 md:w-60"
+      href={`/events/${props.event.slug}`}
+    >
+      <div className="">
+        <p className="text-grey">{hydrated ? clientSideDate(eventDate, props.locale) : serverSideDate(eventDate)}</p>
+        <h3 className="my-3 font-bold">{props.event.title}</h3>
+        <p className="text-grey">
+          <FontAwesomeIcon className="pr-2" icon={faLocationDot} />
           {props.event.location}
         </p>
       </div>
     </Link>
-  );
-}
-
-export function PastEventThumbnail(props: EventThumbnailProps & { className?: string }): JSX.Element {
-  const { eventDate } = props.event;
-  const { t } = useTranslation("main");
-
-  const [hydrated, setHydrated] = useState(false);
-  useEffect(() => {
-    setHydrated(true);
-  }, []);
-
-  return (
-    <div className={toCenterAll}>
-      <div className={pastThumbnail}>
-        <div className={vertical}>
-          <p className={date}>{hydrated ? clientSideDate(eventDate, props.locale) : serverSideDate(eventDate)}</p>
-          <h3 className={title}>{props.event.title}</h3>
-          <p className={locationText}>
-            <FontAwesomeIcon className={locationIcon} icon={faLocationDot} />
-            {props.event.location}
-          </p>
-        </div>
-      </div>
-      <div className={placeholder}>{t("past-event-message")}</div>
-    </div>
   );
 }
 

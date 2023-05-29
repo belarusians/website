@@ -2,8 +2,6 @@ import * as React from "react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-import { active, button, list } from "./language-selector.css";
-
 function formFlag(locales: string[]): string[] {
   const middle = Math.round(locales.length / 2) - 1;
   const beIndex = locales.indexOf("be");
@@ -32,9 +30,17 @@ export function LanguageSelector(props: React.HTMLAttributes<HTMLElement>): JSX.
 
   return (
     <div className={props.className}>
-      <div className={list}>
+      <div className="flex transition-all rounded-md text-white shadow-lg hover:shadow-xl cursor-pointer">
         {sortedLocales.map((l) => (
-          <button className={`${button} ${loc === l ? active : ""}`} key={l} onClick={() => onSelectLanguage(l)}>
+          <button
+            className={
+              loc === l
+                ? "p-1 md:p-2 uppercase text-lg first:rounded-l-md last:rounded-r-md text-white bg-red"
+                : "p-1 md:p-2 uppercase text-lg first:rounded-l-md last:rounded-r-md text-light-black bg-white"
+            }
+            key={l}
+            onClick={() => onSelectLanguage(l)}
+          >
             {l}
           </button>
         ))}

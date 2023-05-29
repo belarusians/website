@@ -1,4 +1,3 @@
-import { beautifulButton } from "./beautiful-button.css";
 import { Button, ButtonProps } from "../button/button";
 
 export function BeautifulButton(props: ButtonProps): JSX.Element {
@@ -6,7 +5,7 @@ export function BeautifulButton(props: ButtonProps): JSX.Element {
     <Button
       label={props.label}
       link={props.link}
-      className={beautifulButton + " " + props.className}
+      className={`${props.className} bg-[length:350%_100%] bg-beautiful-button text-white animate-beautiful-button`}
       trackingName={props.trackingName}
     />
   );

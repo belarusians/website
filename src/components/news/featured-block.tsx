@@ -2,9 +2,6 @@ import { useTranslation } from "next-i18next";
 
 import { NewsThumbnail } from "./thumbnail";
 import { ArticleMeta } from "../types";
-import { animatedCard, sectionTitle } from "../common.styles.css";
-import { row_lg, w_lg_2, w_1, col_lg__row_md } from "../grid.css";
-import { fadeInElementOnScroll } from "../../utils/animation.css";
 
 interface FeaturedNewsBlockProps {
   main: ArticleMeta;
@@ -16,12 +13,24 @@ export function FeaturedNewsBlock(props: FeaturedNewsBlockProps) {
 
   return (
     <>
-      <h2 className={sectionTitle}>{t("news-title")}</h2>
-      <div className={`${row_lg} ${fadeInElementOnScroll}`}>
-        <NewsThumbnail size={"large"} className={`${w_lg_2} ${animatedCard}`} news={props.main} />
-        <div className={`${w_1} ${col_lg__row_md}`}>
-          <NewsThumbnail className={`${w_1} ${animatedCard}`} news={props.secondary[0]} />
-          <NewsThumbnail className={`${w_1} ${animatedCard}`} news={props.secondary[1]} />
+      <h2 className="text-xl font-medium md:text-3xl mb-2">{t("news-title")}</h2>
+      <div className="flex flex-wrap gap-3 md:gap-4 flex-col lg:flex-row">
+        <NewsThumbnail
+          size={"large"}
+          className="transition-all flex basis-28 md:basis-36 lg:basis-72 grow lg:grow-[2] shadow-lg hover:shadow-xl hover:scale-101"
+          news={props.main}
+        />
+        <div className="flex flex-row lg:flex-col gap-3 md:gap-4 grow basis-28 md:basis-36">
+          <NewsThumbnail
+            size={"medium"}
+            className="transition-all flex grow basis-28 md:basis-36 shadow-lg hover:shadow-xl hover:scale-101"
+            news={props.secondary[0]}
+          />
+          <NewsThumbnail
+            size={"medium"}
+            className="transition-all flex grow basis-28 md:basis-36 shadow-lg hover:shadow-xl hover:scale-101"
+            news={props.secondary[1]}
+          />
         </div>
       </div>
     </>

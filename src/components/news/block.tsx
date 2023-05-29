@@ -1,25 +1,27 @@
+import * as React from "react";
 import { useTranslation } from "next-i18next";
 
-import { animatedCard, sectionTitle } from "../common.styles.css";
-import { row_lg, w_1 } from "../grid.css";
-import { fadeInElementOnScroll } from "../../utils/animation.css";
 import { ArticleMeta } from "../types";
 import { NewsThumbnail } from "./thumbnail";
-import { newsItem } from "./block.css";
 
 interface NewsBlockProps {
   news: ArticleMeta[];
 }
 
-export function NewsBlock(props: NewsBlockProps): JSX.Element {
+export function NewsBlock(props: NewsBlockProps): React.JSX.Element {
   const { t } = useTranslation("main");
 
   return (
     <>
-      <h2 className={sectionTitle}>{t("other-news-title")}</h2>
-      <div className={`${row_lg} ${fadeInElementOnScroll}`}>
+      <h2 className="text-xl font-medium md:text-3xl mb-2">{t("other-news-title")}</h2>
+      <div className="flex flex-col lg:flex-row gap-3 md:gap-4 flex-wrap">
         {props.news.map((n, i) => (
-          <NewsThumbnail className={`${w_1} ${newsItem} ${animatedCard}`} size={"small"} key={i} news={n} />
+          <NewsThumbnail
+            className="transition-all flex grow basis-28 md:basis-36 h-[160px] min-w-[320px] shadow-lg hover:shadow-xl hover:scale-101"
+            size={"small"}
+            key={i}
+            news={n}
+          />
         ))}
       </div>
     </>

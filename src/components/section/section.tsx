@@ -1,11 +1,9 @@
 import * as React from "react";
-import { section } from "./section.css";
-import { container } from "../common.styles.css";
 
 export function Section(props: React.PropsWithChildren & { className?: string }): JSX.Element {
   return (
-    <div className={`${section} ${props.className || ""}`}>
-      <div className={container}>{props.children}</div>
+    <div className={`py-3 md:py-4 lg:py-6 animate-fade-in ${props.className || ""}`}>
+      <div className="lg:container px-3">{props.children}</div>
     </div>
   );
 }

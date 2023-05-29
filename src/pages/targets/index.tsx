@@ -4,7 +4,6 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { Section } from "../../components/section/section";
-import { sectionHeading } from "../../components/section/section.css";
 import { CommonPageProps, Lang } from "../../components/types";
 import { Head } from "../../components/head/head";
 import * as React from "react";
@@ -25,7 +24,7 @@ export default function IndexPage(props: CommonPageProps): JSX.Element {
         imagePath="/news/flowers.jpg"
       />
       <Section>
-        <h1 className={sectionHeading}>{t("heading")}</h1>
+        <h1 className="text-xl font-bold md:text-3xl">{t("heading")}</h1>
         <i>{t("targets-foreword")}</i>
         <PDFViewer />
       </Section>

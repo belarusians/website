@@ -3,18 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { ArticleMeta, ArticleType } from "../types";
-import { image, largeTitle, mediumTitle, smallTitle, thumbnail, titleContainer } from "./thumbnail.css";
 
 export interface NewsThumbnailProps {
   news: ArticleMeta;
   size?: "large" | "small" | "medium";
 }
-
-const mapSizeToClass = {
-  large: largeTitle,
-  medium: mediumTitle,
-  small: smallTitle,
-};
 
 function getLinkToArticle(article: ArticleMeta): string {
   if (article.type === ArticleType.News) {
@@ -30,10 +23,25 @@ export const NewsThumbnail = forwardRef<HTMLDivElement, NewsThumbnailProps & { c
   (props: NewsThumbnailProps & { className?: string }, ref) => {
     return (
       <div ref={ref} className={props.className}>
-        <Link className={thumbnail} href={getLinkToArticle(props.news)}>
-          <Image className={image} fill src={props.news.backgroundUrl} alt={props.news.title} />
-          <div className={titleContainer}>
-            <span className={mapSizeToClass[props.size || "medium"]}>{props.news.title}</span>
+        <Link className="relative flex flex-1 flex-col" href={getLinkToArticle(props.news)}>
+          <Image
+            className="object-cover rounded-md brightness-90"
+            fill
+            src={props.news.backgroundUrl}
+            alt={props.news.title}
+          />
+          <div className="p-2 z-40 mt-auto backdrop-blur-md rounded-b-md text-white uppercase">
+            <span
+              className={
+                props.size === "small"
+                  ? "text-sm md:text-base lg:text-xl"
+                  : props.size === "medium"
+                  ? "text-base md:text-xl lg:text-2xl"
+                  : "text-xl md:text-2xl"
+              }
+            >
+              {props.news.title}
+            </span>
           </div>
         </Link>
       </div>

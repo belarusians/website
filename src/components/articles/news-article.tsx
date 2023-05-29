@@ -1,7 +1,6 @@
 import Image from "next/image";
 import * as React from "react";
 import { News } from "../types";
-import { article, articleImage, articleContent, articleImageContainer, ratio16x9, withoutRatio } from "./article.css";
 
 interface ArticleProps {
   news: News;
@@ -9,11 +8,19 @@ interface ArticleProps {
 
 export function NewsArticle(props: ArticleProps): JSX.Element {
   return (
-    <div className={article}>
-      <div className={articleImageContainer + ` ${props.news.imageRatio ? ratio16x9 : withoutRatio}`}>
-        <Image className={articleImage} fill src={props.news.backgroundUrl} alt={props.news.title} />
+    <div className="rounded-md shadow-lg">
+      <div
+        className={
+          "relative rounded-t-md before:z-10 before:bg-white-gradient before:absolute before:h-16 before:right-0 before:bottom-0 before:left-0 " +
+          `${props.news.imageRatio ? "aspect-video" : "h-36 md:h-72"}`
+        }
+      >
+        <Image className="object-cover rounded-t-md" fill src={props.news.backgroundUrl} alt={props.news.title} />
       </div>
-      <div className={articleContent} dangerouslySetInnerHTML={{ __html: props.news.content }}></div>
+      <div
+        className="max-w-full prose prose-hr:my-4 prose-a:text-red prose-a:break-words prose-blockquote:border-l-2 prose-blockquote:border-red px-4 lg:px-8 pb-4 lg:pb-8 my-8 md:my-4"
+        dangerouslySetInnerHTML={{ __html: props.news.content }}
+      ></div>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { md, lg } from "../sprinkles.css";
+import { md, lg } from "../utils";
 
 export function getFullWidth(windowWidth: number, maxSize?: number): number {
   let possibleSize = 0;
