@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import * as React from "react";
 import { useTranslation } from "next-i18next";
 
 export function AchievementsBlock(): JSX.Element {
