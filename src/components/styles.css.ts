@@ -48,3 +48,7 @@ globalStyle("blockquote", {
 globalStyle("blockquote > ul, blockquote > ol", {
   paddingLeft: "1.5rem",
 });
+
+globalStyle("blockquote a", {
+  overflowWrap: "break-word",
+});
