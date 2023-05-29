@@ -3,7 +3,7 @@ import * as React from "react";
 import { DesktopMenu } from "./desktop/desktopMenu";
 import { useEffect, useState } from "react";
 import { MobileMenu } from "./mobile/mobileMenu";
-import { md } from "../sprinkles.css";
+import { md } from "../utils";
 import { ClientOnly } from "../client-only/client-only";
 
 export function Menu(props: { className?: string }): JSX.Element {

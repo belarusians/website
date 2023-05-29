@@ -48,9 +48,7 @@ Gelieve de krans samen met het ticket te betalen, niet "voor later" achterlaten.
 > * concert NAVIBAND
 > * 2 drankjes
 >
-> Workshops worden ter plekke apart contant of via tikkie betaald.
->
-> Kransen zijn ook apart te betalen en kun je beter samen bestellen met [ticket](https://shop.ikbenaanwezig.nl/tickets/event/kupalle-2023-early-birds).
+> Workshops worden ter plekke apart contant of via tikkie betaald. Kransen zijn ook apart te betalen en kun je beter samen bestellen met [ticket](https://shop.ikbenaanwezig.nl/tickets/event/kupalle-2023-early-birds).
 
 #### Waar kan ik mijn auto parkeren?
 > Er zijn verschillende opties:

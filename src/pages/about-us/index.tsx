@@ -5,19 +5,6 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
 
 import { Section } from "../../components/section/section";
-import {
-  whoImage,
-  what,
-  who,
-  why,
-  forMe,
-  help,
-  aboutUs,
-  whyImage,
-  whatImage,
-  forMeImage,
-  helpImage,
-} from "../../components/about-us.css";
 import { CommonPageProps, Lang } from "../../components/types";
 import { GetStaticPropsContext, GetStaticPropsResult } from "next/types";
 
@@ -27,36 +14,36 @@ export default function IndexPage(): React.JSX.Element {
   return (
     <Section>
       <h1 className="text-xl font-medium md:text-3xl">{t("heading")}</h1>
-      <div className={aboutUs}>
-        <div className={who}>
+      <div className="lg:grid grid-cols-4 grid-rows-[20rem_15rem_15rem_20rem_20rem] gap-x-4 gap-y-8 mt-4 md:mt-8 lg:mt-16">
+        <div className="self-center col-span-2">
           <h2 className="text-xl md:text-2xl text-red">{t("who-heading")}</h2>
           <p>{t("who-text")}</p>
         </div>
-        <div className={whoImage}>
+        <div className="col-span-2 relative hidden lg:block rounded-md shadow-lg">
           <Image className="rounded-md object-cover" src="/news/heart.jpg" fill alt="who we are" />
         </div>
-        <div className={what}>
+        <div className="relative hidden lg:block rounded-md shadow-lg">
+          <Image className="rounded-md object-cover" src="/news/mara.jpg" fill alt="what is mara" />
+        </div>
+        <div className="self-center col-span-3">
           <h2 className="text-xl md:text-2xl text-red">{t("what-heading")}</h2>
           <p>{t("what-text")}</p>
         </div>
-        <div className={whatImage}>
-          <Image className="rounded-md object-cover" src="/news/mara.jpg" fill alt="what is mara" />
-        </div>
-        <div className={why}>
+        <div className="self-center col-span-2">
           <h2 className="text-xl md:text-2xl text-red">{t("why-heading")}</h2>
           <p>{t("why-text")}</p>
         </div>
-        <div className={whyImage}>
+        <div className="col-span-2 relative hidden lg:block rounded-md shadow-lg">
           <Image className="rounded-md object-cover" src="/news/other.jpg" fill alt="why do we need mara" />
         </div>
-        <div className={forMe}>
+        <div className="self-center col-span-3">
           <h2 className="text-xl md:text-2xl text-red">{t("for-me-heading")}</h2>
           <p>{t("for-me-text")}</p>
         </div>
-        <div className={forMeImage}>
+        <div className="relative hidden lg:block rounded-md shadow-lg">
           <Image className="rounded-md object-cover" src="/abstract/hand.jpg" fill alt="what is mara for me" />
         </div>
-        <div className={help}>
+        <div className="self-center col-span-1">
           <h2 className="text-xl md:text-2xl text-red">{t("help-heading")}</h2>
           <p>{t("help-text")}</p>
           <a href="mailto:mara@belarusians.nl">mara@belarusians.nl</a>,{" "}
@@ -64,7 +51,7 @@ export default function IndexPage(): React.JSX.Element {
           <a href="https://www.instagram.com/marabynl/">instagram</a>,{" "}
           <a href="https://twitter.com/BelarusinNL">twitter</a>
         </div>
-        <div className={helpImage}>
+        <div className="col-span-3 relative hidden lg:block rounded-md shadow-lg">
           <Image className="rounded-md object-cover" src="/news/flowers.jpg" fill alt="how can i help" />
         </div>
       </div>

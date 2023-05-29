@@ -48,9 +48,7 @@ Strandslag 7, 2566 DP, Den Haag](https://maps.app.goo.gl/Dach3XgMAyCrBrMRA?g_st=
 > * концерт NAVIBAND
 > * 2 напитка
 >
-> Воркшопы оплачиваются отдельно на месте наличными или через tikkie.
-> 
-> Венки также оплачиваются отдельно и лучше заказать вместе с [билетом](https://shop.ikbenaanwezig.nl/tickets/event/kupalle-2023-early-birds).
+> Воркшопы оплачиваются отдельно на месте наличными или через tikkie. Венки также оплачиваются отдельно и лучше заказать вместе с [билетом](https://shop.ikbenaanwezig.nl/tickets/event/kupalle-2023-early-birds).
 
 #### Где можно оставить свой автомобиль?
 > Есть несколько вариантов:

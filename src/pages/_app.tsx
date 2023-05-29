@@ -1,8 +1,8 @@
 import { Roboto } from "next/font/google";
 import { AppProps } from "next/app";
 import Script from "next/script";
+import * as React from "react";
 import { appWithTranslation } from "next-i18next";
-import { themeClass } from "../components/styles.css";
 import { Layout } from "../components/layout";
 import "../components/globals.css";
 
@@ -22,7 +22,6 @@ const roboto = Roboto({
 const DISABLE_GOOGLE_TAG = true;
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const className = themeClass + " " + roboto.className;
   const { lang } = pageProps;
   return (
     <>
@@ -35,7 +34,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       />
       {DISABLE_GOOGLE_TAG ? null : <GoogleTag />}
 
-      <div className={className}>
+      <div className={roboto.className}>
         <Layout lang={lang}>
           <Component {...pageProps} />
         </Layout>
@@ -46,7 +45,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 export default appWithTranslation(MyApp);
 
-function GoogleTag(): JSX.Element {
+function GoogleTag(): React.JSX.Element {
   return (
     <>
       <Script async src="https://www.googletagmanager.com/gtag/js?id=G-GFM2BXYZ27" />

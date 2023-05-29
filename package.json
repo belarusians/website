@@ -31,14 +31,13 @@
     "swr": "^2.1.5"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.9",
     "@types/node": "^18.16.9",
     "@types/react": "^18.2.6",
     "@types/react-dom": "^18.2.4",
     "@types/react-pdf": "^6.2.0",
     "@typescript-eslint/eslint-plugin": "^5.48.1",
     "@typescript-eslint/parser": "^5.48.1",
-    "@vanilla-extract/next-plugin": "^2.1.1",
-    "@vanilla-extract/sprinkles": "^1.5.1",
     "autoprefixer": "^10.4.14",
     "cross-env": "~7.0.3",
     "eslint": "^7.32.0",

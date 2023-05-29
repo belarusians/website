@@ -8,7 +8,6 @@ import { FeaturedNewsBlock } from "../components/news/featured-block";
 import { CommonPageProps, EventMeta, Lang, ArticleMeta, NewsTags } from "../components/types";
 import { getEventsMeta, getNewsMeta } from "../lib/articles";
 import { Section } from "../components/section/section";
-import { beautifulGradient } from "../components/common.styles.css";
 import { AchievementsBlock } from "../components/achievements/achievements";
 import { NewsBlock } from "../components/news/block";
 import { EventsBlock } from "../components/events/block";
@@ -31,7 +30,7 @@ export default function IndexPage(props: MainPageProps): JSX.Element {
         <EventsBlock events={props.events} locale={props.lang!} />
       </Section>
 
-      <Section className={beautifulGradient}>
+      <Section className="bg-beautiful-gradient">
         <AchievementsBlock />
       </Section>
 
