@@ -66,7 +66,7 @@ export const menu = style({
 
 export const menuList = style({
   position: "absolute",
-  top: "62px",
+  top: "60px",
   left: 0,
   display: "flex",
   width: "100%",
