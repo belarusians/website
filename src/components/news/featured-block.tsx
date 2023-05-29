@@ -22,10 +22,12 @@ export function FeaturedNewsBlock(props: FeaturedNewsBlockProps) {
         />
         <div className="flex flex-row lg:flex-col gap-3 md:gap-4 grow basis-28 md:basis-36">
           <NewsThumbnail
+            size={"medium"}
             className="transition-all flex grow basis-28 md:basis-36 shadow-lg hover:shadow-xl hover:scale-101"
             news={props.secondary[0]}
           />
           <NewsThumbnail
+            size={"medium"}
             className="transition-all flex grow basis-28 md:basis-36 shadow-lg hover:shadow-xl hover:scale-101"
             news={props.secondary[1]}
           />
