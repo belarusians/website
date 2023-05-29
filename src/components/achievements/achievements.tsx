@@ -32,7 +32,7 @@ export function AchievementsBlock(): JSX.Element {
     updateCounter();
   }
   return (
-    <div className="flex justify-center gap-3 md:gap-4 text-white flex-col text-center">
+    <div className="flex justify-center gap-1 md:gap-2 text-white flex-col text-center">
       <span className="text-5xl md:text-7xl">
         <span ref={counterRef}></span>
         <span>€</span>

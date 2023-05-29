@@ -18,7 +18,7 @@ export function NewsArticle(props: ArticleProps): JSX.Element {
         <Image className="object-cover rounded-t-md" fill src={props.news.backgroundUrl} alt={props.news.title} />
       </div>
       <div
-        className="max-w-full prose prose-sm md:prose-base prose-hr:my-4 prose-a:text-red prose-a:break-words prose-blockquote:border-l-2 prose-blockquote:border-red px-4 lg:px-8 pb-4 lg:pb-8 my-8 md:my-4"
+        className="max-w-full prose prose-hr:my-4 prose-a:text-red prose-a:break-words prose-blockquote:border-l-2 prose-blockquote:border-red px-4 lg:px-8 pb-4 lg:pb-8 my-8 md:my-4"
         dangerouslySetInnerHTML={{ __html: props.news.content }}
       ></div>
     </div>
