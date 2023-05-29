@@ -40,7 +40,7 @@ export function MobileMenu(): JSX.Element {
 function OpenedMenu(): JSX.Element {
   const { t } = useTranslation();
   return (
-    <div className="bg-red flex flex-col items-center w-full top-[60px] left-0 absolute z-40 divide-solid divide-white divide-y">
+    <div className="bg-red flex flex-col items-center w-full top-[56px] left-0 absolute z-40 divide-solid divide-white divide-y">
       <LanguageSelector className="text-white py-4" />
       <Link className="text-white py-4 text-xl" href={"/about-us"}>
         {t("about-us")}
