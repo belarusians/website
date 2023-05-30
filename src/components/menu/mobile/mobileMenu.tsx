@@ -45,7 +45,12 @@ function OpenedMenu(): JSX.Element {
       <Link className="text-white py-4 text-xl" href={"/about-us"}>
         {t("about-us")}
       </Link>
-      <Link target="_blank" className="text-white py-4 text-xl" href={"https://bunq.me/VerenigingMARA"}>
+      <Link
+        className="text-white py-4 text-xl"
+        data-umami-event="donate-us"
+        target="_blank"
+        href={"https://bunq.me/VerenigingMARA"}
+      >
         {t("donate-us")}
       </Link>
     </div>

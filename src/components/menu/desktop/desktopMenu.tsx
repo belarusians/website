@@ -15,7 +15,7 @@ export function DesktopMenu(): JSX.Element {
         <Link className="pr-2" href={"/about-us"}>
           {t("about-us")}
         </Link>
-        <Link className="pl-2" target="_blank" href={"https://bunq.me/VerenigingMARA"}>
+        <Link className="pl-2" data-umami-event="donate-us" target="_blank" href={"https://bunq.me/VerenigingMARA"}>
           {t("donate-us")}
         </Link>
       </div>
