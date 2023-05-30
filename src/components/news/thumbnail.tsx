@@ -22,7 +22,7 @@ function getLinkToArticle(article: ArticleMeta): string {
 export const NewsThumbnail = forwardRef<HTMLDivElement, NewsThumbnailProps & { className?: string }>(
   (props: NewsThumbnailProps & { className?: string }, ref) => {
     return (
-      <div ref={ref} className={props.className}>
+      <div ref={ref} className={`rounded-md ${props.className}`}>
         <Link className="relative flex flex-1 flex-col" href={getLinkToArticle(props.news)}>
           <Image
             className="object-cover rounded-md brightness-90"
