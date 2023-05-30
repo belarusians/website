@@ -7,6 +7,7 @@ import { Section } from "../../components/section/section";
 import { CommonPageProps, Lang } from "../../components/types";
 import { Head } from "../../components/head/head";
 import * as React from "react";
+import H1 from "../../components/headinds/h1";
 
 const PDFViewer = dynamic(() => import("../../components/pdf-viewer/pdf-viewer").then((mod) => mod.PdfViewer), {
   ssr: false,
@@ -24,7 +25,7 @@ export default function IndexPage(props: CommonPageProps): JSX.Element {
         imagePath="/news/flowers.jpg"
       />
       <Section>
-        <h1 className="text-xl font-bold md:text-3xl">{t("heading")}</h1>
+        <H1>{t("heading")}</H1>
         <i>{t("targets-foreword")}</i>
         <PDFViewer />
       </Section>

@@ -7,6 +7,8 @@ import Link from "next/link";
 import { Section } from "../../components/section/section";
 import { CommonPageProps, Lang } from "../../components/types";
 import { Head } from "../../components/head/head";
+import { md } from "../../components/utils";
+import H1 from "../../components/headinds/h1";
 
 export default function IndexPage(props: CommonPageProps): JSX.Element {
   const { t } = useTranslation("join-us");
@@ -21,7 +23,7 @@ export default function IndexPage(props: CommonPageProps): JSX.Element {
   }, []);
 
   // TODO: do something with those magical numbers. Iframe should be well positioned automatically! Without this magic
-  const iframeHeight = width > 768 ? 1696 : 2280;
+  const iframeHeight = width > md ? 1696 : 2280;
 
   return (
     <>
@@ -32,7 +34,7 @@ export default function IndexPage(props: CommonPageProps): JSX.Element {
         imagePath="/news/heart.jpg"
       />
       <Section>
-        <h1 className="text-xl font-bold md:text-3xl mb-2">{t("heading")}</h1>
+        <H1>{t("heading")}</H1>
         <div className="mb-2 md:mb-4">
           <Link target="_blank" href={"/targets"}>
             {t("targets-text")}

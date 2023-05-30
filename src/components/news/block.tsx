@@ -3,6 +3,7 @@ import { useTranslation } from "next-i18next";
 
 import { ArticleMeta } from "../types";
 import { NewsThumbnail } from "./thumbnail";
+import H2 from "../headinds/h2";
 
 interface NewsBlockProps {
   news: ArticleMeta[];
@@ -13,7 +14,7 @@ export function NewsBlock(props: NewsBlockProps): React.JSX.Element {
 
   return (
     <>
-      <h2 className="text-xl font-medium md:text-3xl mb-2">{t("other-news-title")}</h2>
+      <H2>{t("other-news-title")}</H2>
       <div className="flex flex-col lg:flex-row gap-3 md:gap-4 flex-wrap">
         {props.news.map((n, i) => (
           <NewsThumbnail
