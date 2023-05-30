@@ -18,10 +18,11 @@ module.exports = {
   theme: {
     colors: {
       red: "#ed1c24",
-      "dark-red": "#af0000",
+      "red-shade": "#af0000",
       white: "#ffffff",
+      "white-shade": "#fcfcfc",
       black: "#231f20",
-      "light-black": "#333333",
+      "black-tint": "#333333",
       grey: "rgb(128, 128, 128)",
       "light-grey": "rgb(217,217,217)",
     },

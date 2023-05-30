@@ -5,7 +5,7 @@ import { faGithub, faTwitter, faFacebook, faInstagram } from "@fortawesome/free-
 export function Footer(props: { className?: string }): React.JSX.Element {
   return (
     <div
-      className={`${props.className} flex items-center justify-between bg-red md:bg-white text-white md:text-black pt-2 pb-2 md:pb-4 lg:pb-8`}
+      className={`flex items-center justify-between bg-red md:bg-white-shade text-white md:text-black pt-2 pb-2 md:pb-4 lg:pb-8 ${props.className}`}
     >
       <div>
         <a

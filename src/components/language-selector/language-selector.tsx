@@ -36,7 +36,7 @@ export function LanguageSelector(props: React.HTMLAttributes<HTMLElement>): JSX.
             className={
               loc === l
                 ? "p-1 md:p-2 uppercase text-lg first:rounded-l-md last:rounded-r-md text-white bg-red"
-                : "p-1 md:p-2 uppercase text-lg first:rounded-l-md last:rounded-r-md text-light-black bg-white"
+                : "p-1 md:p-2 uppercase text-lg first:rounded-l-md last:rounded-r-md text-black-tint bg-white"
             }
             key={l}
             onClick={() => onSelectLanguage(l)}

@@ -14,10 +14,6 @@ export interface ButtonProps {
 }
 
 export function Button(props: ButtonProps): JSX.Element {
-  let className = "";
-  if (props.className) {
-    className += `${props.className}`;
-  }
   const buttonAttributes: { "data-umami-event"?: string } = {};
   if (props.trackingName) {
     buttonAttributes["data-umami-event"] = props.trackingName;
@@ -27,7 +23,7 @@ export function Button(props: ButtonProps): JSX.Element {
     return (
       <Link target={props.target} href={props.link} {...buttonAttributes}>
         <button
-          className={className + " transition-all p-2 lg:p-3 shadow-lg hover:shadow-xl active:shadow-2xl rounded-md"}
+          className={`transition-all bg-white p-2 lg:p-3 shadow-lg hover:shadow-xl active:shadow-2xl rounded-md ${props.className}`}
           disabled={props.disabled}
           onClick={props.click}
         >
@@ -38,7 +34,7 @@ export function Button(props: ButtonProps): JSX.Element {
   } else {
     return (
       <button
-        className={className + " transition-all p-2 lg:p-3 shadow-lg hover:shadow-xl active:shadow-2xl rounded-md"}
+        className={`transition-all bg-white p-2 lg:p-3 shadow-lg hover:shadow-xl active:shadow-2xl rounded-md ${props.className}`}
         disabled={props.disabled}
         onClick={props.click}
       >

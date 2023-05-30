@@ -7,9 +7,7 @@ import { Menu } from "../menu/menu";
 export function Header(props: { className: string }): JSX.Element {
   return (
     <div
-      className={
-        props.className + " sticky md:static flex items-center bg-red md:bg-white py-2 md:py-4 lg:py-8 top-0 z-50"
-      }
+      className={`sticky md:static flex items-center bg-red md:bg-white-shade py-2 md:py-4 lg:py-8 top-0 z-50 ${props.className}`}
     >
       <Link href={"/"} passHref>
         <div className="flex">
