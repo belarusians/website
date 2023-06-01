@@ -1,16 +1,38 @@
-const beautifulButtonColor = {
-  first: "#ac28e1",
-  second: "#4128e1",
-  third: "#1198b7",
-  fourth: "#0cb697",
-};
-
 const redColor = {
   first: "#ff1111",
   second: "#b40000",
   third: "#ff0000",
   fourth: "#af0000",
 };
+
+const beautifulButtonColors = [
+  {
+    first: "#e1bc28",
+    second: "#28e14d",
+    third: "#115eb7",
+    fourth: "#720cb6",
+  },
+  {
+    first: "#e12828",
+    second: "#e12897",
+    third: "#b78811",
+    fourth: "#0c2eb6",
+  },
+  {
+    first: "#2885e1",
+    second: "#28e163",
+    third: "#11b727",
+    fourth: "#0c2eb6",
+  },
+  {
+    first: "#ac28e1",
+    second: "#4128e1",
+    third: "#1198b7",
+    fourth: "#0cb697",
+  },
+];
+
+const beautifulButtonColor = beautifulButtonColors[Math.floor(Math.random() * beautifulButtonColors.length)];
 
 /** @type {import("tailwindcss").Config} */
 module.exports = {
