@@ -34,7 +34,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       />
       {DISABLE_GOOGLE_TAG ? null : <GoogleTag />}
 
-      <div className={`${roboto.className} bg-white-shade`}>
+      <div className={`${roboto.className} bg-white-shade min-h-screen`}>
         <Layout lang={lang}>
           <Component {...pageProps} />
         </Layout>

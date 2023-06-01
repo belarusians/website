@@ -20,7 +20,7 @@ module.exports = {
       red: "#ed1c24",
       "red-shade": "#af0000",
       white: "#ffffff",
-      "white-shade": "#fcfcfc",
+      "white-shade": "#fbfbfb",
       black: "#231f20",
       "black-tint": "#333333",
       grey: "rgb(128, 128, 128)",
