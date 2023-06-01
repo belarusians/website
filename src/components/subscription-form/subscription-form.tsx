@@ -3,6 +3,7 @@ import * as React from "react";
 import { ClientOnly } from "../client-only/client-only";
 import { isEmailValid } from "../../lib/email";
 import { Button } from "../button/button";
+import H2 from "../headinds/h2";
 
 export function SubscriptionForm(): React.JSX.Element {
   const emailInputId = "email-input";
@@ -58,7 +59,7 @@ export function SubscriptionForm(): React.JSX.Element {
 
   return (
     <>
-      <h2 className="text-xl text-center font-medium md:text-3xl mb-2">{t("subscribe-title")}</h2>
+      <H2 className="text-center">{t("subscribe-title")}</H2>
       <div className="flex flex-col gap-4 items-center">
         <div className="text-center md:text-xl lg:w-96 mb-2">{t("subscribe-text")}</div>
         <div className="flex flex-row gap-3 justify-center md:gap-4 w-full">
