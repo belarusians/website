@@ -42,8 +42,11 @@ function OpenedMenu(): JSX.Element {
   return (
     <div className="bg-red flex flex-col items-center w-full top-[56px] left-0 absolute z-40 divide-solid divide-white divide-y">
       <LanguageSelector className="text-white py-4" />
-      <Link className="text-white py-4 text-xl" href={"/about-us"}>
+      <Link className="text-white text-xl py-4" href={"/about-us"}>
         {t("about-us")}
+      </Link>
+      <Link className="text-white text-xl py-4" href={"/vacancies"}>
+        {t("vacancies")}
       </Link>
       <Link
         className="text-white py-4 text-xl"

@@ -11,9 +11,12 @@ export function DesktopMenu(): JSX.Element {
     <div className="flex items-center text-red gap-4">
       <BeautifulButton className="font-normal" trackingName="join-button" label={t("join-us")} link={"/join-us"} />
 
-      <div className="divide-solid divide-red divide-x">
+      <div className="lg:text-lg divide-solid divide-red divide-x">
         <Link className="pr-2" href={"/about-us"}>
           {t("about-us")}
+        </Link>
+        <Link className="px-2" href={"/vacancies"}>
+          {t("vacancies")}
         </Link>
         <Link className="pl-2" data-umami-event="donate-us" target="_blank" href={"https://bunq.me/VerenigingMARA"}>
           {t("donate-us")}
