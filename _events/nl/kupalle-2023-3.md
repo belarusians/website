@@ -12,7 +12,7 @@ description: "Tickets, schema en alle basisinformatie over de derde dag van het 
 
 # Kupalle op de Noordzee 2023 met Naviband
 
-Vrienden! Wij, de vzw “MARA - de eerste vereniging van Belarusen in Nederland”, nodigen u uit op Kupalle aan de Noordzee!
+Vrienden! Wij, de “MARA - de eerste vereniging van Belarusen in Nederland”, nodigen u uit op Kupalle aan de Noordzee!
 Dit is een van de mooiste feesten in Belarus, laten we voor de derde keer samenkomen en onszelf en onze families het gevoel van ons moederland geven.
 
 Net als voorheen nodigen we onze vluchtelingen uit op Kupalle. En we zijn erg blij dat Mara de mogelijkheid heeft om de ov-kosten naartoe te betalen voor degenen die in de azielzoekerscentra wonen.
