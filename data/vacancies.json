@@ -2,94 +2,82 @@
   {
     "id": "1",
     "be": {
-      "title": "Group Coordinator/Committee Coordinator",
+      "title": "Распрацоўшчык",
       "tasks": [
         {
-          "title": "Communication",
-          "description": "Coordinators are responsible for maintaining communication between members of the group or committee. This can involve setting up regular meetings, creating agendas, and ensuring that all members are aware of upcoming events and deadlines."
+          "title": "Тэхналогіі",
+          "description": "Наш сайт напісаны на Typescript + NextJS + TailwindCSS. Наш бот напісаны на Python. Але ніякіх абмежаванняў няма: наступныя праекты мы гатовы распрацоўваць на любых тэхналогіях. Галоўнае каб яны адпавядалі развазе. Таму мы не маем жорсткіх патрабаванняў для суіскальніка."
         },
         {
-          "title": "Planning",
-          "description": "Coordinators are often responsible for planning and organizing events or projects. This can include creating timelines, delegating tasks, and ensuring that all necessary resources are available."
+          "title": "Бяспека ПА",
+          "description": "Мы дзейнічаем у асабліва небяспечным поле, таму кожны крок у распрацоўке абумоўлены бяспекай. Мы прытрымліваемся least privilege principal і сьбіраем як мага меньш дадзеных, каб потым не мець праблемаў з іх захаваньнем. Таго ж самага мы будзем патрабаваць і ад суіскальніка."
         },
         {
-          "title": "Record-Keeping",
-          "description": "Coordinators are responsible for keeping accurate records of all group or committee activities. This can include meeting minutes, attendance records, and financial records."
+          "title": "Асабістая бяспека",
+          "description": "Рэпазіторый нашага сайту адчынены. Такім чынам мы паказваем, што мы празрыстыя і не робім нічога дрэннага. Але наступствам гэтага з'яўляецца дэананімізацыя распрацоўшчыкаў сайта. Суіскальнік павінен гэта разумець. Але мы гатовые разглядзець іншыя падыходы ў дачыненні да іншых праграмных праектаў унутры Мары."
         },
         {
-          "title": "Liaison",
-          "description": "Coordinators may serve as a liaison between the group or committee and other organizations or individuals. This can involve networking, building relationships, and representing the group or committee at external events."
+          "title": "Мова камунікацыі",
+          "description": "Унутры мы размаўляем на беларускай і рускай мовах. Але гэта не абавязковае патрабаванне, усі мы валодаем ангельскай на добрым узроўні."
         },
         {
-          "title": "Conflict Resolution",
-          "description": "Coordinators may be responsible for mediating conflicts or disagreements within the group or committee. This can involve listening to different perspectives, finding common ground, and proposing solutions."
-        },
-        {
-          "title": "Evaluation",
-          "description": "Coordinators may be responsible for evaluating the effectiveness of the group or committee. This can involve assessing progress towards goals, identifying areas for improvement, and making recommendations for future activities."
+          "title": "Крэатыўнасьць і свабода",
+          "description": "Мы прытрымліваемся пазіцыі, што чалавек максімальна раскрываецца ў свабодным акружэнні. Таму мы не маем жорсткіх патрабаванняў да распрацоўшчыкаў. Галоўнае, каб ён быў гатовы працаваць у камандзе і меў жаданьне развіваць Мару і беларускую суполку."
         }
       ],
-      "description": "Overall, the role of a Group Coordinator or Committee Coordinator is to facilitate effective communication, planning, and organization within the group or committee, and to ensure that all members are working together towards a common goal."
+      "description": "Нам патрэбен чалавек, які зможа дапамагаць нам развіваць нашую Мару. На дадзены момант інфраструктура не вельмі вялікая, але ёсьць шмат плянаў і ідэй."
     },
     "nl": {
-      "title": "Group Coordinator/Committee Coordinator",
+      "title": "Software ontwikkelaar",
       "tasks": [
         {
-          "title": "Communication",
-          "description": "Coordinators are responsible for maintaining communication between members of the group or committee. This can involve setting up regular meetings, creating agendas, and ensuring that all members are aware of upcoming events and deadlines."
+          "title": "Technologie",
+          "description": "Onze site is geschreven in Typescript + NextJS + TailwindCSS. Onze bot is geschreven in Python. Maar er zijn geen beperkingen: we zijn klaar om de volgende projecten op elke technologie te ontwikkelen. Het belangrijkste is dat ze worden gebruikt in overeenstemming met gezond verstand. Daarom zijn er geen strenge eisen aan de aanvrager."
         },
         {
-          "title": "Planning",
-          "description": "Coordinators are often responsible for planning and organizing events or projects. This can include creating timelines, delegating tasks, and ensuring that all necessary resources are available."
+          "title": "Softwarebeveiliging",
+          "description": "We werken in een bijzonder gevaarlijke omgeving, dus elke stap in de ontwikkeling wordt bepaald door beveiliging. We houden ons aan het principe van de minste privileges en verzamelen zo min mogelijk gegevens, zodat er geen probleem is om deze later op te slaan. Hetzelfde wordt van de aanvrager verlangd."
         },
         {
-          "title": "Record-Keeping",
-          "description": "Coordinators are responsible for keeping accurate records of all group or committee activities. This can include meeting minutes, attendance records, and financial records."
+          "title": "Persoonlijke beveiliging",
+          "description": "De repository van onze site is open. Op deze manier laten we zien dat we transparant zijn en niets verkeerds doen. Maar het gevolg hiervan is de deanonimisering van de site-ontwikkelaars. De aanvrager zou dit moeten begrijpen. Maar we zijn bereid om andere benaderingen voor Mary's softwareprojecten"
         },
         {
-          "title": "Liaison",
-          "description": "Coordinators may serve as a liaison between the group or committee and other organizations or individuals. This can involve networking, building relationships, and representing the group or committee at external events."
+          "title": "Communicatietaal",
+          "description": "Binnen spreken we Belarusisch en Russisch. Maar dat is geen vereiste, we spreken allemaal op een goed niveau Engels."
         },
         {
-          "title": "Conflict Resolution",
-          "description": "Coordinators may be responsible for mediating conflicts or disagreements within the group or committee. This can involve listening to different perspectives, finding common ground, and proposing solutions."
-        },
-        {
-          "title": "Evaluation",
-          "description": "Coordinators may be responsible for evaluating the effectiveness of the group or committee. This can involve assessing progress towards goals, identifying areas for improvement, and making recommendations for future activities."
+          "title": "Creativiteit en vrijheid",
+          "description": "We houden ons aan het standpunt dat een persoon zich zoveel mogelijk openbaart in een vrije omgeving. Daarom stellen we geen strikte eisen aan een ontwikkelaar. Het belangrijkste is dat hij klaar is om in een team te werken en heeft de wens om Mara en de Belarusische gemeenschap in Nederland als geheel te ontwikkelen."
         }
       ],
-      "description": "Overall, the role of a Group Coordinator or Committee Coordinator is to facilitate effective communication, planning, and organization within the group or committee, and to ensure that all members are working together towards a common goal."
+      "description": "We hebben een ontwikkelaar nodig om ons te helpen onze Mara te ontwikkelen. Op dit moment is de infrastructuur niet erg groot, maar er zijn veel plannen en ideeën."
     },
     "ru": {
-      "title": "Group Coordinator/Committee Coordinator",
+      "title": "Разработчик",
       "tasks": [
         {
-          "title": "Communication",
-          "description": "Coordinators are responsible for maintaining communication between members of the group or committee. This can involve setting up regular meetings, creating agendas, and ensuring that all members are aware of upcoming events and deadlines."
+          "title": "Технологии",
+          "description": "Наш сайт написан на Typescript + NextJS + TailwindCSS. Наш бот написан на Python. Но ограничений нет: мы готовы разрабатывать следующие проекты на любой технологии. Главное, чтобы они использовались в соответствовии со здравым смыслом. Поэтому жёстких требований для соискателя нет."
         },
         {
-          "title": "Planning",
-          "description": "Coordinators are often responsible for planning and organizing events or projects. This can include creating timelines, delegating tasks, and ensuring that all necessary resources are available."
+          "title": "Безопасность ПО",
+          "description": "Мы работаем в особо опасной сфере, поэтому каждый шаг в разработке определяется безопасностью. Мы придерживаемся принципа наименьших привилегий и собираем как можно меньше данных, чтобы потом не было проблем с их сохранением. То же требуется и от соискателя."
         },
         {
-          "title": "Record-Keeping",
-          "description": "Coordinators are responsible for keeping accurate records of all group or committee activities. This can include meeting minutes, attendance records, and financial records."
+          "title": "Личная безопасность",
+          "description": "Репозиторий нашего сайта открыт. Таким образом мы показываем, что мы прозрачны и не делаем ничего плохого. Но следствием этого является деанонимизация разработчиков сайта. Соискатель должен это понимать. Но мы готовы рассмотреть другие подходы для программных проектов Мары"
         },
         {
-          "title": "Liaison",
-          "description": "Coordinators may serve as a liaison between the group or committee and other organizations or individuals. This can involve networking, building relationships, and representing the group or committee at external events."
+          "title": "Язык коммуникации",
+          "description": "Внутри мы говорим на беларуском и русском языках. Но это не обязательное требование, все мы владеем английским на хорошем уровне."
         },
         {
-          "title": "Conflict Resolution",
-          "description": "Coordinators may be responsible for mediating conflicts or disagreements within the group or committee. This can involve listening to different perspectives, finding common ground, and proposing solutions."
-        },
-        {
-          "title": "Evaluation",
-          "description": "Coordinators may be responsible for evaluating the effectiveness of the group or committee. This can involve assessing progress towards goals, identifying areas for improvement, and making recommendations for future activities."
+          "title": "Креативность и свобода",
+          "description": "Мы придерживаемся позиции, чтобы человек максимально раскрывает себя в свободной среде. Поэтому у нас нет жёстких требований к разработчику. Главное, чтобы он был готов работать в команде и имел желание развивать Мару и белорусское сообщество в Нидерландах в целом."
         }
       ],
-      "description": "Overall, the role of a Group Coordinator or Committee Coordinator is to facilitate effective communication, planning, and organization within the group or committee, and to ensure that all members are working together towards a common goal."
+      "description": "Нам нужен разработчик, который поможет нам развивать нашу Мару. На данный момент инфраструктура не очень большая, но планов и идей много."
     }
   }
 ]
