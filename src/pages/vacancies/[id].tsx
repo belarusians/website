@@ -7,12 +7,16 @@ import { CommonPageProps, Lang } from "../../components/types";
 import { Section } from "../../components/section/section";
 import H1 from "../../components/headinds/h1";
 import { Head } from "../../components/head/head";
+import { useTranslation } from "next-i18next";
+import H3 from "../../components/headinds/h3";
 
 interface VacancyPageProps extends CommonPageProps {
   vacancy?: Vacancy;
 }
 
 export default function VacancyPage({ vacancy, lang }: VacancyPageProps): React.JSX.Element {
+  const { t } = useTranslation("vacancies");
+
   if (!vacancy) {
     return <h1>404</h1>;
   }
@@ -23,13 +27,30 @@ export default function VacancyPage({ vacancy, lang }: VacancyPageProps): React.
       <Section>
         <div className="rounded-md shadow-xl bg-white font-light text-black p-4 md:p-8">
           <H1 className="mb-4 md:mb-8">{vacancy.title}</H1>
-          <div className="grid grid-cols-1 md:grid-cols-6 gap-x-2 gap-y-2 md:gap-y-3 mb-3">
+          <div className="grid grid-cols-1 md:grid-cols-6 gap-x-2 gap-y-2 md:gap-y-3 mb-8">
             {vacancy.tasks.map((task, i) => (
               <React.Fragment key={i}>
                 <div className="col-span-1 text-red break-words font-medium basis-1">{task.title}</div>
                 <div className="col-span-5">{task.description}</div>
               </React.Fragment>
             ))}
+          </div>
+          <div className="flex flex-col justify-items-start gap-2">
+            <H3>{t("feedback-form-title")}</H3>
+            <label>
+              <span>{t("feedback-form-contact")}</span>
+              <input
+                type="text"
+                className="transition-all w-full rounded-md border-light-grey focus:border-grey focus:ring focus:ring-grey focus:ring-opacity-20"
+              />
+            </label>
+            <label>
+              <span>{t("feedback-form-additional")}</span>
+              <textarea className="transition-all w-full rounded-md border-light-grey focus:border-grey focus:ring focus:ring-grey focus:ring-opacity-20" />
+            </label>
+            <button className="transition-all self-start p-2 lg:px-3 rounded-md border border-light-grey focus:border-grey focus:ring focus:ring-grey focus:ring-opacity-20">
+              {t("feedback-form-button")}
+            </button>
           </div>
         </div>
       </Section>
@@ -56,7 +77,7 @@ export async function getStaticProps({
     props: {
       lang,
       vacancy,
-      ...(await serverSideTranslations(locale || "be", ["common"])),
+      ...(await serverSideTranslations(locale || "be", ["common", "vacancies"])),
     },
   };
 }
