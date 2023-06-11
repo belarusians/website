@@ -12,9 +12,11 @@ export function Layout(props: LayoutProps): JSX.Element {
   return (
     <>
       <Head lang={props.lang} />
-      <Header className="lg:container px-3" />
-      {props.children}
-      <Footer className="lg:container px-3" />
+      <div className="flex flex-col justify-between min-h-screen bg-white-shade">
+        <Header className="lg:container" />
+        <main className="mb-auto">{props.children}</main>
+        <Footer className="lg:container" />
+      </div>
     </>
   );
 }

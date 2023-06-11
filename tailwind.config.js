@@ -13,8 +13,8 @@ const beautifulButtonColors = [
     fourth: "#720cb6",
   },
   {
-    first: "#e12828",
-    second: "#e12897",
+    first: "#e15328",
+    second: "#bb20b3",
     third: "#b78811",
     fourth: "#0c2eb6",
   },
