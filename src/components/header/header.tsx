@@ -4,10 +4,10 @@ import Link from "next/link";
 import { Logo } from "./logo";
 import { Menu } from "../menu/menu";
 
-export function Header(props: { className: string }): JSX.Element {
+export function Header(props: { className: string }): React.JSX.Element {
   return (
     <header
-      className={`sticky md:static flex items-center bg-red md:bg-white-shade p-2 md:py-4 lg:py-8 top-0 z-50 ${props.className}`}
+      className={`sticky md:static flex items-center bg-red md:bg-white-shade px-3 py-2 md:py-4 lg:py-8 top-0 z-50 ${props.className}`}
     >
       <Link href={"/"} passHref>
         <div className="flex">
