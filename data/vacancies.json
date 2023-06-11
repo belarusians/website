@@ -1,0 +1,95 @@
+[
+  {
+    "id": "1",
+    "be": {
+      "title": "Group Coordinator/Committee Coordinator",
+      "tasks": [
+        {
+          "title": "Communication",
+          "description": "Coordinators are responsible for maintaining communication between members of the group or committee. This can involve setting up regular meetings, creating agendas, and ensuring that all members are aware of upcoming events and deadlines."
+        },
+        {
+          "title": "Planning",
+          "description": "Coordinators are often responsible for planning and organizing events or projects. This can include creating timelines, delegating tasks, and ensuring that all necessary resources are available."
+        },
+        {
+          "title": "Record-Keeping",
+          "description": "Coordinators are responsible for keeping accurate records of all group or committee activities. This can include meeting minutes, attendance records, and financial records."
+        },
+        {
+          "title": "Liaison",
+          "description": "Coordinators may serve as a liaison between the group or committee and other organizations or individuals. This can involve networking, building relationships, and representing the group or committee at external events."
+        },
+        {
+          "title": "Conflict Resolution",
+          "description": "Coordinators may be responsible for mediating conflicts or disagreements within the group or committee. This can involve listening to different perspectives, finding common ground, and proposing solutions."
+        },
+        {
+          "title": "Evaluation",
+          "description": "Coordinators may be responsible for evaluating the effectiveness of the group or committee. This can involve assessing progress towards goals, identifying areas for improvement, and making recommendations for future activities."
+        }
+      ],
+      "description": "Overall, the role of a Group Coordinator or Committee Coordinator is to facilitate effective communication, planning, and organization within the group or committee, and to ensure that all members are working together towards a common goal."
+    },
+    "nl": {
+      "title": "Group Coordinator/Committee Coordinator",
+      "tasks": [
+        {
+          "title": "Communication",
+          "description": "Coordinators are responsible for maintaining communication between members of the group or committee. This can involve setting up regular meetings, creating agendas, and ensuring that all members are aware of upcoming events and deadlines."
+        },
+        {
+          "title": "Planning",
+          "description": "Coordinators are often responsible for planning and organizing events or projects. This can include creating timelines, delegating tasks, and ensuring that all necessary resources are available."
+        },
+        {
+          "title": "Record-Keeping",
+          "description": "Coordinators are responsible for keeping accurate records of all group or committee activities. This can include meeting minutes, attendance records, and financial records."
+        },
+        {
+          "title": "Liaison",
+          "description": "Coordinators may serve as a liaison between the group or committee and other organizations or individuals. This can involve networking, building relationships, and representing the group or committee at external events."
+        },
+        {
+          "title": "Conflict Resolution",
+          "description": "Coordinators may be responsible for mediating conflicts or disagreements within the group or committee. This can involve listening to different perspectives, finding common ground, and proposing solutions."
+        },
+        {
+          "title": "Evaluation",
+          "description": "Coordinators may be responsible for evaluating the effectiveness of the group or committee. This can involve assessing progress towards goals, identifying areas for improvement, and making recommendations for future activities."
+        }
+      ],
+      "description": "Overall, the role of a Group Coordinator or Committee Coordinator is to facilitate effective communication, planning, and organization within the group or committee, and to ensure that all members are working together towards a common goal."
+    },
+    "ru": {
+      "title": "Group Coordinator/Committee Coordinator",
+      "tasks": [
+        {
+          "title": "Communication",
+          "description": "Coordinators are responsible for maintaining communication between members of the group or committee. This can involve setting up regular meetings, creating agendas, and ensuring that all members are aware of upcoming events and deadlines."
+        },
+        {
+          "title": "Planning",
+          "description": "Coordinators are often responsible for planning and organizing events or projects. This can include creating timelines, delegating tasks, and ensuring that all necessary resources are available."
+        },
+        {
+          "title": "Record-Keeping",
+          "description": "Coordinators are responsible for keeping accurate records of all group or committee activities. This can include meeting minutes, attendance records, and financial records."
+        },
+        {
+          "title": "Liaison",
+          "description": "Coordinators may serve as a liaison between the group or committee and other organizations or individuals. This can involve networking, building relationships, and representing the group or committee at external events."
+        },
+        {
+          "title": "Conflict Resolution",
+          "description": "Coordinators may be responsible for mediating conflicts or disagreements within the group or committee. This can involve listening to different perspectives, finding common ground, and proposing solutions."
+        },
+        {
+          "title": "Evaluation",
+          "description": "Coordinators may be responsible for evaluating the effectiveness of the group or committee. This can involve assessing progress towards goals, identifying areas for improvement, and making recommendations for future activities."
+        }
+      ],
+      "description": "Overall, the role of a Group Coordinator or Committee Coordinator is to facilitate effective communication, planning, and organization within the group or committee, and to ensure that all members are working together towards a common goal."
+    }
+  }
+]
