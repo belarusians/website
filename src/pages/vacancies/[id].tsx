@@ -6,18 +6,28 @@ import { getVacancies, Vacancy } from "../../lib/vacancies";
 import { CommonPageProps, Lang } from "../../components/types";
 import { Section } from "../../components/section/section";
 import H1 from "../../components/headinds/h1";
+import { Head } from "../../components/head/head";
+import { useTranslation } from "next-i18next";
 
 interface VacancyPageProps extends CommonPageProps {
   vacancy?: Vacancy;
 }
 
-export default function VacancyPage({ vacancy }: VacancyPageProps): React.JSX.Element {
+export default function VacancyPage({ vacancy, lang }: VacancyPageProps): React.JSX.Element {
+  const { t } = useTranslation("vacancies");
+
   if (!vacancy) {
     return <h1>404</h1>;
   }
 
   return (
     <>
+      <Head
+        lang={lang}
+        title={t("meta-title") || undefined}
+        description={t("meta-description") || undefined}
+        imagePath="/abstract/ribbons.jpg"
+      />
       <Section>
         <div className="rounded-md shadow-xl bg-white font-light text-black p-4 md:p-8">
           <H1 className="mb-4 md:mb-8">{vacancy.title}</H1>

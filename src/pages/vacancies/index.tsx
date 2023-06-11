@@ -14,23 +14,23 @@ interface VacanciesPageProps extends CommonPageProps {
   vacancies: Vacancy[];
 }
 
-export default function VacanciesPage(props: VacanciesPageProps) {
+export default function VacanciesPage({ lang, vacancies }: VacanciesPageProps) {
   const { t } = useTranslation("vacancies");
 
   return (
     <>
       <Head
-        lang={props.lang}
+        lang={lang}
         title={t("meta-title") || undefined}
         description={t("meta-description") || undefined}
-        imagePath="/news/heart.jpg"
+        imagePath="/abstract/ribbons.jpg"
       />
       <Section>
-        {props.vacancies.length ? (
+        {vacancies.length ? (
           <>
             <H1>{t("heading")}</H1>
             <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {props.vacancies.map((vacancy, i) => (
+              {vacancies.map((vacancy, i) => (
                 <Link href={`/vacancies/${vacancy.id}`} key={i}>
                   <VacancyPreview vacancy={vacancy} />
                 </Link>
