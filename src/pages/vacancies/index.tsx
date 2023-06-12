@@ -28,11 +28,11 @@ export default function VacanciesPage({ lang, vacancies }: VacanciesPageProps) {
       <Section>
         {vacancies.length ? (
           <>
-            <H1>{t("heading")}</H1>
+            <H1 className="mb-2 md:mb-8">{t("heading")}</H1>
             <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {vacancies.map((vacancy, i) => (
                 <Link href={`/vacancies/${vacancy.id}`} key={i}>
-                  <VacancyPreview vacancy={vacancy} />
+                  <VacancyPreview vacancy={vacancy} buttonLabel={t("more-button")} />
                 </Link>
               ))}
             </div>
