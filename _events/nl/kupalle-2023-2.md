@@ -7,7 +7,7 @@ eventDate: "2023-07-01T14:00:00.000Z"
 location: "The Millers Beachclub, Strandslag 7, Den Haag"
 ticketsLink: "https://shop.ikbenaanwezig.nl/tickets/event/kupalle-2023-early-birds"
 tags: []
-description: "Tickets, schema en alle basisinformatie over de derde dag van het festival van de Belarusische cultuur «Kupalle op de Noordzee 2023» met Naviband"
+description: "Tickets, schema en alle basisinformatie over de tweede dag van het festival van de Belarusische cultuur «Kupalle op de Noordzee 2023» met Naviband"
 ---
 
 # Kupalle op de Noordzee 2023 met Naviband

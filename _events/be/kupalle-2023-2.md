@@ -7,7 +7,7 @@ eventDate: "2023-07-01T14:00:00.000Z"
 location: "The Millers Beachclub, Strandslag 7, Den Haag"
 ticketsLink: "https://shop.ikbenaanwezig.nl/tickets/event/kupalle-2023-early-birds"
 tags: []
-description: "Квіткі, расклад і ўся асноўная інфармацыя пра трэці дзень фестываля беларускай культуры «Купалле на Паўночным моры 2023» з Naviband"
+description: "Квіткі, расклад і ўся асноўная інфармацыя пра другі дзень фестываля беларускай культуры «Купалле на Паўночным моры 2023» з Naviband"
 ---
 
 # Купалле на Паўночным моры 2023 з Naviband
