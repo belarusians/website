@@ -1,6 +1,12 @@
 import { Lang } from "../components/types";
 import vacancies from "../../data/vacancies.json";
 
+export interface VacancyApplication {
+  id: string;
+  contact: string;
+  additionalInfo?: string;
+}
+
 interface VacancyMeta {
   title: string;
   description: string;
