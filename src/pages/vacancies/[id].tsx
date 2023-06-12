@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import { GetStaticPathsContext, GetStaticPathsResult, GetStaticPropsContext, GetStaticPropsResult } from "next/types";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
@@ -16,9 +17,37 @@ interface VacancyPageProps extends CommonPageProps {
 
 export default function VacancyPage({ vacancy, lang }: VacancyPageProps): React.JSX.Element {
   const { t } = useTranslation("vacancies");
+  const [formContact, setFormContact] = useState("");
+  const [formAdditional, setFormAdditional] = useState("");
+  const [isValid, setIsValid] = useState(true);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   if (!vacancy) {
     return <h1>404</h1>;
+  }
+
+  function submit() {
+    if (!formContact || !vacancy?.id) {
+      setIsValid(false);
+      return;
+    }
+
+    setIsValid(true);
+
+    fetch("/api/vacancies/apply", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ contact: formContact, additional: formAdditional, id: vacancy.id }),
+    }).then((response) => {
+      if (!response.ok) {
+        setIsValid(false);
+        setIsSuccess(false);
+      } else {
+        setIsSuccess(true);
+      }
+    });
   }
 
   return (
@@ -37,20 +66,36 @@ export default function VacancyPage({ vacancy, lang }: VacancyPageProps): React.
           </div>
           <div className="flex flex-col justify-items-start gap-2">
             <H3>{t("feedback-form-title")}</H3>
-            <label>
-              <span>{t("feedback-form-contact")}</span>
-              <input
-                type="text"
-                className="transition-all w-full rounded-md border-light-grey focus:border-grey focus:ring focus:ring-grey focus:ring-opacity-20"
-              />
-            </label>
-            <label>
-              <span>{t("feedback-form-additional")}</span>
-              <textarea className="transition-all w-full rounded-md border-light-grey focus:border-grey focus:ring focus:ring-grey focus:ring-opacity-20" />
-            </label>
-            <button className="transition-all self-start p-2 lg:px-3 rounded-md border border-light-grey focus:border-grey focus:ring focus:ring-grey focus:ring-opacity-20">
-              {t("feedback-form-button")}
-            </button>
+            {isSuccess ? (
+              <span>{t("feedback-form-success")}</span>
+            ) : (
+              <>
+                <label>
+                  <span>{t("feedback-form-contact")}</span>
+                  <span className="text-red"> *</span>
+                  <input
+                    onChange={(event) => setFormContact(event.target.value)}
+                    type="text"
+                    className={`transition-all w-full rounded-md border-light-grey focus:border-grey focus:ring focus:ring-grey focus:ring-opacity-20 ${
+                      isValid ? "border-light-grey" : "border-red animate-shake"
+                    }`}
+                  />
+                </label>
+                <label>
+                  <span>{t("feedback-form-additional")}</span>
+                  <textarea
+                    onChange={(event) => setFormAdditional(event.target.value)}
+                    className="transition-all w-full rounded-md border-light-grey focus:border-grey focus:ring focus:ring-grey focus:ring-opacity-20"
+                  />
+                </label>
+                <button
+                  className="transition-all self-start p-2 lg:px-3 rounded-md border border-light-grey focus:border-grey focus:ring focus:ring-grey focus:ring-opacity-20"
+                  onClick={submit}
+                >
+                  {t("feedback-form-button")}
+                </button>
+              </>
+            )}
           </div>
         </div>
       </Section>
