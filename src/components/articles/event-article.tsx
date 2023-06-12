@@ -32,7 +32,7 @@ export function EventArticle(props: ArticleProps): JSX.Element {
           />
         </div>
         <div
-          className="max-w-full prose prose-sm md:prose-base prose-a:text-red prose-a:break-words prose-blockquote:border-l-2 prose-blockquote:border-red md:basis-4/6 lg:basis-4/5"
+          className="prose-sm md:prose prose-hr:my-4 prose-a:text-red prose-a:break-words prose-blockquote:border-l-2 prose-blockquote:border-red md:basis-4/6 lg:basis-4/5"
           dangerouslySetInnerHTML={{ __html: props.event.content }}
         ></div>
       </div>
