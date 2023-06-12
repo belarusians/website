@@ -18,6 +18,11 @@ const nextConfig = {
         destination: "/events/rsp-03-25",
         permanent: true,
       },
+      {
+        source: "/events/kupalle-2023-3",
+        destination: "/events/kupalle-2023-2",
+        permanent: true,
+      },
     ];
   },
   i18n,
