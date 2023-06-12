@@ -9,8 +9,6 @@ tags: [featured-main]
 
 # Kupala op de Noordzee 2023
 
-**Bijgewerkt: helaas kunnen we de 3-daagse vakantie niet doen zoals gepland**
-
 ### Dag één 30.06 (wordt binnenkort bekend gemaakt)
 - Concert met klassieke muziek "Music for Belarus"
 - Belarusisch diner met nationale gerechten
