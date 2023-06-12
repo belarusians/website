@@ -12,7 +12,7 @@ export function Layout(props: LayoutProps): JSX.Element {
   return (
     <>
       <Head lang={props.lang} />
-      <div className="flex flex-col justify-between min-h-screen bg-white-shade">
+      <div className="flex flex-col justify-between min-h-screen">
         <Header className="lg:container" />
         <main className="mb-auto">{props.children}</main>
         <Footer className="lg:container" />

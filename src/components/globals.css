@@ -11,3 +11,7 @@
     quotes: none !important;
   }
 }
+
+html {
+  @apply bg-white-shade;
+}
