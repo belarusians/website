@@ -23,7 +23,9 @@ export function Button(props: ButtonProps): JSX.Element {
     return (
       <Link target={props.target} href={props.link} {...buttonAttributes}>
         <button
-          className={`transition-all bg-white p-2 lg:p-3 shadow-lg hover:shadow-xl active:shadow-2xl rounded-md ${props.className}`}
+          className={`transition-all bg-white p-2 lg:p-3 shadow-lg hover:shadow-xl active:shadow-2xl rounded-md ${
+            props.className ?? ""
+          }`}
           disabled={props.disabled}
           onClick={props.click}
         >
@@ -34,7 +36,9 @@ export function Button(props: ButtonProps): JSX.Element {
   } else {
     return (
       <button
-        className={`transition-all bg-white p-2 lg:p-3 shadow-lg hover:shadow-xl active:shadow-2xl rounded-md ${props.className}`}
+        className={`transition-all bg-white p-2 lg:p-3 shadow-lg hover:shadow-xl active:shadow-2xl rounded-md ${
+          props.className ?? ""
+        }`}
         disabled={props.disabled}
         onClick={props.click}
       >
