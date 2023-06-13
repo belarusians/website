@@ -12,12 +12,12 @@ description: "Tickets en algemene informatie over de eerste dag van «Kupalle op
 
 # Tickets en algemene informatie over de eerste dag van «Kupalle op de Noordzee 2023» en het Music for Belarus concert
 
-Сябры! Мы, некамерцыйная арганізацыя “МАРА - першае аб’яднанне беларусаў Нідэрландаў”, zijn verheugd u uit te nodigen op de eerste dag van de viering van Kupala!
+Vrienden! Wij, “MARA - de eerste vereniging van Belarusen in Nederland”, zijn verheugd u uit te nodigen op de eerste dag van de viering van Kupala!
 
-Het evenement is opgedragen aan politieke gevangenen in Belarus. Hun foto's en verhalen over de acties op het podium leiden tot de uiteindelijke musical- en dansvoorstelling "I Am". Samen met de parels van wereldklassiekers laat het concertprogramma de luisteraar kennismaken met Belarusische volksmuziek en moderne muziek, evenals met de traditionele instrumentencimbalen.
+Het evenement is gewijd aan politieke gevangenen in Belarus. Hun foto's en verhalen, door de actie op het podium, leiden tot de sluitende muzikale en dansvoorstelling "Ik ben er". Het concertprogramma, samen met de parels van wereldklassiekers, laat de luisteraar kennismaken met Belarusische volks en moderne muziek, evenals met het traditionele cimbaalinstrument.
 De originele combinatie van stem, vibrafoon en cimbalen fascineert en zorgt voor verbluffende klankcombinaties.
 
-Daarnaast organiseren we voorafgaand aan het concert een diner met de nationale Belarusische keuken, waar je even kunt terugkeren naar Native Kut, in ieder geval gastronomisch.
+Daarnaast organiseren we voorafgaand aan het concert een diner met de nationale Belarusische keuken, waar je even kunt terugkeren naar Moederland, in ieder geval gastronomisch.
 
 ### Datum
 30 juni. Het concert begint om 19:30 uur, maar we nodigen iedereen uit voor het diner om 17:00 uur. Het diner wordt ter plaatse apart betaald.
