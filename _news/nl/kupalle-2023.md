@@ -9,9 +9,9 @@ tags: [featured-main]
 
 # Kupala op de Noordzee 2023
 
-### Dag één 30.06 (wordt binnenkort bekend gemaakt)
-- Concert met klassieke muziek "Music for Belarus"
+### Dag één 30.06 [(details)](https://www.belarusians.nl/nl/events/kupalle-2023-1)
 - Belarusisch diner met nationale gerechten
+- Concert met klassieke muziek "Music for Belarus"
 
 ### Dag twee 01.07 [(details)](https://www.belarusians.nl/nl/events/kupalle-2023-2)
 - Traditioneel festival "Kupala op de Noordzee 2023". Kransen. Waarzeggerij. Beurs, masterclass keramiek en rariteiten van Belarusische ambachtslieden en kunstenaars. Zingen, dansen, cultureel programma voor het hele gezin :)

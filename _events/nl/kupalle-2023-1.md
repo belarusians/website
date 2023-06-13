@@ -24,8 +24,8 @@ Net als voorheen nodigen we onze vluchtelingen uit op Kupalle. En we zijn erg bl
 [The Grey Space in the Middle, Paviljoensgracht 20-24, 2512 BP, Den Haag](https://goo.gl/maps/Kmi2kzQXV2971sjG8)
 
 ### Programma van de eerste dag
-- **17:00 - 19:00** Diner van de Belarusische keuken.
-- **19:30 - 21:00** Een klassiek muziekconcert.
+- **17:00 - 19:00** Belarusisch diner met nationale gerechten.
+- **19:30 - 21:00** Concert met klassieke muziek "Music for Belarus".
 
 #### Details van een klassiek muziekconcert
 
