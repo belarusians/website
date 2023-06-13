@@ -25,8 +25,8 @@ Net als voorheen nodigen we onze vluchtelingen uit op Kupalle. En we zijn erg bl
 Strandslag 7, 2566 DP, Den Haag](https://maps.app.goo.gl/Dach3XgMAyCrBrMRA?g_st=ic)
 
 ### Programma 🌿🌿🌿
-- **16.00** Deuren gaan open
-- **17.00** Aanvang
+- **16:00** Deuren gaan open
+- **17:00** Aanvang
 - **17:00 - 19:00** Workshop kransen weven, een beurs van Belarusische ambachtslieden die in Nederland wonen, workshops keramiek en een workshop kaarsen voor kinderen, waarzeggerij, Kupalle-meditatie voor vrouwen op de kust.
 - **19:00** Opening van de Kupala feest, traditionele muziek en rondedansen.
 - **20:00 - 21:30** Concert door [NAVIBAND](https://www.instagram.com/naviband/) bij zonsondergang.
