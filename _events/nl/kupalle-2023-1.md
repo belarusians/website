@@ -1,16 +1,16 @@
 ---
 type: "event"
-title: "Kupalle op de Noordzee 2023. De eerste dag. Music for Belarus"
+title: "Kupala op de Noordzee 2023. De eerste dag. Music for Belarus"
 date: "2023-05-16"
 backgroundUrl: "/abstract/ribbons.jpg"
 eventDate: "2023-06-30T17:30:00.000Z"
 location: "The Grey Space in the Middle, Paviljoensgracht 20-24, Den Haag"
 ticketsLink: "https://shop.ikbenaanwezig.nl/tickets/event/music-for-belarus-2023"
 tags: []
-description: "Tickets en algemene informatie over de eerste dag van «Kupalle op de Noordzee 2023» en het Music for Belarus concert"
+description: "Tickets en algemene informatie over de eerste dag van «Kupala op de Noordzee 2023» en het Music for Belarus concert"
 ---
 
-# Tickets en algemene informatie over de eerste dag van «Kupalle op de Noordzee 2023» en het Music for Belarus concert
+# Tickets en algemene informatie over de eerste dag van «Kupala op de Noordzee 2023» en het Music for Belarus concert
 
 Vrienden! Wij, “MARA - de eerste vereniging van Belarusen in Nederland”, zijn verheugd u uit te nodigen op de eerste dag van de viering van Kupala!
 
