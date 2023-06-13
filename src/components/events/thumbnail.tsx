@@ -20,7 +20,7 @@ export function FutureEventThumbnail(props: EventThumbnailProps & { className?: 
 
   return (
     <Link
-      className="bg-white transition-all shadow-lg hover:shadow-xl hover:scale-101 rounded-md p-4 w-80 md:w-60"
+      className="bg-white transition-all shadow-lg hover:shadow-xl hover:scale-101 rounded-md p-4 w-full md:w-60"
       href={`/events/${props.event.slug}`}
     >
       <div className="">
