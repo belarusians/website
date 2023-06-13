@@ -13,7 +13,7 @@ tags: [featured-main]
 - Concert met klassieke muziek "Music for Belarus"
 - Belarusisch diner met nationale gerechten
 
-### Dag twee 01.07 [(details)](https://www.belarusians.nl/nl/events/kupalle-2023-3)
+### Dag twee 01.07 [(details)](https://www.belarusians.nl/nl/events/kupalle-2023-2)
 - Traditioneel festival "Kupala op de Noordzee 2023". Kransen. Waarzeggerij. Beurs, masterclass keramiek en rariteiten van Belarusische ambachtslieden en kunstenaars. Zingen, dansen, cultureel programma voor het hele gezin :)
 - Concert [NAVIBAND](https://www.instagram.com/naviband/) bij zonsondergang
 
