@@ -1,6 +1,6 @@
 ---
 type: "event"
-title: "Kupalle op de Noordzee 2023 met Naviband"
+title: "Kupalle op de Noordzee 2023. De tweede dag. Kupalle met Naviband."
 date: "2023-05-16"
 backgroundUrl: "/abstract/hand.jpg"
 eventDate: "2023-07-01T14:00:00.000Z"
@@ -10,7 +10,7 @@ tags: []
 description: "Tickets, schema en alle basisinformatie over de tweede dag van het festival van de Belarusische cultuur «Kupalle op de Noordzee 2023» met Naviband"
 ---
 
-# Kupalle op de Noordzee 2023 met Naviband
+# Kupalle op de Noordzee 2023. De tweede dag. Kupalle met Naviband.
 
 Vrienden! Wij, “MARA - de eerste vereniging van Belarusen in Nederland”, nodigen u uit op Kupalle aan de Noordzee!
 Dit is een van de mooiste feesten in Belarus, laten we voor de derde keer samenkomen en onszelf en onze families het gevoel van ons moederland geven.
