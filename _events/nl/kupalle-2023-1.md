@@ -27,7 +27,7 @@ Daarnaast organiseren we voorafgaand aan het concert een diner met de nationale 
 
 ### Programma van de eerste dag
 - **17:00 - 19:00** Belarusisch diner met nationale gerechten.
-- **19:30 - 21:00** Concert met klassieke muziek "Music for Belarus".
+- **19:30 - 20:30** Concert met klassieke muziek "Music for Belarus".
 
 #### Details van een klassiek muziekconcert
 
@@ -37,7 +37,7 @@ Bijdragers:
 * **Nadzeya Karakulka** - cimbaal
 * **Pavel Beliaev** - vibrafoon, percussie
 * **Alexandra Danshova** - piano
-* **Tanya Kupra** - performance
+* **Tanya Kupra** - performance, moderation
 
 Programma
 1. H. Villa-Lobos (1887-1959): **Aria (Cantilena) van Bachianas Brasileiras Nr.5**.
@@ -46,7 +46,7 @@ Programma
 4. V. Zhywalewski (1961*): **Pawej, wetryk, pawej** (Wee, windje, wee). Fantasie over een Belarusisch volksliedje
 5. **Ratschanka** (Kleine rivier), een Belarusisch volkslied. Bewerken V. Umaniez
 6. **Tschamu kalina dy ne chyrvona** ( Waarom is vlierbes niet rood?), een Belarusisch volkslied. Bewerken A. Danshova
-7. A. Danshova (1977*): **Cimbaal solo**. 
+7. A. Danshova (1977*): **Acting Hope Cimbaal solo**. 
 8. Performance "**Ik ben er**”, toegewijd aan de politieke gevangenen
 
 #### Meer informatie over de artiesten
@@ -89,7 +89,6 @@ professionele orkesten in Duitsland.
 ###### Alexandra Danshova, piano
 
 Alexandra Danshova is componist, performer, promotor en muziekleraar.
-Ze ontwikkelde een uniek systeem voor muzikale opvoeding van kinderen.
 Alexandra's werken omvatten kamer-, vocale, koor- en orkest
 composities, muziek voor verschillende theater- en filmproducties,
 populaire liedjes en muziek voor kinderen. Haar muziek werd uitgevoerd
