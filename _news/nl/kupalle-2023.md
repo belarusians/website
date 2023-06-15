@@ -22,3 +22,5 @@ Locatie: Den Haag. Nederland.
 We verwelkomen Belarusen en iedereen die geïnteresseerd is in onze tradities en cultuur.
 
 Tot ziens op Kupala!☀️🌾🌸🔥 🤍❤️🤍
+
+*mede mogelijk gemaakt door Nederlandse Ministerie van Buitenlandse Zaken*
