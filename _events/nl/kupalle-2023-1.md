@@ -53,12 +53,14 @@ Programma
 
 ###### Ekaterina Zhuravskaya, sopraan
 
-Briljante zangeres met charmant timbre, ze voltooide haar bachelor in
-Bremen bij prof. dr. Katharina Rössner-Stütz en in de zomer van 2021
-voltooide ze haar master in opera in Düsseldorf bij Thomas Laske. Ze
-treedt ook regelmatig op tijdens concerten in Duitsland en Oostenrijk
-met een grote verscheidenheid aan literatuur van operette tot opera en
-ook met volksliederen uit haar thuisland Belarus.
+Ze begon haar muzikale reis in het koor. Na verhuizing naar Duitsland,
+professionele vocale opleiding met professor Ekaterina Rössner in
+Bremen en voltooide haar masteropleiding opera en zang in Düsseldorf.
+Op het operapodium speelde ze veel belangrijke rollen, waaronder de hoofdrol
+in de "Great Galatea" van Suppe in Wenen, door Blondu in de Cheneranthal in Hamburg, door Lucy in de "Telephone" van Menotti in Bremen,
+evenals Titania in Britten's A Midsummer Night's Dream en Pamina in The Magic Flute in Düsseldorf.
+Hij treedt op in concertzalen in Duitsland en Oostenrijk met een uiteenlopend repertoire van borocco tot nieuwe muziek,
+ook met volksliederen van haar geboorteland - Belarus.
 
 ###### Nadzeya Karakulka, cimbaal
 
