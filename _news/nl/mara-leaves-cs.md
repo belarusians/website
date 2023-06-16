@@ -38,4 +38,4 @@ ontstaan. Een kwalitatieve verbetering van het werk van de CR op deze
 gebieden is een voorwaarde voor de Vereniging om in de toekomst haar
 vertegenwoordigers daarheen te delegeren.
 
-[het eindrapport van de vertegenwoordiger van de MARA Association over werk in CR](https://docs.google.com/document/d/1IoOBtsZFRoGwW_l2eJHNh-iUgR02DBJLpYrf4iuIk3U/edit)
+[het eindrapport van de vertegenwoordiger van de MARA Association over zijn werk in CR](https://docs.google.com/document/d/1IoOBtsZFRoGwW_l2eJHNh-iUgR02DBJLpYrf4iuIk3U/edit)
