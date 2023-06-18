@@ -6,6 +6,7 @@ import { Event, Lang } from "../../../../components/types";
 import { Section } from "../../../../components/section/section";
 import { EventArticle } from "../../../../components/articles/event-article";
 import { CommonPageParams } from "../../../types";
+import { useTranslation } from "../../../i18n";
 
 interface EventPageParams {
   params: {
@@ -14,11 +15,12 @@ interface EventPageParams {
 }
 
 export default async function EventPage({ params }: EventPageParams & CommonPageParams) {
+  const { t } = await useTranslation(params.lng, "events");
   const event = await getData(params.slug, params.lng);
 
   return (
     <Section>
-      <EventArticle event={event} />
+      <EventArticle lang={params.lng} event={event} buttonLabel={t("buy-ticket")} />
     </Section>
   );
 }

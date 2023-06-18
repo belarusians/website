@@ -8,6 +8,7 @@ import { NewsBlock } from "../../components/news/block";
 import { EventsBlock } from "../../components/events/block";
 import { CommonPageParams } from "../types";
 import { supportedLngs } from "../i18n/settings";
+import { useTranslation } from "../i18n";
 
 interface MainPageProps {
   mainNews: ArticleMeta;
@@ -17,11 +18,18 @@ interface MainPageProps {
 }
 
 export default async function IndexPage({ params: { lng } }: CommonPageParams) {
+  const { t } = await useTranslation(lng, "main");
   const props = await getData(lng);
+
   return (
     <>
       <Section>
-        <FeaturedNewsBlock lang={lng} main={props.mainNews} secondary={props.secondaryNews} />
+        <FeaturedNewsBlock
+          lang={lng}
+          main={props.mainNews}
+          secondary={props.secondaryNews}
+          headingText={t("news-title")}
+        />
       </Section>
 
       <Section>

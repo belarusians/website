@@ -1,4 +1,3 @@
-import { useTranslation } from "../../app/i18n";
 import { NewsThumbnail } from "./thumbnail";
 import { ArticleMeta, Lang } from "../types";
 import H2 from "../headinds/h2";
@@ -7,14 +6,13 @@ interface FeaturedNewsBlockProps {
   lang: Lang;
   main: ArticleMeta;
   secondary: [ArticleMeta, ArticleMeta];
+  headingText: string;
 }
 
-export async function FeaturedNewsBlock(props: FeaturedNewsBlockProps) {
-  const { t } = await useTranslation(props.lang, "main");
-
+export function FeaturedNewsBlock(props: FeaturedNewsBlockProps) {
   return (
     <>
-      <H2>{t("news-title")}</H2>
+      <H2>{props.headingText}</H2>
       <div className="flex flex-wrap gap-3 md:gap-4 flex-col lg:flex-row">
         <NewsThumbnail
           size={"large"}

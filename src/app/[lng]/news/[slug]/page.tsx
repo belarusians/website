@@ -23,7 +23,7 @@ export default async function ArticlePage({ params }: NewsPageParams) {
   );
 }
 
-export async function getData(lang: Lang, slug: string): Promise<News> {
+async function getData(lang: Lang, slug: string): Promise<News> {
   return await getNewsBySlug(slug, lang);
 }
 
