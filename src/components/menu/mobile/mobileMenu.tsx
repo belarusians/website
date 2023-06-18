@@ -14,7 +14,7 @@ export function MobileMenu({ lang }: { lang: Lang }) {
 
   return (
     <div className="flex items-center">
-      <BeautifulButton className="mr-4" trackingName="join-button" label={t("join-us")} link={"/join-us"} />
+      <BeautifulButton className="mr-4" trackingName="join-button" label={t("join-us")} link={`/${lang}/join-us`} />
 
       <div
         className="flex flex-col justify-between top-[17px] left-[20px] h-[24px] w-[32px] cursor-pointer z-40"
@@ -45,10 +45,10 @@ function OpenedMenu({ lang }: { lang: Lang }) {
   return (
     <div className="bg-red flex flex-col items-center w-full top-[56px] left-0 absolute z-40 divide-solid divide-white divide-y">
       <LanguageSelector lang={lang} className="text-white py-4" />
-      <Link className="text-white text-xl py-4" href={"/about-us"}>
+      <Link className="text-white text-xl py-4" href={`/${lang}/about-us`}>
         {t("about-us")}
       </Link>
-      <Link className="text-white text-xl py-4" href={"/vacancies"}>
+      <Link className="text-white text-xl py-4" href={`/${lang}/vacancies`}>
         {t("vacancies")}
       </Link>
       <Link

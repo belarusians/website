@@ -5,11 +5,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
-import { EventMeta } from "../types";
+import { EventMeta, Lang } from "../types";
 
 export interface EventThumbnailProps {
   event: EventMeta;
-  locale: string;
+  lang: Lang;
 }
 
 export function FutureEventThumbnail(props: EventThumbnailProps & { className?: string }): JSX.Element {
@@ -23,10 +23,10 @@ export function FutureEventThumbnail(props: EventThumbnailProps & { className?: 
   return (
     <Link
       className="bg-white transition-all shadow-lg hover:shadow-xl hover:scale-101 rounded-md p-4 w-full md:w-60"
-      href={`/events/${props.event.slug}`}
+      href={`/${props.lang}/events/${props.event.slug}`}
     >
       <div className="">
-        <p className="text-grey">{hydrated ? clientSideDate(eventDate, props.locale) : serverSideDate(eventDate)}</p>
+        <p className="text-grey">{hydrated ? clientSideDate(eventDate, props.lang) : serverSideDate(eventDate)}</p>
         <h3 className="my-3 font-bold">{props.event.title}</h3>
         <p className="text-grey">
           <FontAwesomeIcon className="pr-2" icon={faLocationDot} />

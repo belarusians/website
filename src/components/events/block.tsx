@@ -12,7 +12,7 @@ function isEventPast(eventString: string): boolean {
 
 export function EventsBlock(props: EventsBlockProps) {
   function renderEventThumbnail(event: EventMeta, i: number) {
-    return isEventPast(event.eventDate) ? null : <FutureEventThumbnail locale={props.lang} event={event} key={i} />;
+    return isEventPast(event.eventDate) ? null : <FutureEventThumbnail lang={props.lang} event={event} key={i} />;
   }
 
   return (
