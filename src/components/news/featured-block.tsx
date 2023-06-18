@@ -1,16 +1,16 @@
-import { useTranslation } from "next-i18next";
-
+import { useTranslation } from "../../app/i18n";
 import { NewsThumbnail } from "./thumbnail";
-import { ArticleMeta } from "../types";
+import { ArticleMeta, Lang } from "../types";
 import H2 from "../headinds/h2";
 
 interface FeaturedNewsBlockProps {
+  lang: Lang;
   main: ArticleMeta;
   secondary: [ArticleMeta, ArticleMeta];
 }
 
-export function FeaturedNewsBlock(props: FeaturedNewsBlockProps) {
-  const { t } = useTranslation("main");
+export async function FeaturedNewsBlock(props: FeaturedNewsBlockProps) {
+  const { t } = await useTranslation(props.lang, "main");
 
   return (
     <>

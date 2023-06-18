@@ -1,20 +1,18 @@
-import * as React from "react";
-
-import { EventMeta } from "../types";
+import { EventMeta, Lang } from "../types";
 import { FutureEventThumbnail } from "./thumbnail";
 
 export interface EventsBlockProps {
   events: EventMeta[];
-  locale: string;
+  lang: Lang;
 }
 
 function isEventPast(eventString: string): boolean {
   return new Date(eventString).getTime() < Date.now();
 }
 
-export function EventsBlock(props: EventsBlockProps): React.JSX.Element {
-  function renderEventThumbnail(event: EventMeta, i: number): React.JSX.Element | null {
-    return isEventPast(event.eventDate) ? null : <FutureEventThumbnail locale={props.locale} event={event} key={i} />;
+export function EventsBlock(props: EventsBlockProps) {
+  function renderEventThumbnail(event: EventMeta, i: number) {
+    return isEventPast(event.eventDate) ? null : <FutureEventThumbnail locale={props.lang} event={event} key={i} />;
   }
 
   return (

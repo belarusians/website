@@ -1,11 +1,14 @@
-import { useTranslation } from "next-i18next";
+"use client";
+
 import Link from "next/link";
 
+import { useTranslation } from "../../../app/i18n/client";
 import { LanguageSelector } from "../../language-selector/language-selector";
 import { BeautifulButton } from "../../beautiful-button/beautiful-button";
+import { Lang } from "../../types";
 
-export function DesktopMenu(): JSX.Element {
-  const { t } = useTranslation();
+export function DesktopMenu({ lang }: { lang: Lang }) {
+  const { t } = useTranslation(lang);
 
   return (
     <div className="flex items-center text-red gap-4">
@@ -23,7 +26,7 @@ export function DesktopMenu(): JSX.Element {
         </Link>
       </div>
 
-      <LanguageSelector />
+      <LanguageSelector lang={lang} />
     </div>
   );
 }

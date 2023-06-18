@@ -1,3 +1,5 @@
+"use client";
+
 import { HTMLAttributes, PropsWithChildren, useEffect, useState } from "react";
 
 export function ClientOnly({ children }: PropsWithChildren & HTMLAttributes<HTMLElement>): JSX.Element | null {

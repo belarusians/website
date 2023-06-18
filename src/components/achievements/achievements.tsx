@@ -1,11 +1,14 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import * as React from "react";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "../../app/i18n/client";
+import { Lang } from "../types";
 
-export function AchievementsBlock(): JSX.Element {
+export function AchievementsBlock(props: { lang: Lang }) {
   const counterRef = React.useRef<HTMLSpanElement>(null);
 
-  const { t } = useTranslation("main");
+  const { t } = useTranslation(props.lang, "main");
 
   const [hydrated, setHydrated] = useState(false);
   useEffect(() => {

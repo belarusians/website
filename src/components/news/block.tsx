@@ -1,16 +1,19 @@
-import * as React from "react";
-import { useTranslation } from "next-i18next";
+"use client";
 
-import { ArticleMeta } from "../types";
+import * as React from "react";
+
+import { useTranslation } from "../../app/i18n/client";
+import { ArticleMeta, Lang } from "../types";
 import { NewsThumbnail } from "./thumbnail";
 import H2 from "../headinds/h2";
 
 interface NewsBlockProps {
   news: ArticleMeta[];
+  lang: Lang;
 }
 
 export function NewsBlock(props: NewsBlockProps): React.JSX.Element {
-  const { t } = useTranslation("main");
+  const { t } = useTranslation(props.lang, "main");
 
   return (
     <>

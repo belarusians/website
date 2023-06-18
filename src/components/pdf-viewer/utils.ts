@@ -2,7 +2,7 @@ import { md, lg } from "../utils";
 
 export function getFullWidth(windowWidth: number, maxSize?: number): number {
   let possibleSize = 0;
-  console.log(windowWidth);
+
   if (windowWidth <= md) {
     possibleSize = windowWidth - 45;
   } else if (windowWidth < lg) {

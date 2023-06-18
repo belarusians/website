@@ -1,3 +1,5 @@
+"use client";
+
 import { Document, Page } from "react-pdf/dist/esm/entry.webpack5";
 import * as React from "react";
 import { useEffect, useState } from "react";

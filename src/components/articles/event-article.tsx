@@ -1,15 +1,16 @@
 import Image from "next/image";
 import * as React from "react";
-import { Event } from "../types";
+import { Event, Lang } from "../types";
 import { Button } from "../button/button";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "../../app/i18n";
 
 interface ArticleProps {
   event: Event;
+  lang: Lang;
 }
 
-export function EventArticle(props: ArticleProps): JSX.Element {
-  const { t } = useTranslation("events");
+export async function EventArticle(props: ArticleProps) {
+  const { t } = await useTranslation(props.lang, "events");
 
   return (
     <div className="rounded-md shadow-lg">
