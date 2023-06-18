@@ -27,8 +27,8 @@ Strandslag 7, 2566 DP, Den Haag](https://maps.app.goo.gl/Dach3XgMAyCrBrMRA?g_st=
 ### Programma 🌿🌿🌿
 - **16:00** Deuren gaan open
 - **17:00** Aanvang
+- **17:00 - 19:00** Workshop kransen weven, een beurs van Belarusische ambachtslieden die in Nederland wonen, workshops keramiek, waarzeggerij, Kupala-meditatie voor vrouwen op de kust.
 - **17:30 - 18:30** Active spelletjes voor kinderen
-- **17:00 - 19:00** Workshop kransen weven, een beurs van Belarusische ambachtslieden die in Nederland wonen, workshops keramiek en een workshop kaarsen voor kinderen, waarzeggerij, Kupala-meditatie voor vrouwen op de kust.
 - **19:00** Opening van de Kupala feest, traditionele muziek en rondedansen.
 - **19:00 - 19:30** Workshop kaarsen voor kinderen
 - **20:00 - 21:30** Concert door [NAVIBAND](https://www.instagram.com/naviband/) bij zonsondergang.
