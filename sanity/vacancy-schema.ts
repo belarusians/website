@@ -7,6 +7,12 @@ const vacancy = defineType({
   type: "document",
   fields: [
     defineField({
+      name: "title",
+      title: "Title",
+      type: "string",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "id",
       title: "ID",
       type: "slug",
@@ -14,12 +20,6 @@ const vacancy = defineType({
         source: "title",
         isUnique: isUniqueOtherThanLanguage,
       },
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: "title",
-      title: "Title",
-      type: "string",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
