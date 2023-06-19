@@ -1,5 +1,6 @@
 # Allow all crawlers
 User-agent: *
 Allow: /
+Disallow: /studio
 
 Sitemap: https://www.belarusians.nl/sitemap.xml
