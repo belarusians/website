@@ -44,11 +44,11 @@ export async function generateMetadata({ params }: CommonPageParams, parent: Res
     title: titleLang[params.lng],
     description: descriptionLang[params.lng],
     alternates: {
-      canonical: `${parentMetadata.metadataBase}/${Lang.be}`,
+      canonical: `${parentMetadata.metadataBase}${Lang.be}`,
       languages: {
-        [Lang.be]: `${parentMetadata.metadataBase}/${Lang.be}`,
-        [Lang.nl]: `${parentMetadata.metadataBase}/${Lang.nl}`,
-        [Lang.ru]: `${parentMetadata.metadataBase}/${Lang.ru}`,
+        [Lang.be]: `${parentMetadata.metadataBase}${Lang.be}`,
+        [Lang.nl]: `${parentMetadata.metadataBase}${Lang.nl}`,
+        [Lang.ru]: `${parentMetadata.metadataBase}${Lang.ru}`,
       },
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -58,7 +58,7 @@ export async function generateMetadata({ params }: CommonPageParams, parent: Res
       title: titleLang[params.lng],
       description: descriptionLang[params.lng],
       locale: langToLocale[params.lng],
-      url: `${parentMetadata.metadataBase}/${params.lng}`,
+      url: `${parentMetadata.metadataBase}${params.lng}`,
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
