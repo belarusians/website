@@ -1,16 +1,15 @@
 import Image from "next/image";
 import * as React from "react";
-import { Event } from "../types";
+import { Event, Lang } from "../types";
 import { Button } from "../button/button";
-import { useTranslation } from "next-i18next";
 
 interface ArticleProps {
   event: Event;
+  lang: Lang;
+  buttonLabel: string;
 }
 
-export function EventArticle(props: ArticleProps): JSX.Element {
-  const { t } = useTranslation("events");
-
+export function EventArticle(props: ArticleProps) {
   return (
     <div className="rounded-md shadow-lg">
       <div
@@ -26,7 +25,7 @@ export function EventArticle(props: ArticleProps): JSX.Element {
           <Button
             link={props.event.ticketsLink}
             target="_blank"
-            label={t("buy-ticket")}
+            label={props.buttonLabel}
             trackingName={`buy-${props.event.slug}-ticket-button`}
             className="w-full bg-red-gradient animate-button-background-rotation bg-[length:350%_100%] text-white"
           />

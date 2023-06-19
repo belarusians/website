@@ -1,10 +1,3 @@
-const { i18n } = require("./next-i18next.config");
-
-const withPWA = require("next-pwa")({
-  dest: "public",
-  disable: true,
-});
-
 const nextConfig = {
   async redirects() {
     return [
@@ -25,11 +18,10 @@ const nextConfig = {
       },
     ];
   },
-  i18n,
   reactStrictMode: true,
   eslint: {
     ignoreDuringBuilds: true,
   },
 };
 
-module.exports = withPWA(nextConfig);
+module.exports = nextConfig;

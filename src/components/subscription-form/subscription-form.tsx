@@ -1,14 +1,17 @@
-import { useTranslation } from "next-i18next";
+"use client";
+
+import { useTranslation } from "../../app/i18n/client";
 import * as React from "react";
 import { ClientOnly } from "../client-only/client-only";
 import { isEmailValid } from "../../lib/email";
 import { Button } from "../button/button";
 import H2 from "../headinds/h2";
+import { Lang } from "../types";
 
-export function SubscriptionForm(): React.JSX.Element {
+export function SubscriptionForm({ lang }: { lang: Lang }) {
   const emailInputId = "email-input";
 
-  const { t } = useTranslation("main");
+  const { t } = useTranslation(lang, "main");
   const [isLoading, setIsLoading] = React.useState(false);
   const [isValid, setIsValid] = React.useState(true);
   const [isSuccess, setIsSuccess] = React.useState(false);

@@ -6,7 +6,7 @@ interface ArticleProps {
   news: News;
 }
 
-export function NewsArticle(props: ArticleProps): JSX.Element {
+export function NewsArticle(props: ArticleProps) {
   return (
     <div className="rounded-md shadow-lg">
       <div
