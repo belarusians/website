@@ -1,6 +1,6 @@
 import { NewsThumbnail } from "./thumbnail";
-import { ArticleMeta, Lang } from "../types";
-import H2 from "../headinds/h2";
+import { ArticleMeta, Lang } from "../../components/types";
+import H2 from "../../components/headinds/h2";
 
 interface FeaturedNewsBlockProps {
   lang: Lang;

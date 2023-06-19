@@ -1,12 +1,12 @@
 "use client";
 
-import { useTranslation } from "../../app/i18n/client";
+import { useTranslation } from "../i18n/client";
 import * as React from "react";
-import { ClientOnly } from "../client-only/client-only";
+import { ClientOnly } from "../../components/client-only/client-only";
 import { isEmailValid } from "../../lib/email";
-import { Button } from "../button/button";
-import H2 from "../headinds/h2";
-import { Lang } from "../types";
+import { Button } from "../../components/button/button";
+import H2 from "../../components/headinds/h2";
+import { Lang } from "../../components/types";
 
 export function SubscriptionForm({ lang }: { lang: Lang }) {
   const emailInputId = "email-input";

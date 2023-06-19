@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { Header } from "../../components/header/header";
-import { Footer } from "../../components/footer/footer";
+import { Footer } from "./footer";
 import { PropsWithChildren } from "react";
 import { CommonPageParams } from "../types";
 import { Metadata, ResolvingMetadata } from "next/types";

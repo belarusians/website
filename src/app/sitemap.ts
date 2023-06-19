@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 
 import { getNewsSlugs, getEventsSlugs } from "../lib/fs";
 import { Lang } from "../components/types";
-import { baseUrl } from "./config.";
+import { baseUrl } from "./config";
 import { getVacanciesByLang } from "../../sanity/lib/vacancy";
 
 function generateTranslatedUrls(path: string): MetadataRoute.Sitemap {

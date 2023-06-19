@@ -1,6 +1,7 @@
 import Image from "next/image";
 import * as React from "react";
-import { News } from "../types";
+
+import { News } from "../../../../components/types";
 
 interface ArticleProps {
   news: News;

@@ -2,10 +2,10 @@
 
 import * as React from "react";
 
-import { useTranslation } from "../../app/i18n/client";
-import { ArticleMeta, Lang } from "../types";
+import { useTranslation } from "../i18n/client";
+import { ArticleMeta, Lang } from "../../components/types";
 import { NewsThumbnail } from "./thumbnail";
-import H2 from "../headinds/h2";
+import H2 from "../../components/headinds/h2";
 
 interface NewsBlockProps {
   news: ArticleMeta[];

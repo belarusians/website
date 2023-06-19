@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { ArticleMeta, ArticleType, Lang } from "../types";
+import { ArticleMeta, ArticleType, Lang } from "../../components/types";
 
 export interface NewsThumbnailProps {
   news: ArticleMeta;
