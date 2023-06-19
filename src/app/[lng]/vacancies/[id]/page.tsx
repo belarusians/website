@@ -1,17 +1,17 @@
 import { Fragment } from "react";
 import { Metadata, ResolvingMetadata } from "next/types";
 
-import { getVacancies, Vacancy } from "../../../../lib/vacancies";
 import { Lang } from "../../../../components/types";
 import { Section } from "../../../../components/section/section";
 import H1 from "../../../../components/headinds/h1";
 import { CommonPageParams } from "../../../types";
 import VacancyForm from "./form";
+import { getVacanciesByLang, getVacancyById } from "../../../../../sanity/lib/vacancy";
 
 type VacancyPageParams = CommonPageParams & { params: { id: string } };
 
-export default function VacancyPage({ params }: VacancyPageParams) {
-  const vacancy = getData(params.lng, params.id);
+export default async function VacancyPage({ params }: VacancyPageParams) {
+  const vacancy = await getVacancyById(params.lng, params.id);
 
   if (!vacancy) {
     return <h1>404</h1>;
@@ -30,20 +30,16 @@ export default function VacancyPage({ params }: VacancyPageParams) {
           ))}
         </div>
         <div className="flex flex-col justify-items-start gap-2">
-          <VacancyForm vacancyId={vacancy.id} lang={params.lng} />
+          <VacancyForm vacancyId={vacancy.id.current} lang={params.lng} />
         </div>
       </div>
     </Section>
   );
 }
 
-function getData(lang: Lang, id: string): Vacancy | undefined {
-  return getVacancies(lang).find((vac) => vac.id === id);
-}
-
 export async function generateMetadata({ params }: VacancyPageParams, parent: ResolvingMetadata): Promise<Metadata> {
   const parentMetadata = await parent;
-  const vacancy = getData(params.lng, params.id);
+  const vacancy = await getVacancyById(params.lng, params.id);
 
   return {
     title: vacancy?.title || undefined,
@@ -74,6 +70,6 @@ export async function generateMetadata({ params }: VacancyPageParams, parent: Re
   };
 }
 
-export function generateStaticParams({ params }: CommonPageParams) {
-  return getVacancies(params.lng).map((vacancy) => ({ id: vacancy.id }));
+export async function generateStaticParams({ params }: CommonPageParams) {
+  return (await getVacanciesByLang(params.lng)).map((vacancy) => ({ id: vacancy.id.current }));
 }
