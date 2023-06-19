@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import * as React from "react";
 
-import { useTranslation } from "../../app/i18n/client";
-import { Lang } from "../types";
+import { useTranslation } from "../i18n/client";
+import { Lang } from "../../components/types";
 
 export function AchievementsBlock(props: { lang: Lang }) {
   const { t } = useTranslation(props.lang, "main");

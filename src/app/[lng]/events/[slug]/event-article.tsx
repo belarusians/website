@@ -1,7 +1,7 @@
 import Image from "next/image";
 import * as React from "react";
-import { Event, Lang } from "../types";
-import { Button } from "../button/button";
+import { Event, Lang } from "../../../../components/types";
+import { Button } from "../../../../components/button/button";
 
 interface ArticleProps {
   event: Event;

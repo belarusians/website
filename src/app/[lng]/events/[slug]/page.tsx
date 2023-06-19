@@ -4,7 +4,7 @@ import { getEventBySlug } from "../../../../lib/articles";
 import { getEventsSlugs } from "../../../../lib/fs";
 import { Event, Lang } from "../../../../components/types";
 import { Section } from "../../../../components/section/section";
-import { EventArticle } from "../../../../components/articles/event-article";
+import { EventArticle } from "./event-article";
 import { CommonPageParams } from "../../../types";
 import { useTranslation } from "../../../i18n";
 

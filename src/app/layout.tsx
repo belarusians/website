@@ -1,9 +1,8 @@
-import { PropsWithChildren } from "react";
+import React, { PropsWithChildren } from "react";
 import { Metadata } from "next/types";
 import Script from "next/script";
 import { Roboto } from "next/font/google";
 
-import { Favicon } from "../components/favicon/favicon";
 import "../components/globals.css";
 
 /**
@@ -12,7 +11,7 @@ import "../components/globals.css";
  */
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "../../node_modules/@fortawesome/fontawesome-svg-core/styles.css";
-import { baseUrl } from "./config.";
+import { baseUrl } from "./config";
 config.autoAddCss = false;
 
 const roboto = Roboto({
@@ -24,7 +23,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html>
       <head>
-        <Favicon />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="manifest" href="/browserconfig.xml" />
+        <link rel="mask-icon" type="image/svg+xml" href="/icons/safari-pinned-tab.svg" color="#ed1c24" />
       </head>
       <body>
         <Script

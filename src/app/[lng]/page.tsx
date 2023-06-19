@@ -1,10 +1,10 @@
-import { SubscriptionForm } from "../../components/subscription-form/subscription-form";
-import { FeaturedNewsBlock } from "../../components/news/featured-block";
+import { SubscriptionForm } from "./subscription-form";
+import { FeaturedNewsBlock } from "./featured-block";
 import { EventMeta, Lang, ArticleMeta, NewsTags } from "../../components/types";
 import { getEventsMeta, getNewsMeta } from "../../lib/articles";
 import { Section } from "../../components/section/section";
-import { AchievementsBlock } from "../../components/achievements/achievements";
-import { NewsBlock } from "../../components/news/block";
+import { AchievementsBlock } from "./achievements-block";
+import { NewsBlock } from "./news-block";
 import { EventsBlock } from "../../components/events/block";
 import { CommonPageParams } from "../types";
 import { supportedLngs } from "../i18n/settings";

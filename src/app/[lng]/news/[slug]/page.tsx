@@ -2,7 +2,7 @@ import { getNewsSlugs } from "../../../../lib/fs";
 import { getNewsBySlug } from "../../../../lib/articles";
 import { Lang, News } from "../../../../components/types";
 import { Section } from "../../../../components/section/section";
-import { NewsArticle } from "../../../../components/articles/news-article";
+import { NewsArticle } from "./news-article";
 import { CommonPageParams } from "../../../types";
 import { Metadata, ResolvingMetadata } from "next/types";
 
