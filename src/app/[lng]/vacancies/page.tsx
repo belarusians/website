@@ -5,7 +5,7 @@ import { Lang } from "../../../components/types";
 import { Section } from "../../../components/section/section";
 import H1 from "../../../components/headinds/h1";
 import { getVacancies, Vacancy } from "../../../lib/vacancies";
-import { VacancyPreview } from "../../../components/vacancy/vacancyPreview";
+import { VacancyPreview } from "./vacancy-preview";
 import { CommonPageParams } from "../../types";
 import { Metadata, ResolvingMetadata } from "next/types";
 

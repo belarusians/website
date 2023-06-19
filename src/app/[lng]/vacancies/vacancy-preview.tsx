@@ -1,4 +1,4 @@
-import { Vacancy } from "../../lib/vacancies";
+import { Vacancy } from "../../../lib/vacancies";
 
 export interface VacancyProps {
   vacancy: Vacancy;
