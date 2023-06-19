@@ -1,6 +1,3 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
@@ -15,18 +12,13 @@ export interface EventThumbnailProps {
 export function FutureEventThumbnail(props: EventThumbnailProps & { className?: string }): JSX.Element {
   const { eventDate } = props.event;
 
-  const [hydrated, setHydrated] = useState(false);
-  useEffect(() => {
-    setHydrated(true);
-  }, []);
-
   return (
     <Link
       className="bg-white transition-all shadow-lg hover:shadow-xl hover:scale-101 rounded-md p-4 w-full md:w-60"
       href={`/${props.lang}/events/${props.event.slug}`}
     >
       <div className="">
-        <p className="text-grey">{hydrated ? clientSideDate(eventDate, props.lang) : serverSideDate(eventDate)}</p>
+        <p className="text-grey">{clientSideDate(eventDate, props.lang)}</p>
         <h3 className="my-3 font-bold">{props.event.title}</h3>
         <p className="text-grey">
           <FontAwesomeIcon className="pr-2" icon={faLocationDot} />
@@ -51,8 +43,4 @@ function clientSideDate(eventString: string, locale: string): string {
     timeZone: "Europe/Amsterdam",
   });
   return `${eventDateString} ${eventTimeString}`;
-}
-
-function serverSideDate(dateString: string): string {
-  return dateString;
 }

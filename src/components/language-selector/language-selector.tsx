@@ -20,6 +20,7 @@ function formFlag(locales: string[]): string[] {
   return copy;
 }
 
+// TODO: runs to many times for some reason. Needs to be investigated
 export function LanguageSelector(props: React.HTMLAttributes<HTMLElement> & { lang: Lang }): React.JSX.Element {
   const pathname = usePathname();
   const redirectedPathName = (locale: string) => {
