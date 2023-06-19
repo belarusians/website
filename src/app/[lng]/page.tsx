@@ -7,7 +7,6 @@ import { AchievementsBlock } from "./achievements-block";
 import { NewsBlock } from "./news-block";
 import { EventsBlock } from "./events-block";
 import { CommonPageParams } from "../types";
-import { supportedLngs } from "../i18n/settings";
 import { useTranslation } from "../i18n";
 
 interface MainPageProps {
@@ -49,10 +48,6 @@ export default async function IndexPage({ params: { lng } }: CommonPageParams) {
       </Section>
     </>
   );
-}
-
-export async function generateStaticParams() {
-  return supportedLngs.map((lng) => ({ lng }));
 }
 
 function hasTwoSecondaryNews(secondaryNews: ArticleMeta[]): secondaryNews is [ArticleMeta, ArticleMeta] {
