@@ -6,6 +6,7 @@ import { PropsWithChildren } from "react";
 import { CommonPageParams } from "../types";
 import { Metadata, ResolvingMetadata } from "next/types";
 import { Lang } from "../../components/types";
+import { supportedLngs } from "../i18n/settings";
 
 export default function MainLayout({ children, params }: PropsWithChildren & CommonPageParams) {
   return (
@@ -68,4 +69,8 @@ export async function generateMetadata({ params }: CommonPageParams, parent: Res
       description: descriptionLang[params.lng],
     },
   };
+}
+
+export function generateStaticParams() {
+  return supportedLngs.map((lng) => ({ lng }));
 }
