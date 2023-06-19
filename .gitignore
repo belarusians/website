@@ -143,3 +143,4 @@ amplifytools.xcconfig
 
 .next
 .env.local
+.vercel
