@@ -4,10 +4,11 @@ import { useTranslation } from "../../i18n";
 import { Lang } from "../../../components/types";
 import { Section } from "../../../components/section/section";
 import H1 from "../../../components/headinds/h1";
-import { getVacancies, Vacancy } from "../../../lib/vacancies";
 import { VacancyPreview } from "./vacancy-preview";
 import { CommonPageParams } from "../../types";
 import { Metadata, ResolvingMetadata } from "next/types";
+import { Vacancy } from "../../../../sanity.config";
+import { getVacanciesByLang } from "../../../../sanity/lib/vacancy";
 
 export default async function VacanciesPage({ params }: CommonPageParams) {
   const { t } = await useTranslation(params.lng, "vacancies");
@@ -20,7 +21,7 @@ export default async function VacanciesPage({ params }: CommonPageParams) {
           <H1 className="mb-2 md:mb-8">{t("heading")}</H1>
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {vacancies.map((vacancy, i) => (
-              <Link href={`/${params.lng}/vacancies/${vacancy.id}`} key={i}>
+              <Link href={`/${params.lng}/vacancies/${vacancy.id.current}`} key={i}>
                 <VacancyPreview vacancy={vacancy} buttonLabel={t("more-button")} />
               </Link>
             ))}
@@ -36,7 +37,7 @@ export default async function VacanciesPage({ params }: CommonPageParams) {
 }
 
 async function getData(lang: Lang): Promise<Vacancy[]> {
-  return getVacancies(lang);
+  return getVacanciesByLang(lang);
 }
 
 const titleLang = {
