@@ -1,4 +1,4 @@
-import { NewsThumbnail } from "./thumbnail";
+import { NewsThumbnail } from "./news-thumbnail";
 import { ArticleMeta, Lang } from "../../components/types";
 import H2 from "../../components/headinds/h2";
 

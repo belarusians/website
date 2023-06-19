@@ -1,5 +1,5 @@
-import { EventMeta, Lang } from "../types";
-import { FutureEventThumbnail } from "./thumbnail";
+import { EventMeta, Lang } from "../../components/types";
+import { FutureEventThumbnail } from "./event-thumbnail";
 
 export interface EventsBlockProps {
   events: EventMeta[];

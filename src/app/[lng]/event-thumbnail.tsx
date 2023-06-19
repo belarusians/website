@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
-import { EventMeta, Lang } from "../types";
+import { EventMeta, Lang } from "../../components/types";
 
 export interface EventThumbnailProps {
   event: EventMeta;

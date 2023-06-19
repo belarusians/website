@@ -5,7 +5,7 @@ import { getEventsMeta, getNewsMeta } from "../../lib/articles";
 import { Section } from "../../components/section/section";
 import { AchievementsBlock } from "./achievements-block";
 import { NewsBlock } from "./news-block";
-import { EventsBlock } from "../../components/events/block";
+import { EventsBlock } from "./events-block";
 import { CommonPageParams } from "../types";
 import { supportedLngs } from "../i18n/settings";
 import { useTranslation } from "../i18n";
