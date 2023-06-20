@@ -30,16 +30,8 @@ export interface EventMeta extends ArticleMeta {
   ticketsLink: string;
 }
 
-export function isEventMeta(x: ArticleMeta): x is EventMeta {
-  return x.type === ArticleType.Event;
-}
-
 export interface NewsMeta extends ArticleMeta {
   type: ArticleType.News;
-}
-
-export function isNewsMeta(x: ArticleMeta): x is NewsMeta {
-  return x.type === ArticleType.Event;
 }
 
 export type Event = Article & EventMeta;
@@ -50,8 +42,4 @@ export enum Lang {
   be = "be",
   nl = "nl",
   ru = "ru",
-}
-
-export interface CommonPageProps {
-  lang?: Lang;
 }
