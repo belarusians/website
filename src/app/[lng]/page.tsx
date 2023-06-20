@@ -1,13 +1,14 @@
 import { SubscriptionForm } from "./subscription-form";
 import { FeaturedNewsBlock } from "./featured-block";
 import { EventMeta, Lang, ArticleMeta, NewsTags } from "../../components/types";
-import { getEventsMeta, getNewsMeta } from "../../lib/articles";
+import { getNewsMeta } from "../../lib/articles";
 import { Section } from "../../components/section/section";
 import { AchievementsBlock } from "./achievements-block";
 import { NewsBlock } from "./news-block";
 import { EventsBlock } from "./events-block";
 import { CommonPageParams } from "../types";
 import { useTranslation } from "../i18n";
+import { getFutureEvents } from "../../../sanity/lib/event";
 
 interface MainPageProps {
   mainNews: ArticleMeta;
@@ -56,7 +57,7 @@ function hasTwoSecondaryNews(secondaryNews: ArticleMeta[]): secondaryNews is [Ar
 
 async function getData(lang: Lang): Promise<MainPageProps> {
   const newsMeta = await getNewsMeta(lang);
-  const eventsMeta = await getEventsMeta(lang);
+  const eventsMeta = await getFutureEvents(lang);
   const articles = [...newsMeta, ...eventsMeta];
 
   const mainNews = articles.find((meta) => meta.tags.includes(NewsTags.Main));
