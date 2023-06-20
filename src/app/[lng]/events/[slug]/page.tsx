@@ -1,22 +1,24 @@
 import { Metadata, ResolvingMetadata } from "next/types";
 
-import { getEventBySlug } from "../../../../lib/articles";
-import { getEventsSlugs } from "../../../../lib/fs";
 import { Event, Lang } from "../../../../components/types";
 import { Section } from "../../../../components/section/section";
 import { EventArticle } from "./event-article";
 import { CommonPageParams } from "../../../types";
 import { useTranslation } from "../../../i18n";
+import { getAllEventsSlugs, getEventBySlug } from "../../../../../sanity/lib/event";
 
-interface EventPageParams {
+type EventPageParams = CommonPageParams & {
   params: {
     slug: string;
   };
-}
+};
 
-export default async function EventPage({ params }: EventPageParams & CommonPageParams) {
+export default async function EventPage({ params }: EventPageParams) {
   const { t } = await useTranslation(params.lng, "events");
   const event = await getData(params.slug, params.lng);
+  if (!event) {
+    return <div>Not found</div>;
+  }
 
   return (
     <Section>
@@ -25,8 +27,8 @@ export default async function EventPage({ params }: EventPageParams & CommonPage
   );
 }
 
-async function getData(slug: string, lang: Lang): Promise<Event> {
-  return await getEventBySlug(slug, lang);
+async function getData(slug: string, lang: Lang): Promise<Event | undefined> {
+  return await getEventBySlug(lang, slug);
 }
 
 export async function generateMetadata(
@@ -37,8 +39,8 @@ export async function generateMetadata(
   const event = await getData(params.slug, params.lng);
 
   return {
-    title: event.title,
-    description: event.description,
+    title: event?.title,
+    description: event?.description,
     alternates: {
       canonical: `${parentMetadata.metadataBase}${Lang.be}/news/${params.slug}`,
       languages: {
@@ -51,22 +53,22 @@ export async function generateMetadata(
     // @ts-ignore
     openGraph: {
       ...parentMetadata.openGraph,
-      title: event.title,
-      description: event.description,
+      title: event?.title,
+      description: event?.description,
       url: `${params.lng}/news/${params.slug}`,
-      images: [event.backgroundUrl],
+      images: [event?.backgroundUrl || parentMetadata.openGraph!.images![0]],
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     twitter: {
       ...parentMetadata.twitter,
-      title: event.title,
-      description: event.description,
-      images: [event.backgroundUrl],
+      title: event?.title,
+      description: event?.description,
+      images: [event?.backgroundUrl || parentMetadata.twitter!.images![0]],
     },
   };
 }
 
-export function generateStaticParams() {
-  return getEventsSlugs().map((slug) => ({ slug }));
+export async function generateStaticParams({ params }: CommonPageParams): Promise<{ slug: string }[]> {
+  return await getAllEventsSlugs(params.lng);
 }
