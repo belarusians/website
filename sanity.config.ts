@@ -10,13 +10,14 @@ import { documentInternationalization } from "@sanity/document-internationalizat
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import { apiVersion, dataset, projectId } from "./sanity/env";
 import vacancy from "./sanity/vacancy-schema";
+import event from "./sanity/event-schema";
 
 const config = defineConfig({
   basePath: "/studio",
   projectId,
   dataset,
   schema: {
-    types: [vacancy],
+    types: [vacancy, event],
   },
   plugins: [
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -35,7 +36,7 @@ const config = defineConfig({
         { id: "nl", title: "Nederlands" },
         { id: "ru", title: "Русский" },
       ],
-      schemaTypes: ["vacancy"],
+      schemaTypes: ["vacancy", "event"],
     }),
   ],
 });
@@ -45,3 +46,4 @@ export default config;
 type Values = InferSchemaValues<typeof config>;
 
 export type Vacancy = Extract<Values, { _type: "vacancy" }>;
+export type EventSchema = Extract<Values, { _type: "event" }>;
