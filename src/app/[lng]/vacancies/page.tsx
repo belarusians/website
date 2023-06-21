@@ -10,6 +10,8 @@ import { Metadata, ResolvingMetadata } from "next/types";
 import { Vacancy } from "../../../../sanity.config";
 import { getVacanciesByLang } from "../../../../sanity/lib/vacancy";
 
+export const revalidate = 3600;
+
 export default async function VacanciesPage({ params }: CommonPageParams) {
   const { t } = await useTranslation(params.lng, "vacancies");
   const vacancies = await getData(params.lng);
