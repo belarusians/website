@@ -45,6 +45,7 @@ function mapSchemaToEvent(event: EventSchema): Event {
     date: event._createdAt,
     location: event.location,
     content: toHTML(event.content),
+    imageRatio: event.imageRatio,
   };
 }
 

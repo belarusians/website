@@ -29,6 +29,11 @@ const event = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "imageRatio",
+      title: "Image ratio",
+      type: "string",
+    }),
+    defineField({
       name: "eventDate",
       title: "Event date",
       type: "datetime",
