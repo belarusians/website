@@ -15,9 +15,6 @@ function getLinkToArticle(article: ArticleMeta, lang: Lang): string {
   if (article.type === ArticleType.News) {
     return `/${lang}/news/${article.slug}`;
   }
-  if (article.type === ArticleType.Event) {
-    return `/${lang}/events/${article.slug}`;
-  }
   return `/${lang}`;
 }
 

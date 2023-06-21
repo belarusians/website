@@ -47,3 +47,4 @@ type Values = InferSchemaValues<typeof config>;
 
 export type Vacancy = Extract<Values, { _type: "vacancy" }>;
 export type EventSchema = Extract<Values, { _type: "event" }>;
+export type CleanEventSchema = Omit<EventSchema, "_createdAt" | "_type" | "_id" | "_updatedAt" | "_rev" | "language">;

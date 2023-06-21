@@ -1,3 +1,5 @@
+import { CleanEventSchema } from "../../sanity.config";
+
 export enum NewsTags {
   Main = "featured-main",
   Secondary = "featured",
@@ -5,7 +7,6 @@ export enum NewsTags {
 
 export enum ArticleType {
   News = "news",
-  Event = "event",
 }
 
 export interface ArticleMeta {
@@ -23,20 +24,22 @@ export interface Article extends ArticleMeta {
   content: string;
 }
 
-export interface EventMeta extends ArticleMeta {
-  type: ArticleType.Event;
-  location: string;
-  eventDate: string;
-  ticketsLink: string;
-}
-
 export interface NewsMeta extends ArticleMeta {
   type: ArticleType.News;
 }
 
-export type Event = Article & EventMeta;
+export type Event = Modify<
+  CleanEventSchema,
+  {
+    slug: string;
+    backgroundUrl: string;
+    content: string;
+  }
+>;
 
 export type News = Article & NewsMeta;
+
+export type Modify<T, R> = Omit<T, keyof R> & R;
 
 export enum Lang {
   be = "be",
