@@ -18,6 +18,7 @@ const config = defineConfig({
   dataset,
   schema: {
     types: [vacancy, event],
+    templates: (prev) => prev.filter((template) => !["vacancy", "event"].includes(template.id)),
   },
   plugins: [
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
