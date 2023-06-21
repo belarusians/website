@@ -1,6 +1,6 @@
 import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub, faTwitter, faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
+import { faGithub, faTwitter, faFacebook, faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 export function Footer(props: { className?: string }): React.JSX.Element {
   return (
@@ -16,6 +16,9 @@ export function Footer(props: { className?: string }): React.JSX.Element {
         </a>
         <a rel="noreferrer" target={"_blank"} href="https://twitter.com/BelarusinNL">
           <FontAwesomeIcon icon={faTwitter} className="text-2xl lg:text-3xl text-white md:text-red" />
+        </a>
+        <a rel="noreferrer" target={"_blank"} href="https://www.linkedin.com/company/marabynl">
+          <FontAwesomeIcon icon={faLinkedin} className="text-2xl lg:text-3xl text-white md:text-red" />
         </a>
         <a rel="noreferrer" target={"_blank"} href="https://github.com/belarusians">
           <FontAwesomeIcon icon={faGithub} className="text-2xl lg:text-3xl text-white md:text-red" />
