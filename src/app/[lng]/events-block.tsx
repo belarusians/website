@@ -1,5 +1,6 @@
-import { EventMeta, Lang } from "../../components/types";
+import { Lang } from "../../components/types";
 import { FutureEventThumbnail } from "./event-thumbnail";
+import { EventMeta } from "../../../sanity/lib/event";
 
 export interface EventsBlockProps {
   events: EventMeta[];
