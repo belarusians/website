@@ -23,6 +23,12 @@ const event = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "description",
+      title: "Description",
+      type: "text",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "backgroundUrl",
       title: "Image",
       type: "image",
@@ -54,12 +60,6 @@ const event = defineType({
       name: "ticketsLink",
       title: "Tickets link",
       type: "url",
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: "description",
-      title: "Description",
-      type: "text",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
