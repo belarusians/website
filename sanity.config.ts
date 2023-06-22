@@ -11,14 +11,15 @@ import { documentInternationalization } from "@sanity/document-internationalizat
 import { apiVersion, dataset, projectId } from "./sanity/env";
 import vacancy from "./sanity/vacancy-schema";
 import event from "./sanity/event-schema";
+import news from "./sanity/news-schema";
 
 const config = defineConfig({
   basePath: "/studio",
   projectId,
   dataset,
   schema: {
-    types: [vacancy, event],
-    templates: (prev) => prev.filter((template) => !["vacancy", "event"].includes(template.id)),
+    types: [vacancy, event, news],
+    templates: (prev) => prev.filter((template) => !["vacancy", "event", "news"].includes(template.id)),
   },
   plugins: [
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -37,7 +38,7 @@ const config = defineConfig({
         { id: "nl", title: "Nederlands" },
         { id: "ru", title: "Русский" },
       ],
-      schemaTypes: ["vacancy", "event"],
+      schemaTypes: ["vacancy", "event", "news"],
     }),
   ],
 });
@@ -47,5 +48,9 @@ export default config;
 type Values = InferSchemaValues<typeof config>;
 
 export type Vacancy = Extract<Values, { _type: "vacancy" }>;
+
 export type EventSchema = Extract<Values, { _type: "event" }>;
 export type CleanEventSchema = Omit<EventSchema, "_createdAt" | "_type" | "_id" | "_updatedAt" | "_rev" | "language">;
+
+export type NewsSchema = Extract<Values, { _type: "news" }>;
+export type CleanNewsSchema = Omit<NewsSchema, "_createdAt" | "_type" | "_id" | "_updatedAt" | "_rev" | "language">;
