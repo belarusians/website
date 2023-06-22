@@ -16,8 +16,14 @@ export async function GET(request: NextRequest) {
 
   const path = request.nextUrl.searchParams.get("path") || "/";
 
-  console.log("revalidating ", path);
-  revalidatePath(path);
+  console.log(`revalidating of ${path} requested`);
+  try {
+    revalidatePath(path);
+  } catch (e) {
+    console.log(`revalidating of ${path} failed`);
+    return NextResponse.json({ revalidated: false, error: e });
+  }
 
+  console.log(`revalidating of ${path} succeeded`);
   return NextResponse.json({ revalidated: true });
 }
