@@ -53,12 +53,22 @@ const news = defineType({
     defineField({
       name: "featuredMain",
       title: "Featured as big picture",
+      description:
+        "Only one news can be featured as big picture. If many are featured, the freshest one will be shown.",
       type: "boolean",
+      initialValue: false,
+      readOnly: ({ document }) => document?.featured as boolean,
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "featured",
       title: "Featured as small picture",
+      description:
+        "Only 2 news can be featured as small pictures. If more than 2 are featured, the freshest 2 will be shown.",
       type: "boolean",
+      initialValue: false,
+      readOnly: ({ document }) => document?.featuredMain as boolean,
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "publishingDate",
