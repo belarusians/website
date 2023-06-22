@@ -2,13 +2,12 @@ import matter, { GrayMatterFile } from "gray-matter";
 import { remark } from "remark";
 import html from "remark-html";
 
-import { ArticleMeta, ArticleType, Lang, News, NewsMeta } from "../components/types";
+import { LegacyNewsMeta, Lang, LegacyNews } from "../components/types";
 import * as fs from "./fs";
 
-function parseArticleMeta(file: GrayMatterFile<string>, slug: string): ArticleMeta {
-  const meta: ArticleMeta = {
+function parseArticleMeta(file: GrayMatterFile<string>, slug: string): LegacyNewsMeta {
+  const meta: LegacyNewsMeta = {
     slug,
-    type: file.data.type as ArticleType,
     title: file.data.title,
     date: file.data.date,
     backgroundUrl: file.data.backgroundUrl,
@@ -22,25 +21,24 @@ function parseArticleMeta(file: GrayMatterFile<string>, slug: string): ArticleMe
   return meta;
 }
 
-export async function getNewsMetaBySlug(slug: string, locale: Lang = Lang.be): Promise<NewsMeta> {
+export async function getNewsMetaBySlug(slug: string, locale: Lang = Lang.be): Promise<LegacyNewsMeta> {
   const file = await fs.getNewsBySlug(slug, locale);
   const fileWithParsedFM = matter(file);
 
-  return parseArticleMeta(fileWithParsedFM, slug) as NewsMeta;
+  return parseArticleMeta(fileWithParsedFM, slug) as LegacyNewsMeta;
 }
 
-export async function getNewsMeta(lang = Lang.be): Promise<NewsMeta[]> {
+export async function getNewsMeta(lang = Lang.be): Promise<LegacyNewsMeta[]> {
   const slugs = fs.getNewsSlugs(lang);
   return Promise.all(slugs.map((slug) => getNewsMetaBySlug(slug, lang)));
 }
 
-export async function getNewsBySlug(slug: string, locale?: Lang): Promise<News> {
+export async function getNewsBySlug(slug: string, locale?: Lang): Promise<LegacyNews> {
   const file = await fs.getNewsBySlug(slug, locale);
   const fileWithParsedFM = matter(file);
 
-  const news: News = {
+  const news: LegacyNews = {
     ...parseArticleMeta(fileWithParsedFM, slug),
-    type: ArticleType.News,
     content: await markdownToHTML(fileWithParsedFM.content),
   };
 

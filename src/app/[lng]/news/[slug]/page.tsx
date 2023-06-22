@@ -1,10 +1,11 @@
 import { getNewsSlugs } from "../../../../lib/fs";
-import { getNewsBySlug } from "../../../../lib/articles";
-import { Lang, News } from "../../../../components/types";
+import { getNewsBySlug as legacyGetNewsBySlug } from "../../../../lib/articles";
+import { Lang, LegacyNews, News } from "../../../../components/types";
 import { Section } from "../../../../components/section/section";
 import { NewsArticle } from "./news-article";
 import { CommonPageParams } from "../../../types";
 import { Metadata, ResolvingMetadata } from "next/types";
+import { getAllNewsSlugs, getNewsBySlug } from "../../../../../sanity/lib/news";
 
 type NewsPageParams = {
   params: {
@@ -14,6 +15,10 @@ type NewsPageParams = {
 
 export default async function ArticlePage({ params }: NewsPageParams) {
   const news = await getData(params.lng, params.slug);
+  if (!news) {
+    return <div>Not found</div>;
+  }
+
   return (
     <>
       <Section>
@@ -23,12 +28,17 @@ export default async function ArticlePage({ params }: NewsPageParams) {
   );
 }
 
-async function getData(lang: Lang, slug: string): Promise<News> {
-  return await getNewsBySlug(slug, lang);
+async function getData(lang: Lang, slug: string): Promise<News | LegacyNews | undefined> {
+  try {
+    return await legacyGetNewsBySlug(slug, lang);
+  } catch (e) {
+    return await getNewsBySlug(lang, slug);
+  }
 }
 
-export function generateStaticParams() {
-  return getNewsSlugs().map((slug) => ({ slug }));
+export async function generateStaticParams({ params }: CommonPageParams) {
+  const legacySlugs = getNewsSlugs().map((slug) => ({ slug }));
+  return (await getAllNewsSlugs(params.lng)).concat(legacySlugs);
 }
 
 export async function generateMetadata({ params }: NewsPageParams, parent: ResolvingMetadata): Promise<Metadata> {
@@ -36,8 +46,8 @@ export async function generateMetadata({ params }: NewsPageParams, parent: Resol
   const news = await getData(params.lng, params.slug);
 
   return {
-    title: news.title,
-    description: news.description,
+    title: news?.title,
+    description: news?.description,
     alternates: {
       canonical: `${parentMetadata.metadataBase}${Lang.be}/news/${params.slug}`,
       languages: {
@@ -50,18 +60,18 @@ export async function generateMetadata({ params }: NewsPageParams, parent: Resol
     // @ts-ignore
     openGraph: {
       ...parentMetadata.openGraph,
-      title: news.title,
-      description: news.description,
+      title: news?.title,
+      description: news?.description,
       url: `${params.lng}/news/${params.slug}`,
-      images: [news.backgroundUrl],
+      images: [news?.backgroundUrl || parentMetadata.openGraph!.images![0]],
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     twitter: {
       ...parentMetadata.twitter,
-      title: news.title,
-      description: news.description,
-      images: [news.backgroundUrl],
+      title: news?.title,
+      description: news?.description,
+      images: [news?.backgroundUrl || parentMetadata.twitter!.images![0]],
     },
   };
 }
