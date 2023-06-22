@@ -11,7 +11,6 @@ function parseArticleMeta(file: GrayMatterFile<string>, slug: string): LegacyNew
     title: file.data.title,
     date: file.data.date,
     backgroundUrl: file.data.backgroundUrl,
-    tags: file.data.tags,
   };
 
   if (file.data.imageRatio) {

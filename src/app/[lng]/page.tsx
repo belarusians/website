@@ -1,6 +1,6 @@
 import { SubscriptionForm } from "./subscription-form";
 import { FeaturedNewsBlock } from "./featured-block";
-import { Lang, LegacyNewsMeta, NewsTags } from "../../components/types";
+import { Lang, LegacyNewsMeta } from "../../components/types";
 import { getNewsMeta as legacyGetNewsMeta } from "../../lib/articles";
 import { Section } from "../../components/section/section";
 import { AchievementsBlock } from "./achievements-block";
@@ -12,8 +12,8 @@ import { getFutureEventMetas, EventMeta } from "../../../sanity/lib/event";
 import { getNewsMetas, NewsMeta } from "../../../sanity/lib/news";
 
 interface MainPageProps {
-  mainNews: LegacyNewsMeta | NewsMeta;
-  secondaryNews: [LegacyNewsMeta | NewsMeta, LegacyNewsMeta | NewsMeta];
+  mainNews: NewsMeta;
+  secondaryNews: [NewsMeta, NewsMeta];
   otherNews: (LegacyNewsMeta | NewsMeta)[];
   events: EventMeta[];
 }
@@ -52,22 +52,20 @@ export default async function IndexPage({ params: { lng } }: CommonPageParams) {
   );
 }
 
-function hasTwoSecondaryNews(
-  secondaryNews: (LegacyNewsMeta | NewsMeta)[],
-): secondaryNews is [LegacyNewsMeta | NewsMeta, LegacyNewsMeta | NewsMeta] {
+function hasTwoSecondaryNews(secondaryNews: NewsMeta[]): secondaryNews is [NewsMeta, NewsMeta] {
   return secondaryNews.length === 2;
 }
 
 function isLegacyNewsMeta(meta: LegacyNewsMeta | NewsMeta): meta is LegacyNewsMeta {
-  return (meta as LegacyNewsMeta).tags !== undefined;
+  return (meta as LegacyNewsMeta).date !== undefined;
 }
 
-function isMainFeaturedNews(meta: LegacyNewsMeta | NewsMeta): meta is LegacyNewsMeta {
-  return isLegacyNewsMeta(meta) ? meta.tags.includes(NewsTags.Main) : meta.featuredMain;
+function isMainFeaturedNews(meta: NewsMeta): boolean {
+  return meta.featuredMain;
 }
 
-function isFeaturedNews(meta: LegacyNewsMeta | NewsMeta): meta is LegacyNewsMeta {
-  return isLegacyNewsMeta(meta) ? meta.tags.includes(NewsTags.Secondary) : meta.featured;
+function isFeaturedNews(meta: NewsMeta): boolean {
+  return meta.featured;
 }
 
 async function getData(lang: Lang): Promise<MainPageProps> {
@@ -75,18 +73,18 @@ async function getData(lang: Lang): Promise<MainPageProps> {
 
   const legacyNewsMeta = await legacyGetNewsMeta(lang);
   const newsMeta: (LegacyNewsMeta | NewsMeta)[] = await getNewsMetas(lang);
-  const mainNews = newsMeta.concat(legacyNewsMeta).find(isMainFeaturedNews);
-  if (!mainNews) {
-    throw new Error("There should be at least 1 'featured-main' news");
+  const mainNews = (newsMeta as NewsMeta[]).filter(isMainFeaturedNews);
+  if (mainNews.length === 0) {
+    mainNews.push(newsMeta[0] as NewsMeta);
   }
-  const secondaryNews = newsMeta.concat(legacyNewsMeta).filter(isFeaturedNews).slice(0, 2);
+  const secondaryNews = (newsMeta as NewsMeta[]).filter(isFeaturedNews).slice(0, 2);
   if (!hasTwoSecondaryNews(secondaryNews)) {
     throw new Error("There should be at least 2 'featured' news");
   }
   // TODO: remove the slice(0, 4). So far we can't render more, because of bad UX
-  const otherNews = newsMeta
+  const otherNews: (LegacyNewsMeta | NewsMeta)[] = newsMeta
     .concat(legacyNewsMeta)
-    .filter((meta) => !isFeaturedNews(meta) && !isMainFeaturedNews(meta))
+    .filter((meta) => !isFeaturedNews(meta as NewsMeta) && !isMainFeaturedNews(meta as NewsMeta))
     .sort((meta1, meta2) => {
       const firstDate = isLegacyNewsMeta(meta1) ? new Date(meta1.date) : meta1.publishingDate;
       const secondDate = isLegacyNewsMeta(meta2) ? new Date(meta2.date) : meta2.publishingDate;
@@ -96,7 +94,7 @@ async function getData(lang: Lang): Promise<MainPageProps> {
     .slice(0, 4);
 
   return {
-    mainNews,
+    mainNews: mainNews[0],
     secondaryNews,
     otherNews,
     events: eventsMeta,
