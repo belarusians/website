@@ -1,10 +1,12 @@
 import { SlugValidationContext } from "sanity";
+import { CaseIcon } from "@sanity/icons";
 import { defineArrayMember, defineField, defineType } from "@sanity-typed/types";
 
 const vacancy = defineType({
   name: "vacancy",
   title: "Vacancy",
   type: "document",
+  icon: CaseIcon,
   fields: [
     defineField({
       name: "title",

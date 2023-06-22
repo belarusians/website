@@ -1,10 +1,12 @@
 import { defineArrayMember, defineField, defineType } from "@sanity-typed/types";
+import { CalendarIcon } from "@sanity/icons";
 import { isUniqueOtherThanLanguage } from "./vacancy-schema";
 
 const event = defineType({
   name: "event",
   title: "Event",
   type: "document",
+  icon: CalendarIcon,
   fields: [
     defineField({
       name: "title",

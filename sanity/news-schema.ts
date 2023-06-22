@@ -1,10 +1,12 @@
 import { defineArrayMember, defineField, defineType } from "@sanity-typed/types";
+import { BlockContentIcon } from "@sanity/icons";
 import { isUniqueOtherThanLanguage } from "./vacancy-schema";
 
 const news = defineType({
   name: "news",
   title: "News",
   type: "document",
+  icon: BlockContentIcon,
   fields: [
     defineField({
       name: "title",
