@@ -56,10 +56,6 @@ function hasTwoSecondaryNews(secondaryNews: NewsMeta[]): secondaryNews is [NewsM
   return secondaryNews.length === 2;
 }
 
-function isLegacyNewsMeta(meta: LegacyNewsMeta | NewsMeta): meta is LegacyNewsMeta {
-  return (meta as LegacyNewsMeta).date !== undefined;
-}
-
 function isMainFeaturedNews(meta: NewsMeta): boolean {
   return meta.featuredMain;
 }
@@ -71,7 +67,9 @@ function isFeaturedNews(meta: NewsMeta): boolean {
 async function getData(lang: Lang): Promise<MainPageProps> {
   const eventsMeta = await getFutureEventMetas(lang);
 
-  const legacyNewsMeta = await legacyGetNewsMeta(lang);
+  const legacyNewsMeta = (await legacyGetNewsMeta(lang)).sort((meta1, meta2) =>
+    new Date(meta1.date) < new Date(meta2.date) ? 1 : -1,
+  );
   const newsMeta: (LegacyNewsMeta | NewsMeta)[] = await getNewsMetas(lang);
   const mainNews = (newsMeta as NewsMeta[]).filter(isMainFeaturedNews);
   if (mainNews.length === 0) {
@@ -82,15 +80,9 @@ async function getData(lang: Lang): Promise<MainPageProps> {
     throw new Error("There should be at least 2 'featured' news");
   }
   // TODO: remove the slice(0, 4). So far we can't render more, because of bad UX
-  const otherNews: (LegacyNewsMeta | NewsMeta)[] = newsMeta
-    .concat(legacyNewsMeta)
+  const otherNews = newsMeta
     .filter((meta) => !isFeaturedNews(meta as NewsMeta) && !isMainFeaturedNews(meta as NewsMeta))
-    .sort((meta1, meta2) => {
-      const firstDate = isLegacyNewsMeta(meta1) ? new Date(meta1.date) : meta1.publishingDate;
-      const secondDate = isLegacyNewsMeta(meta2) ? new Date(meta2.date) : meta2.publishingDate;
-
-      return firstDate < secondDate ? 1 : -1;
-    })
+    .concat(legacyNewsMeta)
     .slice(0, 4);
 
   return {
