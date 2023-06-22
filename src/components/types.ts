@@ -1,31 +1,17 @@
-import { CleanEventSchema } from "../../sanity.config";
+import { CleanEventSchema, CleanNewsSchema } from "../../sanity.config";
 
 export enum NewsTags {
   Main = "featured-main",
   Secondary = "featured",
 }
 
-export enum ArticleType {
-  News = "news",
-}
-
-export interface ArticleMeta {
-  type: ArticleType;
+export interface LegacyNewsMeta {
   slug: string;
   title: string;
   date: string;
   backgroundUrl: string;
   tags: NewsTags[];
   imageRatio?: string;
-}
-
-export interface Article extends ArticleMeta {
-  description?: string;
-  content: string;
-}
-
-export interface NewsMeta extends ArticleMeta {
-  type: ArticleType.News;
 }
 
 export type Event = Modify<
@@ -37,7 +23,22 @@ export type Event = Modify<
   }
 >;
 
-export type News = Article & NewsMeta;
+export type News = Modify<
+  CleanNewsSchema,
+  {
+    slug: string;
+    backgroundUrl: string;
+    content: string;
+  }
+>;
+
+export type LegacyNews = Modify<
+  Omit<News, "publishingDate" | "featured" | "featuredMain">,
+  {
+    tags: NewsTags[];
+    description?: string;
+  }
+>;
 
 export type Modify<T, R> = Omit<T, keyof R> & R;
 

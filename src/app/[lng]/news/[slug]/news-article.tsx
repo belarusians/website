@@ -1,10 +1,10 @@
 import Image from "next/image";
 import * as React from "react";
 
-import { News } from "../../../../components/types";
+import { LegacyNews, News } from "../../../../components/types";
 
 interface ArticleProps {
-  news: News;
+  news: News | LegacyNews;
 }
 
 export function NewsArticle(props: ArticleProps) {

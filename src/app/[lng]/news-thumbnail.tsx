@@ -2,26 +2,20 @@ import { forwardRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { ArticleMeta, ArticleType, Lang } from "../../components/types";
+import { LegacyNewsMeta, Lang } from "../../components/types";
+import { NewsMeta } from "../../../sanity/lib/news";
 
 export interface NewsThumbnailProps {
-  news: ArticleMeta;
+  news: LegacyNewsMeta | NewsMeta;
   lang: Lang;
   size?: "large" | "small" | "medium";
   className?: string;
 }
 
-function getLinkToArticle(article: ArticleMeta, lang: Lang): string {
-  if (article.type === ArticleType.News) {
-    return `/${lang}/news/${article.slug}`;
-  }
-  return `/${lang}`;
-}
-
 export const NewsThumbnail = forwardRef<HTMLDivElement, NewsThumbnailProps>((props: NewsThumbnailProps, ref) => {
   return (
     <div ref={ref} className={`rounded-md ${props.className}`}>
-      <Link className="relative flex flex-1 flex-col" href={getLinkToArticle(props.news, props.lang)}>
+      <Link className="relative flex flex-1 flex-col" href={`/${props.lang}/news/${props.news.slug}`}>
         <Image
           className="object-cover rounded-md brightness-90"
           fill
