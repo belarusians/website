@@ -1,6 +1,4 @@
-import { getNewsSlugs } from "../../../../lib/fs";
-import { getNewsBySlug as legacyGetNewsBySlug } from "../../../../lib/articles";
-import { Lang, LegacyNews, News } from "../../../../components/types";
+import { Lang, News } from "../../../../components/types";
 import { Section } from "../../../../components/section/section";
 import { NewsArticle } from "./news-article";
 import { CommonPageParams } from "../../../types";
@@ -28,17 +26,12 @@ export default async function ArticlePage({ params }: NewsPageParams) {
   );
 }
 
-async function getData(lang: Lang, slug: string): Promise<News | LegacyNews | undefined> {
-  try {
-    return await getNewsBySlug(lang, slug);
-  } catch (e) {
-    return await legacyGetNewsBySlug(slug, lang);
-  }
+async function getData(lang: Lang, slug: string): Promise<News | undefined> {
+  return await getNewsBySlug(lang, slug);
 }
 
 export async function generateStaticParams({ params }: CommonPageParams) {
-  const legacySlugs = getNewsSlugs().map((slug) => ({ slug }));
-  return (await getAllNewsSlugs(params.lng)).concat(legacySlugs);
+  return await getAllNewsSlugs(params.lng);
 }
 
 export async function generateMetadata({ params }: NewsPageParams, parent: ResolvingMetadata): Promise<Metadata> {

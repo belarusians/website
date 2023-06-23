@@ -1,13 +1,5 @@
 import { CleanEventSchema, CleanNewsSchema } from "../../sanity.config";
 
-export interface LegacyNewsMeta {
-  slug: string;
-  title: string;
-  date: string;
-  backgroundUrl: string;
-  imageRatio?: string;
-}
-
 export type Event = Modify<
   CleanEventSchema,
   {
@@ -23,13 +15,6 @@ export type News = Modify<
     slug: string;
     backgroundUrl: string;
     content: string;
-  }
->;
-
-export type LegacyNews = Modify<
-  Omit<News, "publishingDate" | "featured" | "featuredMain">,
-  {
-    description?: string;
   }
 >;
 

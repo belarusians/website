@@ -1,10 +1,10 @@
 import { MetadataRoute } from "next";
 
-import { getNewsSlugs } from "../lib/fs";
 import { Lang } from "../components/types";
 import { baseUrl } from "./config";
 import { getVacanciesByLang } from "../../sanity/lib/vacancy";
 import { getAllEventsSlugs } from "../../sanity/lib/event";
+import { getAllNewsSlugs } from "../../sanity/lib/news";
 
 function generateTranslatedUrls(path: string): MetadataRoute.Sitemap {
   const normalizedPath = path === "/" || path === "" ? "" : path.startsWith("/") ? path : `/${path}`;
@@ -26,7 +26,7 @@ function generateTranslatedUrls(path: string): MetadataRoute.Sitemap {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const news = getNewsSlugs();
+  const news = await getAllNewsSlugs(Lang.be);
   const events = await getAllEventsSlugs(Lang.be);
   const vacancies = await getVacanciesByLang(Lang.be);
 
