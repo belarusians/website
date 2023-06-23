@@ -12,10 +12,11 @@ import Card from "../../../components/card";
 
 import libereco from "../../../../public/partners/libereco.jpeg";
 import musicForBelarus from "../../../../public/partners/music-for-belarus.jpg";
-import heart from "../../../../public/news/heart.jpg";
-import mara from "../../../../public/news/mara.jpg";
-import other from "../../../../public/news/other.jpg";
-import hand from "../../../../public/abstract/hand.jpg";
+import heart from "../../../../public/images/heart.jpg";
+import mara from "../../../../public/images/mara.jpg";
+import other from "../../../../public/images/other.jpg";
+import flowers from "../../../../public/images/flowers.jpg";
+import hand from "../../../../public/images/hand.jpg";
 
 export default async function AboutUs({ params: { lng } }: CommonPageParams) {
   const language = lng ?? Lang.be;
@@ -62,7 +63,7 @@ export default async function AboutUs({ params: { lng } }: CommonPageParams) {
           <a href="https://twitter.com/BelarusinNL">twitter</a>
         </div>
         <div className="col-span-3 relative hidden lg:block rounded-md shadow-lg">
-          <Image className="rounded-md object-cover" src="/news/flowers.jpg" fill alt="how can i help" />
+          <Image className="rounded-md object-cover" src={flowers} fill alt="how can i help" />
         </div>
       </div>
       <H3 className="mt-4 md:mt-6 lg:mt-8 mb-2 text-center">{t("partners")}</H3>
