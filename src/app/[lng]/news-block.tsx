@@ -3,13 +3,13 @@
 import * as React from "react";
 
 import { useTranslation } from "../i18n/client";
-import { LegacyNewsMeta, Lang } from "../../components/types";
+import { Lang } from "../../components/types";
 import { NewsThumbnail } from "./news-thumbnail";
 import H2 from "../../components/headinds/h2";
 import { NewsMeta } from "../../../sanity/lib/news";
 
 interface NewsBlockProps {
-  news: (LegacyNewsMeta | NewsMeta)[];
+  news: NewsMeta[];
   lang: Lang;
 }
 

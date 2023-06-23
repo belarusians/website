@@ -16,10 +16,10 @@ export type NewsMeta = Modify<
   }
 >;
 
-export async function getNewsMetas(lang: Lang): Promise<NewsMeta[]> {
+export async function getNotFeaturedNewsMetas(lang: Lang, top: number): Promise<NewsMeta[]> {
   const metas: NewsSchema[] = await client.fetch(
     groq`
-    *[_type == "news" && language == "${lang}"] | order(publishingDate desc)
+    *[_type == "news" && language == "${lang}" && featuredMain == false && featured == false] | order(publishingDate desc)
       {
         "slug": slug.current,
         title,
@@ -27,16 +27,53 @@ export async function getNewsMetas(lang: Lang): Promise<NewsMeta[]> {
         featuredMain,
         featured,
         publishingDate
-      }`,
+      }[0...${top}]`,
   );
+
   return metas.map((meta) => ({
     ...meta,
     backgroundUrl: urlForImage(meta.backgroundUrl),
   }));
 }
 
-export async function getAllNewsSlugsByLang(lang: Lang): Promise<{ slug: string }[]> {
-  return client.fetch(`*[_type == "news" && language == "${lang}"]{ "slug": slug.current }`);
+export async function getMainFeaturedNewsMeta(lang: Lang): Promise<NewsMeta> {
+  const meta: NewsSchema = await client.fetch(
+    groq`
+    *[_type == "news" && language == "${lang}" && featuredMain == true] | order(publishingDate desc)
+    {
+        "slug": slug.current,
+        title,
+        backgroundUrl,
+        featuredMain,
+        featured,
+        publishingDate
+      }[0]`,
+  );
+
+  return {
+    ...meta,
+    backgroundUrl: urlForImage(meta.backgroundUrl),
+  };
+}
+
+export async function getFeaturedNewsMetas(lang = Lang.be, top = 2): Promise<NewsMeta[]> {
+  const metas: NewsSchema[] = await client.fetch(
+    groq`
+    *[_type == "news" && language == "${lang}" && featured == true] | order(publishingDate desc)
+    {
+        "slug": slug.current,
+        title,
+        backgroundUrl,
+        featuredMain,
+        featured,
+        publishingDate
+      }[0...${top}]`,
+  );
+
+  return metas.map((meta) => ({
+    ...meta,
+    backgroundUrl: urlForImage(meta.backgroundUrl),
+  }));
 }
 
 export async function getNewsBySlug(lang: Lang, slug: string): Promise<News | undefined> {

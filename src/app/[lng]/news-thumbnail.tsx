@@ -2,11 +2,11 @@ import { forwardRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { LegacyNewsMeta, Lang } from "../../components/types";
+import { Lang } from "../../components/types";
 import { NewsMeta } from "../../../sanity/lib/news";
 
 export interface NewsThumbnailProps {
-  news: LegacyNewsMeta | NewsMeta;
+  news: NewsMeta;
   lang: Lang;
   size?: "large" | "small" | "medium";
   className?: string;

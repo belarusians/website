@@ -20,18 +20,6 @@ function parseArticleMeta(file: GrayMatterFile<string>, slug: string): LegacyNew
   return meta;
 }
 
-export async function getNewsMetaBySlug(slug: string, locale: Lang = Lang.be): Promise<LegacyNewsMeta> {
-  const file = await fs.getNewsBySlug(slug, locale);
-  const fileWithParsedFM = matter(file);
-
-  return parseArticleMeta(fileWithParsedFM, slug) as LegacyNewsMeta;
-}
-
-export async function getNewsMeta(lang = Lang.be): Promise<LegacyNewsMeta[]> {
-  const slugs = fs.getNewsSlugs(lang);
-  return Promise.all(slugs.map((slug) => getNewsMetaBySlug(slug, lang)));
-}
-
 export async function getNewsBySlug(slug: string, locale?: Lang): Promise<LegacyNews> {
   const file = await fs.getNewsBySlug(slug, locale);
   const fileWithParsedFM = matter(file);

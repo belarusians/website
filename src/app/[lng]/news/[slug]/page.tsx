@@ -30,9 +30,9 @@ export default async function ArticlePage({ params }: NewsPageParams) {
 
 async function getData(lang: Lang, slug: string): Promise<News | LegacyNews | undefined> {
   try {
-    return await legacyGetNewsBySlug(slug, lang);
-  } catch (e) {
     return await getNewsBySlug(lang, slug);
+  } catch (e) {
+    return await legacyGetNewsBySlug(slug, lang);
   }
 }
 

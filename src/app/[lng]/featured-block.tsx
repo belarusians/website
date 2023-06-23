@@ -1,12 +1,12 @@
 import { NewsThumbnail } from "./news-thumbnail";
-import { LegacyNewsMeta, Lang } from "../../components/types";
+import { Lang } from "../../components/types";
 import H2 from "../../components/headinds/h2";
 import { NewsMeta } from "../../../sanity/lib/news";
 
 interface FeaturedNewsBlockProps {
   lang: Lang;
-  main: LegacyNewsMeta | NewsMeta;
-  secondary: [LegacyNewsMeta | NewsMeta, LegacyNewsMeta | NewsMeta];
+  main: NewsMeta;
+  secondary: [NewsMeta, NewsMeta];
   headingText: string;
 }
 
