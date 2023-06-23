@@ -8,6 +8,14 @@ import { Lang } from "../../../components/types";
 import H1 from "../../../components/headinds/h1";
 import H3 from "../../../components/headinds/h3";
 import { CommonPageParams } from "../../types";
+import Card from "../../../components/card";
+
+import libereco from "../../../../public/partners/libereco.jpeg";
+import musicForBelarus from "../../../../public/partners/music-for-belarus.jpg";
+import heart from "../../../../public/news/heart.jpg";
+import mara from "../../../../public/news/mara.jpg";
+import other from "../../../../public/news/other.jpg";
+import hand from "../../../../public/abstract/hand.jpg";
 
 export default async function AboutUs({ params: { lng } }: CommonPageParams) {
   const language = lng ?? Lang.be;
@@ -22,10 +30,10 @@ export default async function AboutUs({ params: { lng } }: CommonPageParams) {
           <p>{t("who-text")}</p>
         </div>
         <div className="col-span-2 relative hidden lg:block rounded-md shadow-lg">
-          <Image className="rounded-md object-cover" src="/news/heart.jpg" fill alt="who we are" />
+          <Image className="rounded-md object-cover" src={heart} fill alt="who we are" />
         </div>
         <div className="relative hidden lg:block rounded-md shadow-lg">
-          <Image className="rounded-md object-cover" src="/news/mara.jpg" fill alt="what is mara" />
+          <Image className="rounded-md object-cover" src={mara} fill alt="what is mara" />
         </div>
         <div className="self-center col-span-3">
           <H3 className="text-red">{t("what-heading")}</H3>
@@ -36,14 +44,14 @@ export default async function AboutUs({ params: { lng } }: CommonPageParams) {
           <p>{t("why-text")}</p>
         </div>
         <div className="col-span-2 relative hidden lg:block rounded-md shadow-lg">
-          <Image className="rounded-md object-cover" src="/news/other.jpg" fill alt="why do we need mara" />
+          <Image className="rounded-md object-cover" src={other} fill alt="why do we need mara" />
         </div>
         <div className="self-center col-span-3">
           <H3 className="text-red">{t("for-me-heading")}</H3>
           <p>{t("for-me-text")}</p>
         </div>
         <div className="relative hidden lg:block rounded-md shadow-lg">
-          <Image className="rounded-md object-cover" src="/abstract/hand.jpg" fill alt="what is mara for me" />
+          <Image className="rounded-md object-cover" src={hand} fill alt="what is mara for me" />
         </div>
         <div className="self-center col-span-1">
           <H3 className="text-red">{t("help-heading")}</H3>
@@ -60,15 +68,14 @@ export default async function AboutUs({ params: { lng } }: CommonPageParams) {
       <H3 className="mt-4 md:mt-6 lg:mt-8 mb-2 text-center">{t("partners")}</H3>
       <div className="flex justify-center items-center gap-8">
         <Link className="relative w-36 md:w-48 h-12 md:h-16" href="https://www.libereco.org/">
-          <Image className="object-contain" src="/partners/libereco.jpeg" fill alt="libereco partner" />
+          <Card>
+            <Image className="object-contain rounded-md px-2" src={libereco} fill alt="libereco partner" />
+          </Card>
         </Link>
         <Link className="relative w-12 md:w-20 h-12 md:h-20" href="https://www.facebook.com/musicforbelarus">
-          <Image
-            className="object-contain"
-            src="/partners/music-for-belarus.jpg"
-            fill
-            alt="music for belarus partner"
-          />
+          <Card>
+            <Image className="object-contain rounded-md" src={musicForBelarus} fill alt="music for belarus partner" />
+          </Card>
         </Link>
       </div>
     </Section>
