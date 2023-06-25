@@ -6,7 +6,7 @@ import { getVacanciesByLang } from "../../sanity/lib/vacancy";
 import { getAllEventsSlugs } from "../../sanity/lib/event";
 import { getAllNewsSlugs } from "../../sanity/lib/news";
 
-function generateTranslatedUrls(path: string): MetadataRoute.Sitemap {
+export function generateTranslatedUrls(path: string): MetadataRoute.Sitemap {
   const normalizedPath = path === "/" || path === "" ? "" : path.startsWith("/") ? path : `/${path}`;
 
   return [
@@ -31,11 +31,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const vacancies = await getVacanciesByLang(Lang.be);
 
   const newsUrls: MetadataRoute.Sitemap = news.reduce((acc, slug) => {
-    acc.push(...generateTranslatedUrls(`/news/${slug}`));
+    acc.push(...generateTranslatedUrls(`/news/${slug.slug}`));
     return acc;
   }, [] as MetadataRoute.Sitemap);
   const eventsUrls: MetadataRoute.Sitemap = events.reduce((acc, slug) => {
-    acc.push(...generateTranslatedUrls(`/events/${slug}`));
+    acc.push(...generateTranslatedUrls(`/events/${slug.slug}`));
     return acc;
   }, [] as MetadataRoute.Sitemap);
   const vacanciesUrls: MetadataRoute.Sitemap = vacancies.reduce((acc, vacancy) => {

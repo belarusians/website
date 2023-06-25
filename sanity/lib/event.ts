@@ -16,7 +16,7 @@ export async function getAllEventsSlugs(lang: Lang): Promise<{ slug: string }[]>
 export type EventMeta = Pick<EventSchema, "slug" | "eventDate" | "title" | "location">;
 
 export async function getFutureEventMetas(lang: Lang): Promise<EventMeta[]> {
-  return await client.fetch(
+  return client.fetch(
     `*[_type == "event" && eventDate >= now() && language == "${lang}"] | order(eventDate asc){ "slug": slug.current, eventDate, title, location }`,
   );
 }
