@@ -9,21 +9,13 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      {
-        source: "/news/navi-band-5-11-2022",
-        destination: "/events/navi-band-5-11-2022",
-        permanent: true,
-      },
-      {
-        source: "/news/rsp-03-25",
-        destination: "/events/rsp-03-25",
-        permanent: true,
-      },
+      // since 12-06-2023
       {
         source: "/events/kupalle-2023-3",
         destination: "/events/kupalle-2023-2",
         permanent: true,
       },
+      // since 26-06-2023
       {
         source: "/nl/news/kupalle-2023-2",
         destination: "/nl/events/kupalle-2023-2",
