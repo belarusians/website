@@ -31,10 +31,7 @@ async function getData(slug: string, lang: Lang): Promise<Event | undefined> {
   return await getEventBySlug(lang, slug);
 }
 
-export async function generateMetadata(
-  { params }: EventPageParams & CommonPageParams,
-  parent: ResolvingMetadata,
-): Promise<Metadata> {
+export async function generateMetadata({ params }: EventPageParams, parent: ResolvingMetadata): Promise<Metadata> {
   const parentMetadata = await parent;
   const event = await getData(params.slug, params.lng);
 
@@ -42,11 +39,11 @@ export async function generateMetadata(
     title: event?.title,
     description: event?.description,
     alternates: {
-      canonical: `${parentMetadata.metadataBase}${Lang.be}/news/${params.slug}`,
+      canonical: `${parentMetadata.metadataBase}${Lang.be}/events/${params.slug}`,
       languages: {
-        [Lang.be]: `${parentMetadata.metadataBase}${Lang.be}/news/${params.slug}`,
-        [Lang.nl]: `${parentMetadata.metadataBase}${Lang.nl}/news/${params.slug}`,
-        [Lang.ru]: `${parentMetadata.metadataBase}${Lang.ru}/news/${params.slug}`,
+        [Lang.be]: `${parentMetadata.metadataBase}${Lang.be}/events/${params.slug}`,
+        [Lang.nl]: `${parentMetadata.metadataBase}${Lang.nl}/events/${params.slug}`,
+        [Lang.ru]: `${parentMetadata.metadataBase}${Lang.ru}/events/${params.slug}`,
       },
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -55,7 +52,7 @@ export async function generateMetadata(
       ...parentMetadata.openGraph,
       title: event?.title,
       description: event?.description,
-      url: `${params.lng}/news/${params.slug}`,
+      url: `${params.lng}/events/${params.slug}`,
       images: [event?.backgroundUrl || parentMetadata.openGraph!.images![0]],
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
