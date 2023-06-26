@@ -24,6 +24,31 @@ const nextConfig = {
         destination: "/events/kupalle-2023-2",
         permanent: true,
       },
+      {
+        source: "/nl/news/kupalle-2023-2",
+        destination: "/nl/events/kupalle-2023-2",
+        permanent: true,
+      },
+      {
+        source: "/be/news/kupalle-2023-2",
+        destination: "/be/events/kupalle-2023-2",
+        permanent: true,
+      },
+      {
+        source: "/ru/news/kupalle-2023-2",
+        destination: "/ru/events/kupalle-2023-2",
+        permanent: true,
+      },
+      {
+        source: "/news/kupalle-2023-2",
+        destination: "/be/events/kupalle-2023-2",
+        permanent: true,
+      },
+      {
+        source: "/targets",
+        destination: "/be/targets",
+        permanent: true,
+      },
     ];
   },
   reactStrictMode: true,
