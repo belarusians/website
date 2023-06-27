@@ -64,7 +64,7 @@ async function getData(lang: Lang): Promise<MainPageProps> {
   const eventsMeta = await getFutureEventMetas(lang);
 
   // TODO: remove 4. So far we can't render more, because of bad UX
-  const otherNews: NewsMeta[] = await getNotFeaturedNewsMetas(lang, 4);
+  const otherNews: NewsMeta[] = await getNotFeaturedNewsMetas(lang, 6);
   const mainNews = await getMainFeaturedNewsMeta(lang);
   const secondaryNews = await getFeaturedNewsMetas(lang, 2);
   if (!hasTwoSecondaryNews(secondaryNews)) {
