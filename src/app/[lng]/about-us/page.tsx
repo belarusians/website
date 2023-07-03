@@ -1,8 +1,9 @@
 import * as React from "react";
 import Image from "next/image";
-import { useTranslation } from "../../i18n";
+import { Metadata, ResolvingMetadata } from "next/types";
 import Link from "next/link";
 
+import { useTranslation } from "../../i18n";
 import { Section } from "../../../components/section/section";
 import { Lang } from "../../../components/types";
 import H1 from "../../../components/headinds/h1";
@@ -81,4 +82,19 @@ export default async function AboutUs({ params: { lng } }: CommonPageParams) {
       </div>
     </Section>
   );
+}
+
+export async function generateMetadata(params: CommonPageParams, parent: ResolvingMetadata): Promise<Metadata> {
+  const parentMetadata = await parent;
+
+  return {
+    alternates: {
+      canonical: `${parentMetadata.metadataBase}${Lang.be}/about-us`,
+      languages: {
+        [Lang.be]: `${parentMetadata.metadataBase}${Lang.be}/about-us`,
+        [Lang.nl]: `${parentMetadata.metadataBase}${Lang.nl}/about-us`,
+        [Lang.ru]: `${parentMetadata.metadataBase}${Lang.ru}/about-us`,
+      },
+    },
+  };
 }
