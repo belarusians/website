@@ -12,7 +12,7 @@ const nextConfig = {
       // since 12-06-2023
       {
         source: "/events/kupalle-2023-3",
-        destination: "/events/kupalle-2023-2",
+        destination: "/be/events/kupalle-2023-2",
         permanent: true,
       },
       // since 26-06-2023
@@ -34,11 +34,6 @@ const nextConfig = {
       {
         source: "/news/kupalle-2023-2",
         destination: "/be/events/kupalle-2023-2",
-        permanent: true,
-      },
-      {
-        source: "/targets",
-        destination: "/be/targets",
         permanent: true,
       },
     ];
