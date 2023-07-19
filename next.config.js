@@ -50,6 +50,11 @@ const nextConfig = {
         destination: "/nl/events/rsp-03-25",
         permanent: true,
       },
+      {
+        source: "/targets",
+        destination: "/be/join-us",
+        permanent: true,
+      },
       // since 12-06-2023
       {
         source: "/events/kupalle-2023-3",
