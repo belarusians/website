@@ -20,7 +20,7 @@ export function AchievementsBlock(props: { lang: Lang }) {
       setTimeout(updateCounter, 5);
       return;
     }
-    const target = 600;
+    const target = 1600;
     const count = +counterRef.current?.innerText;
     const increment = target / 100;
     if (count < target) {
