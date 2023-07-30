@@ -15,6 +15,7 @@ import news from "./sanity/news-schema";
 
 const config = defineConfig({
   basePath: "/studio",
+  title: "MARA - Studio",
   projectId,
   dataset,
   schema: {
