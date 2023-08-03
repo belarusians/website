@@ -46,7 +46,7 @@ export default async function IndexPage({ params: { lng } }: CommonPageParams) {
       </Section>
 
       <Section>
-        <NewsBlock lang={lng} news={props.otherNews} />
+        <NewsBlock headingText={t("other-news-title")} lang={lng} news={props.otherNews} />
       </Section>
 
       <Section>

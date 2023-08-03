@@ -1,8 +1,5 @@
-"use client";
-
 import * as React from "react";
 
-import { useTranslation } from "../i18n/client";
 import { Lang } from "../../components/types";
 import { NewsThumbnail } from "./news-thumbnail";
 import H2 from "../../components/headinds/h2";
@@ -10,15 +7,14 @@ import { NewsMeta } from "../../../sanity/lib/news";
 
 interface NewsBlockProps {
   news: NewsMeta[];
+  headingText: string;
   lang: Lang;
 }
 
 export function NewsBlock(props: NewsBlockProps): React.JSX.Element {
-  const { t } = useTranslation(props.lang, "main");
-
   return (
     <>
-      <H2>{t("other-news-title")}</H2>
+      <H2>{props.headingText}</H2>
       <div className="flex flex-col sm:flex-row gap-3 md:gap-4 flex-wrap">
         {props.news.map((n, i) => (
           <NewsThumbnail

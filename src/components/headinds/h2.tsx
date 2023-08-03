@@ -6,5 +6,5 @@ interface H2Props {
 }
 
 export default function H2(props: H2Props): React.JSX.Element {
-  return <h2 className={`text-xl font-medium md:text-3xl mb-2 ${props.className ?? ""}`}>{props.children}</h2>;
+  return <h2 className={`text-xl font-medium md:text-3xl mb-4 ${props.className ?? ""}`}>{props.children}</h2>;
 }

@@ -34,12 +34,12 @@ export function AchievementsBlock(props: { lang: Lang }) {
     updateCounter();
   }
   return (
-    <div className="flex justify-center gap-1 md:gap-2 text-white flex-col text-center">
-      <span className="text-5xl md:text-7xl">
+    <div className="flex items-center gap-1 md:gap-2 text-white flex-col">
+      <p className="text-5xl md:text-7xl">
         <span ref={counterRef}></span>
         <span>€</span>
-      </span>
-      <span className="text-xl md:text-2xl">{t("counter-text")}</span>
+      </p>
+      <p className="text-xl md:text-2xl text-center">{t("counter-text")}</p>
     </div>
   );
 }
