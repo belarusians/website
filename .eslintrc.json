@@ -11,5 +11,5 @@
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/no-explicit-any": "error"
   },
-  "ignorePatterns": ["__checks__/**", "next.config.js", "deploy/**"]
+  "ignorePatterns": ["__checks__/**", "next.config.js", "deploy/**", "jest.config.js"]
 }

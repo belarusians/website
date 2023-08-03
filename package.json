@@ -10,6 +10,7 @@
     "build:profile": "cross-env NODE_ENV=development next build --profile",
     "lint": "next lint",
     "lint:fix": "eslint --fix .",
+    "test": "jest",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -36,6 +37,7 @@
     "swr": "^2.1.5"
   },
   "devDependencies": {
+    "@jest/globals": "^29.5.0",
     "@sanity-typed/types": "^1.6.0",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.9",
@@ -51,11 +53,13 @@
     "eslint-config-next": "^13.4.6",
     "eslint-config-prettier": "^8.8.0",
     "gray-matter": "^4.0.3",
+    "jest": "^29.5.0",
     "postcss": "^8.4.23",
     "prettier": "^2.7.1",
     "remark": "^14.0.2",
     "remark-html": "^15.0.1",
     "tailwindcss": "^3.3.2",
+    "ts-jest": "^29.1.0",
     "typescript": "~5.0.4"
   },
   "prettier": {
