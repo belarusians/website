@@ -1,10 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import H3 from "../../../../components/headinds/h3";
-import * as React from "react";
 import { useTranslation } from "../../../i18n/client";
 import { Lang } from "../../../../components/types";
-import { useState } from "react";
 
 interface VacancyFormProps {
   lang: Lang;

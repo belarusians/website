@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import * as React from "react";
+import { useEffect, useState, useRef } from "react";
 
 import { useTranslation } from "../i18n/client";
 import { Lang } from "../../components/types";
@@ -14,7 +13,7 @@ export function AchievementsBlock(props: { lang: Lang }) {
     setHydrated(true);
   }, []);
 
-  const counterRef = React.useRef<HTMLSpanElement>(null);
+  const counterRef = useRef<HTMLSpanElement>(null);
   const updateCounter = () => {
     if (!counterRef.current) {
       setTimeout(updateCounter, 5);

@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
 import { Metadata } from "next/types";
 import Script from "next/script";
 import { Roboto } from "next/font/google";

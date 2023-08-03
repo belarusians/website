@@ -1,4 +1,3 @@
-import * as React from "react";
 import Image from "next/image";
 import { Metadata, ResolvingMetadata } from "next/types";
 import Link from "next/link";

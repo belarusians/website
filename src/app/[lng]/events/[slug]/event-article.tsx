@@ -1,5 +1,4 @@
 import Image from "next/image";
-import * as React from "react";
 import { Event, Lang } from "../../../../components/types";
 import { Button } from "../../../../components/button/button";
 

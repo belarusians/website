@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import { Header } from "../../components/header/header";
 import { Footer } from "./footer";
 import { PropsWithChildren } from "react";
