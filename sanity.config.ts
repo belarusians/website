@@ -8,10 +8,10 @@ import { deskTool } from "sanity/desk";
 import { documentInternationalization } from "@sanity/document-internationalization";
 
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
-import { apiVersion, dataset, projectId } from "./sanity/env";
-import vacancy from "./sanity/vacancy-schema";
-import event from "./sanity/event-schema";
-import news from "./sanity/news-schema";
+import { apiVersion, dataset, projectId } from "./src/sanity/env";
+import vacancy from "./src/sanity/vacancy/schema";
+import event from "./src/sanity/event/schema";
+import news from "./src/sanity/news/schema";
 
 const config = defineConfig({
   basePath: "/studio",

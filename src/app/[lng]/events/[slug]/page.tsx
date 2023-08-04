@@ -5,7 +5,7 @@ import { Section } from "../../../../components/section/section";
 import { EventArticle } from "./event-article";
 import { CommonPageParams } from "../../../types";
 import { useTranslation } from "../../../i18n";
-import { getAllEventsSlugs, getEventBySlug } from "../../../../../sanity/lib/event";
+import { getAllEventsSlugs, getEventBySlug } from "../../../../sanity/event/service";
 
 type EventPageParams = CommonPageParams & {
   params: {

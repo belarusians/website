@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Lang } from "../../components/types";
-import { NewsMeta } from "../../../sanity/lib/news";
+import { NewsMeta } from "../../sanity/news/service";
 
 export interface NewsThumbnailProps {
   news: NewsMeta;

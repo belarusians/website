@@ -2,9 +2,9 @@ import { MetadataRoute } from "next";
 
 import { Lang } from "../components/types";
 import { baseUrl } from "./config";
-import { getVacanciesByLang } from "../../sanity/lib/vacancy";
-import { getAllEventsSlugs } from "../../sanity/lib/event";
-import { getAllNewsSlugs } from "../../sanity/lib/news";
+import { getVacanciesByLang } from "../sanity/vacancy/service";
+import { getAllEventsSlugs } from "../sanity/event/service";
+import { getAllNewsSlugs } from "../sanity/news/service";
 
 export function generateTranslatedUrls(path: string): MetadataRoute.Sitemap {
   const normalizedPath = path === "/" || path === "" ? "" : path.startsWith("/") ? path : `/${path}`;

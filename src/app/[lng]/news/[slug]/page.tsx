@@ -3,7 +3,7 @@ import { Section } from "../../../../components/section/section";
 import { NewsArticle } from "./news-article";
 import { CommonPageParams } from "../../../types";
 import { Metadata, ResolvingMetadata } from "next/types";
-import { getAllNewsSlugs, getNewsBySlug } from "../../../../../sanity/lib/news";
+import { getAllNewsSlugs, getNewsBySlug } from "../../../../sanity/news/service";
 
 type NewsPageParams = {
   params: {

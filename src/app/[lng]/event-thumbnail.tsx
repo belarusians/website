@@ -3,7 +3,7 @@ import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
 import { Lang } from "../../components/types";
-import { EventMeta } from "../../../sanity/lib/event";
+import { EventMeta } from "../../sanity/event/service";
 
 export interface EventThumbnailProps {
   event: EventMeta;
