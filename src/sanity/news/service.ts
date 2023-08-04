@@ -1,9 +1,10 @@
 import { groq } from "next-sanity";
-import { NewsSchema } from "../../sanity.config";
-import { client } from "./client";
-import { Lang, Modify, News } from "../../src/components/types";
-import { urlForImage } from "./image";
 import { toHTML } from "@portabletext/to-html";
+
+import { NewsSchema } from "../../../sanity.config";
+import { client } from "../client";
+import { Lang, Modify, News } from "../../components/types";
+import { urlForImage } from "../lib/image";
 
 export async function getAllNewsSlugs(lang: Lang): Promise<{ slug: string }[]> {
   return client.fetch(`*[_type == "news" && language == "${lang}"]{ "slug": slug.current }`);

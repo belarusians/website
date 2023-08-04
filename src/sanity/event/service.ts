@@ -1,9 +1,9 @@
 import { toHTML } from "@portabletext/to-html";
 
-import { Event, Lang } from "../../src/components/types";
-import { client } from "./client";
-import { EventSchema } from "../../sanity.config";
-import { urlForImage } from "./image";
+import { Event, Lang } from "../../components/types";
+import { client } from "../client";
+import { EventSchema } from "../../../sanity.config";
+import { urlForImage } from "../lib/image";
 
 export async function getAllEvents(): Promise<EventSchema[]> {
   return client.fetch('*[_type == "event"]');

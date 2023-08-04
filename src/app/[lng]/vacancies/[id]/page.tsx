@@ -6,7 +6,7 @@ import { Section } from "../../../../components/section/section";
 import H1 from "../../../../components/headinds/h1";
 import { CommonPageParams } from "../../../types";
 import VacancyForm from "./form";
-import { getVacanciesByLang, getVacancyById } from "../../../../../sanity/lib/vacancy";
+import { getVacanciesByLang, getVacancyById } from "../../../../sanity/vacancy/service";
 
 type VacancyPageParams = CommonPageParams & { params: { id: string } };
 

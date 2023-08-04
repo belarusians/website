@@ -8,7 +8,7 @@ import { VacancyPreview } from "./vacancy-preview";
 import { CommonPageParams } from "../../types";
 import { Metadata, ResolvingMetadata } from "next/types";
 import { Vacancy } from "../../../../sanity.config";
-import { getVacanciesByLang } from "../../../../sanity/lib/vacancy";
+import { getVacanciesByLang } from "../../../sanity/vacancy/service";
 
 export const revalidate = 3600;
 

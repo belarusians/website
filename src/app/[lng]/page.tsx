@@ -7,13 +7,13 @@ import { NewsBlock } from "./news-block";
 import { EventsBlock } from "./events-block";
 import { CommonPageParams } from "../types";
 import { useTranslation } from "../i18n";
-import { getFutureEventMetas, EventMeta } from "../../../sanity/lib/event";
+import { getFutureEventMetas, EventMeta } from "../../sanity/event/service";
 import {
   getFeaturedNewsMetas,
   getMainFeaturedNewsMeta,
   getNotFeaturedNewsMetas,
   NewsMeta,
-} from "../../../sanity/lib/news";
+} from "../../sanity/news/service";
 
 interface MainPageProps {
   mainNews: NewsMeta;
@@ -74,7 +74,7 @@ async function getData(lang: Lang): Promise<MainPageProps> {
   return {
     mainNews,
     secondaryNews,
-    otherNews,
+    otherNews: [...otherNews, ...otherNews, ...otherNews, ...otherNews, ...otherNews],
     events: eventsMeta,
   };
 }
