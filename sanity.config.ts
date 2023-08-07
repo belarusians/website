@@ -10,6 +10,7 @@ import { documentInternationalization } from "@sanity/document-internationalizat
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import { apiVersion, dataset, projectId } from "./src/sanity/env";
 import vacancy from "./src/sanity/vacancy/schema";
+import feedback from "./src/sanity/feedback/schema";
 import event from "./src/sanity/event/schema";
 import news from "./src/sanity/news/schema";
 
@@ -19,8 +20,8 @@ const config = defineConfig({
   projectId,
   dataset,
   schema: {
-    types: [vacancy, event, news],
-    templates: (prev) => prev.filter((template) => !["vacancy", "event", "news"].includes(template.id)),
+    types: [vacancy, event, news, feedback],
+    templates: (prev) => prev.filter((template) => !["vacancy", "event", "news", "feedback"].includes(template.id)),
   },
   plugins: [
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -39,7 +40,7 @@ const config = defineConfig({
         { id: "nl", title: "Nederlands" },
         { id: "ru", title: "Русский" },
       ],
-      schemaTypes: ["vacancy", "event", "news"],
+      schemaTypes: ["vacancy", "event", "news", "feedback"],
     }),
   ],
 });
@@ -47,6 +48,8 @@ const config = defineConfig({
 export default config;
 
 type Values = InferSchemaValues<typeof config>;
+
+export type Feedback = Extract<Values, { _type: "feedback" }>;
 
 export type Vacancy = Extract<Values, { _type: "vacancy" }>;
 
