@@ -26,7 +26,12 @@ const config = defineConfig({
   plugins: [
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    deskTool(),
+    deskTool({
+      structure: (S) =>
+        S.list()
+          .title("Content")
+          .items(S.documentTypeListItems().filter((item) => item.getTitle() !== "Translation metadata")),
+    }),
     // Vision is a tool that lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
