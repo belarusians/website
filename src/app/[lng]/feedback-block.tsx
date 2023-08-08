@@ -13,7 +13,7 @@ export function FeedbackBlock(props: FeedbackBlockProps) {
       <div className="flex flex-col md:flex-row flex-wrap gap-6 md:gap-8 lg:gap-12">
         {props.feedbacks.map((feedback, i) => (
           <div key={i} className="grow md:basis-2/5 lg:basis-1/4">
-            <p className="text-md text-justify border-l-red border-l-2 pl-4 mb-2 md:mb-3">{feedback.text}</p>
+            <p className="text-sm text-justify border-l-red border-l-2 pl-4 mb-2 md:mb-3">{feedback.text}</p>
             <p className="text-xs text-right">{feedback.signature}</p>
           </div>
         ))}
