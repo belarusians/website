@@ -14,12 +14,16 @@ import {
   getNotFeaturedNewsMetas,
   NewsMeta,
 } from "../../sanity/news/service";
+import { FeedbackBlock } from "./feedback-block";
+import { getNRandomFeedbacksByLang } from "../../sanity/feedback/service";
+import { Feedback } from "../../../sanity.config";
 
 interface MainPageProps {
   mainNews: NewsMeta;
   secondaryNews: [NewsMeta, NewsMeta];
   otherNews: NewsMeta[];
   events: EventMeta[];
+  feedbacks: Feedback[];
 }
 
 export default async function IndexPage({ params: { lng } }: CommonPageParams) {
@@ -52,6 +56,10 @@ export default async function IndexPage({ params: { lng } }: CommonPageParams) {
       <Section>
         <SubscriptionForm lang={lng} />
       </Section>
+
+      <Section>
+        <FeedbackBlock feedbacks={props.feedbacks} headingText={t("feedback-title")} />
+      </Section>
     </>
   );
 }
@@ -71,10 +79,13 @@ async function getData(lang: Lang): Promise<MainPageProps> {
     throw new Error("There should be at least 2 'featured' news");
   }
 
+  const feedbacks = await getNRandomFeedbacksByLang(lang, 3);
+
   return {
     mainNews,
     secondaryNews,
     otherNews: [...otherNews, ...otherNews, ...otherNews, ...otherNews, ...otherNews],
     events: eventsMeta,
+    feedbacks,
   };
 }
