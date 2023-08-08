@@ -79,7 +79,7 @@ async function getData(lang: Lang): Promise<MainPageProps> {
     throw new Error("There should be at least 2 'featured' news");
   }
 
-  const feedbacks = await getNRandomFeedbacksByLang(lang, 3);
+  const feedbacks = await getNRandomFeedbacksByLang(lang, 2);
 
   return {
     mainNews,
