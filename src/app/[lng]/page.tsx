@@ -84,7 +84,7 @@ async function getData(lang: Lang): Promise<MainPageProps> {
   return {
     mainNews,
     secondaryNews,
-    otherNews: [...otherNews, ...otherNews, ...otherNews, ...otherNews, ...otherNews],
+    otherNews,
     events: eventsMeta,
     feedbacks,
   };
