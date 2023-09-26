@@ -9,6 +9,7 @@ export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   if (
+    pathname.startsWith("/.well-known/") ||
     pathname.endsWith(".png") ||
     pathname.endsWith(".jpg") ||
     pathname.endsWith(".jpeg") ||
