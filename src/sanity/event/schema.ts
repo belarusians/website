@@ -63,7 +63,6 @@ const event = defineType({
       name: "ticketsLink",
       title: "Tickets link",
       type: "url",
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "content",
