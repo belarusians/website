@@ -25,7 +25,7 @@
     "aws-sdk": "~2.1354.0",
     "i18next": "~22.4.15",
     "i18next-resources-to-backend": "^1.1.4",
-    "next": "~13.4.19",
+    "next": "~13.5.3",
     "next-sanity": "^5.5.3",
     "react": "~18.2.0",
     "react-dom": "~18.2.0",
