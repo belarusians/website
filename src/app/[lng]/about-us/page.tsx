@@ -5,8 +5,8 @@ import Link from "next/link";
 import { useTranslation } from "../../i18n";
 import { Section } from "../../../components/section/section";
 import { Lang } from "../../../components/types";
-import H1 from "../../../components/headinds/h1";
-import H3 from "../../../components/headinds/h3";
+import H1 from "../../../components/headings/h1";
+import H3 from "../../../components/headings/h3";
 import { CommonPageParams } from "../../types";
 import Card from "../../../components/card";
 

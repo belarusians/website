@@ -1,4 +1,4 @@
-import H2 from "../../components/headinds/h2";
+import H2 from "../../components/headings/h2";
 import { Feedback } from "../../../sanity.config";
 
 interface FeedbackBlockProps {

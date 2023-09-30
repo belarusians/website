@@ -1,6 +1,6 @@
 import { useTranslation } from "../../i18n";
 import { Section } from "../../../components/section/section";
-import H1 from "../../../components/headinds/h1";
+import H1 from "../../../components/headings/h1";
 import Form from "./form";
 import { CommonPageParams } from "../../types";
 import { Metadata, ResolvingMetadata } from "next/types";

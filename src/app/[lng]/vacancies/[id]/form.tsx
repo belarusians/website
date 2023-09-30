@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import H3 from "../../../../components/headinds/h3";
+import H3 from "../../../../components/headings/h3";
 import { useTranslation } from "../../../i18n/client";
 import { Lang } from "../../../../components/types";
 

@@ -3,7 +3,7 @@ import { Metadata, ResolvingMetadata } from "next/types";
 
 import { Lang } from "../../../../components/types";
 import { Section } from "../../../../components/section/section";
-import H1 from "../../../../components/headinds/h1";
+import H1 from "../../../../components/headings/h1";
 import { CommonPageParams } from "../../../types";
 import VacancyForm from "./form";
 import { getVacanciesByLang, getVacancyById } from "../../../../sanity/vacancy/service";

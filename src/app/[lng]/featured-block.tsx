@@ -1,6 +1,6 @@
 import { NewsThumbnail } from "./news-thumbnail";
 import { Lang } from "../../components/types";
-import H2 from "../../components/headinds/h2";
+import H2 from "../../components/headings/h2";
 import { NewsMeta } from "../../sanity/news/service";
 
 interface FeaturedNewsBlockProps {
