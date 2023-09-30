@@ -28,7 +28,9 @@ export default async function EventPage({ params }: EventPageParams) {
 }
 
 async function getData(slug: string, lang: Lang): Promise<Event | undefined> {
-  return await getEventBySlug(lang, slug);
+  // TODO: find more clean solution
+  const decodedSlug = decodeURIComponent(slug);
+  return await getEventBySlug(lang, decodedSlug);
 }
 
 export async function generateMetadata({ params }: EventPageParams, parent: ResolvingMetadata): Promise<Metadata> {
