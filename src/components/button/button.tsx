@@ -13,7 +13,7 @@ export interface ButtonProps {
   click?: (event: React.MouseEvent) => void;
 }
 
-export function Button(props: ButtonProps): JSX.Element {
+export function Button(props: ButtonProps): React.ReactElement {
   const buttonAttributes: { "data-umami-event"?: string } = {};
   if (props.trackingName) {
     buttonAttributes["data-umami-event"] = props.trackingName;
@@ -23,7 +23,7 @@ export function Button(props: ButtonProps): JSX.Element {
     return (
       <Link target={props.target} href={props.link} {...buttonAttributes}>
         <button
-          className={`transition-all bg-white p-2 lg:p-3 shadow-lg hover:shadow-xl active:shadow-2xl rounded-md ${
+          className={`transition-all bg-white p-1 md:p-2 lg:p-3 shadow-lg hover:shadow-xl active:shadow-2xl ${
             props.className ?? ""
           }`}
           disabled={props.disabled}
