@@ -10,7 +10,7 @@ interface ArticleProps {
 
 export function EventArticle(props: ArticleProps) {
   return (
-    <div className="rounded-md shadow-lg">
+    <div className="rounded-md bg-white shadow-lg">
       <div
         className={
           "relative rounded-t-md before:z-10 before:bg-white-gradient before:absolute before:h-16 before:right-0 before:bottom-0 before:left-0 " +
