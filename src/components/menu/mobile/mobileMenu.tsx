@@ -5,16 +5,21 @@ import { useState } from "react";
 
 import { useTranslation } from "../../../app/i18n/client";
 import { LanguageSelector } from "../../language-selector/language-selector";
-import { BeautifulButton } from "../../beautiful-button/beautiful-button";
 import { Lang } from "../../types";
+import { Button } from "../../button/button";
 
 export function MobileMenu({ lang }: { lang: Lang }) {
   const { t } = useTranslation(lang);
   const [menuOpened, toggleMenuState] = useState(false);
 
   return (
-    <div className="flex items-center">
-      <BeautifulButton className="mr-4" trackingName="join-button" label={t("join-us")} link={`/${lang}/join-us`} />
+    <div className="flex items-center justify-between">
+      <Button
+        className="mr-4 p-1 md:p-2 lg:p-3 bg-[length:350%_100%] bg-beautiful-button font-normal rounded-r-md text-white transition-all hover:shadow-tbr-xl animate-bg-rotation-slow-wobble"
+        trackingName="join-button"
+        label={t("join-us")}
+        link={`/${lang}/join-us`}
+      />
 
       <div
         className="flex flex-col justify-between top-[17px] left-[20px] h-[24px] w-[32px] cursor-pointer z-40"
@@ -43,7 +48,7 @@ export function MobileMenu({ lang }: { lang: Lang }) {
 function OpenedMenu({ lang }: { lang: Lang }) {
   const { t } = useTranslation(lang);
   return (
-    <div className="bg-red flex flex-col items-center w-full top-[56px] left-0 absolute z-40 divide-solid divide-white divide-y">
+    <div className="bg-red flex flex-col items-end w-full top-[53px] left-0 absolute z-40 divide-solid divide-white divide-y pr-4">
       <LanguageSelector lang={lang} className="text-white py-4" />
       <Link className="text-white text-xl py-4" href={`/${lang}/about-us`}>
         {t("about-us")}
