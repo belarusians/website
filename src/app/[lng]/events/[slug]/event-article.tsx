@@ -27,7 +27,7 @@ export function EventArticle(props: ArticleProps) {
               target="_blank"
               label={props.buttonLabel}
               trackingName={`buy-${props.event.slug}-ticket-button`}
-              className="w-full bg-red-gradient animate-button-background-rotation bg-[length:350%_100%] text-white"
+              className="w-full bg-red-gradient animate-bg-rotation-fast bg-[length:350%_100%] text-white"
             />
           </div>
         )}
