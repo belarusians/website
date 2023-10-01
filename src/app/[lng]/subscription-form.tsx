@@ -5,7 +5,7 @@ import * as React from "react";
 import { ClientOnly } from "../../components/client-only/client-only";
 import { isEmailValid } from "../../lib/email";
 import { Button } from "../../components/button/button";
-import H2 from "../../components/headinds/h2";
+import H2 from "../../components/headings/h2";
 import { Lang } from "../../components/types";
 
 export function SubscriptionForm({ lang }: { lang: Lang }) {
