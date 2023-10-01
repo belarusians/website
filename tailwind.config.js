@@ -46,13 +46,18 @@ module.exports = {
       black: "#231f20",
       "black-tint": "#333333",
       grey: "rgb(128, 128, 128)",
-      "light-grey": "rgb(217,217,217)",
+      "light-grey": "rgb(235,235,235)",
     },
     container: {
       center: true,
     },
     fontFamily: {},
     extend: {
+      boxShadow: {
+        "tb-xl": "0px 25px 20px -14px rgba(0, 0, 0, 0.10), 0px 6px 6px -6px rgba(0, 0, 0, 0.10)",
+        "tbr-xl": "1px 25px 20px -14px rgba(0, 0, 0, 0.10), 1px 6px 6px -6px rgba(0, 0, 0, 0.10)",
+        "tbl-xl": "-1px 25px 20px -14px rgba(0, 0, 0, 0.10), -1px 6px 6px -6px rgba(0, 0, 0, 0.10)",
+      },
       backgroundImage: {
         "white-gradient": "linear-gradient(to top, rgba(255,255,255,255), rgba(255,255,255,0))",
         "beautiful-gradient":
@@ -111,6 +116,32 @@ module.exports = {
             borderRadius: "10px 30px 15px 30px",
           },
         },
+        "wobble-right": {
+          "0%": {
+            borderTopRightRadius: "30px",
+            borderBottomRightRadius: "15px",
+          },
+          "20%": {
+            borderTopRightRadius: "10px",
+            borderBottomRightRadius: "30px",
+          },
+          "40%": {
+            borderTopRightRadius: "15px",
+            borderBottomRightRadius: "10px",
+          },
+          "60%": {
+            borderTopRightRadius: "15px",
+            borderBottomRightRadius: "30px",
+          },
+          "80%": {
+            borderTopRightRadius: "10px",
+            borderBottomRightRadius: "15px",
+          },
+          "100%": {
+            borderTopRightRadius: "30px",
+            borderBottomRightRadius: "15px",
+          },
+        },
         backgroundRotation: {
           "0%": {
             backgroundPosition: "0 0",
@@ -123,8 +154,12 @@ module.exports = {
       animation: {
         shake: "shake .6s ease-in-out 1",
         "fade-in": "fade-in .5s ease-in-out forwards",
-        "beautiful-button": "wobble 6s ease-in-out alternate infinite, backgroundRotation 5s infinite linear",
-        "button-background-rotation": "backgroundRotation 4s infinite linear",
+        "bg-rotation-slow": "backgroundRotation 5s infinite linear",
+        "bg-rotation-slow-wobble-right":
+          "backgroundRotation 5s infinite linear, wobble-right 6s ease-in-out alternate infinite",
+        "bg-rotation-slow-wobble": "backgroundRotation 5s infinite linear, wobble 6s ease-in-out alternate infinite",
+        "bg-rotation-fast": "backgroundRotation 4s infinite linear",
+        "wobble-right": "wobble-right 6s ease-in-out alternate infinite",
       },
     },
   },
