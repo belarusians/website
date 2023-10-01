@@ -36,7 +36,7 @@ export function LanguageSelector(props: { lang: Lang; className?: string }) {
       <div className="flex transition-all rounded-md text-white shadow-lg hover:shadow-xl cursor-pointer">
         {sortedLocales.map((l) => (
           <Link
-            className={`p-1 md:p-2 uppercase text-lg first:rounded-l-md last:rounded-r-md ${
+            className={`p-1 md:p-2 lg:p-3 uppercase text-lg first:rounded-l-md last:rounded-r-md ${
               props.lang === l ? "text-white bg-red" : "text-black-tint bg-white"
             }`}
             key={l}
