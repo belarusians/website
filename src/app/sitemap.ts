@@ -31,15 +31,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const vacancies = await getVacanciesByLang(Lang.be);
 
   const newsUrls: MetadataRoute.Sitemap = news.reduce((acc, slug) => {
-    acc.push(...generateTranslatedUrls(`/news/${slug.slug}`));
+    acc.push(...generateTranslatedUrls(`/news/${encodeURIComponent(slug.slug)}`));
     return acc;
   }, [] as MetadataRoute.Sitemap);
   const eventsUrls: MetadataRoute.Sitemap = events.reduce((acc, slug) => {
-    acc.push(...generateTranslatedUrls(`/events/${slug.slug}`));
+    acc.push(...generateTranslatedUrls(`/events/${encodeURIComponent(slug.slug)}`));
     return acc;
   }, [] as MetadataRoute.Sitemap);
   const vacanciesUrls: MetadataRoute.Sitemap = vacancies.reduce((acc, vacancy) => {
-    acc.push(...generateTranslatedUrls(`/vacancies/${vacancy.id.current}`));
+    acc.push(...generateTranslatedUrls(`/vacancies/${encodeURIComponent(vacancy.id.current!)}`)); // TODO: find out why current could be undefined
     return acc;
   }, [] as MetadataRoute.Sitemap);
 
