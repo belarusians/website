@@ -9,6 +9,8 @@ export async function getAllEvents(): Promise<EventSchema[]> {
   return client.fetch('*[_type == "event"]');
 }
 
+const { signal } = new AbortController();
+
 export async function getAllEventsSlugs(lang: Lang): Promise<{ slug: string }[]> {
   return client.fetch(`*[_type == "event" && language == "${lang}"]{ "slug": slug.current }`);
 }
@@ -17,7 +19,8 @@ export type EventMeta = Pick<EventSchema, "slug" | "eventDate" | "title" | "loca
 
 export async function getFutureEventMetas(lang: Lang): Promise<EventMeta[]> {
   return client.fetch(
-    `*[_type == "event" && eventDate >= now() && language == "${lang}"] | order(eventDate asc){ "slug": slug.current, eventDate, title, location }`,
+    `*[_type == "event" && eventDate >= now()  && language == "${lang}"] | order(eventDate asc){ "slug": slug.current, eventDate, title, location }`,
+    { signal },
   );
 }
 
