@@ -29,7 +29,9 @@ export async function getEventsByLang(lang: Lang): Promise<EventSchema[]> {
 }
 
 export async function getEventBySlug(lang: Lang, slug: string): Promise<Event | undefined> {
-  const schema = await client.fetch(`*[_type == "event" && slug.current == "${slug}" && language == "${lang}"][0]`);
+  const schema = await client.fetch(`*[_type == "event" && slug.current == "${slug}" && language == "${lang}"][0]`, {
+    signal,
+  });
   if (!schema) {
     return undefined;
   }
