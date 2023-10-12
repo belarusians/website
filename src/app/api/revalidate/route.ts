@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
 
   console.log(`revalidating of ${path} requested`);
   try {
-    revalidatePath(path);
+    revalidatePath(path, "page");
   } catch (e) {
     console.log(`revalidating of ${path} failed`);
     return NextResponse.json({ revalidated: false, error: e });
