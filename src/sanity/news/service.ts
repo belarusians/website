@@ -1,4 +1,5 @@
 import { groq } from "next-sanity";
+import { getImageDimensions, SanityImageDimensions } from "@sanity/asset-utils";
 import { toHTML } from "@portabletext/to-html";
 
 import { NewsSchema } from "../../../sanity.config";
@@ -15,7 +16,8 @@ export type NewsMeta = Modify<
   {
     backgroundUrl: string;
   }
->;
+> &
+  Partial<SanityImageDimensions>;
 
 export async function getNotFeaturedNewsMetas(lang: Lang, top: number): Promise<NewsMeta[]> {
   const metas: NewsSchema[] = await client.fetch(
@@ -86,6 +88,8 @@ export async function getNewsBySlug(lang: Lang, slug: string): Promise<News | un
 }
 
 function mapSchemaToNews(news: NewsSchema): News {
+  const dimensions = getImageDimensions(news.backgroundUrl.asset!);
+
   return {
     title: news.title,
     description: news.description,
@@ -96,5 +100,6 @@ function mapSchemaToNews(news: NewsSchema): News {
     featuredMain: news.featuredMain,
     featured: news.featured,
     publishingDate: news.publishingDate,
+    ...dimensions,
   };
 }
