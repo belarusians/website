@@ -96,7 +96,6 @@ function mapSchemaToNews(news: NewsSchema): News {
     slug: news.slug.current!,
     backgroundUrl: urlForImage(news.backgroundUrl.asset!),
     content: toHTML(news.content),
-    imageRatio: news.imageRatio,
     featuredMain: news.featuredMain,
     featured: news.featured,
     publishingDate: news.publishingDate,
