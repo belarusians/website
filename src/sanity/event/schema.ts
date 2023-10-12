@@ -10,12 +10,6 @@ const event = defineType({
   icon: CalendarIcon,
   fields: [
     defineField({
-      name: "title",
-      title: "Title",
-      type: "string",
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
       name: "slug",
       title: "ID",
       type: "slug",
@@ -26,9 +20,16 @@ const event = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "title",
+      title: "Title",
+      type: "string",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "description",
       title: "Description",
       type: "text",
+      rows: 5,
       validation: (Rule) => Rule.required(),
     }),
     defineField({
