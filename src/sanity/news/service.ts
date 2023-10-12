@@ -79,8 +79,12 @@ export async function getFeaturedNewsMetas(lang = Lang.be, top = 2): Promise<New
   }));
 }
 
+const { signal } = new AbortController();
+
 export async function getNewsBySlug(lang: Lang, slug: string): Promise<News | undefined> {
-  const schema = await client.fetch(`*[_type == "news" && slug.current == "${slug}" && language == "${lang}"][0]`);
+  const schema = await client.fetch(`*[_type == "news" && slug.current == "${slug}" && language == "${lang}"][0]`, {
+    signal,
+  });
   if (!schema) {
     return undefined;
   }
