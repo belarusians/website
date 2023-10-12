@@ -38,11 +38,6 @@ const news = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "imageRatio",
-      title: "Image ratio",
-      type: "string",
-    }),
-    defineField({
       name: "content",
       title: "Content",
       type: "array",
