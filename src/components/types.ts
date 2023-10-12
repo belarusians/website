@@ -1,3 +1,5 @@
+import { SanityImageDimensions } from "@sanity/asset-utils";
+
 import { CleanEventSchema, CleanNewsSchema } from "../../sanity.config";
 
 export type Event = Modify<
@@ -16,7 +18,8 @@ export type News = Modify<
     backgroundUrl: string;
     content: string;
   }
->;
+> &
+  SanityImageDimensions;
 
 export type Modify<T, R> = Omit<T, keyof R> & R;
 

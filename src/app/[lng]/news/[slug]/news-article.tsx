@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { News } from "../../../../components/types";
+import H1 from "../../../../components/headings/h1";
 
 interface ArticleProps {
   news: News;
@@ -8,19 +9,24 @@ interface ArticleProps {
 
 export function NewsArticle(props: ArticleProps) {
   return (
-    <div className="rounded-md bg-white shadow-lg">
-      <div
-        className={
-          "relative rounded-t-md before:z-10 before:bg-white-gradient before:absolute before:h-16 before:right-0 before:bottom-0 before:left-0 " +
-          `${props.news.imageRatio ? "aspect-video" : "h-36 md:h-72"}`
-        }
-      >
-        <Image className="object-cover rounded-t-md" fill src={props.news.backgroundUrl} alt={props.news.title} />
+    <div className="flex flex-row">
+      <div className="flex flex-col gap-4">
+        <div className="rounded-md bg-white shadow-lg p-4 lg:p-8">
+          <H1>{props.news.title}</H1>
+          <p className="prose-sm md:prose-lg">{props.news.description}</p>
+        </div>
+        <Image
+          className="object-cover rounded-md"
+          height={props.news.height}
+          width={props.news.width}
+          src={props.news.backgroundUrl}
+          alt={props.news.title}
+        />
+        <div
+          className="rounded-md bg-white shadow-lg prose-sm md:prose-lg prose-hr:my-4 prose-a:text-red prose-a:break-words prose-blockquote:border-l-2 prose-blockquote:border-red p-4 lg:p-8"
+          dangerouslySetInnerHTML={{ __html: props.news.content }}
+        ></div>
       </div>
-      <div
-        className="prose-sm md:prose-lg prose-hr:my-4 prose-a:text-red prose-a:break-words prose-blockquote:border-l-2 prose-blockquote:border-red px-4 lg:px-8 pb-4 lg:pb-8 my-8 md:my-4"
-        dangerouslySetInnerHTML={{ __html: props.news.content }}
-      ></div>
     </div>
   );
 }
