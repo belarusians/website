@@ -1,4 +1,4 @@
-import { CommonPageParams } from "../../types";
+import { CommonPageParams, PageSearchParams } from "../../types";
 import { useTranslation } from "../../i18n";
 import { Section } from "../../../components/section/section";
 import H1 from "../../../components/headings/h1";
@@ -6,7 +6,7 @@ import { DonateButtons } from "./donate-buttons";
 import { Metadata, ResolvingMetadata } from "next/types";
 import { Lang } from "../../../components/types";
 
-export default async function Page({ params, searchParams }: CommonPageParams) {
+export default async function Page({ params, searchParams }: CommonPageParams & PageSearchParams) {
   const success: boolean = searchParams?.success !== undefined;
 
   const { t } = await useTranslation(params.lng, "donate");
