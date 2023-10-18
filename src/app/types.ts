@@ -5,3 +5,7 @@ export interface CommonPageParams {
     lng: Lang;
   };
 }
+
+export interface PropsWithClass {
+  className?: string;
+}
