@@ -21,7 +21,6 @@ export function DesktopMenu({ lang }: { lang: Lang }) {
         <Link
           className="p-1 md:p-2 lg:p-3 transition-shadow hover:shadow-tb-xl"
           data-umami-event="donate-us"
-          target="_blank"
           href={`/${lang}/donate`}
         >
           {t("donate-us")}

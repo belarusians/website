@@ -58,7 +58,6 @@ function OpenedMenu({ lang }: { lang: Lang }) {
       <Link
         className="text-white py-4 text-xl"
         data-umami-event="donate-us"
-        target="_blank"
         href={`/${lang}/donate`}
       >
         {t("donate-us")}
