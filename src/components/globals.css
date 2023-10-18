@@ -3,15 +3,35 @@
 @tailwind utilities;
 
 @layer base {
-  a {
-    @apply text-red;
-  }
+    a {
+        @apply text-red;
+    }
 
-  blockquote {
-    quotes: none !important;
-  }
+    blockquote {
+        quotes: none !important;
+    }
+
+    input[type="number"],
+    input[type="checkbox"],
+    button {
+        -webkit-appearance: none;
+        appearance: none;
+        margin: 0;
+    }
+}
+
+input:focus,
+button:focus {
+    outline: none !important;
+    @apply ring-0 !important;
+    @apply ring-offset-0 !important;
+}
+
+input:disabled,
+button:disabled {
+    @apply brightness-90;
 }
 
 html {
-  @apply bg-white-shade;
+    @apply bg-white-shade;
 }

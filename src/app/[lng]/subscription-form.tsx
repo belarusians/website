@@ -74,8 +74,8 @@ export function SubscriptionForm({ lang }: { lang: Lang }) {
                 ref={inputRef}
                 onInput={onInput}
                 className={`${isShaking ? "animate-shake" : ""} ${
-                  isValid ? "border border-white" : "border border-red"
-                } appearance-none outline-none transition-all p-2 lg:p-3 bg-white basis-full md:basis-1/3 rounded-md shadow-lg hover:shadow-xl active:shadow-2xl`}
+                  isValid ? "" : "ring-red ring-2"
+                } appearance-none border-none transition-all p-2 lg:p-3 bg-white basis-full md:basis-1/3 rounded-md shadow-lg hover:shadow-xl active:shadow-2xl`}
                 id={emailInputId}
                 name="email"
                 type="email"
@@ -84,7 +84,7 @@ export function SubscriptionForm({ lang }: { lang: Lang }) {
             )}
           </ClientOnly>
 
-          <Button click={submit} isLoading={isLoading} label={t("subscribe-button")}></Button>
+          <Button click={submit} className="bg-white">{t("subscribe-button")}</Button>
         </div>
       </div>
     </>
