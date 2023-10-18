@@ -1,15 +1,16 @@
 import Link from "next/link";
 import * as React from "react";
-import { HTMLAttributeAnchorTarget } from "react";
+import { HTMLAttributeAnchorTarget, PropsWithChildren } from "react";
 
-export interface ButtonProps {
-  label: string;
+export interface ButtonProps extends PropsWithChildren {
+  label?: string;
+  size?: "large" | "medium";
   link?: string;
   target?: HTMLAttributeAnchorTarget;
   disabled?: boolean;
   className?: string;
   trackingName?: string;
-  isLoading?: boolean;
+  type?: "submit" | "button";
   click?: (event: React.MouseEvent) => void;
 }
 
@@ -22,28 +23,24 @@ export function Button(props: ButtonProps): React.ReactElement {
   if (props.link) {
     return (
       <Link target={props.target} href={props.link} {...buttonAttributes}>
-        <button
-          className={`transition-all bg-white p-1 md:p-2 lg:p-3 shadow-lg hover:shadow-xl active:shadow-2xl ${
-            props.className ?? ""
-          }`}
-          disabled={props.disabled}
-          onClick={props.click}
-        >
-          {props.label}
-        </button>
+        <InnerButton {...props} />
       </Link>
     );
   } else {
     return (
-      <button
-        className={`transition-all bg-white p-2 lg:p-3 shadow-lg hover:shadow-xl active:shadow-2xl rounded-md ${
-          props.className ?? ""
-        }`}
-        disabled={props.disabled}
-        onClick={props.click}
-      >
-        {props.label}
-      </button>
+      <InnerButton {...props} />
     );
   }
+}
+
+function InnerButton(props: ButtonProps) {
+  return (
+    <button
+      className={`transition-all ${props.size === "large" ? "p-2 md:p-3 lg:p-4 text-lg" : "p-1 md:p-2 lg:p-3"} rounded-md shadow-lg ${props.disabled ? "" : "hover:shadow-xl active:shadow-2xl"} ${props.className ?? ""}`}
+      disabled={props.disabled}
+      onClick={props.click}
+    >
+      {props.label ?? props.children}
+    </button>
+  );
 }
