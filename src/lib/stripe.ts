@@ -32,7 +32,7 @@ export async function searchProduct(): Promise<Stripe.Product["id"] | null> {
 }
 
 export async function searchPrice(amount: number, recurring: boolean, productId: string): Promise<string | null> {
-  const query = `product:"${productId}" AND metadata["unit_amount"]:"${amount}" AND type:"${recurring ? "recurring" : "one_time"}"`;
+  const query = `product:"${productId}" AND active:"true" AND metadata["unit_amount"]:"${amount}" AND type:"${recurring ? "recurring" : "one_time"}"`;
   const search = await getStripe().prices.search({
     query,
   });
