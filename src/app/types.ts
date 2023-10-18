@@ -4,6 +4,9 @@ export interface CommonPageParams {
   params: {
     lng: Lang;
   };
+  searchParams?: {
+    [key: string]: string | string[] | undefined
+  };
 }
 
 export interface PropsWithClass {
