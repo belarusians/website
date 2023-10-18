@@ -39,7 +39,8 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ payment_link: plink.url }, { status: 200 });
   } catch (e) {
     if (!(e instanceof RequestError)) {
-      throw e;
+      console.error(e);
+      return NextResponse.json({ message: "Server error" }, { status: 500 })
     }
     return NextResponse.json({ message: e.message, cause: e.cause }, { status: e.status });
   }
