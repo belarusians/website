@@ -38,21 +38,21 @@ const beautifulButtonColor = beautifulButtonColors[Math.floor(Math.random() * be
 module.exports = {
   content: ["./src/**/*.tsx"],
   theme: {
-    colors: {
-      red: "#ed1c24",
-      "red-shade": "#af0000",
-      white: "#ffffff",
-      "white-shade": "#f8f8f8",
-      black: "#231f20",
-      "black-tint": "#333333",
-      grey: "rgb(128, 128, 128)",
-      "light-grey": "rgb(235,235,235)",
-    },
     container: {
       center: true,
     },
     fontFamily: {},
     extend: {
+      colors: {
+        red: "#ed1c24",
+        "red-shade": "#af0000",
+        white: "#ffffff",
+        "white-shade": "#f8f8f8",
+        black: "#231f20",
+        "black-tint": "#333333",
+        grey: "rgb(128, 128, 128)",
+        "light-grey": "rgb(235,235,235)",
+      },
       boxShadow: {
         "tb-xl": "0px 25px 20px -14px rgba(0, 0, 0, 0.10), 0px 6px 6px -6px rgba(0, 0, 0, 0.10)",
         "tbr-xl": "1px 25px 20px -14px rgba(0, 0, 0, 0.10), 1px 6px 6px -6px rgba(0, 0, 0, 0.10)",
@@ -69,6 +69,22 @@ module.exports = {
         101: "1.01",
       },
       keyframes: {
+        rotation: {
+          "0%": {
+            transform: "rotate(0deg)",
+          },
+          "100%": {
+            transform: "rotate(360deg)",
+          }
+        },
+        rotationBack: {
+          "0%": {
+            transform: "rotate(0deg)",
+          },
+          "100%": {
+            transform: "rotate(-360deg)",
+          }
+        },
         shake: {
           "0%": {
             transform: "translateX(0)",
@@ -152,6 +168,10 @@ module.exports = {
         },
       },
       animation: {
+        rotate: "rotation 0.7s linear infinite",
+        "rotate-slow": "rotation 1.3s linear infinite",
+        "rotate-back": "rotationBack 0.7s linear infinite",
+        "rotate-back-fast": "rotationBack 0.5s linear infinite",
         shake: "shake .6s ease-in-out 1",
         "fade-in": "fade-in .5s ease-in-out forwards",
         "bg-rotation-slow": "backgroundRotation 5s infinite linear",
