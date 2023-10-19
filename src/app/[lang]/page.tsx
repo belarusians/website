@@ -64,9 +64,11 @@ export default async function IndexPage({ params }: CommonPageParams) {
         </Section>
       ) : null}
 
-      <Section className="bg-beautiful-gradient py-3 md:py-4 lg:py-6">
-        <AchievementsBlock lang={lang} />
-      </Section>
+      <div className="bg-beautiful-gradient">
+        <Section>
+          <AchievementsBlock lang={lang} />
+        </Section>
+      </div>
 
       <Section>
         <NewsBlock headingText={t('other-news-title')} lang={lang} news={props.otherNews} />
