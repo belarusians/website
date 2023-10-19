@@ -7,6 +7,7 @@ import { isEmailValid } from "../../lib/email";
 import { Button } from "../../components/button/button";
 import H2 from "../../components/headings/h2";
 import { Lang } from "../../components/types";
+import { Spinner } from "../../components/spinner";
 
 export function SubscriptionForm({ lang }: { lang: Lang }) {
   const emailInputId = "email-input";
@@ -31,16 +32,17 @@ export function SubscriptionForm({ lang }: { lang: Lang }) {
   };
 
   const submit = (event: React.MouseEvent) => {
+    setIsLoading(true);
+
     event.preventDefault();
 
     const emailInput = document.getElementById(emailInputId) as HTMLInputElement;
     if (!isValidInput(emailInput)) {
       shake();
       setIsValid(false);
+      setIsLoading(false);
       return;
     }
-
-    setIsLoading(true);
 
     fetch("/api/subscribe", {
       method: "POST",
@@ -84,7 +86,7 @@ export function SubscriptionForm({ lang }: { lang: Lang }) {
             )}
           </ClientOnly>
 
-          <Button click={submit} className="bg-white">{t("subscribe-button")}</Button>
+          <Button disabled={isLoading} click={submit} className="transition-all bg-white">{isLoading ? <Spinner className="w-7 h-7" /> : t("subscribe-button")}</Button>
         </div>
       </div>
     </>
