@@ -52,6 +52,7 @@ export async function createPrice(amount: number, recurring: boolean, productId:
     currency: "EUR",
     product: productId,
     unit_amount: amount,
+    active: true,
     recurring: recurring ? {
       interval: "month",
       interval_count: 1,
@@ -61,7 +62,7 @@ export async function createPrice(amount: number, recurring: boolean, productId:
       unit_amount: amount,
     },
   }, {
-    idempotencyKey: `price-${productId}-${amount}-${recurring}`,
+    idempotencyKey: `price-${productId}-${amount}-${recurring}-1`,
   });
 
   console.log(`Created price ${price.id}`);
@@ -99,7 +100,7 @@ export async function createPLinkForPriceId(priceId: Stripe.Price["id"], redirec
       price_id: priceId,
     },
   }, {
-    idempotencyKey: `plink-${priceId}`,
+    idempotencyKey: `plink-${priceId}-${redirectUrl}-1`,
   });
 
   console.log(`Created payment link ${plink.id}`);
