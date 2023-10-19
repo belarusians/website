@@ -50,9 +50,11 @@ export default async function IndexPage({ params: { lang } }: CommonPageParams) 
         <EventsBlock lang={lang} events={props.events} />
       </Section>
 
-      <Section className="bg-beautiful-gradient">
-        <AchievementsBlock lang={lang} />
-      </Section>
+      <div className="bg-beautiful-gradient">
+        <Section>
+          <AchievementsBlock lang={lang} />
+        </Section>
+      </div>
 
       <Section>
         <NewsBlock headingText={t('other-news-title')} lang={lang} news={props.otherNews} />

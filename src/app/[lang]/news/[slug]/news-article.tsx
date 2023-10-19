@@ -1,14 +1,15 @@
 import { MaraImage } from '../../../../components/image';
 import { News } from '../../../../components/types';
 import H1 from '../../../../components/headings/h1';
+import { PropsWithClass } from "../../../types";
 
-interface ArticleProps {
+interface ArticleProps extends PropsWithClass {
   news: News;
 }
 
 export function NewsArticle(props: ArticleProps) {
   return (
-    <div className="flex flex-row">
+    <div className={`flex flex-col gap-4 ${props.className ?? ""}`}>
       <div className="flex flex-col gap-4">
         <div className="rounded-md bg-white shadow-lg p-4 lg:p-8">
           <H1>{props.news.title}</H1>

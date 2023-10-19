@@ -20,8 +20,11 @@ export default async function ArticlePage({ params }: NewsPageParams) {
 
   return (
     <>
-      <Section>
-        <NewsArticle news={news} />
+      <Section className="flex flex-col md:flex-row gap-4">
+        <NewsArticle className="md:basis-3/5 lg:basis-3/4" news={news} />
+        <div className="md:basis-2/5 lg:basis-1/4">
+          <H3>Іншыя навіны</H3>
+        </div>
       </Section>
     </>
   );
