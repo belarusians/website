@@ -1,4 +1,4 @@
-import { redirect } from 'next/navigation';
+import { redirect } from "next/navigation";
 import { SubscriptionForm } from "./subscription-form";
 import { FeaturedNewsBlock } from "./featured-block";
 import { Lang } from "../../components/types";
