@@ -1,3 +1,4 @@
+import { redirect } from 'next/navigation';
 import { SubscriptionForm } from "./subscription-form";
 import { FeaturedNewsBlock } from "./featured-block";
 import { Lang } from "../../components/types";
@@ -17,6 +18,7 @@ import {
 import { FeedbackBlock } from "./feedback-block";
 import { getNRandomFeedbacksByLang } from "../../sanity/feedback/service";
 import { Feedback } from "../../../sanity.config";
+import { supportedLngs } from "../i18n/settings";
 
 interface MainPageProps {
   mainNews: NewsMeta;
@@ -27,6 +29,9 @@ interface MainPageProps {
 }
 
 export default async function IndexPage({ params: { lng } }: CommonPageParams) {
+  if (!supportedLngs.includes(lng)) {
+    redirect(`/${Lang.be}`);
+  }
   const { t } = await useTranslation(lng, "main");
   const props = await getData(lng);
 
