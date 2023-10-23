@@ -18,8 +18,8 @@ import other from "../../../../public/images/other.jpg";
 import flowers from "../../../../public/images/flowers.jpg";
 import hand from "../../../../public/images/hand.jpg";
 
-export default async function AboutUs({ params: { lng } }: CommonPageParams) {
-  const language = lng ?? Lang.be;
+export default async function AboutUs({ params: { lang } }: CommonPageParams) {
+  const language = lang ?? Lang.be;
   const { t } = await useTranslation(language, "about-us");
 
   return (

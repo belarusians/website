@@ -12,7 +12,7 @@ type NewsPageParams = {
 } & CommonPageParams;
 
 export default async function ArticlePage({ params }: NewsPageParams) {
-  const news = await getData(params.lng, params.slug);
+  const news = await getData(params.lang, params.slug);
   if (!news) {
     return <div>Not found</div>;
   }
@@ -31,12 +31,12 @@ async function getData(lang: Lang, slug: string): Promise<News | undefined> {
 }
 
 export async function generateStaticParams({ params }: CommonPageParams) {
-  return await getAllNewsSlugs(params.lng);
+  return await getAllNewsSlugs(params.lang);
 }
 
 export async function generateMetadata({ params }: NewsPageParams, parent: ResolvingMetadata): Promise<Metadata> {
   const parentMetadata = await parent;
-  const news = await getData(params.lng, params.slug);
+  const news = await getData(params.lang, params.slug);
 
   return {
     title: news?.title,
@@ -55,7 +55,7 @@ export async function generateMetadata({ params }: NewsPageParams, parent: Resol
       ...parentMetadata.openGraph,
       title: news?.title,
       description: news?.description,
-      url: `${params.lng}/news/${params.slug}`,
+      url: `${params.lang}/news/${params.slug}`,
       images: [news?.backgroundUrl || parentMetadata.openGraph!.images![0]],
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
