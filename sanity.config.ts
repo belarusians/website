@@ -43,7 +43,6 @@ const config = defineConfig({
       supportedLanguages: [
         { id: "be", title: "Беларуская" },
         { id: "nl", title: "Nederlands" },
-        { id: "ru", title: "Русский" },
       ],
       schemaTypes: ["vacancy", "event", "news", "feedback"],
     }),
