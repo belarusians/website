@@ -10,7 +10,7 @@ export default function MainLayout({ children, params }: PropsWithChildren & Com
   return (
     <>
       <div className="flex flex-col justify-between min-h-screen">
-        <Header lang={params.lng} className="lg:container" />
+        <Header lang={params.lang} className="lg:container" />
         <main className="mb-auto">{children}</main>
         <Footer className="lg:container" />
       </div>
@@ -40,8 +40,8 @@ export async function generateMetadata({ params }: CommonPageParams, parent: Res
   const parentMetadata = await parent;
 
   return {
-    title: titleLang[params.lng],
-    description: descriptionLang[params.lng],
+    title: titleLang[params.lang],
+    description: descriptionLang[params.lang],
     alternates: {
       canonical: `${parentMetadata.metadataBase}${Lang.be}`,
       languages: {
@@ -54,21 +54,21 @@ export async function generateMetadata({ params }: CommonPageParams, parent: Res
     // @ts-ignore
     openGraph: {
       ...parentMetadata.openGraph,
-      title: titleLang[params.lng],
-      description: descriptionLang[params.lng],
-      locale: langToLocale[params.lng],
-      url: `${parentMetadata.metadataBase}${params.lng}`,
+      title: titleLang[params.lang],
+      description: descriptionLang[params.lang],
+      locale: langToLocale[params.lang],
+      url: `${parentMetadata.metadataBase}${params.lang}`,
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     twitter: {
       ...parentMetadata.twitter,
-      title: titleLang[params.lng],
-      description: descriptionLang[params.lng],
+      title: titleLang[params.lang],
+      description: descriptionLang[params.lang],
     },
   };
 }
 
 export function generateStaticParams() {
-  return supportedLngs.map((lng) => ({ lng }));
+  return supportedLngs.map((lang) => ({ lang }));
 }

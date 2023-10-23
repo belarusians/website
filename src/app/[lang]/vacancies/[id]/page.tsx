@@ -11,7 +11,7 @@ import { getVacanciesByLang, getVacancyById } from "../../../../sanity/vacancy/s
 type VacancyPageParams = CommonPageParams & { params: { id: string } };
 
 export default async function VacancyPage({ params }: VacancyPageParams) {
-  const vacancy = await getVacancyById(params.lng, params.id);
+  const vacancy = await getVacancyById(params.lang, params.id);
 
   if (!vacancy) {
     return <h1>404</h1>;
@@ -30,7 +30,7 @@ export default async function VacancyPage({ params }: VacancyPageParams) {
           ))}
         </div>
         <div className="flex flex-col justify-items-start gap-2">
-          <VacancyForm vacancyId={vacancy.id.current} lang={params.lng} />
+          <VacancyForm vacancyId={vacancy.id.current} lang={params.lang} />
         </div>
       </div>
     </Section>
@@ -39,7 +39,7 @@ export default async function VacancyPage({ params }: VacancyPageParams) {
 
 export async function generateMetadata({ params }: VacancyPageParams, parent: ResolvingMetadata): Promise<Metadata> {
   const parentMetadata = await parent;
-  const vacancy = await getVacancyById(params.lng, params.id);
+  const vacancy = await getVacancyById(params.lang, params.id);
 
   return {
     title: vacancy?.title || undefined,
@@ -58,7 +58,7 @@ export async function generateMetadata({ params }: VacancyPageParams, parent: Re
       ...parentMetadata.openGraph,
       title: vacancy?.title || undefined,
       description: vacancy?.description || undefined,
-      url: `${params.lng}/vacancies/${params.id}`,
+      url: `${params.lang}/vacancies/${params.id}`,
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -71,5 +71,5 @@ export async function generateMetadata({ params }: VacancyPageParams, parent: Re
 }
 
 export async function generateStaticParams({ params }: CommonPageParams) {
-  return (await getVacanciesByLang(params.lng)).map((vacancy) => ({ id: vacancy.id.current }));
+  return (await getVacanciesByLang(params.lang)).map((vacancy) => ({ id: vacancy.id.current }));
 }

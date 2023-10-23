@@ -28,18 +28,18 @@ interface MainPageProps {
   feedbacks: Feedback[];
 }
 
-export default async function IndexPage({ params: { lng } }: CommonPageParams) {
-  if (!supportedLngs.includes(lng)) {
+export default async function IndexPage({ params: { lang } }: CommonPageParams) {
+  if (!supportedLngs.includes(lang)) {
     redirect(`/${Lang.be}`);
   }
-  const { t } = await useTranslation(lng, "main");
-  const props = await getData(lng);
+  const { t } = await useTranslation(lang, "main");
+  const props = await getData(lang);
 
   return (
     <>
       <Section>
         <FeaturedNewsBlock
-          lang={lng}
+          lang={lang}
           main={props.mainNews}
           secondary={props.secondaryNews}
           headingText={t("news-title")}
@@ -47,19 +47,19 @@ export default async function IndexPage({ params: { lng } }: CommonPageParams) {
       </Section>
 
       <Section>
-        <EventsBlock lang={lng} events={props.events} />
+        <EventsBlock lang={lang} events={props.events} />
       </Section>
 
       <Section className="bg-beautiful-gradient">
-        <AchievementsBlock lang={lng} />
+        <AchievementsBlock lang={lang} />
       </Section>
 
       <Section>
-        <NewsBlock headingText={t("other-news-title")} lang={lng} news={props.otherNews} />
+        <NewsBlock headingText={t("other-news-title")} lang={lang} news={props.otherNews} />
       </Section>
 
       <Section>
-        <SubscriptionForm lang={lng} />
+        <SubscriptionForm lang={lang} />
       </Section>
 
       <Section>

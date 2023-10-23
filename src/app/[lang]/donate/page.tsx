@@ -11,7 +11,7 @@ import { Lang } from "../../../components/types";
 export default async function Page({ params, searchParams }: CommonPageParams & PageSearchParams) {
   const success: boolean = searchParams?.success !== undefined;
 
-  const { t } = await useTranslation(params.lng, "donate");
+  const { t } = await useTranslation(params.lang, "donate");
 
   return (
     <Section>
@@ -55,8 +55,8 @@ export async function generateMetadata({ params }: CommonPageParams, parent: Res
   const parentMetadata = await parent;
 
   return {
-    title: titleLang[params.lng],
-    description: descriptionLang[params.lng],
+    title: titleLang[params.lang],
+    description: descriptionLang[params.lang],
     alternates: {
       canonical: `${parentMetadata.metadataBase}${Lang.be}/donate`,
       languages: {
@@ -69,16 +69,16 @@ export async function generateMetadata({ params }: CommonPageParams, parent: Res
     // @ts-ignore
     openGraph: {
       ...parentMetadata.openGraph,
-      title: titleLang[params.lng],
-      description: descriptionLang[params.lng],
-      url: `${params.lng}/donate`,
+      title: titleLang[params.lang],
+      description: descriptionLang[params.lang],
+      url: `${params.lang}/donate`,
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     twitter: {
       ...parentMetadata.twitter,
-      title: titleLang[params.lng],
-      description: descriptionLang[params.lng],
+      title: titleLang[params.lang],
+      description: descriptionLang[params.lang],
     },
   };
 }
