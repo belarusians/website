@@ -1,6 +1,6 @@
 import { Lang } from "../../components/types";
 
-export const supportedLngs = [Lang.be, Lang.nl, Lang.ru];
+export const supportedLngs = [Lang.be, Lang.nl];
 
 export const defaultNS = "common";
 

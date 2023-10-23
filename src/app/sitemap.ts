@@ -18,10 +18,6 @@ export function generateTranslatedUrls(path: string): MetadataRoute.Sitemap {
       url: `${baseUrl}${Lang.nl}${normalizedPath}`,
       lastModified: new Date(),
     },
-    {
-      url: `${baseUrl}${Lang.ru}${normalizedPath}`,
-      lastModified: new Date(),
-    },
   ];
 }
 
