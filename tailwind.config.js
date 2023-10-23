@@ -60,6 +60,8 @@ module.exports = {
       },
       backgroundImage: {
         "white-gradient": "linear-gradient(to top, rgba(255,255,255,255), rgba(255,255,255,0))",
+        nl: "linear-gradient(180deg, #AE1C28 0, #AE1C28 33%, #FFF 33%, #FFF 67%, #21468B 67%, #21468B 100%)",
+        be: "linear-gradient(180deg, #FFF 0, #FFF 33%, #ed1c24 33%, #ed1c24 67%, #FFF 67%, #FFF 100%)",
         "beautiful-gradient":
           "radial-gradient(26.76% 85.52% at 86.73% -12.86%, #af0000 6.65%, transparent), radial-gradient(farthest-side at bottom left, #af0000 6.65%, #ed1c24 100%)",
         "beautiful-button": `linear-gradient(60deg, ${beautifulButtonColor.first}, ${beautifulButtonColor.second}, ${beautifulButtonColor.third}, ${beautifulButtonColor.fourth}, ${beautifulButtonColor.first}, ${beautifulButtonColor.second}, ${beautifulButtonColor.third})`,
