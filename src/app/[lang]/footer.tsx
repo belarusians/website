@@ -1,6 +1,6 @@
 import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub, faTwitter, faFacebook, faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { faTelegram, faGithub, faTwitter, faFacebook, faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 export function Footer(props: { className?: string }): React.JSX.Element {
   return (
@@ -23,6 +23,10 @@ export function Footer(props: { className?: string }): React.JSX.Element {
         <a rel="noreferrer" target={"_blank"} href="https://github.com/belarusians">
           <FontAwesomeIcon icon={faGithub} className="text-2xl lg:text-3xl text-white md:text-red" />
         </a>
+        <a rel="noreferrer" target={"_blank"} href="https://t.me/+I0pG4qwEv2E4Mjhi">
+          <FontAwesomeIcon icon={faTelegram} className="text-2xl lg:text-3xl text-white md:text-red" />
+        </a>
+        <iframe className="hidden md:block" src="https://status.belarusians.nl/badge" width="250" height="30" frameBorder="0" scrolling="no"></iframe>
       </div>
       <p className="text-sm font-light tracking-wider">Belarusians NL 2023</p>
     </footer>
