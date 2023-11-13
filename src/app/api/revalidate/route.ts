@@ -1,10 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
+import { parseBody } from "next-sanity/webhook";
 
-export async function GET(request: NextRequest) {
-  const secret = request.headers.get("x-mara-revalidate-secret");
+export async function POST(request: NextRequest) {
+  const { isValidSignature, body } = await parseBody<{ _type: string }>(
+    request,
+    process.env.SANITY_REVALIDATE_SECRET,
+  );
 
-  if (secret !== process.env.REVALIDATION_SECRET_TOKEN) {
+  if (!isValidSignature) {
     return new NextResponse(JSON.stringify({ message: "Invalid Token" }), {
       status: 401,
       statusText: "Unauthorized",
@@ -14,16 +18,24 @@ export async function GET(request: NextRequest) {
     });
   }
 
-  const path = request.nextUrl.searchParams.get("path") || "/";
+  if (!body?._type) {
+    return new NextResponse(JSON.stringify({ message: "Bad Request" }), {
+      status: 400,
+      statusText: "Bad Request",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
 
-  console.log(`revalidating of ${path} requested`);
+  console.log(`revalidating tag ${body._type} requested`);
   try {
-    revalidatePath(path, "layout");
+    revalidateTag(body._type);
   } catch (e) {
-    console.log(`revalidating of ${path} failed`);
+    console.log(`revalidating tag ${body._type} failed`);
     return NextResponse.json({ revalidated: false, error: e });
   }
 
-  console.log(`revalidating of ${path} succeeded`);
+  console.log(`revalidating tag ${body._type} succeeded`);
   return NextResponse.json({ revalidated: true });
 }
