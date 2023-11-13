@@ -19,7 +19,7 @@ export function DesktopMenu({ lang }: { lang: Lang }) {
         >
           <div
             className="animate-t-fade-in absolute mt-2 z-10 divide-solid divide-light-grey divide-y flex flex-col bg-white shadow-lg rounded-md">
-            <a href="https://t.me/belarusians_nl_bot" className="p-2 transition-shadow hover:shadow-lrb-xl">
+            <a href="https://t.me/belarusians_nl_bot" className="p-1 md:p-2 lg:p-3 transition-shadow hover:shadow-lrb-xl">
               {t("refugees-bot")}
             </a>
           </div>
