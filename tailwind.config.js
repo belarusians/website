@@ -54,9 +54,11 @@ module.exports = {
         "light-grey": "rgb(235,235,235)",
       },
       boxShadow: {
-        "tb-xl": "0px 25px 20px -14px rgba(0, 0, 0, 0.10), 0px 6px 6px -6px rgba(0, 0, 0, 0.10)",
-        "tbr-xl": "1px 25px 20px -14px rgba(0, 0, 0, 0.10), 1px 6px 6px -6px rgba(0, 0, 0, 0.10)",
-        "tbl-xl": "-1px 25px 20px -14px rgba(0, 0, 0, 0.10), -1px 6px 6px -6px rgba(0, 0, 0, 0.10)",
+        "lr-xl": "15px 0px 15px -20px rgba(0, 0, 0, 0.4), -15px 0px 15px -20px rgba(0, 0, 0, 0.4)",
+        "lrb-xl": "15px 10px 20px -10px rgba(0, 0, 0, 0.1), -15px 10px 20px -10px rgba(0, 0, 0, 0.1)",
+        "tb-xl": "0px 25px 20px -14px rgba(0, 0, 0, 0.1), 0px 6px 6px -6px rgba(0, 0, 0, 0.10)",
+        "tbr-xl": "1px 25px 20px -14px rgba(0, 0, 0, 0.1), 1px 6px 6px -6px rgba(0, 0, 0, 0.10)",
+        "tbl-xl": "-1px 25px 20px -14px rgba(0, 0, 0, 0.1), -1px 6px 6px -6px rgba(0, 0, 0, 0.10)",
       },
       backgroundImage: {
         "white-gradient": "linear-gradient(to top, rgba(255,255,255,255), rgba(255,255,255,0))",
@@ -107,11 +109,31 @@ module.exports = {
         "fade-in": {
           "0%": {
             opacity: 0,
-            transform: "translateY(50px)",
+            transform: "translateY(30px)",
           },
           "100%": {
             opacity: 1,
             transform: "translateY(0)",
+          },
+        },
+        "t-fade-in": {
+          "0%": {
+            opacity: 0,
+            transform: "translateY(-30px)",
+          },
+          "100%": {
+            opacity: 1,
+            transform: "translateY(0)",
+          },
+        },
+        "t-fade-out": {
+          "0%": {
+            opacity: 1,
+            transform: "translateY(0)",
+          },
+          "100%": {
+            opacity: 0,
+            transform: "translateY(-30px)",
           },
         },
         wobble: {
@@ -175,7 +197,8 @@ module.exports = {
         "rotate-back": "rotationBack 0.7s linear infinite",
         "rotate-back-fast": "rotationBack 0.5s linear infinite",
         shake: "shake .6s ease-in-out 1",
-        "fade-in": "fade-in .5s ease-in-out forwards",
+        "fade-in": "fade-in .4s ease-in-out forwards",
+        "t-fade-in": "t-fade-in .2s ease-in-out forwards",
         "bg-rotation-slow": "backgroundRotation 5s infinite linear",
         "bg-rotation-slow-wobble-right":
           "backgroundRotation 5s infinite linear, wobble-right 6s ease-in-out alternate infinite",
