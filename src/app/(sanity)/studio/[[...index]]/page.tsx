@@ -1,5 +1,3 @@
-"use client";
-
 /**
  * This route is responsible for the built-in authoring environment using Sanity Studio.
  * All routes under your studio path is handled by this file using Next.js' catch-all routes:
@@ -9,11 +7,16 @@
  * https://github.com/sanity-io/next-sanity
  */
 
-import { NextStudio } from "next-sanity/studio";
-import config from "../../../../../sanity.config";
+import { Studio } from "./studio";
+
+export { metadata } from "next-sanity/studio/metadata";
+export { viewport } from "next-sanity/studio/viewport";
+
+// Ensures the Studio route is statically generated
+export const dynamic = "force-static";
 
 export default function StudioPage() {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  return <NextStudio config={config} />;
+  return <Studio />;
 }
