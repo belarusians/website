@@ -19,7 +19,7 @@ export function middleware(request: NextRequest) {
     return;
   }
 
-  const pathnameHasRuLocale = pathname.startsWith(`/${Lang.ru}/`) || pathname === `/${Lang.ru}`;
+  const pathnameHasRuLocale = pathname.startsWith("/ru/") || pathname === "/ru";
 
   if (pathnameHasRuLocale) {
     const url = new NextURL(`/${Lang.be}${pathname.substring(3)}`, request.url);

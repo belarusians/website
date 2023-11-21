@@ -45,7 +45,6 @@ export async function generateMetadata({ params }: CommonPageParams, parent: Res
       languages: {
         [Lang.be]: `${parentMetadata.metadataBase}${Lang.be}/join-us`,
         [Lang.nl]: `${parentMetadata.metadataBase}${Lang.nl}/join-us`,
-        [Lang.ru]: `${parentMetadata.metadataBase}${Lang.ru}/join-us`,
       },
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment

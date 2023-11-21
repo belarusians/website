@@ -21,19 +21,16 @@ export default function MainLayout({ children, params }: PropsWithChildren & Com
 const titleLang = {
   be: "MARA: Аб'яднанне беларусаў у Нідэрландах",
   nl: "MARA: Vereniging Belarusen in Nederland",
-  ru: "MARA: Объединение беларусов в Нидерландах",
 };
 
 const descriptionLang = {
   be: "MARA - гэта некамерцыйная арганізацыя неабыякавых беларусаў Нідэрландаў, якія мараць аб цудоўнай будучыні для сваёй роднай краіны.",
   nl: "MARA is een non-profit organisatie van zorgzame Belarusen in Nederland die dromen van een mooie toekomst voor hun vaderland.",
-  ru: "MARA - это некоммерческая организация небезразличных беларусов Нидерландов, которые мечтают о прекрасном будущем для своей родной страны.",
 };
 
 const langToLocale = {
   be: "be_BY",
   nl: "nl_NL",
-  ru: "ru_BY",
 };
 
 export async function generateMetadata({ params }: CommonPageParams, parent: ResolvingMetadata): Promise<Metadata> {
@@ -47,7 +44,6 @@ export async function generateMetadata({ params }: CommonPageParams, parent: Res
       languages: {
         [Lang.be]: `${parentMetadata.metadataBase}${Lang.be}`,
         [Lang.nl]: `${parentMetadata.metadataBase}${Lang.nl}`,
-        [Lang.ru]: `${parentMetadata.metadataBase}${Lang.ru}`,
       },
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment

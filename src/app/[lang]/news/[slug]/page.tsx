@@ -46,7 +46,6 @@ export async function generateMetadata({ params }: NewsPageParams, parent: Resol
       languages: {
         [Lang.be]: `${parentMetadata.metadataBase}${Lang.be}/news/${params.slug}`,
         [Lang.nl]: `${parentMetadata.metadataBase}${Lang.nl}/news/${params.slug}`,
-        [Lang.ru]: `${parentMetadata.metadataBase}${Lang.ru}/news/${params.slug}`,
       },
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment

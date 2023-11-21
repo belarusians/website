@@ -26,5 +26,4 @@ export type Modify<T, R> = Omit<T, keyof R> & R;
 export enum Lang {
   be = "be",
   nl = "nl",
-  ru = "ru",
 }

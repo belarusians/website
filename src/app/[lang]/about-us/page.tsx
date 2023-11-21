@@ -19,8 +19,7 @@ import flowers from "../../../../public/images/flowers.jpg";
 import hand from "../../../../public/images/hand.jpg";
 
 export default async function AboutUs({ params: { lang } }: CommonPageParams) {
-  const language = lang ?? Lang.be;
-  const { t } = await useTranslation(language, "about-us");
+  const { t } = await useTranslation(lang, "about-us");
 
   return (
     <Section>
@@ -92,7 +91,6 @@ export async function generateMetadata(params: CommonPageParams, parent: Resolvi
       languages: {
         [Lang.be]: `${parentMetadata.metadataBase}${Lang.be}/about-us`,
         [Lang.nl]: `${parentMetadata.metadataBase}${Lang.nl}/about-us`,
-        [Lang.ru]: `${parentMetadata.metadataBase}${Lang.ru}/about-us`,
       },
     },
   };

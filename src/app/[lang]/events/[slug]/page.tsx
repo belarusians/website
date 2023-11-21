@@ -45,7 +45,6 @@ export async function generateMetadata({ params }: EventPageParams, parent: Reso
       languages: {
         [Lang.be]: `${parentMetadata.metadataBase}${Lang.be}/events/${params.slug}`,
         [Lang.nl]: `${parentMetadata.metadataBase}${Lang.nl}/events/${params.slug}`,
-        [Lang.ru]: `${parentMetadata.metadataBase}${Lang.ru}/events/${params.slug}`,
       },
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
