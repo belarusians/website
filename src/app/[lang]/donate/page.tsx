@@ -23,10 +23,17 @@ export default async function Page({ params, searchParams }: CommonPageParams & 
           </p>
         </div>
         <div className="md:basis-1/2 lg:basis-1/3 xl:basis-2/5 grid grid-cols-2 gap-4">
-          <DonateButtons donateBtnLabel={t("donateBtn")}
+          {success ?
+            <div
+              className="col-span-2 p-2 md:p-4 lg:p-6 rounded-md bg-white shadow-lg flex items-center justify-center">
+              <p className="text-center">
+                {t("successMsg")}&nbsp;
+                <Link href="https://billing.stripe.com/p/login/9AQ6qpfV726XcsU144">{t("customerPortalLink")}</Link>.
+              </p>
+            </div> : <DonateButtons donateBtnLabel={t("donateBtn")}
                                     recurringLabel={t("recurring")}
                                     donateBtnErrLabel={t("donateBtnErr")}
-            />
+            />}
         </div>
       </div>
     </Section>
