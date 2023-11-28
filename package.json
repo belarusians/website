@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "description": "belarusians-nl",
+  "engines": {
+    "node": "^18"
+  },
   "scripts": {
     "dev": "cross-env NODE_OPTIONS='' next dev",
     "start": "cross-env next start",
