@@ -3,7 +3,6 @@ import { toHTML } from "@portabletext/to-html";
 import { Event, Lang } from "../../components/types";
 import { sanityFetch } from "../client";
 import { EventSchema } from "../../../sanity.config";
-import { urlForImage } from "../lib/image";
 
 export async function getAllEvents(): Promise<EventSchema[]> {
   return sanityFetch<EventSchema[]>('*[_type == "event"]', ["event"]);
@@ -39,7 +38,7 @@ function mapSchemaToEvent(event: EventSchema): Event {
     description: event.description,
     eventDate: event.eventDate,
     slug: event.slug.current!,
-    backgroundUrl: urlForImage(event.backgroundUrl.asset!),
+    backgroundUrl: event.backgroundUrl,
     ticketsLink: event.ticketsLink,
     location: event.location,
     content: toHTML(event.content),

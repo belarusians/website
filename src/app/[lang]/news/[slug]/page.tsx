@@ -4,6 +4,7 @@ import { NewsArticle } from "./news-article";
 import { CommonPageParams } from "../../../types";
 import { Metadata, ResolvingMetadata } from "next/types";
 import { getAllNewsSlugs, getNewsBySlug } from "../../../../sanity/news/service";
+import { urlForImage } from "../../../../sanity/lib/image";
 
 type NewsPageParams = {
   params: {
@@ -37,6 +38,13 @@ export async function generateStaticParams({ params }: CommonPageParams) {
 export async function generateMetadata({ params }: NewsPageParams, parent: ResolvingMetadata): Promise<Metadata> {
   const parentMetadata = await parent;
   const news = await getData(params.lang, params.slug);
+  const images = [];
+  if (news) {
+    images.push(urlForImage(news.backgroundUrl));
+  }
+  if (parentMetadata.openGraph?.images) {
+    images.push(...parentMetadata.openGraph.images);
+  }
 
   return {
     title: news?.title,
@@ -55,7 +63,7 @@ export async function generateMetadata({ params }: NewsPageParams, parent: Resol
       title: news?.title,
       description: news?.description,
       url: `${params.lang}/news/${params.slug}`,
-      images: [news?.backgroundUrl || parentMetadata.openGraph!.images![0]],
+      images,
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -63,7 +71,7 @@ export async function generateMetadata({ params }: NewsPageParams, parent: Resol
       ...parentMetadata.twitter,
       title: news?.title,
       description: news?.description,
-      images: [news?.backgroundUrl || parentMetadata.twitter!.images![0]],
+      images,
     },
   };
 }

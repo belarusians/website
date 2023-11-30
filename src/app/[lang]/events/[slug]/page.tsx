@@ -6,6 +6,7 @@ import { EventArticle } from "./event-article";
 import { CommonPageParams } from "../../../types";
 import { useTranslation } from "../../../i18n";
 import { getAllEventsSlugs, getEventBySlug } from "../../../../sanity/event/service";
+import { urlForImage } from "../../../../sanity/lib/image";
 
 type EventPageParams = CommonPageParams & {
   params: {
@@ -36,6 +37,13 @@ async function getData(slug: string, lang: Lang): Promise<Event | undefined> {
 export async function generateMetadata({ params }: EventPageParams, parent: ResolvingMetadata): Promise<Metadata> {
   const parentMetadata = await parent;
   const event = await getData(params.slug, params.lang);
+  const images = [];
+  if (event) {
+    images.push(urlForImage(event.backgroundUrl));
+  }
+  if (parentMetadata.openGraph?.images) {
+    images.push(...parentMetadata.openGraph.images);
+  }
 
   return {
     title: event?.title,
@@ -54,7 +62,7 @@ export async function generateMetadata({ params }: EventPageParams, parent: Reso
       title: event?.title,
       description: event?.description,
       url: `${params.lang}/events/${params.slug}`,
-      images: [event?.backgroundUrl || parentMetadata.openGraph!.images![0]],
+      images,
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -62,7 +70,7 @@ export async function generateMetadata({ params }: EventPageParams, parent: Reso
       ...parentMetadata.twitter,
       title: event?.title,
       description: event?.description,
-      images: [event?.backgroundUrl || parentMetadata.twitter!.images![0]],
+      images,
     },
   };
 }

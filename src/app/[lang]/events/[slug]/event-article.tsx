@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { MaraImage } from "../../../../components/image";
 import { Event, Lang } from "../../../../components/types";
 import { Button } from "../../../../components/button/button";
 
@@ -17,7 +17,7 @@ export function EventArticle(props: ArticleProps) {
           `${props.event.imageRatio ? "aspect-video" : "h-36 md:h-72"}`
         }
       >
-        <Image className="object-cover rounded-t-md" fill src={props.event.backgroundUrl} alt={props.event.title} />
+        <MaraImage className="object-cover rounded-t-md" image={props.event.backgroundUrl} fill alt={props.event.title} />
       </div>
       <div className="flex flex-col md:flex-row gap-4 px-4 lg:px-8 pb-4 lg:pb-8 my-8 md:my-4">
         {props.event.ticketsLink && (

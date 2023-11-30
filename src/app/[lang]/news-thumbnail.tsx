@@ -1,9 +1,8 @@
-import { forwardRef } from "react";
-import Image from "next/image";
 import Link from "next/link";
 
 import { Lang } from "../../components/types";
 import { NewsMeta } from "../../sanity/news/service";
+import { MaraImage } from "../../components/image";
 
 export interface NewsThumbnailProps {
   news: NewsMeta;
@@ -12,14 +11,14 @@ export interface NewsThumbnailProps {
   className?: string;
 }
 
-export const NewsThumbnail = forwardRef<HTMLDivElement, NewsThumbnailProps>((props: NewsThumbnailProps, ref) => {
+export async function NewsThumbnail(props: NewsThumbnailProps) {
   return (
-    <div ref={ref} className={`rounded-md ${props.className}`}>
+    <div className={`rounded-md ${props.className}`}>
       <Link className="relative flex flex-1 flex-col" href={`/${props.lang}/news/${props.news.slug}`}>
-        <Image
+        <MaraImage
+          image={props.news.backgroundUrl}
           className="object-cover rounded-md brightness-90"
           fill
-          src={props.news.backgroundUrl}
           alt={props.news.title}
         />
         <div className="p-2 z-40 mt-auto backdrop-blur-md rounded-b-md text-white uppercase">
@@ -28,8 +27,8 @@ export const NewsThumbnail = forwardRef<HTMLDivElement, NewsThumbnailProps>((pro
               props.size === "small"
                 ? "text-sm md:text-base lg:text-xl"
                 : props.size === "medium"
-                ? "text-base md:text-xl lg:text-2xl"
-                : "text-xl md:text-2xl"
+                  ? "text-base md:text-xl lg:text-2xl"
+                  : "text-xl md:text-2xl"
             }
           >
             {props.news.title}
@@ -38,6 +37,4 @@ export const NewsThumbnail = forwardRef<HTMLDivElement, NewsThumbnailProps>((pro
       </Link>
     </div>
   );
-});
-
-NewsThumbnail.displayName = "NewsThumbnail";
+}

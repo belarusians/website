@@ -1,11 +1,9 @@
 import { groq } from "next-sanity";
-import { getImageDimensions, SanityImageDimensions } from "@sanity/asset-utils";
 import { toHTML } from "@portabletext/to-html";
 
 import { NewsSchema } from "../../../sanity.config";
 import { client } from "../client";
-import { Lang, Modify, News } from "../../components/types";
-import { urlForImage } from "../lib/image";
+import { Lang, News } from "../../components/types";
 
 export async function getAllNewsSlugs(lang: Lang): Promise<{ slug: string }[]> {
   return client.fetch(`*[_type == "news" && language == "${lang}"]{ "slug": slug.current }`);
@@ -13,13 +11,7 @@ export async function getAllNewsSlugs(lang: Lang): Promise<{ slug: string }[]> {
 
 const { signal } = new AbortController();
 
-export type NewsMeta = Modify<
-  Pick<NewsSchema, "slug" | "title" | "backgroundUrl" | "featuredMain" | "featured" | "publishingDate">,
-  {
-    backgroundUrl: string;
-  }
-> &
-  Partial<SanityImageDimensions>;
+export type NewsMeta = Pick<NewsSchema, "slug" | "title" | "backgroundUrl" | "featuredMain" | "featured" | "publishingDate">;
 
 export async function getNotFeaturedNewsMetas(lang: Lang, top: number): Promise<NewsMeta[]> {
   const metas: NewsSchema[] = await client.fetch(
@@ -35,10 +27,7 @@ export async function getNotFeaturedNewsMetas(lang: Lang, top: number): Promise<
       }[0...${top}]`,
   );
 
-  return metas.map((meta) => ({
-    ...meta,
-    backgroundUrl: urlForImage(meta.backgroundUrl),
-  }));
+  return metas;
 }
 
 export async function getMainFeaturedNewsMeta(lang: Lang): Promise<NewsMeta> {
@@ -56,10 +45,7 @@ export async function getMainFeaturedNewsMeta(lang: Lang): Promise<NewsMeta> {
     { signal },
   );
 
-  return {
-    ...meta,
-    backgroundUrl: urlForImage(meta.backgroundUrl),
-  };
+  return meta;
 }
 
 export async function getFeaturedNewsMetas(lang = Lang.be, top = 2): Promise<NewsMeta[]> {
@@ -77,10 +63,7 @@ export async function getFeaturedNewsMetas(lang = Lang.be, top = 2): Promise<New
     { signal },
   );
 
-  return metas.map((meta) => ({
-    ...meta,
-    backgroundUrl: urlForImage(meta.backgroundUrl),
-  }));
+  return metas;
 }
 
 export async function getNewsBySlug(lang: Lang, slug: string): Promise<News | undefined> {
@@ -94,17 +77,14 @@ export async function getNewsBySlug(lang: Lang, slug: string): Promise<News | un
 }
 
 function mapSchemaToNews(news: NewsSchema): News {
-  const dimensions = getImageDimensions(news.backgroundUrl.asset!);
-
   return {
     title: news.title,
     description: news.description,
     slug: news.slug.current!,
-    backgroundUrl: urlForImage(news.backgroundUrl.asset!),
+    backgroundUrl: news.backgroundUrl,
     content: toHTML(news.content),
     featuredMain: news.featuredMain,
     featured: news.featured,
     publishingDate: news.publishingDate,
-    ...dimensions,
   };
 }
