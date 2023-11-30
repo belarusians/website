@@ -4,7 +4,7 @@ import { DesktopMenu } from './desktop/desktopMenu';
 import { useEffect, useState } from 'react';
 import { MobileMenu } from './mobile/mobileMenu';
 import { md } from '../utils';
-import { ClientOnly } from '../client-only/client-only';
+import { ClientOnly } from '../client-only';
 import { Lang } from '../types';
 
 export function Menu(props: { className?: string; lang: Lang }) {

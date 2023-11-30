@@ -1,5 +1,5 @@
 import { useTranslation } from '../../i18n';
-import { Section } from '../../../components/section/section';
+import { Section } from '../../../components/section';
 import H1 from '../../../components/headings/h1';
 import Form from './form';
 import { CommonPageParams } from '../../types';

@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { useTranslation } from '../../i18n';
 import { Lang } from '../../../components/types';
-import { Section } from '../../../components/section/section';
+import { Section } from '../../../components/section';
 import H1 from '../../../components/headings/h1';
 import { VacancyPreview } from './vacancy-preview';
 import { CommonPageParams } from '../../types';

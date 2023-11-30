@@ -2,8 +2,8 @@
 
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { supportedLngs } from '../../app/i18n/settings';
-import { Lang } from '../types';
+import { supportedLngs } from '../app/i18n/settings';
+import { Lang } from './types';
 
 // TODO: runs to many times for some reason. Needs to be investigated
 export function LanguageSelector(props: { lang: Lang; className?: string }) {
