@@ -1,6 +1,6 @@
-import { Lang } from "../../components/types";
-import { client } from "../client";
-import { Feedback } from "../../../sanity.config";
+import { Lang } from '../../components/types';
+import { client } from '../client';
+import { Feedback } from '../../../sanity.config';
 
 export async function getNRandomFeedbacksByLang(lang: Lang, n: number): Promise<Feedback[]> {
   const allIds: { _id: string }[] = await client.fetch(`*[_type == "feedback" && language == "${lang}"]{ _id }`);
@@ -9,5 +9,5 @@ export async function getNRandomFeedbacksByLang(lang: Lang, n: number): Promise<
     .slice(0, n)
     .map(({ _id }) => _id);
 
-  return client.fetch("*[_id in $ids]", { ids });
+  return client.fetch('*[_id in $ids]', { ids });
 }

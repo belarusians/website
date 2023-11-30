@@ -1,4 +1,4 @@
-import { Vacancy } from "../../../../sanity.config";
+import { Vacancy } from '../../../../sanity.config';
 
 export interface VacancyProps {
   vacancy: Vacancy;

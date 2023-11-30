@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
-import { revalidateTag } from "next/cache";
-import { parseBody } from "next-sanity/webhook";
+import { NextRequest, NextResponse } from 'next/server';
+import { revalidateTag } from 'next/cache';
+import { parseBody } from 'next-sanity/webhook';
 
 export async function POST(request: NextRequest) {
   const { isValidSignature, body } = await parseBody<{ _type: string }>(
@@ -9,21 +9,21 @@ export async function POST(request: NextRequest) {
   );
 
   if (!isValidSignature) {
-    return new NextResponse(JSON.stringify({ message: "Invalid Token" }), {
+    return new NextResponse(JSON.stringify({ message: 'Invalid Token' }), {
       status: 401,
-      statusText: "Unauthorized",
+      statusText: 'Unauthorized',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
   }
 
   if (!body?._type) {
-    return new NextResponse(JSON.stringify({ message: "Bad Request" }), {
+    return new NextResponse(JSON.stringify({ message: 'Bad Request' }), {
       status: 400,
-      statusText: "Bad Request",
+      statusText: 'Bad Request',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
   }

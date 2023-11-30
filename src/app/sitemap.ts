@@ -1,13 +1,13 @@
-import { MetadataRoute } from "next";
+import { MetadataRoute } from 'next';
 
-import { Lang } from "../components/types";
-import { baseUrl } from "./config";
-import { getVacanciesByLang } from "../sanity/vacancy/service";
-import { getAllEventsSlugs } from "../sanity/event/service";
-import { getAllNewsSlugs } from "../sanity/news/service";
+import { Lang } from '../components/types';
+import { baseUrl } from './config';
+import { getVacanciesByLang } from '../sanity/vacancy/service';
+import { getAllEventsSlugs } from '../sanity/event/service';
+import { getAllNewsSlugs } from '../sanity/news/service';
 
 export function generateTranslatedUrls(path: string): MetadataRoute.Sitemap {
-  const normalizedPath = path === "/" || path === "" ? "" : path.startsWith("/") ? path : `/${path}`;
+  const normalizedPath = path === '/' || path === '' ? '' : path.startsWith('/') ? path : `/${path}`;
 
   return [
     {
@@ -40,11 +40,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }, [] as MetadataRoute.Sitemap);
 
   return [
-    ...generateTranslatedUrls(""),
-    ...generateTranslatedUrls("/about-us"),
-    ...generateTranslatedUrls("/donate"),
-    ...generateTranslatedUrls("/join-us"),
-    ...generateTranslatedUrls("/vacancies"),
+    ...generateTranslatedUrls(''),
+    ...generateTranslatedUrls('/about-us'),
+    ...generateTranslatedUrls('/donate'),
+    ...generateTranslatedUrls('/join-us'),
+    ...generateTranslatedUrls('/vacancies'),
     ...newsUrls,
     ...eventsUrls,
     ...vacanciesUrls,

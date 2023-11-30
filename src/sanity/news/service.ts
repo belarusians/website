@@ -1,9 +1,9 @@
-import { groq } from "next-sanity";
-import { toHTML } from "@portabletext/to-html";
+import { groq } from 'next-sanity';
+import { toHTML } from '@portabletext/to-html';
 
-import { NewsSchema } from "../../../sanity.config";
-import { client } from "../client";
-import { Lang, News } from "../../components/types";
+import { NewsSchema } from '../../../sanity.config';
+import { client } from '../client';
+import { Lang, News } from '../../components/types';
 
 export async function getAllNewsSlugs(lang: Lang): Promise<{ slug: string }[]> {
   return client.fetch(`*[_type == "news" && language == "${lang}"]{ "slug": slug.current }`);
@@ -11,7 +11,7 @@ export async function getAllNewsSlugs(lang: Lang): Promise<{ slug: string }[]> {
 
 const { signal } = new AbortController();
 
-export type NewsMeta = Pick<NewsSchema, "slug" | "title" | "backgroundUrl" | "featuredMain" | "featured" | "publishingDate">;
+export type NewsMeta = Pick<NewsSchema, 'slug' | 'title' | 'backgroundUrl' | 'featuredMain' | 'featured' | 'publishingDate'>;
 
 export async function getNotFeaturedNewsMetas(lang: Lang, top: number): Promise<NewsMeta[]> {
   const metas: NewsSchema[] = await client.fetch(

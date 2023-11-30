@@ -1,17 +1,17 @@
-import { useTranslation } from "../../i18n";
-import { Section } from "../../../components/section/section";
-import H1 from "../../../components/headings/h1";
-import Form from "./form";
-import { CommonPageParams } from "../../types";
-import { Metadata, ResolvingMetadata } from "next/types";
-import { Lang } from "../../../components/types";
+import { useTranslation } from '../../i18n';
+import { Section } from '../../../components/section/section';
+import H1 from '../../../components/headings/h1';
+import Form from './form';
+import { CommonPageParams } from '../../types';
+import { Metadata, ResolvingMetadata } from 'next/types';
+import { Lang } from '../../../components/types';
 
 export default async function IndexPage({ params }: CommonPageParams) {
-  const { t } = await useTranslation(params.lang, "join-us");
+  const { t } = await useTranslation(params.lang, 'join-us');
 
   return (
     <Section>
-      <H1>{t("heading")}</H1>
+      <H1>{t('heading')}</H1>
       <div className="mb-2 md:mb-4">
         {/*<Link target="_blank" href={"/targets"}>*/}
         {/*  {t("targets-text")}*/}
@@ -23,15 +23,15 @@ export default async function IndexPage({ params }: CommonPageParams) {
 }
 
 const titleLang = {
-  be: "Далучайся да MARA!",
-  nl: "Word lid van MARA!",
-  ru: "Присоединяйся к MARA!",
+  be: 'Далучайся да MARA!',
+  nl: 'Word lid van MARA!',
+  ru: 'Присоединяйся к MARA!',
 };
 
 const descriptionLang = {
-  be: "Запоўні форму і далучайся да MARA! Разам мы зможам болей!",
-  nl: "Vul het formulier in en word lid van MARA! Samen kunnen we meer doen!",
-  ru: "Заполни форму и присоединяйся к MARA! Вместе мы сможем больше!",
+  be: 'Запоўні форму і далучайся да MARA! Разам мы зможам болей!',
+  nl: 'Vul het formulier in en word lid van MARA! Samen kunnen we meer doen!',
+  ru: 'Заполни форму и присоединяйся к MARA! Вместе мы сможем больше!',
 };
 
 export async function generateMetadata({ params }: CommonPageParams, parent: ResolvingMetadata): Promise<Metadata> {

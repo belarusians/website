@@ -1,5 +1,5 @@
-import * as z from "zod";
-import { RequestError } from "../lib/utils";
+import * as z from 'zod';
+import { RequestError } from '../lib/utils';
 
 const donationSchema = z.object({
   amount: z.coerce.number().min(1).max(1000),
@@ -8,7 +8,7 @@ const donationSchema = z.object({
 export function parseDonation(donation: Record<string, unknown>): Donation {
   const parsed = donationSchema.safeParse(donation);
   if (!parsed.success) {
-    throw new RequestError("Validation error", 400, parsed.error);
+    throw new RequestError('Validation error', 400, parsed.error);
   }
 
   return parsed.data;

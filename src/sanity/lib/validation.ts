@@ -1,12 +1,12 @@
-import { SlugValidationContext } from "sanity";
+import { SlugValidationContext } from 'sanity';
 
 export async function isUniqueOtherThanLanguage(slug: string, context: SlugValidationContext) {
   const { document, getClient } = context;
   if (!document?.language) {
     return true;
   }
-  const client = getClient({ apiVersion: "2023-04-24" });
-  const id = document._id.replace(/^drafts\./, "");
+  const client = getClient({ apiVersion: '2023-04-24' });
+  const id = document._id.replace(/^drafts\./, '');
   const params = {
     draft: `drafts.${id}`,
     published: id,

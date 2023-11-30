@@ -1,6 +1,6 @@
-import { Lang } from "../../components/types";
-import { client } from "../client";
-import { Vacancy } from "../../../sanity.config";
+import { Lang } from '../../components/types';
+import { client } from '../client';
+import { Vacancy } from '../../../sanity.config';
 
 export async function getAllVacancies(): Promise<Vacancy[]> {
   return client.fetch('*[_type == "vacancy"]');

@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef } from 'react';
 
 // Written completely by copilot
 export function ClickOutside({ children, onClickOutside }: { children: ReactNode, onClickOutside: () => void }) {
@@ -11,9 +11,9 @@ export function ClickOutside({ children, onClickOutside }: { children: ReactNode
       }
     }
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [onClickOutside]);
 

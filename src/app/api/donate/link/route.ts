@@ -1,25 +1,25 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from 'next/server';
 import {
   createPLinkForPriceId,
   createPrice,
   searchPLinkByPriceId,
   searchPrice,
   searchProduct,
-} from "../../../../lib/stripe";
-import { parseDonation } from "../../../../contract/donate";
-import { cutQuery, RequestError } from "../../../../lib/utils";
+} from '../../../../lib/stripe';
+import { parseDonation } from '../../../../contract/donate';
+import { cutQuery, RequestError } from '../../../../lib/utils';
 
 
 export async function GET(request: NextRequest) {
-  const amountInEuro = request.nextUrl.searchParams.get("amount");
-  const recurring = request.nextUrl.searchParams.get("recurring");
+  const amountInEuro = request.nextUrl.searchParams.get('amount');
+  const recurring = request.nextUrl.searchParams.get('recurring');
 
   try {
-    const donation = parseDonation({ amount: amountInEuro, recurring: recurring === "true" });
+    const donation = parseDonation({ amount: amountInEuro, recurring: recurring === 'true' });
 
     const productId = await searchProduct();
     if (!productId) {
-      throw new RequestError("Donation product is not found", 500);
+      throw new RequestError('Donation product is not found', 500);
     }
 
     const amountInCents = donation.amount * 100;
@@ -30,7 +30,7 @@ export async function GET(request: NextRequest) {
 
     let plink = await searchPLinkByPriceId(priceId);
     if (!plink) {
-      const referer = request.headers.get("referer");
+      const referer = request.headers.get('referer');
       const redirectUrl = referer ? `${cutQuery(referer)}?success` : undefined;
 
       plink = await createPLinkForPriceId(priceId, redirectUrl);
@@ -40,7 +40,7 @@ export async function GET(request: NextRequest) {
   } catch (e) {
     if (!(e instanceof RequestError)) {
       console.error(e);
-      return NextResponse.json({ message: "Server error" }, { status: 500 })
+      return NextResponse.json({ message: 'Server error' }, { status: 500 })
     }
     return NextResponse.json({ message: e.message, cause: e.cause }, { status: e.status });
   }

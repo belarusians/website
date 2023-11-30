@@ -1,12 +1,12 @@
-import { Metadata, ResolvingMetadata } from "next/types";
+import { Metadata, ResolvingMetadata } from 'next/types';
 
-import { Event, Lang } from "../../../../components/types";
-import { Section } from "../../../../components/section/section";
-import { EventArticle } from "./event-article";
-import { CommonPageParams } from "../../../types";
-import { useTranslation } from "../../../i18n";
-import { getAllEventsSlugs, getEventBySlug } from "../../../../sanity/event/service";
-import { urlForImage } from "../../../../sanity/lib/image";
+import { Event, Lang } from '../../../../components/types';
+import { Section } from '../../../../components/section/section';
+import { EventArticle } from './event-article';
+import { CommonPageParams } from '../../../types';
+import { useTranslation } from '../../../i18n';
+import { getAllEventsSlugs, getEventBySlug } from '../../../../sanity/event/service';
+import { urlForImage } from '../../../../sanity/lib/image';
 
 type EventPageParams = CommonPageParams & {
   params: {
@@ -15,7 +15,7 @@ type EventPageParams = CommonPageParams & {
 };
 
 export default async function EventPage({ params }: EventPageParams) {
-  const { t } = await useTranslation(params.lang, "events");
+  const { t } = await useTranslation(params.lang, 'events');
   const event = await getData(params.slug, params.lang);
   if (!event) {
     return <div>Not found</div>;
@@ -23,7 +23,7 @@ export default async function EventPage({ params }: EventPageParams) {
 
   return (
     <Section>
-      <EventArticle lang={params.lang} event={event} buttonLabel={t("buy-ticket")} />
+      <EventArticle lang={params.lang} event={event} buttonLabel={t('buy-ticket')} />
     </Section>
   );
 }

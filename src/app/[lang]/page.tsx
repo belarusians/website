@@ -1,24 +1,24 @@
-import { redirect } from "next/navigation";
-import { SubscriptionForm } from "./subscription-form";
-import { FeaturedNewsBlock } from "./featured-block";
-import { Lang } from "../../components/types";
-import { Section } from "../../components/section/section";
-import { AchievementsBlock } from "./achievements-block";
-import { NewsBlock } from "./news-block";
-import { EventsBlock } from "./events-block";
-import { CommonPageParams } from "../types";
-import { useTranslation } from "../i18n";
-import { getFutureEventMetas, EventMeta } from "../../sanity/event/service";
+import { redirect } from 'next/navigation';
+import { SubscriptionForm } from './subscription-form';
+import { FeaturedNewsBlock } from './featured-block';
+import { Lang } from '../../components/types';
+import { Section } from '../../components/section/section';
+import { AchievementsBlock } from './achievements-block';
+import { NewsBlock } from './news-block';
+import { EventsBlock } from './events-block';
+import { CommonPageParams } from '../types';
+import { useTranslation } from '../i18n';
+import { getFutureEventMetas, EventMeta } from '../../sanity/event/service';
 import {
   getFeaturedNewsMetas,
   getMainFeaturedNewsMeta,
   getNotFeaturedNewsMetas,
   NewsMeta,
-} from "../../sanity/news/service";
-import { FeedbackBlock } from "./feedback-block";
-import { getNRandomFeedbacksByLang } from "../../sanity/feedback/service";
-import { Feedback } from "../../../sanity.config";
-import { supportedLngs } from "../i18n/settings";
+} from '../../sanity/news/service';
+import { FeedbackBlock } from './feedback-block';
+import { getNRandomFeedbacksByLang } from '../../sanity/feedback/service';
+import { Feedback } from '../../../sanity.config';
+import { supportedLngs } from '../i18n/settings';
 
 interface MainPageProps {
   mainNews: NewsMeta;
@@ -32,7 +32,7 @@ export default async function IndexPage({ params: { lang } }: CommonPageParams) 
   if (!supportedLngs.includes(lang)) {
     redirect(`/${Lang.be}`);
   }
-  const { t } = await useTranslation(lang, "main");
+  const { t } = await useTranslation(lang, 'main');
   const props = await getData(lang);
 
   return (
@@ -42,7 +42,7 @@ export default async function IndexPage({ params: { lang } }: CommonPageParams) 
           lang={lang}
           main={props.mainNews}
           secondary={props.secondaryNews}
-          headingText={t("news-title")}
+          headingText={t('news-title')}
         />
       </Section>
 
@@ -55,7 +55,7 @@ export default async function IndexPage({ params: { lang } }: CommonPageParams) 
       </Section>
 
       <Section>
-        <NewsBlock headingText={t("other-news-title")} lang={lang} news={props.otherNews} />
+        <NewsBlock headingText={t('other-news-title')} lang={lang} news={props.otherNews} />
       </Section>
 
       <Section>
@@ -63,7 +63,7 @@ export default async function IndexPage({ params: { lang } }: CommonPageParams) 
       </Section>
 
       <Section>
-        <FeedbackBlock feedbacks={props.feedbacks} headingText={t("feedback-title")} />
+        <FeedbackBlock feedbacks={props.feedbacks} headingText={t('feedback-title')} />
       </Section>
     </>
   );

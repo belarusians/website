@@ -1,8 +1,8 @@
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic';
 
-import { Section } from "../section/section";
+import { Section } from '../section/section';
 
-const PDFViewer = dynamic(() => import("../../components/pdf-viewer/pdf-viewer").then((mod) => mod.PdfViewer), {
+const PDFViewer = dynamic(() => import('../../components/pdf-viewer/pdf-viewer').then((mod) => mod.PdfViewer), {
   ssr: false,
 });
 

@@ -1,4 +1,4 @@
-import { Lang } from "../components/types";
+import { Lang } from '../components/types';
 
 export interface CommonPageParams {
   params: {

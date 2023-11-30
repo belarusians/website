@@ -1,7 +1,7 @@
-import { ZodError } from "zod";
+import { ZodError } from 'zod';
 
 export function querifyObject<T extends Record<string, unknown>>(obj: T): string {
-  return Object.entries(obj).map(([key, value]) => `${key}=${value}`).join("&");
+  return Object.entries(obj).map(([key, value]) => `${key}=${value}`).join('&');
 }
 
 export class RequestError extends Error {
@@ -14,7 +14,7 @@ export class RequestError extends Error {
 }
 
 export function cutQuery(url: string) {
-  const index = url.indexOf("?");
+  const index = url.indexOf('?');
   if (index === -1) {
     return url;
   }

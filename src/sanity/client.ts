@@ -1,6 +1,6 @@
-import { createClient } from "next-sanity";
+import { createClient } from 'next-sanity';
 
-import { apiVersion, dataset, projectId, useCdn } from "./env";
+import { apiVersion, dataset, projectId, useCdn } from './env';
 
 export const client = createClient({
   apiVersion,
@@ -11,7 +11,7 @@ export const client = createClient({
 
 export function sanityFetch<QueryResponse>(query: string, tags: string[] = []) {
   return client.fetch<QueryResponse>(query, {}, {
-    cache: "force-cache",
+    cache: 'force-cache',
     next: { tags },
   });
 }

@@ -1,5 +1,5 @@
 export function isEmailValid(email?: unknown): boolean {
-  if (!email || typeof email !== "string") {
+  if (!email || typeof email !== 'string') {
     return false;
   }
 

@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { md } from "../../../components/utils";
+import { useEffect, useState } from 'react';
+import { md } from '../../../components/utils';
 
 export default function Form() {
   const [width, setWidth] = useState(0);
 
   useEffect(() => {
     setWidth(window.innerWidth);
-    window.addEventListener("resize", () => {
+    window.addEventListener('resize', () => {
       setWidth(window.innerWidth);
     });
   }, []);
