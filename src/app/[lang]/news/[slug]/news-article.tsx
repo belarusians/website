@@ -1,6 +1,6 @@
-import { MaraImage } from "../../../../components/image";
-import { News } from "../../../../components/types";
-import H1 from "../../../../components/headings/h1";
+import { MaraImage } from '../../../../components/image';
+import { News } from '../../../../components/types';
+import H1 from '../../../../components/headings/h1';
 
 interface ArticleProps {
   news: News;

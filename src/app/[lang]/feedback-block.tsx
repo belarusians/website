@@ -1,5 +1,5 @@
-import H2 from "../../components/headings/h2";
-import { Feedback } from "../../../sanity.config";
+import H2 from '../../components/headings/h2';
+import { Feedback } from '../../../sanity.config';
 
 interface FeedbackBlockProps {
   headingText: string;

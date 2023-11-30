@@ -7,13 +7,13 @@
  * https://github.com/sanity-io/next-sanity
  */
 
-import { Studio } from "./studio";
+import { Studio } from './studio';
 
-export { metadata } from "next-sanity/studio/metadata";
-export { viewport } from "next-sanity/studio/viewport";
+export { metadata } from 'next-sanity/studio/metadata';
+export { viewport } from 'next-sanity/studio/viewport';
 
 // Ensures the Studio route is statically generated
-export const dynamic = "force-static";
+export const dynamic = 'force-static';
 
 export default function StudioPage() {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment

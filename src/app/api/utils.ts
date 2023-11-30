@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
 
 export function sendError(status: number, message: string, reason?: string) {
   return NextResponse.json({ message, reason }, { status });

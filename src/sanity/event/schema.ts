@@ -1,85 +1,85 @@
-import { defineArrayMember, defineField, defineType } from "@sanity-typed/types";
-import { CalendarIcon } from "@sanity/icons";
+import { defineArrayMember, defineField, defineType } from '@sanity-typed/types';
+import { CalendarIcon } from '@sanity/icons';
 
-import { isUniqueOtherThanLanguage } from "../lib/validation";
+import { isUniqueOtherThanLanguage } from '../lib/validation';
 
 const event = defineType({
-  name: "event",
-  title: "Event",
-  type: "document",
+  name: 'event',
+  title: 'Event',
+  type: 'document',
   icon: CalendarIcon,
   fields: [
     defineField({
-      name: "slug",
-      title: "ID",
-      type: "slug",
+      name: 'slug',
+      title: 'ID',
+      type: 'slug',
       options: {
-        source: "title",
+        source: 'title',
         isUnique: isUniqueOtherThanLanguage,
       },
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "title",
-      title: "Title",
-      type: "string",
+      name: 'title',
+      title: 'Title',
+      type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "description",
-      title: "Description",
-      type: "text",
+      name: 'description',
+      title: 'Description',
+      type: 'text',
       rows: 5,
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "backgroundUrl",
-      title: "Image",
-      type: "image",
+      name: 'backgroundUrl',
+      title: 'Image',
+      type: 'image',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "imageRatio",
-      title: "Image ratio",
-      type: "string",
+      name: 'imageRatio',
+      title: 'Image ratio',
+      type: 'string',
     }),
     defineField({
-      name: "eventDate",
-      title: "Event date",
-      type: "datetime",
+      name: 'eventDate',
+      title: 'Event date',
+      type: 'datetime',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "location",
-      title: "Location name",
-      type: "string",
+      name: 'location',
+      title: 'Location name',
+      type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "geoLocation",
-      title: "Location",
-      type: "geopoint",
+      name: 'geoLocation',
+      title: 'Location',
+      type: 'geopoint',
     }),
     defineField({
-      name: "ticketsLink",
-      title: "Tickets link",
-      type: "url",
+      name: 'ticketsLink',
+      title: 'Tickets link',
+      type: 'url',
     }),
     defineField({
-      name: "content",
-      title: "Content",
-      type: "array",
+      name: 'content',
+      title: 'Content',
+      type: 'array',
       of: [
         defineArrayMember({
-          type: "block",
+          type: 'block',
         }),
       ],
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       // should match 'languageField' plugin configuration setting, if customized
-      name: "language",
-      type: "string",
+      name: 'language',
+      type: 'string',
       readOnly: true,
       hidden: true,
       validation: (Rule) => Rule.required(),

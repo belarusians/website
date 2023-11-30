@@ -1,30 +1,30 @@
-import { toHTML } from "@portabletext/to-html";
+import { toHTML } from '@portabletext/to-html';
 
-import { Event, Lang } from "../../components/types";
-import { sanityFetch } from "../client";
-import { EventSchema } from "../../../sanity.config";
+import { Event, Lang } from '../../components/types';
+import { sanityFetch } from '../client';
+import { EventSchema } from '../../../sanity.config';
 
 export async function getAllEvents(): Promise<EventSchema[]> {
-  return sanityFetch<EventSchema[]>('*[_type == "event"]', ["event"]);
+  return sanityFetch<EventSchema[]>('*[_type == "event"]', ['event']);
 }
 
 export async function getAllEventsSlugs(lang: Lang): Promise<{ slug: string }[]> {
-  return sanityFetch<{ slug: string }[]>(`*[_type == "event" && language == "${lang}"]{ "slug": slug.current }`, ["event"]);
+  return sanityFetch<{ slug: string }[]>(`*[_type == "event" && language == "${lang}"]{ "slug": slug.current }`, ['event']);
 }
 
-export type EventMeta = Pick<EventSchema, "slug" | "eventDate" | "title" | "location">;
+export type EventMeta = Pick<EventSchema, 'slug' | 'eventDate' | 'title' | 'location'>;
 
 export async function getFutureEventMetas(lang: Lang): Promise<EventMeta[]> {
   return sanityFetch<EventMeta[]>(
     `*[_type == "event" && eventDate >= now()  && language == "${lang}"] | order(eventDate asc){ "slug": slug.current, eventDate, title, location }`,
-    ["event"],
+    ['event'],
   );
 }
 
 export async function getEventBySlug(lang: Lang, slug: string): Promise<Event | undefined> {
   const schema = await sanityFetch<EventSchema>(
     `*[_type == "event" && slug.current == "${slug}" && language == "${lang}"][0]`,
-    ["event"]
+    ['event']
   );
   if (!schema) {
     return undefined;

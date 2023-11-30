@@ -1,9 +1,9 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
-import Link from "next/link";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import Link from 'next/link';
 
-import { Lang } from "../../components/types";
-import { EventMeta } from "../../sanity/event/service";
+import { Lang } from '../../components/types';
+import { EventMeta } from '../../sanity/event/service';
 
 export interface EventThumbnailProps {
   event: EventMeta;
@@ -31,15 +31,15 @@ export function FutureEventThumbnail(props: EventThumbnailProps & { className?: 
 function clientSideDate(eventString: string, locale: string): string {
   const eventDate = new Date(eventString);
   const eventDateString = eventDate.toLocaleDateString(locale, {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
   });
   const eventTimeString = eventDate.toLocaleTimeString(locale, {
-    hour: "numeric",
-    minute: "numeric",
+    hour: 'numeric',
+    minute: 'numeric',
     second: undefined,
-    timeZone: "Europe/Amsterdam",
+    timeZone: 'Europe/Amsterdam',
   });
   return `${eventDateString} ${eventTimeString}`;
 }

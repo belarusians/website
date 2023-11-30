@@ -1,8 +1,8 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import { Logo } from "./logo";
-import { Menu } from "../menu/menu";
-import { Lang } from "../types";
+import { Logo } from './logo';
+import { Menu } from '../menu/menu';
+import { Lang } from '../types';
 
 export function Header(props: { className: string; lang: Lang }) {
   return (

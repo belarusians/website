@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from 'react';
 
-import { useTranslation } from "../i18n/client";
-import { Lang } from "../../components/types";
+import { useTranslation } from '../i18n/client';
+import { Lang } from '../../components/types';
 
 export function AchievementsBlock(props: { lang: Lang }) {
-  const { t } = useTranslation(props.lang, "main");
+  const { t } = useTranslation(props.lang, 'main');
 
   const [hydrated, setHydrated] = useState(false);
   useEffect(() => {
@@ -39,7 +39,7 @@ export function AchievementsBlock(props: { lang: Lang }) {
         <span ref={counterRef}></span>
         <span>€</span>
       </p>
-      <p className="text-xl md:text-2xl text-center">{t("counter-text")}</p>
+      <p className="text-xl md:text-2xl text-center">{t('counter-text')}</p>
     </div>
   );
 }

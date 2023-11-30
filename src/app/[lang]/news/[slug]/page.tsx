@@ -1,10 +1,10 @@
-import { Lang, News } from "../../../../components/types";
-import { Section } from "../../../../components/section/section";
-import { NewsArticle } from "./news-article";
-import { CommonPageParams } from "../../../types";
-import { Metadata, ResolvingMetadata } from "next/types";
-import { getAllNewsSlugs, getNewsBySlug } from "../../../../sanity/news/service";
-import { urlForImage } from "../../../../sanity/lib/image";
+import { Lang, News } from '../../../../components/types';
+import { Section } from '../../../../components/section/section';
+import { NewsArticle } from './news-article';
+import { CommonPageParams } from '../../../types';
+import { Metadata, ResolvingMetadata } from 'next/types';
+import { getAllNewsSlugs, getNewsBySlug } from '../../../../sanity/news/service';
+import { urlForImage } from '../../../../sanity/lib/image';
 
 type NewsPageParams = {
   params: {

@@ -1,6 +1,6 @@
-import { MaraImage } from "../../../../components/image";
-import { Event, Lang } from "../../../../components/types";
-import { Button } from "../../../../components/button/button";
+import { MaraImage } from '../../../../components/image';
+import { Event, Lang } from '../../../../components/types';
+import { Button } from '../../../../components/button/button';
 
 interface ArticleProps {
   event: Event;
@@ -13,8 +13,8 @@ export function EventArticle(props: ArticleProps) {
     <div className="rounded-md bg-white shadow-lg">
       <div
         className={
-          "relative rounded-t-md before:z-10 before:bg-white-gradient before:absolute before:h-16 before:right-0 before:bottom-0 before:left-0 " +
-          `${props.event.imageRatio ? "aspect-video" : "h-36 md:h-72"}`
+          'relative rounded-t-md before:z-10 before:bg-white-gradient before:absolute before:h-16 before:right-0 before:bottom-0 before:left-0 ' +
+          `${props.event.imageRatio ? 'aspect-video' : 'h-36 md:h-72'}`
         }
       >
         <MaraImage className="object-cover rounded-t-md" image={props.event.backgroundUrl} fill alt={props.event.title} />

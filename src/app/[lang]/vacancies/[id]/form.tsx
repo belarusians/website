@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import H3 from "../../../../components/headings/h3";
-import { useTranslation } from "../../../i18n/client";
-import { Lang } from "../../../../components/types";
+import { useState } from 'react';
+import H3 from '../../../../components/headings/h3';
+import { useTranslation } from '../../../i18n/client';
+import { Lang } from '../../../../components/types';
 
 interface VacancyFormProps {
   lang: Lang;
@@ -11,10 +11,10 @@ interface VacancyFormProps {
 }
 
 export default function VacancyForm({ lang, vacancyId }: VacancyFormProps) {
-  const { t } = useTranslation(lang, "vacancies");
+  const { t } = useTranslation(lang, 'vacancies');
 
-  const [formContact, setFormContact] = useState("");
-  const [formAdditional, setFormAdditional] = useState("");
+  const [formContact, setFormContact] = useState('');
+  const [formAdditional, setFormAdditional] = useState('');
   const [isValid, setIsValid] = useState(true);
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -26,10 +26,10 @@ export default function VacancyForm({ lang, vacancyId }: VacancyFormProps) {
 
     setIsValid(true);
 
-    fetch("/api/vacancies/apply", {
-      method: "POST",
+    fetch('/api/vacancies/apply', {
+      method: 'POST',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
       },
       body: JSON.stringify({ contact: formContact, additional: formAdditional, id: vacancyId }),
     }).then((response) => {
@@ -44,24 +44,24 @@ export default function VacancyForm({ lang, vacancyId }: VacancyFormProps) {
 
   return (
     <>
-      <H3>{t("feedback-form-title")}</H3>
+      <H3>{t('feedback-form-title')}</H3>
       {isSuccess ? (
-        <span>{t("feedback-form-success")}</span>
+        <span>{t('feedback-form-success')}</span>
       ) : (
         <>
           <label>
-            <span>{t("feedback-form-contact")}</span>
+            <span>{t('feedback-form-contact')}</span>
             <span className="text-red"> *</span>
             <input
               onChange={(event) => setFormContact(event.target.value)}
               type="text"
               className={`transition-all w-full rounded-md border-light-grey focus:border-grey focus:ring focus:ring-grey focus:ring-opacity-20 ${
-                isValid ? "border-light-grey" : "border-red animate-shake"
+                isValid ? 'border-light-grey' : 'border-red animate-shake'
               }`}
             />
           </label>
           <label>
-            <span>{t("feedback-form-additional")}</span>
+            <span>{t('feedback-form-additional')}</span>
             <textarea
               onChange={(event) => setFormAdditional(event.target.value)}
               className="transition-all w-full rounded-md border-light-grey focus:border-grey focus:ring focus:ring-grey focus:ring-opacity-20"
@@ -71,7 +71,7 @@ export default function VacancyForm({ lang, vacancyId }: VacancyFormProps) {
             className="transition-all self-start p-2 lg:px-3 rounded-md border border-light-grey focus:border-grey focus:ring focus:ring-grey focus:ring-opacity-20"
             onClick={submit}
           >
-            {t("feedback-form-button")}
+            {t('feedback-form-button')}
           </button>
         </>
       )}

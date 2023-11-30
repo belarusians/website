@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { ChangeEvent, MouseEvent, useState } from "react";
+import { ChangeEvent, MouseEvent, useState } from 'react';
 
-import { Button } from "../../../components/button/button";
-import { Donation, parseDonation } from "../../../contract/donate";
-import { querifyObject } from "../../../lib/utils";
-import { Spinner } from "../../../components/spinner";
+import { Button } from '../../../components/button/button';
+import { Donation, parseDonation } from '../../../contract/donate';
+import { querifyObject } from '../../../lib/utils';
+import { Spinner } from '../../../components/spinner';
 
 interface DonateButtonsProps {
   recurringLabel: string;
@@ -50,15 +50,15 @@ export function DonateButtons(props: DonateButtonsProps) {
   }
 
   function handleCustomPriceInput(event: ChangeEvent<HTMLInputElement>) {
-    if (event.target.value.indexOf("€") !== -1) {
+    if (event.target.value.indexOf('€') !== -1) {
       event.target.value = event.target.value
-        .replace("€", "")
-        .replace(/[^0-9]/g, "");
+        .replace('€', '')
+        .replace(/[^0-9]/g, '');
     }
     const clearValue = event.target.value;
     setCustomPrice(parseInt(clearValue));
 
-    event.target.value = event.target.value + "€";
+    event.target.value = event.target.value + '€';
     event.target.setSelectionRange(event.target.value.length - 1, event.target.value.length - 1);
   }
 
@@ -72,9 +72,9 @@ export function DonateButtons(props: DonateButtonsProps) {
       });
 
       const response = await fetch(`/api/donate/link?${querifyObject<Donation>(donation)}`, {
-        method: "GET",
+        method: 'GET',
         headers: {
-          "content-type": "application/json",
+          'content-type': 'application/json',
         },
       });
 
@@ -86,7 +86,7 @@ export function DonateButtons(props: DonateButtonsProps) {
       }
 
       const body = await response.json();
-      window.open(body.payment_link, "_self");
+      window.open(body.payment_link, '_self');
 
       setIsLoading(false);
     } catch (e) {
@@ -107,12 +107,12 @@ export function DonateButtons(props: DonateButtonsProps) {
   return (
     <>
       {prices.map((p, i) =>
-        <Button disabled={isLoading} className={`${p === price ? "bg-red text-white" : "bg-white"}`} size="large"
+        <Button disabled={isLoading} className={`${p === price ? 'bg-red text-white' : 'bg-white'}`} size="large"
                 label={`${p}€`}
                 key={i} click={() => handlePriceClick(p)} />,
       )}
       <input
-        className={`${customPrice !== null ? "bg-red text-white placeholder-white" : "bg-white placeholder-black"} text-center transition-all shadow-lg ${isLoading ? "" : "hover:shadow-xl active:shadow-2xl"} rounded-md appearance-none border-transparent border-none p-2 md:p-3 lg:p-4 text-lg`}
+        className={`${customPrice !== null ? 'bg-red text-white placeholder-white' : 'bg-white placeholder-black'} text-center transition-all shadow-lg ${isLoading ? '' : 'hover:shadow-xl active:shadow-2xl'} rounded-md appearance-none border-transparent border-none p-2 md:p-3 lg:p-4 text-lg`}
         min="1"
         max="1000"
         placeholder="...€"
@@ -127,7 +127,7 @@ export function DonateButtons(props: DonateButtonsProps) {
         <label htmlFor="recurring" className="ml-3 cursor-pointer">{props.recurringLabel}</label>
       </div>
       <Button size="large" type="submit"
-              className={`transition-all col-span-2 flex justify-center ${isShaking ? "animate-shake" : ""} ${isLoading ? "bg-red" : "bg-white"} ${isValid ? "" : "ring-red ring-2"}`}
+              className={`transition-all col-span-2 flex justify-center ${isShaking ? 'animate-shake' : ''} ${isLoading ? 'bg-red' : 'bg-white'} ${isValid ? '' : 'ring-red ring-2'}`}
               disabled={isLoading}
               click={sendDonation}>
         {isLoading

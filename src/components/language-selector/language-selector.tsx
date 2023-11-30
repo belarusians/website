@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { usePathname } from "next/navigation";
-import Link from "next/link";
-import { supportedLngs } from "../../app/i18n/settings";
-import { Lang } from "../types";
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import { supportedLngs } from '../../app/i18n/settings';
+import { Lang } from '../types';
 
 // TODO: runs to many times for some reason. Needs to be investigated
 export function LanguageSelector(props: { lang: Lang; className?: string }) {
   const pathname = usePathname();
   const redirectedPathName = (locale: string) => {
-    if (!pathname) return "/";
-    const segments = pathname.split("/");
+    if (!pathname) return '/';
+    const segments = pathname.split('/');
     segments[1] = locale;
-    return segments.join("/");
+    return segments.join('/');
   };
 
   return (
@@ -21,7 +21,7 @@ export function LanguageSelector(props: { lang: Lang; className?: string }) {
         {supportedLngs.map((l) => (
           <Link
             className={`p-1 md:p-2 lg:p-3 uppercase text-lg first:rounded-l-md last:rounded-r-md ${
-              props.lang === l ? "text-white bg-red" : "text-black-tint bg-white"
+              props.lang === l ? 'text-white bg-red' : 'text-black-tint bg-white'
             }`}
             key={l}
             href={redirectedPathName(l)}

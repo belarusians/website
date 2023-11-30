@@ -1,8 +1,8 @@
-import { Lang } from "../../components/types";
+import { Lang } from '../../components/types';
 
 export const supportedLngs = [Lang.be, Lang.nl];
 
-export const defaultNS = "common";
+export const defaultNS = 'common';
 
 export function getOptions(lng = Lang.be, ns = defaultNS) {
   return {

@@ -1,8 +1,8 @@
-import { createInstance, i18n } from "i18next";
-import resourcesToBackend from "i18next-resources-to-backend";
-import { initReactI18next } from "react-i18next/initReactI18next";
-import { getOptions } from "./settings";
-import { Lang } from "../../components/types";
+import { createInstance, i18n } from 'i18next';
+import resourcesToBackend from 'i18next-resources-to-backend';
+import { initReactI18next } from 'react-i18next/initReactI18next';
+import { getOptions } from './settings';
+import { Lang } from '../../components/types';
 
 const initI18next = async (lng?: Lang, ns?: string) => {
   const i18nInstance = createInstance();

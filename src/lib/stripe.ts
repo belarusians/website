@@ -1,15 +1,15 @@
-import Stripe from "stripe";
+import Stripe from 'stripe';
 
 let stripe: Stripe | undefined = undefined;
 
 function getStripe() {
   if (!stripe) {
     if (!process.env.STRIPE_API_KEY) {
-      throw new Error("STRIPE_API_KEY env variable should be set");
+      throw new Error('STRIPE_API_KEY env variable should be set');
     }
     stripe = new Stripe(process.env.STRIPE_API_KEY,
       {
-        apiVersion: "2023-08-16",
+        apiVersion: '2023-08-16',
         typescript: true,
       });
   }
@@ -17,8 +17,8 @@ function getStripe() {
   return stripe;
 }
 
-export async function searchProduct(): Promise<Stripe.Product["id"] | null> {
-  const productName = "Donation";
+export async function searchProduct(): Promise<Stripe.Product['id'] | null> {
+  const productName = 'Donation';
   const search = await getStripe().products.search({
     query: `name:"${productName}"`,
   });
@@ -32,7 +32,7 @@ export async function searchProduct(): Promise<Stripe.Product["id"] | null> {
 }
 
 export async function searchPrice(amount: number, recurring: boolean, productId: string): Promise<string | null> {
-  const query = `product:"${productId}" AND active:"true" AND metadata["unit_amount"]:"${amount}" AND type:"${recurring ? "recurring" : "one_time"}"`;
+  const query = `product:"${productId}" AND active:"true" AND metadata["unit_amount"]:"${amount}" AND type:"${recurring ? 'recurring' : 'one_time'}"`;
   const search = await getStripe().prices.search({
     query,
   });
@@ -46,17 +46,17 @@ export async function searchPrice(amount: number, recurring: boolean, productId:
   return search.data[0].id;
 }
 
-export async function createPrice(amount: number, recurring: boolean, productId: string): Promise<Stripe.Price["id"]> {
-  console.log("Creating price");
+export async function createPrice(amount: number, recurring: boolean, productId: string): Promise<Stripe.Price['id']> {
+  console.log('Creating price');
   const price = await getStripe().prices.create({
-    currency: "EUR",
+    currency: 'EUR',
     product: productId,
     unit_amount: amount,
     active: true,
     recurring: recurring ? {
-      interval: "month",
+      interval: 'month',
       interval_count: 1,
-      usage_type: "licensed",
+      usage_type: 'licensed',
     } : undefined,
     metadata: {
       unit_amount: amount,
@@ -69,9 +69,9 @@ export async function createPrice(amount: number, recurring: boolean, productId:
   return price.id;
 }
 
-export async function searchPLinkByPriceId(priceId: Stripe.Price["id"]): Promise<Stripe.PaymentLink | null> {
+export async function searchPLinkByPriceId(priceId: Stripe.Price['id']): Promise<Stripe.PaymentLink | null> {
   const plinks = await getStripe().paymentLinks.list({ active: true });
-  const plink = plinks.data.find(pl => pl.metadata["price_id"] === priceId);
+  const plink = plinks.data.find(pl => pl.metadata['price_id'] === priceId);
   if (!plink) {
     console.log(`Did not find payment link for ${priceId}`);
     return null;
@@ -81,8 +81,8 @@ export async function searchPLinkByPriceId(priceId: Stripe.Price["id"]): Promise
   return plink;
 }
 
-export async function createPLinkForPriceId(priceId: Stripe.Price["id"], redirectUrl?: string): Promise<Stripe.PaymentLink> {
-  console.log("Creating payment link");
+export async function createPLinkForPriceId(priceId: Stripe.Price['id'], redirectUrl?: string): Promise<Stripe.PaymentLink> {
+  console.log('Creating payment link');
   const plink = await getStripe().paymentLinks.create({
     line_items: [{
       price: priceId,
@@ -90,7 +90,7 @@ export async function createPLinkForPriceId(priceId: Stripe.Price["id"], redirec
     }],
     ...(redirectUrl && {
       after_completion: {
-        type: "redirect",
+        type: 'redirect',
         redirect: {
           url: redirectUrl,
         },

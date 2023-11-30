@@ -1,4 +1,4 @@
-import { md, lg } from "../utils";
+import { md, lg } from '../utils';
 
 export function getFullWidth(windowWidth: number, maxSize?: number): number {
   let possibleSize = 0;

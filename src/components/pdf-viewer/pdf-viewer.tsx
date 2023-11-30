@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { Document, Page } from "react-pdf/dist/esm/entry.webpack5";
-import * as React from "react";
-import { useEffect, useState } from "react";
-import { PDFDocumentProxy } from "pdfjs-dist";
+import { Document, Page } from 'react-pdf/dist/esm/entry.webpack5';
+import * as React from 'react';
+import { useEffect, useState } from 'react';
+import { PDFDocumentProxy } from 'pdfjs-dist';
 
-import "react-pdf/dist/esm/Page/TextLayer.css";
-import { getFullWidth } from "./utils";
+import 'react-pdf/dist/esm/Page/TextLayer.css';
+import { getFullWidth } from './utils';
 
 function PDFPlaceholder(): React.JSX.Element {
   return <div className="flex justify-center items-center w-screen h-[80vh]">Loading stuff</div>;
@@ -20,7 +20,7 @@ export function PdfViewer(): React.JSX.Element {
 
   useEffect(() => {
     setWidth(window.innerWidth);
-    window.addEventListener("resize", () => {
+    window.addEventListener('resize', () => {
       setWidth(window.innerWidth);
     });
   }, []);

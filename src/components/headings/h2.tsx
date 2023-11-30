@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 
 interface H2Props {
   children: React.ReactNode;
@@ -6,5 +6,5 @@ interface H2Props {
 }
 
 export default function H2(props: H2Props): React.JSX.Element {
-  return <h2 className={`text-xl font-medium md:text-3xl mb-4 ${props.className ?? ""}`}>{props.children}</h2>;
+  return <h2 className={`text-xl font-medium md:text-3xl mb-4 ${props.className ?? ''}`}>{props.children}</h2>;
 }
