@@ -1,5 +1,4 @@
-import Image from "next/image";
-
+import { MaraImage } from "../../../../components/image";
 import { News } from "../../../../components/types";
 import H1 from "../../../../components/headings/h1";
 
@@ -15,11 +14,9 @@ export function NewsArticle(props: ArticleProps) {
           <H1>{props.news.title}</H1>
           <p className="prose-sm md:prose-lg">{props.news.description}</p>
         </div>
-        <Image
+        <MaraImage
+          image={props.news.backgroundUrl}
           className="object-cover rounded-md"
-          height={props.news.height}
-          width={props.news.width}
-          src={props.news.backgroundUrl}
           alt={props.news.title}
         />
         <div
