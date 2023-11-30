@@ -2,9 +2,9 @@
 
 import { useTranslation } from '../i18n/client';
 import * as React from 'react';
-import { ClientOnly } from '../../components/client-only/client-only';
+import { ClientOnly } from '../../components/client-only';
 import { isEmailValid } from '../../lib/email';
-import { Button } from '../../components/button/button';
+import { Button } from '../../components/button';
 import H2 from '../../components/headings/h2';
 import { Lang } from '../../components/types';
 import { Spinner } from '../../components/spinner';

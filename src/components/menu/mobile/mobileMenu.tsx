@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 import { useTranslation } from '../../../app/i18n/client';
-import { LanguageSelector } from '../../language-selector/language-selector';
+import { LanguageSelector } from '../../language-selector';
 import { Lang } from '../../types';
-import { Button } from '../../button/button';
+import { Button } from '../../button';
 
 export function MobileMenu({ lang }: { lang: Lang }) {
   const { t } = useTranslation(lang);

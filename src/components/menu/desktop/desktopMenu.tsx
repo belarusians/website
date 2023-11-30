@@ -3,7 +3,7 @@
 import Link from 'next/link';
 
 import { useTranslation } from '../../../app/i18n/client';
-import { LanguageSelector } from '../../language-selector/language-selector';
+import { LanguageSelector } from '../../language-selector';
 import { Lang } from '../../types';
 import { Dropdown } from '../../dropdown';
 

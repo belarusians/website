@@ -1,4 +1,4 @@
-import { PropsWithClass } from '../../app/types';
+import { PropsWithClass } from '../app/types';
 
 export function Spinner({ className }: PropsWithClass) {
   return (

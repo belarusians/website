@@ -1,7 +1,7 @@
 import { Metadata, ResolvingMetadata } from 'next/types';
 
 import { Event, Lang } from '../../../../components/types';
-import { Section } from '../../../../components/section/section';
+import { Section } from '../../../../components/section';
 import { EventArticle } from './event-article';
 import { CommonPageParams } from '../../../types';
 import { useTranslation } from '../../../i18n';

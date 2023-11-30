@@ -1,5 +1,5 @@
 import { Lang, News } from '../../../../components/types';
-import { Section } from '../../../../components/section/section';
+import { Section } from '../../../../components/section';
 import { NewsArticle } from './news-article';
 import { CommonPageParams } from '../../../types';
 import { Metadata, ResolvingMetadata } from 'next/types';

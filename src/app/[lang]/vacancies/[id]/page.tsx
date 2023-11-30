@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { Metadata, ResolvingMetadata } from 'next/types';
 
 import { Lang } from '../../../../components/types';
-import { Section } from '../../../../components/section/section';
+import { Section } from '../../../../components/section';
 import H1 from '../../../../components/headings/h1';
 import { CommonPageParams } from '../../../types';
 import VacancyForm from './form';

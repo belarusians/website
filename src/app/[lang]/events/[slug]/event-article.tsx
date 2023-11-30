@@ -1,6 +1,6 @@
 import { MaraImage } from '../../../../components/image';
 import { Event, Lang } from '../../../../components/types';
-import { Button } from '../../../../components/button/button';
+import { Button } from '../../../../components/button';
 
 interface ArticleProps {
   event: Event;

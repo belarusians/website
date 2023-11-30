@@ -2,7 +2,7 @@
 
 import { ChangeEvent, MouseEvent, useState } from 'react';
 
-import { Button } from '../../../components/button/button';
+import { Button } from '../../../components/button';
 import { Donation, parseDonation } from '../../../contract/donate';
 import { querifyObject } from '../../../lib/utils';
 import { Spinner } from '../../../components/spinner';

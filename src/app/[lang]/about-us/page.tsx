@@ -3,7 +3,7 @@ import { Metadata, ResolvingMetadata } from 'next/types';
 import Link from 'next/link';
 
 import { useTranslation } from '../../i18n';
-import { Section } from '../../../components/section/section';
+import { Section } from '../../../components/section';
 import { Lang } from '../../../components/types';
 import H1 from '../../../components/headings/h1';
 import H3 from '../../../components/headings/h3';

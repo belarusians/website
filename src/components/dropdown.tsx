@@ -4,7 +4,7 @@ import { useState, PropsWithChildren } from 'react';
 
 
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import { ClickOutside } from '../click-outside';
+import { ClickOutside } from './click-outside';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface DropdownProps extends PropsWithChildren {
