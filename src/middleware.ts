@@ -10,6 +10,7 @@ export function middleware(request: NextRequest) {
 
   if (
     pathname.startsWith('/.well-known/') ||
+    pathname === '/robots.txt' ||
     pathname.endsWith('.png') ||
     pathname.endsWith('.jpg') ||
     pathname.endsWith('.jpeg') ||
