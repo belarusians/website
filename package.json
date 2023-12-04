@@ -7,7 +7,7 @@
     "node": "^18"
   },
   "scripts": {
-    "dev": "cross-env NODE_OPTIONS='' next dev",
+    "dev": "NODE_OPTIONS='--inspect' next dev",
     "start": "cross-env next start",
     "build": "next build",
     "build:profile": "cross-env NODE_ENV=development next build --profile",
