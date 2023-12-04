@@ -27,7 +27,7 @@ export function EventArticle(props: ArticleProps) {
               size="large"
               link={props.event.ticketsLink}
               target="_blank"
-              label={props.ticketsLabel}
+              label={props.event.ticketsLabel ?? props.ticketsLabel}
               trackingName={`buy-${props.event.slug}-ticket-button`}
               className="w-full bg-red-gradient animate-bg-rotation-fast bg-[length:350%_100%] text-white"
             />

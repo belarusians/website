@@ -67,6 +67,11 @@ const event = defineType({
       type: 'url',
     }),
     defineField({
+      name: 'ticketsLabel',
+      title: 'Tickets button text',
+      type: 'string',
+    }),
+    defineField({
       name: 'tipsLink',
       title: 'Tips link',
       type: 'url',
