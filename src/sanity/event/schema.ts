@@ -39,6 +39,17 @@ const event = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'content',
+      title: 'Content',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'block',
+        }),
+      ],
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: 'eventDate',
       title: 'Event date',
       type: 'datetime',
@@ -49,11 +60,6 @@ const event = defineType({
       title: 'Location name',
       type: 'string',
       validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'geoLocation',
-      title: 'Location',
-      type: 'geopoint',
     }),
     defineField({
       name: 'ticketsLink',
@@ -69,17 +75,6 @@ const event = defineType({
       name: 'tipsLabel',
       title: 'Tips button text',
       type: 'string',
-    }),
-    defineField({
-      name: 'content',
-      title: 'Content',
-      type: 'array',
-      of: [
-        defineArrayMember({
-          type: 'block',
-        }),
-      ],
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       // should match 'languageField' plugin configuration setting, if customized
