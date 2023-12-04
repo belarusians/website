@@ -13,19 +13,32 @@ interface ArticleProps {
 
 export function EventArticle(props: ArticleProps) {
   return (
-    <div className="flex flex-col md:flex-row gap-2">
+    <div className="flex flex-col md:flex-row gap-2 mg:gap-3 lg:gap-4">
       <div className="md:basis-1/3 lg:basis-2/5">
-        <div className="flex flex-col gap-4">
-          <MaraImage className="object-cover rounded-md" image={props.event.backgroundUrl} alt={props.event.title} />
-          <ButtonGroup
-            slug={props.event.slug}
-            ticketsLink={props.event.ticketsLink}
-            ticketsLabel={props.ticketsLabel}
-            tipsLink={props.event.tipsLink}
-            tipsLabel={props.event.tipsLabel ?? props.tipsLabel}
-            paymentSucceeded={props.paymentSucceeded}
-            paymentSucceededText={props.paymentSucceededText}
+        <div className="flex flex-col gap-2 mg:gap-3 lg:gap-4">
+          <MaraImage
+            className="object-cover rounded-md shadow-lg"
+            image={props.event.backgroundUrl}
+            alt={props.event.title}
           />
+          {props.paymentSucceeded && props.paymentSucceededText && <ThanksText text={props.paymentSucceededText} />}
+          {!props.paymentSucceeded && props.event.ticketsLink && (
+            <Button
+              size="large"
+              link={props.event.ticketsLink}
+              target="_blank"
+              label={props.ticketsLabel}
+              trackingName={`buy-${props.event.slug}-ticket-button`}
+              className="w-full bg-red-gradient animate-bg-rotation-fast bg-[length:350%_100%] text-white"
+            />
+          )}
+          {props.event.tipsLink && (
+            <TipsButton
+              tipsLink={props.event.tipsLink}
+              tipsLabel={props.event.tipsLabel ?? props.tipsLabel}
+              slug={props.event.slug}
+            />
+          )}
         </div>
       </div>
       <div className="md:basis-2/3 lg:basis-3/5">
@@ -38,14 +51,12 @@ export function EventArticle(props: ArticleProps) {
   );
 }
 
-interface ButtonGroupProps {
-  slug: string;
-  ticketsLink?: string;
-  ticketsLabel: string;
-  tipsLink?: string;
-  tipsLabel?: string;
-  paymentSucceeded?: boolean;
-  paymentSucceededText?: string;
+function ThanksText(props: { text: string }) {
+  return (
+    <p className="p-2 md:p-3 lg:p-4 text-lg text-center">
+      <span className="">{props.text}</span>
+    </p>
+  );
 }
 
 function TipsButton(props: { tipsLink: string; tipsLabel?: string; slug: string }) {
@@ -57,27 +68,5 @@ function TipsButton(props: { tipsLink: string; tipsLabel?: string; slug: string 
       trackingName={`buy-${props.slug}-tips-button`}
       className="w-full bg-white border-2 border-red bg-[length:350%_100%] text-red"
     />
-  );
-}
-
-function ButtonGroup(props: ButtonGroupProps) {
-  return (
-    <div className="flex flex-col gap-4">
-      {props.paymentSucceeded && (
-        <p className="mt-4 text-center">
-          <span className="">{props.paymentSucceededText}</span>
-        </p>
-      )}
-      {!props.paymentSucceeded && props.ticketsLink && (
-        <Button
-          link={props.ticketsLink}
-          target="_blank"
-          label={props.ticketsLabel}
-          trackingName={`buy-${props.slug}-ticket-button`}
-          className="w-full bg-red-gradient animate-bg-rotation-fast bg-[length:350%_100%] text-white"
-        />
-      )}
-      {props.tipsLink && <TipsButton tipsLink={props.tipsLink} tipsLabel={props.tipsLabel} slug={props.slug} />}
-    </div>
   );
 }
