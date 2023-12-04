@@ -47,7 +47,7 @@ module.exports = {
         red: '#ed1c24',
         'red-shade': '#af0000',
         white: '#ffffff',
-        'white-shade': '#f8f8f8',
+        'white-shade': '#f6f6f6',
         black: '#231f20',
         'black-tint': '#333333',
         grey: 'rgb(128, 128, 128)',
@@ -79,7 +79,7 @@ module.exports = {
           },
           '100%': {
             transform: 'rotate(360deg)',
-          }
+          },
         },
         rotationBack: {
           '0%': {
@@ -87,7 +87,7 @@ module.exports = {
           },
           '100%': {
             transform: 'rotate(-360deg)',
-          }
+          },
         },
         shake: {
           '0%': {
