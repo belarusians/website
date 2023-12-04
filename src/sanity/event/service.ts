@@ -9,7 +9,9 @@ export async function getAllEvents(): Promise<EventSchema[]> {
 }
 
 export async function getAllEventsSlugs(lang: Lang): Promise<{ slug: string }[]> {
-  return sanityFetch<{ slug: string }[]>(`*[_type == "event" && language == "${lang}"]{ "slug": slug.current }`, ['event']);
+  return sanityFetch<{ slug: string }[]>(`*[_type == "event" && language == "${lang}"]{ "slug": slug.current }`, [
+    'event',
+  ]);
 }
 
 export type EventMeta = Pick<EventSchema, 'slug' | 'eventDate' | 'title' | 'location'>;
@@ -24,7 +26,7 @@ export async function getFutureEventMetas(lang: Lang): Promise<EventMeta[]> {
 export async function getEventBySlug(lang: Lang, slug: string): Promise<Event | undefined> {
   const schema = await sanityFetch<EventSchema>(
     `*[_type == "event" && slug.current == "${slug}" && language == "${lang}"][0]`,
-    ['event']
+    ['event'],
   );
   if (!schema) {
     return undefined;
@@ -34,14 +36,8 @@ export async function getEventBySlug(lang: Lang, slug: string): Promise<Event | 
 
 function mapSchemaToEvent(event: EventSchema): Event {
   return {
-    title: event.title,
-    description: event.description,
-    eventDate: event.eventDate,
+    ...event,
     slug: event.slug.current!,
-    backgroundUrl: event.backgroundUrl,
-    ticketsLink: event.ticketsLink,
-    location: event.location,
     content: toHTML(event.content),
-    imageRatio: event.imageRatio,
   };
 }
