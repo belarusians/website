@@ -3,7 +3,7 @@ import { Metadata, ResolvingMetadata } from 'next/types';
 import { Event, Lang } from '../../../../components/types';
 import { Section } from '../../../../components/section';
 import { EventArticle } from './event-article';
-import { CommonPageParams } from '../../../types';
+import { CommonPageParams, PageSearchParams } from '../../../types';
 import { useTranslation } from '../../../i18n';
 import { getAllEventsSlugs, getEventBySlug } from '../../../../sanity/event/service';
 import { urlForImage } from '../../../../sanity/lib/image';
@@ -14,7 +14,9 @@ type EventPageParams = CommonPageParams & {
   };
 };
 
-export default async function EventPage({ params }: EventPageParams) {
+export default async function EventPage({ params, searchParams }: EventPageParams & PageSearchParams) {
+  const paymentSucceeded: boolean = searchParams?.payment_succeeded !== undefined;
+
   const { t } = await useTranslation(params.lang, 'events');
   const event = await getData(params.slug, params.lang);
   if (!event) {
@@ -23,7 +25,14 @@ export default async function EventPage({ params }: EventPageParams) {
 
   return (
     <Section>
-      <EventArticle lang={params.lang} event={event} buttonLabel={t('buy-ticket')} />
+      <EventArticle
+        lang={params.lang}
+        event={event}
+        ticketsLabel={t('buy-ticket')}
+        tipsLabel={t('donate')}
+        paymentSucceeded={paymentSucceeded}
+        paymentSucceededText={t('success-payment-text')}
+      />
     </Section>
   );
 }

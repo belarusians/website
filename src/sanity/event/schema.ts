@@ -66,6 +66,16 @@ const event = defineType({
       type: 'url',
     }),
     defineField({
+      name: 'tipsLink',
+      title: 'Tips link',
+      type: 'url',
+    }),
+    defineField({
+      name: 'tipsLabel',
+      title: 'Tips button text',
+      type: 'string',
+    }),
+    defineField({
       name: 'content',
       title: 'Content',
       type: 'array',
