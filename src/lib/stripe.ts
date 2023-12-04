@@ -16,6 +16,19 @@ function getStripe() {
   return stripe;
 }
 
+export async function getProductsByCheckoutSession(checkoutSessionId: string): Promise<string[]> {
+  const checkoutSession = await getStripe().checkout.sessions.retrieve(checkoutSessionId, {
+    expand: ['line_items.data.price.product'],
+  });
+  if (!checkoutSession) {
+    console.log(`Did not find checkout session ${checkoutSessionId}`);
+    return [];
+  }
+
+  const products = checkoutSession.line_items?.data.map((line) => line.price?.product).filter(Boolean);
+  return products as string[];
+}
+
 export function constructWebhookEvent(body: Buffer, signature: string): Stripe.Event {
   if (!process.env.STRIPE_ENDPOINT_SECRET) {
     throw new Error('STRIPE_ENDPOINT_SECRET env variable should be set');
