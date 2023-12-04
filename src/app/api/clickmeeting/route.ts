@@ -18,7 +18,9 @@ export async function POST(req: NextRequest) {
     const bodyBuffer = new Buffer(await req.arrayBuffer());
     event = constructWebhookEvent(bodyBuffer, sig);
   } catch (err) {
-    return NextResponse.json({ message: `Webhook Error: ${JSON.stringify(err)}` }, { status: 400 });
+    const message = `Webhook Error: ${JSON.stringify(err)}`;
+    console.error(message);
+    return NextResponse.json({ message }, { status: 400 });
   }
 
   if (event.type !== 'charge.succeeded') {
