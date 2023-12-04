@@ -7,11 +7,10 @@ function getStripe() {
     if (!process.env.STRIPE_API_KEY) {
       throw new Error('STRIPE_API_KEY env variable should be set');
     }
-    stripe = new Stripe(process.env.STRIPE_API_KEY,
-      {
-        apiVersion: '2023-08-16',
-        typescript: true,
-      });
+    stripe = new Stripe(process.env.STRIPE_API_KEY, {
+      apiVersion: '2023-10-16',
+      typescript: true,
+    });
   }
 
   return stripe;
