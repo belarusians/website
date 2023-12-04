@@ -13,22 +13,10 @@ interface ArticleProps {
 
 export function EventArticle(props: ArticleProps) {
   return (
-    <div className="rounded-md bg-white shadow-lg">
-      <div
-        className={
-          'relative rounded-t-md before:z-10 before:bg-white-gradient before:absolute before:h-16 before:right-0 before:bottom-0 before:left-0 ' +
-          `${props.event.imageRatio ? 'aspect-video' : 'h-36 md:h-72'}`
-        }
-      >
-        <MaraImage
-          className="object-cover rounded-t-md"
-          image={props.event.backgroundUrl}
-          fill
-          alt={props.event.title}
-        />
-      </div>
-      <div className="flex flex-col md:flex-row gap-4 px-4 lg:px-8 pb-4 lg:pb-8 my-8 md:my-4">
-        <div className="md:basis-2/6 lg:basis-1/5">
+    <div className="flex flex-col md:flex-row gap-2">
+      <div className="md:basis-1/3 lg:basis-2/5">
+        <div className="flex flex-col gap-4">
+          <MaraImage className="object-cover rounded-md" image={props.event.backgroundUrl} alt={props.event.title} />
           <ButtonGroup
             slug={props.event.slug}
             ticketsLink={props.event.ticketsLink}
@@ -39,8 +27,10 @@ export function EventArticle(props: ArticleProps) {
             paymentSucceededText={props.paymentSucceededText}
           />
         </div>
+      </div>
+      <div className="md:basis-2/3 lg:basis-3/5">
         <div
-          className="prose-sm md:prose prose-hr:my-4 prose-a:text-red prose-a:break-words prose-blockquote:border-l-2 prose-blockquote:border-red md:basis-4/6 lg:basis-4/5"
+          className="rounded-md bg-white shadow-lg p-4 lg:p-8 prose-sm md:prose lg:prose-lg prose-hr:my-4 prose-a:text-red prose-a:break-words prose-blockquote:border-l-2 prose-blockquote:border-red"
           dangerouslySetInnerHTML={{ __html: props.event.content }}
         ></div>
       </div>
