@@ -16,6 +16,13 @@ function getStripe() {
   return stripe;
 }
 
+export function constructWebhookEvent(body: Buffer, signature: string): Stripe.Event {
+  if (!process.env.STRIPE_ENDPOINT_SECRET) {
+    throw new Error('STRIPE_ENDPOINT_SECRET env variable should be set');
+  }
+  return getStripe().webhooks.constructEvent(body, signature, process.env.STRIPE_ENDPOINT_SECRET);
+}
+
 export async function searchProduct(): Promise<Stripe.Product['id'] | null> {
   const productName = 'Donation';
   const search = await getStripe().products.search({
@@ -31,7 +38,9 @@ export async function searchProduct(): Promise<Stripe.Product['id'] | null> {
 }
 
 export async function searchPrice(amount: number, recurring: boolean, productId: string): Promise<string | null> {
-  const query = `product:"${productId}" AND active:"true" AND metadata["unit_amount"]:"${amount}" AND type:"${recurring ? 'recurring' : 'one_time'}"`;
+  const query = `product:"${productId}" AND active:"true" AND metadata["unit_amount"]:"${amount}" AND type:"${
+    recurring ? 'recurring' : 'one_time'
+  }"`;
   const search = await getStripe().prices.search({
     query,
   });
@@ -47,22 +56,27 @@ export async function searchPrice(amount: number, recurring: boolean, productId:
 
 export async function createPrice(amount: number, recurring: boolean, productId: string): Promise<Stripe.Price['id']> {
   console.log('Creating price');
-  const price = await getStripe().prices.create({
-    currency: 'EUR',
-    product: productId,
-    unit_amount: amount,
-    active: true,
-    recurring: recurring ? {
-      interval: 'month',
-      interval_count: 1,
-      usage_type: 'licensed',
-    } : undefined,
-    metadata: {
+  const price = await getStripe().prices.create(
+    {
+      currency: 'EUR',
+      product: productId,
       unit_amount: amount,
+      active: true,
+      recurring: recurring
+        ? {
+            interval: 'month',
+            interval_count: 1,
+            usage_type: 'licensed',
+          }
+        : undefined,
+      metadata: {
+        unit_amount: amount,
+      },
     },
-  }, {
-    idempotencyKey: `price-${productId}-${amount}-${recurring}-1`,
-  });
+    {
+      idempotencyKey: `price-${productId}-${amount}-${recurring}-1`,
+    },
+  );
 
   console.log(`Created price ${price.id}`);
   return price.id;
@@ -70,7 +84,7 @@ export async function createPrice(amount: number, recurring: boolean, productId:
 
 export async function searchPLinkByPriceId(priceId: Stripe.Price['id']): Promise<Stripe.PaymentLink | null> {
   const plinks = await getStripe().paymentLinks.list({ active: true });
-  const plink = plinks.data.find(pl => pl.metadata['price_id'] === priceId);
+  const plink = plinks.data.find((pl) => pl.metadata['price_id'] === priceId);
   if (!plink) {
     console.log(`Did not find payment link for ${priceId}`);
     return null;
@@ -80,27 +94,35 @@ export async function searchPLinkByPriceId(priceId: Stripe.Price['id']): Promise
   return plink;
 }
 
-export async function createPLinkForPriceId(priceId: Stripe.Price['id'], redirectUrl?: string): Promise<Stripe.PaymentLink> {
+export async function createPLinkForPriceId(
+  priceId: Stripe.Price['id'],
+  redirectUrl?: string,
+): Promise<Stripe.PaymentLink> {
   console.log('Creating payment link');
-  const plink = await getStripe().paymentLinks.create({
-    line_items: [{
-      price: priceId,
-      quantity: 1,
-    }],
-    ...(redirectUrl && {
-      after_completion: {
-        type: 'redirect',
-        redirect: {
-          url: redirectUrl,
+  const plink = await getStripe().paymentLinks.create(
+    {
+      line_items: [
+        {
+          price: priceId,
+          quantity: 1,
         },
+      ],
+      ...(redirectUrl && {
+        after_completion: {
+          type: 'redirect',
+          redirect: {
+            url: redirectUrl,
+          },
+        },
+      }),
+      metadata: {
+        price_id: priceId,
       },
-    }),
-    metadata: {
-      price_id: priceId,
     },
-  }, {
-    idempotencyKey: `plink-${priceId}-${redirectUrl}-1`,
-  });
+    {
+      idempotencyKey: `plink-${priceId}-${redirectUrl}-1`,
+    },
+  );
 
   console.log(`Created payment link ${plink.id}`);
   return plink;
