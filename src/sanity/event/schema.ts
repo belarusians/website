@@ -84,6 +84,7 @@ const event = defineType({
     defineField({
       name: 'successText',
       title: 'Payment success message',
+      description: 'Message shown instead of tickets button after successful payment',
       type: 'string',
     }),
     defineField({
