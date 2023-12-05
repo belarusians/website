@@ -41,8 +41,7 @@ export async function generateMetadata({ params }: NewsPageParams, parent: Resol
   const images = [];
   if (news) {
     images.push(urlForImage(news.backgroundUrl));
-  }
-  if (parentMetadata.openGraph?.images) {
+  } else if (parentMetadata.openGraph?.images) {
     images.push(...parentMetadata.openGraph.images);
   }
 

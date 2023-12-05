@@ -49,8 +49,7 @@ export async function generateMetadata({ params }: EventPageParams, parent: Reso
   const images = [];
   if (event) {
     images.push(urlForImage(event.backgroundUrl));
-  }
-  if (parentMetadata.openGraph?.images) {
+  } else if (parentMetadata.openGraph?.images) {
     images.push(...parentMetadata.openGraph.images);
   }
 
