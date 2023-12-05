@@ -21,7 +21,7 @@ export function EventArticle(props: ArticleProps) {
             image={props.event.backgroundUrl}
             alt={props.event.title}
           />
-          {props.paymentSucceeded && <ThanksText text={props.defaultPaymentSuccessText ?? props.event.successText} />}
+          {props.paymentSucceeded && <ThanksText text={props.event.successText ?? props.defaultPaymentSuccessText} />}
           {!props.paymentSucceeded && props.event.ticketsLink && (
             <Button
               size="large"
