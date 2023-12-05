@@ -3,10 +3,7 @@ import { revalidateTag } from 'next/cache';
 import { parseBody } from 'next-sanity/webhook';
 
 export async function POST(request: NextRequest) {
-  const { isValidSignature, body } = await parseBody<{ _type: string }>(
-    request,
-    process.env.SANITY_REVALIDATE_SECRET,
-  );
+  const { isValidSignature, body } = await parseBody<{ _type: string }>(request, process.env.SANITY_REVALIDATE_SECRET);
 
   if (!isValidSignature) {
     return new NextResponse(JSON.stringify({ message: 'Invalid Token' }), {
@@ -19,7 +16,7 @@ export async function POST(request: NextRequest) {
   }
 
   if (!body?._type) {
-    return new NextResponse(JSON.stringify({ message: 'Bad Request' }), {
+    return new NextResponse(JSON.stringify({ message: 'Bad Request: _type should exist in body' }), {
       status: 400,
       statusText: 'Bad Request',
       headers: {
@@ -32,10 +29,28 @@ export async function POST(request: NextRequest) {
   try {
     revalidateTag(body._type);
   } catch (e) {
-    console.log(`revalidating tag ${body._type} failed`);
-    return NextResponse.json({ revalidated: false, error: e });
+    const message = `Tag ${body._type} revalidation failed`;
+    console.log(message);
+    return NextResponse.json(
+      { message, error: e },
+      {
+        status: 500,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    );
   }
 
-  console.log(`revalidating tag ${body._type} succeeded`);
-  return NextResponse.json({ revalidated: true });
+  const message = `Tag ${body._type} revalidation succeeded`;
+  console.log(message);
+  return NextResponse.json(
+    { message },
+    {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
+  );
 }
