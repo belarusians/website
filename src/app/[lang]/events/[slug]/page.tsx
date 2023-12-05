@@ -28,10 +28,10 @@ export default async function EventPage({ params, searchParams }: EventPageParam
       <EventArticle
         lang={params.lang}
         event={event}
-        ticketsLabel={t('buy-ticket')}
-        tipsLabel={t('donate')}
+        defaultTicketsLabel={t('buy-ticket')}
+        defaultTipsLabel={t('donate')}
         paymentSucceeded={paymentSucceeded}
-        paymentSucceededText={t('success-payment-text')}
+        defaultPaymentSuccessText={t('success-payment-text')}
       />
     </Section>
   );

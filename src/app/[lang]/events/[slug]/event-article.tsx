@@ -5,10 +5,10 @@ import { Button } from '../../../../components/button';
 interface ArticleProps {
   event: Event;
   lang: Lang;
-  ticketsLabel: string;
-  tipsLabel?: string;
+  defaultTicketsLabel: string;
+  defaultPaymentSuccessText: string;
+  defaultTipsLabel?: string;
   paymentSucceeded?: boolean;
-  paymentSucceededText?: string;
 }
 
 export function EventArticle(props: ArticleProps) {
@@ -21,13 +21,13 @@ export function EventArticle(props: ArticleProps) {
             image={props.event.backgroundUrl}
             alt={props.event.title}
           />
-          {props.paymentSucceeded && props.paymentSucceededText && <ThanksText text={props.paymentSucceededText} />}
+          {props.paymentSucceeded && <ThanksText text={props.defaultPaymentSuccessText ?? props.event.successText} />}
           {!props.paymentSucceeded && props.event.ticketsLink && (
             <Button
               size="large"
               link={props.event.ticketsLink}
               target="_blank"
-              label={props.event.ticketsLabel ?? props.ticketsLabel}
+              label={props.event.ticketsLabel ?? props.defaultTicketsLabel}
               trackingName={`buy-${props.event.slug}-ticket-button`}
               className="w-full bg-red-gradient animate-bg-rotation-fast bg-[length:350%_100%] text-white"
             />
@@ -35,7 +35,7 @@ export function EventArticle(props: ArticleProps) {
           {props.event.tipsLink && (
             <TipsButton
               tipsLink={props.event.tipsLink}
-              tipsLabel={props.event.tipsLabel ?? props.tipsLabel}
+              tipsLabel={props.event.tipsLabel ?? props.defaultTipsLabel}
               slug={props.event.slug}
             />
           )}

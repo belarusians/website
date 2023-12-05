@@ -82,6 +82,11 @@ const event = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'successText',
+      title: 'Payment success message',
+      type: 'string',
+    }),
+    defineField({
       // should match 'languageField' plugin configuration setting, if customized
       name: 'language',
       type: 'string',
