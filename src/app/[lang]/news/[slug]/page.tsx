@@ -28,11 +28,11 @@ export default async function ArticlePage({ params }: NewsPageParams) {
 }
 
 async function getData(lang: Lang, slug: string): Promise<News | undefined> {
-  return await getNewsBySlug(lang, slug);
+  return getNewsBySlug(lang, slug);
 }
 
 export async function generateStaticParams({ params }: CommonPageParams) {
-  return await getAllNewsSlugs(params.lang);
+  return getAllNewsSlugs(params.lang);
 }
 
 export async function generateMetadata({ params }: NewsPageParams, parent: ResolvingMetadata): Promise<Metadata> {

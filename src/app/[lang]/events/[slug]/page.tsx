@@ -86,5 +86,5 @@ export async function generateMetadata({ params }: EventPageParams, parent: Reso
 }
 
 export async function generateStaticParams({ params }: CommonPageParams): Promise<{ slug: string }[]> {
-  return await getAllEventsSlugs(params.lang);
+  return getAllEventsSlugs(params.lang);
 }

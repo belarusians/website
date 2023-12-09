@@ -19,5 +19,5 @@ export async function isUniqueOtherThanLanguage(slug: string, context: SlugValid
     language == $language
   ][0]._id)`;
 
-  return await client.fetch(query, params);
+  return client.fetch(query, params);
 }

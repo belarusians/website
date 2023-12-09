@@ -14,7 +14,8 @@
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/no-explicit-any": "error",
     "no-useless-escape": "off",
-    "no-unused-vars": "error"
+    "no-unused-vars": "error",
+    "no-return-await": "error"
   },
   "ignorePatterns": ["__checks__/**", "next.config.js", "deploy/**", "jest.config.js"]
 }
