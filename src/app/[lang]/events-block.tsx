@@ -11,7 +11,7 @@ export function EventsBlock(props: EventsBlockProps) {
   return (
     <div className="grid grid-cols-2 md:flex md:flex-row justify-center gap-3 md:gap-4">
       {props.events.map((event, i) => (
-        <EventThumbnail lang={props.lang} event={event} key={i} />
+        <EventThumbnail lang={props.lang} event={event} key={i} displayYear={false} />
       ))}
     </div>
   );

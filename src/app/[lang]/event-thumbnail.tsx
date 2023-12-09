@@ -9,6 +9,7 @@ import { isEventPassed } from '../../sanity/event/utils';
 export interface EventThumbnailProps {
   event: EventMeta;
   lang: Lang;
+  displayYear?: boolean;
 }
 
 export function EventThumbnail(props: EventThumbnailProps) {
@@ -16,13 +17,15 @@ export function EventThumbnail(props: EventThumbnailProps) {
 
   return (
     <Link
-      className="bg-white transition-all shadow-lg hover:shadow-xl hover:scale-101 rounded-md p-4 w-full md:max-w-xs"
+      className="bg-white transition-all shadow-lg hover:shadow-xl hover:scale-101 rounded-md p-2 md:p-4 w-full md:max-w-xs"
       href={`/${props.lang}/events/${props.event.slug}`}
     >
-      <div className="">
-        <p className={isPassed ? 'text-gray-300' : 'text-gray-500'}>{renderDate(props.event.eventDate, props.lang)}</p>
-        <p className={`my-3 font-bold ${isPassed ? 'text-gray-400' : 'text-red-500'}`}>{props.event.title}</p>
+      <div className="flex flex-col gap-2 md:gap-3 h-full">
         <p className={isPassed ? 'text-gray-300' : 'text-gray-500'}>
+          {renderDate(props.event.eventDate, props.lang, props.displayYear)}
+        </p>
+        <p className={`font-bold ${isPassed ? 'text-gray-400' : 'text-red-500'}`}>{props.event.title}</p>
+        <p className={`mt-auto ${isPassed ? 'text-gray-300' : 'text-gray-500'}`}>
           <FontAwesomeIcon className="pr-2" icon={faLocationDot} />
           {props.event.location}
         </p>
@@ -31,10 +34,10 @@ export function EventThumbnail(props: EventThumbnailProps) {
   );
 }
 
-function renderDate(eventString: string, locale: Lang): string {
+function renderDate(eventString: string, locale: Lang, renderYear = true): string {
   const eventDate = new Date(eventString);
   const eventDateString = eventDate.toLocaleDateString(locale, {
-    year: 'numeric',
+    year: renderYear ? 'numeric' : undefined,
     month: 'long',
     day: 'numeric',
   });
