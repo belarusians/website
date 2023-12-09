@@ -26,6 +26,7 @@
     "@sanity/document-internationalization": "^2.0.2",
     "@sanity/image-url": "^1.0.2",
     "@sanity/vision": "^3.19.2",
+    "@vercel/speed-insights": "~1.0.1",
     "aws-sdk": "~2.1354.0",
     "i18next": "~22.4.15",
     "i18next-resources-to-backend": "^1.1.4",
