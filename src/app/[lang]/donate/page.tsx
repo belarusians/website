@@ -18,22 +18,23 @@ export default async function Page({ params, searchParams }: CommonPageParams & 
       <div className="flex flex-col md:flex-row gap-4 md:gap-5 lg:gap-20 xl:gap-60">
         <div className="md:basis-1/2 lg:basis-2/3 xl:basis-3/5">
           <H1>{t('heading')}</H1>
-          <p>
-            {t('text')}
-          </p>
+          <p>{t('text')}</p>
         </div>
         <div className="md:basis-1/2 lg:basis-1/3 xl:basis-2/5 grid grid-cols-2 gap-4">
-          {success ?
-            <div
-              className="col-span-2 p-2 md:p-4 lg:p-6 rounded-md bg-white shadow-lg flex items-center justify-center">
+          {success ? (
+            <div className="col-span-2 p-2 md:p-4 lg:p-6 rounded-md bg-white shadow-lg flex items-center justify-center">
               <p className="text-center">
                 {t('successMsg')}&nbsp;
                 <Link href="https://billing.stripe.com/p/login/9AQ6qpfV726XcsU144">{t('customerPortalLink')}</Link>.
               </p>
-            </div> : <DonateButtons donateBtnLabel={t('donateBtn')}
-                                    recurringLabel={t('recurring')}
-                                    donateBtnErrLabel={t('donateBtnErr')}
-            />}
+            </div>
+          ) : (
+            <DonateButtons
+              donateBtnLabel={t('donateBtn')}
+              recurringLabel={t('recurring')}
+              donateBtnErrLabel={t('donateBtnErr')}
+            />
+          )}
         </div>
       </div>
     </Section>
