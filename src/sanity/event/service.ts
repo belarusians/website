@@ -5,7 +5,7 @@ import { sanityFetch } from '../client';
 import { EventSchema } from '../../../sanity.config';
 
 export async function getAllEvents(lang: Lang): Promise<EventMeta[]> {
-  return sanityFetch<EventSchema[]>(
+  return sanityFetch<EventMeta[]>(
     `*[_type == "event" && language == "${lang}"] | order(eventDate desc){ "slug": slug.current, eventDate, title, location }`,
     ['event'],
   );
@@ -17,7 +17,7 @@ export async function getAllEventsSlugs(lang: Lang): Promise<{ slug: string }[]>
   ]);
 }
 
-export type EventMeta = Pick<EventSchema, 'slug' | 'eventDate' | 'title' | 'location'>;
+export type EventMeta = Pick<Event, 'slug' | 'eventDate' | 'title' | 'location'>;
 
 export async function getFutureEventMetas(lang: Lang): Promise<EventMeta[]> {
   return sanityFetch<EventMeta[]>(

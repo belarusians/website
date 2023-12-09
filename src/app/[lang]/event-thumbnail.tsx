@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import { Lang } from '../../components/types';
 import { EventMeta } from '../../sanity/event/service';
+import { isEventPassed } from '../../sanity/event/utils';
 
 export interface EventThumbnailProps {
   event: EventMeta;
@@ -11,7 +12,7 @@ export interface EventThumbnailProps {
 }
 
 export function EventThumbnail(props: EventThumbnailProps) {
-  const isPassed = new Date(props.event.eventDate).getTime() < Date.now();
+  const isPassed = isEventPassed(props.event);
 
   return (
     <Link

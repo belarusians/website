@@ -1,12 +1,13 @@
 import { Metadata, ResolvingMetadata } from 'next/types';
 
-import { Event, Lang } from '../../../../components/types';
+import { Lang, Event } from '../../../../components/types';
 import { Section } from '../../../../components/section';
 import { EventArticle } from './event-article';
 import { CommonPageParams, PageSearchParams } from '../../../types';
 import { useTranslation } from '../../../i18n';
 import { getAllEventsSlugs, getEventBySlug } from '../../../../sanity/event/service';
 import { urlForImage } from '../../../../sanity/lib/image';
+import { isEventPassed } from '../../../../sanity/event/utils';
 
 type EventPageParams = CommonPageParams & {
   params: {
@@ -28,6 +29,7 @@ export default async function EventPage({ params, searchParams }: EventPageParam
       <EventArticle
         lang={params.lang}
         event={event}
+        pastEvent={isEventPassed(event)}
         defaultTicketsLabel={t('buy-ticket')}
         defaultTipsLabel={t('donate')}
         paymentSucceeded={paymentSucceeded}
@@ -40,7 +42,7 @@ export default async function EventPage({ params, searchParams }: EventPageParam
 async function getData(slug: string, lang: Lang): Promise<Event | undefined> {
   // TODO: find more clean solution
   const decodedSlug = decodeURIComponent(slug);
-  return await getEventBySlug(lang, decodedSlug);
+  return getEventBySlug(lang, decodedSlug);
 }
 
 export async function generateMetadata({ params }: EventPageParams, parent: ResolvingMetadata): Promise<Metadata> {

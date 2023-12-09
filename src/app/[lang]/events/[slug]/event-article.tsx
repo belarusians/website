@@ -1,10 +1,11 @@
 import { MaraImage } from '../../../../components/image';
 import { Event, Lang } from '../../../../components/types';
-import { Button } from '../../../../components/button';
+import { Button, ButtonProps } from '../../../../components/button';
 
 interface ArticleProps {
   event: Event;
   lang: Lang;
+  pastEvent: boolean;
   defaultTicketsLabel: string;
   defaultPaymentSuccessText: string;
   defaultTipsLabel?: string;
@@ -27,13 +28,17 @@ export function EventArticle(props: ArticleProps) {
               size="large"
               link={props.event.ticketsLink}
               target="_blank"
+              disabled={props.pastEvent}
               label={props.event.ticketsLabel ?? props.defaultTicketsLabel}
               trackingName={`buy-${props.event.slug}-ticket-button`}
-              className="w-full bg-red-gradient animate-bg-rotation-fast bg-[length:350%_100%] text-white"
+              className={`${
+                props.pastEvent ? 'contrast-50' : 'animate-bg-rotation-fast bg-[length:350%_100%]'
+              } bg-red-gradient w-full text-white`}
             />
           )}
           {props.event.tipsLink && (
             <TipsButton
+              disabled={false}
               tipsLink={props.event.tipsLink}
               tipsLabel={props.event.tipsLabel ?? props.defaultTipsLabel}
               slug={props.event.slug}
@@ -59,9 +64,10 @@ function ThanksText(props: { text: string }) {
   );
 }
 
-function TipsButton(props: { tipsLink: string; tipsLabel?: string; slug: string }) {
+function TipsButton(props: { tipsLink: string; tipsLabel?: string; slug: string } & ButtonProps) {
   return (
     <Button
+      {...props}
       link={props.tipsLink}
       target="_blank"
       label={props.tipsLabel}
