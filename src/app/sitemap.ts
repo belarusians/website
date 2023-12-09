@@ -45,6 +45,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...generateTranslatedUrls('/donate'),
     ...generateTranslatedUrls('/join-us'),
     ...generateTranslatedUrls('/vacancies'),
+    ...generateTranslatedUrls('/events'),
     ...newsUrls,
     ...eventsUrls,
     ...vacanciesUrls,
