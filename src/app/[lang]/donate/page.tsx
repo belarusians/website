@@ -43,21 +43,21 @@ export default async function Page({ params, searchParams }: CommonPageParams & 
 const titleLang = {
   be: 'MARA шукае падтрымку!',
   nl: 'MARA zoekt ondersteuning!',
-  ru: 'МАРА ищет поддержку!',
 };
 
 const descriptionLang = {
   be: 'Нашыя культурныя і дабрачынныя праекты ажыццяўляюцца з дапамогай чальцоў і сяброў MÁRA. Дзякуючы вашаму ўкладу мы разам зможам рабіць яшчэ больш. Далучайцеся каб падтрымаць культурныя і дабрачынныя праекты MÁRA. Дзякуй!',
   nl: "Onze culturele en liefdadigheidsprojecten worden uitgevoerd met de hulp van MARA-leden en vrienden. Dankzij uw bijdrage kunnen we nog meer samen doen. Sluit u bij ons aan en steun MÁRA's culturele en liefdadigheidsprojecten. Bedankt!",
-  ru: 'Наши культурные и благотворительные проекты реализуются при помощи членов МАРА и друзей. Благодаря вашему вкладу мы сможем сделать еще больше вместе. Присоединяйтесь, чтобы поддержать культурные и благотворительные проекты MÁRA. Спасибо!',
 };
 
 export async function generateMetadata({ params }: CommonPageParams, parent: ResolvingMetadata): Promise<Metadata> {
   const parentMetadata = await parent;
+  const description = descriptionLang[params.lang];
+  const title = titleLang[params.lang];
 
   return {
-    title: titleLang[params.lang],
-    description: descriptionLang[params.lang],
+    title,
+    description,
     alternates: {
       canonical: `${parentMetadata.metadataBase}${Lang.be}/donate`,
       languages: {
@@ -69,16 +69,16 @@ export async function generateMetadata({ params }: CommonPageParams, parent: Res
     // @ts-ignore
     openGraph: {
       ...parentMetadata.openGraph,
-      title: titleLang[params.lang],
-      description: descriptionLang[params.lang],
+      title,
+      description,
       url: `${params.lang}/donate`,
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     twitter: {
       ...parentMetadata.twitter,
-      title: titleLang[params.lang],
-      description: descriptionLang[params.lang],
+      title,
+      description,
     },
   };
 }

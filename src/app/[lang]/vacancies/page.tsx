@@ -45,21 +45,21 @@ async function getData(lang: Lang): Promise<Vacancy[]> {
 const titleLang = {
   be: 'Мара шукае кадры!',
   nl: 'Mara zoekt personeel!',
-  ru: 'Мара ищет кадры!',
 };
 
 const descriptionLang = {
   be: 'Ты хочаш дапамагчы нашай Мары? Можа быць мы шукаем менавіта цябе! Глядзі нашыя вакансіі і пішы нам, калі знойдзеш нешта для сябе.',
   nl: 'Wil jij onze Mara helpen? Misschien zijn wij wel op zoek naar jou! Bekijk onze vacatures en schrijf ons als je iets voor jezelf vindt.',
-  ru: 'Ты хочешь помочь нашей Маре? Может быть мы ищем именно тебя! Смотри наши вакансии и пиши нам, если найдёшь что-то для себя.',
 };
 
 export async function generateMetadata({ params }: CommonPageParams, parent: ResolvingMetadata): Promise<Metadata> {
   const parentMetadata = await parent;
+  const description = descriptionLang[params.lang];
+  const title = titleLang[params.lang];
 
   return {
-    title: titleLang[params.lang],
-    description: descriptionLang[params.lang],
+    title,
+    description,
     alternates: {
       canonical: `${parentMetadata.metadataBase}${Lang.be}/vacancies`,
       languages: {
@@ -71,16 +71,16 @@ export async function generateMetadata({ params }: CommonPageParams, parent: Res
     // @ts-ignore
     openGraph: {
       ...parentMetadata.openGraph,
-      title: titleLang[params.lang],
-      description: descriptionLang[params.lang],
+      title,
+      description,
       url: `${params.lang}/vacancies`,
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     twitter: {
       ...parentMetadata.twitter,
-      title: titleLang[params.lang],
-      description: descriptionLang[params.lang],
+      title,
+      description,
     },
   };
 }

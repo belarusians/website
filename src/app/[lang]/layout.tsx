@@ -33,10 +33,12 @@ const langToLocale = {
 
 export async function generateMetadata({ params }: CommonPageParams, parent: ResolvingMetadata): Promise<Metadata> {
   const parentMetadata = await parent;
+  const description = descriptionLang[params.lang];
+  const title = titleLang[params.lang];
 
   return {
-    title: titleLang[params.lang],
-    description: descriptionLang[params.lang],
+    title,
+    description,
     alternates: {
       canonical: `${parentMetadata.metadataBase}${Lang.be}`,
       languages: {
@@ -48,8 +50,8 @@ export async function generateMetadata({ params }: CommonPageParams, parent: Res
     // @ts-ignore
     openGraph: {
       ...parentMetadata.openGraph,
-      title: titleLang[params.lang],
-      description: descriptionLang[params.lang],
+      title,
+      description,
       locale: langToLocale[params.lang],
       url: `${parentMetadata.metadataBase}${params.lang}`,
     },
@@ -58,7 +60,7 @@ export async function generateMetadata({ params }: CommonPageParams, parent: Res
     twitter: {
       ...parentMetadata.twitter,
       title: titleLang[params.lang],
-      description: descriptionLang[params.lang],
+      description,
     },
   };
 }
