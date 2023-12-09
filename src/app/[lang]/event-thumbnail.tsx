@@ -10,16 +10,18 @@ export interface EventThumbnailProps {
   lang: Lang;
 }
 
-export function FutureEventThumbnail(props: EventThumbnailProps & { className?: string }): JSX.Element {
+export function EventThumbnail(props: EventThumbnailProps) {
+  const isPassed = new Date(props.event.eventDate).getTime() < Date.now();
+
   return (
     <Link
-      className="bg-white transition-all shadow-lg hover:shadow-xl hover:scale-101 rounded-md p-4 w-full md:w-60"
+      className="bg-white transition-all shadow-lg hover:shadow-xl hover:scale-101 rounded-md p-4 w-full md:max-w-xs"
       href={`/${props.lang}/events/${props.event.slug}`}
     >
       <div className="">
-        <p className="text-grey">{clientSideDate(props.event.eventDate, props.lang)}</p>
-        <h3 className="my-3 font-bold">{props.event.title}</h3>
-        <p className="text-grey">
+        <p className={isPassed ? 'text-gray-300' : 'text-gray-500'}>{renderDate(props.event.eventDate, props.lang)}</p>
+        <p className={`my-3 font-bold ${isPassed ? 'text-gray-400' : 'text-red-500'}`}>{props.event.title}</p>
+        <p className={isPassed ? 'text-gray-300' : 'text-gray-500'}>
           <FontAwesomeIcon className="pr-2" icon={faLocationDot} />
           {props.event.location}
         </p>
@@ -28,7 +30,7 @@ export function FutureEventThumbnail(props: EventThumbnailProps & { className?: 
   );
 }
 
-function clientSideDate(eventString: string, locale: string): string {
+function renderDate(eventString: string, locale: Lang): string {
   const eventDate = new Date(eventString);
   const eventDateString = eventDate.toLocaleDateString(locale, {
     year: 'numeric',

@@ -44,9 +44,14 @@ module.exports = {
     fontFamily: {},
     extend: {
       colors: {
-        red: '#ed1c24',
-        'red-shade': '#af0000',
-        white: '#ffffff',
+        red: {
+          600: '#af0000',
+          DEFAULT: '#ed1c24',
+          500: '#ed1c24',
+        },
+        white: {
+          DEFAULT: '#ffffff',
+        },
         'white-shade': '#f6f6f6',
         black: '#231f20',
         'black-tint': '#333333',
