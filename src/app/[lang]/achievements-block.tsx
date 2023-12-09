@@ -35,11 +35,11 @@ export function AchievementsBlock(props: { lang: Lang }) {
   }
   return (
     <div className="flex items-center gap-1 md:gap-2 text-white flex-col">
-      <p className="text-5xl md:text-7xl">
+      <p className="text-4xl md:text-7xl">
         <span ref={counterRef}></span>
         <span>€</span>
       </p>
-      <p className="text-xl md:text-2xl text-center">{t('counter-text')}</p>
+      <p className="text-lg md:text-2xl text-center">{t('counter-text')}</p>
     </div>
   );
 }

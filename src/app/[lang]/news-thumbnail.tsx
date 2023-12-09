@@ -23,13 +23,13 @@ export async function NewsThumbnail(props: NewsThumbnailProps) {
         />
         <div className="p-2 z-40 mt-auto backdrop-blur-md rounded-b-md text-white uppercase">
           <span
-            className={
+            className={`text-sm ${
               props.size === 'small'
-                ? 'text-sm md:text-base lg:text-xl'
+                ? 'md:text-base lg:text-xl'
                 : props.size === 'medium'
-                  ? 'text-base md:text-xl lg:text-2xl'
-                  : 'text-xl md:text-2xl'
-            }
+                ? 'md:text-xl lg:text-2xl'
+                : 'md:text-2xl'
+            }`}
           >
             {props.news.title}
           </span>

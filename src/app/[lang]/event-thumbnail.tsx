@@ -20,7 +20,7 @@ export function EventThumbnail(props: EventThumbnailProps) {
       className="bg-white transition-all shadow-lg hover:shadow-xl hover:scale-101 rounded-md p-2 md:p-4 w-full md:max-w-xs"
       href={`/${props.lang}/events/${props.event.slug}`}
     >
-      <div className="flex flex-col gap-2 md:gap-3 h-full">
+      <div className="flex flex-col gap-2 md:gap-3 h-full text-sm md:text-base">
         <p className={isPassed ? 'text-gray-300' : 'text-gray-500'}>
           {renderDate(props.event.eventDate, props.lang, props.displayYear)}
         </p>
