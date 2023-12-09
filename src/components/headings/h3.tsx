@@ -6,5 +6,9 @@ interface H3Props {
 }
 
 export default function H3(props: H3Props): React.JSX.Element {
-  return <h3 className={`text-lg font-light md:text-xl mb-2 ${props.className ?? ''}`}>{props.children}</h3>;
+  return (
+    <h3 className={`text-lg md:text-xl lg:text-2xl xl:text-3xl font-light mb-2 ${props.className ?? ''}`}>
+      {props.children}
+    </h3>
+  );
 }

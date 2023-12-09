@@ -6,5 +6,13 @@ interface H1Props {
 }
 
 export default function H1(props: H1Props): React.JSX.Element {
-  return <h1 className={`text-xl font-medium md:text-3xl mb-2 ${props.className ?? ''}`}>{props.children}</h1>;
+  return (
+    <h1
+      className={`text-xl md:text-3xl lg:text-4xl xl:text-5xl leading-tight tracking-tight font-medium mb-4 ${
+        props.className ?? ''
+      }`}
+    >
+      {props.children}
+    </h1>
+  );
 }
