@@ -1,9 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { revalidateTag } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { parseBody } from 'next-sanity/webhook';
 
 export async function POST(request: NextRequest) {
-  const { isValidSignature, body } = await parseBody<{ _type: string }>(request, process.env.SANITY_REVALIDATE_SECRET);
+  const { isValidSignature, body } = await parseBody<{
+    _type: string,
+    slug?: string
+  }>(request, process.env.SANITY_REVALIDATE_SECRET);
 
   if (!isValidSignature) {
     return new NextResponse(JSON.stringify({ message: 'Invalid Token' }), {
@@ -28,6 +31,17 @@ export async function POST(request: NextRequest) {
   console.log(`revalidating tag ${body._type} requested`);
   try {
     revalidateTag(body._type);
+    revalidatePath('/', 'page');
+    revalidatePath('/[lang]', 'page');
+
+    if (body.slug && body._type === 'event') {
+      console.log(`Revalidating tag events with slug ${body.slug}`);
+      revalidatePath('/[lang]/events/[slug]', 'page');
+    }
+    if (body.slug && body._type === 'news') {
+      console.log(`Revalidating tag news with slug ${body.slug}`);
+      revalidatePath('/[lang]/news/[slug]', 'page');
+    }
   } catch (e) {
     const message = `Tag ${body._type} revalidation failed`;
     console.log(message);
