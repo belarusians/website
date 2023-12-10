@@ -36,6 +36,9 @@ const news = defineType({
       name: 'backgroundUrl',
       title: 'Image',
       type: 'image',
+      options: {
+        hotspot: true,
+      },
       validation: (Rule) => Rule.required(),
     }),
     defineField({
