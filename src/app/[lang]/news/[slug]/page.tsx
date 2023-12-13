@@ -5,6 +5,7 @@ import { CommonPageParams } from '../../../types';
 import { Metadata, ResolvingMetadata } from 'next/types';
 import { getAllNewsSlugs, getNewsBySlug } from '../../../../sanity/news/service';
 import { urlForImage } from '../../../../sanity/lib/image';
+import H3 from '../../../../components/headings/h3';
 
 type NewsPageParams = {
   params: {
