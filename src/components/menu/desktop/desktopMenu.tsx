@@ -13,29 +13,29 @@ export function DesktopMenu({ lang }: { lang: Lang }) {
   return (
     <div className="flex items-center text-red gap-4 justify-between">
       <div
-        className="text-lg flex rounded-md text-white bg-white cursor-pointer shadow-lg divide-solid divide-light-grey divide-x animate-wobble-right">
-        <Dropdown className="p-1 md:p-2 lg:p-3 transition-shadow hover:shadow-tb-xl text-red"
+        className="text-lg flex rounded-md bg-white cursor-pointer shadow-lg divide-solid divide-light-grey divide-x animate-wobble-right">
+        <Dropdown className="p-1 md:p-2 lg:p-3 transition-shadow hover:shadow-tb-xl"
                   label={t('to-refugees')}
         >
           <div
             className="animate-t-fade-in absolute mt-2 z-10 divide-solid divide-light-grey divide-y flex flex-col bg-white shadow-lg rounded-md">
-            <Link href="https://t.me/belarusians_nl_bot" className="p-1 md:p-2 lg:p-3 transition-shadow hover:shadow-lrb-xl" target="_blank">
+            <Link href="https://t.me/belarusians_nl_bot" className="p-1 md:p-2 lg:p-3 transition-shadow no-underline hover:shadow-lrb-xl decoration-2" target="_blank">
               {t('refugees-bot')}
             </Link>
           </div>
         </Dropdown>
-        <Dropdown className="p-1 md:p-2 lg:p-3 transition-shadow hover:shadow-tb-xl text-red"
+        <Dropdown className="p-1 md:p-2 lg:p-3 transition-shadow no-underline hover:shadow-tb-xl text-red"
                   label={t('about-us')}
         >
           <div
             className="animate-t-fade-in absolute mt-2 z-10 divide-solid divide-light-grey divide-y flex flex-col bg-white shadow-lg rounded-md">
-            <Link className="p-1 md:p-2 lg:p-3 transition-shadow hover:shadow-lr-xl" href={`/${lang}/about-us`}>
+            <Link className="p-1 md:p-2 lg:p-3 transition-shadow no-underline hover:shadow-lr-xl" href={`/${lang}/about-us`}>
               {t('who-are-we')}
             </Link>
-            <Link className="p-1 md:p-2 lg:p-3 transition-shadow hover:shadow-lr-xl" href={`/${lang}/vacancies`}>
+            <Link className="p-1 md:p-2 lg:p-3 transition-shadow no-underline hover:shadow-lr-xl" href={`/${lang}/vacancies`}>
               {t('vacancies')}
             </Link>
-            <Link className="p-1 md:p-2 lg:p-3 transition-shadow hover:shadow-lrb-xl" href={`/${lang}/join-us`}
+            <Link className="p-1 md:p-2 lg:p-3 transition-shadow no-underline hover:shadow-lrb-xl" href={`/${lang}/join-us`}
                   data-umami-event="join-button"
             >
               {t('join-us')}
@@ -43,7 +43,7 @@ export function DesktopMenu({ lang }: { lang: Lang }) {
           </div>
         </Dropdown>
         <Link
-          className="p-1 md:p-2 lg:p-3 bg-[length:350%_100%] bg-beautiful-button font-normal rounded-r-md text-white transition-all hover:shadow-tbr-xl animate-bg-rotation-slow-wobble-right"
+          className="p-1 md:p-2 lg:p-3 bg-[length:350%_100%] bg-beautiful-button font-normal rounded-r-md text-white transition-shadow no-underline hover:shadow-tbr-xl animate-bg-rotation-slow-wobble-right"
           data-umami-event="donate-us"
           href={`/${lang}/donate`}
         >

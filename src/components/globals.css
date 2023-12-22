@@ -4,7 +4,7 @@
 
 @layer base {
     a {
-        @apply text-red;
+        @apply transition-colors underline decoration-transparent hover:decoration-red decoration-2;
     }
 
     blockquote {
