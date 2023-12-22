@@ -26,6 +26,13 @@ export async function getFutureEventMetas(lang: Lang): Promise<EventMeta[]> {
   );
 }
 
+export async function getLastNEventMetas(lang: Lang, top: number): Promise<EventMeta[]> {
+  return sanityFetch<EventMeta[]>(
+    `*[_type == "event" && language == "${lang}"] | order(eventDate asc){ "slug": slug.current, eventDate, title, location }[0...${top}]`,
+    ['event'],
+  );
+}
+
 export async function getEventBySlug(lang: Lang, slug: string): Promise<Event | undefined> {
   const schema = await sanityFetch<EventSchema>(
     `*[_type == "event" && slug.current == "${slug}" && language == "${lang}"][0]`,
