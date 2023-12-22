@@ -8,10 +8,10 @@ import { supportedLngs } from '../i18n/settings';
 
 export default function MainLayout({ children, params }: PropsWithChildren & CommonPageParams) {
   return (
-    <div className="flex flex-col justify-between min-h-screen">
+    <div className="flex flex-col gap-3 md:gap-4 lg:gap-6 min-h-screen">
       <Header lang={params.lang} className="lg:container" />
-      <main className="mb-auto">{children}</main>
-      <Footer className="lg:container" />
+      {children}
+      <Footer className="lg:container mt-auto" />
     </div>
   );
 }
