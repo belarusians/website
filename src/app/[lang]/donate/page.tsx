@@ -42,8 +42,8 @@ export default async function Page({ params, searchParams }: CommonPageParams & 
 }
 
 const titleLang = {
-  be: 'MARA шукае падтрымку!',
-  nl: 'MARA zoekt ondersteuning!',
+  be: 'Вы можаце падтрымаць MARA!',
+  nl: 'U kunt MARA steunen!',
 };
 
 const descriptionLang = {
