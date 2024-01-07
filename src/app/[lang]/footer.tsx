@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTelegram, faGithub, faTwitter, faFacebook, faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
 export function Footer(props: { className?: string }): React.JSX.Element {
+  const year = new Date().getFullYear();
   return (
     <footer
       className={`flex items-center justify-between bg-red md:bg-white-shade text-white md:text-black p-3 md:pb-4 lg:pb-8 ${props.className}`}
@@ -28,7 +29,7 @@ export function Footer(props: { className?: string }): React.JSX.Element {
         </a>
         <iframe className="hidden md:block" src="https://status.belarusians.nl/badge" width="250" height="30" frameBorder="0" scrolling="no"></iframe>
       </div>
-      <p className="text-sm font-light tracking-wider">Belarusians NL 2023</p>
+      <p className="text-sm font-light tracking-wider">Belarusians NL {year}</p>
     </footer>
   );
 }
