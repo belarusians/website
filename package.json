@@ -24,6 +24,7 @@
     "@portabletext/to-html": "^2.0.5",
     "@sanity/document-internationalization": "^2.0.2",
     "@sanity/image-url": "^1.0.2",
+    "@sanity/locale-be-by": "~1.0.0",
     "@sanity/vision": "^3.19.2",
     "@vercel/speed-insights": "~1.0.1",
     "aws-sdk": "~2.1354.0",

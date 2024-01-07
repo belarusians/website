@@ -6,6 +6,7 @@ import { visionTool } from '@sanity/vision';
 import { defineConfig, InferSchemaValues } from '@sanity-typed/types';
 import { deskTool } from 'sanity/desk';
 import { documentInternationalization } from '@sanity/document-internationalization';
+import { beBYLocale } from '@sanity/locale-be-by';
 
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import { apiVersion, dataset, projectId } from './src/sanity/env';
@@ -24,6 +25,7 @@ const config = defineConfig({
     templates: (prev) => prev.filter((template) => !['vacancy', 'event', 'news', 'feedback'].includes(template.id)),
   },
   plugins: [
+    beBYLocale(),
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     deskTool({
