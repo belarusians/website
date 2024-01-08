@@ -15,26 +15,23 @@ interface ArticleProps {
 }
 
 export function MaraImage(props: ArticleProps) {
-  const sanityImageProps = useNextSanityImage({
-    projectId,
-    dataset,
-  }, props.image);
+  const sanityImageProps = useNextSanityImage(
+    {
+      projectId,
+      dataset,
+    },
+    props.image,
+  );
 
   const imgProps: ImageProps = {
     alt: props.alt,
-    ...(
-      props.fill ? {
-        src: sanityImageProps.src,
-        loader: sanityImageProps.loader,
-      } : sanityImageProps
-    ),
+    ...(props.fill
+      ? {
+          src: sanityImageProps.src,
+          loader: sanityImageProps.loader,
+        }
+      : sanityImageProps),
   };
 
-  return (
-    <Image
-      className={props.className}
-      {...imgProps}
-      fill={props.fill}
-    />
-  );
+  return <Image className={props.className + ' w-full'} {...imgProps} fill={props.fill} />;
 }
