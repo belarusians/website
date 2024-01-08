@@ -8,7 +8,7 @@ const redColor = {
 const beautifulButtonColors = [
   {
     first: '#e1bc28',
-    second: '#28e14d',
+    second: '#21c241',
     third: '#115eb7',
     fourth: '#720cb6',
   },
@@ -20,8 +20,8 @@ const beautifulButtonColors = [
   },
   {
     first: '#2885e1',
-    second: '#28e163',
-    third: '#11b727',
+    second: '#24c758',
+    third: '#0e9a21',
     fourth: '#0c2eb6',
   },
   {
