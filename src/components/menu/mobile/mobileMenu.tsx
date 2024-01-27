@@ -18,7 +18,9 @@ export function MobileMenu({ lang }: { lang: Lang }) {
         className="mr-4 p-1 md:p-2 lg:p-3 bg-[length:350%_100%] bg-beautiful-button font-normal rounded-r-md text-white transition-all hover:shadow-tbr-xl animate-bg-rotation-slow-wobble"
         trackingName="join-button"
         link={`/${lang}/join-us`}
-      >{t('join-us')}</Button>
+      >
+        {t('join-us')}
+      </Button>
 
       <div
         className="flex flex-col justify-between top-[17px] left-[20px] h-[24px] w-[32px] cursor-pointer z-40"
@@ -52,14 +54,16 @@ function OpenedMenu({ lang }: { lang: Lang }) {
       <Link className="text-white text-xl py-4" href={`/${lang}/about-us`}>
         {t('about-us')}
       </Link>
+      <Link className="text-white text-xl py-4" href={`/${lang}/events`}>
+        {t('events')}
+      </Link>
+      {/*<Link className="text-white text-xl py-4" href={`/${lang}/news`}>*/}
+      {/*  {t('news')}*/}
+      {/*</Link>*/}
       <Link className="text-white text-xl py-4" href={`/${lang}/vacancies`}>
         {t('vacancies')}
       </Link>
-      <Link
-        className="text-white py-4 text-xl"
-        data-umami-event="donate-us"
-        href={`/${lang}/donate`}
-      >
+      <Link className="text-white py-4 text-xl" data-umami-event="donate-us" href={`/${lang}/donate`}>
         {t('donate-us')}
       </Link>
     </div>
