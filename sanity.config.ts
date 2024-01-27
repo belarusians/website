@@ -14,12 +14,16 @@ import vacancy from './src/sanity/vacancy/schema';
 import feedback from './src/sanity/feedback/schema';
 import event from './src/sanity/event/schema';
 import news from './src/sanity/news/schema';
+import { LogoIcon } from './src/components/header/logo-icon';
 
 const config = defineConfig({
   basePath: '/studio',
   title: 'MARA - Studio',
   projectId,
   dataset,
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  icon: LogoIcon,
   schema: {
     types: [vacancy, event, news, feedback],
     templates: (prev) => prev.filter((template) => !['vacancy', 'event', 'news', 'feedback'].includes(template.id)),

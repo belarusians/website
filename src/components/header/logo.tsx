@@ -1,4 +1,8 @@
-export function Logo(props: { className?: string }): JSX.Element {
+interface Props {
+  className?: string;
+}
+
+export function Logo(props: Props) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 231.88 60.74" className={props.className}>
       <g className="fill-white md:fill-red">
