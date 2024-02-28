@@ -4,7 +4,7 @@
   "private": true,
   "description": "belarusians-nl",
   "engines": {
-    "node": "^18.17"
+    "node": "^20"
   },
   "scripts": {
     "dev": "NODE_OPTIONS='--inspect' next dev",
@@ -18,6 +18,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.523.0",
     "@fortawesome/fontawesome-svg-core": "~6.2.0",
     "@fortawesome/free-brands-svg-icons": "~6.2.0",
     "@fortawesome/free-solid-svg-icons": "~6.2.0",
@@ -28,7 +29,6 @@
     "@sanity/locale-be-by": "~1.1.2",
     "@sanity/vision": "^3.30.1",
     "@vercel/speed-insights": "~1.0.1",
-    "aws-sdk": "~2.1354.0",
     "i18next": "~22.4.15",
     "i18next-resources-to-backend": "^1.1.4",
     "next": "~14.1.1",

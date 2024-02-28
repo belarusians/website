@@ -1,5 +1,7 @@
 credentials.txt
 coverage/
+dumps/
+production-export-2024-01-29t11-21-16-776z/
 
 # Created by https://www.toptal.com/developers/gitignore/api/intellij
 # Edit at https://www.toptal.com/developers/gitignore?templates=intellij
