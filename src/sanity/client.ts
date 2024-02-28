@@ -9,9 +9,13 @@ export const client = createClient({
   useCdn,
 });
 
-export function sanityFetch<QueryResponse>(query: string, tags: string[] = []) {
-  return client.fetch<QueryResponse>(query, {}, {
-    cache: 'force-cache',
-    next: { tags },
-  });
+export function sanityFetch<QueryResponse>(query: string, tags: string[] = []): Promise<QueryResponse> {
+  return client.fetch<QueryResponse>(
+    query,
+    {},
+    {
+      cache: 'force-cache',
+      next: { tags },
+    },
+  );
 }
