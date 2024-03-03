@@ -1,12 +1,11 @@
-import { defineArrayMember, defineField, defineType } from '@sanity-typed/types';
+import { defineField, defineType } from '@sanity-typed/types';
 import { CalendarIcon } from '@sanity/icons';
-
-import { isUniqueOtherThanLanguage } from '../lib/validation';
 
 const event = defineType({
   name: 'event',
-  title: 'Event',
+  title: 'Імпрэзы',
   type: 'document',
+  options: {},
   icon: CalendarIcon,
   fields: [
     defineField({
@@ -14,22 +13,20 @@ const event = defineType({
       title: 'ID',
       type: 'slug',
       options: {
-        source: 'title',
-        isUnique: isUniqueOtherThanLanguage,
+        source: 'title.be',
       },
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'title',
       title: 'Title',
-      type: 'string',
+      type: 'localeString',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'description',
       title: 'Description',
-      type: 'text',
-      rows: 5,
+      type: 'localeText',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -44,12 +41,7 @@ const event = defineType({
     defineField({
       name: 'content',
       title: 'Content',
-      type: 'array',
-      of: [
-        defineArrayMember({
-          type: 'block',
-        }),
-      ],
+      type: 'localeContent',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -72,7 +64,7 @@ const event = defineType({
     defineField({
       name: 'ticketsLabel',
       title: 'Tickets button text',
-      type: 'string',
+      type: 'localeString',
     }),
     defineField({
       name: 'tipsLink',
@@ -82,23 +74,27 @@ const event = defineType({
     defineField({
       name: 'tipsLabel',
       title: 'Tips button text',
-      type: 'string',
+      type: 'localeString',
     }),
     defineField({
       name: 'successText',
       title: 'Payment success message',
       description: 'Message shown instead of tickets button after successful payment',
-      type: 'string',
-    }),
-    defineField({
-      // should match 'languageField' plugin configuration setting, if customized
-      name: 'language',
-      type: 'string',
-      readOnly: true,
-      hidden: true,
-      validation: (Rule) => Rule.required(),
+      type: 'localeString',
     }),
   ],
+  preview: {
+    select: {
+      title: 'title.be',
+      media: 'backgroundUrl',
+    },
+    prepare({ title, media }) {
+      return {
+        title,
+        media,
+      };
+    },
+  },
 });
 
 export default event;

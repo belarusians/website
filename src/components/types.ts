@@ -1,12 +1,18 @@
-import { CleanEventSchema, CleanNewsSchema } from '../../sanity.config';
+import { EventSchema, CleanNewsSchema } from '../../sanity.config';
 
-export type Event = Modify<
-  CleanEventSchema,
+export type EventWithoutHTMLContent = Modify<
+  EventSchema,
   {
     slug: string;
-    content: string;
+    title: string;
+    description: string;
+    ticketsLabel?: string;
+    tipsLabel?: string;
+    successText?: string;
   }
 >;
+
+export type Event = Modify<EventWithoutHTMLContent, { content: string }>;
 
 export type News = Modify<
   CleanNewsSchema,

@@ -9,9 +9,10 @@ export async function getAllNewsSlugs(lang: Lang): Promise<{ slug: string }[]> {
   return client.fetch(`*[_type == "news" && language == "${lang}"]{ "slug": slug.current }`);
 }
 
-const { signal } = new AbortController();
-
-export type NewsMeta = Pick<NewsSchema, 'slug' | 'title' | 'backgroundUrl' | 'featuredMain' | 'featured' | 'publishingDate'>;
+export type NewsMeta = Pick<
+  NewsSchema,
+  'slug' | 'title' | 'backgroundUrl' | 'featuredMain' | 'featured' | 'publishingDate'
+>;
 
 export async function getNotFeaturedNewsMetas(lang: Lang, top: number): Promise<NewsMeta[]> {
   const metas: NewsSchema[] = await client.fetch(
@@ -42,7 +43,6 @@ export async function getMainFeaturedNewsMeta(lang: Lang): Promise<NewsMeta> {
         featured,
         publishingDate
       }[0]`,
-    { signal },
   );
 
   return meta;
@@ -60,16 +60,13 @@ export async function getFeaturedNewsMetas(lang = Lang.be, top = 2): Promise<New
         featured,
         publishingDate
       }[0...${top}]`,
-    { signal },
   );
 
   return metas;
 }
 
 export async function getNewsBySlug(lang: Lang, slug: string): Promise<News | undefined> {
-  const schema = await client.fetch(`*[_type == "news" && slug.current == "${slug}" && language == "${lang}"][0]`, {
-    signal,
-  });
+  const schema = await client.fetch(`*[_type == "news" && slug.current == "${slug}" && language == "${lang}"][0]`);
   if (!schema) {
     return undefined;
   }
