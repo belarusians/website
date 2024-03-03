@@ -1,53 +1,64 @@
 import { toHTML } from '@portabletext/to-html';
 
-import { Event, Lang } from '../../components/types';
+import { Event, EventWithoutHTMLContent, Lang, Modify } from '../../components/types';
 import { sanityFetch } from '../client';
-import { EventSchema } from '../../../sanity.config';
 
 export async function getAllEvents(lang: Lang): Promise<EventMeta[]> {
   return sanityFetch<EventMeta[]>(
-    `*[_type == "event" && language == "${lang}"] | order(eventDate desc){ "slug": slug.current, eventDate, title, location }`,
+    `*[_type == "event"] | order(eventDate desc){ "slug": slug.current, eventDate, "title": title.${lang}, location }`,
     ['event'],
   );
 }
 
-export async function getAllEventsSlugs(lang: Lang): Promise<{ slug: string }[]> {
-  return sanityFetch<{ slug: string }[]>(`*[_type == "event" && language == "${lang}"]{ "slug": slug.current }`, [
-    'event',
-  ]);
+export async function getAllEventsSlugs(): Promise<{ slug: string }[]> {
+  return sanityFetch<{ slug: string }[]>('*[_type == "event"]{ "slug": slug.current }', ['event']);
 }
 
-export type EventMeta = Pick<Event, 'slug' | 'eventDate' | 'title' | 'location'>;
+export type EventMeta = Modify<
+  Pick<Event, 'slug' | 'eventDate' | 'title' | 'location'>,
+  {
+    title: string;
+  }
+>;
 
 export async function getFutureEventMetas(lang: Lang): Promise<EventMeta[]> {
   return sanityFetch<EventMeta[]>(
-    `*[_type == "event" && eventDate >= now() && language == "${lang}"] | order(eventDate asc){ "slug": slug.current, eventDate, title, location }`,
+    `*[_type == "event" && eventDate >= now()] | order(eventDate asc){
+        "slug": slug.current,
+        "title": title.${lang},
+        eventDate,
+        location
+      }`,
     ['event'],
   );
 }
 
 export async function getLastNEventMetas(lang: Lang, top: number): Promise<EventMeta[]> {
   return sanityFetch<EventMeta[]>(
-    `*[_type == "event" && language == "${lang}"] | order(eventDate asc){ "slug": slug.current, eventDate, title, location }[0...${top}]`,
+    `*[_type == "event"] | order(eventDate asc){ "slug": slug.current, eventDate, "title": title.${lang}, location }[0...${top}]`,
     ['event'],
   );
 }
 
 export async function getEventBySlug(lang: Lang, slug: string): Promise<Event | undefined> {
-  const schema = await sanityFetch<EventSchema>(
-    `*[_type == "event" && slug.current == "${slug}" && language == "${lang}"][0]`,
+  const schema = await sanityFetch<EventWithoutHTMLContent>(
+    `*[_type == "event" && slug.current == "${slug}"]{
+      ...,
+      "slug": slug.current,
+      "title": title.${lang},
+      "description": description.${lang},
+      "content": content.${lang},
+      "ticketsLabel": ticketsLabel.${lang},
+      "tipsLabel": tipsLabel.${lang},
+      "successText": successText.${lang},
+    }[0]`,
     ['event'],
   );
   if (!schema) {
     return undefined;
   }
-  return mapSchemaToEvent(schema);
-}
-
-function mapSchemaToEvent(event: EventSchema): Event {
   return {
-    ...event,
-    slug: event.slug.current!,
-    content: toHTML(event.content),
+    ...schema,
+    content: toHTML(schema.content),
   };
 }
