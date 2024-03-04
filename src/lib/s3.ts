@@ -6,11 +6,14 @@ export async function saveEmail(email: string) {
     throw new Error('S3_BUCKET env variable should be set');
   }
 
-  if (!process.env.ACCESS_KEY_AWS || !process.env.SECRET_KEY_AWS || !process.env.REGION_AWS) {
+  if (!process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY || !process.env.REGION_AWS) {
     throw new Error('AWS credentials variable should be set');
   }
 
-  const s3 = new S3({ region: process.env.REGION_AWS });
+  const s3 = new S3({
+    region: process.env.REGION_AWS,
+    credentials: { accessKeyId: process.env.AWS_ACCESS_KEY_ID, secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY },
+  });
   const Key = randomString(20);
   const params: PutObjectCommandInput = {
     Bucket: process.env.S3_BUCKET,
@@ -27,11 +30,14 @@ export async function saveVacancyApplication({ contact, additionalInfo, id }: Va
     throw new Error('S3_VACANCY_BUCKET env variable should be set');
   }
 
-  if (!process.env.ACCESS_KEY_AWS || !process.env.SECRET_KEY_AWS || !process.env.REGION_AWS) {
+  if (!process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY || !process.env.REGION_AWS) {
     throw new Error('AWS credentials variable should be set');
   }
 
-  const s3 = new S3({ region: process.env.REGION_AWS });
+  const s3 = new S3({
+    region: process.env.REGION_AWS,
+    credentials: { accessKeyId: process.env.AWS_ACCESS_KEY_ID, secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY },
+  });
   const Key = randomString(20);
   const params: PutObjectCommandInput = {
     Bucket: process.env.S3_VACANCY_BUCKET,
