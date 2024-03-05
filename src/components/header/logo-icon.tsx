@@ -1,10 +1,4 @@
-import { LogoProps } from 'sanity';
-
-interface Props extends LogoProps {
-  className?: string;
-}
-
-export function LogoIcon(props: Props) {
+export function LogoIcon() {
   return (
     <svg
       version="1.1"
