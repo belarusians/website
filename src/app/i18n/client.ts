@@ -1,7 +1,7 @@
 'use client';
 
 import i18next from 'i18next';
-import { initReactI18next, useTranslation as useTranslationOrg, UseTranslationOptions } from 'react-i18next';
+import { initReactI18next, useTranslation as useTranslationOrg } from 'react-i18next';
 import resourcesToBackend from 'i18next-resources-to-backend';
 import { defaultNS, getOptions } from './settings';
 
@@ -17,9 +17,9 @@ i18next
     },
   });
 
-export function useTranslation(lang: string, ns = defaultNS, options: UseTranslationOptions = {}) {
+export function useTranslation(lang: string, ns = defaultNS) {
   if (i18next.resolvedLanguage !== lang) {
     i18next.changeLanguage(lang);
   }
-  return useTranslationOrg(ns, options);
+  return useTranslationOrg(ns);
 }
