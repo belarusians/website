@@ -52,7 +52,7 @@ export function DesktopMenu({ lang }: { lang: Lang }) {
         </Dropdown>
         <Link
           className="p-1 md:p-2 lg:p-3 transition-shadow no-underline hover:shadow-tb-xl text-red"
-          href={`${lang}/events`}
+          href={`/${lang}/events`}
         >
           {t('events')}
         </Link>
