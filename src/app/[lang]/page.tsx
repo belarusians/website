@@ -8,12 +8,7 @@ import { NewsBlock } from './news-block';
 import { EventsBlock } from './events-block';
 import { CommonPageParams } from '../types';
 import { useTranslation } from '../i18n';
-import {
-  getFutureEventMetas,
-  EventMeta,
-  getLastNEventMetas,
-  getFutureRescheduledEventMetas,
-} from '../../sanity/event/service';
+import { getFutureEventMetas, EventMeta, getLastNEventMetas } from '../../sanity/event/service';
 import {
   getFeaturedNewsMetas,
   getMainFeaturedNewsMeta,
@@ -85,9 +80,7 @@ function hasTwoSecondaryNews(secondaryNews: NewsMeta[]): secondaryNews is [NewsM
 }
 
 async function getData(lang: Lang): Promise<MainPageProps> {
-  const events: EventMeta[] = [];
-  events.push(...(await getFutureEventMetas(lang)));
-  events.push(...(await getFutureRescheduledEventMetas(lang)));
+  const events = await getFutureEventMetas(lang);
   if (events.length === 0) {
     events.push(...(await getLastNEventMetas(lang, 2)));
   }
