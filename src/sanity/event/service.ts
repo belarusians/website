@@ -23,22 +23,9 @@ export async function getAllEventsSlugs(): Promise<{ slug: string }[]> {
 
 export type EventMeta = Pick<Event, 'slug' | 'eventDate' | 'rescheduled' | 'rescheduledDate' | 'title' | 'location'>;
 
-// TODO: should return rescheduled events as well
 export async function getFutureEventMetas(lang: Lang): Promise<EventMeta[]> {
   return sanityFetch<EventMeta[]>(
-    `*[_type == "event" && eventDate >= now()] | order(eventDate asc){
-        "slug": slug.current,
-        "title": title.${lang},
-        eventDate,
-        location
-      }`,
-    ['event'],
-  );
-}
-
-export async function getFutureRescheduledEventMetas(lang: Lang): Promise<EventMeta[]> {
-  return sanityFetch<EventMeta[]>(
-    `*[_type == "event" && rescheduled && (rescheduledDate >= now() || true)] | order(rescheduledDate asc){
+    `*[_type == "event" && (eventDate >= now() || rescheduled && (rescheduledDate >= now() || true))] | order(eventDate asc){
         "slug": slug.current,
         "title": title.${lang},
         eventDate,
