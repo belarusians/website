@@ -87,14 +87,14 @@ export async function generateMetadata(): Promise<Metadata> {
       type: 'website',
       images: [
         {
-          url: 'https://www.belarusians.nl/logo/og-winter-image.png',
+          url: 'https://www.belarusians.nl/logo/og-image.png',
           width: 1076, // 574
           height: 568, // 301
         },
       ],
     },
     twitter: {
-      images: ['https://www.belarusians.nl/logo/og-winter-image.png'],
+      images: ['https://www.belarusians.nl/logo/og-image.png'],
       card: 'summary_large_image',
     },
     other: {
