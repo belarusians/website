@@ -1,11 +1,18 @@
 import { toHTML } from '@portabletext/to-html';
 
-import { Event, EventWithoutHTMLContent, Lang, Modify } from '../../components/types';
+import { Event, EventWithoutHTMLContent, Lang } from '../../components/types';
 import { sanityFetch } from '../client';
 
 export async function getAllEvents(lang: Lang): Promise<EventMeta[]> {
   return sanityFetch<EventMeta[]>(
-    `*[_type == "event"] | order(eventDate desc){ "slug": slug.current, eventDate, "title": title.${lang}, location }`,
+    `*[_type == "event"] | order(eventDate desc){ 
+      "slug": slug.current,
+       eventDate,
+       rescheduledDate,
+       rescheduled,
+       "title": title.${lang},
+        location
+     }`,
     ['event'],
   );
 }
@@ -14,19 +21,29 @@ export async function getAllEventsSlugs(): Promise<{ slug: string }[]> {
   return sanityFetch<{ slug: string }[]>('*[_type == "event"]{ "slug": slug.current }', ['event']);
 }
 
-export type EventMeta = Modify<
-  Pick<Event, 'slug' | 'eventDate' | 'title' | 'location'>,
-  {
-    title: string;
-  }
->;
+export type EventMeta = Pick<Event, 'slug' | 'eventDate' | 'rescheduled' | 'rescheduledDate' | 'title' | 'location'>;
 
+// TODO: should return rescheduled events as well
 export async function getFutureEventMetas(lang: Lang): Promise<EventMeta[]> {
   return sanityFetch<EventMeta[]>(
     `*[_type == "event" && eventDate >= now()] | order(eventDate asc){
         "slug": slug.current,
         "title": title.${lang},
         eventDate,
+        location
+      }`,
+    ['event'],
+  );
+}
+
+export async function getFutureRescheduledEventMetas(lang: Lang): Promise<EventMeta[]> {
+  return sanityFetch<EventMeta[]>(
+    `*[_type == "event" && rescheduled && (rescheduledDate >= now() || true)] | order(rescheduledDate asc){
+        "slug": slug.current,
+        "title": title.${lang},
+        eventDate,
+        rescheduled,
+        rescheduledDate,
         location
       }`,
     ['event'],

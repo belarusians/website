@@ -10,10 +10,12 @@ export interface EventThumbnailProps {
   event: EventMeta;
   lang: Lang;
   displayYear?: boolean;
+  tbaText?: string;
 }
 
 export function EventThumbnail(props: EventThumbnailProps) {
   const isPassed = isEventPassed(props.event);
+  const isRescheduled = props.event.rescheduled;
 
   return (
     <Link
@@ -21,9 +23,18 @@ export function EventThumbnail(props: EventThumbnailProps) {
       href={`/${props.lang}/events/${props.event.slug}`}
     >
       <div className="flex flex-col gap-2 md:gap-3 h-full text-sm md:text-base">
-        <p className={isPassed ? 'text-gray-300' : 'text-gray-500'}>
-          {renderDate(props.event.eventDate, props.lang, props.displayYear)}
-        </p>
+        <div>
+          <p className={(isPassed ? 'text-gray-300' : 'text-gray-500') + ' ' + (isRescheduled ? 'line-through' : '')}>
+            {renderDate(props.event.eventDate, props.lang, props.displayYear)}
+          </p>
+          {isRescheduled && (
+            <p className="text-red-500">
+              {props.event.rescheduledDate
+                ? renderDate(props.event.rescheduledDate, props.lang, props.displayYear)
+                : props.tbaText}
+            </p>
+          )}
+        </div>
         <p className={`font-bold ${isPassed ? 'text-gray-400' : 'text-red-500'}`}>{props.event.title}</p>
         <p className={`mt-auto ${isPassed ? 'text-gray-300' : 'text-gray-500'}`}>
           <FontAwesomeIcon className="pr-2" icon={faLocationDot} />
