@@ -34,6 +34,7 @@ export default async function EventPage({ params, searchParams }: EventPageParam
         defaultTipsLabel={t('donate')}
         paymentSucceeded={paymentSucceeded}
         defaultPaymentSuccessText={t('success-payment-text')}
+        rescheduledEventText={t('rescheduled-event-text')}
       />
     </Section>
   );

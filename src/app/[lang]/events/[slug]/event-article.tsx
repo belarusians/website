@@ -8,6 +8,7 @@ interface ArticleProps {
   pastEvent: boolean;
   defaultTicketsLabel: string;
   defaultPaymentSuccessText: string;
+  rescheduledEventText?: string;
   defaultTipsLabel?: string;
   paymentSucceeded?: boolean;
 }
@@ -46,7 +47,12 @@ export function EventArticle(props: ArticleProps) {
           )}
         </div>
       </div>
-      <div className="md:basis-2/3 lg:basis-3/5">
+      <div className="md:basis-2/3 lg:basis-3/5 flex flex-col gap-2 mg:gap-3 lg:gap-4">
+        {props.event.rescheduled && (
+          <div className="rounded-md bg-white shadow-lg p-4 lg:p-8 text-red-500 text-2xl">
+            {props.rescheduledEventText}
+          </div>
+        )}
         <div
           className="rounded-md bg-white shadow-lg p-4 lg:p-8 prose-sm md:prose lg:prose-lg prose-hr:my-4 prose-a:text-red prose-a:break-words prose-blockquote:border-l-2 prose-blockquote:border-red"
           dangerouslySetInnerHTML={{ __html: props.event.content }}
