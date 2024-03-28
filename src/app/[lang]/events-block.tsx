@@ -9,6 +9,7 @@ export interface EventsBlockProps {
   headingText: string;
   events: EventMeta[];
   lang: Lang;
+  tbaText: string;
 }
 
 export function EventsBlock(props: EventsBlockProps) {
@@ -24,7 +25,7 @@ export function EventsBlock(props: EventsBlockProps) {
       </H2>
       <div className="grid grid-cols-2 md:flex md:flex-row justify-center gap-3 md:gap-4">
         {props.events.map((event, i) => (
-          <EventThumbnail lang={props.lang} event={event} key={i} displayYear={false} />
+          <EventThumbnail lang={props.lang} event={event} key={i} displayYear={false} tbaText={props.tbaText} />
         ))}
       </div>
     </>

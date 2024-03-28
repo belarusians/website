@@ -21,7 +21,7 @@ export default async function EventsPage({ params }: CommonPageParams) {
         {Object.entries(grouped)
           .reverse()
           .map(([year, events]) => (
-            <Year key={year} year={year} events={events} lang={params.lang} />
+            <Year key={year} year={year} events={events} lang={params.lang} tbaText={t('rescheduled-tba-text')} />
           ))}
       </div>
     </Section>
@@ -40,13 +40,13 @@ function groupByYear(events: EventMeta[]): { [year: string]: EventMeta[] } {
   return grouped;
 }
 
-function Year({ year, events, lang }: { year: string; events: EventMeta[]; lang: Lang }) {
+function Year({ year, events, lang, tbaText }: { year: string; events: EventMeta[]; lang: Lang; tbaText?: string }) {
   return (
     <div>
       <H2>{year}</H2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 md:gap-4">
         {events.map((e, i) => (
-          <EventThumbnail key={i} event={e} lang={lang} />
+          <EventThumbnail key={i} event={e} lang={lang} tbaText={tbaText} />
         ))}
       </div>
     </div>

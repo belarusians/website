@@ -82,6 +82,18 @@ const event = defineType({
       description: 'Message shown instead of tickets button after successful payment',
       type: 'localeString',
     }),
+    defineField({
+      name: 'rescheduled',
+      title: 'Змена ў даце',
+      type: 'boolean',
+    }),
+    defineField({
+      name: 'rescheduledDate',
+      title: 'Новая дата',
+      description: 'калі не вядома - пакінуць пустым',
+      type: 'datetime',
+      hidden: ({ parent }) => !parent?.rescheduled,
+    }),
   ],
   preview: {
     select: {
