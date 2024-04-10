@@ -5,6 +5,7 @@ import { CommonPageParams } from '../../../types';
 import { Metadata, ResolvingMetadata } from 'next/types';
 import { getAllNewsSlugs, getNewsBySlug } from '../../../../sanity/news/service';
 import { urlForImage } from '../../../../sanity/lib/image';
+import { getAlternates } from '../../../../utils/og';
 
 type NewsPageParams = {
   params: {
@@ -48,13 +49,11 @@ export async function generateMetadata({ params }: NewsPageParams, parent: Resol
   return {
     title: news?.title,
     description: news?.description,
-    alternates: {
-      canonical: `${parentMetadata.metadataBase}${Lang.be}/news/${params.slug}`,
-      languages: {
-        [Lang.be]: `${parentMetadata.metadataBase}${Lang.be}/news/${params.slug}`,
-        [Lang.nl]: `${parentMetadata.metadataBase}${Lang.nl}/news/${params.slug}`,
-      },
-    },
+    alternates: getAlternates(
+      params.lang,
+      `${parentMetadata.metadataBase}${Lang.be}/news/${params.slug}`,
+      `${parentMetadata.metadataBase}${Lang.nl}/news/${params.slug}`,
+    ),
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     openGraph: {

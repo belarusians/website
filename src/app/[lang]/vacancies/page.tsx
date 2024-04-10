@@ -9,6 +9,7 @@ import { CommonPageParams } from '../../types';
 import { Metadata, ResolvingMetadata } from 'next/types';
 import { Vacancy } from '../../../../sanity.config';
 import { getVacanciesByLang } from '../../../sanity/vacancy/service';
+import { getAlternates } from '../../../utils/og';
 
 export const revalidate = 3600;
 
@@ -60,13 +61,11 @@ export async function generateMetadata({ params }: CommonPageParams, parent: Res
   return {
     title,
     description,
-    alternates: {
-      canonical: `${parentMetadata.metadataBase}${Lang.be}/vacancies`,
-      languages: {
-        [Lang.be]: `${parentMetadata.metadataBase}${Lang.be}/vacancies`,
-        [Lang.nl]: `${parentMetadata.metadataBase}${Lang.nl}/vacancies`,
-      },
-    },
+    alternates: getAlternates(
+      params.lang,
+      `${parentMetadata.metadataBase}${Lang.be}/vacancies`,
+      `${parentMetadata.metadataBase}${Lang.nl}/vacancies`,
+    ),
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     openGraph: {

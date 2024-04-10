@@ -7,6 +7,7 @@ import H1 from '../../../components/headings/h1';
 import { DonateButtons } from './donate-buttons';
 import { Metadata, ResolvingMetadata } from 'next/types';
 import { Lang } from '../../../components/types';
+import { getAlternates } from '../../../utils/og';
 
 export default async function Page({ params, searchParams }: CommonPageParams & PageSearchParams) {
   const success: boolean = searchParams?.success !== undefined;
@@ -59,13 +60,11 @@ export async function generateMetadata({ params }: CommonPageParams, parent: Res
   return {
     title,
     description,
-    alternates: {
-      canonical: `${parentMetadata.metadataBase}${Lang.be}/donate`,
-      languages: {
-        [Lang.be]: `${parentMetadata.metadataBase}${Lang.be}/donate`,
-        [Lang.nl]: `${parentMetadata.metadataBase}${Lang.nl}/donate`,
-      },
-    },
+    alternates: getAlternates(
+      params.lang,
+      `${parentMetadata.metadataBase}${Lang.be}/donate`,
+      `${parentMetadata.metadataBase}${Lang.nl}/donate`,
+    ),
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     openGraph: {

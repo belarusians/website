@@ -7,6 +7,7 @@ import H1 from '../../../../components/headings/h1';
 import { CommonPageParams } from '../../../types';
 import VacancyForm from './form';
 import { getVacanciesByLang, getVacancyById } from '../../../../sanity/vacancy/service';
+import { getAlternates } from '../../../../utils/og';
 
 type VacancyPageParams = CommonPageParams & { params: { id: string } };
 
@@ -44,13 +45,11 @@ export async function generateMetadata({ params }: VacancyPageParams, parent: Re
   return {
     title: vacancy?.title || undefined,
     description: vacancy?.description || undefined,
-    alternates: {
-      canonical: `${parentMetadata.metadataBase}${Lang.be}/vacancies/${params.id}`,
-      languages: {
-        [Lang.be]: `${parentMetadata.metadataBase}${Lang.be}/vacancies/${params.id}`,
-        [Lang.nl]: `${parentMetadata.metadataBase}${Lang.nl}/vacancies/${params.id}`,
-      },
-    },
+    alternates: getAlternates(
+      params.lang,
+      `${parentMetadata.metadataBase}${Lang.be}/vacancies/${params.id}`,
+      `${parentMetadata.metadataBase}${Lang.nl}/vacancies/${params.id}`,
+    ),
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     openGraph: {

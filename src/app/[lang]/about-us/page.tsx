@@ -17,6 +17,7 @@ import mara from '../../../../public/images/mara.jpg';
 import other from '../../../../public/images/other.jpg';
 import flowers from '../../../../public/images/flowers.jpg';
 import hand from '../../../../public/images/hand.jpg';
+import { getAlternates } from '../../../utils/og';
 
 export default async function AboutUs({ params: { lang } }: CommonPageParams) {
   const { t } = await useTranslation(lang, 'about-us');
@@ -82,16 +83,14 @@ export default async function AboutUs({ params: { lang } }: CommonPageParams) {
   );
 }
 
-export async function generateMetadata(params: CommonPageParams, parent: ResolvingMetadata): Promise<Metadata> {
+export async function generateMetadata({ params }: CommonPageParams, parent: ResolvingMetadata): Promise<Metadata> {
   const parentMetadata = await parent;
 
   return {
-    alternates: {
-      canonical: `${parentMetadata.metadataBase}${Lang.be}/about-us`,
-      languages: {
-        [Lang.be]: `${parentMetadata.metadataBase}${Lang.be}/about-us`,
-        [Lang.nl]: `${parentMetadata.metadataBase}${Lang.nl}/about-us`,
-      },
-    },
+    alternates: getAlternates(
+      params.lang,
+      `${parentMetadata.metadataBase}${Lang.be}/about-us`,
+      `${parentMetadata.metadataBase}${Lang.nl}/about-us`,
+    ),
   };
 }

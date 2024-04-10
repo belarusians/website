@@ -5,6 +5,7 @@ import { CommonPageParams } from '../types';
 import { Metadata, ResolvingMetadata } from 'next/types';
 import { Lang } from '../../components/types';
 import { supportedLngs } from '../i18n/settings';
+import { getAlternates } from '../../utils/og';
 
 export default function MainLayout({ children, params }: PropsWithChildren & CommonPageParams) {
   return (
@@ -39,13 +40,11 @@ export async function generateMetadata({ params }: CommonPageParams, parent: Res
   return {
     title,
     description,
-    alternates: {
-      canonical: `${parentMetadata.metadataBase}${Lang.be}`,
-      languages: {
-        [Lang.be]: `${parentMetadata.metadataBase}${Lang.be}`,
-        [Lang.nl]: `${parentMetadata.metadataBase}${Lang.nl}`,
-      },
-    },
+    alternates: getAlternates(
+      params.lang,
+      `${parentMetadata.metadataBase}${Lang.be}`,
+      `${parentMetadata.metadataBase}${Lang.nl}`,
+    ),
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     openGraph: {

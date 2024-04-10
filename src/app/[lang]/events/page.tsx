@@ -7,6 +7,7 @@ import { EventThumbnail } from '../event-thumbnail';
 import { EventMeta, getAllEvents } from '../../../sanity/event/service';
 import { Lang } from '../../../components/types';
 import { Metadata, ResolvingMetadata } from 'next/types';
+import { getAlternates } from '../../../utils/og';
 
 export default async function EventsPage({ params }: CommonPageParams) {
   const { t } = await useTranslation(params.lang, 'events');
@@ -77,13 +78,11 @@ export async function generateMetadata({ params }: CommonPageParams, parent: Res
   return {
     title,
     description,
-    alternates: {
-      canonical: `${parentMetadata.metadataBase}${Lang.be}/events`,
-      languages: {
-        [Lang.be]: `${parentMetadata.metadataBase}${Lang.be}/events`,
-        [Lang.nl]: `${parentMetadata.metadataBase}${Lang.nl}/events`,
-      },
-    },
+    alternates: getAlternates(
+      params.lang,
+      `${parentMetadata.metadataBase}${Lang.be}/events`,
+      `${parentMetadata.metadataBase}${Lang.nl}/events`,
+    ),
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     openGraph: {

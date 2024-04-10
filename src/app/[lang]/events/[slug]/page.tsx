@@ -8,6 +8,7 @@ import { useTranslation } from '../../../i18n';
 import { getAllEventsSlugs, getEventBySlug } from '../../../../sanity/event/service';
 import { urlForImage } from '../../../../sanity/lib/image';
 import { isEventPassed } from '../../../../sanity/event/utils';
+import { getAlternates } from '../../../../utils/og';
 
 type EventPageParams = CommonPageParams & {
   params: {
@@ -59,13 +60,11 @@ export async function generateMetadata({ params }: EventPageParams, parent: Reso
   return {
     title: event?.title,
     description: event?.description,
-    alternates: {
-      canonical: `${parentMetadata.metadataBase}${Lang.be}/events/${params.slug}`,
-      languages: {
-        [Lang.be]: `${parentMetadata.metadataBase}${Lang.be}/events/${params.slug}`,
-        [Lang.nl]: `${parentMetadata.metadataBase}${Lang.nl}/events/${params.slug}`,
-      },
-    },
+    alternates: getAlternates(
+      params.lang,
+      `${parentMetadata.metadataBase}${Lang.be}/events/${params.slug}`,
+      `${parentMetadata.metadataBase}${Lang.nl}/events/${params.slug}`,
+    ),
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     openGraph: {

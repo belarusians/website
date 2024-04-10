@@ -5,6 +5,7 @@ import Form from './form';
 import { CommonPageParams } from '../../types';
 import { Metadata, ResolvingMetadata } from 'next/types';
 import { Lang } from '../../../components/types';
+import { getAlternates } from '../../../utils/og';
 
 export default async function IndexPage({ params }: CommonPageParams) {
   const { t } = await useTranslation(params.lang, 'join-us');
@@ -40,13 +41,11 @@ export async function generateMetadata({ params }: CommonPageParams, parent: Res
   return {
     title,
     description,
-    alternates: {
-      canonical: `${parentMetadata.metadataBase}${Lang.be}/join-us`,
-      languages: {
-        [Lang.be]: `${parentMetadata.metadataBase}${Lang.be}/join-us`,
-        [Lang.nl]: `${parentMetadata.metadataBase}${Lang.nl}/join-us`,
-      },
-    },
+    alternates: getAlternates(
+      params.lang,
+      `${parentMetadata.metadataBase}${Lang.be}/join-us`,
+      `${parentMetadata.metadataBase}${Lang.nl}/join-us`,
+    ),
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     openGraph: {
