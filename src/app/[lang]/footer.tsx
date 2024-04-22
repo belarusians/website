@@ -1,6 +1,13 @@
 import * as React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTelegram, faGithub, faTwitter, faFacebook, faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import {
+  faTelegram,
+  faGithub,
+  faXTwitter,
+  faFacebook,
+  faInstagram,
+  faLinkedin,
+} from '@fortawesome/free-brands-svg-icons';
 
 export function Footer(props: { className?: string }): React.JSX.Element {
   const year = new Date().getFullYear();
@@ -15,8 +22,8 @@ export function Footer(props: { className?: string }): React.JSX.Element {
         <a rel="noreferrer" target={'_blank'} href="https://www.facebook.com/marabynl">
           <FontAwesomeIcon icon={faFacebook} className="text-2xl lg:text-3xl text-white md:text-red" />
         </a>
-        <a rel="noreferrer" target={'_blank'} href="https://twitter.com/BelarusinNL">
-          <FontAwesomeIcon icon={faTwitter} className="text-2xl lg:text-3xl text-white md:text-red" />
+        <a rel="noreferrer" target={'_blank'} href="https://x.com/BelarusinNL">
+          <FontAwesomeIcon icon={faXTwitter} className="text-2xl lg:text-3xl text-white md:text-red" />
         </a>
         <a rel="noreferrer" target={'_blank'} href="https://www.linkedin.com/company/marabynl">
           <FontAwesomeIcon icon={faLinkedin} className="text-2xl lg:text-3xl text-white md:text-red" />
