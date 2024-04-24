@@ -12,7 +12,7 @@ export async function inviteAttendee(email: string, roomId: string) {
     throw new Error('CLICKMEETING_API_KEY env variable should be set');
   }
 
-  console.debug(`Inviting ${hideEmailPartially(email)} to the meeting`);
+  console.debug(`Inviting ${hideEmailPartially(email)} to the room ${roomId}`);
 
   try {
     const url = `https://api.clickmeeting.com/v1/conferences/${roomId}/invitation/email/en`;
