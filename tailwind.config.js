@@ -57,6 +57,8 @@ module.exports = {
         'black-tint': '#333333',
         grey: 'rgb(128, 128, 128)',
         'light-grey': 'rgb(235,235,235)',
+        'blue-ukraine': '#0056B9',
+        'yellow-ukraine': '#FFD800',
       },
       boxShadow: {
         'lr-xl': '15px 0px 15px -20px rgba(0, 0, 0, 0.4), -15px 0px 15px -20px rgba(0, 0, 0, 0.4)',
