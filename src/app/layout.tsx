@@ -22,6 +22,18 @@ const roboto = Roboto({
   subsets: ['latin', 'cyrillic'],
 });
 
+function addJsonLd() {
+  return {
+    __html: `{
+      "@context" : "https://schema.org",
+      "@type" : "WebSite",
+      "name" : "MÁRA",
+      "url" : "https://www.belarusians.nl/"
+    }
+  `,
+  };
+}
+
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html>
@@ -51,6 +63,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
           sizes="180x180"
           href="/icons/apple-touch-icon-180x180-precomposed.png"
         />
+        <Script id="website-jsonld" type="application/ld+json" dangerouslySetInnerHTML={addJsonLd()} />
       </head>
       <body>
         <Script
