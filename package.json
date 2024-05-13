@@ -39,7 +39,7 @@
     "react-i18next": "~12.2.2",
     "sanity": "~3.38.0",
     "sharp": "~0.33.2",
-    "stripe": "~14.7.0",
+    "stripe": "~15.6.0",
     "zod": "3.22.4"
   },
   "devDependencies": {
