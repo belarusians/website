@@ -17,16 +17,29 @@ function getStripe() {
 }
 
 export async function getProductsByCheckoutSession(checkoutSessionId: string): Promise<string[]> {
-  const checkoutSession = await getStripe().checkout.sessions.retrieve(checkoutSessionId, {
-    expand: ['line_items.data.price.product'],
-  });
-  if (!checkoutSession) {
+  const checkoutSession: Stripe.Response<Stripe.Checkout.Session> = await getStripe().checkout.sessions.retrieve(
+    checkoutSessionId,
+    {
+      expand: ['line_items.data.price'],
+    },
+  );
+  if (!checkoutSession || !checkoutSession.line_items) {
     console.log(`Did not find checkout session ${checkoutSessionId}`);
     return [];
   }
 
-  const products = checkoutSession.line_items?.data.map((line) => line.price?.product).filter(Boolean);
-  return products as string[];
+  return checkoutSession.line_items.data
+    .map((line) => {
+      if (typeof line.price?.product !== 'string') {
+        return;
+      }
+      return line.price?.product;
+    })
+    .filter(isString);
+}
+
+function isString(value: unknown): value is string {
+  return typeof value === 'string';
 }
 
 export function constructWebhookEvent(body: Buffer, signature: string): Stripe.Event {

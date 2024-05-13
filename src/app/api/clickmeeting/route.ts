@@ -18,7 +18,10 @@ export async function POST(req: NextRequest) {
     const bodyBuffer = new Buffer(await req.arrayBuffer());
     event = constructWebhookEvent(bodyBuffer, sig);
   } catch (err) {
-    const message = `Webhook Error: ${JSON.stringify(err)}`;
+    let message = 'Unknown error in constructWebhookEvent';
+    if (err instanceof Error) {
+      message = `Webhook Error: ${err.message ?? JSON.stringify(err)}`;
+    }
     console.error(message);
     return NextResponse.json({ message }, { status: 400 });
   }
@@ -50,7 +53,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ message: 'skipped' }, { status: 202 });
   }
 
-  if (products.includes(process.env.STRIPE_PRODUCT_FOR_CLICKMEETING)) {
+  if (!products.includes(process.env.STRIPE_PRODUCT_FOR_CLICKMEETING)) {
+    console.debug(`Bought items don't contain product ${process.env.STRIPE_PRODUCT_FOR_CLICKMEETING}`);
     return NextResponse.json({ message: 'Unsupported product' }, { status: 202 });
   }
   try {
