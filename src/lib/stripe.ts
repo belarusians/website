@@ -8,7 +8,7 @@ function getStripe() {
       throw new Error('STRIPE_API_KEY env variable should be set');
     }
     stripe = new Stripe(process.env.STRIPE_API_KEY, {
-      apiVersion: '2023-10-16',
+      apiVersion: '2024-04-10',
       typescript: true,
     });
   }
