@@ -5,10 +5,11 @@ import { sanityFetch } from '../client';
 
 export async function getAllEvents(lang: Lang): Promise<EventMeta[]> {
   return sanityFetch<EventMeta[]>(
-    `*[_type == "event"] | order(eventDate desc){ 
+    `*[_type == "event"] | order(timeframe.start desc, eventDate desc){ 
       "slug": slug.current,
        eventDate,
-       rescheduledDate,
+       timeframe,
+       rescheduledTimeframe,
        rescheduled,
        "title": title.${lang},
         location
@@ -21,16 +22,20 @@ export async function getAllEventsSlugs(): Promise<{ slug: string }[]> {
   return sanityFetch<{ slug: string }[]>('*[_type == "event"]{ "slug": slug.current }', ['event']);
 }
 
-export type EventMeta = Pick<Event, 'slug' | 'eventDate' | 'rescheduled' | 'rescheduledDate' | 'title' | 'location'>;
+export type EventMeta = Pick<
+  Event,
+  'slug' | 'eventDate' | 'rescheduled' | 'rescheduledTimeframe' | 'title' | 'location' | 'timeframe'
+>;
 
 export async function getFutureEventMetas(lang: Lang): Promise<EventMeta[]> {
   return sanityFetch<EventMeta[]>(
-    `*[_type == "event" && (eventDate >= now() || rescheduled && (rescheduledDate >= now() || true))] | order(eventDate asc){
+    `*[_type == "event" && (eventDate >= now() || timeframe.start >= now() || rescheduled && (rescheduledDate >= now() || true))] | order(timeframe.start asc, eventDate asc){
         "slug": slug.current,
         "title": title.${lang},
         eventDate,
+        timeframe,
         rescheduled,
-        rescheduledDate,
+        rescheduledTimeframe,
         location
       }`,
     ['event'],
@@ -39,7 +44,7 @@ export async function getFutureEventMetas(lang: Lang): Promise<EventMeta[]> {
 
 export async function getLastNEventMetas(lang: Lang, top: number): Promise<EventMeta[]> {
   return sanityFetch<EventMeta[]>(
-    `*[_type == "event"] | order(eventDate asc){ "slug": slug.current, eventDate, "title": title.${lang}, location }[0...${top}]`,
+    `*[_type == "event"] | order(timeframe.start asc, eventDate asc){ "slug": slug.current, eventDate, timeframe.start, "title": title.${lang}, location }[0...${top}]`,
     ['event'],
   );
 }

@@ -48,7 +48,28 @@ const event = defineType({
       name: 'eventDate',
       title: 'Event date',
       type: 'datetime',
+      deprecated: {
+        reason: 'Выкарыстоўвайце "Час імпрэзы"',
+      },
+      hidden: ({ value }) => value === undefined,
+    }),
+    defineField({
+      name: 'timeframe',
+      title: 'Час імпрэзы',
+      type: 'timeframe',
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'rescheduled',
+      title: 'Змена ў даце',
+      type: 'boolean',
+    }),
+    defineField({
+      name: 'rescheduledTimeframe',
+      title: 'Новы час',
+      description: 'калі не вядома - пакінуць пустым',
+      type: 'timeframe',
+      hidden: ({ parent }) => !parent?.rescheduled,
     }),
     defineField({
       name: 'location',
@@ -81,18 +102,6 @@ const event = defineType({
       title: 'Payment success message',
       description: 'Message shown instead of tickets button after successful payment',
       type: 'localeString',
-    }),
-    defineField({
-      name: 'rescheduled',
-      title: 'Змена ў даце',
-      type: 'boolean',
-    }),
-    defineField({
-      name: 'rescheduledDate',
-      title: 'Новая дата',
-      description: 'калі не вядома - пакінуць пустым',
-      type: 'datetime',
-      hidden: ({ parent }) => !parent?.rescheduled,
     }),
   ],
   preview: {

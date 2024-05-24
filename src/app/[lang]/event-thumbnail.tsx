@@ -25,12 +25,12 @@ export function EventThumbnail(props: EventThumbnailProps) {
       <div className="flex flex-col gap-2 md:gap-3 h-full text-sm md:text-base">
         <div>
           <p className={(isPassed ? 'text-gray-300' : 'text-gray-500') + ' ' + (isRescheduled ? 'line-through' : '')}>
-            {renderDate(props.event.eventDate, props.lang, props.displayYear)}
+            {renderDate(props.event.eventDate ?? props.event.timeframe.start, props.lang, props.displayYear)}
           </p>
           {isRescheduled && (
             <p className="text-red-500">
-              {props.event.rescheduledDate
-                ? renderDate(props.event.rescheduledDate, props.lang, props.displayYear)
+              {props.event.rescheduledTimeframe
+                ? renderDate(props.event.rescheduledTimeframe.start, props.lang, props.displayYear)
                 : props.tbaText}
             </p>
           )}
