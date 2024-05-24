@@ -17,6 +17,7 @@ import { LogoIcon } from './src/components/header/logo-icon';
 import localeString from './src/sanity/locale-schemas/string';
 import localeText from './src/sanity/locale-schemas/text';
 import localeContent from './src/sanity/locale-schemas/content';
+import timeframe from './src/sanity/timeframe';
 
 const config = defineConfig({
   basePath: '/studio',
@@ -27,7 +28,7 @@ const config = defineConfig({
   // @ts-ignore
   icon: LogoIcon,
   schema: {
-    types: [localeString, localeText, localeContent, vacancy, event, news, feedback],
+    types: [localeString, localeText, localeContent, timeframe, vacancy, event, news, feedback],
     // templates: (prev) => prev.filter((template) => !['vacancy', 'event', 'news', 'feedback'].includes(template.id)),
   },
   plugins: [
