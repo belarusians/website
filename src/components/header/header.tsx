@@ -7,7 +7,7 @@ import { Lang } from '../types';
 export function Header(props: { className: string; lang: Lang }) {
   return (
     <header
-      className={`sticky md:static flex items-center bg-red md:bg-white-shade px-3 py-2 md:py-4 lg:py-8 top-0 z-50 gap-4 lg:gap-8 ${props.className}`}
+      className={`sticky md:static flex items-center bg-white-shade px-3 py-2 md:py-4 lg:py-8 top-0 z-50 gap-4 lg:gap-8 ${props.className}`}
     >
       <Link href={`/${props.lang}`} passHref>
         <div className="flex">

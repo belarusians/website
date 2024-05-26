@@ -29,15 +29,15 @@ export function MobileMenu({ lang }: { lang: Lang }) {
         <span
           className={
             menuOpened
-              ? 'transition-all duration-300 block bg-white h-[8px] w-full rounded-sm origin-[6px_6px] rotate-45'
-              : 'transition-all duration-300 block bg-white h-[8px] w-full rounded-sm origin-[6px_6px]'
+              ? 'transition-all duration-300 block bg-red h-[8px] w-full rounded-sm origin-[6px_6px] rotate-45'
+              : 'transition-all duration-300 block bg-red h-[8px] w-full rounded-sm origin-[6px_6px]'
           }
         ></span>
         <span
           className={
             menuOpened
-              ? 'transition-all duration-300 block bg-white h-[8px] w-full rounded-sm origin-[5px_1px] -rotate-45'
-              : 'transition-all duration-300 block bg-white h-[8px] w-full rounded-sm origin-[5px_1px]'
+              ? 'transition-all duration-300 block bg-red h-[8px] w-full rounded-sm origin-[5px_1px] -rotate-45'
+              : 'transition-all duration-300 block bg-red h-[8px] w-full rounded-sm origin-[5px_1px]'
           }
         ></span>
       </div>
@@ -49,21 +49,21 @@ export function MobileMenu({ lang }: { lang: Lang }) {
 function OpenedMenu({ lang }: { lang: Lang }) {
   const { t } = useTranslation(lang);
   return (
-    <div className="bg-red flex flex-col items-end w-full top-[53px] left-0 absolute z-40 divide-solid divide-white divide-y pr-4">
+    <div className="bg-white-shade flex flex-col items-end w-full top-[53px] left-0 absolute z-40 divide-solid divide-red divide-y pr-4">
       <LanguageSelector lang={lang} className="text-white py-4" />
-      <Link className="text-white text-xl py-4" href={`/${lang}/about-us`}>
+      <Link className="text-red text-xl py-4" href={`/${lang}/about-us`}>
         {t('about-us')}
       </Link>
-      <Link className="text-white text-xl py-4" href={`/${lang}/events`}>
+      <Link className="text-red text-xl py-4" href={`/${lang}/events`}>
         {t('events')}
       </Link>
       {/*<Link className="text-white text-xl py-4" href={`/${lang}/news`}>*/}
       {/*  {t('news')}*/}
       {/*</Link>*/}
-      <Link className="text-white text-xl py-4" href={`/${lang}/vacancies`}>
+      <Link className="text-red text-xl py-4" href={`/${lang}/vacancies`}>
         {t('vacancies')}
       </Link>
-      <Link className="text-white py-4 text-xl" data-umami-event="donate-us" href={`/${lang}/donate`}>
+      <Link className="text-red py-4 text-xl" data-umami-event="donate-us" href={`/${lang}/donate`}>
         {t('donate-us')}
       </Link>
     </div>
