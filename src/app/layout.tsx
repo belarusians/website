@@ -81,7 +81,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#ed1c24',
+  themeColor: '#f6f6f6',
 };
 
 export async function generateMetadata(): Promise<Metadata> {
