@@ -15,24 +15,24 @@ export function Footer(props: { className?: string }): React.JSX.Element {
     <footer
       className={`flex items-center justify-between bg-white-shade text-black p-3 md:pb-4 lg:pb-8 ${props.className}`}
     >
-      <div className="flex gap-2 md:gap-4 lg:gap-6">
+      <div className="flex items-center gap-2 md:gap-4 lg:gap-6">
         <a rel="noreferrer" target={'_blank'} href="https://www.instagram.com/marabynl">
-          <FontAwesomeIcon icon={faInstagram} className="text-2xl lg:text-3xl text-red" />
+          <FontAwesomeIcon icon={faInstagram} className="text-3xl lg:text-4xl text-red" />
         </a>
         <a rel="noreferrer" target={'_blank'} href="https://www.facebook.com/marabynl">
-          <FontAwesomeIcon icon={faFacebook} className="text-2xl lg:text-3xl text-red" />
+          <FontAwesomeIcon icon={faFacebook} className="text-3xl lg:text-4xl text-red" />
         </a>
         <a rel="noreferrer" target={'_blank'} href="https://x.com/BelarusinNL">
-          <FontAwesomeIcon icon={faXTwitter} className="text-2xl lg:text-3xl text-red" />
+          <FontAwesomeIcon icon={faXTwitter} className="text-3xl lg:text-4xl text-red" />
         </a>
         <a rel="noreferrer" target={'_blank'} href="https://www.linkedin.com/company/marabynl">
-          <FontAwesomeIcon icon={faLinkedin} className="text-2xl lg:text-3xl text-red" />
-        </a>
-        <a rel="noreferrer" target={'_blank'} href="https://github.com/belarusians">
-          <FontAwesomeIcon icon={faGithub} className="text-2xl lg:text-3xl text-red" />
+          <FontAwesomeIcon icon={faLinkedin} className="text-3xl lg:text-4xl text-red" />
         </a>
         <a rel="noreferrer" target={'_blank'} href="https://t.me/+I0pG4qwEv2E4Mjhi">
-          <FontAwesomeIcon icon={faTelegram} className="text-2xl lg:text-3xl text-red" />
+          <FontAwesomeIcon icon={faTelegram} className="text-3xl lg:text-4xl text-red" />
+        </a>
+        <a rel="noreferrer" target={'_blank'} href="https://github.com/belarusians">
+          <FontAwesomeIcon icon={faGithub} className="text-3xl lg:text-4xl text-red" />
         </a>
         <iframe
           className="hidden md:block"
