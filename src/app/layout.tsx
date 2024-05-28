@@ -34,7 +34,7 @@ function addJsonLd() {
   };
 }
 
-const DISABLE_GOOGLE_TAG = false;
+const ENABLE_GOOGLE_TAG = true;
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
@@ -77,7 +77,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         />
         <div className={roboto.className}>{children}</div>
         <SpeedInsights />
-        {DISABLE_GOOGLE_TAG ? <GoogleTag /> : null}
+        {ENABLE_GOOGLE_TAG ? <GoogleTag /> : null}
       </body>
     </html>
   );
