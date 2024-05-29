@@ -40,8 +40,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html>
       <head>
-        <link rel="manifest" href="/manifest.json" />
-        <link rel="manifest" href="/browserconfig.xml" />
+        <meta name="msapplication-config" content="browserconfig.xml" />
         <link rel="mask-icon" type="image/svg+xml" href="/icons/safari-pinned-tab.svg" color="#ed1c24" />
         <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-touch-icon-60x60.png" />
         <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/icons/apple-touch-icon-60x60-precomposed.png" />
@@ -118,6 +117,7 @@ export const viewport: Viewport = {
 export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: baseUrl,
+    manifest: '/manifest.json',
     keywords: ['mara belarus', 'mara nederland', 'mara wit-rusland', 'mara diaspora', 'belarus diaspora nederland'],
     verification: {
       google: 'hXVTSewNsnJ2_HBXFikyt5I9HeaIv2QypVnUeqcJKvU',
