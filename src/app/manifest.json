@@ -1,6 +1,6 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "MARA - Vereniging van Belarusen in Nederland website",
+    "short_name": "MARA",
     "icons": [
         {
             "src": "/icons/android-chrome-192x192.png",
@@ -13,7 +13,7 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#ed1c24",
-    "background_color": "#ed1c24",
+    "theme_color": "#f6f6f6",
+    "background_color": "#f6f6f6",
     "display": "standalone"
 }
