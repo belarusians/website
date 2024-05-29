@@ -3,7 +3,6 @@ import { Metadata } from 'next/types';
 import Script from 'next/script';
 import { Roboto } from 'next/font/google';
 import { Viewport } from 'next';
-import { GoogleTagManager } from '@next/third-parties/google';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import '../components/globals.css';
@@ -78,9 +77,24 @@ export default function RootLayout({ children }: PropsWithChildren) {
         />
         <div className={roboto.className}>{children}</div>
         <SpeedInsights />
-        {ENABLE_GOOGLE_TAG ? <GoogleTagManager gtmId="AW-11125506805" /> : null}
+        {ENABLE_GOOGLE_TAG ? <GoogleTag /> : null}
       </body>
     </html>
+  );
+}
+
+function GoogleTag(): JSX.Element {
+  return (
+    <>
+      <Script async src="https://www.googletagmanager.com/gtag/js?id=AW-11125506805" />
+      <Script id="google-tag">
+        {`window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'AW-11125506805');`}
+      </Script>
+    </>
   );
 }
 
