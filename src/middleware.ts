@@ -10,7 +10,6 @@ export function middleware(request: NextRequest) {
 
   if (
     pathname.startsWith('/.well-known/') ||
-    pathname === '/robots.txt' ||
     pathname.endsWith('.png') ||
     pathname.endsWith('.jpg') ||
     pathname.endsWith('.jpeg') ||
@@ -41,5 +40,7 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   // Matcher ignoring `/_next/` and `/api/`
-  matcher: ['/((?!api|_next/static|_next/image|studio|favicon.ico|apple-icon.png|icon.png|sitemap.xml).*)'],
+  matcher: [
+    '/((?!api|_next/static|_next/image|studio|favicon.ico|apple-icon.png|icon.png|sitemap.xml|manifest.json|robots.txt).*)',
+  ],
 };
