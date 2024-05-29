@@ -9,6 +9,7 @@ export interface NewsThumbnailProps {
   lang: Lang;
   size?: 'large' | 'small' | 'medium';
   className?: string;
+  priority?: boolean;
 }
 
 export async function NewsThumbnail(props: NewsThumbnailProps) {
@@ -20,6 +21,7 @@ export async function NewsThumbnail(props: NewsThumbnailProps) {
           className="object-cover rounded-md brightness-90"
           fill
           alt={props.news.title}
+          priority={props.priority}
         />
         <div className="px-2 py-1 z-40 mt-auto backdrop-blur-md rounded-b-md text-white uppercase">
           <span

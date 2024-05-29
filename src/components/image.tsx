@@ -6,14 +6,15 @@ import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
 
 import { dataset, projectId } from '../sanity/env';
 
-interface ArticleProps {
+interface ImageProps {
   image: SanityImageSource;
   alt: string;
   className?: string;
   fill?: boolean;
+  priority?: boolean;
 }
 
-export function MaraImage(props: ArticleProps) {
+export function MaraImage(props: ImageProps) {
   const sanityImageProps = useNextSanityImage(
     {
       projectId,
@@ -29,5 +30,14 @@ export function MaraImage(props: ArticleProps) {
       }
     : sanityImageProps;
 
-  return <Image className={props.className + ' w-full'} alt={props.alt} {...imgProps} fill={props.fill} />;
+  return (
+    <Image
+      className={props.className + ' w-full'}
+      alt={props.alt}
+      {...imgProps}
+      fill={props.fill}
+      priority={!!props.priority}
+      loading={props.priority ? 'eager' : 'lazy'}
+    />
+  );
 }
