@@ -18,7 +18,7 @@ import { baseUrl } from './config';
 config.autoAddCss = false;
 
 const roboto = Roboto({
-  weight: ['300', '400', '500', '900'],
+  weight: ['300', '400', '500', '700'],
   subsets: ['latin', 'cyrillic'],
 });
 
