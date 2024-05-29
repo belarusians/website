@@ -94,6 +94,19 @@ function GoogleTag(): JSX.Element {
 
           gtag('config', 'AW-11125506805');`}
       </Script>
+      <Script id="gtm-conversion-reporter">
+        {`
+        function gtag_report_conversion(value) {
+          var callback = function () {};
+          gtag('event', 'conversion', {
+              'send_to': value,
+              'transaction_id': '',
+              'event_callback': callback
+          });
+          return false;
+        }
+        `}
+      </Script>
     </>
   );
 }

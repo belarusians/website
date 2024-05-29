@@ -1,7 +1,5 @@
 'use client';
 
-import { sendGTMEvent } from '@next/third-parties/google';
-
 import { MaraImage } from '../../../../components/image';
 import { Event, Lang } from '../../../../components/types';
 import { Button, ButtonProps } from '../../../../components/button';
@@ -37,9 +35,7 @@ export function EventArticle(props: ArticleProps) {
               label={props.event.ticketsLabel ?? props.defaultTicketsLabel}
               trackingName={`buy-${props.event.slug}-ticket-button`}
               click={
-                props.event.gtmEventValue
-                  ? () => sendGTMEvent({ event: 'conversion', value: props.event.gtmEventValue })
-                  : undefined
+                props.event.gtmEventValue ? () => window.gtag_report_conversion(props.event.gtmEventValue) : undefined
               }
               className={`${
                 props.pastEvent ? 'contrast-50' : 'animate-bg-rotation-fast bg-[length:350%_100%]'
