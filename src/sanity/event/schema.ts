@@ -103,6 +103,13 @@ const event = defineType({
       description: 'Message shown instead of tickets button after successful payment',
       type: 'localeString',
     }),
+    defineField({
+      name: 'gtmEventValue',
+      title: 'GTM',
+      description: 'Google Tag Manager conversion ID',
+      type: 'string',
+      validation: (Rule) => Rule.optional(),
+    }),
   ],
   preview: {
     select: {
