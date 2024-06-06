@@ -60,7 +60,7 @@ export default async function AboutUs({ params: { lang } }: CommonPageParams) {
           <a href="mailto:mara@belarusians.nl">mara@belarusians.nl</a>,{' '}
           <a href="https://facebook.com/marabynl">facebook</a>,{' '}
           <a href="https://www.instagram.com/marabynl/">instagram</a>,{' '}
-          <a href="https://twitter.com/BelarusinNL">twitter</a>
+          <a href="https://twitter.com/marabynl">twitter</a>
         </div>
         <div className="col-span-3 relative hidden lg:block rounded-md shadow-lg">
           <Image className="rounded-md object-cover" src={flowers} fill alt="how can i help" />
