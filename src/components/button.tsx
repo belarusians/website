@@ -17,15 +17,10 @@ export interface ButtonProps extends PropsWithChildren {
 }
 
 export function Button(props: ButtonProps): React.ReactElement {
-  const buttonAttributes: { 'data-umami-event'?: string } = {};
-  if (props.trackingName) {
-    buttonAttributes['data-umami-event'] = props.trackingName;
-  }
-
   if (props.link) {
     return (
-      <Link target={props.target} href={props.link} {...buttonAttributes}>
-        <InnerButton {...props} />
+      <Link target={props.target} href={props.link}>
+        <InnerButton { ...props } />
       </Link>
     );
   } else {
@@ -34,6 +29,11 @@ export function Button(props: ButtonProps): React.ReactElement {
 }
 
 function InnerButton(props: ButtonProps) {
+  const buttonAttributes: { 'data-umami-event'?: string } = {};
+  if (props.trackingName) {
+    buttonAttributes['data-umami-event'] = props.trackingName;
+  }
+
   return (
     <button
       className={`transition-all ${
@@ -41,6 +41,7 @@ function InnerButton(props: ButtonProps) {
       } rounded-md shadow-lg ${props.disabled ? '' : 'hover:shadow-xl active:shadow-2xl'} ${props.className ?? ''}`}
       disabled={props.disabled}
       onClick={props.click}
+      {...buttonAttributes}
     >
       {props.label ?? props.children}
     </button>
