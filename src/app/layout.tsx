@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, ReactElement } from 'react';
 import { Metadata } from 'next/types';
 import Script from 'next/script';
 import { Roboto } from 'next/font/google';
@@ -34,7 +34,7 @@ function addJsonLd() {
   };
 }
 
-const ENABLE_GOOGLE_TAG = true;
+const ENABLE_GOOGLE_TAG = false;
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
@@ -82,7 +82,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
   );
 }
 
-function GoogleTag(): JSX.Element {
+function GoogleTag(): ReactElement {
   return (
     <>
       <Script async src="https://www.googletagmanager.com/gtag/js?id=AW-11125506805" />
