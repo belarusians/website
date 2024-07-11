@@ -9,52 +9,6 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      // very old
-      {
-        source: "/news/navi-band-5-11-2022",
-        destination: "/events/navi-band-5-11-2022",
-        permanent: true,
-      },
-      {
-        source: "/nl/news/navi-band-5-11-2022",
-        destination: "/nl/events/navi-band-5-11-2022",
-        permanent: true,
-      },
-      {
-        source: "/be/news/navi-band-5-11-2022",
-        destination: "/be/events/navi-band-5-11-2022",
-        permanent: true,
-      },
-      {
-        source: "/ru/news/navi-band-5-11-2022",
-        destination: "/ru/events/navi-band-5-11-2022",
-        permanent: true,
-      },
-      {
-        source: "/news/rsp-03-25",
-        destination: "/events/rsp-03-25",
-        permanent: true,
-      },
-      {
-        source: "/be/news/rsp-03-25",
-        destination: "/be/events/rsp-03-25",
-        permanent: true,
-      },
-      {
-        source: "/ru/news/rsp-03-25",
-        destination: "/ru/events/rsp-03-25",
-        permanent: true,
-      },
-      {
-        source: "/nl/news/rsp-03-25",
-        destination: "/nl/events/rsp-03-25",
-        permanent: true,
-      },
-      {
-        source: "/targets",
-        destination: "/be/join-us",
-        permanent: true,
-      },
       // since 12-06-2023
       {
         source: "/events/kupalle-2023-3",
@@ -80,6 +34,22 @@ const nextConfig = {
       {
         source: "/news/kupalle-2023-2",
         destination: "/be/events/kupalle-2023-2",
+        permanent: true,
+      },
+      // since 11-07-2024
+      {
+        source: "/events/Charnuha&Plotka",
+        destination: "/events/charnuha-and-plotka",
+        permanent: true,
+      },
+      {
+        source: "/be/events/Charnuha&Plotka",
+        destination: "/be/events/charnuha-and-plotka",
+        permanent: true,
+      },
+      {
+        source: "/nl/events/Charnuha&Plotka",
+        destination: "/nl/events/charnuha-and-plotka",
         permanent: true,
       },
     ];
