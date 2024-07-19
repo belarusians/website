@@ -32,8 +32,8 @@ async function getData(lang: Lang, slug: string): Promise<News | undefined> {
   return getNewsBySlug(lang, slug);
 }
 
-export async function generateStaticParams({ params }: CommonPageParams) {
-  return getAllNewsSlugs(params.lang);
+export async function generateStaticParams() {
+  return getAllNewsSlugs();
 }
 
 export async function generateMetadata({ params }: NewsPageParams, parent: ResolvingMetadata): Promise<Metadata> {

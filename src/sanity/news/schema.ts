@@ -1,11 +1,10 @@
-import { defineArrayMember, defineField, defineType } from '@sanity-typed/types';
+import { defineField, defineType } from '@sanity-typed/types';
 import { BlockContentIcon } from '@sanity/icons';
 
-import { isUniqueOtherThanLanguage } from '../lib/validation';
 
 const news = defineType({
   name: 'news',
-  title: 'News',
+  title: 'Навіны',
   type: 'document',
   icon: BlockContentIcon,
   fields: [
@@ -14,22 +13,35 @@ const news = defineType({
       title: 'ID',
       type: 'slug',
       options: {
-        source: 'title',
-        isUnique: isUniqueOtherThanLanguage,
+        source: 'title.be',
       },
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.required().custom(slug => {
+        if (!slug?.current) {
+          return 'Slug is required';
+        }
+        if (/[A-Z]/.test(slug.current)) {
+          return 'Slug must not contain uppercase letters';
+        }
+        if (/\s/.test(slug.current)) {
+          return 'Slug must not contain spaces';
+        }
+        if (/[^a-z0-9\-]/.test(slug.current)) {
+          return 'Slug must only contain lowercase letters, numbers and dashes';
+        }
+
+        return true;
+      }),
     }),
     defineField({
       name: 'title',
       title: 'Title',
-      type: 'string',
+      type: 'localeString',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'description',
       title: 'Description',
-      type: 'text',
-      rows: 5,
+      type: 'localeText',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -44,12 +56,7 @@ const news = defineType({
     defineField({
       name: 'content',
       title: 'Content',
-      type: 'array',
-      of: [
-        defineArrayMember({
-          type: 'block',
-        }),
-      ],
+      type: 'localeContent',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -78,15 +85,19 @@ const news = defineType({
       type: 'datetime',
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
-      // should match 'languageField' plugin configuration setting, if customized
-      name: 'language',
-      type: 'string',
-      readOnly: true,
-      hidden: true,
-      validation: (Rule) => Rule.required(),
-    }),
   ],
+  preview: {
+    select: {
+      title: 'title.be',
+      media: 'backgroundUrl',
+    },
+    prepare({ title, media }) {
+      return {
+        title,
+        media,
+      };
+    },
+  },
   initialValue: () => ({
     publishingDate: new Date().toISOString(),
   }),

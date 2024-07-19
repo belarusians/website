@@ -22,7 +22,7 @@ export function generateTranslatedUrls(path: string): MetadataRoute.Sitemap {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const news = await getAllNewsSlugs(Lang.be);
+  const news = await getAllNewsSlugs();
   const events = await getAllEventsSlugs();
   const vacancies = await getVacanciesByLang(Lang.be);
 

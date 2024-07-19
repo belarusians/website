@@ -66,5 +66,4 @@ export type Vacancy = Values['vacancy'];
 
 export type EventSchema = Omit<Values['event'], '_createdAt' | '_type' | '_id' | '_updatedAt' | '_rev'>;
 
-export type NewsSchema = Values['news'];
-export type CleanNewsSchema = Omit<NewsSchema, '_createdAt' | '_type' | '_id' | '_updatedAt' | '_rev' | 'language'>;
+export type NewsSchema = Omit<Values['news'], '_createdAt' | '_type' | '_id' | '_updatedAt' | '_rev'>;
