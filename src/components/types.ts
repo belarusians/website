@@ -1,4 +1,4 @@
-import { EventSchema, CleanNewsSchema } from '../../sanity.config';
+import { EventSchema, NewsSchema } from '../../sanity.config';
 
 export type EventWithoutHTMLContent = Modify<
   EventSchema,
@@ -14,13 +14,17 @@ export type EventWithoutHTMLContent = Modify<
 
 export type Event = Modify<EventWithoutHTMLContent, { content: string }>;
 
-export type News = Modify<
-  CleanNewsSchema,
+// TODO: shit naming
+export type NewsWithoutHTMLContent = Modify<
+  NewsSchema,
   {
     slug: string;
-    content: string;
+    title: string;
+    description: string;
   }
 >;
+
+export type News = Modify<NewsWithoutHTMLContent, { content: string }>;
 
 export type Modify<T, R> = Omit<T, keyof R> & R;
 
