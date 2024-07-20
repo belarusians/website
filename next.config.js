@@ -52,6 +52,17 @@ const nextConfig = {
         destination: "/nl/events/charnuha-and-plotka",
         permanent: true,
       },
+      // since 20-07-2024
+      {
+        source: "/nl/news/guk_viasny",
+        destination: "/nl/news/guk-viasny",
+        permanent: true,
+      },
+      {
+        source: "/be/news/guk_viasny",
+        destination: "/be/news/guk-viasny",
+        permanent: true,
+      },
     ];
   },
   reactStrictMode: true,
