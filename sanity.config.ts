@@ -51,7 +51,7 @@ const config = defineConfig({
         { id: 'be', title: 'Беларуская' },
         { id: 'nl', title: 'Nederlands' },
       ],
-      schemaTypes: ['vacancy', 'news', 'feedback'],
+      schemaTypes: ['vacancy', 'feedback'],
     }),
   ],
 });
