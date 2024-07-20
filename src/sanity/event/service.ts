@@ -29,10 +29,9 @@ export type EventMeta = Pick<
 
 export async function getFutureEventMetas(lang: Lang): Promise<EventMeta[]> {
   return sanityFetch<EventMeta[]>(
-    `*[_type == "event" && (eventDate >= now() || timeframe.start >= now() || rescheduled && (rescheduledDate >= now() || true))] | order(timeframe.start asc, eventDate asc){
+    `*[_type == "event" && (timeframe.end >= now() || rescheduled && (rescheduledDate >= now() || true))] | order(timeframe.start asc){
         "slug": slug.current,
         "title": title.${lang},
-        eventDate,
         timeframe,
         rescheduled,
         rescheduledTimeframe,
