@@ -60,7 +60,7 @@ export default config;
 
 type Values = InferSchemaValues<typeof config>;
 
-export type Feedback = Values['feedback'];
+export type FeedbackSchema = Values['feedback'];
 
 export type Vacancy = Values['vacancy'];
 
