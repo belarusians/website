@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
 import { SubscriptionForm } from './subscription-form';
 import { FeaturedNewsBlock } from './featured-block';
-import { Lang } from '../../components/types';
+import { Feedback, Lang } from '../../components/types';
 import { Section } from '../../components/section';
 import { AchievementsBlock } from './achievements-block';
 import { NewsBlock } from './news-block';
@@ -17,7 +17,6 @@ import {
 } from '../../sanity/news/service';
 import { FeedbackBlock } from './feedback-block';
 import { getNRandomFeedbacksByLang } from '../../sanity/feedback/service';
-import { Feedback } from '../../../sanity.config';
 import { supportedLngs } from '../i18n/settings';
 
 interface MainPageProps {

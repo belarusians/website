@@ -1,4 +1,6 @@
-import { EventSchema, NewsSchema } from '../../sanity.config';
+import { EventSchema, FeedbackSchema, NewsSchema } from '../../sanity.config';
+
+export type Feedback = Modify<FeedbackSchema, { text: string; signature: string; }>
 
 export type EventWithoutHTMLContent = Modify<
   EventSchema,
