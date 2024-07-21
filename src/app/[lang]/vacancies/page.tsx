@@ -7,7 +7,7 @@ import H1 from '../../../components/headings/h1';
 import { VacancyPreview } from './vacancy-preview';
 import { CommonPageParams } from '../../types';
 import { Metadata, ResolvingMetadata } from 'next/types';
-import { Vacancy } from '../../../../sanity.config';
+import { Vacancy } from '../../../sanity/vacancy/type';
 import { getVacanciesByLang } from '../../../sanity/vacancy/service';
 import { getAlternates } from '../../../utils/og';
 
@@ -24,7 +24,7 @@ export default async function VacanciesPage({ params }: CommonPageParams) {
           <H1 className="mb-2 md:mb-8">{t('heading')}</H1>
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {vacancies.map((vacancy, i) => (
-              <Link className="no-underline" href={`/${params.lang}/vacancies/${vacancy.id.current}`} key={i}>
+              <Link className="no-underline" href={`/${params.lang}/vacancies/${vacancy.id}`} key={i}>
                 <VacancyPreview vacancy={vacancy} buttonLabel={t('more-button')} />
               </Link>
             ))}

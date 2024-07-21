@@ -22,7 +22,7 @@ const feedback = defineType({
   ],
   preview: {
     select: {
-      title: 'signature.be',
+      signature: 'signature.be',
     },
     prepare({ title }) {
       return {

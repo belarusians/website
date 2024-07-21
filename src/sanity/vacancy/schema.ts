@@ -5,14 +5,14 @@ import { isUniqueOtherThanLanguage } from '../lib/validation';
 
 const vacancy = defineType({
   name: 'vacancy',
-  title: 'Vacancy',
+  title: 'Вакансіі',
   type: 'document',
   icon: CaseIcon,
   fields: [
     defineField({
       name: 'title',
       title: 'Title',
-      type: 'string',
+      type: 'localeString',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -20,7 +20,7 @@ const vacancy = defineType({
       title: 'ID',
       type: 'slug',
       options: {
-        source: 'title',
+        source: 'title.be',
         isUnique: isUniqueOtherThanLanguage,
       },
       validation: (Rule) => Rule.required(),
@@ -28,7 +28,7 @@ const vacancy = defineType({
     defineField({
       name: 'description',
       title: 'Description',
-      type: 'text',
+      type: 'localeText',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -41,28 +41,40 @@ const vacancy = defineType({
           type: 'object',
           fields: [
             defineField({
-              type: 'string',
+              type: 'localeString',
               name: 'title',
               validation: (Rule) => Rule.required(),
             }),
             defineField({
-              type: 'text',
+              type: 'localeText',
               name: 'description',
               validation: (Rule) => Rule.required(),
             }),
           ],
+          preview: {
+            select: {
+              title: 'title.be',
+            },
+            prepare({ title }) {
+              return {
+                title,
+              };
+            },
+          },
         }),
       ],
     }),
-    defineField({
-      // should match 'languageField' plugin configuration setting, if customized
-      name: 'language',
-      type: 'string',
-      readOnly: true,
-      hidden: true,
-      validation: (Rule) => Rule.required(),
-    }),
   ],
+  preview: {
+    select: {
+      title: 'title.be',
+    },
+    prepare({ title }) {
+      return {
+        title,
+      };
+    },
+  },
 });
 
 export default vacancy;

@@ -5,7 +5,6 @@
 import { visionTool } from '@sanity/vision';
 import { defineConfig, InferSchemaValues } from '@sanity-typed/types';
 import { structureTool } from 'sanity/structure';
-import { documentInternationalization } from '@sanity/document-internationalization';
 import { beBYLocale } from '@sanity/locale-be-by';
 
 import { apiVersion, dataset, projectId } from './src/sanity/env';
@@ -28,7 +27,7 @@ const config = defineConfig({
   // @ts-ignore
   icon: LogoIcon,
   schema: {
-    types: [localeString, localeText, localeContent, timeframe, vacancy, event, news, feedback],
+    types: [localeString, localeText, localeContent, timeframe, event, news, feedback, vacancy],
     // templates: (prev) => prev.filter((template) => !['vacancy', 'event', 'news', 'feedback'].includes(template.id)),
   },
   plugins: [
@@ -37,22 +36,13 @@ const config = defineConfig({
       structure: (S) =>
         S.list()
           .title('Дакументы')
-          .items(S.documentTypeListItems().filter((item) => item.getTitle() !== 'Translation metadata')),
+          .items(S.documentTypeListItems()),
     }),
     // Vision is a tool that lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     visionTool({ defaultApiVersion: apiVersion }),
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    documentInternationalization({
-      supportedLanguages: [
-        { id: 'be', title: 'Беларуская' },
-        { id: 'nl', title: 'Nederlands' },
-      ],
-      schemaTypes: ['vacancy', 'feedback'],
-    }),
   ],
 });
 
@@ -62,7 +52,7 @@ type Values = InferSchemaValues<typeof config>;
 
 export type FeedbackSchema = Values['feedback'];
 
-export type Vacancy = Values['vacancy'];
+export type VacancySchema = Values['vacancy'];
 
 export type EventSchema = Omit<Values['event'], '_createdAt' | '_type' | '_id' | '_updatedAt' | '_rev'>;
 
