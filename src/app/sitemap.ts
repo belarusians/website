@@ -35,7 +35,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     return acc;
   }, [] as MetadataRoute.Sitemap);
   const vacanciesUrls: MetadataRoute.Sitemap = vacancies.reduce((acc, vacancy) => {
-    acc.push(...generateTranslatedUrls(`/vacancies/${encodeURIComponent(vacancy.id.current!)}`)); // TODO: find out why current could be undefined
+    acc.push(...generateTranslatedUrls(`/vacancies/${encodeURIComponent(vacancy.id)}`));
     return acc;
   }, [] as MetadataRoute.Sitemap);
 
