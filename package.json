@@ -30,7 +30,7 @@
     "@sanity/vision": "^3.58.0",
     "@vercel/speed-insights": "~1.0.12",
     "i18next": "~23.15.1",
-    "i18next-resources-to-backend": "^1.1.4",
+    "i18next-resources-to-backend": "^1.2.1",
     "next": "~14.2.13",
     "next-sanity": "~9.4.7",
     "next-sanity-image": "~6.1.1",
