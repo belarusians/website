@@ -9,7 +9,7 @@ import { getAlternates } from '../../utils/og';
 
 export default function MainLayout({ children, params }: PropsWithChildren & CommonPageParams) {
   return (
-    <div className="flex flex-col gap-3 md:gap-4 lg:gap-6 min-h-screen">
+    <div className="flex flex-col gap-4 lg:gap-6 min-h-screen">
       <Header lang={params.lang} className="lg:container" />
       {children}
       <Footer className="lg:container mt-auto" />
