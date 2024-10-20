@@ -47,8 +47,19 @@ export function MobileMenu({ lang }: { lang: Lang }) {
             }
           ></span>
         </div>
-          {menuOpened && <OpenedMenu lang={lang} />}
+        <div
+          className={`fixed top-0 right-0 h-full w-52 bg-white-shade transition-transform transform duration-300 z-20 ${
+            menuOpened ? 'translate-x-0' : 'translate-x-full'
+          }`}
+        >
+          <OpenedMenu lang={lang} />
         </div>
+        {menuOpened && (
+          <div
+            className="fixed top-0 left-0 w-full h-full bg-black z-10 opacity-50"
+            onClick={toggleMenu}
+          ></div>
+        )}
       </div>
     </ClickOutside>
   );
@@ -57,18 +68,18 @@ export function MobileMenu({ lang }: { lang: Lang }) {
 function OpenedMenu({ lang }: { lang: Lang }) {
   const { t } = useTranslation(lang);
   return (
-    <div className="bg-white-shade flex flex-col items-end w-full top-[53px] left-0 absolute z-40 divide-solid divide-red divide-y pr-4">
+    <div className="flex flex-col items-start w-full left-0 absolute pl-4">
       <LanguageSelector lang={lang} className="text-white py-4" />
-      <Link className="text-red text-xl py-4" href={`/${lang}/about-us`}>
+      <Link className="text-red text-lg py-2" href={`/${lang}/about-us`}>
         {t('about-us')}
       </Link>
-      <Link className="text-red text-xl py-4" href={`/${lang}/events`}>
+      <Link className="text-red text-lg py-2" href={`/${lang}/events`}>
         {t('events')}
       </Link>
-      <Link className="text-red text-xl py-4" href={`/${lang}/vacancies`}>
+      <Link className="text-red text-lg py-2" href={`/${lang}/vacancies`}>
         {t('vacancies')}
       </Link>
-      <Link className="text-red py-4 text-xl" data-umami-event="donate-us" href={`/${lang}/donate`}>
+      <Link className="text-red text-lg py-2" data-umami-event="donate-us" href={`/${lang}/donate`}>
         {t('donate-us')}
       </Link>
     </div>
