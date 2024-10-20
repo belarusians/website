@@ -11,14 +11,14 @@ import { ClickOutside } from '../../click-outside';
 
 export function MobileMenu({ lang }: { lang: Lang }) {
   const { t } = useTranslation(lang);
-  const [menuOpened, toggleMenuState] = useState(false);
+  const [menuOpened, setMenuOpened] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpened(!menuOpened);
+  };
 
   return (
-    <ClickOutside onClickOutside={() => {
-      if (menuOpened) {
-        toggleMenuState(false);
-      }
-    }}>
+    <ClickOutside onClickOutside={() => menuOpened && setMenuOpened(false)}>
       <div className="flex items-center justify-between">
         <Button
           className="mr-4 p-1 md:p-2 lg:p-3 bg-[length:350%_100%] bg-beautiful-button font-normal rounded-r-md text-white transition-all hover:shadow-tbr-xl animate-bg-rotation-slow-wobble"
@@ -30,7 +30,7 @@ export function MobileMenu({ lang }: { lang: Lang }) {
 
         <div
           className="flex flex-col justify-between top-[17px] left-[20px] h-[24px] w-[32px] cursor-pointer z-40"
-          onClick={() => toggleMenuState(!menuOpened)}
+          onClick={toggleMenu}
         >
           <span
             className={
@@ -47,7 +47,8 @@ export function MobileMenu({ lang }: { lang: Lang }) {
             }
           ></span>
         </div>
-        {menuOpened ? <OpenedMenu lang={lang} /> : null}
+          {menuOpened && <OpenedMenu lang={lang} />}
+        </div>
       </div>
     </ClickOutside>
   );
@@ -64,9 +65,6 @@ function OpenedMenu({ lang }: { lang: Lang }) {
       <Link className="text-red text-xl py-4" href={`/${lang}/events`}>
         {t('events')}
       </Link>
-      {/*<Link className="text-white text-xl py-4" href={`/${lang}/news`}>*/}
-      {/*  {t('news')}*/}
-      {/*</Link>*/}
       <Link className="text-red text-xl py-4" href={`/${lang}/vacancies`}>
         {t('vacancies')}
       </Link>
