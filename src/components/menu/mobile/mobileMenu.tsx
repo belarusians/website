@@ -52,34 +52,31 @@ export function MobileMenu({ lang }: { lang: Lang }) {
             menuOpened ? 'translate-x-0' : 'translate-x-full'
           }`}
         >
-          <OpenedMenu lang={lang} />
+          <OpenedMenu lang={lang} onClick={toggleMenu} />
         </div>
         {menuOpened && (
-          <div
-            className="fixed top-0 left-0 w-full h-full bg-black z-10 opacity-50"
-            onClick={toggleMenu}
-          ></div>
+          <div className="fixed top-0 left-0 w-full h-full bg-black z-10 opacity-50" onClick={toggleMenu}></div>
         )}
       </div>
     </ClickOutside>
   );
 }
 
-function OpenedMenu({ lang }: { lang: Lang }) {
+function OpenedMenu({ lang, onClick }: { lang: Lang; onClick: () => void }) {
   const { t } = useTranslation(lang);
   return (
     <div className="flex flex-col items-start w-full left-0 absolute pl-4">
       <LanguageSelector lang={lang} className="text-white py-4" />
-      <Link className="text-red text-lg py-2" href={`/${lang}/about-us`}>
+      <Link className="text-red text-lg py-2" href={`/${lang}/about-us`} onClick={onClick}>
         {t('about-us')}
       </Link>
-      <Link className="text-red text-lg py-2" href={`/${lang}/events`}>
+      <Link className="text-red text-lg py-2" href={`/${lang}/events`} onClick={onClick}>
         {t('events')}
       </Link>
-      <Link className="text-red text-lg py-2" href={`/${lang}/vacancies`}>
+      <Link className="text-red text-lg py-2" href={`/${lang}/vacancies`} onClick={onClick}>
         {t('vacancies')}
       </Link>
-      <Link className="text-red text-lg py-2" data-umami-event="donate-us" href={`/${lang}/donate`}>
+      <Link className="text-red text-lg py-2" data-umami-event="donate-us" href={`/${lang}/donate`} onClick={onClick}>
         {t('donate-us')}
       </Link>
     </div>
