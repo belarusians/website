@@ -14,8 +14,9 @@ import { getAlternates } from '../../../utils/og';
 export const revalidate = 3600;
 
 export default async function VacanciesPage({ params }: CommonPageParams) {
-  const { t } = await useTranslation(params.lang, 'vacancies');
-  const vacancies = await getData(params.lang);
+  const { lang } = await params;
+  const { t } = await useTranslation(lang, 'vacancies');
+  const vacancies = await getData(lang);
 
   return (
     <Section>
@@ -24,7 +25,7 @@ export default async function VacanciesPage({ params }: CommonPageParams) {
           <H1 className="mb-2 md:mb-8">{t('heading')}</H1>
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {vacancies.map((vacancy, i) => (
-              <Link className="no-underline" href={`/${params.lang}/vacancies/${vacancy.id}`} key={i}>
+              <Link className="no-underline" href={`/${lang}/vacancies/${vacancy.id}`} key={i}>
                 <VacancyPreview vacancy={vacancy} buttonLabel={t('more-button')} />
               </Link>
             ))}
@@ -54,15 +55,16 @@ const descriptionLang = {
 };
 
 export async function generateMetadata({ params }: CommonPageParams, parent: ResolvingMetadata): Promise<Metadata> {
+  const { lang } = await params;
   const parentMetadata = await parent;
-  const description = descriptionLang[params.lang];
-  const title = titleLang[params.lang];
+  const description = descriptionLang[lang];
+  const title = titleLang[lang];
 
   return {
     title,
     description,
     alternates: getAlternates(
-      params.lang,
+      lang,
       `${parentMetadata.metadataBase}${Lang.be}/vacancies`,
       `${parentMetadata.metadataBase}${Lang.nl}/vacancies`,
     ),
@@ -72,7 +74,7 @@ export async function generateMetadata({ params }: CommonPageParams, parent: Res
       ...parentMetadata.openGraph,
       title,
       description,
-      url: `${params.lang}/vacancies`,
+      url: `${lang}/vacancies`,
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore

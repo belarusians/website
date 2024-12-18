@@ -8,13 +8,14 @@ import { urlForImage } from '../../../../sanity/lib/image';
 import { getAlternates } from '../../../../utils/og';
 
 type NewsPageParams = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 } & CommonPageParams;
 
 export default async function ArticlePage({ params }: NewsPageParams) {
-  const news = await getData(params.lang, params.slug);
+  const { lang, slug } = await params;
+  const news = await getData(lang, slug);
   if (!news) {
     return <div>Not found</div>;
   }
@@ -38,7 +39,8 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: NewsPageParams, parent: ResolvingMetadata): Promise<Metadata> {
   const parentMetadata = await parent;
-  const news = await getData(params.lang, params.slug);
+  const { lang, slug } = await params;
+  const news = await getData(lang, slug);
   const images = [];
   if (news) {
     images.push(urlForImage(news.backgroundUrl));
@@ -50,9 +52,9 @@ export async function generateMetadata({ params }: NewsPageParams, parent: Resol
     title: news?.title,
     description: news?.description,
     alternates: getAlternates(
-      params.lang,
-      `${parentMetadata.metadataBase}${Lang.be}/news/${params.slug}`,
-      `${parentMetadata.metadataBase}${Lang.nl}/news/${params.slug}`,
+      lang,
+      `${parentMetadata.metadataBase}${Lang.be}/news/${slug}`,
+      `${parentMetadata.metadataBase}${Lang.nl}/news/${slug}`,
     ),
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -60,7 +62,7 @@ export async function generateMetadata({ params }: NewsPageParams, parent: Resol
       ...parentMetadata.openGraph,
       title: news?.title,
       description: news?.description,
-      url: `${params.lang}/news/${params.slug}`,
+      url: `${lang}/news/${slug}`,
       images,
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment

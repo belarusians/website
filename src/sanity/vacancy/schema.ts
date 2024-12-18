@@ -7,6 +7,8 @@ const vacancy = defineType({
   name: 'vacancy',
   title: 'Вакансіі',
   type: 'document',
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   icon: CaseIcon,
   fields: [
     defineField({

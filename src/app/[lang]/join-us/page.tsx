@@ -8,7 +8,8 @@ import { Lang } from '../../../components/types';
 import { getAlternates } from '../../../utils/og';
 
 export default async function IndexPage({ params }: CommonPageParams) {
-  const { t } = await useTranslation(params.lang, 'join-us');
+  const { lang } = await params;
+  const { t } = await useTranslation(lang, 'join-us');
 
   return (
     <Section>
@@ -34,15 +35,16 @@ const descriptionLang = {
 };
 
 export async function generateMetadata({ params }: CommonPageParams, parent: ResolvingMetadata): Promise<Metadata> {
+  const { lang } = await params;
   const parentMetadata = await parent;
-  const description = descriptionLang[params.lang];
-  const title = titleLang[params.lang];
+  const description = descriptionLang[lang];
+  const title = titleLang[lang];
 
   return {
     title,
     description,
     alternates: getAlternates(
-      params.lang,
+      lang,
       `${parentMetadata.metadataBase}${Lang.be}/join-us`,
       `${parentMetadata.metadataBase}${Lang.nl}/join-us`,
     ),
@@ -52,7 +54,7 @@ export async function generateMetadata({ params }: CommonPageParams, parent: Res
       ...parentMetadata.openGraph,
       title,
       description,
-      url: `${params.lang}/join-us`,
+      url: `${lang}/join-us`,
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore

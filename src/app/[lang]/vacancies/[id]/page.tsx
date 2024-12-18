@@ -9,10 +9,11 @@ import VacancyForm from './form';
 import { getVacanciesByLang, getVacancyById } from '../../../../sanity/vacancy/service';
 import { getAlternates } from '../../../../utils/og';
 
-type VacancyPageParams = CommonPageParams & { params: { id: string } };
+type VacancyPageParams = CommonPageParams & { params: Promise<{ id: string }> };
 
 export default async function VacancyPage({ params }: VacancyPageParams) {
-  const vacancy = await getVacancyById(params.lang, params.id);
+  const { lang, id } = await params;
+  const vacancy = await getVacancyById(lang, id);
 
   if (!vacancy) {
     return <h1>404</h1>;
@@ -25,13 +26,13 @@ export default async function VacancyPage({ params }: VacancyPageParams) {
         <div className="grid grid-cols-1 md:grid-cols-6 gap-x-2 gap-y-2 md:gap-y-3 mb-8">
           {vacancy.tasks.map((task, i) => (
             <Fragment key={i}>
-              <div className="col-span-1 text-red break-words font-medium basis-1">{task.title[params.lang]}</div>
-              <div className="col-span-5">{task.description[params.lang]}</div>
+              <div className="col-span-1 text-red break-words font-medium basis-1">{task.title[lang]}</div>
+              <div className="col-span-5">{task.description[lang]}</div>
             </Fragment>
           ))}
         </div>
         <div className="flex flex-col justify-items-start gap-2">
-          <VacancyForm vacancyId={vacancy.id} lang={params.lang} />
+          <VacancyForm vacancyId={vacancy.id} lang={lang} />
         </div>
       </div>
     </Section>
@@ -40,15 +41,16 @@ export default async function VacancyPage({ params }: VacancyPageParams) {
 
 export async function generateMetadata({ params }: VacancyPageParams, parent: ResolvingMetadata): Promise<Metadata> {
   const parentMetadata = await parent;
-  const vacancy = await getVacancyById(params.lang, params.id);
+  const { lang, id } = await params;
+  const vacancy = await getVacancyById(lang, id);
 
   return {
     title: vacancy?.title || undefined,
     description: vacancy?.description || undefined,
     alternates: getAlternates(
-      params.lang,
-      `${parentMetadata.metadataBase}${Lang.be}/vacancies/${params.id}`,
-      `${parentMetadata.metadataBase}${Lang.nl}/vacancies/${params.id}`,
+      lang,
+      `${parentMetadata.metadataBase}${Lang.be}/vacancies/${id}`,
+      `${parentMetadata.metadataBase}${Lang.nl}/vacancies/${id}`,
     ),
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -56,7 +58,7 @@ export async function generateMetadata({ params }: VacancyPageParams, parent: Re
       ...parentMetadata.openGraph,
       title: vacancy?.title || undefined,
       description: vacancy?.description || undefined,
-      url: `${params.lang}/vacancies/${params.id}`,
+      url: `${lang}/vacancies/${id}`,
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -69,5 +71,6 @@ export async function generateMetadata({ params }: VacancyPageParams, parent: Re
 }
 
 export async function generateStaticParams({ params }: CommonPageParams) {
-  return (await getVacanciesByLang(params.lang)).map((vacancy) => ({ id: vacancy.id }));
+  const { lang } = await params;
+  return (await getVacanciesByLang(lang)).map((vacancy) => ({ id: vacancy.id }));
 }

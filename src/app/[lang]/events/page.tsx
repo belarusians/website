@@ -10,9 +10,10 @@ import { Metadata, ResolvingMetadata } from 'next/types';
 import { getAlternates } from '../../../utils/og';
 
 export default async function EventsPage({ params }: CommonPageParams) {
-  const { t } = await useTranslation(params.lang, 'events');
+  const { lang } = await params;
+  const { t } = await useTranslation(lang, 'events');
 
-  const events = await getAllEvents(params.lang);
+  const events = await getAllEvents(lang);
   const grouped = groupByYear(events);
 
   return (
@@ -22,7 +23,7 @@ export default async function EventsPage({ params }: CommonPageParams) {
         {Object.entries(grouped)
           .reverse()
           .map(([year, events]) => (
-            <Year key={year} year={year} events={events} lang={params.lang} tbaText={t('rescheduled-tba-text')} />
+            <Year key={year} year={year} events={events} lang={lang} tbaText={t('rescheduled-tba-text')} />
           ))}
       </div>
     </Section>
@@ -65,6 +66,7 @@ const descriptionLang = {
 };
 
 export async function generateMetadata({ params }: CommonPageParams, parent: ResolvingMetadata): Promise<Metadata> {
+  const { lang } = await params;
   const parentMetadata = await parent;
 
   const images = [];
@@ -72,14 +74,14 @@ export async function generateMetadata({ params }: CommonPageParams, parent: Res
     images.push(...parentMetadata.openGraph.images);
   }
 
-  const description = descriptionLang[params.lang];
-  const title = titleLang[params.lang];
+  const description = descriptionLang[lang];
+  const title = titleLang[lang];
 
   return {
     title,
     description,
     alternates: getAlternates(
-      params.lang,
+      lang,
       `${parentMetadata.metadataBase}${Lang.be}/events`,
       `${parentMetadata.metadataBase}${Lang.nl}/events`,
     ),
@@ -89,7 +91,7 @@ export async function generateMetadata({ params }: CommonPageParams, parent: Res
       ...parentMetadata.openGraph,
       title,
       description,
-      url: `${params.lang}/events`,
+      url: `${lang}/events`,
       images,
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment

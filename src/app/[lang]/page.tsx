@@ -27,7 +27,8 @@ interface MainPageProps {
   feedbacks: Feedback[];
 }
 
-export default async function IndexPage({ params: { lang } }: CommonPageParams) {
+export default async function IndexPage({ params }: CommonPageParams) {
+  const { lang } = await params;
   if (!supportedLngs.includes(lang)) {
     redirect(`/${Lang.be}`);
   }
