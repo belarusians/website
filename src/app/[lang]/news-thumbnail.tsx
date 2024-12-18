@@ -12,7 +12,7 @@ export interface NewsThumbnailProps {
   priority?: boolean;
 }
 
-export async function NewsThumbnail(props: NewsThumbnailProps) {
+export function NewsThumbnail(props: NewsThumbnailProps) {
   return (
     <div className={`rounded-md ${props.className}`}>
       <Link className="h-full relative flex flex-1 flex-col" href={`/${props.lang}/news/${props.news.slug}`}>
