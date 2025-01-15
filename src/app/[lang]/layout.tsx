@@ -1,16 +1,20 @@
 import { Header } from '../../components/header/header';
 import { Footer } from './footer';
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, JSX } from 'react';
 import { CommonPageParams } from '../types';
 import { Metadata, ResolvingMetadata } from 'next/types';
 import { Lang } from '../../components/types';
 import { supportedLngs } from '../i18n/settings';
 import { getAlternates } from '../../utils/og';
 
-export default function MainLayout({ children, params }: PropsWithChildren & CommonPageParams) {
+export default async function MainLayout({
+  children,
+  params,
+}: PropsWithChildren & CommonPageParams): Promise<JSX.Element> {
+  const { lang } = await params;
   return (
     <div className="flex flex-col gap-4 lg:gap-6 min-h-screen">
-      <Header lang={params.lang} className="lg:container" />
+      <Header lang={lang} className="lg:container" />
       {children}
       <Footer className="lg:container mt-auto" />
     </div>
@@ -34,14 +38,15 @@ const langToLocale = {
 
 export async function generateMetadata({ params }: CommonPageParams, parent: ResolvingMetadata): Promise<Metadata> {
   const parentMetadata = await parent;
-  const description = descriptionLang[params.lang];
-  const title = titleLang[params.lang];
+  const { lang } = await params;
+  const description = descriptionLang[lang];
+  const title = titleLang[lang];
 
   return {
     title,
     description,
     alternates: getAlternates(
-      params.lang,
+      lang,
       `${parentMetadata.metadataBase}${Lang.be}`,
       `${parentMetadata.metadataBase}${Lang.nl}`,
     ),
@@ -51,14 +56,14 @@ export async function generateMetadata({ params }: CommonPageParams, parent: Res
       ...parentMetadata.openGraph,
       title,
       description,
-      locale: langToLocale[params.lang],
-      url: `${parentMetadata.metadataBase}${params.lang}`,
+      locale: langToLocale[lang],
+      url: `${parentMetadata.metadataBase}${lang}`,
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     twitter: {
       ...parentMetadata.twitter,
-      title: titleLang[params.lang],
+      title: titleLang[lang],
       description,
     },
   };

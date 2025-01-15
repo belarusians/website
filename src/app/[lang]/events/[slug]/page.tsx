@@ -11,16 +11,19 @@ import { isEventPassed } from '../../../../sanity/event/utils';
 import { getAlternates } from '../../../../utils/og';
 
 type EventPageParams = CommonPageParams & {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 export default async function EventPage({ params, searchParams }: EventPageParams & PageSearchParams) {
-  const paymentSucceeded: boolean = searchParams?.payment_succeeded !== undefined;
+  const { lang, slug } = await params;
+  const searchParamsData = await searchParams;
 
-  const { t } = await useTranslation(params.lang, 'events');
-  const event = await getData(params.slug, params.lang);
+  const paymentSucceeded: boolean = searchParamsData?.payment_succeeded !== undefined;
+
+  const { t } = await useTranslation(lang, 'events');
+  const event = await getData(slug, lang);
   if (!event) {
     return <div>Not found</div>;
   }
@@ -28,7 +31,7 @@ export default async function EventPage({ params, searchParams }: EventPageParam
   return (
     <Section>
       <EventArticle
-        lang={params.lang}
+        lang={lang}
         event={event}
         pastEvent={isEventPassed(event)}
         defaultTicketsLabel={t('buy-ticket')}
@@ -49,7 +52,8 @@ async function getData(slug: string, lang: Lang): Promise<Event | undefined> {
 
 export async function generateMetadata({ params }: EventPageParams, parent: ResolvingMetadata): Promise<Metadata> {
   const parentMetadata = await parent;
-  const event = await getData(params.slug, params.lang);
+  const { lang, slug } = await params;
+  const event = await getData(slug, lang);
   const images = [];
   if (event) {
     images.push(urlForImage(event.backgroundUrl));
@@ -61,9 +65,9 @@ export async function generateMetadata({ params }: EventPageParams, parent: Reso
     title: event?.title,
     description: event?.description,
     alternates: getAlternates(
-      params.lang,
-      `${parentMetadata.metadataBase}${Lang.be}/events/${params.slug}`,
-      `${parentMetadata.metadataBase}${Lang.nl}/events/${params.slug}`,
+      lang,
+      `${parentMetadata.metadataBase}${Lang.be}/events/${slug}`,
+      `${parentMetadata.metadataBase}${Lang.nl}/events/${slug}`,
     ),
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -71,7 +75,7 @@ export async function generateMetadata({ params }: EventPageParams, parent: Reso
       ...parentMetadata.openGraph,
       title: event?.title,
       description: event?.description,
-      url: `${params.lang}/events/${params.slug}`,
+      url: `${lang}/events/${slug}`,
       images,
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment

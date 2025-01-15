@@ -1,11 +1,12 @@
 import { defineField, defineType } from '@sanity-typed/types';
 import { BlockContentIcon } from '@sanity/icons';
 
-
 const news = defineType({
   name: 'news',
   title: 'Навіны',
   type: 'document',
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   icon: BlockContentIcon,
   fields: [
     defineField({
@@ -15,22 +16,23 @@ const news = defineType({
       options: {
         source: 'title.be',
       },
-      validation: (Rule) => Rule.required().custom(slug => {
-        if (!slug?.current) {
-          return 'Slug is required';
-        }
-        if (/[A-Z]/.test(slug.current)) {
-          return 'Slug must not contain uppercase letters';
-        }
-        if (/\s/.test(slug.current)) {
-          return 'Slug must not contain spaces';
-        }
-        if (/[^a-z0-9\-]/.test(slug.current)) {
-          return 'Slug must only contain lowercase letters, numbers and dashes';
-        }
+      validation: (Rule) =>
+        Rule.required().custom((slug) => {
+          if (!slug?.current) {
+            return 'Slug is required';
+          }
+          if (/[A-Z]/.test(slug.current)) {
+            return 'Slug must not contain uppercase letters';
+          }
+          if (/\s/.test(slug.current)) {
+            return 'Slug must not contain spaces';
+          }
+          if (/[^a-z0-9\-]/.test(slug.current)) {
+            return 'Slug must only contain lowercase letters, numbers and dashes';
+          }
 
-        return true;
-      }),
+          return true;
+        }),
     }),
     defineField({
       name: 'title',

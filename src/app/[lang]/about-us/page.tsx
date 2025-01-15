@@ -19,7 +19,8 @@ import flowers from '../../../../public/images/flowers.jpg';
 import hand from '../../../../public/images/hand.jpg';
 import { getAlternates } from '../../../utils/og';
 
-export default async function AboutUs({ params: { lang } }: CommonPageParams) {
+export default async function AboutUs({ params }: CommonPageParams) {
+  const { lang } = await params;
   const { t } = await useTranslation(lang, 'about-us');
 
   return (
@@ -84,11 +85,12 @@ export default async function AboutUs({ params: { lang } }: CommonPageParams) {
 }
 
 export async function generateMetadata({ params }: CommonPageParams, parent: ResolvingMetadata): Promise<Metadata> {
+  const { lang } = await params;
   const parentMetadata = await parent;
 
   return {
     alternates: getAlternates(
-      params.lang,
+      lang,
       `${parentMetadata.metadataBase}${Lang.be}/about-us`,
       `${parentMetadata.metadataBase}${Lang.nl}/about-us`,
     ),

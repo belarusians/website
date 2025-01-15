@@ -5,6 +5,8 @@ const feedback = defineType({
   name: 'feedback',
   title: 'Водгукі',
   type: 'document',
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   icon: HeartIcon,
   fields: [
     defineField({

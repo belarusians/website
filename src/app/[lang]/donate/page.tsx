@@ -10,9 +10,11 @@ import { Lang } from '../../../components/types';
 import { getAlternates } from '../../../utils/og';
 
 export default async function Page({ params, searchParams }: CommonPageParams & PageSearchParams) {
-  const success: boolean = searchParams?.success !== undefined;
+  const { lang } = await params;
+  const awaitedSearchParams = await searchParams;
+  const success: boolean = awaitedSearchParams?.success !== undefined;
 
-  const { t } = await useTranslation(params.lang, 'donate');
+  const { t } = await useTranslation(lang, 'donate');
 
   return (
     <Section>
@@ -53,15 +55,16 @@ const descriptionLang = {
 };
 
 export async function generateMetadata({ params }: CommonPageParams, parent: ResolvingMetadata): Promise<Metadata> {
+  const { lang } = await params;
   const parentMetadata = await parent;
-  const description = descriptionLang[params.lang];
-  const title = titleLang[params.lang];
+  const description = descriptionLang[lang];
+  const title = titleLang[lang];
 
   return {
     title,
     description,
     alternates: getAlternates(
-      params.lang,
+      lang,
       `${parentMetadata.metadataBase}${Lang.be}/donate`,
       `${parentMetadata.metadataBase}${Lang.nl}/donate`,
     ),
@@ -71,7 +74,7 @@ export async function generateMetadata({ params }: CommonPageParams, parent: Res
       ...parentMetadata.openGraph,
       title,
       description,
-      url: `${params.lang}/donate`,
+      url: `${lang}/donate`,
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore

@@ -1,15 +1,15 @@
 import { Lang } from '../components/types';
 
 export interface CommonPageParams {
-  params: {
+  params: Promise<{
     lang: Lang;
-  };
+  }>;
 }
 
 export interface PageSearchParams {
-  searchParams?: {
+  searchParams?: Promise<{
     [key: string]: string | string[] | undefined;
-  };
+  }>;
 }
 
 export interface PropsWithClass {
