@@ -19,12 +19,12 @@ export function AchievementsBlock(props: { lang: Lang }) {
       setTimeout(updateCounter, 5);
       return;
     }
-    const target = 1770;
+    const target = 3790;
     const count = +counterRef.current?.innerText;
-    const increment = target / 118;
+    const increment = target / 200;
     if (count < target) {
       counterRef.current.innerText = `${Math.ceil(count + increment)}`;
-      setTimeout(updateCounter, 10);
+      setTimeout(updateCounter, 5);
     } else {
       counterRef.current.innerText = `${target}`;
     }
