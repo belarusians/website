@@ -1,7 +1,9 @@
 {
   "title": "Імпрэзы",
   "buy-ticket": "Купіць квіток",
+  "donate": "Падтрымаць",
   "success-payment-text": "Дзякуй вялікі за вашу зацікаўленасьць!",
   "rescheduled-tba-text": "хутка будзе вядома",
-  "rescheduled-event-text": "Увага! Імпрэза перанесена!"
+  "rescheduled-event-text": "Увага! Імпрэза перанесена!",
+  "cancelled-event-text": "Увага! Імпрэза адменена!"
 }

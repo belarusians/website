@@ -1,7 +1,9 @@
 {
   "title": "Evenementen",
   "buy-ticket": "Koop ticket",
+  "donate": "Doneren",
   "success-payment-text": "Bedankt!",
   "rescheduled-tba-text": "het zal binnenkort bekend worden",
-  "rescheduled-event-text": "Attentie! Het evenement is uitgesteld!"
+  "rescheduled-event-text": "Attentie! Het evenement is uitgesteld!",
+  "cancelled-event-text": "Attentie! Het evenement is geannuleerd!"
 }

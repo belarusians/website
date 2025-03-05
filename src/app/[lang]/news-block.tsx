@@ -19,7 +19,7 @@ export function NewsBlock(props: NewsBlockProps): React.JSX.Element {
         {props.news.map((n, i) => (
           <NewsThumbnail
             lang={props.lang}
-            className="transition-all flex grow h-[160px] min-w-[320px] shadow-lg hover:shadow-xl hover:scale-101"
+            className="transition-all flex grow h-[160px] min-w-[320px] shadow-lg hover:shadow-xl"
             size={'small'}
             key={i}
             news={n}

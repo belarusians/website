@@ -81,13 +81,21 @@ const event = defineType({
       name: 'rescheduled',
       title: 'Змена ў даце',
       type: 'boolean',
+      readOnly: ({ document }) => document?.cancelled as boolean,
+    }),
+    defineField({
+      name: 'cancelled',
+      title: 'Адменена',
+      type: 'boolean',
+      initialValue: false,
+      readOnly: ({ document }) => document?.rescheduled as boolean,
     }),
     defineField({
       name: 'rescheduledTimeframe',
       title: 'Новы час',
       description: 'калі не вядома - пакінуць пустым',
       type: 'timeframe',
-      hidden: ({ parent }) => !parent?.rescheduled,
+      hidden: ({ parent }) => !parent?.rescheduled || parent?.cancelled,
     }),
     defineField({
       name: 'location',
