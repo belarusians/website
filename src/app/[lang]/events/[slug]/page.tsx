@@ -39,6 +39,7 @@ export default async function EventPage({ params, searchParams }: EventPageParam
         paymentSucceeded={paymentSucceeded}
         defaultPaymentSuccessText={t('success-payment-text')}
         rescheduledEventText={t('rescheduled-event-text')}
+        cancelledEventText={t('cancelled-event-text')}
       />
     </Section>
   );

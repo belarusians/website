@@ -11,6 +11,7 @@ interface ArticleProps {
   defaultTicketsLabel: string;
   defaultPaymentSuccessText: string;
   rescheduledEventText?: string;
+  cancelledEventText?: string;
   defaultTipsLabel?: string;
   paymentSucceeded?: boolean;
 }
@@ -21,12 +22,12 @@ export function EventArticle(props: ArticleProps) {
       <div className="md:basis-1/3 lg:basis-2/5">
         <div className="flex flex-col gap-2 mg:gap-3 lg:gap-4">
           <MaraImage
-            className="object-cover rounded-md shadow-lg"
+            className={`object-cover rounded-md shadow-lg ${props.event.cancelled ? 'opacity-60 grayscale' : ''}`}
             image={props.event.backgroundUrl}
             alt={props.event.title}
           />
           {props.paymentSucceeded && <ThanksText text={props.event.successText ?? props.defaultPaymentSuccessText} />}
-          {!props.paymentSucceeded && props.event.ticketsLink && (
+          {!props.paymentSucceeded && props.event.ticketsLink && !props.event.cancelled && (
             <Button
               size="large"
               link={props.event.ticketsLink}
@@ -42,7 +43,7 @@ export function EventArticle(props: ArticleProps) {
               } bg-red-gradient w-full text-white`}
             />
           )}
-          {props.event.tipsLink && (
+          {props.event.tipsLink && !props.event.cancelled && (
             <TipsButton
               disabled={false}
               tipsLink={props.event.tipsLink}
@@ -53,13 +54,18 @@ export function EventArticle(props: ArticleProps) {
         </div>
       </div>
       <div className="md:basis-2/3 lg:basis-3/5 flex flex-col gap-2 mg:gap-3 lg:gap-4">
-        {props.event.rescheduled && (
+        {props.event.cancelled && (
+          <div className="rounded-md bg-white shadow-lg p-4 lg:p-8 text-gray-500 text-2xl">
+            {props.cancelledEventText}
+          </div>
+        )}
+        {props.event.rescheduled && !props.event.cancelled && (
           <div className="rounded-md bg-white shadow-lg p-4 lg:p-8 text-red-500 text-2xl">
             {props.rescheduledEventText}
           </div>
         )}
         <div
-          className="rounded-md bg-white shadow-lg p-4 lg:p-8 prose-sm md:prose lg:prose-lg prose-hr:my-4 prose-a:text-red prose-a:break-words prose-blockquote:border-l-2 prose-blockquote:border-red"
+          className={`rounded-md bg-white shadow-lg p-4 lg:p-8 prose-sm md:prose lg:prose-lg prose-hr:my-4 prose-a:text-red prose-a:break-words prose-blockquote:border-l-2 prose-blockquote:border-red ${props.event.cancelled ? 'opacity-60' : ''}`}
           dangerouslySetInnerHTML={{ __html: props.event.content }}
         ></div>
       </div>

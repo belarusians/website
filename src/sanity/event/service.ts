@@ -11,6 +11,7 @@ export async function getAllEvents(lang: Lang): Promise<EventMeta[]> {
        timeframe,
        rescheduledTimeframe,
        rescheduled,
+       cancelled,
        "title": title.${lang},
         location
      }`,
@@ -24,7 +25,7 @@ export async function getAllEventsSlugs(): Promise<{ slug: string }[]> {
 
 export type EventMeta = Pick<
   Event,
-  'slug' | 'eventDate' | 'rescheduled' | 'rescheduledTimeframe' | 'title' | 'location' | 'timeframe'
+  'slug' | 'eventDate' | 'rescheduled' | 'cancelled' | 'rescheduledTimeframe' | 'title' | 'location' | 'timeframe'
 >;
 
 export async function getFutureEventMetas(lang: Lang): Promise<EventMeta[]> {
@@ -34,6 +35,7 @@ export async function getFutureEventMetas(lang: Lang): Promise<EventMeta[]> {
         "title": title.${lang},
         timeframe,
         rescheduled,
+        cancelled,
         rescheduledTimeframe,
         location
       }`,
@@ -43,7 +45,16 @@ export async function getFutureEventMetas(lang: Lang): Promise<EventMeta[]> {
 
 export async function getLastNEventMetas(lang: Lang, top: number): Promise<EventMeta[]> {
   return sanityFetch<EventMeta[]>(
-    `*[_type == "event"] | order(timeframe.start asc, eventDate asc){ "slug": slug.current, eventDate, timeframe.start, "title": title.${lang}, location }[0...${top}]`,
+    `*[_type == "event"] | order(timeframe.start asc, eventDate asc){ 
+      "slug": slug.current, 
+      eventDate, 
+      timeframe,
+      rescheduled,
+      cancelled,
+      rescheduledTimeframe,
+      "title": title.${lang}, 
+      location 
+    }[0...${top}]`,
     ['event'],
   );
 }
@@ -59,6 +70,7 @@ export async function getEventBySlug(lang: Lang, slug: string): Promise<Event | 
       "ticketsLabel": ticketsLabel.${lang},
       "tipsLabel": tipsLabel.${lang},
       "successText": successText.${lang},
+      cancelled,
     }[0]`,
     ['event'],
   );
