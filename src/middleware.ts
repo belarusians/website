@@ -1,3 +1,4 @@
+import { clerkMiddleware, ClerkMiddlewareAuth } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
@@ -5,17 +6,10 @@ import { Lang } from './components/types';
 import { supportedLngs } from './app/i18n/settings';
 import { NextURL } from 'next/dist/server/web/next-url';
 
-export function middleware(request: NextRequest) {
+export default clerkMiddleware(async (auth: ClerkMiddlewareAuth, request: NextRequest) => {
   const pathname = request.nextUrl.pathname;
 
-  if (
-    pathname.startsWith('/.well-known/') ||
-    pathname.endsWith('.png') ||
-    pathname.endsWith('.jpg') ||
-    pathname.endsWith('.jpeg') ||
-    pathname.endsWith('.webp') ||
-    pathname.endsWith('.svg')
-  ) {
+  if (pathname.startsWith('/.well-known/')) {
     return;
   }
 
@@ -36,10 +30,12 @@ export function middleware(request: NextRequest) {
     const url = new NextURL(`/${Lang.be}${pathname}`, request.url);
     return NextResponse.redirect(url);
   }
-}
+});
 
 export const config = {
   matcher: [
-    '/((?!api|_next/static|_next/image|studio|favicon.ico|apple-icon.png|icon.png|sitemap.xml|manifest.json|robots.txt|browserconfig.xml).*)',
+    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest|api|studio|favicon.ico|apple-icon.png|icon.png|sitemap.xml|manifest.json|robots.txt|browserconfig.xml)).*)',
+    // Always run for API routes
+    '/(api|trpc)(.*)',
   ],
 };

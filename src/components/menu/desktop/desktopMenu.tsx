@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { UserButton, useUser } from '@clerk/nextjs';
 
 import { useTranslation } from '../../../app/i18n/client';
 import { LanguageSelector } from '../../language-selector';
@@ -9,10 +10,11 @@ import { Dropdown } from '../../dropdown';
 
 export function DesktopMenu({ lang }: { lang: Lang }) {
   const { t } = useTranslation(lang);
+  const { user } = useUser();
 
   return (
-    <div className="flex items-center text-red gap-4 justify-between">
-      <div className="text-lg flex rounded-md bg-white cursor-pointer shadow-lg divide-solid divide-light-grey divide-x animate-wobble-right">
+    <div className="flex items-center text-red gap-4">
+      <div className="text-lg flex rounded-md bg-white cursor-pointer shadow-lg divide-solid divide-light-grey divide-x animate-wobble-right mr-auto">
         <Dropdown className="p-1 md:p-2 lg:p-3 transition-shadow hover:shadow-tb-xl" label={t('to-refugees')}>
           <div className="animate-t-fade-in absolute mt-2 z-10 divide-solid divide-light-grey divide-y flex flex-col bg-white shadow-lg rounded-md">
             <Link
@@ -68,6 +70,7 @@ export function DesktopMenu({ lang }: { lang: Lang }) {
         </Link>
       </div>
 
+      {user ? <UserButton /> : null}
       <LanguageSelector lang={lang} />
     </div>
   );

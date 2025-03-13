@@ -19,11 +19,13 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.523.0",
+    "@clerk/nextjs": "~6.12.5",
     "@fortawesome/fontawesome-svg-core": "~6.5.2",
     "@fortawesome/free-brands-svg-icons": "~6.5.2",
     "@fortawesome/free-solid-svg-icons": "~6.5.2",
     "@fortawesome/react-fontawesome": "~0.2.0",
     "@portabletext/to-html": "^2.0.14",
+    "@sanity/icons": "^3.7.0",
     "@sanity/image-url": "^1.1.0",
     "@sanity/locale-be-by": "~1.1.19",
     "@sanity/vision": "^3.70.0",
@@ -42,7 +44,7 @@
   },
   "devDependencies": {
     "@jest/globals": "^29.5.0",
-    "@sanity-typed/types": "~7.0.1",
+    "@sanity-typed/types": "~8.0.0",
     "@tailwindcss/forms": "^0.5.9",
     "@tailwindcss/typography": "^0.5.15",
     "@types/node": "^20.17.10",
@@ -62,7 +64,7 @@
     "styled-components": "^6.1.13",
     "tailwindcss": "~3.4.16",
     "ts-jest": "^29.1.0",
-    "typescript": "~5.6.3"
+    "typescript": "^5.7.3"
   },
   "prettier": {
     "printWidth": 120,
