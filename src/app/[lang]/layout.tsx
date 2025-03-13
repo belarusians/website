@@ -1,3 +1,5 @@
+import { ClerkProvider } from '@clerk/nextjs';
+
 import { Header } from '../../components/header/header';
 import { Footer } from './footer';
 import { PropsWithChildren, JSX } from 'react';
@@ -13,11 +15,13 @@ export default async function MainLayout({
 }: PropsWithChildren & CommonPageParams): Promise<JSX.Element> {
   const { lang } = await params;
   return (
-    <div className="flex flex-col gap-4 lg:gap-6 min-h-screen">
-      <Header lang={lang} className="lg:container" />
-      {children}
-      <Footer className="lg:container mt-auto" />
-    </div>
+    <ClerkProvider>
+      <div className="flex flex-col gap-4 lg:gap-6 min-h-screen">
+        <Header lang={lang} className="lg:container" />
+        {children}
+        <Footer className="lg:container mt-auto" />
+      </div>
+    </ClerkProvider>
   );
 }
 
