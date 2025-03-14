@@ -38,7 +38,7 @@ export default clerkMiddleware(async (auth: ClerkMiddlewareAuth, request: NextRe
 
 export const config = {
   matcher: [
-    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest|api|studio|favicon.ico|apple-icon.png|icon.png|sitemap.xml|manifest.json|robots.txt|browserconfig.xml)).*)',
+    '/((?!_next/static|_next/image|studio|favicon.ico|apple-icon.png|icon.png|sitemap.xml|manifest.json|robots.txt|browserconfig.xml|[^?]*\\\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
     // Always run for API routes
     '/(api|trpc)(.*)',
   ],
