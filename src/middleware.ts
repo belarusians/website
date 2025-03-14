@@ -6,10 +6,10 @@ import { Lang } from './components/types';
 import { supportedLngs } from './app/i18n/settings';
 import { NextURL } from 'next/dist/server/web/next-url';
 
-export default clerkMiddleware(async (auth: ClerkMiddlewareAuth, request: NextRequest) => {
+function localeMiddleware(request: NextRequest): void | NextResponse {
   const pathname = request.nextUrl.pathname;
 
-  if (pathname.startsWith('/.well-known/')) {
+  if (pathname.startsWith('/.well-known/') || pathname.startsWith('/api/') || pathname.startsWith('/trpc/')) {
     return;
   }
 
@@ -30,6 +30,10 @@ export default clerkMiddleware(async (auth: ClerkMiddlewareAuth, request: NextRe
     const url = new NextURL(`/${Lang.be}${pathname}`, request.url);
     return NextResponse.redirect(url);
   }
+}
+
+export default clerkMiddleware(async (auth: ClerkMiddlewareAuth, request: NextRequest) => {
+  return localeMiddleware(request);
 });
 
 export const config = {
