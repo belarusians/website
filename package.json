@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.523.0",
+    "@clerk/backend": "^1.25.2",
     "@clerk/nextjs": "~6.12.5",
     "@fortawesome/fontawesome-svg-core": "~6.5.2",
     "@fortawesome/free-brands-svg-icons": "~6.5.2",
@@ -30,6 +31,7 @@
     "@sanity/locale-be-by": "~1.1.19",
     "@sanity/vision": "^3.70.0",
     "@vercel/speed-insights": "~1.1.0",
+    "googleapis": "^146.0.0",
     "i18next": "~23.15.1",
     "i18next-resources-to-backend": "^1.2.1",
     "next": "~15.2.1",
@@ -40,6 +42,7 @@
     "sanity": "~3.77.2",
     "sharp": "~0.33.5",
     "stripe": "~15.6.0",
+    "svix": "^1.61.4",
     "zod": "3.22.4"
   },
   "devDependencies": {

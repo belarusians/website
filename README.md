@@ -7,7 +7,7 @@
 
 #### Prerequisites
 
-* [nodeJS](https://nodejs.org/en/) 18
+* [nodeJS](https://nodejs.org/en/) 20
 
 #### How to run
 
