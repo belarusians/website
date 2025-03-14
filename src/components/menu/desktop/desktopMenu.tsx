@@ -7,6 +7,7 @@ import { useTranslation } from '../../../app/i18n/client';
 import { LanguageSelector } from '../../language-selector';
 import { Lang } from '../../types';
 import { Dropdown } from '../../dropdown';
+import { StudioLink } from '@/components/studio-link';
 
 export function DesktopMenu({ lang }: { lang: Lang }) {
   const { t } = useTranslation(lang);
@@ -69,6 +70,8 @@ export function DesktopMenu({ lang }: { lang: Lang }) {
           {t('donate-us')}
         </Link>
       </div>
+
+      <StudioLink />
 
       {user ? <UserButton /> : null}
       <LanguageSelector lang={lang} />
