@@ -2,7 +2,6 @@
 
 import { useTranslation } from '../i18n/client';
 import * as React from 'react';
-import { ClientOnly } from '../../components/client-only';
 import { isEmailValid } from '../../lib/email';
 import { Button } from '../../components/button';
 import H2 from '../../components/headings/h2';
@@ -68,25 +67,25 @@ export function SubscriptionForm({ lang }: { lang: Lang }) {
       <div className="flex flex-col gap-4 items-center">
         <div className="text-center md:text-xl lg:w-96 mb-2">{t('subscribe-text')}</div>
         <div className="flex flex-row gap-3 justify-center md:gap-4 w-full">
-          <ClientOnly>
-            {isSuccess ? (
-              <span className="flex flex-col justify-center">{t('subscribed-text')}</span>
-            ) : (
-              <input
-                ref={inputRef}
-                onInput={onInput}
-                className={`${isShaking ? 'animate-shake' : ''} ${
-                  isValid ? '' : 'ring-red ring-2'
-                } appearance-none border-none transition-all p-2 lg:p-3 bg-white basis-full md:basis-1/3 rounded-md shadow-lg hover:shadow-xl active:shadow-2xl`}
-                id={emailInputId}
-                name="email"
-                type="email"
-                placeholder={t('subscribe-input-placeholder') || 'subscribe'}
-              />
-            )}
-          </ClientOnly>
+          {isSuccess ? (
+            <span className="flex flex-col justify-center">{t('subscribed-text')}</span>
+          ) : (
+            <input
+              ref={inputRef}
+              onInput={onInput}
+              className={`${isShaking ? 'animate-shake' : ''} ${
+                isValid ? '' : 'ring-red ring-2'
+              } appearance-none border-none transition-all p-2 lg:p-3 bg-white basis-full md:basis-1/3 rounded-md shadow-lg hover:shadow-xl active:shadow-2xl`}
+              id={emailInputId}
+              name="email"
+              type="email"
+              placeholder={t('subscribe-input-placeholder') || 'subscribe'}
+            />
+          )}
 
-          <Button disabled={isLoading} click={submit} className="transition-all bg-white">{isLoading ? <Spinner className="w-7 h-7" /> : t('subscribe-button')}</Button>
+          <Button disabled={isLoading} click={submit} className="transition-all bg-white">
+            {isLoading ? <Spinner className="w-7 h-7" /> : t('subscribe-button')}
+          </Button>
         </div>
       </div>
     </>
