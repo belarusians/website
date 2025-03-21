@@ -35,15 +35,15 @@ export function MobileMenu({ lang }: { lang: Lang }) {
           <span
             className={
               menuOpened
-                ? 'transition-all duration-300 block bg-red h-[8px] w-full rounded-sm origin-[6px_6px] rotate-45'
-                : 'transition-all duration-300 block bg-red h-[8px] w-full rounded-sm origin-[6px_6px]'
+                ? 'transition-all duration-300 block bg-red h-[8px] w-full rounded-xs origin-[6px_6px] rotate-45'
+                : 'transition-all duration-300 block bg-red h-[8px] w-full rounded-xs origin-[6px_6px]'
             }
           ></span>
           <span
             className={
               menuOpened
-                ? 'transition-all duration-300 block bg-red h-[8px] w-full rounded-sm origin-[5px_1px] -rotate-45'
-                : 'transition-all duration-300 block bg-red h-[8px] w-full rounded-sm origin-[5px_1px]'
+                ? 'transition-all duration-300 block bg-red h-[8px] w-full rounded-xs origin-[5px_1px] -rotate-45'
+                : 'transition-all duration-300 block bg-red h-[8px] w-full rounded-xs origin-[5px_1px]'
             }
           ></span>
         </div>
