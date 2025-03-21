@@ -1,6 +1,247 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
+
+@theme {
+  --color-red-500: #ed1c24;
+  --color-red-600: #af0000;
+  --color-red: #ed1c24;
+
+  --color-white: #ffffff;
+
+  --color-white-shade: #f6f6f6;
+  --color-black: #231f20;
+  --color-black-tint: #333333;
+  --color-grey: rgb(128, 128, 128);
+  --color-light-grey: rgb(235, 235, 235);
+  --color-blue-ukraine: #0056b9;
+  --color-yellow-ukraine: #ffd800;
+
+  --shadow-lr-xl:
+    15px 0px 15px -20px rgba(0, 0, 0, 0.4),
+    -15px 0px 15px -20px rgba(0, 0, 0, 0.4);
+  --shadow-lrb-xl:
+    15px 10px 20px -10px rgba(0, 0, 0, 0.1),
+    -15px 10px 20px -10px rgba(0, 0, 0, 0.1);
+  --shadow-tb-xl:
+    0px 25px 20px -14px rgba(0, 0, 0, 0.1), 0px 6px 6px -6px rgba(0, 0, 0, 0.1);
+  --shadow-tbr-xl:
+    1px 25px 20px -14px rgba(0, 0, 0, 0.1), 1px 6px 6px -6px rgba(0, 0, 0, 0.1);
+  --shadow-tbl-xl:
+    -1px 25px 20px -14px rgba(0, 0, 0, 0.1),
+    -1px 6px 6px -6px rgba(0, 0, 0, 0.1);
+
+  --background-image-white-gradient: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 255),
+    rgba(255, 255, 255, 0)
+  );
+  --background-image-nl: linear-gradient(
+    180deg,
+    #ae1c28 0,
+    #ae1c28 33%,
+    #fff 33%,
+    #fff 67%,
+    #21468b 67%,
+    #21468b 100%
+  );
+  --background-image-be: linear-gradient(
+    180deg,
+    #fff 0,
+    #fff 33%,
+    #ed1c24 33%,
+    #ed1c24 67%,
+    #fff 67%,
+    #fff 100%
+  );
+  --background-image-beautiful-gradient:
+    radial-gradient(
+      26.76% 85.52% at 86.73% -12.86%,
+      #af0000 6.65%,
+      transparent
+    ),
+    radial-gradient(farthest-side at bottom left, #af0000 6.65%, #ed1c24 100%);
+  --background-image-beautiful-button: linear-gradient(
+    60deg,
+    #e1bc28,
+    #21c241,
+    #115eb7,
+    #720cb6,
+    #e1bc28,
+    #21c241,
+    #115eb7
+  );
+  --background-image-red-gradient: linear-gradient(
+    60deg,
+    #ff1111,
+    #b40000,
+    #ff0000,
+    #af0000,
+    #ff1111,
+    #b40000,
+    #ff0000
+  );
+
+  --scale-101: 1.01;
+
+  --animate-rotate: rotation 0.7s linear infinite;
+  --animate-rotate-slow: rotation 1.3s linear infinite;
+  --animate-rotate-back: rotationBack 0.7s linear infinite;
+  --animate-rotate-back-fast: rotationBack 0.5s linear infinite;
+  --animate-shake: shake 0.6s ease-in-out 1;
+  --animate-fade-in: fade-in 0.4s ease-in-out forwards;
+  --animate-t-fade-in: t-fade-in 0.2s ease-in-out forwards;
+  --animate-bg-rotation-slow: backgroundRotation 5s infinite linear;
+  --animate-bg-rotation-slow-wobble-right:
+    backgroundRotation 5s infinite linear,
+    wobble-right 6s ease-in-out alternate infinite;
+  --animate-bg-rotation-slow-wobble:
+    backgroundRotation 5s infinite linear,
+    wobble 6s ease-in-out alternate infinite;
+  --animate-bg-rotation-fast: backgroundRotation 4s infinite linear;
+  --animate-wobble-right: wobble-right 6s ease-in-out alternate infinite;
+
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes rotationBack {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(-360deg);
+    }
+  }
+  @keyframes shake {
+    0% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(5px);
+    }
+    50% {
+      transform: translateX(-5px);
+    }
+    75% {
+      transform: translateX(5px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes t-fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes t-fade-out {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+  }
+  @keyframes wobble {
+    0% {
+      border-radius: 10px 30px 15px 30px;
+    }
+    20% {
+      border-radius: 30px 10px 30px 15px;
+    }
+    40% {
+      border-radius: 30% 30% 20% 20%;
+    }
+    60% {
+      border-radius: 30px 15px 30px 15px;
+    }
+    80% {
+      border-radius: 30px 20% 30% 30%;
+    }
+    100% {
+      border-radius: 10px 30px 15px 30px;
+    }
+  }
+  @keyframes wobble-right {
+    0% {
+      border-top-right-radius: 30px;
+      border-bottom-right-radius: 15px;
+    }
+    20% {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 30px;
+    }
+    40% {
+      border-top-right-radius: 15px;
+      border-bottom-right-radius: 10px;
+    }
+    60% {
+      border-top-right-radius: 15px;
+      border-bottom-right-radius: 30px;
+    }
+    80% {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 15px;
+    }
+    100% {
+      border-top-right-radius: 30px;
+      border-bottom-right-radius: 15px;
+    }
+  }
+  @keyframes backgroundRotation {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 100% 0;
+    }
+  }
+}
+
+@utility container {
+  margin-inline: auto;
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
 
 @layer base {
     a {
@@ -23,8 +264,8 @@
 input:focus,
 button:focus {
     outline: none !important;
-    @apply ring-0 !important;
-    @apply ring-offset-0 !important;
+    @apply ring-0!;
+    @apply ring-offset-0!;
 }
 
 input:disabled,

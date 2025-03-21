@@ -55,7 +55,7 @@ export default function VacancyForm({ lang, vacancyId }: VacancyFormProps) {
             <input
               onChange={(event) => setFormContact(event.target.value)}
               type="text"
-              className={`transition-all w-full rounded-md border-light-grey focus:border-grey focus:ring focus:ring-grey focus:ring-opacity-20 ${
+              className={`transition-all w-full rounded-md border-light-grey focus:border-grey focus:ring-3 focus:ring-grey focus:ring-opacity-20 ${
                 isValid ? 'border-light-grey' : 'border-red animate-shake'
               }`}
             />
@@ -64,11 +64,11 @@ export default function VacancyForm({ lang, vacancyId }: VacancyFormProps) {
             <span>{t('feedback-form-additional')}</span>
             <textarea
               onChange={(event) => setFormAdditional(event.target.value)}
-              className="transition-all w-full rounded-md border-light-grey focus:border-grey focus:ring focus:ring-grey focus:ring-opacity-20"
+              className="transition-all w-full rounded-md border-light-grey focus:border-grey focus:ring-3 focus:ring-grey focus:ring-opacity-20"
             />
           </label>
           <button
-            className="transition-all self-start p-2 lg:px-3 rounded-md border border-light-grey focus:border-grey focus:ring focus:ring-grey focus:ring-opacity-20"
+            className="transition-all self-start p-2 lg:px-3 rounded-md border border-light-grey focus:border-grey focus:ring-3 focus:ring-grey focus:ring-opacity-20"
             onClick={submit}
           >
             {t('feedback-form-button')}
