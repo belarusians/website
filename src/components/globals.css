@@ -75,16 +75,6 @@
     #21c241,
     #115eb7
   );
-  --background-image-red-gradient: linear-gradient(
-    60deg,
-    #ff1111,
-    #b40000,
-    #ff0000,
-    #af0000,
-    #ff1111,
-    #b40000,
-    #ff0000
-  );
 
   --scale-101: 1.01;
 
@@ -102,7 +92,6 @@
   --animate-bg-rotation-slow-wobble:
     backgroundRotation 5s infinite linear,
     wobble 6s ease-in-out alternate infinite;
-  --animate-bg-rotation-fast: backgroundRotation 4s infinite linear;
   --animate-wobble-right: wobble-right 6s ease-in-out alternate infinite;
 
   @keyframes rotation {
