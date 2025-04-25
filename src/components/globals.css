@@ -7,9 +7,9 @@
   --color-red: #ed1c24;
   --color-red-shade: #af0000;
   --color-red-tint: #ff1111;
-  --color-primary: var(--color-red);
-  --color-primary-shade: var(--color-red-shade);
-  --color-primary-tint: var(--color-red-tint);
+  --color-primary: var(--color-king-orange);
+  --color-primary-shade: var(--color-king-orange-shade);
+  --color-primary-tint: var(--color-king-orange-tint);
 
   --color-white: #ffffff;
 
@@ -20,6 +20,9 @@
   --color-light-grey: rgb(235, 235, 235);
   --color-blue-ukraine: #0056b9;
   --color-yellow-ukraine: #ffd800;
+  --color-king-orange: #F64D04;
+  --color-king-orange-shade: #BF3903FF;
+  --color-king-orange-tint: #f36227;
 
   --shadow-lr-xl:
     15px 0px 15px -20px rgba(0, 0, 0, 0.4),
