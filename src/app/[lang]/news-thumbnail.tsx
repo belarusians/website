@@ -18,7 +18,7 @@ export function NewsThumbnail(props: NewsThumbnailProps) {
       <Link className="h-full relative flex flex-1 flex-col" href={`/${props.lang}/news/${props.news.slug}`}>
         <MaraImage
           image={props.news.backgroundUrl}
-          className="object-cover rounded-md brightness-90"
+          className="object-cover rounded-md brightness-85"
           fill
           alt={props.news.title}
           priority={props.priority}
