@@ -35,15 +35,15 @@ export function MobileMenu({ lang }: { lang: Lang }) {
           <span
             className={
               menuOpened
-                ? 'transition-all duration-300 block bg-red h-[8px] w-full rounded-xs origin-[6px_6px] rotate-45'
-                : 'transition-all duration-300 block bg-red h-[8px] w-full rounded-xs origin-[6px_6px]'
+                ? 'transition-all duration-300 block bg-primary h-[8px] w-full rounded-xs origin-[6px_6px] rotate-45'
+                : 'transition-all duration-300 block bg-primary h-[8px] w-full rounded-xs origin-[6px_6px]'
             }
           ></span>
           <span
             className={
               menuOpened
-                ? 'transition-all duration-300 block bg-red h-[8px] w-full rounded-xs origin-[5px_1px] -rotate-45'
-                : 'transition-all duration-300 block bg-red h-[8px] w-full rounded-xs origin-[5px_1px]'
+                ? 'transition-all duration-300 block bg-primary h-[8px] w-full rounded-xs origin-[5px_1px] -rotate-45'
+                : 'transition-all duration-300 block bg-primary h-[8px] w-full rounded-xs origin-[5px_1px]'
             }
           ></span>
         </div>
@@ -67,16 +67,21 @@ function OpenedMenu({ lang, onClick }: { lang: Lang; onClick: () => void }) {
   return (
     <div className="flex flex-col items-start w-full left-0 absolute pl-4">
       <LanguageSelector lang={lang} className="text-white py-4" />
-      <Link className="text-red text-lg py-2" href={`/${lang}/about-us`} onClick={onClick}>
+      <Link className="text-primary text-lg py-2" href={`/${lang}/about-us`} onClick={onClick}>
         {t('about-us')}
       </Link>
-      <Link className="text-red text-lg py-2" href={`/${lang}/events`} onClick={onClick}>
+      <Link className="text-primary text-lg py-2" href={`/${lang}/events`} onClick={onClick}>
         {t('events')}
       </Link>
-      <Link className="text-red text-lg py-2" href={`/${lang}/vacancies`} onClick={onClick}>
+      <Link className="text-primary text-lg py-2" href={`/${lang}/vacancies`} onClick={onClick}>
         {t('vacancies')}
       </Link>
-      <Link className="text-red text-lg py-2" data-umami-event="donate-us" href={`/${lang}/donate`} onClick={onClick}>
+      <Link
+        className="text-primary text-lg py-2"
+        data-umami-event="donate-us"
+        href={`/${lang}/donate`}
+        onClick={onClick}
+      >
         {t('donate-us')}
       </Link>
     </div>

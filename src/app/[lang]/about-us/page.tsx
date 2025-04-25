@@ -28,7 +28,7 @@ export default async function AboutUs({ params }: CommonPageParams) {
       <H1>{t('heading')}</H1>
       <div className="lg:grid grid-cols-4 grid-rows-[20rem_15rem_15rem_20rem_20rem] gap-x-4 gap-y-8 mt-4 md:mt-8 lg:mt-16">
         <div className="self-center col-span-2">
-          <H3 className="text-red">{t('who-heading')}</H3>
+          <H3 className="text-primary">{t('who-heading')}</H3>
           <p>{t('who-text')}</p>
         </div>
         <div className="col-span-2 relative hidden lg:block rounded-md shadow-lg">
@@ -38,25 +38,25 @@ export default async function AboutUs({ params }: CommonPageParams) {
           <Image className="rounded-md object-cover" src={mara} fill alt="what is mara" />
         </div>
         <div className="self-center col-span-3">
-          <H3 className="text-red">{t('what-heading')}</H3>
+          <H3 className="text-primary">{t('what-heading')}</H3>
           <p>{t('what-text')}</p>
         </div>
         <div className="self-center col-span-2">
-          <H3 className="text-red">{t('why-heading')}</H3>
+          <H3 className="text-primary">{t('why-heading')}</H3>
           <p>{t('why-text')}</p>
         </div>
         <div className="col-span-2 relative hidden lg:block rounded-md shadow-lg">
           <Image className="rounded-md object-cover" src={other} fill alt="why do we need mara" />
         </div>
         <div className="self-center col-span-3">
-          <H3 className="text-red">{t('for-me-heading')}</H3>
+          <H3 className="text-primary">{t('for-me-heading')}</H3>
           <p>{t('for-me-text')}</p>
         </div>
         <div className="relative hidden lg:block rounded-md shadow-lg">
           <Image className="rounded-md object-cover" src={hand} fill alt="what is mara for me" />
         </div>
         <div className="self-center col-span-1">
-          <H3 className="text-red">{t('help-heading')}</H3>
+          <H3 className="text-primary">{t('help-heading')}</H3>
           <p>{t('help-text')}</p>
           <a href="mailto:mara@belarusians.nl">mara@belarusians.nl</a>,{' '}
           <a href="https://facebook.com/marabynl">facebook</a>,{' '}

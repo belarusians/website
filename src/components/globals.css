@@ -4,9 +4,12 @@
 @plugin '@tailwindcss/typography';
 
 @theme {
-  --color-red-500: #ed1c24;
-  --color-red-600: #af0000;
   --color-red: #ed1c24;
+  --color-red-shade: #af0000;
+  --color-red-tint: #ff1111;
+  --color-primary: var(--color-red);
+  --color-primary-shade: var(--color-red-shade);
+  --color-primary-tint: var(--color-red-tint);
 
   --color-white: #ffffff;
 
@@ -50,18 +53,18 @@
     180deg,
     #fff 0,
     #fff 33%,
-    #ed1c24 33%,
-    #ed1c24 67%,
+    var(--color-primary) 33%,
+    var(--color-primary) 67%,
     #fff 67%,
     #fff 100%
   );
   --background-image-beautiful-gradient:
     radial-gradient(
       26.76% 85.52% at 86.73% -12.86%,
-      #af0000 6.65%,
+      var(--color-primary-shade) 6.65%,
       transparent
     ),
-    radial-gradient(farthest-side at bottom left, #af0000 6.65%, #ed1c24 100%);
+    radial-gradient(farthest-side at bottom left, var(--color-primary-shade) 6.65%, var(--color-primary) 100%);
   --background-image-beautiful-button: linear-gradient(
     60deg,
     #e1bc28,

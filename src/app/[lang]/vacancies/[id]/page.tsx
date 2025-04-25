@@ -26,7 +26,7 @@ export default async function VacancyPage({ params }: VacancyPageParams) {
         <div className="grid grid-cols-1 md:grid-cols-6 gap-x-2 gap-y-2 md:gap-y-3 mb-8">
           {vacancy.tasks.map((task, i) => (
             <Fragment key={i}>
-              <div className="col-span-1 text-red break-words font-medium basis-1">{task.title[lang]}</div>
+              <div className="col-span-1 text-primary break-words font-medium basis-1">{task.title[lang]}</div>
               <div className="col-span-5">{task.description[lang]}</div>
             </Fragment>
           ))}

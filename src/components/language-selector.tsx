@@ -21,7 +21,7 @@ export function LanguageSelector(props: { lang: Lang; className?: string }) {
         {supportedLngs.map((l) => (
           <Link
             className={`p-1 md:p-2 lg:p-3 uppercase text-lg no-underline first:rounded-l-md last:rounded-r-md ${
-              props.lang === l ? 'text-white bg-red' : 'text-black-tint bg-white'
+              props.lang === l ? 'text-white bg-primary' : 'text-black-tint bg-white'
             }`}
             key={l}
             href={redirectedPathName(l)}

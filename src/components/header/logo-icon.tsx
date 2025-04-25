@@ -10,7 +10,7 @@ export function LogoIcon() {
       viewBox="0 0 85 85"
       xmlSpace="preserve"
     >
-      <g className="fill-red">
+      <g className="fill-primary">
         <rect
           x="59.4"
           y="19.5"
@@ -55,7 +55,7 @@ export function LogoIcon() {
           width="4.3"
           height="4.3"
         />
-        <g className="fill-red">
+        <g className="fill-primary">
           <polygon className="st0" points="31.7,12.2 41.1,21.4 41.1,39 31.7,29.7" />
           <polygon className="st0" points="53.5,12.2 44.1,21.4 44.1,39 53.5,29.7" />
           <polygon className="st0" points="31.7,72.9 41.1,63.7 41.1,46.1 31.7,55.3" />

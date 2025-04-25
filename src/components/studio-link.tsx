@@ -14,7 +14,7 @@ export function StudioLink() {
   if (!hasAccess) return null;
 
   return (
-    <Link href="/studio" className="transition-all p-1 md:p-2 lg:p-3 bg-red text-white rounded-md hover:shadow-lg">
+    <Link href="/studio" className="transition-all p-1 md:p-2 lg:p-3 bg-primary text-white rounded-md hover:shadow-lg">
       Studio
     </Link>
   );

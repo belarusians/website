@@ -35,14 +35,14 @@ export function EventThumbnail(props: EventThumbnailProps) {
             {renderDate(props.event.eventDate ?? props.event.timeframe.start, props.lang, props.displayYear)}
           </p>
           {isRescheduled && (
-            <p className={`${isCancelled ? 'text-gray-400 line-through' : 'text-red-500'}`}>
+            <p className={`${isCancelled ? 'text-gray-400 line-through' : 'text-primary'}`}>
               {props.event.rescheduledTimeframe
                 ? renderDate(props.event.rescheduledTimeframe.start, props.lang, props.displayYear)
                 : props.tbaText}
             </p>
           )}
         </div>
-        <p className={`font-bold ${isCancelled ? 'text-gray-400 line-through' : 'text-red-500'}`}>
+        <p className={`font-bold ${isCancelled ? 'text-gray-400 line-through' : 'text-primary'}`}>
           {props.event.title}
         </p>
         <p className={`mt-auto ${isCancelled ? 'text-gray-300 line-through' : 'text-gray-500'}`}>

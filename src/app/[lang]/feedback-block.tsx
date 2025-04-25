@@ -16,7 +16,7 @@ export function FeedbackBlock(props: FeedbackBlockProps) {
             {
               // TODO: replace margins with gap when safari 14+13.1+9.1 will be less than 0.1%
             }
-            <p className="text-sm text-justify border-l-red border-l-2 pl-4 mb-2 md:mb-3">{feedback.text}</p>
+            <p className="text-sm text-justify border-l-primary border-l-2 pl-4 mb-2 md:mb-3">{feedback.text}</p>
             <p className="text-xs text-right">{feedback.signature}</p>
           </div>
         ))}
