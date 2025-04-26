@@ -7,9 +7,9 @@
   --color-red: #ed1c24;
   --color-red-shade: #af0000;
   --color-red-tint: #ff1111;
-  --color-primary: var(--color-king-orange);
-  --color-primary-shade: var(--color-king-orange-shade);
-  --color-primary-tint: var(--color-king-orange-tint);
+  --color-primary: var(--color-red);
+  --color-primary-shade: var(--color-red-shade);
+  --color-primary-tint: var(--color-red-tint);
 
   --color-white: #ffffff;
 
