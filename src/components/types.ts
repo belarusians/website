@@ -1,32 +1,34 @@
-import { EventSchema, FeedbackSchema, NewsSchema } from '../../sanity.config';
+import { EventSchema, FeedbackSchema, GuideSchema, NewsSchema } from '../../sanity.config';
 
-export type Feedback = Modify<FeedbackSchema, { text: string; signature: string; }>
+export type Feedback = Modify<FeedbackSchema, { text: string; signature: string }>;
 
-export type EventWithoutHTMLContent = Modify<
+export type Event = Modify<
   EventSchema,
   {
-    slug: string;
-    title: string;
-    description: string;
-    ticketsLabel?: string;
-    tipsLabel?: string;
-    successText?: string;
+    content: string;
   }
 >;
 
-export type Event = Modify<EventWithoutHTMLContent, { content: string }>;
+export type EventWithoutHTMLContent = Omit<Event, 'content'>;
 
-// TODO: shit naming
-export type NewsWithoutHTMLContent = Modify<
+export type News = Modify<
   NewsSchema,
   {
-    slug: string;
-    title: string;
-    description: string;
+    content: string;
   }
 >;
 
-export type News = Modify<NewsWithoutHTMLContent, { content: string }>;
+// TODO: shit naming
+export type NewsWithoutHTMLContent = Omit<News, 'content'>;
+
+export type Guide = Modify<
+  GuideSchema,
+  {
+    content: string;
+  }
+>;
+
+export type GuideWithoutHTMLContent = Omit<Guide, 'content'>;
 
 export type Modify<T, R> = Omit<T, keyof R> & R;
 

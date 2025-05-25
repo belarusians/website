@@ -1,7 +1,8 @@
 import { toHTML } from '@portabletext/to-html';
 
-import { Event, EventWithoutHTMLContent, Lang } from '../../components/types';
+import { Event, Lang } from '../../components/types';
 import { sanityFetch } from '../client';
+import { EventSchema } from '../../../sanity.config';
 
 export async function getAllEvents(lang: Lang): Promise<EventMeta[]> {
   return sanityFetch<EventMeta[]>(
@@ -60,7 +61,7 @@ export async function getLastNEventMetas(lang: Lang, top: number): Promise<Event
 }
 
 export async function getEventBySlug(lang: Lang, slug: string): Promise<Event | undefined> {
-  const schema = await sanityFetch<EventWithoutHTMLContent>(
+  const schema = await sanityFetch<EventSchema>(
     `*[_type == "event" && slug.current == "${slug}"]{
       ...,
       "slug": slug.current,

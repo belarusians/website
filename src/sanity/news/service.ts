@@ -3,6 +3,7 @@ import { toHTML } from '@portabletext/to-html';
 
 import { sanityFetch } from '../client';
 import { Lang, News, NewsWithoutHTMLContent } from '../../components/types';
+import { NewsSchema } from '../../../sanity.config';
 
 export async function getAllNewsSlugs(): Promise<{ slug: string }[]> {
   return sanityFetch('*[_type == "news"]{ "slug": slug.current }', ['news']);
@@ -65,13 +66,14 @@ export async function getFeaturedNewsMetas(lang = Lang.be, top = 2): Promise<New
 }
 
 export async function getNewsBySlug(lang: Lang, slug: string): Promise<News | undefined> {
-  const schema = await sanityFetch<NewsWithoutHTMLContent | undefined>(`*[_type == "news" && slug.current == "${slug}"]{
+  const schema = await sanityFetch<NewsSchema | undefined>(
+    `*[_type == "news" && slug.current == "${slug}"]{
       ...,
       "title": title.${lang},
       "description": description.${lang},
       "content": content.${lang},
     }[0]`,
-    ['news']
+    ['news'],
   );
   if (!schema) {
     return undefined;
