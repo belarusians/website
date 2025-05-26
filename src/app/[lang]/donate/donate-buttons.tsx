@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent, MouseEvent, useState } from 'react';
+import { ChangeEvent, MouseEvent, useState, ReactElement } from 'react';
 
 import { Button } from '../../../components/button';
 import { Donation, parseDonation } from '../../../contract/donate';
@@ -13,7 +13,7 @@ interface DonateButtonsProps {
   donateBtnErrLabel: string;
 }
 
-export function DonateButtons(props: DonateButtonsProps) {
+export function DonateButtons(props: DonateButtonsProps): ReactElement {
   const [isLoading, setIsLoading] = useState(false);
   const [isValid, setIsValid] = useState(true);
   const [isShaking, doShake] = useState(false);
@@ -89,6 +89,7 @@ export function DonateButtons(props: DonateButtonsProps) {
 
       setIsLoading(false);
     } catch (e) {
+      console.warn(e);
       setIsLoading(false);
       setIsValid(false);
       shake();

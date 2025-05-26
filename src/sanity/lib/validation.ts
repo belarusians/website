@@ -1,6 +1,6 @@
 import { SlugValidationContext } from 'sanity';
 
-export async function isUniqueOtherThanLanguage(slug: string, context: SlugValidationContext) {
+export async function isUniqueOtherThanLanguage(slug: string, context: SlugValidationContext): Promise<boolean> {
   const { document, getClient } = context;
   if (!document?.language) {
     return true;

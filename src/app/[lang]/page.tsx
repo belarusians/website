@@ -7,7 +7,7 @@ import { AchievementsBlock } from './achievements-block';
 import { NewsBlock } from './news-block';
 import { EventsBlock } from './events-block';
 import { CommonPageParams } from '../types';
-import { useTranslation } from '../i18n';
+import { getTranslation } from '../i18n';
 import { getFutureEventMetas, EventMeta, getLastNEventMetas } from '../../sanity/event/service';
 import {
   getFeaturedNewsMetas,
@@ -32,8 +32,8 @@ export default async function IndexPage({ params }: CommonPageParams) {
   if (!supportedLngs.includes(lang)) {
     redirect(`/${Lang.be}`);
   }
-  const { t } = await useTranslation(lang, 'main');
-  const { t: eventsT } = await useTranslation(lang, 'events');
+  const { t } = await getTranslation(lang, 'main');
+  const { t: eventsT } = await getTranslation(lang, 'events');
   const props = await getData(lang);
 
   return (

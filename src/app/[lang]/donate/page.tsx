@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { CommonPageParams, PageSearchParams } from '../../types';
-import { useTranslation } from '../../i18n';
+import { getTranslation } from '../../i18n';
 import { Section } from '../../../components/section';
 import H1 from '../../../components/headings/h1';
 import { DonateButtons } from './donate-buttons';
@@ -14,7 +14,7 @@ export default async function Page({ params, searchParams }: CommonPageParams & 
   const awaitedSearchParams = await searchParams;
   const success: boolean = awaitedSearchParams?.success !== undefined;
 
-  const { t } = await useTranslation(lang, 'donate');
+  const { t } = await getTranslation(lang, 'donate');
 
   return (
     <Section>

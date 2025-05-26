@@ -1,5 +1,7 @@
 'use client';
 
+import { ReactElement } from 'react';
+
 import { MaraImage } from '../../../../components/image';
 import { Event, Lang } from '../../../../components/types';
 import { Button, ButtonProps } from '../../../../components/button';
@@ -81,7 +83,7 @@ function ThanksText(props: { text: string }) {
   );
 }
 
-function TipsButton(props: { tipsLink: string; tipsLabel?: string; slug: string } & ButtonProps) {
+function TipsButton(props: { tipsLink: string; tipsLabel?: string; slug: string } & ButtonProps): ReactElement {
   return (
     <Button
       {...props}

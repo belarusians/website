@@ -1,4 +1,4 @@
-import { useTranslation } from '../../i18n';
+import { getTranslation } from '../../i18n';
 import { Section } from '../../../components/section';
 import H1 from '../../../components/headings/h1';
 import Form from './form';
@@ -9,7 +9,7 @@ import { getAlternates } from '../../../utils/og';
 
 export default async function IndexPage({ params }: CommonPageParams) {
   const { lang } = await params;
-  const { t } = await useTranslation(lang, 'join-us');
+  const { t } = await getTranslation(lang, 'join-us');
 
   return (
     <Section>

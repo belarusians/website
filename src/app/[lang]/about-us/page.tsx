@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Metadata, ResolvingMetadata } from 'next/types';
 import Link from 'next/link';
 
-import { useTranslation } from '../../i18n';
+import { getTranslation } from '../../i18n';
 import { Section } from '../../../components/section';
 import { Lang } from '../../../components/types';
 import H1 from '../../../components/headings/h1';
@@ -21,7 +21,7 @@ import { getAlternates } from '../../../utils/og';
 
 export default async function AboutUs({ params }: CommonPageParams) {
   const { lang } = await params;
-  const { t } = await useTranslation(lang, 'about-us');
+  const { t } = await getTranslation(lang, 'about-us');
 
   return (
     <Section>

@@ -3,14 +3,14 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
-import { useTranslation } from '../../../app/i18n/client';
+import { getTranslation } from '../../../app/i18n/client';
 import { LanguageSelector } from '../../language-selector';
 import { Lang } from '../../types';
 import { Button } from '../../button';
 import { ClickOutside } from '../../click-outside';
 
 export function MobileMenu({ lang }: { lang: Lang }) {
-  const { t } = useTranslation(lang);
+  const { t } = getTranslation(lang);
   const [menuOpened, setMenuOpened] = useState(false);
 
   const toggleMenu = () => {
@@ -63,7 +63,7 @@ export function MobileMenu({ lang }: { lang: Lang }) {
 }
 
 function OpenedMenu({ lang, onClick }: { lang: Lang; onClick: () => void }) {
-  const { t } = useTranslation(lang);
+  const { t } = getTranslation(lang);
   return (
     <div className="flex flex-col items-start w-full left-0 absolute pl-4">
       <LanguageSelector lang={lang} className="text-white py-4" />

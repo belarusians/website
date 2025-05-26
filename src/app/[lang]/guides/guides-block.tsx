@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { GuideWithoutHTMLContent, Lang } from '@/components/types';
 import { GuidesBlockClient } from './guides-block-client';
-import { useTranslation } from '../../i18n';
+import { getTranslation } from '../../i18n';
 
 interface GuidesBlockProps {
   guides: GuideWithoutHTMLContent[];
@@ -10,7 +10,7 @@ interface GuidesBlockProps {
 }
 
 export async function GuidesBlock(props: GuidesBlockProps): Promise<React.JSX.Element> {
-  const { t } = await useTranslation(props.lang, 'guides');
+  const { t } = await getTranslation(props.lang, 'guides');
 
   const translations = {
     all: t('all'),

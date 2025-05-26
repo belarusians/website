@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import H3 from '../../../../components/headings/h3';
-import { useTranslation } from '../../../i18n/client';
+import { getTranslation } from '../../../i18n/client';
 import { Lang } from '../../../../components/types';
 
 interface VacancyFormProps {
@@ -11,7 +11,7 @@ interface VacancyFormProps {
 }
 
 export default function VacancyForm({ lang, vacancyId }: VacancyFormProps) {
-  const { t } = useTranslation(lang, 'vacancies');
+  const { t } = getTranslation(lang, 'vacancies');
 
   const [formContact, setFormContact] = useState('');
   const [formAdditional, setFormAdditional] = useState('');

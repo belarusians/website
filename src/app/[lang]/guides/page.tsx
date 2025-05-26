@@ -1,4 +1,4 @@
-import { useTranslation } from '../../i18n';
+import { getTranslation } from '../../i18n';
 import { CommonPageParams } from '../../types';
 import { Section } from '@/components/section';
 import H1 from '../../../components/headings/h1';
@@ -10,7 +10,7 @@ import { GuidesBlock } from './guides-block';
 
 export default async function GuidesPage({ params }: CommonPageParams) {
   const { lang } = await params;
-  const { t } = await useTranslation(lang, 'guides');
+  const { t } = await getTranslation(lang, 'guides');
 
   const guides = await getAllGuides(lang);
 

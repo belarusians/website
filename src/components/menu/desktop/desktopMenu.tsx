@@ -3,14 +3,14 @@
 import Link from 'next/link';
 import { UserButton, useUser } from '@clerk/nextjs';
 
-import { useTranslation } from '../../../app/i18n/client';
+import { getTranslation } from '../../../app/i18n/client';
 import { LanguageSelector } from '../../language-selector';
 import { Lang } from '../../types';
 import { Dropdown } from '../../dropdown';
 import { StudioLink } from '@/components/studio-link';
 
 export function DesktopMenu({ lang }: { lang: Lang }) {
-  const { t } = useTranslation(lang);
+  const { t } = getTranslation(lang);
   const { user } = useUser();
 
   return (
