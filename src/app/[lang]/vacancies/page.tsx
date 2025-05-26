@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { useTranslation } from '../../i18n';
+import { getTranslation } from '../../i18n';
 import { Lang } from '../../../components/types';
 import { Section } from '../../../components/section';
 import H1 from '../../../components/headings/h1';
@@ -15,7 +15,7 @@ export const revalidate = 3600;
 
 export default async function VacanciesPage({ params }: CommonPageParams) {
   const { lang } = await params;
-  const { t } = await useTranslation(lang, 'vacancies');
+  const { t } = await getTranslation(lang, 'vacancies');
   const vacancies = await getData(lang);
 
   return (

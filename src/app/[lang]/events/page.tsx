@@ -1,4 +1,4 @@
-import { useTranslation } from '../../i18n';
+import { getTranslation } from '../../i18n';
 import { CommonPageParams } from '../../types';
 import { Section } from '../../../components/section';
 import H1 from '../../../components/headings/h1';
@@ -11,7 +11,7 @@ import { getAlternates } from '../../../utils/og';
 
 export default async function EventsPage({ params }: CommonPageParams) {
   const { lang } = await params;
-  const { t } = await useTranslation(lang, 'events');
+  const { t } = await getTranslation(lang, 'events');
 
   const events = await getAllEvents(lang);
   const grouped = groupByYear(events);

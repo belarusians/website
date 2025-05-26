@@ -101,10 +101,10 @@ The website supports multiple languages with i18next.
 
 2. Use the translation function in components:
    ```tsx
-   import { useTranslation } from 'react-i18next';
+   import { useTranslation as getTranslation } from 'react-i18next';
    
    const Component = () => {
-     const { t } = useTranslation('namespace');
+     const { t } = getTranslation('namespace');
      return <p>{t('key')}</p>;
    };
    ```

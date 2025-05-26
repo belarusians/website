@@ -5,7 +5,11 @@ import { sanityFetch } from '../client';
 import { Guide, GuideWithoutHTMLContent, Lang } from '@/components/types';
 import { GuideSchema } from '../../../sanity.config';
 
-export async function getAllGuidesSlugs(): Promise<{ slug: string }[]> {
+export type Slug = {
+  slug: string;
+};
+
+export async function getAllGuidesSlugs(): Promise<Slug[]> {
   return sanityFetch('*[_type == "guide"]{ "slug": slug.current }', ['guide']);
 }
 

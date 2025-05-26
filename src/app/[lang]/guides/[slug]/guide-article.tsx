@@ -1,5 +1,5 @@
 import H1 from '../../../../components/headings/h1';
-import { useTranslation } from '@/app/i18n';
+import { getTranslation } from '@/app/i18n';
 import { Guide, Lang } from '@/components/types';
 
 interface GuideArticleProps {
@@ -8,7 +8,7 @@ interface GuideArticleProps {
 }
 
 export async function GuideArticle(props: GuideArticleProps) {
-  const { t } = await useTranslation(props.lang, 'guides');
+  const { t } = await getTranslation(props.lang, 'guides');
   const formattedDate = new Date(props.guide.publishedAt).toLocaleDateString(props.lang, {
     year: 'numeric',
     month: 'long',

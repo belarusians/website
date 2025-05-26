@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, ReactElement } from 'react';
 import { md } from '../../../components/utils';
 
-export default function Form() {
+export default function Form(): ReactElement {
   const [width, setWidth] = useState(0);
 
   useEffect(() => {

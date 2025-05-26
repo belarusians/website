@@ -4,7 +4,7 @@ import { Lang, Event } from '../../../../components/types';
 import { Section } from '../../../../components/section';
 import { EventArticle } from './event-article';
 import { CommonPageParams, PageSearchParams } from '../../../types';
-import { useTranslation } from '../../../i18n';
+import { getTranslation } from '../../../i18n';
 import { getAllEventsSlugs, getEventBySlug } from '../../../../sanity/event/service';
 import { urlForImage } from '../../../../sanity/lib/image';
 import { isEventPassed } from '../../../../sanity/event/utils';
@@ -22,7 +22,7 @@ export default async function EventPage({ params, searchParams }: EventPageParam
 
   const paymentSucceeded: boolean = searchParamsData?.payment_succeeded !== undefined;
 
-  const { t } = await useTranslation(lang, 'events');
+  const { t } = await getTranslation(lang, 'events');
   const event = await getData(slug, lang);
   if (!event) {
     return <div>Not found</div>;

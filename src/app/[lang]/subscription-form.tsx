@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslation } from '../i18n/client';
+import { getTranslation } from '../i18n/client';
 import * as React from 'react';
 import { isEmailValid } from '../../lib/email';
 import { Button } from '../../components/button';
@@ -11,7 +11,7 @@ import { Spinner } from '../../components/spinner';
 export function SubscriptionForm({ lang }: { lang: Lang }) {
   const emailInputId = 'email-input';
 
-  const { t } = useTranslation(lang, 'main');
+  const { t } = getTranslation(lang, 'main');
   const [isLoading, setIsLoading] = React.useState(false);
   const [isValid, setIsValid] = React.useState(true);
   const [isSuccess, setIsSuccess] = React.useState(false);

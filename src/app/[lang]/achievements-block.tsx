@@ -2,11 +2,11 @@
 
 import { useEffect, useState, useRef } from 'react';
 
-import { useTranslation } from '../i18n/client';
+import { getTranslation } from '../i18n/client';
 import { Lang } from '../../components/types';
 
 export function AchievementsBlock(props: { lang: Lang }) {
-  const { t } = useTranslation(props.lang, 'main');
+  const { t } = getTranslation(props.lang, 'main');
 
   const [hydrated, setHydrated] = useState(false);
   useEffect(() => {
@@ -14,7 +14,7 @@ export function AchievementsBlock(props: { lang: Lang }) {
   }, []);
 
   const counterRef = useRef<HTMLSpanElement>(null);
-  const updateCounter = () => {
+  const updateCounter = (): void => {
     if (!counterRef.current) {
       setTimeout(updateCounter, 5);
       return;
