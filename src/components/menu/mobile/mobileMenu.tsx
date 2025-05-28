@@ -21,7 +21,7 @@ export function MobileMenu({ lang }: { lang: Lang }) {
     <ClickOutside onClickOutside={() => menuOpened && setMenuOpened(false)}>
       <div className="flex items-center justify-between">
         <Button
-          className="mr-4 p-1 md:p-2 lg:p-3 bg-[length:350%_100%] bg-beautiful-button font-normal rounded-r-md text-white transition-all hover:shadow-tbr-xl animate-bg-rotation-slow-wobble"
+          className="mr-4 p-2 lg:p-3 bg-[length:350%_100%] bg-beautiful-button font-normal rounded-r-md text-white transition-all hover:shadow-tbr-xl animate-bg-rotation-slow-wobble"
           trackingName="join-button"
           link={`/${lang}/join-us`}
         >
