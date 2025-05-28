@@ -14,7 +14,7 @@ export default function Form(): ReactElement {
   }, []);
 
   // TODO: do something with those magical numbers. Iframe should be well positioned automatically! Without this magic
-  const iframeHeight = width > md ? 1696 : 2280;
+  const iframeHeight = width > md ? 1296 : 1480;
 
   return (
     <iframe
