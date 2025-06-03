@@ -3,4 +3,14 @@ User-agent: *
 Allow: /
 Disallow: /studio
 
+# Block Next.js static assets
+Disallow: /_next/
+Disallow: /api/
+
+# Block other assets that shouldn't be indexed
+Disallow: /*.woff2$
+Disallow: /*.woff$
+Disallow: /*.ttf$
+Disallow: /*.eot$
+
 Sitemap: https://www.belarusians.nl/sitemap.xml
