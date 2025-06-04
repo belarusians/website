@@ -17,7 +17,7 @@ function localeMiddleware(request: NextRequest): void | NextResponse {
 
   if (pathnameHasRuLocale) {
     const url = new NextURL(`/${Lang.be}${pathname.substring(3)}`, request.url);
-    return NextResponse.redirect(url);
+    return NextResponse.redirect(url, 301);
   }
 
   // Check if there is any supported locale in the pathname
