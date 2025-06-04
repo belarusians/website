@@ -1,4 +1,3 @@
-# Allow all crawlers
 User-agent: *
 Allow: /
 Disallow: /studio
@@ -7,10 +6,21 @@ Disallow: /studio
 Disallow: /_next/
 Disallow: /api/
 
-# Block other assets that shouldn't be indexed
+# Block authentication subdomains
+Disallow: /clerk*
+
+# Block deprecated Russian locale
+Disallow: /ru/
+
+# Block font files and other assets
 Disallow: /*.woff2$
 Disallow: /*.woff$
 Disallow: /*.ttf$
 Disallow: /*.eot$
+Disallow: /*.otf$
+
+# Block system files
+Disallow: /*.json$
+Disallow: /*.xml$
 
 Sitemap: https://www.belarusians.nl/sitemap.xml
