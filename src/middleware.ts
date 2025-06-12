@@ -13,6 +13,12 @@ function localeMiddleware(request: NextRequest): void | NextResponse {
     return;
   }
 
+  // Handle trailing slash removal first
+  if (pathname.endsWith('/') && pathname.length > 1) {
+    const url = new NextURL(pathname.slice(0, -1), request.url);
+    return NextResponse.redirect(url, 308);
+  }
+
   const pathnameHasRuLocale = pathname.startsWith('/ru/') || pathname === '/ru';
 
   if (pathnameHasRuLocale) {
