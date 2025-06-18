@@ -35,7 +35,7 @@ export default async function KupallePage({ params }: CommonPageParams) {
       <div className="flex flex-col gap-6">
         <div className="">
           <H2>{t('map.title')}</H2>
-          <Card className="px-2 md:px-2">
+          <Card>
             <div className="w-full overflow-auto">
               <img src="/kupalle-plan.svg" alt={t('map.title')} className="w-full h-auto max-w-none" />
             </div>
