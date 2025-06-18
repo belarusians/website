@@ -9,7 +9,7 @@ import { NextURL } from 'next/dist/server/web/next-url';
 function localeMiddleware(request: NextRequest): void | NextResponse {
   const pathname = request.nextUrl.pathname;
 
-  if (pathname.startsWith('/.well-known/') || pathname.startsWith('/api/') || pathname.startsWith('/trpc/')) {
+  if (pathname.startsWith('/.well-known/') || pathname.startsWith('/api/') || pathname.startsWith('/trpc/') || pathname.endsWith('.svg') || pathname.endsWith('.png') || pathname.endsWith('.jpg') || pathname.endsWith('.jpeg') || pathname.endsWith('.gif') || pathname.endsWith('.ico')) {
     return;
   }
 
