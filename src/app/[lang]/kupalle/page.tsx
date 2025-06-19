@@ -70,6 +70,15 @@ export default async function KupallePage({ params }: CommonPageParams) {
               {t('links.song-lyrics.link')}
               <FontAwesomeIcon icon={faExternalLinkAlt} className="w-3 h-3" />
             </a>
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSeAVbabp2UCdghus1rBIWqr0rxCbHR8URkqQsYNQE02pwfMJg/viewform"
+              className="inline-flex items-center gap-2 text-primary transition-colors hover:text-primary-dark"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              {t('links.quiz.link')}
+              <FontAwesomeIcon icon={faExternalLinkAlt} className="w-3 h-3" />
+            </a>
           </div>
         </div>
       </div>
