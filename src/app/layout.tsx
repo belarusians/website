@@ -34,7 +34,7 @@ function addJsonLd() {
   };
 }
 
-const ENABLE_GOOGLE_TAG = true;
+const ENABLE_GOOGLE_TAG = false;
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
