@@ -32,7 +32,7 @@ export function EventThumbnail(props: EventThumbnailProps) {
               (isRescheduled || isCancelled ? 'line-through' : '')
             }
           >
-            {renderDate(props.event.eventDate ?? props.event.timeframe.start, props.lang, props.displayYear)}
+            {renderDate(props.event.timeframe.start, props.lang, props.displayYear)}
           </p>
           {isRescheduled && (
             <p className={`${isCancelled ? 'text-gray-400 line-through' : 'text-primary'}`}>

@@ -8,7 +8,7 @@ import { NewsBlock } from './news-block';
 import { EventsBlock } from './events-block';
 import { CommonPageParams } from '../types';
 import { getTranslation } from '../i18n';
-import { getFutureEventMetas, EventMeta, getLastNEventMetas } from '../../sanity/event/service';
+import { getFutureEventMetas, EventMeta } from '../../sanity/event/service';
 import {
   getFeaturedNewsMetas,
   getMainFeaturedNewsMeta,
@@ -47,14 +47,16 @@ export default async function IndexPage({ params }: CommonPageParams) {
         />
       </Section>
 
-      <Section>
-        <EventsBlock
-          headingText={t('events-title')}
-          lang={lang}
-          events={props.events}
-          tbaText={eventsT('rescheduled-tba-text')}
-        />
-      </Section>
+      {props.events.length ? (
+        <Section>
+          <EventsBlock
+            headingText={t('events-title')}
+            lang={lang}
+            events={props.events}
+            tbaText={eventsT('rescheduled-tba-text')}
+          />
+        </Section>
+      ) : null}
 
       <Section className="bg-beautiful-gradient py-3 md:py-4 lg:py-6">
         <AchievementsBlock lang={lang} />
@@ -81,9 +83,6 @@ function hasTwoSecondaryNews(secondaryNews: NewsMeta[]): secondaryNews is [NewsM
 
 async function getData(lang: Lang): Promise<MainPageProps> {
   const events = await getFutureEventMetas(lang);
-  if (events.length === 0) {
-    events.push(...(await getLastNEventMetas(lang, 2)));
-  }
 
   // TODO: remove 4. So far we can't render more, because of bad UX
   const otherNews: NewsMeta[] = await getNotFeaturedNewsMetas(lang, 6);

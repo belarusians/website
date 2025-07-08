@@ -33,7 +33,7 @@ export default async function EventsPage({ params }: CommonPageParams) {
 function groupByYear(events: EventMeta[]): { [year: string]: EventMeta[] } {
   const grouped: { [year: string]: EventMeta[] } = {};
   for (const event of events) {
-    const year = (event.eventDate ?? event.timeframe.start).split('-')[0];
+    const year = event.timeframe.start.split('-')[0];
     if (!grouped[year]) {
       grouped[year] = [];
     }

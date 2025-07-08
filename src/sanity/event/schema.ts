@@ -63,15 +63,6 @@ const event = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'eventDate',
-      title: 'Event date',
-      type: 'datetime',
-      deprecated: {
-        reason: 'Выкарыстоўвайце "Час імпрэзы"',
-      },
-      hidden: ({ value }) => value === undefined,
-    }),
-    defineField({
       name: 'timeframe',
       title: 'Час імпрэзы',
       type: 'timeframe',

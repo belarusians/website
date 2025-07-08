@@ -6,9 +6,8 @@ import { EventSchema } from '../../../sanity.config';
 
 export async function getAllEvents(lang: Lang): Promise<EventMeta[]> {
   return sanityFetch<EventMeta[]>(
-    `*[_type == "event"] | order(timeframe.start desc, eventDate desc){ 
+    `*[_type == "event"] | order(timeframe.start desc){ 
       "slug": slug.current,
-       eventDate,
        timeframe,
        rescheduledTimeframe,
        rescheduled,
@@ -26,7 +25,7 @@ export async function getAllEventsSlugs(): Promise<{ slug: string }[]> {
 
 export type EventMeta = Pick<
   Event,
-  'slug' | 'eventDate' | 'rescheduled' | 'cancelled' | 'rescheduledTimeframe' | 'title' | 'location' | 'timeframe'
+  'slug' | 'rescheduled' | 'cancelled' | 'rescheduledTimeframe' | 'title' | 'location' | 'timeframe'
 >;
 
 export async function getFutureEventMetas(lang: Lang): Promise<EventMeta[]> {
@@ -46,9 +45,8 @@ export async function getFutureEventMetas(lang: Lang): Promise<EventMeta[]> {
 
 export async function getLastNEventMetas(lang: Lang, top: number): Promise<EventMeta[]> {
   return sanityFetch<EventMeta[]>(
-    `*[_type == "event"] | order(timeframe.start asc, eventDate asc){ 
+    `*[_type == "event"] | order(timeframe.start desc){ 
       "slug": slug.current, 
-      eventDate, 
       timeframe,
       rescheduled,
       cancelled,
