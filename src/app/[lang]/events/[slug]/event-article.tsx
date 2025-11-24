@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactElement } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 
 import { MaraImage } from '../../../../components/image';
 import { Event, Lang } from '../../../../components/types';
@@ -19,6 +19,25 @@ interface ArticleProps {
 }
 
 export function EventArticle(props: ArticleProps) {
+  const [currentTime, setCurrentTime] = useState<number | null>(null);
+
+  // Hydrate on client to get real current time
+  useEffect(() => {
+    setCurrentTime(Date.now());
+
+    // Update every minute
+    const interval = setInterval(() => {
+      setCurrentTime(Date.now());
+    }, 60000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Calculate if event is past based on current client time
+  const isPastEvent =
+    currentTime !== null
+      ? new Date(props.event.timeframe.end).getTime() < currentTime && !props.event.rescheduled
+      : props.pastEvent; // Fallback to server-side calculation during SSR
   return (
     <div className="flex flex-col md:flex-row gap-2 mg:gap-3 lg:gap-4">
       <div className="md:basis-1/3 lg:basis-2/5">
@@ -34,13 +53,13 @@ export function EventArticle(props: ArticleProps) {
               size="large"
               link={props.event.ticketsLink}
               target="_blank"
-              disabled={props.pastEvent}
+              disabled={isPastEvent}
               label={props.event.ticketsLabel ?? props.defaultTicketsLabel}
               trackingName={`buy-${props.event.slug}-ticket-button`}
               click={
                 props.event.gtmEventValue ? () => window.gtag_report_conversion(props.event.gtmEventValue!) : undefined
               }
-              className={`${props.pastEvent ? 'contrast-50' : ''} bg-primary w-full text-white`}
+              className={`${isPastEvent ? 'contrast-50' : ''} bg-primary w-full text-white`}
             />
           )}
           {props.event.tipsLink && !props.event.cancelled && (

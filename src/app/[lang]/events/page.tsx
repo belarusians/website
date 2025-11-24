@@ -9,6 +9,9 @@ import { Lang } from '../../../components/types';
 import { Metadata, ResolvingMetadata } from 'next/types';
 import { getAlternates } from '../../../utils/og';
 
+// Use ISR to revalidate every hour - balances freshness with performance
+export const revalidate = 3600;
+
 export default async function EventsPage({ params }: CommonPageParams) {
   const { lang } = await params;
   const { t } = await getTranslation(lang, 'events');
