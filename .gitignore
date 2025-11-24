@@ -147,3 +147,7 @@ amplifytools.xcconfig
 .next
 .env*.local
 .vercel
+
+# TypeScript build info
+tsconfig.tsbuildinfo
+*.tsbuildinfo
