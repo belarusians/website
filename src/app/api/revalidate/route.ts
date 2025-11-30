@@ -38,6 +38,10 @@ export async function POST(request: NextRequest) {
       console.log(`Revalidating tag events with slug ${body.slug}`);
       revalidatePath('/[lang]/events/[slug]', 'page');
     }
+    if (body._type === 'event') {
+      console.log('Revalidating events listing page');
+      revalidatePath('/[lang]/events', 'page');
+    }
     if (body.slug && body._type === 'news') {
       console.log(`Revalidating tag news with slug ${body.slug}`);
       revalidatePath('/[lang]/news/[slug]', 'page');
