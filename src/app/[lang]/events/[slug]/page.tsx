@@ -10,9 +10,6 @@ import { urlForImage } from '../../../../sanity/lib/image';
 import { isEventPassed } from '../../../../sanity/event/utils';
 import { getAlternates } from '../../../../utils/og';
 
-// Use ISR to revalidate every hour
-export const revalidate = 3600;
-
 type EventPageParams = CommonPageParams & {
   params: Promise<{
     slug: string;
