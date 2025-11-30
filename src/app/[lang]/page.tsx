@@ -19,8 +19,8 @@ import { FeedbackBlock } from './feedback-block';
 import { getNRandomFeedbacksByLang } from '../../sanity/feedback/service';
 import { supportedLngs } from '../i18n/settings';
 
-// Force SSR to ensure fresh event data on every request
-export const dynamic = 'force-dynamic';
+// Use ISR to balance freshness with performance - revalidate every 5 minutes
+export const revalidate = 300;
 
 interface MainPageProps {
   mainNews: NewsMeta;
