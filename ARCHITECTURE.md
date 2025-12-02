@@ -1,134 +1,125 @@
-# Architecture Guide for AI Agents
+# Architecture Insights for AI Agents
 
-> **Purpose**: Quick navigation guide to find information efficiently. Code is self-documented - this shows you where to look.
+> **Purpose**: High-level insights and architectural decisions. Code is self-documented - read it directly. This shows you what's non-obvious and where to look.
 
-## Quick Reference
+## System Overview
 
-**Stack**: Next.js 15 (App Router) + TypeScript + Sanity CMS + Clerk Auth + Stripe + Tailwind CSS
-**Languages**: Belarusian (be), Dutch (nl) - all routes use `[lang]` parameter
-**Build Commands**: See `CLAUDE.md`
+**Stack**: Next.js 15 (App Router) + TypeScript + Sanity CMS + Clerk Auth + Stripe
+**Key Insight**: Multilingual (be/nl) with locale-first routing via `[lang]` parameter throughout
+
+## Critical Architectural Decisions
+
+### 1. Locale-First Routing Pattern
+**Decision**: Every route uses `/[lang]/...` enforced by middleware
+**Why**: SEO, consistent URLs, server-side locale detection
+**Implication**: When adding routes, always include `[lang]` parameter and `generateStaticParams()` for both locales
+**Entry point**: `src/middleware.ts:15`
+
+### 2. ISR with Webhook-Triggered Revalidation
+**Decision**: `force-cache` + tag-based revalidation via Sanity webhooks
+**Why**: Performance of static sites, freshness within minutes, no manual deploys
+**Gotcha**: Revalidation is type-level (all events), not document-level (one event)
+**Entry points**:
+- Cache tags: `src/sanity/*/service.ts` (search for `tags:`)
+- Revalidation: `src/app/api/revalidate/route.ts:24`
+
+### 3. Multi-Language Content Schema
+**Decision**: Custom Sanity field types (localeString, localeText, localeContent)
+**Why**: Structured multi-language support, fallback to Belarusian, type safety
+**Gotcha**: GROQ projections must extract locale: `localeString[lang] as "title"`
+**Entry point**: `src/sanity/locale-schemas/`
+
+### 4. S3 for Form Submissions (Not Database)
+**Decision**: Store subscriptions/applications as JSON files in S3
+**Why**: Simple, cheap, no complex queries needed, no database maintenance
+**Implication**: No search/filter capability - manual download from S3 console
+**Entry points**:
+- `src/lib/s3.ts:12`
+- `src/app/api/subscribe/route.ts:18`
+- `src/app/api/vacancies/apply/route.ts:22`
+
+### 5. Google Workspace for RBAC
+**Decision**: Fetch user roles from Google Groups instead of custom role management
+**Why**: Organization already uses Google Groups, no duplicate user management
+**Gotcha**: Requires service account with domain-wide delegation, impersonates admin
+**Entry point**: `src/lib/google-directory.ts:28`
+
+## Important Patterns & Gotchas
+
+### Portable Text Transformation
+**Pattern**: Sanity stores rich text as Portable Text blocks → convert to HTML server-side
+**Why**: Structured content, multi-language support, not just HTML strings
+**Where**: All `src/sanity/*/service.ts` files use `@portabletext/to-html`
+
+### Stripe Payment → ClickMeeting Flow
+**Non-obvious**: Donation payments trigger automatic ClickMeeting invitations
+**How**: Stripe webhook checks product ID → if match, extracts email → sends ClickMeeting invite
+**Gotcha**: Product ID must be configured in webhook handler for invite to trigger
+**Entry point**: `src/app/api/clickmeeting/route.ts:35`
+
+### Authentication vs Authorization
+**Insight**: Clerk handles authentication, Google Workspace handles authorization
+**Flow**: User signs in (Clerk) → backend fetches Google Groups → maps to role (Admin/Editor/Member)
+**Gotcha**: User must be in Google Group to get elevated permissions, not managed in app
+**Entry point**: `src/lib/google-directory.ts:45`
+
+### Cache Tag Strategy
+**Insight**: Revalidation granularity is by content type, not by document
+**Why**: Simpler webhook logic, acceptable staleness trade-off
+**Implication**: Publishing one event regenerates all event pages, not just that one
+**Tags**: `event`, `news`, `guide`, `vacancy`, `feedback`
+
+## Directory Structure Logic
+
+```
+/src/app/[lang]/        → All user-facing routes (locale-specific)
+/src/app/api/           → Backend API routes (webhooks, form handlers)
+/src/app/(sanity)/      → Sanity Studio isolated in route group
+/src/sanity/[type]/     → Content schemas + queries + types (co-located)
+/src/lib/               → External service clients (Stripe, S3, Google, etc.)
+/src/contract/          → Zod validation schemas for API routes
+/src/components/        → React components (organized by route)
+```
+
+**Insight**: Sanity content types co-locate schema/service/type in same directory for cohesion
+
+## Key Constraints
+
+1. **Always support both languages** (`be` and `nl`) when adding features
+2. **Attach cache tags** to all Sanity fetches for ISR to work
+3. **Validate API inputs** with Zod schemas in `/src/contract/`
+4. **Never use `any` type** - strict mode enabled, all types must be defined
+5. **Translations required** in both `/src/app/i18n/locales/{be,nl}/translation.json`
+6. **Path aliases** - use `@/lib/...` not `../../lib/...`
+
+## Common Pitfalls
+
+1. **Forgetting `[lang]` parameter** in new routes breaks middleware
+2. **Missing cache tags** prevents ISR from updating content
+3. **GROQ without locale projection** returns entire localeString object, not string
+4. **Missing translations** breaks pages in one language
+5. **Webhook signature not verified** creates security vulnerability
+6. **Google private key newlines** must be preserved (`\n` → actual newline)
 
 ## Where to Find Things
 
-### Routes & Pages
-- **All routes**: `/src/app/[lang]/*` - locale-first routing enforced by middleware
-- **Layouts**: `/src/app/[lang]/layout.tsx` - Clerk provider, i18n, header/footer
-- **API routes**: `/src/app/api/*/route.ts` - RESTful endpoints
-- **Sanity Studio**: `/src/app/(sanity)/studio/` - CMS admin at `/studio`
+Use Glob/Grep to find specific functionality:
+- **Routes**: `src/app/[lang]/**/*.tsx`
+- **API endpoints**: `src/app/api/**/route.ts`
+- **Sanity schemas**: `src/sanity/*/schema.ts`
+- **GROQ queries**: `src/sanity/*/service.ts`
+- **External integrations**: `src/lib/*.ts`
+- **Validation**: `src/contract/*.ts`
+- **Translations**: `src/app/i18n/locales/`
 
-### Content Management (Sanity)
-- **Schemas**: `/src/sanity/[type]/schema.ts` - event, news, guide, vacancy, feedback
-- **Queries**: `/src/sanity/[type]/service.ts` - GROQ queries with cache tags
-- **Types**: `/src/sanity/[type]/type.ts` - TypeScript definitions
-- **Multi-language fields**: `/src/sanity/locale-schemas/` - localeString, localeText, localeContent
-- **Config**: `/sanity.config.ts` + `/src/sanity/env.ts`
+## Testing Strategy Insight
 
-### External Integrations
-- **Stripe**: `/src/lib/stripe.ts` - payments (products, prices, payment links)
-- **Google Workspace**: `/src/lib/google-directory.ts` - role-based access (Admin/Editor/Member)
-- **S3**: `/src/lib/s3.ts` - form submissions storage
-- **ClickMeeting**: `/src/lib/clickmeeting.ts` - video conference invites
-
-### Internationalization
-- **Config**: `/src/app/i18n/settings.ts` - supported languages
-- **Translations**: `/src/app/i18n/locales/{be,nl}/translation.json`
-- **Server**: `/src/app/i18n/index.ts` - server-side i18n
-- **Client**: `/src/app/i18n/client.ts` - useTranslation hook
-
-### Components
-- **Global**: `/src/components/` - button, card, image, header, footer
-- **Locale-specific**: `/src/components/[lang]/` - locale-aware components
-- **Styles**: `/src/components/globals.css` - Tailwind configuration
-
-### Configuration
-- **Next.js**: `next.config.js` - image domains, redirects
-- **TypeScript**: `tsconfig.json` - strict mode, path aliases (`@/*` → `./src/*`)
-- **Environment**: `.env.development`, `.env.production`
-
-## Key Patterns
-
-### 1. Locale Handling
-- Every page/route must support both `be` and `nl`
-- Middleware (`/src/middleware.ts`) enforces locale prefix
-- Use `generateStaticParams()` for static generation
-- Translations in `/src/app/i18n/locales/{lang}/translation.json`
-
-### 2. Content from Sanity
-```
-Page → Service (GROQ query) → Portable Text → HTML → Render
-```
-- All fetches use `force-cache` with cache tags
-- ISR via webhooks to `/api/revalidate`
-- Cache tags: `event`, `news`, `guide`, `vacancy`, `feedback`
-
-### 3. API Routes
-- Validation: Zod schemas in `/src/contract/`
-- Response format: `{ success: true, data: {...} }` or `{ error: "..." }`
-- Webhooks verify signatures (Sanity HMAC, Stripe, Clerk Svix)
-
-### 4. Authentication & Authorization
-```
-Clerk (auth) → Google Workspace API (groups) → Role mapping
-```
-- Roles: Admin (administratie@), Editor (editors@), Member (default)
-- See `/src/lib/google-directory.ts` for role logic
-
-## Common Tasks
-
-### Add New Content Type
-1. Schema: `/src/sanity/[type]/schema.ts`
-2. Service: `/src/sanity/[type]/service.ts` (GROQ queries + cache tags)
-3. Types: `/src/sanity/[type]/type.ts`
-4. Route: `/src/app/[lang]/[type]/page.tsx`
-5. Revalidation: Update `/src/app/api/revalidate/route.ts`
-6. Register: Update `/sanity.config.ts`
-
-### Add New API Endpoint
-1. Route: `/src/app/api/[name]/route.ts`
-2. Validation: `/src/contract/[name].ts` (Zod schema)
-3. Integration: Use clients from `/src/lib/` if needed
-
-### Add New Page
-1. Route: `/src/app/[lang]/[route]/page.tsx`
-2. Translations: `/src/app/i18n/locales/{be,nl}/translation.json`
-3. Metadata: Implement `generateMetadata()`
-4. Components: `/src/components/[lang]/[route]/` (if route-specific)
-
-### Add External Integration
-1. Client: `/src/lib/[service].ts`
-2. Environment vars: `.env.*` files
-3. Types: Define API response types
-4. Use in: API routes for orchestration
-
-## Data Flow Essentials
-
-**Page Render**: Middleware → Router → Layout → Page → Sanity query → Static HTML (ISR)
-
-**Content Update**: Sanity edit → Webhook → `/api/revalidate` → Next.js cache invalidation → Regenerate
-
-**Donation**: Form → `/api/donate/link` → Stripe Payment Link → User pays → Stripe webhook → `/api/clickmeeting` → ClickMeeting invite
-
-**Subscription/Application**: Form → API route → S3 storage (JSON files)
-
-## Troubleshooting Entry Points
-
-- **ISR not working**: Check `/api/revalidate` logs, Sanity webhook delivery, `SANITY_REVALIDATE_SECRET`
-- **Auth issues**: Check Clerk dashboard, Google Workspace service account, group memberships
-- **Build errors**: Run `npm run typecheck`, `npm run lint`, check environment variables
-- **Payment flow**: Verify Stripe keys, webhook signatures, product IDs
-
-## Critical Conventions
-
-✓ Always use `[lang]` in routes
-✓ Attach cache tags to all Sanity fetches
-✓ Validate API inputs with Zod
-✓ Never use `any` type (strict mode)
-✓ Add translations for both `be` and `nl`
-✓ Use path aliases (`@/lib/...` not `../../lib/...`)
-✓ Mock external services in tests
+**No E2E tests** - reliance on TypeScript strict mode + linting to catch errors at compile time
+**Implication**: When adding features, ensure strong typing to prevent runtime errors
+**CI**: ESLint + Jest on PRs, but test coverage is minimal
 
 ## Related Docs
 
-- `CLAUDE.md` - Build commands, code style, testing
-- `INTEGRATIONS.md` - External service API details and env vars
-- `DATA_FLOWS.md` - Detailed flow diagrams if you need them
+- `DATA_FLOWS.md` - Key data flow insights and tracing tips
+- `INTEGRATIONS.md` - Environment variables and integration gotchas
+- `CLAUDE.md` - Build commands and code style rules

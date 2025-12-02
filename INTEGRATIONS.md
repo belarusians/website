@@ -1,235 +1,44 @@
-# External Integrations Quick Reference
+# Integration Insights
 
-> **Purpose**: Quick lookup for API credentials, endpoints, and code locations. See code for implementation details.
+> **Purpose**: Critical information about external services. Read their docs and the code - this shows you gotchas and environment setup.
 
-## Overview
+## Integration Overview
 
-| Service | Purpose | Code Location | Auth Type |
-|---------|---------|---------------|-----------|
-| Sanity CMS | Content management | `/src/sanity/` | API Token |
-| Clerk | User authentication | Layout, webhooks | API Key + Webhook Secret |
-| Stripe | Payment processing | `/src/lib/stripe.ts` | Secret Key + Webhook Secret |
-| Google Workspace | Role authorization | `/src/lib/google-directory.ts` | Service Account JWT |
-| AWS S3 | Form data storage | `/src/lib/s3.ts` | Access Key + Secret |
-| ClickMeeting | Video conferencing | `/src/lib/clickmeeting.ts` | API Key |
-| Umami | Website analytics | `/src/app/layout.tsx` | Public (script embed) |
+| Service | Purpose | Code Location | Critical Gotcha |
+|---------|---------|---------------|-----------------|
+| Sanity | Content management | `src/sanity/` | GROQ locale projection required |
+| Clerk | User authentication | Layout, webhooks | Must include `[lang]` in redirect URLs |
+| Stripe | Payments | `src/lib/stripe.ts` | Product ID matching hardcoded |
+| Google Workspace | Role authorization | `src/lib/google-directory.ts` | Private key newlines must be preserved |
+| AWS S3 | Form storage | `src/lib/s3.ts` | No query capability - manual processing |
+| ClickMeeting | Video conferencing | `src/lib/clickmeeting.ts` | Triggered by Stripe webhook only |
+| Umami | Analytics | `src/app/layout.tsx` | Script tag embed - no server-side tracking |
 
-## Sanity CMS
-
-### Environment Variables
-```bash
-NEXT_PUBLIC_SANITY_PROJECT_ID=         # Project ID
-NEXT_PUBLIC_SANITY_DATASET=            # Dataset name (production)
-NEXT_PUBLIC_SANITY_API_VERSION=        # API version (2023-05-03)
-SANITY_API_READ_TOKEN=                 # Read token (optional)
-SANITY_REVALIDATE_SECRET=              # Webhook HMAC secret
-```
-
-### Key Locations
-- **Config**: `/src/sanity/env.ts`, `/sanity.config.ts`
-- **Schemas**: `/src/sanity/{type}/schema.ts`
-- **Queries**: `/src/sanity/{type}/service.ts`
-- **Studio**: Access at `/studio`
-
-### Webhooks
-- **Endpoint**: `POST /api/revalidate`
-- **Code**: `/src/app/api/revalidate/route.ts`
-- **Signature**: HMAC-SHA256 in `Sanity-Webhook-Signature` header
-- **Config**: Sanity Dashboard → API → Webhooks
-
-### Content Types
-Event, News, Guide, Vacancy, Feedback (see `/src/sanity/` subdirectories)
-
----
-
-## Clerk
-
-### Environment Variables
-```bash
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=     # Frontend SDK key
-CLERK_SECRET_KEY=                      # Backend API key
-CLERK_WEBHOOK_SECRET=                  # Svix webhook secret
-NEXT_PUBLIC_CLERK_SIGN_IN_URL=/[lang]/sign-in
-NEXT_PUBLIC_CLERK_SIGN_UP_URL=/[lang]/sign-up
-NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/[lang]
-NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/[lang]
-```
-
-### Key Locations
-- **Provider**: `/src/app/[lang]/layout.tsx` (ClerkProvider)
-- **Middleware**: `/src/middleware.ts` (session handling)
-- **Webhooks**: `/src/app/api/webhooks/clerk/route.ts`
-
-### Webhook Events
-`user.created`, `user.updated`, `user.deleted`, `session.created`, `session.ended`
-
-### Config
-Clerk Dashboard → Webhooks → Add endpoint → Select events
-
----
-
-## Stripe
-
-### Environment Variables
-```bash
-STRIPE_SECRET_KEY=                     # Backend API key (sk_...)
-STRIPE_WEBHOOK_SECRET=                 # Webhook signing secret (whsec_...)
-```
-
-### Key Locations
-- **Client**: `/src/lib/stripe.ts`
-- **Donation API**: `/src/app/api/donate/link/route.ts`
-- **Webhook Handler**: `/src/app/api/clickmeeting/route.ts`
-
-### API Operations
-- **Products**: Search by name, create if missing
-- **Prices**: Search by amount/currency/interval, create if missing
-- **Payment Links**: Create with line items
-- **Webhooks**: `checkout.session.completed` → ClickMeeting invite
-
-### Config
-Stripe Dashboard → Developers → Webhooks → Add endpoint → Select `checkout.session.completed`
-
----
-
-## Google Workspace
-
-### Environment Variables
-```bash
-GOOGLE_SERVICE_ACCOUNT_EMAIL=          # Service account email
-GOOGLE_PRIVATE_KEY=                    # Private key (preserve \n)
-GOOGLE_SUBJECT_EMAIL=                  # Admin email to impersonate
-```
-
-### Key Locations
-- **Client**: `/src/lib/google-directory.ts`
-- **Usage**: Authorization checks in components
-
-### Setup Requirements
-1. Create service account in Google Cloud Console
-2. Enable Admin SDK API
-3. Grant domain-wide delegation
-4. Scope: `https://www.googleapis.com/auth/admin.directory.group.readonly`
-
-### Role Mapping
-- `administratie@belarusians.nl` → Admin
-- `editors@belarusians.nl` → Editor
-- Default → Member
-
----
-
-## AWS S3
-
-### Environment Variables
-```bash
-AWS_ACCESS_KEY_ID=                     # IAM user access key
-AWS_SECRET_ACCESS_KEY=                 # IAM user secret
-AWS_REGION=                            # e.g., eu-central-1
-SUBSCRIPTIONS_BUCKET=                  # Bucket for email subscriptions
-APPLICATIONS_BUCKET=                   # Bucket for job applications
-```
-
-### Key Locations
-- **Client**: `/src/lib/s3.ts`
-- **Subscribe API**: `/src/app/api/subscribe/route.ts`
-- **Applications API**: `/src/app/api/vacancies/apply/route.ts`
-
-### File Structure
-- Subscriptions: `{uuid}.json`
-- Applications: `{vacancy-id}/{uuid}.json`
-
-### IAM Permissions
-Required: `s3:PutObject` on specified buckets
-
----
-
-## ClickMeeting
-
-### Environment Variables
-```bash
-CLICKMEETING_API_KEY=                  # API key from dashboard
-CLICKMEETING_ROOM_ID=                  # Conference room ID
-```
-
-### Key Locations
-- **Client**: `/src/lib/clickmeeting.ts`
-- **Usage**: `/src/app/api/clickmeeting/route.ts` (Stripe webhook handler)
-
-### API Endpoint
-`POST https://api.clickmeeting.com/v1/conferences/{room_id}/invitations`
-
-### Flow
-Stripe payment → Webhook → Check product ID → Send email invitation
-
----
-
-## Umami Analytics
-
-### Environment Variables
-```bash
-NEXT_PUBLIC_UMAMI_WEBSITE_ID=          # Website ID from Umami
-NEXT_PUBLIC_UMAMI_URL=                 # Umami instance URL
-```
-
-### Key Locations
-- **Script**: `/src/app/layout.tsx` (script tag in head)
-
-### Features
-- Automatic page view tracking
-- Privacy-friendly (no cookies, GDPR compliant)
-- Custom events: `window.umami.track(event, data)` (not currently used)
-
----
-
-## Vercel (Hosting)
-
-### Configuration
-- **Build Command**: `npm run build`
-- **Install Command**: `npm install --legacy-peer-deps`
-- **Framework**: Next.js (auto-detected)
-- **Environment Variables**: Set in Vercel Dashboard
-
-### Features Used
-- Automatic deployments (push to branch)
-- Serverless API routes
-- ISR support
-- Speed Insights
-
-### Limits (Hobby Plan)
-- Function timeout: 10 seconds
-- Function memory: 1024 MB
-- Payload size: 5 MB
-
----
-
-## Environment Variable Checklist
-
-Copy to `.env.development` or `.env.production`:
+## Environment Variables (Required)
 
 ```bash
-# Sanity
+# Sanity CMS
 NEXT_PUBLIC_SANITY_PROJECT_ID=
 NEXT_PUBLIC_SANITY_DATASET=production
 NEXT_PUBLIC_SANITY_API_VERSION=2023-05-03
-SANITY_API_READ_TOKEN=
-SANITY_REVALIDATE_SECRET=
+SANITY_REVALIDATE_SECRET=           # For webhook verification
 
-# Clerk
+# Clerk Auth
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
 CLERK_SECRET_KEY=
 CLERK_WEBHOOK_SECRET=
-NEXT_PUBLIC_CLERK_SIGN_IN_URL=/[lang]/sign-in
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/[lang]/sign-in    # Must include [lang]!
 NEXT_PUBLIC_CLERK_SIGN_UP_URL=/[lang]/sign-up
 NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/[lang]
 NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/[lang]
 
 # Stripe
-STRIPE_SECRET_KEY=
-STRIPE_WEBHOOK_SECRET=
+STRIPE_SECRET_KEY=                  # Use sk_test_ for dev, sk_live_ for prod
+STRIPE_WEBHOOK_SECRET=              # Different per environment
 
-# Google Workspace
+# Google Workspace (RBAC)
 GOOGLE_SERVICE_ACCOUNT_EMAIL=
-GOOGLE_PRIVATE_KEY=
+GOOGLE_PRIVATE_KEY=                 # CRITICAL: Preserve \n as actual newlines
 GOOGLE_SUBJECT_EMAIL=admin@belarusians.nl
 
 # AWS S3
@@ -243,106 +52,167 @@ APPLICATIONS_BUCKET=
 CLICKMEETING_API_KEY=
 CLICKMEETING_ROOM_ID=
 
-# Umami
+# Umami Analytics
 NEXT_PUBLIC_UMAMI_WEBSITE_ID=
 NEXT_PUBLIC_UMAMI_URL=
 ```
 
----
+## Critical Integration Gotchas
 
-## Webhook Configuration Summary
+### Sanity CMS
+**Gotcha #1**: GROQ queries must extract locale, not return entire localeString object
+- ❌ Wrong: `localeString` → returns `{ be: "...", nl: "..." }`
+- ✅ Correct: `localeString[lang] as "title"` → returns string
 
-| Service | Dashboard URL | Endpoint | Events |
-|---------|---------------|----------|--------|
-| Sanity | sanity.io/manage | `/api/revalidate` | Document publish/update/delete |
-| Stripe | dashboard.stripe.com/webhooks | `/api/clickmeeting` | `checkout.session.completed` |
-| Clerk | dashboard.clerk.com/webhooks | `/api/webhooks/clerk` | User lifecycle events |
+**Gotcha #2**: Webhook signature verification uses HMAC-SHA256, not Svix
+- Check: `src/app/api/revalidate/route.ts:15`
+
+**Gotcha #3**: Revalidation is type-level, publishing one event regenerates all events
+- Trade-off accepted for simplicity
+
+### Clerk
+**Gotcha #1**: All redirect URLs must include `[lang]` parameter
+- ❌ Wrong: `/sign-in`
+- ✅ Correct: `/[lang]/sign-in`
+
+**Gotcha #2**: Webhooks use Svix for signature verification (different from Stripe/Sanity)
+
+### Stripe
+**Gotcha #1**: Product ID matching is hardcoded in webhook handler
+- Check: `src/app/api/clickmeeting/route.ts:35`
+- Must update code when creating new event products
+
+**Gotcha #2**: Must expand line items in checkout session to get product details
+- `expand: ['line_items.data.price.product']`
+
+**Gotcha #3**: Different webhook secrets for test vs production
+- Use Stripe CLI for local testing: `stripe listen --forward-to localhost:3000/api/clickmeeting`
+
+### Google Workspace
+**Gotcha #1**: Private key newlines MUST be preserved
+- ❌ Wrong: Literal `\n` string
+- ✅ Correct: Actual newline character
+- Fix: `GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n')`
+
+**Gotcha #2**: Service account needs domain-wide delegation
+- Setup: Google Cloud Console → IAM → Service Accounts → Domain-wide delegation
+- Required scope: `https://www.googleapis.com/auth/admin.directory.group.readonly`
+
+**Gotcha #3**: Must impersonate admin user
+- `subject: GOOGLE_SUBJECT_EMAIL` required in JWT auth
+
+### AWS S3
+**Gotcha #1**: No database means no query/search capability
+- Implication: Manual download from S3 console for processing
+
+**Gotcha #2**: IAM permissions must allow `s3:PutObject`
+- Check bucket policy if uploads fail with 403
+
+### ClickMeeting
+**Gotcha #1**: Not directly called - only triggered by Stripe webhook
+- Flow: Payment → Stripe webhook → Check product ID → Send invite
+
+**Gotcha #2**: Product ID must match hardcoded check
+- See: `src/app/api/clickmeeting/route.ts:35`
+
+## Webhook Configuration
+
+### Setup Checklist
+| Service | Dashboard | Endpoint | Events | Signature |
+|---------|-----------|----------|--------|-----------|
+| Sanity | sanity.io/manage | `/api/revalidate` | publish/update/delete | HMAC-SHA256 |
+| Stripe | dashboard.stripe.com/webhooks | `/api/clickmeeting` | `checkout.session.completed` | Stripe SDK |
+| Clerk | dashboard.clerk.com/webhooks | `/api/webhooks/clerk` | user.* | Svix |
 
 **All webhooks require**:
-- HTTPS URL
-- Signature verification
-- Idempotent processing
-- 200 response on success
+1. HTTPS URL (no localhost in production)
+2. Signature verification in handler
+3. 200 response on success
+4. Idempotent processing (webhooks can be replayed)
 
----
+## Security Insights
 
-## Testing Integrations
+### Secret Management
+**Critical**: All secrets in environment variables, never in code
+**Per-environment**: Use different secrets for dev/staging/production
+**Rotation**: Quarterly rotation recommended
 
-### Local Testing
-- **Sanity**: Use production/staging dataset, test webhook with ngrok
-- **Clerk**: Use test environment, test webhooks with Clerk CLI
-- **Stripe**: Use test mode keys (`sk_test_...`), test webhooks with Stripe CLI
-- **Google Workspace**: Use staging credentials if available
+### Webhook Security
+**Pattern**: Every webhook verifies signature before processing
+**Methods differ**: Sanity (HMAC), Stripe (SDK), Clerk (Svix)
+**Never skip**: Processing unverified webhooks = security vulnerability
+
+### Service Account Permissions
+**Principle**: Least privilege
+- Google Workspace: Read-only directory access
+- AWS S3: PutObject only (no delete/list)
+- Stripe: No admin permissions needed
+
+## Testing Integrations Locally
+
+### Webhooks
+```bash
+# Stripe webhooks
+stripe listen --forward-to localhost:3000/api/clickmeeting
+
+# Sanity/Clerk webhooks
+ngrok http 3000
+# Update webhook URL in dashboard to ngrok URL
+```
+
+### API Keys
+- **Sanity**: Use separate dataset for dev (`development` vs `production`)
+- **Clerk**: Use test environment
+- **Stripe**: Use test keys (`sk_test_...`)
 - **S3**: Use separate dev buckets
-- **ClickMeeting**: Use test room if available
-
-### CLI Tools
-- Stripe CLI: `stripe listen --forward-to localhost:3000/api/clickmeeting`
-- Clerk CLI: Similar webhook forwarding
-- ngrok: `ngrok http 3000` for local webhook testing
-
----
 
 ## Common Issues
 
-### Sanity
-- **Webhooks not delivering**: Check URL, verify HTTPS, check signature secret
-- **Content not updating**: Verify webhook reaching `/api/revalidate`, check cache tags
+### "Content not updating after Sanity publish"
+1. Check Sanity Dashboard → API → Webhooks → Delivery logs
+2. Verify `SANITY_REVALIDATE_SECRET` matches
+3. Check Next.js cache tags are attached to fetches
 
-### Clerk
-- **Auth not working**: Check publishable/secret keys match environment
-- **Redirects failing**: Ensure sign-in/sign-up URLs include `[lang]` param
+### "Clerk redirects broken"
+1. Verify all Clerk URLs include `[lang]` parameter
+2. Check middleware isn't blocking Clerk routes
 
-### Stripe
-- **Payment links failing**: Check product/price creation logic in `/src/lib/stripe.ts`
-- **Webhooks failing**: Verify signature secret, check Stripe dashboard logs
+### "Stripe payment success but no ClickMeeting invite"
+1. Check Stripe webhook delivery in dashboard
+2. Verify product ID matches check in code
+3. Check ClickMeeting API key and room ID
 
-### Google Workspace
-- **403 errors**: Verify domain-wide delegation, check scopes
-- **Private key errors**: Ensure newlines preserved (`\n` in string)
+### "Google Workspace 403 errors"
+1. Verify service account has domain-wide delegation
+2. Check private key newlines are actual newlines, not `\n` strings
+3. Verify `GOOGLE_SUBJECT_EMAIL` is admin account
 
-### S3
-- **Upload failures**: Check IAM permissions, bucket names, region
-- **403 errors**: Verify access key/secret, check bucket policy
+### "S3 uploads failing"
+1. Check IAM permissions (need `s3:PutObject`)
+2. Verify bucket names and region
+3. Check AWS credentials are correct
 
-### ClickMeeting
-- **Invites not sending**: Check API key, room ID, email format
-- **Product ID mismatch**: Ensure Stripe product ID matches check logic
+## Integration Dependencies
 
----
+**Clerk depends on**: Google Workspace for role mapping
+**Stripe depends on**: ClickMeeting for event invitations
+**Sanity depends on**: Webhooks for ISR to work
 
-## Security Checklist
+**Implication**: Auth works without Google Workspace (default to Member role), but RBAC requires it
 
-✓ All secrets in environment variables (never committed)
-✓ Webhook signatures verified on every request
-✓ Use test keys in development, production keys in production only
-✓ Rotate secrets quarterly
-✓ Service account has minimal required permissions
-✓ S3 buckets are private (no public access)
-✓ API routes validate inputs with Zod
-✓ HTTPS enforced for all webhooks
+## Performance Considerations
 
----
+**Google Workspace API**: Not cached, fetched on-demand
+- Consider: Add session caching for role lookups
 
-## Quick Command Reference
+**Stripe API**: Only called for donations (low frequency)
+- No rate limiting concerns
 
-```bash
-# Test Sanity connection
-npm run sanity:check
+**S3 uploads**: Synchronous, blocks API response
+- Acceptable for low-volume forms
 
-# Test Stripe webhook locally
-stripe listen --forward-to localhost:3000/api/clickmeeting
+## Related Documentation
 
-# Check environment variables
-cat .env.development
-
-# Test build with all integrations
-npm run build
-
-# Verify TypeScript types
-npm run typecheck
-```
-
----
-
-For implementation details, see the code files listed above. All integration logic is in `/src/lib/` and API routes in `/src/app/api/`.
+- Read service docs for API details
+- Check code in `/src/lib/` for implementations
+- See `DATA_FLOWS.md` for webhook flow sequences
