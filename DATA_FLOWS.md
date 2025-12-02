@@ -1,235 +1,151 @@
-# Data Flows Quick Reference
+# Data Flow Insights
 
-> **Purpose**: Shows how data moves through the system. Look here to understand request flows and find entry points.
+> **Purpose**: Key insights about how data moves. Read the code for details - this highlights non-obvious patterns and important considerations.
 
-## Core Flows
+## Critical Flow Insights
 
-### 1. Page Rendering (ISR)
-```
-Request → /src/middleware.ts (locale check)
-       → Next.js Router ([lang] param)
-       → /src/app/[lang]/layout.tsx (Clerk, i18n, header/footer)
-       → page.tsx (e.g., /src/app/[lang]/events/page.tsx)
-           → /src/sanity/event/service.ts (GROQ query with cache tags)
-           → force-cache + ISR
-       → Static HTML
-```
-**Key files**: `/src/middleware.ts`, page components, `/src/sanity/*/service.ts`
+### ISR (Incremental Static Regeneration) Flow
+**Key Insight**: Content updates are webhook-driven, not time-based
+**Sequence**: Sanity publish → Webhook → Verify signature → Extract type → `revalidateTag()` → Next.js regenerates
+**Non-obvious**: Revalidation is type-level (all events), not document-level (single event)
+**Gotcha**: If webhook fails (wrong secret, network), content stays stale until next deployment
+**Trace from**: `src/app/api/revalidate/route.ts:24`
 
-### 2. Content Updates (Webhooks → ISR)
-```
-Sanity Studio edit/publish
-    → Webhook: POST /api/revalidate
-    → /src/app/api/revalidate/route.ts
-        - Verify HMAC signature
-        - Extract _type → cache tag
-        - revalidateTag(contentType)
-    → Next.js regenerates affected pages
-```
-**Key files**: `/src/app/api/revalidate/route.ts`
-**Config**: Sanity dashboard → Webhooks
+### Multi-Language Content Resolution
+**Key Insight**: Locale extraction happens in GROQ query, not in component
+**Pattern**: `localeString[lang] as "title"` → TypeScript receives `{ title: string }`, not `{ localeString: { be: string, nl: string } }`
+**Why**: Reduces payload size, simplifies component logic, type-safe
+**Gotcha**: Forgetting locale projection returns entire object, breaking type expectations
+**Example**: `src/sanity/event/service.ts:42`
 
-### 3. Donation Flow
-```
-/[lang]/donate form
-    → GET /api/donate/link?amount=X&recurring=true
-    → /src/app/api/donate/link/route.ts
-        - /src/lib/stripe.ts (create/find product, price, payment link)
-    → Redirect to Stripe
-    → User pays
-    → Stripe webhook: POST /api/clickmeeting
-    → /src/app/api/clickmeeting/route.ts
-        - Verify signature
-        - Check product ID
-        - /src/lib/clickmeeting.ts (send invite if match)
-```
-**Key files**: `/src/app/api/donate/link/route.ts`, `/src/app/api/clickmeeting/route.ts`, `/src/lib/stripe.ts`, `/src/lib/clickmeeting.ts`
+### Stripe → ClickMeeting Integration
+**Key Insight**: This is webhook-to-API orchestration, not direct integration
+**Flow**: User pays → Stripe sends webhook → Verify signature → Fetch full checkout session → Check product ID → If match, call ClickMeeting API
+**Non-obvious**: Product ID matching is hardcoded logic, not configuration
+**Gotcha**: Must expand line items in webhook to get product details
+**Trace from**: `src/app/api/clickmeeting/route.ts:35`
 
-### 4. Form Submissions → S3
-```
-Subscription form: /[lang]/ → POST /api/subscribe → /src/lib/s3.ts → Save {uuid}.json
-Applications form: /[lang]/vacancies/[id] → POST /api/vacancies/apply → /src/lib/s3.ts → Save {id}/{uuid}.json
-```
-**Key files**: `/src/app/api/subscribe/route.ts`, `/src/app/api/vacancies/apply/route.ts`, `/src/lib/s3.ts`
-**Validation**: `/src/contract/*.ts` (Zod schemas)
+### Form Submissions → S3
+**Key Insight**: No database - direct write to S3 as JSON files
+**Pattern**: Generate UUID → Write `{uuid}.json` with data + timestamp → Return success
+**Why**: Simple, no database migrations, cheap, sufficient for low-volume forms
+**Implication**: No search/query capability, manual processing from S3 console
+**Files**: `src/app/api/subscribe/route.ts:18`, `src/app/api/vacancies/apply/route.ts:22`
 
-### 5. Authentication & Authorization
-```
-Protected page access
-    → Clerk middleware checks session
-    → /src/lib/google-directory.ts (fetch user's Google Groups)
-    → Map groups to role: Admin (administratie@) > Editor (editors@) > Member
-    → Component renders based on role
-```
-**Key files**: `/src/lib/google-directory.ts`, `/src/app/[lang]/layout.tsx` (ClerkProvider)
+### Authentication vs Authorization Split
+**Key Insight**: Two separate services handle auth concerns
+**Flow**: Clerk verifies identity → Google Workspace determines permissions
+**Why**: Clerk for easy auth, Google Workspace for existing org structure
+**Non-obvious**: Role is fetched on-demand, not cached in session (performance consideration)
+**Trace from**: `src/lib/google-directory.ts:45`
 
-### 6. User Lifecycle (Clerk Webhooks)
-```
-User event (created/updated/deleted)
-    → POST /api/webhooks/clerk
-    → /src/app/api/webhooks/clerk/route.ts
-        - Verify Svix signature
-        - Process event (currently minimal)
-```
-**Key files**: `/src/app/api/webhooks/clerk/route.ts`
+## Cache Strategy Insights
 
-## Data Transformations
+### Tag-Based Revalidation
+**Content Type** → **Cache Tag** → **What Regenerates**
+- `event` → All event listing + detail pages
+- `news` → All news listing + detail pages
+- `guide` → All guide pages
+- `vacancy` → All vacancy pages
+- `feedback` → Homepage (testimonials section)
 
-### Multi-language Content
-```
-Sanity localeString: { be: "...", nl: "..." }
-    → GROQ query projection: localeString[lang] as "title"
-    → TypeScript type: { title: string }
-    → Component renders single language
-```
-**Where**: All `/src/sanity/*/service.ts` files
+**Key Insight**: One document publish triggers regeneration of entire content type
+**Trade-off**: Simpler webhook logic vs. more regeneration than necessary
+**Acceptable because**: Content types have <100 documents each, regeneration is fast
+
+### Force-Cache Strategy
+**Decision**: All Sanity fetches use `force-cache`, not `no-cache` or time-based revalidation
+**Why**: Aggressive caching for performance, webhook-based invalidation for freshness
+**Gotcha**: If webhooks break, content becomes stale indefinitely
+**Implementation**: Check any `src/sanity/*/service.ts` for `next: { tags: [...] }`
+
+## Data Transformation Patterns
 
 ### Portable Text → HTML
-```
-Sanity Portable Text blocks
-    → @portabletext/to-html conversion
-    → HTML string
-    → dangerouslySetInnerHTML in component
-```
-**Where**: `/src/sanity/*/service.ts` functions
+**When**: Server-side during Sanity query processing
+**Why**: Not in component (separates concerns), not in CMS (keeps content structured)
+**Library**: `@portabletext/to-html` with default serializers
+**Implication**: Adding custom blocks requires serializer updates
+**Example**: `src/sanity/news/service.ts:28`
 
 ### Slug Generation
-```
-Editor enters title (localeString.be)
-    → Sanity auto-generates slug
-    → lowercase + hyphens + unique check
-    → Used in /[lang]/[type]/[slug] routes
-```
-**Where**: Sanity Studio field configuration
-
-## Cache Strategy
-
-### Cache Tags (ISR)
-| Content Type | Tag | Routes Affected |
-|--------------|-----|-----------------|
-| Event | `event` | `/[lang]/events/*` |
-| News | `news` | `/[lang]/news/*` |
-| Guide | `guide` | `/[lang]/guides/*` |
-| Vacancy | `vacancy` | `/[lang]/vacancies/*` |
-| Feedback | `feedback` | `/[lang]/` (homepage) |
-
-**Implementation**: Add to fetch options in `/src/sanity/*/service.ts`:
-```typescript
-next: { tags: ['event'] }
-```
-
-### Revalidation
-- **Trigger**: Sanity webhook on publish/update/delete
-- **Granularity**: By content type (not per document)
-- **Files**: `/src/app/api/revalidate/route.ts`
-
-## External Service Patterns
-
-### Stripe
-**Create flow**: Search existing → Create if missing (products, prices, payment links)
-**Webhook flow**: Verify signature → Fetch full data → Process event
-**Where**: `/src/lib/stripe.ts`
-
-### S3
-**Pattern**: Upload JSON with random UUID filename
-**Structure**:
-- Subscriptions: `{uuid}.json`
-- Applications: `{vacancy-id}/{uuid}.json`
-**Where**: `/src/lib/s3.ts`
-
-### Google Workspace
-**Pattern**: Service account JWT → Impersonate admin → Fetch user groups → Map to role
-**Caching**: None (consider adding session cache)
-**Where**: `/src/lib/google-directory.ts`
-
-### ClickMeeting
-**Pattern**: Triggered by Stripe webhook → Send invitation to email
-**Idempotency**: Handled by ClickMeeting (duplicate emails OK)
-**Where**: `/src/lib/clickmeeting.ts`
-
-## Error Handling
-
-### API Routes
-Standard format:
-```typescript
-// Success
-{ success: true, data: {...} }
-
-// Error
-{ error: "message" }  // with appropriate HTTP status
-```
-
-### Webhooks
-- Return 401 if signature invalid (triggers retry)
-- Return 500 if processing fails (triggers retry)
-- Return 200 for success (idempotent)
-
-### Sanity Queries
-- Throw error if query fails
-- Page shows 404 or error boundary
-- No graceful degradation currently
+**When**: In Sanity Studio on title change
+**Source**: Belarusian text (`localeString.be`), not Dutch
+**Why**: Belarusian is primary language, ensures consistent slugs across locales
+**Implication**: Slug doesn't reflect Dutch title, but URL consistency is more important
+**Config**: Sanity schema definitions
 
 ## Security Patterns
 
-### Webhook Verification
-| Service | Method | File |
-|---------|--------|------|
-| Sanity | HMAC-SHA256 | `/src/app/api/revalidate/route.ts` |
-| Stripe | Stripe SDK | `/src/app/api/clickmeeting/route.ts` |
-| Clerk | Svix library | `/src/app/api/webhooks/clerk/route.ts` |
+### Webhook Signature Verification
+**Critical**: Every webhook endpoint must verify signature before processing
+**Methods**:
+- Sanity: HMAC-SHA256 manual verification (`src/app/api/revalidate/route.ts:15`)
+- Stripe: Stripe SDK (`stripe.webhooks.constructEvent`)
+- Clerk: Svix library (`svix.verify()`)
 
-**Secrets**: All in environment variables, verified on every webhook
+**Gotcha**: Different verification methods per service - check docs carefully
+**Never**: Process webhook without verification (security vulnerability)
 
 ### Input Validation
-- **API routes**: Zod schemas in `/src/contract/`
-- **Forms**: Client-side + server-side validation
-- **Sanity**: Schema validation in CMS
+**Pattern**: Zod schemas in `/src/contract/`, not inline validation
+**Why**: Reusable, type-safe, clear error messages
+**Implication**: API route changes require contract updates
+**Example**: `src/contract/donate.ts:8`
 
-## Monitoring Entry Points
+## Monitoring Insights
 
-**Performance**: Vercel Speed Insights (automatic)
-**Analytics**: Umami script in `/src/app/layout.tsx`
-**Errors**: Not structured (consider adding Sentry)
+**Current State**: Minimal structured monitoring
+**What exists**:
+- Vercel Speed Insights (automatic)
+- Umami page views (script tag)
+- Service-level monitoring (Stripe/Clerk/Sanity dashboards)
 
-**What to monitor**:
-- Webhook delivery failures (in service dashboards)
-- ISR revalidation success (Next.js logs)
-- API route errors (server logs)
-- Build failures (GitHub Actions)
+**What's missing**:
+- Structured error logging
+- API route performance metrics
+- Webhook failure alerts
+- Cache hit/miss rates
 
-## Common Issues & Where to Look
+**Implication**: Debugging requires checking multiple service dashboards
 
-**Content not updating**:
-1. Check Sanity webhook logs (Sanity dashboard)
-2. Check `/api/revalidate` in Vercel logs
-3. Verify `SANITY_REVALIDATE_SECRET` matches
+## Troubleshooting Entry Points
 
-**Payment flow broken**:
-1. Check Stripe webhook logs (Stripe dashboard)
-2. Check `/api/clickmeeting` in Vercel logs
-3. Verify product IDs match
+### Content Not Updating
+1. Sanity Dashboard → API → Webhooks → Check delivery logs
+2. Vercel logs → Search for `/api/revalidate`
+3. Verify `SANITY_REVALIDATE_SECRET` matches between services
 
-**Auth not working**:
-1. Check Clerk dashboard for user
-2. Check Google Workspace for group membership
-3. Verify service account credentials
+### Payment Flow Broken
+1. Stripe Dashboard → Developers → Webhooks → Check delivery
+2. Vercel logs → Search for `/api/clickmeeting`
+3. Check product ID in code matches Stripe product
 
-**Form submissions failing**:
-1. Check S3 bucket permissions
-2. Verify AWS credentials
-3. Check API route logs
+### Auth Issues
+1. Clerk Dashboard → Users → Verify user exists
+2. Google Workspace Admin → Groups → Check membership
+3. Verify service account credentials and scopes
 
 ## Flow Tracing Tips
 
-To trace a specific feature:
-1. **Find the entry point**: Start with route in `/src/app/[lang]/`
-2. **Follow the service calls**: Check imports for `/src/sanity/` or `/src/lib/`
-3. **Check API routes**: Look in `/src/app/api/` for backend logic
-4. **Find validation**: Check `/src/contract/` for Zod schemas
-5. **Trace webhooks**: Follow from external service → API route → processing logic
+**To trace a feature**:
+1. Start with route: `src/app/[lang]/[route]/page.tsx`
+2. Follow imports to Sanity services or API calls
+3. Check validation in `src/contract/` if API involved
+4. Trace external integrations in `src/lib/`
+5. Check middleware for routing logic
 
-Use Grep or file search to find:
-- API calls: Search for `fetch(` or service function names
-- Webhooks: Search for `webhook` or service names
-- Cache tags: Search for `revalidateTag` or `next: { tags:`
-- Translations: Search for `useTranslation` or `t(` calls
+**Use Grep to find**:
+- API calls: `fetch(`
+- Sanity queries: `sanityFetch` or GROQ strings
+- Cache tags: `tags:` or `revalidateTag`
+- Webhooks: `signature` or service names
+
+## Performance Considerations
+
+**Static Generation**: All pages pre-rendered at build
+**ISR**: Content updates within minutes (webhook latency)
+**Database**: None - all content in Sanity, forms in S3
+**Serverless**: API routes have 10s timeout (Vercel Hobby plan)
+
+**Implication**: Keep API routes fast, avoid long-running operations
