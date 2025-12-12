@@ -8,9 +8,11 @@ import { DonateButtons } from './donate-buttons';
 import { Metadata, ResolvingMetadata } from 'next/types';
 import { Lang } from '../../../components/types';
 import { getAlternates } from '../../../utils/og';
+import { toLang } from '../../../utils/lang';
 
 export default async function Page({ params, searchParams }: CommonPageParams & PageSearchParams) {
-  const { lang } = await params;
+  const { lang: langParam } = await params;
+  const lang = toLang(langParam);
   const awaitedSearchParams = await searchParams;
   const success: boolean = awaitedSearchParams?.success !== undefined;
 
@@ -55,7 +57,8 @@ const descriptionLang = {
 };
 
 export async function generateMetadata({ params }: CommonPageParams, parent: ResolvingMetadata): Promise<Metadata> {
-  const { lang } = await params;
+  const { lang: langParam } = await params;
+  const lang = toLang(langParam);
   const parentMetadata = await parent;
   const description = descriptionLang[lang];
   const title = titleLang[lang];

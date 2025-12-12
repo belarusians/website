@@ -9,6 +9,7 @@ import { getAllEventsSlugs, getEventBySlug } from '../../../../sanity/event/serv
 import { urlForImage } from '../../../../sanity/lib/image';
 import { isEventPassed } from '../../../../sanity/event/utils';
 import { getAlternates } from '../../../../utils/og';
+import { toLang } from '../../../../utils/lang';
 
 type EventPageParams = CommonPageParams & {
   params: Promise<{
@@ -17,7 +18,8 @@ type EventPageParams = CommonPageParams & {
 };
 
 export default async function EventPage({ params, searchParams }: EventPageParams & PageSearchParams) {
-  const { lang, slug } = await params;
+  const { lang: langParam, slug } = await params;
+  const lang = toLang(langParam);
   const searchParamsData = await searchParams;
 
   const paymentSucceeded: boolean = searchParamsData?.payment_succeeded !== undefined;
@@ -53,7 +55,8 @@ async function getData(slug: string, lang: Lang): Promise<Event | undefined> {
 
 export async function generateMetadata({ params }: EventPageParams, parent: ResolvingMetadata): Promise<Metadata> {
   const parentMetadata = await parent;
-  const { lang, slug } = await params;
+  const { lang: langParam, slug } = await params;
+  const lang = toLang(langParam);
   const event = await getData(slug, lang);
   const images = [];
   if (event) {

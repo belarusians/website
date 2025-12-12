@@ -17,7 +17,7 @@ import {
 } from '../../sanity/news/service';
 import { FeedbackBlock } from './feedback-block';
 import { getNRandomFeedbacksByLang } from '../../sanity/feedback/service';
-import { supportedLngs } from '../i18n/settings';
+import { isValidLang, toLang } from '../../utils/lang';
 
 // Use ISR to balance freshness with performance - revalidate every 5 minutes
 export const revalidate = 300;
@@ -31,10 +31,11 @@ interface MainPageProps {
 }
 
 export default async function IndexPage({ params }: CommonPageParams) {
-  const { lang } = await params;
-  if (!supportedLngs.includes(lang)) {
+  const { lang: langParam } = await params;
+  if (!isValidLang(langParam)) {
     redirect(`/${Lang.be}`);
   }
+  const lang = toLang(langParam);
   const { t } = await getTranslation(lang, 'main');
   const { t: eventsT } = await getTranslation(lang, 'events');
   const props = await getData(lang);

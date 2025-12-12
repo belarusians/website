@@ -6,6 +6,7 @@ import { Metadata, ResolvingMetadata } from 'next/types';
 import { getAllNewsSlugs, getNewsBySlug } from '../../../../sanity/news/service';
 import { urlForImage } from '../../../../sanity/lib/image';
 import { getAlternates } from '../../../../utils/og';
+import { toLang } from '../../../../utils/lang';
 
 type NewsPageParams = {
   params: Promise<{
@@ -14,7 +15,8 @@ type NewsPageParams = {
 } & CommonPageParams;
 
 export default async function ArticlePage({ params }: NewsPageParams) {
-  const { lang, slug } = await params;
+  const { lang: langParam, slug } = await params;
+  const lang = toLang(langParam);
   const news = await getData(lang, slug);
   if (!news) {
     return <div>Not found</div>;
@@ -39,7 +41,8 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: NewsPageParams, parent: ResolvingMetadata): Promise<Metadata> {
   const parentMetadata = await parent;
-  const { lang, slug } = await params;
+  const { lang: langParam, slug } = await params;
+  const lang = toLang(langParam);
   const news = await getData(lang, slug);
   const images = [];
   if (news) {

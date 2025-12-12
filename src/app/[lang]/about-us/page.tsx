@@ -18,9 +18,11 @@ import other from '../../../../public/images/other.jpg';
 import flowers from '../../../../public/images/flowers.jpg';
 import hand from '../../../../public/images/hand.jpg';
 import { getAlternates } from '../../../utils/og';
+import { toLang } from '../../../utils/lang';
 
 export default async function AboutUs({ params }: CommonPageParams) {
-  const { lang } = await params;
+  const { lang: langParam } = await params;
+  const lang = toLang(langParam);
   const { t } = await getTranslation(lang, 'about-us');
 
   return (
@@ -85,7 +87,8 @@ export default async function AboutUs({ params }: CommonPageParams) {
 }
 
 export async function generateMetadata({ params }: CommonPageParams, parent: ResolvingMetadata): Promise<Metadata> {
-  const { lang } = await params;
+  const { lang: langParam } = await params;
+  const lang = toLang(langParam);
   const parentMetadata = await parent;
 
   return {

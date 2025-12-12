@@ -11,9 +11,11 @@ import CopiableHashtag from '../../../components/copiable-hashtag';
 import CopyAllHashtags from '../../../components/copy-all-hashtags';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
+import { toLang } from '../../../utils/lang';
 
 export default async function KupallePage({ params }: CommonPageParams) {
-  const { lang } = await params;
+  const { lang: langParam } = await params;
+  const lang = toLang(langParam);
   const { t } = await getTranslation(lang, 'kupalle');
 
   const hashtags = [
@@ -97,7 +99,8 @@ const descriptionLang = {
 };
 
 export async function generateMetadata({ params }: CommonPageParams, parent: ResolvingMetadata): Promise<Metadata> {
-  const { lang } = await params;
+  const { lang: langParam } = await params;
+  const lang = toLang(langParam);
   const parentMetadata = await parent;
 
   const images = [];

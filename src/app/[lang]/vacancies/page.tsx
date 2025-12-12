@@ -10,11 +10,13 @@ import { Metadata, ResolvingMetadata } from 'next/types';
 import { Vacancy } from '../../../sanity/vacancy/type';
 import { getVacanciesByLang } from '../../../sanity/vacancy/service';
 import { getAlternates } from '../../../utils/og';
+import { toLang } from '../../../utils/lang';
 
 export const revalidate = 3600;
 
 export default async function VacanciesPage({ params }: CommonPageParams) {
-  const { lang } = await params;
+  const { lang: langParam } = await params;
+  const lang = toLang(langParam);
   const { t } = await getTranslation(lang, 'vacancies');
   const vacancies = await getData(lang);
 
@@ -55,7 +57,8 @@ const descriptionLang = {
 };
 
 export async function generateMetadata({ params }: CommonPageParams, parent: ResolvingMetadata): Promise<Metadata> {
-  const { lang } = await params;
+  const { lang: langParam } = await params;
+  const lang = toLang(langParam);
   const parentMetadata = await parent;
   const description = descriptionLang[lang];
   const title = titleLang[lang];

@@ -6,9 +6,11 @@ import { CommonPageParams } from '../../types';
 import { Metadata, ResolvingMetadata } from 'next/types';
 import { Lang } from '../../../components/types';
 import { getAlternates } from '../../../utils/og';
+import { toLang } from '../../../utils/lang';
 
 export default async function IndexPage({ params }: CommonPageParams) {
-  const { lang } = await params;
+  const { lang: langParam } = await params;
+  const lang = toLang(langParam);
   const { t } = await getTranslation(lang, 'join-us');
 
   return (
@@ -35,7 +37,8 @@ const descriptionLang = {
 };
 
 export async function generateMetadata({ params }: CommonPageParams, parent: ResolvingMetadata): Promise<Metadata> {
-  const { lang } = await params;
+  const { lang: langParam } = await params;
+  const lang = toLang(langParam);
   const parentMetadata = await parent;
   const description = descriptionLang[lang];
   const title = titleLang[lang];
