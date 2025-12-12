@@ -1,8 +1,6 @@
-import { Lang } from '../components/types';
-
 export interface CommonPageParams {
   params: Promise<{
-    lang: Lang;
+    lang: string;
   }>;
 }
 

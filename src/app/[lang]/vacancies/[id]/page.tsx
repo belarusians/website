@@ -8,11 +8,13 @@ import { CommonPageParams } from '../../../types';
 import VacancyForm from './form';
 import { getVacanciesByLang, getVacancyById } from '../../../../sanity/vacancy/service';
 import { getAlternates } from '../../../../utils/og';
+import { toLang } from '../../../../utils/lang';
 
 type VacancyPageParams = CommonPageParams & { params: Promise<{ id: string }> };
 
 export default async function VacancyPage({ params }: VacancyPageParams) {
-  const { lang, id } = await params;
+  const { lang: langParam, id } = await params;
+  const lang = toLang(langParam);
   const vacancy = await getVacancyById(lang, id);
 
   if (!vacancy) {
@@ -41,7 +43,8 @@ export default async function VacancyPage({ params }: VacancyPageParams) {
 
 export async function generateMetadata({ params }: VacancyPageParams, parent: ResolvingMetadata): Promise<Metadata> {
   const parentMetadata = await parent;
-  const { lang, id } = await params;
+  const { lang: langParam, id } = await params;
+  const lang = toLang(langParam);
   const vacancy = await getVacancyById(lang, id);
 
   return {
@@ -70,7 +73,7 @@ export async function generateMetadata({ params }: VacancyPageParams, parent: Re
   };
 }
 
-export async function generateStaticParams({ params }: CommonPageParams) {
-  const { lang } = await params;
+export async function generateStaticParams({ params }: { params: { id: string; lang: string } }) {
+  const lang = toLang(params.lang);
   return (await getVacanciesByLang(lang)).map((vacancy) => ({ id: vacancy.id }));
 }

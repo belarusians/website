@@ -7,9 +7,11 @@ import { Lang } from '@/components/types';
 import { Metadata, ResolvingMetadata } from 'next/types';
 import { getAlternates } from '@/utils/og';
 import { GuidesBlock } from './guides-block';
+import { toLang } from '@/utils/lang';
 
 export default async function GuidesPage({ params }: CommonPageParams) {
-  const { lang } = await params;
+  const { lang: langParam } = await params;
+  const lang = toLang(langParam);
   const { t } = await getTranslation(lang, 'guides');
 
   const guides = await getAllGuides(lang);
@@ -33,7 +35,8 @@ const descriptionLang = {
 };
 
 export async function generateMetadata({ params }: CommonPageParams, parent: ResolvingMetadata): Promise<Metadata> {
-  const { lang } = await params;
+  const { lang: langParam } = await params;
+  const lang = toLang(langParam);
   const parentMetadata = await parent;
 
   const images = [];

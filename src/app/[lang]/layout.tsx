@@ -8,12 +8,14 @@ import { Metadata, ResolvingMetadata } from 'next/types';
 import { Lang } from '../../components/types';
 import { supportedLngs } from '../i18n/settings';
 import { getAlternates } from '../../utils/og';
+import { toLang } from '../../utils/lang';
 
 export default async function MainLayout({
   children,
   params,
 }: PropsWithChildren & CommonPageParams): Promise<JSX.Element> {
-  const { lang } = await params;
+  const { lang: langParam } = await params;
+  const lang = toLang(langParam);
   return (
     <ClerkProvider>
       <div className="flex flex-col gap-4 lg:gap-6 min-h-screen">
@@ -42,7 +44,8 @@ const langToLocale = {
 
 export async function generateMetadata({ params }: CommonPageParams, parent: ResolvingMetadata): Promise<Metadata> {
   const parentMetadata = await parent;
-  const { lang } = await params;
+  const { lang: langParam } = await params;
+  const lang = toLang(langParam);
   const description = descriptionLang[lang];
   const title = titleLang[lang];
 

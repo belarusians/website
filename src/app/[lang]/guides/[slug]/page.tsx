@@ -7,6 +7,7 @@ import { GuideArticle } from './guide-article';
 import { CommonPageParams } from '../../../types';
 import { getAllGuidesSlugs, getGuideBySlug, Slug } from '../../../../sanity/guide/service';
 import { getAlternates } from '../../../../utils/og';
+import { toLang } from '../../../../utils/lang';
 
 type GuidePageParams = {
   params: Promise<{
@@ -15,7 +16,8 @@ type GuidePageParams = {
 } & CommonPageParams;
 
 export default async function GuidePage({ params }: GuidePageParams): Promise<ReactElement> {
-  const { lang, slug } = await params;
+  const { lang: langParam, slug } = await params;
+  const lang = toLang(langParam);
   const guide = await getData(lang, slug);
   if (!guide) {
     return <div>Not found</div>;
@@ -40,7 +42,8 @@ export async function generateStaticParams(): Promise<Slug[]> {
 
 export async function generateMetadata({ params }: GuidePageParams, parent: ResolvingMetadata): Promise<Metadata> {
   const parentMetadata = await parent;
-  const { lang, slug } = await params;
+  const { lang: langParam, slug } = await params;
+  const lang = toLang(langParam);
   const guide = await getData(lang, slug);
   const images = [];
 
