@@ -19,9 +19,9 @@ export function AchievementsBlock(props: { lang: Lang }) {
       setTimeout(updateCounter, 5);
       return;
     }
-    const target = 3790;
+    const target = 4040;
     const count = +counterRef.current?.innerText;
-    const increment = target / 200;
+    const increment = target / 202;
     if (count < target) {
       counterRef.current.innerText = `${Math.ceil(count + increment)}`;
       setTimeout(updateCounter, 5);
