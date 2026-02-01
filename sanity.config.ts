@@ -13,6 +13,7 @@ import feedback from './src/sanity/feedback/schema';
 import event from './src/sanity/event/schema';
 import news from './src/sanity/news/schema';
 import guide from './src/sanity/guide/schema';
+import alienPassportFeedback from './src/sanity/alien-passport-feedback/schema';
 import { LogoIcon } from './src/components/header/logo-icon';
 import localeString from './src/sanity/locale-schemas/string';
 import localeText from './src/sanity/locale-schemas/text';
@@ -30,7 +31,7 @@ const config = defineConfig({
   // @ts-ignore
   icon: LogoIcon,
   schema: {
-    types: [localeString, localeText, localeContent, timeframe, event, news, guide, feedback, vacancy],
+    types: [localeString, localeText, localeContent, timeframe, event, news, guide, feedback, vacancy, alienPassportFeedback],
     // templates: (prev) => prev.filter((template) => !['vacancy', 'event', 'news', 'feedback'].includes(template.id)),
   },
   plugins: [
@@ -76,6 +77,8 @@ export type NewsSchema = Modify<
     description: string;
   }
 >;
+
+export type AlienPassportFeedbackSchema = Values['alienPassportFeedback'];
 
 export type GuideSchema = Modify<
   Omit<Values['guide'], '_createdAt' | '_type' | '_id' | '_updatedAt' | '_rev'>,
