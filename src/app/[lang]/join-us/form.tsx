@@ -7,10 +7,15 @@ export default function Form(): ReactElement {
   const [width, setWidth] = useState(0);
 
   useEffect(() => {
-    setWidth(window.innerWidth);
-    window.addEventListener('resize', () => {
+    const handleResize = (): void => {
       setWidth(window.innerWidth);
-    });
+    };
+    const timeout = setTimeout(handleResize, 0);
+    window.addEventListener('resize', handleResize);
+    return () => {
+      clearTimeout(timeout);
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   // TODO: do something with those magical numbers. Iframe should be well positioned automatically! Without this magic
