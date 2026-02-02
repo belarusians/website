@@ -4,7 +4,7 @@
 
 import { visionTool } from '@sanity/vision';
 import { defineConfig } from 'sanity';
-import { structureTool } from 'sanity/structure';
+import { structureTool, type StructureBuilder } from 'sanity/structure';
 import { beBYLocale } from '@sanity/locale-be-by';
 
 import { apiVersion, dataset, projectId } from './src/sanity/env';
@@ -45,7 +45,7 @@ const config = defineConfig({
   plugins: [
     beBYLocale(),
     structureTool({
-      structure: (S) => S.list().title('Дакументы').items(S.documentTypeListItems()),
+      structure: (S: StructureBuilder) => S.list().title('Дакументы').items(S.documentTypeListItems()),
     }),
     // Vision is a tool that lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin

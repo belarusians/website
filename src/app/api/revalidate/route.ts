@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
 
   console.log(`revalidating tag ${body._type} requested`);
   try {
-    revalidateTag(body._type);
+    revalidateTag(body._type, 'max');
     revalidatePath('/', 'page');
     revalidatePath('/[lang]', 'page');
 

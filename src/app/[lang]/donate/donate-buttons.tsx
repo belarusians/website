@@ -127,7 +127,7 @@ export function DonateButtons(props: DonateButtonsProps): ReactElement {
         placeholder="...€"
         disabled={isLoading}
         onClick={handleCustomPriceClick}
-        onInput={handleCustomPriceInput}
+        onChange={handleCustomPriceInput}
       />
       <div className="col-span-2">
         <input
