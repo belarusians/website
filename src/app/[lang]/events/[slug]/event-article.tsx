@@ -23,14 +23,18 @@ export function EventArticle(props: ArticleProps) {
 
   // Hydrate on client to get real current time
   useEffect(() => {
-    setCurrentTime(Date.now());
+    // Use setTimeout to avoid synchronous setState in effect
+    const timeout = setTimeout(() => setCurrentTime(Date.now()), 0);
 
     // Update every minute
     const interval = setInterval(() => {
       setCurrentTime(Date.now());
     }, 60000);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearTimeout(timeout);
+      clearInterval(interval);
+    };
   }, []);
 
   // Calculate if event is past based on current client time

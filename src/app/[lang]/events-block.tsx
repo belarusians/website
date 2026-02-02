@@ -20,14 +20,18 @@ export function EventsBlock(props: EventsBlockProps) {
 
   // Hydrate on client to get real current time
   useEffect(() => {
-    setCurrentTime(Date.now());
+    // Use setTimeout to avoid synchronous setState in effect
+    const timeout = setTimeout(() => setCurrentTime(Date.now()), 0);
 
     // Update every minute to refilter events
     const interval = setInterval(() => {
       setCurrentTime(Date.now());
     }, 60000);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearTimeout(timeout);
+      clearInterval(interval);
+    };
   }, []);
 
   // Filter out truly past events (not rescheduled)
