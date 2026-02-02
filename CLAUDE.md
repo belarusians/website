@@ -8,6 +8,7 @@ Website for MARA, a non-profit organization of Belarusians in the Netherlands. N
 - `npm run lint` / `npm run lint:fix` — ESLint
 - `npm run typecheck` — TypeScript check
 - `npm run test` / `npx jest -t "pattern"` — Jest tests
+- `npm run sanity:types` — regenerate Sanity TypeGen types (run after schema changes)
 
 ## Code Style
 - Prettier: 120 chars, single quotes, 2-space indent

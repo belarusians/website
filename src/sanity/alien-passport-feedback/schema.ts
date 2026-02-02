@@ -1,5 +1,5 @@
 import { DocumentTextIcon } from '@sanity/icons';
-import { defineField, defineType } from '@sanity-typed/types';
+import { defineField, defineType } from 'sanity';
 
 const alienPassportFeedback = defineType({
   name: 'alienPassportFeedback',

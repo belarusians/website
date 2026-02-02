@@ -1,5 +1,5 @@
 import { HeartIcon } from '@sanity/icons';
-import { defineField, defineType } from '@sanity-typed/types';
+import { defineField, defineType } from 'sanity';
 
 const feedback = defineType({
   name: 'feedback',
@@ -26,9 +26,9 @@ const feedback = defineType({
     select: {
       signature: 'signature.be',
     },
-    prepare({ title }) {
+    prepare({ signature }) {
       return {
-        title,
+        title: signature,
       };
     },
   },

@@ -1,4 +1,4 @@
-import { defineArrayMember, defineType } from '@sanity-typed/types';
+import { defineArrayMember, defineType } from 'sanity';
 
 import { supportedLanguages } from './locales';
 

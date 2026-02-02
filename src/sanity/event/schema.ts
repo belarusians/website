@@ -1,4 +1,4 @@
-import { defineField, defineType } from '@sanity-typed/types';
+import { defineField, defineType } from 'sanity';
 import { CalendarIcon } from '@sanity/icons';
 
 const event = defineType({
@@ -125,7 +125,6 @@ const event = defineType({
       title: 'GTM',
       description: 'Google Tag Manager conversion ID',
       type: 'string',
-      validation: (Rule) => Rule.optional(),
     }),
   ],
   preview: {

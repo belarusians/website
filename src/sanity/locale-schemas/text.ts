@@ -1,5 +1,5 @@
 import { supportedLanguages } from './locales';
-import { defineType } from '@sanity-typed/types';
+import { defineType } from 'sanity';
 
 const localeText = defineType({
   name: 'localeText',
