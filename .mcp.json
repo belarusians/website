@@ -14,7 +14,14 @@
       ],
       "env": {
         "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}",
-        "GITHUB_TOOLSETS": "context,pull_request_read"
+        "GITHUB_TOOLSETS": "context,pull_requests"
+      }
+    },
+    "sanity": {
+      "type": "http",
+      "url": "https://mcp.sanity.io",
+      "headers": {
+        "Authorization": "Bearer ${SANITY_BEARER_TOKEN}"
       }
     }
   }
