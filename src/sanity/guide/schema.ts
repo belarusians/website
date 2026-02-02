@@ -1,4 +1,4 @@
-import { defineField, defineType } from '@sanity-typed/types';
+import { defineField, defineType } from 'sanity';
 import { BookIcon } from '@sanity/icons';
 
 const guide = defineType({

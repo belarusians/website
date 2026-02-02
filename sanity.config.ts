@@ -3,7 +3,7 @@
  */
 
 import { visionTool } from '@sanity/vision';
-import { defineConfig, InferSchemaValues } from '@sanity-typed/types';
+import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 import { beBYLocale } from '@sanity/locale-be-by';
 
@@ -20,6 +20,14 @@ import localeText from './src/sanity/locale-schemas/text';
 import localeContent from './src/sanity/locale-schemas/content';
 import timeframe from './src/sanity/timeframe';
 import type { PortableTextBlock } from '@portabletext/types';
+import type {
+  Event as SanityEvent,
+  News as SanityNews,
+  Guide as SanityGuide,
+  Feedback as SanityFeedback,
+  Vacancy as SanityVacancy,
+  AlienPassportFeedback as SanityAlienPassportFeedback,
+} from './sanity.types';
 import { Modify } from '@/components/types';
 
 const config = defineConfig({
@@ -49,14 +57,12 @@ const config = defineConfig({
 
 export default config;
 
-type Values = InferSchemaValues<typeof config>;
+export type FeedbackSchema = SanityFeedback;
 
-export type FeedbackSchema = Values['feedback'];
-
-export type VacancySchema = Values['vacancy'];
+export type VacancySchema = SanityVacancy;
 
 export type EventSchema = Modify<
-  Omit<Values['event'], '_createdAt' | '_type' | '_id' | '_updatedAt' | '_rev'>,
+  Omit<SanityEvent, '_createdAt' | '_type' | '_id' | '_updatedAt' | '_rev'>,
   {
     content: PortableTextBlock;
     slug: string;
@@ -69,7 +75,7 @@ export type EventSchema = Modify<
 >;
 
 export type NewsSchema = Modify<
-  Omit<Values['news'], '_createdAt' | '_type' | '_id' | '_updatedAt' | '_rev'>,
+  Omit<SanityNews, '_createdAt' | '_type' | '_id' | '_updatedAt' | '_rev'>,
   {
     content: PortableTextBlock;
     slug: string;
@@ -78,10 +84,10 @@ export type NewsSchema = Modify<
   }
 >;
 
-export type AlienPassportFeedbackSchema = Values['alienPassportFeedback'];
+export type AlienPassportFeedbackSchema = SanityAlienPassportFeedback;
 
 export type GuideSchema = Modify<
-  Omit<Values['guide'], '_createdAt' | '_type' | '_id' | '_updatedAt' | '_rev'>,
+  Omit<SanityGuide, '_createdAt' | '_type' | '_id' | '_updatedAt' | '_rev'>,
   {
     content: PortableTextBlock;
     slug: string;

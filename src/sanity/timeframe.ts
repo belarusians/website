@@ -1,4 +1,4 @@
-import { defineField, defineType } from '@sanity-typed/types';
+import { defineField, defineType } from 'sanity';
 
 const timeframe = defineType({
   name: 'timeframe',
