@@ -14,6 +14,7 @@ import event from './src/sanity/event/schema';
 import news from './src/sanity/news/schema';
 import guide from './src/sanity/guide/schema';
 import alienPassportFeedback from './src/sanity/alien-passport-feedback/schema';
+import { DocumentTextIcon } from '@sanity/icons';
 import { LogoIcon } from './src/components/header/logo-icon';
 import localeString from './src/sanity/locale-schemas/string';
 import localeText from './src/sanity/locale-schemas/text';
@@ -40,12 +41,29 @@ const config = defineConfig({
   icon: LogoIcon,
   schema: {
     types: [localeString, localeText, localeContent, timeframe, event, news, guide, feedback, vacancy, alienPassportFeedback],
-    // templates: (prev) => prev.filter((template) => !['vacancy', 'event', 'news', 'feedback'].includes(template.id)),
+    templates: (prev) => prev.filter((template) => template.id !== 'alienPassportFeedback'),
   },
   plugins: [
     beBYLocale(),
     structureTool({
-      structure: (S: StructureBuilder) => S.list().title('Дакументы').items(S.documentTypeListItems()),
+      structure: (S: StructureBuilder) =>
+        S.list()
+          .title('Дакументы')
+          .items([
+            ...S.documentTypeListItems().filter(
+              (item) => item.getId() !== 'alienPassportFeedback',
+            ),
+            S.divider(),
+            S.listItem()
+              .title('Пашпарт замежніка - Зваротная сувязь')
+              .icon(DocumentTextIcon)
+              .child(
+                S.documentTypeList('alienPassportFeedback')
+                  .title('Зваротная сувязь')
+                  .defaultOrdering([{ field: 'submittedAt', direction: 'desc' }])
+                  .menuItems([]),
+              ),
+          ]),
     }),
     // Vision is a tool that lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin

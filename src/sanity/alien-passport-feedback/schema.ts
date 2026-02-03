@@ -8,6 +8,7 @@ const alienPassportFeedback = defineType({
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   icon: DocumentTextIcon,
+  readOnly: true,
   fields: [
     defineField({
       name: 'gemeente',

@@ -8,7 +8,6 @@
   },
   "scripts": {
     "dev": "NODE_OPTIONS='--inspect' next dev",
-    "dev:turbo": "NODE_OPTIONS='--inspect' next dev --turbo",
     "start": "cross-env next start",
     "build": "next build",
     "build:profile": "cross-env NODE_ENV=development next build --profile",
