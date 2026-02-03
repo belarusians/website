@@ -151,3 +151,6 @@ amplifytools.xcconfig
 # TypeScript build info
 tsconfig.tsbuildinfo
 *.tsbuildinfo
+
+# Sanity
+.sanity

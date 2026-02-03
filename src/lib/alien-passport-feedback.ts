@@ -7,7 +7,7 @@ const writeClient = createClient({
   dataset,
   projectId,
   useCdn: false,
-  token: process.env.SANITY_WRITE_TOKEN,
+  token: process.env.SANITY_API_WRITE_TOKEN,
 });
 
 interface AlienPassportFeedbackInput {
