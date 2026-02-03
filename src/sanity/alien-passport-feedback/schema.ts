@@ -3,7 +3,7 @@ import { defineField, defineType } from 'sanity';
 
 const alienPassportFeedback = defineType({
   name: 'alienPassportFeedback',
-  title: 'Пашпарт чужаземца - Зваротны сувязь',
+  title: 'Пашпарт замежніка - Зваротная сувязь',
   type: 'document',
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore

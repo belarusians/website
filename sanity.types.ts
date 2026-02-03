@@ -41,6 +41,24 @@ export type Vacancy = {
   }>;
 };
 
+export type LocaleText = {
+  _type: 'localeText';
+  be?: string;
+  nl?: string;
+};
+
+export type LocaleString = {
+  _type: 'localeString';
+  be?: string;
+  nl?: string;
+};
+
+export type Slug = {
+  _type: 'slug';
+  current: string;
+  source?: string;
+};
+
 export type Feedback = {
   _id: string;
   _type: 'feedback';
@@ -63,74 +81,6 @@ export type Guide = {
   content: LocaleContent;
   featured: boolean;
   publishedAt: string;
-};
-
-export type News = {
-  _id: string;
-  _type: 'news';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  slug: Slug;
-  title: LocaleString;
-  description: LocaleText;
-  backgroundUrl: {
-    asset?: {
-      _ref: string;
-      _type: 'reference';
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: 'image';
-  };
-  content: LocaleContent;
-  featuredMain: boolean;
-  featured: boolean;
-  publishingDate: string;
-};
-
-export type Event = {
-  _id: string;
-  _type: 'event';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  slug: Slug;
-  title: LocaleString;
-  description: LocaleText;
-  backgroundUrl: {
-    asset?: {
-      _ref: string;
-      _type: 'reference';
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: 'image';
-  };
-  content: LocaleContent;
-  timeframe: Timeframe;
-  rescheduled?: boolean;
-  cancelled?: boolean;
-  rescheduledTimeframe?: Timeframe;
-  location: string;
-  ticketsLink?: string;
-  ticketsLabel?: LocaleString;
-  tipsLink?: string;
-  tipsLabel?: LocaleString;
-  successText?: LocaleString;
-  gtmEventValue?: string;
-};
-
-export type Timeframe = {
-  _type: 'timeframe';
-  start: string;
-  end: string;
 };
 
 export type LocaleContent = {
@@ -173,16 +123,85 @@ export type LocaleContent = {
   }>;
 };
 
-export type LocaleText = {
-  _type: 'localeText';
-  be?: string;
-  nl?: string;
+export type SanityImageAssetReference = {
+  _ref: string;
+  _type: 'reference';
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
 };
 
-export type LocaleString = {
-  _type: 'localeString';
-  be?: string;
-  nl?: string;
+export type News = {
+  _id: string;
+  _type: 'news';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  slug: Slug;
+  title: LocaleString;
+  description: LocaleText;
+  backgroundUrl: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: 'image';
+  };
+  content: LocaleContent;
+  featuredMain: boolean;
+  featured: boolean;
+  publishingDate: string;
+};
+
+export type SanityImageCrop = {
+  _type: 'sanity.imageCrop';
+  top: number;
+  bottom: number;
+  left: number;
+  right: number;
+};
+
+export type SanityImageHotspot = {
+  _type: 'sanity.imageHotspot';
+  x: number;
+  y: number;
+  height: number;
+  width: number;
+};
+
+export type Event = {
+  _id: string;
+  _type: 'event';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  slug: Slug;
+  title: LocaleString;
+  description: LocaleText;
+  backgroundUrl: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: 'image';
+  };
+  content: LocaleContent;
+  timeframe: Timeframe;
+  rescheduled?: boolean;
+  cancelled?: boolean;
+  rescheduledTimeframe?: Timeframe;
+  location: string;
+  ticketsLink?: string;
+  ticketsLabel?: LocaleString;
+  tipsLink?: string;
+  tipsLabel?: LocaleString;
+  successText?: LocaleString;
+  gtmEventValue?: string;
+};
+
+export type Timeframe = {
+  _type: 'timeframe';
+  start: string;
+  end: string;
 };
 
 export type SanityImagePaletteSwatch = {
@@ -211,20 +230,16 @@ export type SanityImageDimensions = {
   aspectRatio: number;
 };
 
-export type SanityImageHotspot = {
-  _type: 'sanity.imageHotspot';
-  x: number;
-  y: number;
-  height: number;
-  width: number;
-};
-
-export type SanityImageCrop = {
-  _type: 'sanity.imageCrop';
-  top: number;
-  bottom: number;
-  left: number;
-  right: number;
+export type SanityImageMetadata = {
+  _type: 'sanity.imageMetadata';
+  location?: Geopoint;
+  dimensions?: SanityImageDimensions;
+  palette?: SanityImagePalette;
+  lqip?: string;
+  blurHash?: string;
+  thumbHash?: string;
+  hasAlpha?: boolean;
+  isOpaque?: boolean;
 };
 
 export type SanityFileAsset = {
@@ -247,6 +262,13 @@ export type SanityFileAsset = {
   path?: string;
   url?: string;
   source?: SanityAssetSourceData;
+};
+
+export type SanityAssetSourceData = {
+  _type: 'sanity.assetSourceData';
+  name?: string;
+  id?: string;
+  url?: string;
 };
 
 export type SanityImageAsset = {
@@ -272,17 +294,6 @@ export type SanityImageAsset = {
   source?: SanityAssetSourceData;
 };
 
-export type SanityImageMetadata = {
-  _type: 'sanity.imageMetadata';
-  location?: Geopoint;
-  dimensions?: SanityImageDimensions;
-  palette?: SanityImagePalette;
-  lqip?: string;
-  blurHash?: string;
-  hasAlpha?: boolean;
-  isOpaque?: boolean;
-};
-
 export type Geopoint = {
   _type: 'geopoint';
   lat?: number;
@@ -290,39 +301,34 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type Slug = {
-  _type: 'slug';
-  current: string;
-  source?: string;
-};
-
-export type SanityAssetSourceData = {
-  _type: 'sanity.assetSourceData';
-  name?: string;
-  id?: string;
-  url?: string;
-};
-
 export type AllSanitySchemaTypes =
   | AlienPassportFeedback
   | Vacancy
-  | Feedback
-  | Guide
-  | News
-  | Event
-  | Timeframe
-  | LocaleContent
   | LocaleText
   | LocaleString
+  | Slug
+  | Feedback
+  | Guide
+  | LocaleContent
+  | SanityImageAssetReference
+  | News
+  | SanityImageCrop
+  | SanityImageHotspot
+  | Event
+  | Timeframe
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
-  | SanityImageHotspot
-  | SanityImageCrop
-  | SanityFileAsset
-  | SanityImageAsset
   | SanityImageMetadata
-  | Geopoint
-  | Slug
-  | SanityAssetSourceData;
+  | SanityFileAsset
+  | SanityAssetSourceData
+  | SanityImageAsset
+  | Geopoint;
+
 export declare const internalGroqTypeReferenceTo: unique symbol;
+
+type ArrayOf<T> = Array<
+  T & {
+    _key: string;
+  }
+>;

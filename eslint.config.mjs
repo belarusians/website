@@ -7,10 +7,20 @@ const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
   eslintConfigPrettier,
-  globalIgnores(['__checks__/**', 'next.config.js', 'deploy/**', 'jest.config.js']),
+  globalIgnores([
+    '__checks__/**',
+    'next.config.js',
+    'deploy/**',
+    'dist/**',
+    '.next/**',
+    '.sanity/**',
+    'node_modules',
+    'jest.config.js',
+    'sanity.types.ts',
+  ]),
   {
     rules: {
-      'quotes': ['error', 'single', { avoidEscape: true }],
+      quotes: ['error', 'single', { avoidEscape: true }],
       'import/no-duplicates': 'error',
       '@typescript-eslint/no-unused-vars': 'error',
       '@typescript-eslint/no-explicit-any': 'error',
