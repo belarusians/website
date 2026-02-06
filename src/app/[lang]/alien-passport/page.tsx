@@ -34,16 +34,41 @@ export default async function AlienPassport({ params }: CommonPageParams) {
   );
 }
 
+const titleLang = {
+  be: 'Пашпарт замежніка',
+  nl: 'Vreemdelingenpaspoort',
+};
+
+const descriptionLang = {
+  be: 'Збор зваротаў ад беларусаў у Нідэрландах, якія сутыкнуліся з цяжкасцямі пры аформленні пашпарта замежніка.',
+  nl: 'Ervaringen verzamelen van Belarussen in Nederland die problemen hebben ondervonden bij het aanvragen van een vreemdelingenpaspoort.',
+};
+
 export async function generateMetadata({ params }: CommonPageParams, parent: ResolvingMetadata): Promise<Metadata> {
   const { lang: langParam } = await params;
   const lang = toLang(langParam);
   const parentMetadata = await parent;
+  const title = titleLang[lang];
+  const description = descriptionLang[lang];
 
   return {
+    title,
+    description,
     alternates: getAlternates(
       lang,
       `${parentMetadata.metadataBase}${Lang.be}/alien-passport`,
       `${parentMetadata.metadataBase}${Lang.nl}/alien-passport`,
     ),
+    openGraph: {
+      ...parentMetadata.openGraph,
+      title,
+      description,
+      url: `${lang}/alien-passport`,
+    },
+    twitter: {
+      ...parentMetadata.twitter,
+      title,
+      description,
+    },
   };
 }
