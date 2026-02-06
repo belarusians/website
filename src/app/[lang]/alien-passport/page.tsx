@@ -65,6 +65,8 @@ export async function generateMetadata({ params }: CommonPageParams, parent: Res
       description,
       url: `${lang}/alien-passport`,
     },
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     twitter: {
       ...parentMetadata.twitter,
       title,
