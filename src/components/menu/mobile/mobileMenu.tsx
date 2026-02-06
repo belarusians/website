@@ -73,9 +73,6 @@ function OpenedMenu({ lang, onClick }: { lang: Lang; onClick: () => void }) {
       <Link className="text-primary text-lg py-2" href={`/${lang}/events`} onClick={onClick}>
         {t('events')}
       </Link>
-      {/*<Link className="text-primary text-lg py-2" href={`/${lang}/guides`} onClick={onClick}>*/}
-      {/*  {t('guides')}*/}
-      {/*</Link>*/}
       <Link className="text-primary text-lg py-2" href={`/${lang}/vacancies`} onClick={onClick}>
         {t('vacancies')}
       </Link>

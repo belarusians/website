@@ -46,13 +46,9 @@ export async function POST(request: NextRequest) {
       console.log(`Revalidating tag news with slug ${body.slug}`);
       revalidatePath('/[lang]/news/[slug]', 'page');
     }
-    if (body.slug && body._type === 'guide') {
-      console.log(`Revalidating tag guides with slug ${body.slug}`);
-      revalidatePath('/[lang]/guides/[slug]', 'page');
-    }
     if (body._type === 'guide') {
-      console.log('Revalidating guides listing page');
-      revalidatePath('/[lang]/guides', 'page');
+      console.log('Revalidating alien-passport page');
+      revalidatePath('/[lang]/alien-passport', 'page');
     }
   } catch (e) {
     const message = `Tag ${body._type} revalidation failed`;

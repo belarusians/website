@@ -59,12 +59,6 @@ export function DesktopMenu({ lang }: { lang: Lang }) {
         >
           {t('events')}
         </Link>
-        {/*<Link*/}
-        {/*  className="p-1 md:p-2 lg:p-3 transition-shadow no-underline hover:shadow-tb-xl text-primary"*/}
-        {/*  href={`/${lang}/guides`}*/}
-        {/*>*/}
-        {/*  {t('guides')}*/}
-        {/*</Link>*/}
         {/*<Link className="p-1 md:p-2 lg:p-3 transition-shadow no-underline hover:shadow-tb-xl text-primary" href={`${lang}/news`}>*/}
         {/*  {t('news')}*/}
         {/*</Link>*/}

@@ -28,8 +28,6 @@ export type Guide = Modify<
   }
 >;
 
-export type GuideWithoutHTMLContent = Omit<Guide, 'content'>;
-
 export type Modify<T, R> = Omit<T, keyof R> & R;
 
 export enum Lang {
