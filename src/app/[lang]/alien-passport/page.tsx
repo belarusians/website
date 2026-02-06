@@ -23,7 +23,7 @@ export default async function AlienPassport({ params }: CommonPageParams) {
       <p className="mb-6 md:mb-8">{t('intro')}</p>
       {guide && (
         <div
-          className="rounded-md bg-white shadow-lg prose prose-sm md:prose-lg prose-hr:my-4 prose-a:text-primary prose-a:break-words prose-blockquote:border-l-2 prose-blockquote:border-red prose-headings:text-gray-900 prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-gray-100 prose-pre:border prose-ul:my-4 prose-ol:my-4 prose-li:my-1 p-4 lg:p-8"
+          className="rounded-md bg-white shadow-lg max-w-full prose prose-sm md:prose-lg prose-hr:my-4 prose-a:text-primary prose-a:break-words prose-blockquote:border-l-2 prose-blockquote:border-red prose-headings:text-gray-900 prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-gray-100 prose-pre:border prose-ul:my-4 prose-ol:my-4 prose-li:my-1 p-4 lg:p-8"
           dangerouslySetInnerHTML={{ __html: guide.content }}
         />
       )}
