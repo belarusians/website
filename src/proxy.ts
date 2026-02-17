@@ -9,7 +9,7 @@ import { NextURL } from 'next/dist/server/web/next-url';
 function localeMiddleware(request: NextRequest): void | NextResponse {
   const pathname = request.nextUrl.pathname;
 
-  if (pathname.startsWith('/.well-known/') || pathname.startsWith('/api/') || pathname.startsWith('/trpc/') || pathname.endsWith('.svg') || pathname.endsWith('.png') || pathname.endsWith('.jpg') || pathname.endsWith('.jpeg') || pathname.endsWith('.gif') || pathname.endsWith('.ico')) {
+  if (pathname.startsWith('/.well-known/') || pathname.startsWith('/api/') || pathname.startsWith('/trpc/') || pathname.endsWith('.svg') || pathname.endsWith('.png') || pathname.endsWith('.jpg') || pathname.endsWith('.jpeg') || pathname.endsWith('.gif') || pathname.endsWith('.ico') || pathname.endsWith('.pdf')) {
     return;
   }
 
@@ -44,7 +44,7 @@ export default clerkMiddleware(async (auth: ClerkMiddlewareAuth, request: NextRe
 
 export const config = {
   matcher: [
-    '/((?!_next/static|_next/image|studio|favicon.ico|apple-icon.png|icon.png|sitemap.xml|manifest.json|robots.txt|browserconfig.xml|[^?]*\\\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+    '/((?!_next/static|_next/image|studio|favicon.ico|apple-icon.png|icon.png|sitemap.xml|manifest.json|robots.txt|browserconfig.xml|[^?]*\\\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest|pdf)).*)',
     // Always run for API routes
     '/(api|trpc)(.*)',
   ],
