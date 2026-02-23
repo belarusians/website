@@ -76,6 +76,19 @@ function OpenedMenu({ lang, onClick }: { lang: Lang; onClick: () => void }) {
       <Link className="text-primary text-lg py-2" href={`/${lang}/vacancies`} onClick={onClick}>
         {t('vacancies')}
       </Link>
+      <p className="text-primary text-lg py-2 font-bold m-0">{t('reports')}</p>
+      <Link className="text-primary text-base py-1 pl-2" href={`/${lang}/reports/2025`} onClick={onClick}>
+        2025
+      </Link>
+      <Link className="text-primary text-base py-1 pl-2" href={`/${lang}/reports/2024`} onClick={onClick}>
+        2024
+      </Link>
+      <Link className="text-primary text-base py-1 pl-2" href={`/${lang}/reports/2023`} onClick={onClick}>
+        2023
+      </Link>
+      <Link className="text-primary text-base py-1 pl-2" href={`/${lang}/reports/2022`} onClick={onClick}>
+        2022
+      </Link>
       <Link
         className="text-primary text-lg py-2"
         data-umami-event="donate-us"
