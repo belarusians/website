@@ -48,10 +48,20 @@ export default async function ReportPage({ params }: ReportPageParams) {
 
         <Section className="bg-primary py-6 md:py-10">
           <div className="text-center text-white">
-            <p className="text-lg md:text-2xl">{t('2025-organized')}</p>
-            <p className="text-4xl md:text-7xl font-bold my-2">{t('2025-events-count')}</p>
-            <p className="text-lg md:text-2xl">{t('2025-expenses-were')}</p>
+            {lang === Lang.nl ? (
+              <>
+                <p className="text-4xl md:text-7xl font-bold my-2">{t('2025-events-count')}</p>
+                <p className="text-lg md:text-2xl">{t('2025-organized')}</p>
+              </>
+            ) : (
+              <>
+                <p className="text-lg md:text-2xl">{t('2025-organized')}</p>
+                <p className="text-4xl md:text-7xl font-bold my-2">{t('2025-events-count')}</p>
+              </>
+            )}
+            <p className="text-lg md:text-2xl mt-4">{t('2025-expenses-were')}</p>
             <p className="text-4xl md:text-7xl font-bold mt-2">{t('2025-events-cost')}</p>
+            <p className="text-lg md:text-2xl">{t('2025-expenses-suffix')}</p>
           </div>
         </Section>
 
