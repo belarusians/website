@@ -19,8 +19,7 @@ Disallow: /*.ttf$
 Disallow: /*.eot$
 Disallow: /*.otf$
 
-# Block system files
+# Block system files (except sitemap.xml)
 Disallow: /*.json$
-Disallow: /*.xml$
 
 Sitemap: https://www.belarusians.nl/sitemap.xml

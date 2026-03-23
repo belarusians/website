@@ -86,16 +86,53 @@ export default async function AboutUs({ params }: CommonPageParams) {
   );
 }
 
+const titleLang = {
+  be: 'Пра нас — MARA',
+  nl: 'Over ons — MARA',
+};
+
+const descriptionLang = {
+  be: 'MARA — некамерцыйная арганізацыя беларусаў Нідэрландаў. Даведайцеся пра нашы мэты, дзейнасць і як далучыцца.',
+  nl: 'MARA is een non-profit organisatie van Belarusen in Nederland. Lees meer over onze doelen, activiteiten en hoe u kunt meedoen.',
+};
+
 export async function generateMetadata({ params }: CommonPageParams, parent: ResolvingMetadata): Promise<Metadata> {
   const { lang: langParam } = await params;
   const lang = toLang(langParam);
   const parentMetadata = await parent;
 
+  const title = titleLang[lang];
+  const description = descriptionLang[lang];
+
+  const images = [];
+  if (parentMetadata.openGraph?.images) {
+    images.push(...parentMetadata.openGraph.images);
+  }
+
   return {
+    title,
+    description,
     alternates: getAlternates(
       lang,
       `${parentMetadata.metadataBase}${Lang.be}/about-us`,
       `${parentMetadata.metadataBase}${Lang.nl}/about-us`,
     ),
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    openGraph: {
+      ...parentMetadata.openGraph,
+      title,
+      description,
+      url: `${parentMetadata.metadataBase}${lang}/about-us`,
+      images,
+    },
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    twitter: {
+      ...parentMetadata.twitter,
+      title,
+      description,
+      images,
+    },
   };
 }

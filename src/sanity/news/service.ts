@@ -65,6 +65,22 @@ export async function getFeaturedNewsMetas(lang = Lang.be, top = 2): Promise<New
   return metas;
 }
 
+export async function getAllNewsMetas(lang: Lang): Promise<NewsMeta[]> {
+  return sanityFetch<NewsMeta[]>(
+    groq`
+    *[_type == "news"] | order(publishingDate desc)
+    {
+      "slug": slug.current,
+      "title": title.${lang},
+      backgroundUrl,
+      featuredMain,
+      featured,
+      publishingDate
+    }`,
+    ['news'],
+  );
+}
+
 export async function getNewsBySlug(lang: Lang, slug: string): Promise<News | undefined> {
   const schema = await sanityFetch<NewsSchema | undefined>(
     `*[_type == "news" && slug.current == "${slug}"]{

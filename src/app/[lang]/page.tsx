@@ -18,6 +18,7 @@ import {
 import { FeedbackBlock } from './feedback-block';
 import { getNRandomFeedbacksByLang } from '../../sanity/feedback/service';
 import { isValidLang, toLang } from '../../utils/lang';
+import H1 from '../../components/headings/h1';
 
 // Use ISR to balance freshness with performance - revalidate every 5 minutes
 export const revalidate = 300;
@@ -43,6 +44,7 @@ export default async function IndexPage({ params }: CommonPageParams) {
   return (
     <>
       <Section>
+        <H1 className="sr-only">{t('site-title')}</H1>
         <FeaturedNewsBlock
           lang={lang}
           main={props.mainNews}
