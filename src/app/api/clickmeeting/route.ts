@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
   let event;
 
   try {
-    const bodyBuffer = new Buffer(await req.arrayBuffer());
+    const bodyBuffer = Buffer.from(await req.arrayBuffer());
     event = constructWebhookEvent(bodyBuffer, sig);
   } catch (err) {
     let message = 'Unknown error in constructWebhookEvent';

@@ -2,8 +2,12 @@ import { NextRequest } from 'next/server';
 
 import { sendError, sendSuccess } from '../../utils';
 import { saveAlienPassportFeedback } from '../../../../lib/alien-passport-feedback';
+import { checkRateLimit } from '../../rate-limit';
 
 export async function POST(req: NextRequest) {
+  const rateLimitError = checkRateLimit(req, { limit: 10, windowMs: 60_000 });
+  if (rateLimitError) return rateLimitError;
+
   try {
     const { gemeente, complaint, contact } = await req.json();
 
