@@ -67,6 +67,9 @@ function OpenedMenu({ lang, onClick }: { lang: Lang; onClick: () => void }) {
   return (
     <div className="flex flex-col items-start w-full left-0 absolute pl-4">
       <LanguageSelector lang={lang} className="text-white py-4" />
+      <Link className="text-primary text-lg py-2" href={`/${lang}/alien-passport`} onClick={onClick}>
+        {t('alien-passport')}
+      </Link>
       <Link className="text-primary text-lg py-2" href={`/${lang}/about-us`} onClick={onClick}>
         {t('about-us')}
       </Link>
