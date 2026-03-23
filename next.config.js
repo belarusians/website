@@ -52,6 +52,12 @@ const nextConfig = {
         destination: "/nl/events/charnuha-and-plotka",
         permanent: true,
       },
+      // since 17-02-2026
+      {
+        source: "/:lang(be|nl)/report-2025",
+        destination: "/:lang/reports/2025",
+        permanent: true,
+      },
       // since 20-07-2024
       {
         source: "/nl/news/guk_viasny",

@@ -62,6 +62,37 @@ export function DesktopMenu({ lang }: { lang: Lang }) {
         {/*<Link className="p-1 md:p-2 lg:p-3 transition-shadow no-underline hover:shadow-tb-xl text-primary" href={`${lang}/news`}>*/}
         {/*  {t('news')}*/}
         {/*</Link>*/}
+        <Dropdown
+          className="p-1 md:p-2 lg:p-3 transition-shadow no-underline hover:shadow-tb-xl text-primary"
+          label={t('reports')}
+        >
+          <div className="animate-t-fade-in absolute mt-2 z-10 divide-solid divide-light-grey divide-y flex flex-col bg-white shadow-lg rounded-md">
+            <Link
+              className="p-1 md:p-2 lg:p-3 transition-shadow no-underline hover:shadow-lr-xl"
+              href={`/${lang}/reports/2025`}
+            >
+              2025
+            </Link>
+            <Link
+              className="p-1 md:p-2 lg:p-3 transition-shadow no-underline hover:shadow-lr-xl"
+              href={`/${lang}/reports/2024`}
+            >
+              2024
+            </Link>
+            <Link
+              className="p-1 md:p-2 lg:p-3 transition-shadow no-underline hover:shadow-lr-xl"
+              href={`/${lang}/reports/2023`}
+            >
+              2023
+            </Link>
+            <Link
+              className="p-1 md:p-2 lg:p-3 transition-shadow no-underline hover:shadow-lrb-xl"
+              href={`/${lang}/reports/2022`}
+            >
+              2022
+            </Link>
+          </div>
+        </Dropdown>
         <Link
           className="p-1 md:p-2 lg:p-3 bg-[length:350%_100%] bg-beautiful-button font-normal rounded-r-md text-white transition-shadow no-underline hover:shadow-tbr-xl animate-bg-rotation-slow-wobble-right"
           data-umami-event="donate-us"
