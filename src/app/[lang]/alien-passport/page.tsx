@@ -35,8 +35,8 @@ export default async function AlienPassport({ params }: CommonPageParams) {
 }
 
 const titleLang = {
-  be: 'Пашпарт замежніка',
-  nl: 'Vreemdelingenpaspoort',
+  be: 'Пашпарт замежніка — MARA',
+  nl: 'Vreemdelingenpaspoort — MARA',
 };
 
 const descriptionLang = {
@@ -48,8 +48,14 @@ export async function generateMetadata({ params }: CommonPageParams, parent: Res
   const { lang: langParam } = await params;
   const lang = toLang(langParam);
   const parentMetadata = await parent;
+
   const title = titleLang[lang];
   const description = descriptionLang[lang];
+
+  const images = [];
+  if (parentMetadata.openGraph?.images) {
+    images.push(...parentMetadata.openGraph.images);
+  }
 
   return {
     title,
@@ -59,11 +65,14 @@ export async function generateMetadata({ params }: CommonPageParams, parent: Res
       `${parentMetadata.metadataBase}${Lang.be}/alien-passport`,
       `${parentMetadata.metadataBase}${Lang.nl}/alien-passport`,
     ),
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     openGraph: {
       ...parentMetadata.openGraph,
       title,
       description,
-      url: `${lang}/alien-passport`,
+      url: `${parentMetadata.metadataBase}${lang}/alien-passport`,
+      images,
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -71,6 +80,7 @@ export async function generateMetadata({ params }: CommonPageParams, parent: Res
       ...parentMetadata.twitter,
       title,
       description,
+      images,
     },
   };
 }

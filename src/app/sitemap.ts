@@ -5,6 +5,7 @@ import { baseUrl } from './config';
 import { getVacanciesByLang } from '../sanity/vacancy/service';
 import { getAllEventsSlugs } from '../sanity/event/service';
 import { getAllNewsSlugs } from '../sanity/news/service';
+import { getAllGuidesSlugs } from '../sanity/guide/service';
 
 export function generateTranslatedUrls(path: string): MetadataRoute.Sitemap {
   const normalizedPath = path === '/' || path === '' ? '' : path.startsWith('/') ? path : `/${path}`;
@@ -25,6 +26,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const news = await getAllNewsSlugs();
   const events = await getAllEventsSlugs();
   const vacancies = await getVacanciesByLang(Lang.be);
+  const guides = await getAllGuidesSlugs();
 
   const newsUrls: MetadataRoute.Sitemap = news.reduce((acc, slug) => {
     acc.push(...generateTranslatedUrls(`/news/${encodeURIComponent(slug.slug)}`));
@@ -38,6 +40,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     acc.push(...generateTranslatedUrls(`/vacancies/${encodeURIComponent(vacancy.id)}`));
     return acc;
   }, [] as MetadataRoute.Sitemap);
+  const guidesUrls: MetadataRoute.Sitemap = guides.reduce((acc, slug) => {
+    acc.push(...generateTranslatedUrls(`/guides/${encodeURIComponent(slug.slug)}`));
+    return acc;
+  }, [] as MetadataRoute.Sitemap);
 
   return [
     ...generateTranslatedUrls(''),
@@ -46,8 +52,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...generateTranslatedUrls('/join-us'),
     ...generateTranslatedUrls('/vacancies'),
     ...generateTranslatedUrls('/events'),
+    ...generateTranslatedUrls('/news'),
+    ...generateTranslatedUrls('/guides'),
+    ...generateTranslatedUrls('/kupalle'),
+    ...generateTranslatedUrls('/alien-passport'),
     ...newsUrls,
     ...eventsUrls,
     ...vacanciesUrls,
+    ...guidesUrls,
   ];
 }
