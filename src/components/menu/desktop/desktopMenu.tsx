@@ -16,7 +16,7 @@ export function DesktopMenu({ lang }: { lang: Lang }) {
   return (
     <div className="flex items-center text-primary gap-4">
       <div className="text-lg flex rounded-md bg-white cursor-pointer shadow-lg divide-solid divide-light-grey divide-x animate-wobble-right mr-auto">
-        <Dropdown className="p-1 md:p-2 lg:p-3 transition-shadow hover:shadow-tb-xl" label={t('to-refugees')}>
+        <Dropdown className="p-1 md:p-2 lg:p-3 transition-shadow hover:shadow-tb-xl" label={t('useful-info')}>
           <div className="animate-t-fade-in absolute mt-2 z-10 divide-solid divide-light-grey divide-y flex flex-col bg-white shadow-lg rounded-md">
             <Link
               href="https://t.me/belarusians_nl_bot"
