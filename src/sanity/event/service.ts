@@ -60,7 +60,7 @@ export async function getLastNEventMetas(lang: Lang, top: number): Promise<Event
 
 export async function getEventBySlug(lang: Lang, slug: string): Promise<Event | undefined> {
   const schema = await sanityFetch<EventSchema>(
-    `*[_type == "event" && slug.current == "${slug}"]{
+    `*[_type == "event" && slug.current == $slug]{
       ...,
       "slug": slug.current,
       "title": title.${lang},
@@ -72,6 +72,7 @@ export async function getEventBySlug(lang: Lang, slug: string): Promise<Event | 
       cancelled,
     }[0]`,
     ['event'],
+    { slug },
   );
   if (!schema) {
     return undefined;

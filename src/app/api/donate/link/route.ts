@@ -8,9 +8,11 @@ import {
 } from '../../../../lib/stripe';
 import { parseDonation } from '../../../../contract/donate';
 import { cutQuery, RequestError } from '../../../../lib/utils';
-
+import { checkRateLimit } from '../../rate-limit';
 
 export async function GET(request: NextRequest) {
+  const rateLimitError = checkRateLimit(request, { limit: 20, windowMs: 60_000 });
+  if (rateLimitError) return rateLimitError;
   const amountInEuro = request.nextUrl.searchParams.get('amount');
   const recurring = request.nextUrl.searchParams.get('recurring');
 

@@ -83,13 +83,14 @@ export async function getAllNewsMetas(lang: Lang): Promise<NewsMeta[]> {
 
 export async function getNewsBySlug(lang: Lang, slug: string): Promise<News | undefined> {
   const schema = await sanityFetch<NewsSchema | undefined>(
-    `*[_type == "news" && slug.current == "${slug}"]{
+    `*[_type == "news" && slug.current == $slug]{
       ...,
       "title": title.${lang},
       "description": description.${lang},
       "content": content.${lang},
     }[0]`,
     ['news'],
+    { slug },
   );
   if (!schema) {
     return undefined;

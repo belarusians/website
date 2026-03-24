@@ -18,10 +18,13 @@ export async function getVacanciesByLang(lang: Lang): Promise<Vacancy[]> {
 }
 
 export async function getVacancyById(lang: Lang, id: string): Promise<Vacancy | undefined> {
-  return client.fetch(`*[_type == "vacancy" && id.current == "${id}"]{
+  return client.fetch(
+    `*[_type == "vacancy" && id.current == $id]{
     "id": id.current,
     "title": title.${lang},
     "description": description.${lang},
     tasks,
-  }[0]`);
+  }[0]`,
+    { id },
+  );
 }

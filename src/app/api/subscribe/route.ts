@@ -1,20 +1,25 @@
 import { NextRequest } from 'next/server';
-import { isEmailValid } from '../../../lib/email';
+import * as z from 'zod';
 import { saveEmail } from '../../../lib/s3';
 import { sendError, sendSuccess } from '../utils';
+import { checkRateLimit } from '../rate-limit';
+
+const subscribeSchema = z.object({
+  email: z.string().email().max(254),
+});
 
 export async function POST(req: NextRequest) {
-  const { email } = await req.json();
-  if (!email) {
-    return sendError(400, 'Bad Request', 'Request body is missing email');
-  }
+  const rateLimitError = checkRateLimit(req, { limit: 5, windowMs: 60_000 });
+  if (rateLimitError) return rateLimitError;
 
-  if (!isEmailValid(email)) {
-    return sendError(400, 'Bad Request', 'Email is not valid');
+  const body = await req.json().catch(() => null);
+  const parsed = subscribeSchema.safeParse(body);
+  if (!parsed.success) {
+    return sendError(400, 'Bad Request', 'Invalid or missing email');
   }
 
   try {
-    await saveEmail(email);
+    await saveEmail(parsed.data.email);
     return sendSuccess('Subscribed');
   } catch (e) {
     console.error(e);

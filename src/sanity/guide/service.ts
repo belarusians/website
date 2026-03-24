@@ -14,13 +14,14 @@ export async function getAllGuidesSlugs(): Promise<Slug[]> {
 
 export async function getGuideBySlug(lang: Lang, slug: string): Promise<Guide | undefined> {
   const schema = await sanityFetch<GuideSchema | undefined>(
-    `*[_type == "guide" && slug.current == "${slug}"]{
+    `*[_type == "guide" && slug.current == $slug]{
       ...,
       "title": title.${lang},
       "excerpt": excerpt.${lang},
       "content": content.${lang},
     }[0]`,
     ['guide'],
+    { slug },
   );
 
   if (!schema) {

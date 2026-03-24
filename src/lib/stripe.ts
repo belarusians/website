@@ -24,7 +24,6 @@ export async function getProductsByCheckoutSession(checkoutSessionId: string): P
     },
   );
   if (!checkoutSession || !checkoutSession.line_items) {
-    console.log(`Did not find checkout session ${checkoutSessionId}`);
     return [];
   }
 
@@ -55,11 +54,9 @@ export async function searchProduct(): Promise<Stripe.Product['id'] | null> {
     query: `name:"${productName}"`,
   });
   if (!search.data.length) {
-    console.log(`Did not find product ${productName}`);
     return null;
   }
 
-  console.log(`Found product ${search.data[0].id}`);
   return search.data[0].id;
 }
 
@@ -72,16 +69,13 @@ export async function searchPrice(amount: number, recurring: boolean, productId:
   });
 
   if (search.data.length === 0) {
-    console.log(`Did not find price with query ${query}`);
     return null;
   }
 
-  console.log(`Found price ${search.data[0].id}`);
   return search.data[0].id;
 }
 
 export async function createPrice(amount: number, recurring: boolean, productId: string): Promise<Stripe.Price['id']> {
-  console.log('Creating price');
   const price = await getStripe().prices.create(
     {
       currency: 'EUR',
@@ -104,7 +98,6 @@ export async function createPrice(amount: number, recurring: boolean, productId:
     },
   );
 
-  console.log(`Created price ${price.id}`);
   return price.id;
 }
 
@@ -112,11 +105,9 @@ export async function searchPLinkByPriceId(priceId: Stripe.Price['id']): Promise
   const plinks = await getStripe().paymentLinks.list({ active: true });
   const plink = plinks.data.find((pl) => pl.metadata['price_id'] === priceId);
   if (!plink) {
-    console.log(`Did not find payment link for ${priceId}`);
     return null;
   }
 
-  console.log(`Found payment link ${plink.id}`);
   return plink;
 }
 
@@ -124,7 +115,6 @@ export async function createPLinkForPriceId(
   priceId: Stripe.Price['id'],
   redirectUrl?: string,
 ): Promise<Stripe.PaymentLink> {
-  console.log('Creating payment link');
   const plink = await getStripe().paymentLinks.create(
     {
       line_items: [
@@ -150,6 +140,5 @@ export async function createPLinkForPriceId(
     },
   );
 
-  console.log(`Created payment link ${plink.id}`);
   return plink;
 }
