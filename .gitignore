@@ -154,3 +154,5 @@ tsconfig.tsbuildinfo
 
 # Sanity
 .sanity
+
+.mcp.json
