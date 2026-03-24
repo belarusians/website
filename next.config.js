@@ -9,7 +9,7 @@ const securityHeaders = [
     value: [
       "default-src 'self'",
       // Scripts: Next.js, Clerk, Stripe, Umami
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://clerk.belarusians.nl https://*.clerk.accounts.dev https://js.stripe.com https://analytics.belarusians.nl https://analytics.umami.is https://cloud.umami.is",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://clerk.belarusians.nl https://*.clerk.accounts.dev https://js.stripe.com https://analytics.umami.is https://cloud.umami.is",
       // Styles: Next.js inline styles + Google Fonts
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       // Fonts
@@ -19,7 +19,7 @@ const securityHeaders = [
       // Frames: Stripe, Google Forms, status badge
       "frame-src https://js.stripe.com https://docs.google.com https://status.belarusians.nl",
       // Connections: Sanity API, Clerk, Stripe, ClickMeeting, Umami
-      "connect-src 'self' https://*.sanity.io https://clerk.belarusians.nl https://*.clerk.accounts.dev https://api.stripe.com https://analytics.belarusians.nl https://analytics.umami.is https://cloud.umami.is",
+      "connect-src 'self' https://*.sanity.io https://clerk.belarusians.nl https://*.clerk.accounts.dev https://api.stripe.com https://analytics.umami.is https://cloud.umami.is",
       // Workers: Clerk uses service workers
       "worker-src 'self' blob:",
     ].join('; '),
