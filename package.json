@@ -20,7 +20,7 @@
     "sanity:types": "npm run sanity:extract && npm run sanity:typegen"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.523.0",
+    "@aws-sdk/client-s3": "^3.1029.0",
     "@clerk/backend": "^2.27.1",
     "@clerk/nextjs": "^6.36.10",
     "@fortawesome/fontawesome-svg-core": "~6.5.2",
@@ -29,20 +29,20 @@
     "@fortawesome/react-fontawesome": "^3.1.1",
     "@portabletext/to-html": "^2.0.14",
     "@sanity/icons": "^3.7.4",
-    "@sanity/image-url": "^1.1.0",
-    "@sanity/locale-be-by": "~1.1.24",
-    "@sanity/vision": "^3.89.0",
+    "@sanity/image-url": "^2.1.1",
+    "@sanity/locale-be-by": "~1.1.33",
+    "@sanity/vision": "^5.10.0",
     "@vercel/speed-insights": "~1.1.0",
     "googleapis": "^146.0.0",
     "i18next": "~25.2.1",
     "i18next-resources-to-backend": "^1.2.1",
-    "next": "16.1.6",
-    "next-sanity": "~12.0.16",
+    "next": "16.2.3",
+    "next-sanity": "~12.0.17",
     "next-sanity-image": "^6.2.0",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
+    "react": "19.2.5",
+    "react-dom": "19.2.5",
     "react-i18next": "~15.5.2",
-    "sanity": "~5.7.0",
+    "sanity": "~5.10.0",
     "sharp": "~0.33.5",
     "stripe": "~15.12.0",
     "svix": "^1.61.4",
@@ -54,7 +54,7 @@
     "@tailwindcss/postcss": "^4.0.15",
     "@tailwindcss/typography": "^0.5.19",
     "@types/node": "^20.17.10",
-    "@types/react": "19.2.10",
+    "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "cross-env": "~7.0.3",
     "eslint": "^9.0.0",
@@ -66,7 +66,7 @@
     "styled-components": "^6.3.8",
     "tailwindcss": "^4.0.15",
     "ts-jest": "^29.1.0",
-    "typescript": "^5.7.3"
+    "typescript": "^5.9.3"
   },
   "prettier": {
     "printWidth": 120,
@@ -75,8 +75,5 @@
     "singleQuote": true,
     "tabWidth": 2
   },
-  "overrides": {
-    "@types/react": "19.2.10",
-    "@types/react-dom": "19.2.3"
-  }
+  "overrides": {}
 }
