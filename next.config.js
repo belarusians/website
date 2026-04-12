@@ -4,12 +4,16 @@ const securityHeaders = [
   { key: 'X-XSS-Protection', value: '1; mode=block' },
   { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
   { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
+  { key: 'Strict-Transport-Security', value: 'max-age=31536000; includeSubDomains' },
+  { key: 'X-Permitted-Cross-Domain-Policies', value: 'none' },
+  { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
+  { key: 'Cross-Origin-Resource-Policy', value: 'same-origin' },
   {
     key: 'Content-Security-Policy',
     value: [
       "default-src 'self'",
-      // Scripts: Next.js, Clerk, Stripe, Umami
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://clerk.belarusians.nl https://*.clerk.accounts.dev https://js.stripe.com https://analytics.umami.is https://cloud.umami.is",
+      // Scripts: Next.js, Clerk, Stripe, Umami ('unsafe-inline' needed for JSON-LD in layout.tsx)
+      "script-src 'self' 'unsafe-inline' https://clerk.belarusians.nl https://*.clerk.accounts.dev https://js.stripe.com https://analytics.umami.is https://cloud.umami.is",
       // Styles: Next.js inline styles + Google Fonts
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       // Fonts
@@ -22,6 +26,8 @@ const securityHeaders = [
       "connect-src 'self' https://*.sanity.io https://clerk.belarusians.nl https://*.clerk.accounts.dev https://api.stripe.com https://analytics.umami.is https://cloud.umami.is",
       // Workers: Clerk uses service workers
       "worker-src 'self' blob:",
+      // Force HTTPS for all resource loads
+      "upgrade-insecure-requests",
     ].join('; '),
   },
 ];
