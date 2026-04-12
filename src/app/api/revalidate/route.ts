@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { revalidatePath, revalidateTag } from 'next/cache';
 import { parseBody } from 'next-sanity/webhook';
+import { checkRateLimit } from '../rate-limit';
 
 export async function POST(request: NextRequest) {
+  const rateLimitError = checkRateLimit(request, { limit: 30, windowMs: 60_000 });
+  if (rateLimitError) return rateLimitError;
   const { isValidSignature, body } = await parseBody<{
     _type: string,
     slug?: string
@@ -51,10 +54,9 @@ export async function POST(request: NextRequest) {
       revalidatePath('/[lang]/alien-passport', 'page');
     }
   } catch (e) {
-    const message = `Tag ${body._type} revalidation failed`;
-    console.log(message);
+    console.error(`[Revalidate] Tag ${body._type} revalidation failed:`, e instanceof Error ? e.message : e);
     return NextResponse.json(
-      { message, error: e },
+      { message: 'Revalidation failed' },
       {
         status: 500,
         headers: {

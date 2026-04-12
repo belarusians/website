@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { constructWebhookEvent, getProductsByCheckoutSession } from '../../../lib/stripe';
-import { inviteAttendee } from '../../../lib/clickmeeting';
+import { constructWebhookEvent, getProductsByCheckoutSession } from '@/lib/stripe';
+import { inviteAttendee } from '@/lib/clickmeeting';
+import { checkRateLimit } from '../rate-limit';
 
 export async function POST(req: NextRequest) {
+  const rateLimitError = checkRateLimit(req, { limit: 30, windowMs: 60_000 });
+  if (rateLimitError) return rateLimitError;
   const sig = req.headers.get('stripe-signature');
 
   if (!sig) {
@@ -18,18 +21,13 @@ export async function POST(req: NextRequest) {
     const bodyBuffer = Buffer.from(await req.arrayBuffer());
     event = constructWebhookEvent(bodyBuffer, sig);
   } catch (err) {
-    let message = 'Unknown error in constructWebhookEvent';
-    if (err instanceof Error) {
-      message = `Webhook Error: ${err.message ?? JSON.stringify(err)}`;
-    }
-    console.error(message);
-    return NextResponse.json({ message }, { status: 400 });
+    console.error('[ClickMeeting Webhook] Signature verification failed:', err instanceof Error ? err.message : err);
+    return NextResponse.json({ message: 'Webhook verification failed' }, { status: 400 });
   }
 
   if (event.type !== 'checkout.session.completed') {
-    const message = `Unhandled event type ${event.type}`;
-    console.debug(message);
-    return NextResponse.json({ message }, { status: 202 });
+    console.debug(`[ClickMeeting Webhook] Unhandled event type: ${event.type}`);
+    return NextResponse.json({ message: 'Event type not handled' }, { status: 202 });
   }
 
   const { payment_status, customer_details } = event.data.object;
@@ -64,9 +62,8 @@ export async function POST(req: NextRequest) {
     }
     await inviteAttendee(customer_details.email, process.env.CLICKMEETING_ROOM);
   } catch (e) {
-    const message = `Invite attendee failed with error: ${JSON.stringify(e)}`;
-    console.error(message);
-    return NextResponse.json({ message }, { status: 500 });
+    console.error('[ClickMeeting Webhook] Invite attendee failed:', e instanceof Error ? e.message : e);
+    return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
   }
 
   return NextResponse.json({ message: 'success' }, { status: 200 });

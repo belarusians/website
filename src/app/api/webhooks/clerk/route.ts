@@ -4,6 +4,7 @@ import { Webhook } from 'svix';
 import { SessionWebhookEvent, WebhookEvent } from '@clerk/nextjs/server';
 import { createClerkClient } from '@clerk/backend';
 import { getUserGroups, mapGroupsToRole } from '@/lib/google-directory';
+import { checkRateLimit } from '../../rate-limit';
 
 if (!process.env.CLERK_SECRET_KEY) {
   throw new Error('CLERK_SECRET_KEY has to be set');
@@ -15,6 +16,8 @@ function isSessionEvent(event: WebhookEvent): event is SessionWebhookEvent {
 }
 
 export async function POST(req: NextRequest): Promise<void | NextResponse> {
+  const rateLimitError = checkRateLimit(req, { limit: 30, windowMs: 60_000 });
+  if (rateLimitError) return rateLimitError;
   if (!process.env.CLERK_WEBHOOK_SECRET) {
     throw new Error('CLERK_WEBHOOK_SECRET has to be set');
   }
