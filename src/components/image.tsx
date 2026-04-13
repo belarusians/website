@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useNextSanityImage } from 'next-sanity-image';
-import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import type { SanityImageSource } from '@sanity/image-url';
 
 import { dataset, projectId } from '../sanity/env';
 
