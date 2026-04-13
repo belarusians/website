@@ -78,6 +78,7 @@ export async function generateMetadata({ params }: CommonPageParams, parent: Res
       title,
       description,
       url: `${lang}/vacancies`,
+      images: [{ url: '/images/og/vacancies.jpg' }],
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -85,6 +86,7 @@ export async function generateMetadata({ params }: CommonPageParams, parent: Res
       ...parentMetadata.twitter,
       title,
       description,
+      images: ['/images/og/vacancies.jpg'],
     },
   };
 }
