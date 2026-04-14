@@ -98,7 +98,7 @@ Explicit non-goals (deferred to follow-up plans):
 - [x] run full test suite — must pass before task 3
 
 ### Task 3: Build subscription service module
-- [ ] create `src/lib/subscriptions/service.ts` with:
+- [x] create `src/lib/subscriptions/service.ts` with:
   - `generateUnsubscribeToken(): string` — 32 random bytes, base64url
   - `normalizeEmail(email: string): string` — lowercase + trim
   - `upsertActiveSubscription({ email, newsletterType, stripeCustomerId?, stripeSubscriptionId?, source }): Promise<{ created: boolean; reactivated: boolean }>` — INSERT ... ON CONFLICT (email, newsletter_type); if existing row is `unsubscribed` and `unsubscribe_source = 'stripe_subscription_lapsed'`, reactivate it (new token, `welcome_email_pending=true`); if it's `unsubscribed` due to `'user'`, do NOT reactivate
@@ -106,10 +106,10 @@ Explicit non-goals (deferred to follow-up plans):
   - `markUnsubscribed(id: string, unsubscribeSource: 'user' | 'stripe_subscription_lapsed'): Promise<void>`
   - `markUnsubscribedByStripeSubscriptionId(subscriptionId: string): Promise<void>` — used by the lapse handler
   - `markWelcomeEmailSent(id: string): Promise<void>` — for the future email plan
-- [ ] create `src/lib/subscriptions/types.ts` with `NewsletterType`, `SubscriptionStatus`, `UnsubscribeSource` unions and the `Subscription` record type matching the table
-- [ ] write unit tests for `generateUnsubscribeToken` (length, uniqueness across N calls, url-safe charset)
-- [ ] write unit tests for `normalizeEmail` (mixed case, surrounding spaces, already normalised)
-- [ ] run tests — must pass before task 4
+- [x] create `src/lib/subscriptions/types.ts` with `NewsletterType`, `SubscriptionStatus`, `UnsubscribeSource` unions and the `Subscription` record type matching the table
+- [x] write unit tests for `generateUnsubscribeToken` (length, uniqueness across N calls, url-safe charset)
+- [x] write unit tests for `normalizeEmail` (mixed case, surrounding spaces, already normalised)
+- [x] run tests — must pass before task 4
 
 ### Task 4: Implement `/api/newsletter/unsubscribe` endpoint
 - [ ] create `src/app/api/newsletter/unsubscribe/route.ts` exporting `GET` (for link clicks) and `POST` (for form confirmation):
