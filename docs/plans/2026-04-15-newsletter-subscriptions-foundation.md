@@ -112,15 +112,15 @@ Explicit non-goals (deferred to follow-up plans):
 - [x] run tests — must pass before task 4
 
 ### Task 4: Implement `/api/newsletter/unsubscribe` endpoint
-- [ ] create `src/app/api/newsletter/unsubscribe/route.ts` exporting `GET` (for link clicks) and `POST` (for form confirmation):
+- [x] create `src/app/api/newsletter/unsubscribe/route.ts` exporting `GET` (for link clicks) and `POST` (for form confirmation):
   - parse `token` from query (GET) or body (POST) with Zod
   - rate-limit via existing `checkRateLimit` helper
   - look up via `findByUnsubscribeToken`; if missing → `sendError(404, 'invalid token')` (opaque wording; never reveal whether the email exists)
   - if already `unsubscribed` → `sendSuccess('already unsubscribed')` (idempotent)
   - otherwise `markUnsubscribed(id, 'user')` and return `sendSuccess`
-- [ ] write unit tests for the Zod token schema (valid/invalid shapes)
-- [ ] write unit tests for any pure response-builder helper factored out
-- [ ] run tests — must pass before task 5
+- [x] write unit tests for the Zod token schema (valid/invalid shapes)
+- [x] write unit tests for any pure response-builder helper factored out (no separate response-builder needed; handleUnsubscribe is thin over service calls)
+- [x] run tests — must pass before task 5
 
 ### Task 5: Donate page newsletter opt-in + Payment Link metadata
 - [ ] add a checkbox to `src/app/[lang]/donate/donate-buttons.tsx` (default checked). Only render/submit when the donation is recurring. Labels via i18n keys (`newsletter_optin`) in `src/app/i18n/locales/{be,nl}/donate.json`
