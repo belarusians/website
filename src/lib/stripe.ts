@@ -113,7 +113,8 @@ export async function searchPLinkByPriceId(
   for await (const pl of getStripe().paymentLinks.list({ active: true, limit: 100 })) {
     if (pl.metadata['price_id'] !== priceId) continue;
     if (options?.newsletterOptin !== undefined) {
-      if (pl.metadata['newsletter_optin'] !== String(options.newsletterOptin)) continue;
+      const plOptin = pl.metadata['newsletter_optin'] ?? 'false';
+      if (plOptin !== String(options.newsletterOptin)) continue;
     }
     return pl;
   }

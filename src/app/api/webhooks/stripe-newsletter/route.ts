@@ -19,13 +19,15 @@ export async function POST(req: NextRequest) {
     return sendError(400, 'Missing body');
   }
 
+  const secret = process.env.STRIPE_NEWSLETTER_WEBHOOK_SECRET;
+  if (!secret) {
+    console.error('STRIPE_NEWSLETTER_WEBHOOK_SECRET env variable should be set');
+    return sendError(500, 'Internal Server Error');
+  }
+
   let event: Stripe.Event;
   try {
     const bodyBuffer = Buffer.from(await req.arrayBuffer());
-    const secret = process.env.STRIPE_NEWSLETTER_WEBHOOK_SECRET;
-    if (!secret) {
-      throw new Error('STRIPE_NEWSLETTER_WEBHOOK_SECRET env variable should be set');
-    }
     event = constructWebhookEvent(bodyBuffer, sig, secret);
   } catch (err) {
     const message = err instanceof Error ? `Webhook Error: ${err.message}` : 'Unknown webhook error';

@@ -1,5 +1,5 @@
 import { randomBytes } from 'crypto';
-import { getDb } from '@/lib/db';
+import { getDb } from '../db';
 import { NewsletterType, Subscription, SubscriptionSource, UnsubscribeSource } from './types';
 
 export function generateUnsubscribeToken(): string {
