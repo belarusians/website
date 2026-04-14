@@ -129,7 +129,7 @@ NEXT_PUBLIC_CLERK_SIGN_UP_URL, NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL, NEXT_PUBLIC_
 POSTGRES_URL (connection string for @vercel/postgres)
 
 # Stripe
-STRIPE_SECRET_KEY (sk_test_ for dev, sk_live_ for prod), STRIPE_WEBHOOK_SECRET
+STRIPE_API_KEY (sk_test_ for dev, sk_live_ for prod), STRIPE_WEBHOOK_SECRET
 STRIPE_NEWSLETTER_WEBHOOK_SECRET (signing secret for /api/webhooks/stripe-newsletter)
 
 # Google Workspace (RBAC)

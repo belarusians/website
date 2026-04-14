@@ -45,19 +45,22 @@ export async function upsertActiveSubscription({
   const normalized = normalizeEmail(email);
   const token = generateUnsubscribeToken();
 
+  const insertResult = await db`
+    INSERT INTO subscriptions (email, newsletter_type, unsubscribe_token, stripe_customer_id, stripe_subscription_id, source)
+    VALUES (${normalized}, ${newsletterType}, ${token}, ${stripeCustomerId ?? null}, ${stripeSubscriptionId ?? null}, ${source})
+    ON CONFLICT (email, newsletter_type) DO NOTHING
+    RETURNING id
+  `;
+
+  if (insertResult.rows.length > 0) {
+    return { created: true, reactivated: false };
+  }
+
   const existing = await db`
     SELECT id, status, unsubscribe_source
     FROM subscriptions
     WHERE email = ${normalized} AND newsletter_type = ${newsletterType}
   `;
-
-  if (existing.rows.length === 0) {
-    await db`
-      INSERT INTO subscriptions (email, newsletter_type, unsubscribe_token, stripe_customer_id, stripe_subscription_id, source)
-      VALUES (${normalized}, ${newsletterType}, ${token}, ${stripeCustomerId ?? null}, ${stripeSubscriptionId ?? null}, ${source})
-    `;
-    return { created: true, reactivated: false };
-  }
 
   const row = existing.rows[0];
 
@@ -114,13 +117,3 @@ export async function markUnsubscribedByStripeSubscriptionId(subscriptionId: str
   `;
 }
 
-export async function markWelcomeEmailSent(id: string): Promise<void> {
-  const db = getDb();
-  await db`
-    UPDATE subscriptions
-    SET welcome_email_pending = false,
-        welcome_email_sent_at = now(),
-        updated_at = now()
-    WHERE id = ${id}
-  `;
-}

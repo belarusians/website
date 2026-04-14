@@ -39,8 +39,15 @@ async function main() {
     const content = await readFile(filePath, 'utf-8');
 
     console.log(`Applying ${file}...`);
-    await sql.query(content);
-    await sql`INSERT INTO _migrations (name) VALUES (${file})`;
+    await sql.query('BEGIN');
+    try {
+      await sql.query(content);
+      await sql`INSERT INTO _migrations (name) VALUES (${file})`;
+      await sql.query('COMMIT');
+    } catch (err) {
+      await sql.query('ROLLBACK');
+      throw err;
+    }
     console.log(`Applied ${file}.`);
   }
 

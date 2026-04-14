@@ -110,15 +110,14 @@ export async function searchPLinkByPriceId(
   priceId: Stripe.Price['id'],
   options?: { newsletterOptin?: boolean },
 ): Promise<Stripe.PaymentLink | null> {
-  const plinks = await getStripe().paymentLinks.list({ active: true });
-  const plink = plinks.data.find((pl) => {
-    if (pl.metadata['price_id'] !== priceId) return false;
+  for await (const pl of getStripe().paymentLinks.list({ active: true, limit: 100 })) {
+    if (pl.metadata['price_id'] !== priceId) continue;
     if (options?.newsletterOptin !== undefined) {
-      return pl.metadata['newsletter_optin'] === String(options.newsletterOptin);
+      if (pl.metadata['newsletter_optin'] !== String(options.newsletterOptin)) continue;
     }
-    return true;
-  });
-  return plink ?? null;
+    return pl;
+  }
+  return null;
 }
 
 export async function createPLinkForPriceId(

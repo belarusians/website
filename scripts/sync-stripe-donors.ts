@@ -29,12 +29,11 @@ async function main(): Promise<void> {
   let subscriptionsScanned = 0;
   let eligible = 0;
   let inserted = 0;
-  let alreadyExisted = 0;
-  let skippedUnsubscribed = 0;
+  let skipped = 0;
 
   const donors: EligibleDonor[] = [];
 
-  for await (const sub of stripe.subscriptions.list({ status: 'active', limit: 100 })) {
+  for await (const sub of stripe.subscriptions.list({ status: 'active', limit: 100, expand: ['data.customer'] })) {
     subscriptionsScanned++;
 
     const invoices = await stripe.invoices.list({
@@ -86,8 +85,7 @@ async function main(): Promise<void> {
     const donor = donorsByEmail.get(email)!;
 
     if (dryRun) {
-      console.log(`[DRY RUN] Would enroll: ${email}`);
-      inserted++;
+      console.log(`[DRY RUN] Would attempt to enroll: ${email}`);
       continue;
     }
 
@@ -104,8 +102,7 @@ async function main(): Promise<void> {
     } else if (result.reactivated) {
       inserted++;
     } else {
-      alreadyExisted++;
-      skippedUnsubscribed++;
+      skipped++;
     }
   }
 
@@ -113,8 +110,7 @@ async function main(): Promise<void> {
   console.log(`  subscriptions_scanned: ${subscriptionsScanned}`);
   console.log(`  eligible: ${eligible}`);
   console.log(`  inserted: ${inserted}`);
-  console.log(`  already_existed: ${alreadyExisted}`);
-  console.log(`  skipped_unsubscribed: ${skippedUnsubscribed}`);
+  console.log(`  skipped: ${skipped}`);
 }
 
 main()

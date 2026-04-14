@@ -2,7 +2,7 @@ import { NextRequest } from 'next/server';
 import Stripe from 'stripe';
 import { constructWebhookEvent, retrieveSubscription } from '@/lib/stripe';
 import { upsertActiveSubscription, markUnsubscribedByStripeSubscriptionId } from '@/lib/subscriptions/service';
-import { classifySubscriptionEvent, parseOptInFlag, extractEnrollmentEmail } from '@/lib/subscriptions/webhook-helpers';
+import { classifySubscriptionEvent, parseOptInFlag } from '@/lib/subscriptions/webhook-helpers';
 import { sendError, sendSuccess } from '../../utils';
 import { checkRateLimit } from '../../rate-limit';
 
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
   } catch (err) {
     const message = err instanceof Error ? `Webhook Error: ${err.message}` : 'Unknown webhook error';
     console.error(message);
-    return sendError(400, message);
+    return sendError(400, 'Invalid webhook signature');
   }
 
   const obj = event.data.object;
@@ -75,11 +75,7 @@ async function handleEnrollment(invoice: Stripe.Invoice) {
     return sendSuccess('Skipped: no opt-in');
   }
 
-  const charge =
-    invoice.charge && typeof invoice.charge === 'object'
-      ? { billing_details: { email: invoice.charge.billing_details?.email } }
-      : null;
-  const email = extractEnrollmentEmail({ customer_email: invoice.customer_email }, charge);
+  const email = invoice.customer_email;
   if (!email) {
     console.warn('No email found on invoice for enrollment', { subscriptionId });
     return sendSuccess('Skipped: no email');
