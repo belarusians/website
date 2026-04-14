@@ -123,14 +123,14 @@ Explicit non-goals (deferred to follow-up plans):
 - [x] run tests — must pass before task 5
 
 ### Task 5: Donate page newsletter opt-in + Payment Link metadata
-- [ ] add a checkbox to `src/app/[lang]/donate/donate-buttons.tsx` (default checked). Only render/submit when the donation is recurring. Labels via i18n keys (`newsletter_optin`) in `src/app/i18n/locales/{be,nl}/donate.json`
-- [ ] pass the checkbox value to `/api/donate/link` as a query param (`newsletterOptin=true|false`)
-- [ ] in `src/app/api/donate/link/route.ts`:
+- [x] add a checkbox to `src/app/[lang]/donate/donate-buttons.tsx` (default checked). Only render/submit when the donation is recurring. Labels via i18n keys (`newsletter_optin`) in `src/app/i18n/locales/{be,nl}/donate.json`
+- [x] pass the checkbox value to `/api/donate/link` as a query param (`newsletterOptin=true|false`)
+- [x] in `src/app/api/donate/link/route.ts`:
   - extend the Zod schema to accept `newsletterOptin` (boolean, coerced)
   - ignore the flag when `recurring=false`
   - when creating the recurring Payment Link, add `subscription_data.metadata.newsletter_optin` so it lands on the resulting Stripe `Subscription` (read by webhook invoice handlers)
-- [ ] write unit tests for the updated Zod schema (presence, absence, boolean coercion, non-recurring case ignored)
-- [ ] run tests — must pass before task 6
+- [x] write unit tests for the updated Zod schema (presence, absence, boolean coercion, non-recurring case ignored)
+- [x] run tests — must pass before task 6
 
 ### Task 6: Stripe webhook listener for subscription lifecycle
 - [ ] create `src/app/api/webhooks/stripe-newsletter/route.ts` that:

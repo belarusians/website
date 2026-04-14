@@ -11,6 +11,7 @@ interface DonateButtonsProps {
   recurringLabel: string;
   donateBtnLabel: string;
   donateBtnErrLabel: string;
+  newsletterOptinLabel: string;
 }
 
 export function DonateButtons(props: DonateButtonsProps): ReactElement {
@@ -21,6 +22,7 @@ export function DonateButtons(props: DonateButtonsProps): ReactElement {
   const defaultPrice = 5;
   const [price, setPrice] = useState(defaultPrice);
   const [isRecurring, setIsRecurring] = useState(false);
+  const [newsletterOptin, setNewsletterOptin] = useState(true);
   const [customPrice, setCustomPrice] = useState<number | null>(null);
 
   const prices = [3, 5, 10, 20, 50];
@@ -68,6 +70,7 @@ export function DonateButtons(props: DonateButtonsProps): ReactElement {
       const donation = parseDonation({
         amount: customPrice === null ? price : customPrice,
         recurring: isRecurring,
+        ...(isRecurring && { newsletterOptin }),
       });
 
       const response = await fetch(`/api/donate/link?${querifyObject<Donation>(donation)}`, {
@@ -142,6 +145,21 @@ export function DonateButtons(props: DonateButtonsProps): ReactElement {
           {props.recurringLabel}
         </label>
       </div>
+      {isRecurring && (
+        <div className="col-span-2">
+          <input
+            disabled={isLoading}
+            type="checkbox"
+            id="newsletterOptin"
+            checked={newsletterOptin}
+            className="text-primary transition-all shadow-lg hover:shadow-xl active:shadow-2xl rounded-md appearance-none border-none p-4 cursor-pointer"
+            onChange={(e) => setNewsletterOptin(e.target.checked)}
+          />
+          <label htmlFor="newsletterOptin" className="ml-3 cursor-pointer">
+            {props.newsletterOptinLabel}
+          </label>
+        </div>
+      )}
       <Button
         size="large"
         type="submit"

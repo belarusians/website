@@ -1,9 +1,15 @@
 import * as z from 'zod';
 import { RequestError } from '../lib/utils';
 
+const booleanLike = z.preprocess(
+  (val) => (typeof val === 'string' ? val === 'true' : val),
+  z.boolean(),
+);
+
 const donationSchema = z.object({
   amount: z.coerce.number().min(1).max(1000),
   recurring: z.boolean(),
+  newsletterOptin: booleanLike.optional(),
 });
 export function parseDonation(donation: Record<string, unknown>): Donation {
   const parsed = donationSchema.safeParse(donation);

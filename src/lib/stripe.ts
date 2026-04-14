@@ -101,20 +101,31 @@ export async function createPrice(amount: number, recurring: boolean, productId:
   return price.id;
 }
 
-export async function searchPLinkByPriceId(priceId: Stripe.Price['id']): Promise<Stripe.PaymentLink | null> {
+export async function searchPLinkByPriceId(
+  priceId: Stripe.Price['id'],
+  options?: { newsletterOptin?: boolean },
+): Promise<Stripe.PaymentLink | null> {
   const plinks = await getStripe().paymentLinks.list({ active: true });
-  const plink = plinks.data.find((pl) => pl.metadata['price_id'] === priceId);
-  if (!plink) {
-    return null;
-  }
-
-  return plink;
+  const plink = plinks.data.find((pl) => {
+    if (pl.metadata['price_id'] !== priceId) return false;
+    if (options?.newsletterOptin !== undefined) {
+      return pl.metadata['newsletter_optin'] === String(options.newsletterOptin);
+    }
+    return true;
+  });
+  return plink ?? null;
 }
 
 export async function createPLinkForPriceId(
   priceId: Stripe.Price['id'],
   redirectUrl?: string,
+  options?: { newsletterOptin?: boolean },
 ): Promise<Stripe.PaymentLink> {
+  const metadata: Record<string, string> = { price_id: priceId };
+  if (options?.newsletterOptin !== undefined) {
+    metadata.newsletter_optin = String(options.newsletterOptin);
+  }
+
   const plink = await getStripe().paymentLinks.create(
     {
       line_items: [
@@ -131,12 +142,15 @@ export async function createPLinkForPriceId(
           },
         },
       }),
-      metadata: {
-        price_id: priceId,
-      },
+      metadata,
+      ...(options?.newsletterOptin && {
+        subscription_data: {
+          metadata: { newsletter_optin: 'true' },
+        },
+      }),
     },
     {
-      idempotencyKey: `plink-${priceId}-${redirectUrl}-1`,
+      idempotencyKey: `plink-${priceId}-${redirectUrl}-${options?.newsletterOptin ?? 'none'}-1`,
     },
   );
 

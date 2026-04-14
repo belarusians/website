@@ -15,9 +15,14 @@ export async function GET(request: NextRequest) {
   if (rateLimitError) return rateLimitError;
   const amountInEuro = request.nextUrl.searchParams.get('amount');
   const recurring = request.nextUrl.searchParams.get('recurring');
+  const newsletterOptin = request.nextUrl.searchParams.get('newsletterOptin');
 
   try {
-    const donation = parseDonation({ amount: amountInEuro, recurring: recurring === 'true' });
+    const donation = parseDonation({
+      amount: amountInEuro,
+      recurring: recurring === 'true',
+      ...(newsletterOptin !== null && { newsletterOptin }),
+    });
 
     const productId = await searchProduct();
     if (!productId) {
@@ -30,12 +35,16 @@ export async function GET(request: NextRequest) {
       priceId = await createPrice(amountInCents, donation.recurring, productId);
     }
 
-    let plink = await searchPLinkByPriceId(priceId);
+    const plinkOptions = donation.recurring
+      ? { newsletterOptin: donation.newsletterOptin === true }
+      : undefined;
+
+    let plink = await searchPLinkByPriceId(priceId, plinkOptions);
     if (!plink) {
       const referer = request.headers.get('referer');
       const redirectUrl = referer ? `${cutQuery(referer)}?success` : undefined;
 
-      plink = await createPLinkForPriceId(priceId, redirectUrl);
+      plink = await createPLinkForPriceId(priceId, redirectUrl, plinkOptions);
     }
 
     return NextResponse.json({ payment_link: plink.url }, { status: 200 });

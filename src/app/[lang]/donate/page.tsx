@@ -38,6 +38,7 @@ export default async function Page({ params, searchParams }: CommonPageParams & 
               donateBtnLabel={t('donateBtn')}
               recurringLabel={t('recurring')}
               donateBtnErrLabel={t('donateBtnErr')}
+              newsletterOptinLabel={t('newsletter_optin')}
             />
           )}
         </div>
