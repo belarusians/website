@@ -18,7 +18,8 @@
     "sanity:extract": "sanity schema extract --enforce-required-fields",
     "sanity:typegen": "sanity typegen generate",
     "sanity:types": "npm run sanity:extract && npm run sanity:typegen",
-    "db:migrate": "tsx scripts/migrate.ts"
+    "db:migrate": "tsx scripts/migrate.ts",
+    "sync:stripe-donors": "tsx scripts/sync-stripe-donors.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1029.0",

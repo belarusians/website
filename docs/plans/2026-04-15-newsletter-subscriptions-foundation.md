@@ -157,7 +157,7 @@ Explicit non-goals (deferred to follow-up plans):
 - [x] run tests — must pass before task 7
 
 ### Task 7: Stripe backfill script for current monthly donors (≥2 paid invoices)
-- [ ] create `scripts/sync-stripe-donors.ts` that:
+- [x] create `scripts/sync-stripe-donors.ts` that:
   - loads `.env.local` via dotenv
   - paginates Stripe `subscriptions.list({ status: 'active' })`
   - for each subscription, fetch paid invoices via `invoices.list({ subscription: sub.id, status: 'paid', limit: 100 })`
@@ -167,11 +167,11 @@ Explicit non-goals (deferred to follow-up plans):
   - for each eligible unique email, `upsertActiveSubscription({ email, newsletterType: 'financial_report', stripeCustomerId, stripeSubscriptionId, source: 'stripe_backfill' })`
   - log a summary: `{ subscriptions_scanned, eligible, inserted, already_existed, skipped_unsubscribed }`
   - support `--dry-run` flag
-- [ ] add `"sync:stripe-donors": "tsx scripts/sync-stripe-donors.ts"` to package.json scripts
-- [ ] factor out `isEligibleForBackfill(subscription, paidInvoiceCount): boolean` as a pure helper
-- [ ] write unit tests for `isEligibleForBackfill` (active + ≥2 invoices → true; active + 1 invoice → false; past_due → false; canceled → false)
-- [ ] write unit tests for the in-run dedup/normalisation logic
-- [ ] run tests — must pass before task 8
+- [x] add `"sync:stripe-donors": "tsx scripts/sync-stripe-donors.ts"` to package.json scripts
+- [x] factor out `isEligibleForBackfill(subscription, paidInvoiceCount): boolean` as a pure helper
+- [x] write unit tests for `isEligibleForBackfill` (active + ≥2 invoices → true; active + 1 invoice → false; past_due → false; canceled → false)
+- [x] write unit tests for the in-run dedup/normalisation logic
+- [x] run tests — must pass before task 8
 
 ### Task 8: Verify acceptance criteria
 - [ ] verify migration runs cleanly on a fresh DB and is idempotent (re-running `npm run db:migrate` is a no-op)
