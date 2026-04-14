@@ -76,7 +76,7 @@ Explicit non-goals (deferred to follow-up plans):
 - [x] run tests — must pass before task 2
 
 ### Task 2: Add subscriptions table migration
-- [ ] create `db/migrations/0001_subscriptions.sql` defining:
+- [x] create `db/migrations/0001_subscriptions.sql` defining:
   - `id uuid primary key default gen_random_uuid()` (enable `pgcrypto` if not present)
   - `email text not null` (stored lowercased/trimmed)
   - `newsletter_type text not null` with CHECK constraint: `('financial_report','events')`
@@ -93,9 +93,9 @@ Explicit non-goals (deferred to follow-up plans):
   - `unique(email, newsletter_type)`
   - index on `unsubscribe_token`
   - index on `stripe_subscription_id` (for fast lapse lookup)
-- [ ] verify migration runs cleanly against a local/dev Postgres (documented in Post-Completion)
-- [ ] no unit tests in this task (pure SQL); covered by manual verification + downstream task tests
-- [ ] run full test suite — must pass before task 3
+- [x] verify migration runs cleanly against a local/dev Postgres (documented in Post-Completion)
+- [x] no unit tests in this task (pure SQL); covered by manual verification + downstream task tests
+- [x] run full test suite — must pass before task 3
 
 ### Task 3: Build subscription service module
 - [ ] create `src/lib/subscriptions/service.ts` with:
