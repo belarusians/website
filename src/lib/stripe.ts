@@ -41,11 +41,16 @@ function isString(value: unknown): value is string {
   return typeof value === 'string';
 }
 
-export function constructWebhookEvent(body: Buffer, signature: string): Stripe.Event {
-  if (!process.env.STRIPE_ENDPOINT_SECRET) {
-    throw new Error('STRIPE_ENDPOINT_SECRET env variable should be set');
+export function constructWebhookEvent(body: Buffer, signature: string, secret?: string): Stripe.Event {
+  const webhookSecret = secret ?? process.env.STRIPE_ENDPOINT_SECRET;
+  if (!webhookSecret) {
+    throw new Error('Webhook secret env variable should be set');
   }
-  return getStripe().webhooks.constructEvent(body, signature, process.env.STRIPE_ENDPOINT_SECRET);
+  return getStripe().webhooks.constructEvent(body, signature, webhookSecret);
+}
+
+export async function retrieveSubscription(subscriptionId: string): Promise<Stripe.Subscription> {
+  return getStripe().subscriptions.retrieve(subscriptionId);
 }
 
 export async function searchProduct(): Promise<Stripe.Product['id'] | null> {

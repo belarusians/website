@@ -133,7 +133,7 @@ Explicit non-goals (deferred to follow-up plans):
 - [x] run tests — must pass before task 6
 
 ### Task 6: Stripe webhook listener for subscription lifecycle
-- [ ] create `src/app/api/webhooks/stripe-newsletter/route.ts` that:
+- [x] create `src/app/api/webhooks/stripe-newsletter/route.ts` that:
   - verifies signature with `constructWebhookEvent` using a new `STRIPE_NEWSLETTER_WEBHOOK_SECRET`
   - rate-limits (follow existing pattern)
   - dispatches based on `event.type`:
@@ -142,19 +142,19 @@ Explicit non-goals (deferred to follow-up plans):
     - `customer.subscription.updated` → lapse path if new `status` ∈ {`canceled`,`unpaid`,`incomplete_expired`,`past_due`}
     - everything else → return 200 `{ skipped: true }`
   - always return 200 on handled events (so Stripe does not retry)
-- [ ] **Enrollment path (`invoice.payment_succeeded`)**:
+- [x] **Enrollment path (`invoice.payment_succeeded`)**:
   - skip when invoice has no associated subscription (one-off charges)
   - fetch the Stripe Subscription (via `stripe.subscriptions.retrieve`) to read `metadata.newsletter_optin`
   - if opt-in is not truthy, skip
   - extract `email` from `invoice.customer_email` (fallback to `charge.billing_details.email` if expanded)
   - `upsertActiveSubscription({ email, newsletterType: 'financial_report', stripeCustomerId, stripeSubscriptionId, source: 'stripe_webhook' })` — idempotent: 2nd, 3rd, Nth invoices for the same subscription are no-ops
-- [ ] **Lapse path**:
+- [x] **Lapse path**:
   - extract `subscription.id` and call `markUnsubscribedByStripeSubscriptionId(subscription.id)`
-- [ ] factor out pure helpers: `classifySubscriptionEvent(event)` (returns `'enroll' | 'lapse' | 'skip'`), `parseOptInFlag(metadata)`, `extractEnrollmentEmail(invoice, charge?)`. Keep Stripe API calls outside these helpers.
-- [ ] write unit tests for `classifySubscriptionEvent` covering: enroll on any invoice.payment_succeeded tied to a subscription, skip on invoice.payment_succeeded without subscription, skip on unrelated event, lapse on subscription.deleted, lapse on subscription.updated (each terminal status), no-lapse on subscription.updated → status=active
-- [ ] write unit tests for `parseOptInFlag` (`"true"`, `true`, `"false"`, missing, garbage)
-- [ ] write unit tests for `extractEnrollmentEmail` (invoice.customer_email primary, billing_details fallback, missing → null)
-- [ ] run tests — must pass before task 7
+- [x] factor out pure helpers: `classifySubscriptionEvent(event)` (returns `'enroll' | 'lapse' | 'skip'`), `parseOptInFlag(metadata)`, `extractEnrollmentEmail(invoice, charge?)`. Keep Stripe API calls outside these helpers.
+- [x] write unit tests for `classifySubscriptionEvent` covering: enroll on any invoice.payment_succeeded tied to a subscription, skip on invoice.payment_succeeded without subscription, skip on unrelated event, lapse on subscription.deleted, lapse on subscription.updated (each terminal status), no-lapse on subscription.updated → status=active
+- [x] write unit tests for `parseOptInFlag` (`"true"`, `true`, `"false"`, missing, garbage)
+- [x] write unit tests for `extractEnrollmentEmail` (invoice.customer_email primary, billing_details fallback, missing → null)
+- [x] run tests — must pass before task 7
 
 ### Task 7: Stripe backfill script for current monthly donors (≥2 paid invoices)
 - [ ] create `scripts/sync-stripe-donors.ts` that:
