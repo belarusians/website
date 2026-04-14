@@ -67,13 +67,13 @@ Explicit non-goals (deferred to follow-up plans):
 ## Implementation Steps
 
 ### Task 1: Provision DB client and migration runner
-- [ ] add `@vercel/postgres` to dependencies and `tsx`, `dotenv` to devDependencies
-- [ ] create `src/lib/db.ts` re-exporting `sql` from `@vercel/postgres`, with a startup check that `POSTGRES_URL` is set (matches existing env-var-guard style)
-- [ ] create `db/migrations/` directory with a README noting the naming convention (`NNNN_name.sql`)
-- [ ] create `scripts/migrate.ts` that reads migrations from `db/migrations/`, tracks applied ones in `_migrations(name text primary key, applied_at timestamptz)`, and applies pending ones in order inside a transaction
-- [ ] add `"db:migrate": "tsx scripts/migrate.ts"` to package.json scripts
-- [ ] write unit tests for the migration-file discovery/ordering helper (pure function over a directory listing)
-- [ ] run tests — must pass before task 2
+- [x] add `@vercel/postgres` to dependencies and `tsx`, `dotenv` to devDependencies
+- [x] create `src/lib/db.ts` re-exporting `sql` from `@vercel/postgres`, with a startup check that `POSTGRES_URL` is set (matches existing env-var-guard style)
+- [x] create `db/migrations/` directory with a README noting the naming convention (`NNNN_name.sql`)
+- [x] create `scripts/migrate.ts` that reads migrations from `db/migrations/`, tracks applied ones in `_migrations(name text primary key, applied_at timestamptz)`, and applies pending ones in order inside a transaction
+- [x] add `"db:migrate": "tsx scripts/migrate.ts"` to package.json scripts
+- [x] write unit tests for the migration-file discovery/ordering helper (pure function over a directory listing)
+- [x] run tests — must pass before task 2
 
 ### Task 2: Add subscriptions table migration
 - [ ] create `db/migrations/0001_subscriptions.sql` defining:
