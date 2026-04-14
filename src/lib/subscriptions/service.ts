@@ -72,7 +72,7 @@ export async function upsertActiveSubscription({
     return { created: false, reactivated: false };
   }
 
-  await db`
+  const updateResult = await db`
     UPDATE subscriptions
     SET status = 'active',
         unsubscribe_token = ${token},
@@ -81,9 +81,9 @@ export async function upsertActiveSubscription({
         stripe_customer_id = ${stripeCustomerId ?? null},
         stripe_subscription_id = ${stripeSubscriptionId ?? null},
         updated_at = now()
-    WHERE id = ${row.id}
+    WHERE id = ${row.id} AND status != 'active' AND (unsubscribe_source IS NULL OR unsubscribe_source != 'user')
   `;
-  return { created: false, reactivated: true };
+  return { created: false, reactivated: (updateResult.rowCount ?? 0) > 0 };
 }
 
 export async function findByUnsubscribeToken(token: string): Promise<Subscription | null> {

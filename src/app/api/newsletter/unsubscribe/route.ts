@@ -8,6 +8,7 @@ export const tokenSchema = z.object({
   token: z
     .string()
     .min(1)
+    .max(64)
     .regex(/^[A-Za-z0-9_-]+$/, 'Invalid token format'),
 });
 
