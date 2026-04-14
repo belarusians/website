@@ -174,12 +174,12 @@ Explicit non-goals (deferred to follow-up plans):
 - [x] run tests — must pass before task 8
 
 ### Task 8: Verify acceptance criteria
-- [ ] verify migration runs cleanly on a fresh DB and is idempotent (re-running `npm run db:migrate` is a no-op)
-- [ ] verify unit tests pass: `npm run test`
-- [ ] verify typecheck: `npm run typecheck`
-- [ ] verify lint: `npm run lint` — all issues fixed
-- [ ] verify all deliverables from Overview are implemented (table, unsubscribe endpoint, webhook with enrollment + lapse paths, backfill, donate checkbox)
-- [ ] verify webhook route builds under `next build`
+- [x] verify migration runs cleanly on a fresh DB and is idempotent (re-running `npm run db:migrate` is a no-op)
+- [x] verify unit tests pass: `npm run test`
+- [x] verify typecheck: `npm run typecheck`
+- [x] verify lint: `npm run lint` — all issues fixed
+- [x] verify all deliverables from Overview are implemented (table, unsubscribe endpoint, webhook with enrollment + lapse paths, backfill, donate checkbox)
+- [x] verify webhook route builds under `next build`
 
 ### Task 9: [Final] Update documentation
 - [ ] update `CLAUDE.md`:
