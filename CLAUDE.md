@@ -93,7 +93,7 @@ Monthly donors can opt in to the financial report newsletter via a checkbox on t
 
 **Backfill**: `npm run sync:stripe-donors` enrolls existing monthly donors with active subscriptions and ≥2 paid invoices. Stricter bar because they never saw the opt-in checkbox. Rows get `welcome_email_pending=true`.
 
-**Auto-unsubscribe (lapse)**: On `customer.subscription.deleted` or `customer.subscription.updated` with terminal status (`canceled`, `unpaid`, `incomplete_expired`, `past_due`), the subscription row is flipped to `unsubscribed` with `unsubscribe_source='stripe_subscription_lapsed'`.
+**Auto-unsubscribe (lapse)**: On `customer.subscription.deleted` or `customer.subscription.updated` with terminal status (`canceled`, `unpaid`, `incomplete_expired`), the subscription row is flipped to `unsubscribed` with `unsubscribe_source='stripe_subscription_lapsed'`. `past_due` is excluded because Stripe retries payment -- premature lapse would cause unnecessary churn.
 
 **User unsubscribe**: `/api/newsletter/unsubscribe?token=<token>` flips status with `unsubscribe_source='user'`. User-initiated unsubscribes are permanent — re-subscribing in Stripe does NOT reactivate.
 

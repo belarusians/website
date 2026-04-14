@@ -264,4 +264,4 @@ JSON response today; a user-facing confirmation page can be added with the email
 
 ## Handoff: Welcome Email Plan
 
-The follow-up welcome-email plan should query `SELECT * FROM subscriptions WHERE welcome_email_pending = true AND status = 'active'` to find subscribers who need a welcome email. After sending, call `markWelcomeEmailSent(id)` (already implemented in `src/lib/subscriptions/service.ts`) to set `welcome_email_sent_at` and flip `welcome_email_pending` to `false`. For backfilled subscribers, send the welcome email before the first monthly financial report arrives.
+The follow-up welcome-email plan should query `SELECT * FROM subscriptions WHERE welcome_email_pending = true AND status = 'active'` to find subscribers who need a welcome email. It will need to implement a `markWelcomeEmailSent(id)` function in `src/lib/subscriptions/service.ts` to set `welcome_email_sent_at` and flip `welcome_email_pending` to `false`. For backfilled subscribers, send the welcome email before the first monthly financial report arrives.

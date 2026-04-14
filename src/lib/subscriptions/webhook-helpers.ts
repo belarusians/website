@@ -1,4 +1,4 @@
-const TERMINAL_STATUSES = new Set(['canceled', 'unpaid', 'incomplete_expired', 'past_due']);
+const TERMINAL_STATUSES = new Set(['canceled', 'unpaid', 'incomplete_expired']);
 
 export type EventClassification = 'enroll' | 'lapse' | 'skip';
 
@@ -28,13 +28,4 @@ export function parseOptInFlag(metadata: Record<string, string> | null | undefin
   if (!metadata) return false;
   const value = metadata.newsletter_optin;
   return value === 'true' || (value as unknown) === true;
-}
-
-export function extractEnrollmentEmail(
-  invoice: { customer_email?: string | null },
-  charge?: { billing_details?: { email?: string | null } } | null,
-): string | null {
-  if (invoice.customer_email) return invoice.customer_email;
-  if (charge?.billing_details?.email) return charge.billing_details.email;
-  return null;
 }

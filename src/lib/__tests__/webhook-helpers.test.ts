@@ -2,7 +2,6 @@ import { describe, expect, test } from '@jest/globals';
 import {
   classifySubscriptionEvent,
   parseOptInFlag,
-  extractEnrollmentEmail,
 } from '../subscriptions/webhook-helpers';
 
 describe('classifySubscriptionEvent', () => {
@@ -67,13 +66,13 @@ describe('classifySubscriptionEvent', () => {
     ).toBe('lapse');
   });
 
-  test('lapse on customer.subscription.updated with past_due status', () => {
+  test('skip on customer.subscription.updated with past_due status', () => {
     expect(
       classifySubscriptionEvent({
         eventType: 'customer.subscription.updated',
         subscriptionStatus: 'past_due',
       }),
-    ).toBe('lapse');
+    ).toBe('skip');
   });
 
   test('skip on customer.subscription.updated with active status', () => {
@@ -145,38 +144,3 @@ describe('parseOptInFlag', () => {
   });
 });
 
-describe('extractEnrollmentEmail', () => {
-  test('returns customer_email when present', () => {
-    expect(extractEnrollmentEmail({ customer_email: 'user@example.com' })).toBe('user@example.com');
-  });
-
-  test('falls back to billing_details.email when customer_email is null', () => {
-    expect(
-      extractEnrollmentEmail({ customer_email: null }, { billing_details: { email: 'billing@example.com' } }),
-    ).toBe('billing@example.com');
-  });
-
-  test('falls back to billing_details.email when customer_email is missing', () => {
-    expect(extractEnrollmentEmail({}, { billing_details: { email: 'billing@example.com' } })).toBe(
-      'billing@example.com',
-    );
-  });
-
-  test('returns null when both sources are missing', () => {
-    expect(extractEnrollmentEmail({ customer_email: null })).toBeNull();
-  });
-
-  test('returns null when charge has no billing_details', () => {
-    expect(extractEnrollmentEmail({ customer_email: null }, { billing_details: undefined })).toBeNull();
-  });
-
-  test('returns null when charge is null', () => {
-    expect(extractEnrollmentEmail({ customer_email: null }, null)).toBeNull();
-  });
-
-  test('prefers customer_email over billing_details', () => {
-    expect(
-      extractEnrollmentEmail({ customer_email: 'primary@example.com' }, { billing_details: { email: 'fallback@example.com' } }),
-    ).toBe('primary@example.com');
-  });
-});
