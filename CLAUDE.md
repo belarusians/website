@@ -9,6 +9,8 @@ Website for MARA, a non-profit organization of Belarusians in the Netherlands. N
 - `npm run typecheck` — TypeScript check
 - `npm run test` / `npx jest -t "pattern"` — Jest tests
 - `npm run sanity:types` — regenerate Sanity TypeGen types (run after schema changes)
+- `npm run db:migrate` — run pending database migrations
+- `npm run sync:stripe-donors` — backfill newsletter subscriptions from Stripe (supports `--dry-run`)
 
 ## Code Style
 - Prettier: 120 chars, single quotes, 2-space indent
@@ -22,14 +24,16 @@ src/app/[lang]/          Pages (be, nl). Each page gets lang from CommonPagePara
 src/app/[lang]/about-us, donate, events, events/[slug], join-us, news, news/[slug],
                 sign-in, sign-up, vacancies, vacancies/[id]
 src/app/(sanity)/studio  Sanity Studio (protected by Clerk)
-src/app/api/             API routes: clickmeeting, donate, revalidate, subscribe, vacancies, webhooks
+src/app/api/             API routes: clickmeeting, donate, newsletter, revalidate, subscribe, vacancies, webhooks
 src/app/api/utils.ts     sendError(status, msg, reason?) / sendSuccess(msg) helpers
 src/app/i18n/            i18n config + locales/{be,nl}/*.json
 src/app/types.ts         CommonPageParams, PageSearchParams, PropsWithClass
 src/components/          Reusable UI: button, card, dropdown, header/, headings/, menu/, section, spinner, image
 src/components/types.ts  Lang enum (be, nl), domain types (Event, News, Guide, Feedback)
 src/sanity/              CMS schemas: event/, news/, guide/, feedback/, vacancy/, locale-schemas/
-src/lib/                 Integrations: stripe, s3, email, clickmeeting, google-directory, vacancies
+src/lib/                 Integrations: stripe, s3, email, clickmeeting, google-directory, vacancies, subscriptions
+db/migrations/           SQL migration files (NNNN_name.sql), applied by scripts/migrate.ts
+scripts/                 CLI scripts: migrate.ts, sync-stripe-donors.ts (run via tsx)
 src/utils/               Helpers: og.ts (OG images), lang.ts (validation)
 src/middleware.ts        Clerk auth + locale redirect (default: be, /ru → /be redirect)
 sanity.config.ts         Schema registration + type exports (EventSchema, NewsSchema, etc.)
@@ -59,6 +63,10 @@ Export async HTTP method handlers (GET, POST, etc.) in `route.ts`. Use `sendErro
 ### Data Flow
 Content created in Sanity Studio → fetched by server components via Sanity service files → rendered as SSR/ISR → client components handle interactions → API routes handle form submissions and external integrations (Stripe, S3, ClickMeeting).
 
+## Database
+
+Raw SQL with `@vercel/postgres` (no ORM). Migrations are plain `.sql` files in `db/migrations/` named `NNNN_name.sql`, tracked in a `_migrations` table. Run `npm run db:migrate` to apply pending migrations. See `db/README.md`.
+
 ## Architectural Decisions (Non-Obvious)
 
 ### ISR with Webhook-Triggered Revalidation
@@ -78,6 +86,19 @@ Clerk handles authentication. Google Workspace Groups determine authorization (A
 ### Stripe → ClickMeeting Flow
 Donation payments can trigger automatic ClickMeeting invitations. Stripe webhook checks product ID (hardcoded match) → extracts email → sends ClickMeeting invite. Product ID must be updated in code when creating new event products. See `src/app/api/clickmeeting/route.ts`.
 
+### Newsletter Subscription Lifecycle
+Monthly donors can opt in to the financial report newsletter via a checkbox on the donate page (default checked, only shown for recurring donations). The opt-in flag is stored on the Stripe Subscription's `metadata.newsletter_optin`.
+
+**Enrollment**: Stripe webhook (`/api/webhooks/stripe-newsletter`) listens for `invoice.payment_succeeded`. On the 1st successful invoice for a subscription with `newsletter_optin=true`, the donor is enrolled in the `subscriptions` table. Subsequent invoices are idempotent no-ops.
+
+**Backfill**: `npm run sync:stripe-donors` enrolls existing monthly donors with active subscriptions and ≥2 paid invoices. Stricter bar because they never saw the opt-in checkbox. Rows get `welcome_email_pending=true`.
+
+**Auto-unsubscribe (lapse)**: On `customer.subscription.deleted` or `customer.subscription.updated` with terminal status (`canceled`, `unpaid`, `incomplete_expired`, `past_due`), the subscription row is flipped to `unsubscribed` with `unsubscribe_source='stripe_subscription_lapsed'`.
+
+**User unsubscribe**: `/api/newsletter/unsubscribe?token=<token>` flips status with `unsubscribe_source='user'`. User-initiated unsubscribes are permanent — re-subscribing in Stripe does NOT reactivate.
+
+**Reactivation**: If a lapsed subscriber (not user-unsubscribed) resumes donating, their row is reactivated with a new token and `welcome_email_pending=true`.
+
 ### Portable Text → HTML
 Sanity stores rich text as Portable Text blocks. Converted to HTML server-side in `src/sanity/*/service.ts` using `@portabletext/to-html`. Adding custom blocks requires serializer updates.
 
@@ -87,6 +108,7 @@ Sanity stores rich text as Portable Text blocks. Converted to HTML server-side i
 |---------|----------|--------|--------------|
 | Sanity | `/api/revalidate` | publish/update/delete | HMAC-SHA256 |
 | Stripe | `/api/clickmeeting` | `checkout.session.completed` | Stripe SDK |
+| Stripe | `/api/webhooks/stripe-newsletter` | `invoice.payment_succeeded`, `customer.subscription.deleted`, `customer.subscription.updated` | Stripe SDK |
 | Clerk | `/api/webhooks/clerk` | user.* | Svix |
 
 All webhooks must verify signature before processing. Never skip verification.
@@ -103,8 +125,12 @@ NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY, CLERK_SECRET_KEY, CLERK_WEBHOOK_SECRET
 NEXT_PUBLIC_CLERK_SIGN_IN_URL (/[lang]/sign-in — must include [lang]!)
 NEXT_PUBLIC_CLERK_SIGN_UP_URL, NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL, NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL
 
+# Vercel Postgres
+POSTGRES_URL (connection string for @vercel/postgres)
+
 # Stripe
 STRIPE_SECRET_KEY (sk_test_ for dev, sk_live_ for prod), STRIPE_WEBHOOK_SECRET
+STRIPE_NEWSLETTER_WEBHOOK_SECRET (signing secret for /api/webhooks/stripe-newsletter)
 
 # Google Workspace (RBAC)
 GOOGLE_SERVICE_ACCOUNT_EMAIL, GOOGLE_PRIVATE_KEY (preserve \n as actual newlines!)

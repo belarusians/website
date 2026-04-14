@@ -182,14 +182,14 @@ Explicit non-goals (deferred to follow-up plans):
 - [x] verify webhook route builds under `next build`
 
 ### Task 9: [Final] Update documentation
-- [ ] update `CLAUDE.md`:
+- [x] update `CLAUDE.md`:
   - add `POSTGRES_URL` and `STRIPE_NEWSLETTER_WEBHOOK_SECRET` to env var list
   - add a short "Database" section describing the raw-sql + migrations convention
   - add the new webhook (`/api/webhooks/stripe-newsletter`) to the Webhooks table with its listed events
   - note the enrollment rules (webhook: opt-in + 1st paid invoice; backfill: ≥2 paid invoices) and the lapse rule in the Architectural Decisions section
-- [ ] add `db/README.md` explaining how to add a migration and run `npm run db:migrate`
-- [ ] add `scripts/README.md` listing `migrate` and `sync-stripe-donors` and how to run them
-- [ ] add a short note at the end of the plan: the welcome-email plan picks up rows with `welcome_email_pending=true`
+- [x] add `db/README.md` explaining how to add a migration and run `npm run db:migrate`
+- [x] add `scripts/README.md` listing `migrate` and `sync-stripe-donors` and how to run them
+- [x] add a short note at the end of the plan: the welcome-email plan picks up rows with `welcome_email_pending=true`
 
 ## Technical Details
 
@@ -261,3 +261,7 @@ JSON response today; a user-facing confirmation page can be added with the email
 - Events newsletter enrollment UX (type already supported in the schema).
 - Admin UI for listing/exporting subscribers.
 - Double opt-in / consent log if required after legal review.
+
+## Handoff: Welcome Email Plan
+
+The follow-up welcome-email plan should query `SELECT * FROM subscriptions WHERE welcome_email_pending = true AND status = 'active'` to find subscribers who need a welcome email. After sending, call `markWelcomeEmailSent(id)` (already implemented in `src/lib/subscriptions/service.ts`) to set `welcome_email_sent_at` and flip `welcome_email_pending` to `false`. For backfilled subscribers, send the welcome email before the first monthly financial report arrives.
