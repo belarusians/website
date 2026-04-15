@@ -7,4 +7,3 @@ export function getDb() {
   return sql;
 }
 
-export { sql };

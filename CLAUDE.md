@@ -31,6 +31,7 @@ src/app/types.ts         CommonPageParams, PageSearchParams, PropsWithClass
 src/components/          Reusable UI: button, card, dropdown, header/, headings/, menu/, section, spinner, image
 src/components/types.ts  Lang enum (be, nl), domain types (Event, News, Guide, Feedback)
 src/sanity/              CMS schemas: event/, news/, guide/, feedback/, vacancy/, locale-schemas/
+src/contract/            Shared validation schemas (Zod): donate
 src/lib/                 Integrations: stripe, s3, email, clickmeeting, google-directory, vacancies, subscriptions
 db/migrations/           SQL migration files (NNNN_name.sql), applied by scripts/migrate.ts
 scripts/                 CLI scripts: migrate.ts, sync-stripe-donors.ts (run via tsx)

@@ -38,7 +38,7 @@ Explicit non-goals (deferred to follow-up plans):
 - **Opt-in capture**: checkbox on the donate page (default checked) — only rendered when the donation is recurring. Value forwarded to the Stripe Payment Link via `subscription_data.metadata.newsletter_optin`.
 - **Webhook enrollment rule**: enroll on the **1st successful `invoice.payment_succeeded`** for a given Stripe subscription where the opt-in flag on the subscription is truthy. New monthly donors start receiving the report as soon as their first payment clears.
 - **Backfill enrollment rule**: enroll existing Stripe customers whose active subscription has **≥2 paid invoices**. The stricter bar is the retroactive-consent safeguard for donors who never saw the opt-in checkbox. Rows get `welcome_email_pending=true` so the future email plan can notify them before the first report arrives.
-- **Auto-unsubscribe trigger**: on `customer.subscription.deleted` and on `customer.subscription.updated` when the new status is one of `canceled`, `unpaid`, `incomplete_expired`, or `past_due` (terminal failures). Flip status to `unsubscribed` with `unsubscribe_source='stripe_subscription_lapsed'` so it's distinguishable from user-initiated unsubscribes.
+- **Auto-unsubscribe trigger**: on `customer.subscription.deleted` and on `customer.subscription.updated` when the new status is one of `canceled`, `unpaid`, or `incomplete_expired` (terminal failures). `past_due` is excluded because Stripe retries payment — premature lapse would cause unnecessary churn. Flip status to `unsubscribed` with `unsubscribe_source='stripe_subscription_lapsed'` so it's distinguishable from user-initiated unsubscribes.
 - **Welcome email**: deferred. Plan records intent (column) but does not send anything.
 - **Internal group (`mara@belarusians.nl`)**: not stored here. Handled at send-time by the future dispatcher.
 
@@ -105,7 +105,7 @@ Explicit non-goals (deferred to follow-up plans):
   - `findByUnsubscribeToken(token): Promise<Subscription | null>`
   - `markUnsubscribed(id: string, unsubscribeSource: 'user' | 'stripe_subscription_lapsed'): Promise<void>`
   - `markUnsubscribedByStripeSubscriptionId(subscriptionId: string): Promise<void>` — used by the lapse handler
-  - `markWelcomeEmailSent(id: string): Promise<void>` — for the future email plan
+  - ~~`markWelcomeEmailSent(id: string): Promise<void>`~~ — deferred to welcome email plan (trivial function, no current callers)
 - [x] create `src/lib/subscriptions/types.ts` with `NewsletterType`, `SubscriptionStatus`, `UnsubscribeSource` unions and the `Subscription` record type matching the table
 - [x] write unit tests for `generateUnsubscribeToken` (length, uniqueness across N calls, url-safe charset)
 - [x] write unit tests for `normalizeEmail` (mixed case, surrounding spaces, already normalised)
@@ -139,7 +139,7 @@ Explicit non-goals (deferred to follow-up plans):
   - dispatches based on `event.type`:
     - `invoice.payment_succeeded` → enrollment path
     - `customer.subscription.deleted` → lapse path
-    - `customer.subscription.updated` → lapse path if new `status` ∈ {`canceled`,`unpaid`,`incomplete_expired`,`past_due`}
+    - `customer.subscription.updated` → lapse path if new `status` ∈ {`canceled`,`unpaid`,`incomplete_expired`} (`past_due` excluded — Stripe retries payment)
     - everything else → return 200 `{ skipped: true }`
   - always return 200 on handled events (so Stripe does not retry)
 - [x] **Enrollment path (`invoice.payment_succeeded`)**:
@@ -150,10 +150,10 @@ Explicit non-goals (deferred to follow-up plans):
   - `upsertActiveSubscription({ email, newsletterType: 'financial_report', stripeCustomerId, stripeSubscriptionId, source: 'stripe_webhook' })` — idempotent: 2nd, 3rd, Nth invoices for the same subscription are no-ops
 - [x] **Lapse path**:
   - extract `subscription.id` and call `markUnsubscribedByStripeSubscriptionId(subscription.id)`
-- [x] factor out pure helpers: `classifySubscriptionEvent(event)` (returns `'enroll' | 'lapse' | 'skip'`), `parseOptInFlag(metadata)`, `extractEnrollmentEmail(invoice, charge?)`. Keep Stripe API calls outside these helpers.
+- [x] factor out pure helpers: `classifySubscriptionEvent(event)` (returns `'enroll' | 'lapse' | 'skip'`), `parseOptInFlag(metadata)`. Keep Stripe API calls outside these helpers. (`extractEnrollmentEmail` was not factored out — `invoice.customer_email` is used inline, which is simpler and sufficient; the `billing_details` fallback was dropped as unnecessary.)
 - [x] write unit tests for `classifySubscriptionEvent` covering: enroll on any invoice.payment_succeeded tied to a subscription, skip on invoice.payment_succeeded without subscription, skip on unrelated event, lapse on subscription.deleted, lapse on subscription.updated (each terminal status), no-lapse on subscription.updated → status=active
 - [x] write unit tests for `parseOptInFlag` (`"true"`, `true`, `"false"`, missing, garbage)
-- [x] write unit tests for `extractEnrollmentEmail` (invoice.customer_email primary, billing_details fallback, missing → null)
+- [ ] ~~write unit tests for `extractEnrollmentEmail`~~ — dropped; email extraction is a single field read, not worth a helper
 - [x] run tests — must pass before task 7
 
 ### Task 7: Stripe backfill script for current monthly donors (≥2 paid invoices)
@@ -222,7 +222,7 @@ subscriptions (
 - Existing row, status=`unsubscribed`, `unsubscribe_source='stripe_subscription_lapsed'` → reactivate (new token, `welcome_email_pending=true`) when they resume donating.
 
 ### Lapse semantics
-On `customer.subscription.deleted` or `customer.subscription.updated` → status ∈ {`canceled`,`unpaid`,`incomplete_expired`,`past_due`}:
+On `customer.subscription.deleted` or `customer.subscription.updated` → status ∈ {`canceled`,`unpaid`,`incomplete_expired`} (`past_due` excluded — Stripe retries payment):
 - Find rows by `stripe_subscription_id` and flip status to `unsubscribed` with `unsubscribe_source='stripe_subscription_lapsed'`.
 - Token is **not** rotated on lapse (future reactivation preserves audit trail).
 
