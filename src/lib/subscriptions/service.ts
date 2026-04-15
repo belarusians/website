@@ -63,6 +63,9 @@ export async function upsertActiveSubscription({
   `;
 
   const row = existing.rows[0];
+  if (!row) {
+    return { created: false, reactivated: false };
+  }
 
   if (row.status === 'active') {
     return { created: false, reactivated: false };

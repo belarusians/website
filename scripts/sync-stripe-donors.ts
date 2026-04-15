@@ -39,7 +39,7 @@ async function main(): Promise<void> {
     const invoices = await stripe.invoices.list({
       subscription: sub.id,
       status: 'paid',
-      limit: 100,
+      limit: 2,
     });
 
     const paidCount = invoices.data.length;
