@@ -22,7 +22,7 @@ export default async function MainLayout({
       <div className="flex flex-col gap-4 lg:gap-6 min-h-screen">
         <LangSync lang={lang} />
         <Header lang={lang} className="lg:container" />
-        <main>{children}</main>
+        <main className="flex flex-col gap-4 lg:gap-6">{children}</main>
         <Footer className="lg:container mt-auto" />
       </div>
     </ClerkProvider>
