@@ -2,6 +2,7 @@ import { ClerkProvider } from '@clerk/nextjs';
 
 import { Header } from '../../components/header/header';
 import { Footer } from './footer';
+import { LangSync } from './lang-sync';
 import { PropsWithChildren, JSX } from 'react';
 import { CommonPageParams } from '../types';
 import { Metadata, ResolvingMetadata } from 'next/types';
@@ -19,8 +20,9 @@ export default async function MainLayout({
   return (
     <ClerkProvider>
       <div className="flex flex-col gap-4 lg:gap-6 min-h-screen">
+        <LangSync lang={lang} />
         <Header lang={lang} className="lg:container" />
-        {children}
+        <main>{children}</main>
         <Footer className="lg:container mt-auto" />
       </div>
     </ClerkProvider>
