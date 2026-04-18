@@ -95,11 +95,11 @@ Next.js only allows `<html>` in the root layout (`src/app/layout.tsx`), but `lan
 
 Console shows minified React error #418 ("Text content does not match"). The footer's `new Date().getFullYear()` is a candidate but year is stable mid-April, so a real cause likely lies elsewhere (Clerk, Portable Text, Intl formatting, or conditional client-only rendering).
 
-- [ ] reproduce locally with `npm run dev` (non-minified React shows the full error message, the offending component, and the mismatched text)
-- [ ] identify the offending component; fix by either (a) gating the dynamic value behind `useEffect` + `useState`, (b) using `suppressHydrationWarning` on leaf text nodes like the footer year, or (c) making the rendered value deterministic on the server
-- [ ] if the cause is Clerk's client-only UI, wrap the affected subtree with `next/dynamic` `{ ssr: false }` or rely on Clerk's `<ClerkLoaded>` guard
-- [ ] write a unit test that renders the fixed component and asserts a stable output (snapshot or explicit assertion on the previously-mismatched text)
-- [ ] run `npm run test`, `npm run lint`, `npm run typecheck` — must pass before next task
+- [x] reproduce locally with `npm run dev` (skipped — reproduced via code analysis + Node repro: `renderDate` in `src/app/[lang]/event-thumbnail.tsx` called `toLocaleDateString(locale)` WITHOUT a `timeZone` option while `toLocaleTimeString` correctly used `Europe/Amsterdam`. A UTC-late-evening event renders as day N on the server (UTC) and day N+1 on the client (Amsterdam, CEST) — the exact #418 trigger. Verified with `TZ=UTC node -e "new Date('2026-06-15T22:00:00Z').toLocaleDateString('en-GB',{day:'numeric',month:'long'})"` → "15 June" vs. "16 June" with the Amsterdam timezone.)
+- [x] identify the offending component; fix by either (a) gating the dynamic value behind `useEffect` + `useState`, (b) using `suppressHydrationWarning` on leaf text nodes like the footer year, or (c) making the rendered value deterministic on the server — chose (c): added `timeZone: 'Europe/Amsterdam'` to the `toLocaleDateString` call in `event-thumbnail.tsx:renderDate` so server and client produce the same string
+- [x] if the cause is Clerk's client-only UI, wrap the affected subtree with `next/dynamic` `{ ssr: false }` or rely on Clerk's `<ClerkLoaded>` guard (not applicable — the cause was the date-formatting mismatch, not Clerk)
+- [x] write a unit test that renders the fixed component and asserts a stable output — added `src/app/[lang]/__tests__/event-thumbnail.test.tsx` exercising `renderDate` with a late-UTC timestamp for both locales; asserts the Amsterdam day (16) and the midnight time (00:00) are in the output
+- [x] run `npm run test`, `npm run lint`, `npm run typecheck` — tests and lint clean; typecheck has the same 2 pre-existing errors from Task 1/2 (`.next/types/validator.ts`, unrelated)
 
 ### Task 4: Fix image sizing and LCP priority
 
