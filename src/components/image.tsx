@@ -12,6 +12,8 @@ interface ImageProps {
   className?: string;
   fill?: boolean;
   priority?: boolean;
+  sizes?: string;
+  fetchPriority?: 'high' | 'low' | 'auto';
 }
 
 export function MaraImage(props: ImageProps) {
@@ -36,7 +38,9 @@ export function MaraImage(props: ImageProps) {
       alt={props.alt}
       {...imgProps}
       fill={props.fill}
+      sizes={props.sizes}
       priority={!!props.priority}
+      fetchPriority={props.fetchPriority ?? (props.priority ? 'high' : undefined)}
       loading={props.priority ? 'eager' : 'lazy'}
     />
   );

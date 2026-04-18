@@ -38,7 +38,7 @@ const ENABLE_GOOGLE_TAG = false;
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <html>
+    <html lang="be">
       <head>
         <meta name="msapplication-config" content="browserconfig.xml" />
         <link rel="mask-icon" type="image/svg+xml" href="/icons/safari-pinned-tab.svg" color="#ed1c24" />

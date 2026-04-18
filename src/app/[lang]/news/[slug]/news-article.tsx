@@ -14,7 +14,12 @@ export function NewsArticle(props: ArticleProps) {
           <H1>{props.news.title}</H1>
           <p className="prose-sm md:prose-lg">{props.news.description}</p>
         </div>
-        <MaraImage image={props.news.backgroundUrl} className="object-cover rounded-md" alt={props.news.title} />
+        <MaraImage
+          image={props.news.backgroundUrl}
+          className="object-cover rounded-md"
+          alt={props.news.title}
+          sizes="(min-width: 1024px) 1024px, 100vw"
+        />
         <div
           className="rounded-md bg-white shadow-lg prose-sm md:prose-lg prose-hr:my-4 prose-a:text-primary prose-a:break-words prose-blockquote:border-l-2 prose-blockquote:border-red p-4 lg:p-8"
           dangerouslySetInnerHTML={{ __html: props.news.content }}

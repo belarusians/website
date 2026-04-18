@@ -90,12 +90,13 @@ export function EventThumbnail(props: EventThumbnailProps) {
   );
 }
 
-function renderDate(eventString: string, locale: Lang, renderYear = true): string {
+export function renderDate(eventString: string, locale: Lang, renderYear = true): string {
   const eventDate = new Date(eventString);
   const eventDateString = eventDate.toLocaleDateString(locale, {
     year: renderYear ? 'numeric' : undefined,
     month: 'long',
     day: 'numeric',
+    timeZone: 'Europe/Amsterdam',
   });
   const eventTimeString = eventDate.toLocaleTimeString(locale, {
     hour: 'numeric',

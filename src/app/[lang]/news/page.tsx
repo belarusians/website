@@ -56,6 +56,7 @@ function Year({ year, news, lang }: { year: string; news: NewsMeta[]; lang: Lang
             lang={lang}
             size="small"
             className="h-[160px] shadow-lg hover:shadow-xl transition-all"
+            sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw"
           />
         ))}
       </div>

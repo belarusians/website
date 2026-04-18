@@ -23,6 +23,7 @@ export function NewsBlock(props: NewsBlockProps): React.JSX.Element {
             size={'small'}
             key={i}
             news={n}
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
           />
         ))}
       </div>

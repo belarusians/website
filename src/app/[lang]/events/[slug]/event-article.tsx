@@ -50,6 +50,7 @@ export function EventArticle(props: ArticleProps) {
             className={`object-cover rounded-md shadow-lg ${props.event.cancelled ? 'opacity-60 grayscale' : ''}`}
             image={props.event.backgroundUrl}
             alt={props.event.title}
+            sizes="(min-width: 1024px) 40vw, (min-width: 768px) 33vw, 100vw"
           />
           {props.paymentSucceeded && <ThanksText text={props.event.successText ?? props.defaultPaymentSuccessText} />}
           {!props.paymentSucceeded && props.event.ticketsLink && !props.event.cancelled && (
