@@ -30,6 +30,7 @@ export function FeaturedNewsBlock(props: FeaturedNewsBlockProps) {
           className="h-36 md:h-48 lg:h-full transition-transform col-span-1 lg:col-span-2 row-span-1 shadow-lg hover:shadow-xl"
           news={props.secondary[0]}
           priority
+          fetchPriority="auto"
           sizes="(min-width: 1024px) 40vw, 50vw"
         />
         <NewsThumbnail
@@ -38,6 +39,7 @@ export function FeaturedNewsBlock(props: FeaturedNewsBlockProps) {
           className="h-36 md:h-48 lg:h-full transition-transform col-span-1 lg:col-span-2 row-span-1 shadow-lg hover:shadow-xl"
           news={props.secondary[1]}
           priority
+          fetchPriority="auto"
           sizes="(min-width: 1024px) 40vw, 50vw"
         />
       </div>
