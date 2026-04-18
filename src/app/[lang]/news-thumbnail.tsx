@@ -10,6 +10,8 @@ export interface NewsThumbnailProps {
   size?: 'large' | 'small' | 'medium';
   className?: string;
   priority?: boolean;
+  sizes?: string;
+  fetchPriority?: 'high' | 'low' | 'auto';
 }
 
 export function NewsThumbnail(props: NewsThumbnailProps) {
@@ -22,6 +24,8 @@ export function NewsThumbnail(props: NewsThumbnailProps) {
           fill
           alt={props.news.title}
           priority={props.priority}
+          sizes={props.sizes}
+          fetchPriority={props.fetchPriority}
         />
         <div className="px-2 py-1 z-40 mt-auto backdrop-blur-md rounded-b-md text-white uppercase">
           <span

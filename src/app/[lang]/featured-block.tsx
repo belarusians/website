@@ -21,6 +21,8 @@ export function FeaturedNewsBlock(props: FeaturedNewsBlockProps) {
           className="h-36 sm:h-48 md:h-64 lg:h-96 transition-transform col-span-2 lg:col-span-3 row-span-1 lg:row-span-2 shadow-lg hover:shadow-xl"
           news={props.main}
           priority
+          fetchPriority="high"
+          sizes="(min-width: 1024px) 60vw, 100vw"
         />
         <NewsThumbnail
           lang={props.lang}
@@ -28,6 +30,7 @@ export function FeaturedNewsBlock(props: FeaturedNewsBlockProps) {
           className="h-36 md:h-48 lg:h-full transition-transform col-span-1 lg:col-span-2 row-span-1 shadow-lg hover:shadow-xl"
           news={props.secondary[0]}
           priority
+          sizes="(min-width: 1024px) 40vw, 50vw"
         />
         <NewsThumbnail
           lang={props.lang}
@@ -35,6 +38,7 @@ export function FeaturedNewsBlock(props: FeaturedNewsBlockProps) {
           className="h-36 md:h-48 lg:h-full transition-transform col-span-1 lg:col-span-2 row-span-1 shadow-lg hover:shadow-xl"
           news={props.secondary[1]}
           priority
+          sizes="(min-width: 1024px) 40vw, 50vw"
         />
       </div>
     </>

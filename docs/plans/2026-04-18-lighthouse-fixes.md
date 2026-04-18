@@ -105,13 +105,13 @@ Console shows minified React error #418 ("Text content does not match"). The foo
 
 Root cause: `MaraImage` with `fill` does not forward `sizes`, so `next/image` emits `sizes="100vw"` by default and the browser picks the widest srcset candidate (~1920 px) for thumbnails that actually render at 440–620 px. Also the LCP image at `featured-block.tsx` passes `priority` but we should verify `fetchpriority="high"` is emitted in the built HTML.
 
-- [ ] extend `MaraImage` props in `src/components/image.tsx` with an optional `sizes?: string` and forward it to `<Image>`
-- [ ] update `src/app/[lang]/news-thumbnail.tsx` to pass realistic `sizes` like `(min-width: 1024px) 30vw, (min-width: 768px) 50vw, 100vw` based on the grid layout
-- [ ] audit other `MaraImage` call sites (`grep -rn MaraImage src/`) — at minimum `featured-block.tsx`, event card, guide card — and pass appropriate `sizes` for each
-- [ ] for the LCP image (first card in `featured-block.tsx`): keep `priority`, and add `fetchPriority="high"` explicitly; verify Next.js 15 forwards it into the rendered HTML (if not, add as a native attribute on `<Image>`)
-- [ ] double-check the `loader` wiring in `src/components/image.tsx:26–30`: currently `loader` is only passed when `fill` is truthy — confirm this is still correct after the `sizes` change, otherwise always pass `loader`
-- [ ] no unit test here — verify by inspecting the `srcset`/`sizes` emitted by `npm run dev` and by the post-completion Lighthouse re-run
-- [ ] run `npm run lint`, `npm run typecheck` — must pass before next task
+- [x] extend `MaraImage` props in `src/components/image.tsx` with an optional `sizes?: string` and forward it to `<Image>` (also added optional `fetchPriority?: 'high' | 'low' | 'auto'`)
+- [x] update `src/app/[lang]/news-thumbnail.tsx` to pass realistic `sizes` like `(min-width: 1024px) 30vw, (min-width: 768px) 50vw, 100vw` based on the grid layout (NewsThumbnail now accepts a `sizes` prop — wired through to MaraImage — and each caller supplies a grid-appropriate value)
+- [x] audit other `MaraImage` call sites (`grep -rn MaraImage src/`) — at minimum `featured-block.tsx`, event card, guide card — and pass appropriate `sizes` for each (call sites: `featured-block.tsx`, `news-block.tsx`, `news/page.tsx`, `news/[slug]/news-article.tsx`, `events/[slug]/event-article.tsx`; no guide card call site exists. All updated.)
+- [x] for the LCP image (first card in `featured-block.tsx`): keep `priority`, and add `fetchPriority="high"` explicitly; verify Next.js 15 forwards it into the rendered HTML (if not, add as a native attribute on `<Image>`) — `MaraImage` now forwards `fetchPriority` to `next/image`, defaulting to `'high'` whenever `priority` is set; the main featured card also passes `fetchPriority="high"` explicitly
+- [x] double-check the `loader` wiring in `src/components/image.tsx:26–30`: currently `loader` is only passed when `fill` is truthy — confirm this is still correct after the `sizes` change, otherwise always pass `loader` (confirmed correct: `fill` branch explicitly forwards `{ src, loader }`; non-`fill` branch spreads `sanityImageProps`, which already includes `loader`, `width`, and `height`. Both paths carry the loader, so Sanity `w=…` URLs are generated for whichever srcset candidate Next.js picks.)
+- [x] no unit test here — verify by inspecting the `srcset`/`sizes` emitted by `npm run dev` and by the post-completion Lighthouse re-run
+- [x] run `npm run lint`, `npm run typecheck` — must pass before next task (lint: 0 errors; typecheck: clean except the 2 pre-existing errors in `.next/types/validator.ts` carried from Task 1/2/3, unrelated to this change)
 
 ### Task 5: Reduce legacy JavaScript polyfills
 
