@@ -85,11 +85,11 @@ Next.js only allows `<html>` in the root layout (`src/app/layout.tsx`), but `lan
 
 ### Task 2: Give icon-only links accessible names
 
-- [ ] add `aria-label` to each of the 6 social `<a>` tags in `src/app/[lang]/footer.tsx:19–36` (e.g., "Instagram", "Facebook", "X (Twitter)", "LinkedIn", "Telegram", "GitHub") — social-network names don't need localisation, but if the existing `common` i18n namespace has a natural place, route through there
-- [ ] add `aria-label` to the home logo link in `src/components/header/header.tsx:12–16` (translated "MÁRA home" / "MÁRA hoofdpagina" via the `common` namespace)
-- [ ] write unit test for `Footer` asserting every `<a>` has an accessible name (`getByRole('link', { name: /instagram/i })` etc.)
-- [ ] write unit test for `Header` asserting the logo link has an accessible name for both `be` and `nl`
-- [ ] run `npm run test`, `npm run lint`, `npm run typecheck` — must pass before next task
+- [x] add `aria-label` to each of the 6 social `<a>` tags in `src/app/[lang]/footer.tsx:19–36` (e.g., "Instagram", "Facebook", "X (Twitter)", "LinkedIn", "Telegram", "GitHub") — social-network names don't need localisation, but if the existing `common` i18n namespace has a natural place, route through there
+- [x] add `aria-label` to the home logo link in `src/components/header/header.tsx:12–16` (translated "MÁRA home" / "MÁRA hoofdpagina" via the `common` namespace)
+- [x] write unit test for `Footer` asserting every `<a>` has an accessible name (`getByRole('link', { name: /instagram/i })` etc.)
+- [x] write unit test for `Header` asserting the logo link has an accessible name for both `be` and `nl`
+- [x] run `npm run test`, `npm run lint`, `npm run typecheck` — must pass before next task (typecheck has the 2 pre-existing errors from Task 1)
 
 ### Task 3: Investigate and fix React hydration mismatch (error #418)
 
