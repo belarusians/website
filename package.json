@@ -75,5 +75,11 @@
     "singleQuote": true,
     "tabWidth": 2
   },
+  "browserslist": [
+    "chrome >= 96",
+    "firefox >= 98",
+    "safari >= 15.4",
+    "edge >= 96"
+  ],
   "overrides": {}
 }

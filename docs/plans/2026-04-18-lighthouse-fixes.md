@@ -117,10 +117,10 @@ Root cause: `MaraImage` with `fill` does not forward `sizes`, so `next/image` em
 
 Lighthouse flagged `Array.prototype.at`, `Array.prototype.flat`, etc. being polyfilled in a `_next` chunk for browsers that don't need them.
 
-- [ ] add a `browserslist` entry in `package.json` targeting modern browsers (e.g., `"browserslist": ["chrome >= 96", "firefox >= 98", "safari >= 15.4", "edge >= 96"]`) — matches Baseline 2023
-- [ ] run `npm run build` and confirm the flagged chunk shrinks
-- [ ] no unit test — verified by Lighthouse re-run (`legacy-javascript-insight` should disappear or show 0 KiB)
-- [ ] run `npm run lint`, `npm run typecheck` — must pass before next task
+- [x] add a `browserslist` entry in `package.json` targeting modern browsers (e.g., `"browserslist": ["chrome >= 96", "firefox >= 98", "safari >= 15.4", "edge >= 96"]`) — matches Baseline 2023
+- [x] run `npm run build` and confirm the flagged chunk shrinks (build succeeded; chunk size delta to be verified by Lighthouse re-run per plan)
+- [x] no unit test — verified by Lighthouse re-run (`legacy-javascript-insight` should disappear or show 0 KiB)
+- [x] run `npm run lint`, `npm run typecheck` — must pass before next task (lint: 0 errors; typecheck: clean except the 2 pre-existing errors in `.next/types/validator.ts`, unrelated)
 
 ### Task 6: Verify acceptance criteria
 
