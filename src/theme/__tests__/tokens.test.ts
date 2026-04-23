@@ -26,12 +26,9 @@ describe('theme tokens', () => {
   });
 
   it('every value is a valid hex or rgb() string', () => {
-    const shape = /^#[0-9a-fA-F]{6,8}$|^rgb\(/;
-    for (const [key, value] of Object.entries(COLORS)) {
+    const shape = /^#(?:[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$|^rgb\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*\)$/;
+    for (const value of Object.values(COLORS)) {
       expect(value).toMatch(shape);
-      expect(typeof value).toBe('string');
-      // sanity: ensure key is exposed
-      expect(key.length).toBeGreaterThan(0);
     }
   });
 
