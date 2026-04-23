@@ -108,12 +108,12 @@ Dependencies / external:
 
 ### Task 1: Bump `--color-red-tint` in CSS + tokens.ts
 
-- [ ] in `src/components/globals.css:9`, change `--color-red-tint: #ff1111;` to `--color-red-tint: #f36d72;`.
-- [ ] if `src/theme/tokens.ts` exists (created by Plan 1), update the `redTint` value from `'#ff1111'` to `'#f36d72'` in lockstep. If Plan 1 has not shipped, note this as a follow-up cross-reference when Plan 1 lands — do not create `tokens.ts` in this plan.
-- [ ] grep `src` for any remaining `#ff1111` literals — expect zero.
-- [ ] run `npm run typecheck && npm run lint && npm run build`.
-- [ ] no unit test — pure value change. Verified by build + visual: places that use `bg-primary-tint` / `text-primary-tint` shift to the new softer coral.
-- [ ] must pass before Task 2.
+- [x] in `src/components/globals.css:9`, change `--color-red-tint: #ff1111;` to `--color-red-tint: #f36d72;`.
+- [x] if `src/theme/tokens.ts` exists (created by Plan 1), update the `redTint` value from `'#ff1111'` to `'#f36d72'` in lockstep. If Plan 1 has not shipped, note this as a follow-up cross-reference when Plan 1 lands — do not create `tokens.ts` in this plan.
+- [x] grep `src` for any remaining `#ff1111` literals — expect zero.
+- [x] run `npm run typecheck && npm run lint && npm run build`.
+- [x] no unit test — pure value change. Verified by build + visual: places that use `bg-primary-tint` / `text-primary-tint` shift to the new softer coral.
+- [x] must pass before Task 2.
 
 ### Task 2: Introduce `bg-rainbow-spin` utility class (seamless conic rotation)
 

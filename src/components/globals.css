@@ -6,7 +6,7 @@
 @theme {
   --color-red: #ed1c24;
   --color-red-shade: #af0000;
-  --color-red-tint: #ff1111;
+  --color-red-tint: #f36d72;
   --color-primary: var(--color-red);
   --color-primary-shade: var(--color-red-shade);
   --color-primary-tint: var(--color-red-tint);
