@@ -104,7 +104,7 @@ Dependencies / external:
 
 ### Task 2: Create shared theme tokens module for TSX consumers
 
-- [ ] create `src/theme/tokens.ts` exporting a typed `COLORS` object mirroring the CSS custom properties. Keys match the `--color-*` variables (camelCase transform):
+- [x] create `src/theme/tokens.ts` exporting a typed `COLORS` object mirroring the CSS custom properties. Keys match the `--color-*` variables (camelCase transform):
   - `red: '#ed1c24'`
   - `redShade: '#af0000'`
   - `redTint: '#ff1111'` — keep the current value for now; Plan 3 will flip this to `#f36d72` in lockstep across CSS and TS.
@@ -121,14 +121,14 @@ Dependencies / external:
   - `kingOrangeTint: '#f36227'`
   - `nlRed: '#ae1c28'`
   - `nlBlue: '#21468b'`
-- [ ] export as `export const COLORS = { … } as const;` so TypeScript narrows the values to string literals.
-- [ ] also export a `PRIMARY` alias (`PRIMARY = COLORS.red`) to match the `--color-primary` CSS alias.
-- [ ] add one-line header comment `// Keep in sync with @theme block in src/components/globals.css` — this is the narrow exception to the "no comments" rule because the invariant is enforced only by humans.
-- [ ] create `src/theme/__tests__/tokens.test.ts` with:
+- [x] export as `export const COLORS = { … } as const;` so TypeScript narrows the values to string literals.
+- [x] also export a `PRIMARY` alias (`PRIMARY = COLORS.red`) to match the `--color-primary` CSS alias.
+- [x] add one-line header comment `// Keep in sync with @theme block in src/components/globals.css` — this is the narrow exception to the "no comments" rule because the invariant is enforced only by humans.
+- [x] create `src/theme/__tests__/tokens.test.ts` with:
   - test that `COLORS` exposes every expected key (import the constant, assert `Object.keys(COLORS).sort()` deep-equals the expected list).
   - test that every value matches `^#[0-9a-fA-F]{6,8}$|^rgb\(` (shape validation).
   - test that `PRIMARY === COLORS.red`.
-- [ ] run `npx jest tokens.test` — must pass before Task 3.
+- [x] run `npx jest tokens.test` — must pass before Task 3.
 
 ### Task 3: Migrate src/app/layout.tsx metadata hex to tokens
 
