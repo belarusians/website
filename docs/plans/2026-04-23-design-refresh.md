@@ -250,13 +250,13 @@ Dependencies / external:
 
 ### Task 9: Verify acceptance criteria and full scope
 
-- [ ] verify all eight items from the Overview are implemented (red-tint bumped, rainbow rewritten, nav wobble/dividers gone, Donate pill has `rounded-md` + `bg-rainbow-spin`, buttons translate on hover/active, Logo has `showSubtitle` prop, Spinner uses red opacities, beautiful-button token upgraded, dead keyframes removed).
-- [ ] `grep -rn "animate-wobble\|animate-bg-rotation-slow-wobble" src` — must return zero matches.
-- [ ] `grep -rn "rounded-r-md" src/components/menu` — zero matches (Donate pill now has `rounded-md`).
-- [ ] `grep -rn "#ff1111" src` — zero matches.
-- [ ] run full test suite: `npm test`.
-- [ ] run linter: `npm run lint` — no errors.
-- [ ] run `npm run build` — must succeed.
+- [x] verify all eight items from the Overview are implemented (red-tint bumped, rainbow rewritten, nav wobble/dividers gone, Donate pill has `rounded-md` + `bg-rainbow-spin`, buttons translate on hover/active, Logo has `showSubtitle` prop, Spinner uses red opacities, beautiful-button token upgraded, dead keyframes removed).
+- [x] `grep -rn "animate-wobble\|animate-bg-rotation-slow-wobble" src` — must return zero matches.
+- [x] `grep -rn "rounded-r-md" src/components/menu` — zero matches (Donate pill now has `rounded-md`).
+- [x] `grep -rn "#ff1111" src` — zero matches.
+- [x] run full test suite: `npm test`.
+- [x] run linter: `npm run lint` — no errors.
+- [x] run `npm run build` — must succeed.
 
 ### Task 10: Update CLAUDE.md with the new patterns
 
