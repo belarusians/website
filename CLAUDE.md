@@ -16,6 +16,11 @@ Website for MARA, a non-profit organization of Belarusians in the Netherlands. N
 - Path alias: `@/*` → `./src/*`
 - Tests: `__tests__/` dirs, `.test.ts` extension
 
+### Theme tokens
+- CSS source of truth: `@theme` block in `src/components/globals.css` (Tailwind 4 custom properties).
+- TSX/TS source of truth: `src/theme/tokens.ts` (`COLORS`, `PRIMARY`) — import from `@/theme/tokens` instead of inlining hex literals.
+- Keep both in sync; the Next.js metadata API only accepts plain strings, so JS consumers cannot read CSS variables directly.
+
 ## Project Layout
 ```
 src/app/[lang]/          Pages (be, nl). Each page gets lang from CommonPageParams

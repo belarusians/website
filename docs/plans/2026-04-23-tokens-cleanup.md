@@ -151,8 +151,8 @@ Dependencies / external:
 
 ### Task 5: Update project CLAUDE.md with tokens convention
 
-- [ ] in `CLAUDE.md`, add a short "Theme tokens" subsection under "Code Style" explaining that hex values in TSX/TS should import from `@/theme/tokens` and that `globals.css` `@theme` block is the source of truth for CSS variables. Keep it to 3-4 lines — no code examples, reference the files.
-- [ ] no test needed (documentation only).
+- [x] in `CLAUDE.md`, add a short "Theme tokens" subsection under "Code Style" explaining that hex values in TSX/TS should import from `@/theme/tokens` and that `globals.css` `@theme` block is the source of truth for CSS variables. Keep it to 3-4 lines — no code examples, reference the files.
+- [x] no test needed (documentation only).
 
 ## Technical Details
 
