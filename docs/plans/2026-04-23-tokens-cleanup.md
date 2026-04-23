@@ -81,10 +81,10 @@ Dependencies / external:
 
 ### Task 1: Add NL flag tokens and normalize flag gradients to use tokens
 
-- [ ] in `src/components/globals.css` `@theme` block, add two new tokens below `--color-yellow-ukraine` (around line 22), following existing casing (lowercase hex):
+- [x] in `src/components/globals.css` `@theme` block, add two new tokens below `--color-yellow-ukraine` (around line 22), following existing casing (lowercase hex):
   - `--color-nl-red: #ae1c28;`
   - `--color-nl-blue: #21468b;`
-- [ ] rewrite `--background-image-nl` (lines 46-54) to reference the new tokens and `--color-white`:
+- [x] rewrite `--background-image-nl` (lines 46-54) to reference the new tokens and `--color-white`:
   ```
   --background-image-nl: linear-gradient(
     180deg,
@@ -96,11 +96,11 @@ Dependencies / external:
     var(--color-nl-blue) 100%
   );
   ```
-- [ ] rewrite `--background-image-be` (lines 55-63) so every `#fff` stop reads `var(--color-white)` (keep `var(--color-primary)` as-is).
-- [ ] do NOT touch `--background-image-beautiful-gradient` or `--background-image-beautiful-button` — deferred to Plan 3.
-- [ ] do NOT touch `--color-red-tint` value — deferred to Plan 3.
-- [ ] verify no unintended reflow: `npm run typecheck && npm run lint && npm run build`. No unit test applies (pure CSS variable change).
-- [ ] confirm `bg-nl` and `bg-be` Tailwind utilities still compile by grepping the build output (or `grep -r 'bg-nl\|bg-be' src`) for consumers and confirming the site builds — must pass before Task 2.
+- [x] rewrite `--background-image-be` (lines 55-63) so every `#fff` stop reads `var(--color-white)` (keep `var(--color-primary)` as-is).
+- [x] do NOT touch `--background-image-beautiful-gradient` or `--background-image-beautiful-button` — deferred to Plan 3.
+- [x] do NOT touch `--color-red-tint` value — deferred to Plan 3.
+- [x] verify no unintended reflow: `npm run typecheck && npm run lint && npm run build`. No unit test applies (pure CSS variable change).
+- [x] confirm `bg-nl` and `bg-be` Tailwind utilities still compile by grepping the build output (or `grep -r 'bg-nl\|bg-be' src`) for consumers and confirming the site builds — must pass before Task 2.
 
 ### Task 2: Create shared theme tokens module for TSX consumers
 
