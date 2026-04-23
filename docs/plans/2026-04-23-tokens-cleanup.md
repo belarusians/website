@@ -132,13 +132,13 @@ Dependencies / external:
 
 ### Task 3: Migrate src/app/layout.tsx metadata hex to tokens
 
-- [ ] in `src/app/layout.tsx`, add `import { COLORS } from '@/theme/tokens';` near the other imports.
-- [ ] replace line 44 `color="#ed1c24"` with `color={COLORS.red}`.
-- [ ] replace line 114 `themeColor: '#f6f6f6'` with `themeColor: COLORS.whiteShade`.
-- [ ] replace line 147 `'msapplication-TileColor': '#b91d47'` with `'msapplication-TileColor': COLORS.red`. This intentionally standardizes the Windows tile color onto brand red (`#ed1c24`). The old `#b91d47` is a legacy off-palette value; the design system normalizes on brand red for chrome surfaces. Note this in the commit message.
-- [ ] run `grep -niE '#[0-9a-f]{3,8}\b' src/app/layout.tsx` — must return zero hex literals (confirms migration is complete).
-- [ ] run `npm run typecheck && npm run lint` — must pass.
-- [ ] no unit test — Next.js metadata is string-typed and round-trips without transformation; the grep + build suffice.
+- [x] in `src/app/layout.tsx`, add `import { COLORS } from '@/theme/tokens';` near the other imports.
+- [x] replace line 44 `color="#ed1c24"` with `color={COLORS.red}`.
+- [x] replace line 114 `themeColor: '#f6f6f6'` with `themeColor: COLORS.whiteShade`.
+- [x] replace line 147 `'msapplication-TileColor': '#b91d47'` with `'msapplication-TileColor': COLORS.red`. This intentionally standardizes the Windows tile color onto brand red (`#ed1c24`). The old `#b91d47` is a legacy off-palette value; the design system normalizes on brand red for chrome surfaces. Note this in the commit message.
+- [x] run `grep -niE '#[0-9a-f]{3,8}\b' src/app/layout.tsx` — must return zero hex literals (confirms migration is complete).
+- [x] run `npm run typecheck && npm run lint` — must pass.
+- [x] no unit test — Next.js metadata is string-typed and round-trips without transformation; the grep + build suffice.
 
 ### Task 4: Verify acceptance criteria and full scope
 

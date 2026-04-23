@@ -14,6 +14,7 @@ import '../components/globals.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '../../node_modules/@fortawesome/fontawesome-svg-core/styles.css';
 import { baseUrl } from './config';
+import { COLORS } from '@/theme/tokens';
 
 config.autoAddCss = false;
 
@@ -41,7 +42,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
     <html lang="be">
       <head>
         <meta name="msapplication-config" content="browserconfig.xml" />
-        <link rel="mask-icon" type="image/svg+xml" href="/icons/safari-pinned-tab.svg" color="#ed1c24" />
+        <link rel="mask-icon" type="image/svg+xml" href="/icons/safari-pinned-tab.svg" color={COLORS.red} />
         <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-touch-icon-60x60.png" />
         <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/icons/apple-touch-icon-60x60-precomposed.png" />
         <link rel="apple-touch-icon" sizes="76x76" href="/icons/apple-touch-icon-76x76.png" />
@@ -111,7 +112,7 @@ function GoogleTag(): ReactElement {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#f6f6f6',
+  themeColor: COLORS.whiteShade,
 };
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -144,7 +145,7 @@ export async function generateMetadata(): Promise<Metadata> {
     other: {
       'facebook-domain-verification': 'puzhrq5e71epeox7ohkx5oluv6azvd',
       'fb:app_id': '1246176432634113',
-      'msapplication-TileColor': '#b91d47',
+      'msapplication-TileColor': COLORS.red,
     },
   };
 }
