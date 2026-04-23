@@ -238,15 +238,15 @@ Dependencies / external:
 
 ### Task 8: Remove dead wobble tokens and keyframes from `globals.css`
 
-- [ ] open `src/components/globals.css`. Remove:
+- [x] open `src/components/globals.css`. Remove:
   - lines ~92-98: the wobble-related `--animate-*` tokens (`--animate-bg-rotation-slow-wobble-right`, `--animate-bg-rotation-slow-wobble`, `--animate-wobble-right`). Keep `--animate-bg-rotation-slow` for now only if any consumer still references the old `backgroundRotation` keyframe — if not, remove it as well.
   - `@keyframes wobble` (lines ~163-182) — remove.
   - `@keyframes wobble-right` (lines ~183-208) — remove.
   - `@keyframes backgroundRotation` (lines ~209-216) — remove iff no consumers remain.
-- [ ] grep for any remaining usage: `grep -rn "wobble\|animate-bg-rotation-slow\|backgroundRotation" src` — expect zero hits outside `globals.css` (and after the delete, zero everywhere).
-- [ ] run `npm run typecheck && npm run lint && npm run build` — must succeed.
-- [ ] no unit test — pure CSS cleanup. The build is the guardrail; if any consumer references a removed class, Tailwind will emit a warning or the class will just be unresolved.
-- [ ] must pass before Task 9.
+- [x] grep for any remaining usage: `grep -rn "wobble\|animate-bg-rotation-slow\|backgroundRotation" src` — expect zero hits outside `globals.css` (and after the delete, zero everywhere).
+- [x] run `npm run typecheck && npm run lint && npm run build` — must succeed.
+- [x] no unit test — pure CSS cleanup. The build is the guardrail; if any consumer references a removed class, Tailwind will emit a warning or the class will just be unresolved.
+- [x] must pass before Task 9.
 
 ### Task 9: Verify acceptance criteria and full scope
 
