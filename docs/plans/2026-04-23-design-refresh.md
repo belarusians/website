@@ -174,12 +174,12 @@ Dependencies / external:
 
 ### Task 4: Mobile legacy wobble cleanup (coordinate with Plan 2)
 
-- [ ] check whether `src/components/menu/mobile/mobileMenu.tsx` still exists. If Plan 2 has shipped and the file is gone, **skip this task entirely**.
-- [ ] if it exists, open it and line 24 — on the Join `<Button>`, remove `bg-[length:350%_100%] bg-beautiful-button ... animate-bg-rotation-slow-wobble` and either (a) swap to `bg-rainbow-spin` if you want the Join button to remain a rainbow CTA in the interim, or (b) swap to the plain `bg-primary text-white` per the chat's final decision that Join is not a rainbow surface. Pick (a) — minimal behavioral change; Plan 2 will retire the button outright.
-- [ ] swap any other wobble references in the mobile menu file (same pattern) to the non-wobble equivalents.
-- [ ] run `npm run typecheck && npm run lint && npm run build`.
-- [ ] no unit test — cosmetic.
-- [ ] must pass before Task 5.
+- [x] check whether `src/components/menu/mobile/mobileMenu.tsx` still exists. If Plan 2 has shipped and the file is gone, **skip this task entirely**.
+- [x] if it exists, open it and line 24 — on the Join `<Button>`, remove `bg-[length:350%_100%] bg-beautiful-button ... animate-bg-rotation-slow-wobble` and either (a) swap to `bg-rainbow-spin` if you want the Join button to remain a rainbow CTA in the interim, or (b) swap to the plain `bg-primary text-white` per the chat's final decision that Join is not a rainbow surface. Pick (a) — minimal behavioral change; Plan 2 will retire the button outright.
+- [x] swap any other wobble references in the mobile menu file (same pattern) to the non-wobble equivalents.
+- [x] run `npm run typecheck && npm run lint && npm run build`.
+- [x] no unit test — cosmetic.
+- [x] must pass before Task 5.
 
 ### Task 5: Stronger button hover/active states
 
