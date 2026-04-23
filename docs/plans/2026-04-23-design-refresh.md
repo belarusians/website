@@ -163,14 +163,14 @@ Dependencies / external:
 
 ### Task 3: Strip wobble + dividers + rewrite Donate pill in `desktopMenu.tsx`
 
-- [ ] open `src/components/menu/desktop/desktopMenu.tsx`.
-- [ ] line 18 — change `className="text-lg flex rounded-md bg-white cursor-pointer shadow-lg divide-solid divide-light-grey divide-x animate-wobble-right mr-auto"` to `className="text-lg flex rounded-md bg-white cursor-pointer shadow-lg mr-auto"`. Remove: `divide-solid divide-light-grey divide-x animate-wobble-right`.
-- [ ] lines 20, 40, 75 — remove `divide-solid divide-light-grey divide-y` from each dropdown menu container. Keep `animate-t-fade-in absolute mt-2 z-10 flex flex-col bg-white shadow-lg rounded-md`.
-- [ ] line 103 — change Donate `<Link>` className from `"p-1 md:p-2 lg:p-3 bg-[length:350%_100%] bg-beautiful-button font-normal rounded-r-md text-white transition-shadow no-underline hover:shadow-tbr-xl animate-bg-rotation-slow-wobble-right"` to `"p-1 md:p-2 lg:p-3 bg-rainbow-spin font-normal rounded-md text-white transition-shadow no-underline hover:shadow-tbr-xl"`. Changes: remove `bg-[length:350%_100%] bg-beautiful-button animate-bg-rotation-slow-wobble-right`, change `rounded-r-md` → `rounded-md`, add `bg-rainbow-spin`.
-- [ ] verify the nav visually: Donate pill rotates seamlessly, no wobble, no divider between items, plain `rounded-md` on all four corners.
-- [ ] no new unit test — the classes are cosmetic. Existing desktop-menu tests (if any) should be updated to match the new class list; run `npx jest desktopMenu` — if no tests exist, skip.
-- [ ] run `npm run typecheck && npm run lint && npm run build`.
-- [ ] must pass before Task 4.
+- [x] open `src/components/menu/desktop/desktopMenu.tsx`.
+- [x] line 18 — change `className="text-lg flex rounded-md bg-white cursor-pointer shadow-lg divide-solid divide-light-grey divide-x animate-wobble-right mr-auto"` to `className="text-lg flex rounded-md bg-white cursor-pointer shadow-lg mr-auto"`. Remove: `divide-solid divide-light-grey divide-x animate-wobble-right`.
+- [x] lines 20, 40, 75 — remove `divide-solid divide-light-grey divide-y` from each dropdown menu container. Keep `animate-t-fade-in absolute mt-2 z-10 flex flex-col bg-white shadow-lg rounded-md`.
+- [x] line 103 — change Donate `<Link>` className from `"p-1 md:p-2 lg:p-3 bg-[length:350%_100%] bg-beautiful-button font-normal rounded-r-md text-white transition-shadow no-underline hover:shadow-tbr-xl animate-bg-rotation-slow-wobble-right"` to `"p-1 md:p-2 lg:p-3 bg-rainbow-spin font-normal rounded-md text-white transition-shadow no-underline hover:shadow-tbr-xl"`. Changes: remove `bg-[length:350%_100%] bg-beautiful-button animate-bg-rotation-slow-wobble-right`, change `rounded-r-md` → `rounded-md`, add `bg-rainbow-spin`.
+- [x] verify the nav visually: Donate pill rotates seamlessly, no wobble, no divider between items, plain `rounded-md` on all four corners. [manual visual check skipped - not automatable]
+- [x] no new unit test — the classes are cosmetic. Existing desktop-menu tests (if any) should be updated to match the new class list; run `npx jest desktopMenu` — if no tests exist, skip.
+- [x] run `npm run typecheck && npm run lint && npm run build`.
+- [x] must pass before Task 4.
 
 ### Task 4: Mobile legacy wobble cleanup (coordinate with Plan 2)
 
