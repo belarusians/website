@@ -100,7 +100,7 @@ export function DesktopMenu({ lang }: { lang: Lang }) {
           </div>
         </Dropdown>
         <Link
-          className="p-1 md:p-2 lg:p-3 bg-rainbow-spin font-normal rounded-md text-white transition-shadow no-underline hover:shadow-tbr-xl"
+          className="p-1 md:p-2 lg:p-3 bg-rainbow-spin font-normal rounded-r-md text-white transition-shadow no-underline hover:shadow-tbr-xl"
           data-umami-event="donate-us"
           href={`/${lang}/donate`}
         >

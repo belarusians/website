@@ -166,8 +166,8 @@ Dependencies / external:
 - [x] open `src/components/menu/desktop/desktopMenu.tsx`.
 - [x] line 18 — change `className="text-lg flex rounded-md bg-white cursor-pointer shadow-lg divide-solid divide-light-grey divide-x animate-wobble-right mr-auto"` to `className="text-lg flex rounded-md bg-white cursor-pointer shadow-lg mr-auto"`. Remove: `divide-solid divide-light-grey divide-x animate-wobble-right`.
 - [x] lines 20, 40, 75 — remove `divide-solid divide-light-grey divide-y` from each dropdown menu container. Keep `animate-t-fade-in absolute mt-2 z-10 flex flex-col bg-white shadow-lg rounded-md`.
-- [x] line 103 — change Donate `<Link>` className from `"p-1 md:p-2 lg:p-3 bg-[length:350%_100%] bg-beautiful-button font-normal rounded-r-md text-white transition-shadow no-underline hover:shadow-tbr-xl animate-bg-rotation-slow-wobble-right"` to `"p-1 md:p-2 lg:p-3 bg-rainbow-spin font-normal rounded-md text-white transition-shadow no-underline hover:shadow-tbr-xl"`. Changes: remove `bg-[length:350%_100%] bg-beautiful-button animate-bg-rotation-slow-wobble-right`, change `rounded-r-md` → `rounded-md`, add `bg-rainbow-spin`.
-- [x] verify the nav visually: Donate pill rotates seamlessly, no wobble, no divider between items, plain `rounded-md` on all four corners. [manual visual check skipped - not automatable]
+- [x] line 103 — change Donate `<Link>` className from `"p-1 md:p-2 lg:p-3 bg-[length:350%_100%] bg-beautiful-button font-normal rounded-r-md text-white transition-shadow no-underline hover:shadow-tbr-xl animate-bg-rotation-slow-wobble-right"` to `"p-1 md:p-2 lg:p-3 bg-rainbow-spin font-normal rounded-r-md text-white transition-shadow no-underline hover:shadow-tbr-xl"`. Changes: remove `bg-[length:350%_100%] bg-beautiful-button animate-bg-rotation-slow-wobble-right`, add `bg-rainbow-spin`. **Keep `rounded-r-md`** — the Donate pill sits at the right end of the nav container with other items butting up against its left edge; left corners must stay flat so the button slots flush against its neighbor. (`mara-design-system/project/preview/nav.html:37` sets `border-top-right-radius: 6px; border-bottom-right-radius: 6px;` only, confirming the right-side-only radius.)
+- [x] verify the nav visually: Donate pill rotates seamlessly, no wobble, no divider between items, right corners rounded, left corners flat (sits flush against previous nav item). [manual visual check skipped - not automatable]
 - [x] no new unit test — the classes are cosmetic. Existing desktop-menu tests (if any) should be updated to match the new class list; run `npx jest desktopMenu` — if no tests exist, skip.
 - [x] run `npm run typecheck && npm run lint && npm run build`.
 - [x] must pass before Task 4.
@@ -250,9 +250,9 @@ Dependencies / external:
 
 ### Task 9: Verify acceptance criteria and full scope
 
-- [x] verify all eight items from the Overview are implemented (red-tint bumped, rainbow rewritten, nav wobble/dividers gone, Donate pill has `rounded-md` + `bg-rainbow-spin`, buttons translate on hover/active, Logo has `showSubtitle` prop, Spinner uses red opacities, beautiful-button token upgraded, dead keyframes removed).
+- [x] verify all eight items from the Overview are implemented (red-tint bumped, rainbow rewritten, nav wobble/dividers gone, Donate pill has `rounded-r-md` + `bg-rainbow-spin`, buttons translate on hover/active, Logo has `showSubtitle` prop, Spinner uses red opacities, beautiful-button token upgraded, dead keyframes removed).
 - [x] `grep -rn "animate-wobble\|animate-bg-rotation-slow-wobble" src` — must return zero matches.
-- [x] `grep -rn "rounded-r-md" src/components/menu` — zero matches (Donate pill now has `rounded-md`).
+- [x] confirm Donate pill keeps `rounded-r-md` (right-side-only radius so it slots flush against its left-side neighbor in the nav container).
 - [x] `grep -rn "#ff1111" src` — zero matches.
 - [x] run full test suite: `npm test`.
 - [x] run linter: `npm run lint` — no errors.
