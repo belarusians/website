@@ -31,7 +31,7 @@ export function Dropdown({ className, label, children: dropdownMenu, onOpen, onC
       setIsOpen(false);
       if (typeof onClose === 'function') onClose();
     }}>
-      <div className="divide-solid divide-light-grey divide-y">
+      <div>
         <button className={`${className}`} onClick={toggleDropdown}>
           {label}
           <FontAwesomeIcon icon={faChevronDown} className={`ml-2 transition-transform ${isOpen ? 'rotate-180' : 'rotate-0'}`} />

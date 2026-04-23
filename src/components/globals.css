@@ -168,7 +168,7 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background-color: #231f20;
+  background-color: var(--color-black);
 }
 
 .bg-rainbow-spin::before {
