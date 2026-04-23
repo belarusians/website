@@ -260,11 +260,11 @@ Dependencies / external:
 
 ### Task 10: Update CLAUDE.md with the new patterns
 
-- [ ] in `CLAUDE.md`, add a short subsection "Visual foundations (refreshed)" under "Architectural Decisions" or near "Code Style", capturing three one-liners:
+- [x] in `CLAUDE.md`, add a short subsection "Visual foundations (refreshed)" under "Architectural Decisions" or near "Code Style", capturing three one-liners:
   - "Buttons translate on hover/active (`hover:-translate-y-0.5`, `active:translate-y-px`) alongside shadow escalation. Defined in `src/components/button.tsx`."
   - "The rainbow gradient is a seamless conic rotation driven by `@property --mara-angle` via the `bg-rainbow-spin` utility in `globals.css`. Do not reintroduce `animation-duration` hover changes — they cause a visible jump."
   - "Logo has a `showSubtitle` prop for the two approved variants (`src/components/header/logo.tsx`); callers default to the subtitle-visible variant."
-- [ ] no test needed (documentation only).
+- [x] no test needed (documentation only).
 
 ## Technical Details
 
