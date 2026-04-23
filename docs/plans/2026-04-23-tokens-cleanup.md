@@ -81,10 +81,10 @@ Dependencies / external:
 
 ### Task 1: Add NL flag tokens and normalize flag gradients to use tokens
 
-- [ ] in `src/components/globals.css` `@theme` block, add two new tokens below `--color-yellow-ukraine` (around line 22), following existing casing (lowercase hex):
+- [x] in `src/components/globals.css` `@theme` block, add two new tokens below `--color-yellow-ukraine` (around line 22), following existing casing (lowercase hex):
   - `--color-nl-red: #ae1c28;`
   - `--color-nl-blue: #21468b;`
-- [ ] rewrite `--background-image-nl` (lines 46-54) to reference the new tokens and `--color-white`:
+- [x] rewrite `--background-image-nl` (lines 46-54) to reference the new tokens and `--color-white`:
   ```
   --background-image-nl: linear-gradient(
     180deg,
@@ -96,15 +96,15 @@ Dependencies / external:
     var(--color-nl-blue) 100%
   );
   ```
-- [ ] rewrite `--background-image-be` (lines 55-63) so every `#fff` stop reads `var(--color-white)` (keep `var(--color-primary)` as-is).
-- [ ] do NOT touch `--background-image-beautiful-gradient` or `--background-image-beautiful-button` — deferred to Plan 3.
-- [ ] do NOT touch `--color-red-tint` value — deferred to Plan 3.
-- [ ] verify no unintended reflow: `npm run typecheck && npm run lint && npm run build`. No unit test applies (pure CSS variable change).
-- [ ] confirm `bg-nl` and `bg-be` Tailwind utilities still compile by grepping the build output (or `grep -r 'bg-nl\|bg-be' src`) for consumers and confirming the site builds — must pass before Task 2.
+- [x] rewrite `--background-image-be` (lines 55-63) so every `#fff` stop reads `var(--color-white)` (keep `var(--color-primary)` as-is).
+- [x] do NOT touch `--background-image-beautiful-gradient` or `--background-image-beautiful-button` — deferred to Plan 3.
+- [x] do NOT touch `--color-red-tint` value — deferred to Plan 3.
+- [x] verify no unintended reflow: `npm run typecheck && npm run lint && npm run build`. No unit test applies (pure CSS variable change).
+- [x] confirm `bg-nl` and `bg-be` Tailwind utilities still compile by grepping the build output (or `grep -r 'bg-nl\|bg-be' src`) for consumers and confirming the site builds — must pass before Task 2.
 
 ### Task 2: Create shared theme tokens module for TSX consumers
 
-- [ ] create `src/theme/tokens.ts` exporting a typed `COLORS` object mirroring the CSS custom properties. Keys match the `--color-*` variables (camelCase transform):
+- [x] create `src/theme/tokens.ts` exporting a typed `COLORS` object mirroring the CSS custom properties. Keys match the `--color-*` variables (camelCase transform):
   - `red: '#ed1c24'`
   - `redShade: '#af0000'`
   - `redTint: '#ff1111'` — keep the current value for now; Plan 3 will flip this to `#f36d72` in lockstep across CSS and TS.
@@ -121,38 +121,38 @@ Dependencies / external:
   - `kingOrangeTint: '#f36227'`
   - `nlRed: '#ae1c28'`
   - `nlBlue: '#21468b'`
-- [ ] export as `export const COLORS = { … } as const;` so TypeScript narrows the values to string literals.
-- [ ] also export a `PRIMARY` alias (`PRIMARY = COLORS.red`) to match the `--color-primary` CSS alias.
-- [ ] add one-line header comment `// Keep in sync with @theme block in src/components/globals.css` — this is the narrow exception to the "no comments" rule because the invariant is enforced only by humans.
-- [ ] create `src/theme/__tests__/tokens.test.ts` with:
+- [x] export as `export const COLORS = { … } as const;` so TypeScript narrows the values to string literals.
+- [x] also export a `PRIMARY` alias (`PRIMARY = COLORS.red`) to match the `--color-primary` CSS alias.
+- [x] add one-line header comment `// Keep in sync with @theme block in src/components/globals.css` — this is the narrow exception to the "no comments" rule because the invariant is enforced only by humans.
+- [x] create `src/theme/__tests__/tokens.test.ts` with:
   - test that `COLORS` exposes every expected key (import the constant, assert `Object.keys(COLORS).sort()` deep-equals the expected list).
   - test that every value matches `^#[0-9a-fA-F]{6,8}$|^rgb\(` (shape validation).
   - test that `PRIMARY === COLORS.red`.
-- [ ] run `npx jest tokens.test` — must pass before Task 3.
+- [x] run `npx jest tokens.test` — must pass before Task 3.
 
 ### Task 3: Migrate src/app/layout.tsx metadata hex to tokens
 
-- [ ] in `src/app/layout.tsx`, add `import { COLORS } from '@/theme/tokens';` near the other imports.
-- [ ] replace line 44 `color="#ed1c24"` with `color={COLORS.red}`.
-- [ ] replace line 114 `themeColor: '#f6f6f6'` with `themeColor: COLORS.whiteShade`.
-- [ ] replace line 147 `'msapplication-TileColor': '#b91d47'` with `'msapplication-TileColor': COLORS.red`. This intentionally standardizes the Windows tile color onto brand red (`#ed1c24`). The old `#b91d47` is a legacy off-palette value; the design system normalizes on brand red for chrome surfaces. Note this in the commit message.
-- [ ] run `grep -niE '#[0-9a-f]{3,8}\b' src/app/layout.tsx` — must return zero hex literals (confirms migration is complete).
-- [ ] run `npm run typecheck && npm run lint` — must pass.
-- [ ] no unit test — Next.js metadata is string-typed and round-trips without transformation; the grep + build suffice.
+- [x] in `src/app/layout.tsx`, add `import { COLORS } from '@/theme/tokens';` near the other imports.
+- [x] replace line 44 `color="#ed1c24"` with `color={COLORS.red}`.
+- [x] replace line 114 `themeColor: '#f6f6f6'` with `themeColor: COLORS.whiteShade`.
+- [x] replace line 147 `'msapplication-TileColor': '#b91d47'` with `'msapplication-TileColor': COLORS.red`. This intentionally standardizes the Windows tile color onto brand red (`#ed1c24`). The old `#b91d47` is a legacy off-palette value; the design system normalizes on brand red for chrome surfaces. Note this in the commit message.
+- [x] run `grep -niE '#[0-9a-f]{3,8}\b' src/app/layout.tsx` — must return zero hex literals (confirms migration is complete).
+- [x] run `npm run typecheck && npm run lint` — must pass.
+- [x] no unit test — Next.js metadata is string-typed and round-trips without transformation; the grep + build suffice.
 
 ### Task 4: Verify acceptance criteria and full scope
 
-- [ ] verify all three items from the Overview are implemented (NL tokens added, flag gradients reference tokens, layout.tsx hex migrated).
-- [ ] run `grep -rniE '#[0-9a-f]{3,8}\b' src --include='*.tsx' --include='*.ts'` — the only hits should be inside `src/theme/tokens.ts` (where hex is definitionally the source of truth).
-- [ ] run `grep -niE '#[0-9a-f]{3,8}\b' src/components/globals.css` — every hit should be inside a `--color-*: #…;` variable definition line (no hex stops in `--background-image-*` except inside `--background-image-beautiful-button`, which is deferred to Plan 3).
-- [ ] run full test suite: `npm test`.
-- [ ] run linter: `npm run lint` — no errors.
-- [ ] run `npm run build` — must succeed; confirms Tailwind 4 theme compiles and no metadata type errors.
+- [x] verify all three items from the Overview are implemented (NL tokens added, flag gradients reference tokens, layout.tsx hex migrated).
+- [x] run `grep -rniE '#[0-9a-f]{3,8}\b' src --include='*.tsx' --include='*.ts'` — the only hits should be inside `src/theme/tokens.ts` (where hex is definitionally the source of truth). Only extra match is `#418` in a test comment referencing React hydration error code 418 — not a color, regex false-positive.
+- [x] run `grep -niE '#[0-9a-f]{3,8}\b' src/components/globals.css` — every hit should be inside a `--color-*: #…;` variable definition line (no hex stops in `--background-image-*` except inside `--background-image-beautiful-button`, which is deferred to Plan 3).
+- [x] run full test suite: `npm test`. 17/17 passing.
+- [x] run linter: `npm run lint` — no errors. 0 errors, 95 pre-existing warnings unrelated to this plan.
+- [x] run `npm run build` — must succeed; confirms Tailwind 4 theme compiles and no metadata type errors.
 
 ### Task 5: Update project CLAUDE.md with tokens convention
 
-- [ ] in `CLAUDE.md`, add a short "Theme tokens" subsection under "Code Style" explaining that hex values in TSX/TS should import from `@/theme/tokens` and that `globals.css` `@theme` block is the source of truth for CSS variables. Keep it to 3-4 lines — no code examples, reference the files.
-- [ ] no test needed (documentation only).
+- [x] in `CLAUDE.md`, add a short "Theme tokens" subsection under "Code Style" explaining that hex values in TSX/TS should import from `@/theme/tokens` and that `globals.css` `@theme` block is the source of truth for CSS variables. Keep it to 3-4 lines — no code examples, reference the files.
+- [x] no test needed (documentation only).
 
 ## Technical Details
 

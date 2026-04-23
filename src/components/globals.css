@@ -20,6 +20,8 @@
   --color-light-grey: rgb(235, 235, 235);
   --color-blue-ukraine: #0056b9;
   --color-yellow-ukraine: #ffd800;
+  --color-nl-red: #ae1c28;
+  --color-nl-blue: #21468b;
   --color-king-orange: #F64D04;
   --color-king-orange-shade: #BF3903FF;
   --color-king-orange-tint: #f36227;
@@ -45,21 +47,21 @@
   );
   --background-image-nl: linear-gradient(
     180deg,
-    #ae1c28 0,
-    #ae1c28 33%,
-    #fff 33%,
-    #fff 67%,
-    #21468b 67%,
-    #21468b 100%
+    var(--color-nl-red) 0,
+    var(--color-nl-red) 33%,
+    var(--color-white) 33%,
+    var(--color-white) 67%,
+    var(--color-nl-blue) 67%,
+    var(--color-nl-blue) 100%
   );
   --background-image-be: linear-gradient(
     180deg,
-    #fff 0,
-    #fff 33%,
+    var(--color-white) 0,
+    var(--color-white) 33%,
     var(--color-primary) 33%,
     var(--color-primary) 67%,
-    #fff 67%,
-    #fff 100%
+    var(--color-white) 67%,
+    var(--color-white) 100%
   );
   --background-image-beautiful-gradient:
     radial-gradient(

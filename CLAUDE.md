@@ -16,6 +16,11 @@ Website for MARA, a non-profit organization of Belarusians in the Netherlands. N
 - Path alias: `@/*` → `./src/*`
 - Tests: `__tests__/` dirs, `.test.ts` extension
 
+### Theme tokens
+- CSS source of truth: `@theme` block in `src/components/globals.css` (Tailwind 4 custom properties).
+- TSX/TS source of truth: `src/theme/tokens.ts` (`COLORS`, `PRIMARY`) — import from `@/theme/tokens` instead of inlining hex literals.
+- Keep both in sync; the Next.js metadata API only accepts plain strings, so JS consumers cannot read CSS variables directly.
+
 ## Project Layout
 ```
 src/app/[lang]/          Pages (be, nl). Each page gets lang from CommonPageParams
@@ -30,6 +35,7 @@ src/components/          Reusable UI: button, card, dropdown, header/, headings/
 src/components/types.ts  Lang enum (be, nl), domain types (Event, News, Guide, Feedback)
 src/sanity/              CMS schemas: event/, news/, guide/, feedback/, vacancy/, locale-schemas/
 src/lib/                 Integrations: stripe, s3, email, clickmeeting, google-directory, vacancies
+src/theme/               Design tokens: tokens.ts (COLORS, PRIMARY) — keep in sync with globals.css @theme
 src/utils/               Helpers: og.ts (OG images), lang.ts (validation)
 src/middleware.ts        Clerk auth + locale redirect (default: be, /ru → /be redirect)
 sanity.config.ts         Schema registration + type exports (EventSchema, NewsSchema, etc.)
