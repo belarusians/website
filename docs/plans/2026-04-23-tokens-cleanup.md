@@ -142,12 +142,12 @@ Dependencies / external:
 
 ### Task 4: Verify acceptance criteria and full scope
 
-- [ ] verify all three items from the Overview are implemented (NL tokens added, flag gradients reference tokens, layout.tsx hex migrated).
-- [ ] run `grep -rniE '#[0-9a-f]{3,8}\b' src --include='*.tsx' --include='*.ts'` — the only hits should be inside `src/theme/tokens.ts` (where hex is definitionally the source of truth).
-- [ ] run `grep -niE '#[0-9a-f]{3,8}\b' src/components/globals.css` — every hit should be inside a `--color-*: #…;` variable definition line (no hex stops in `--background-image-*` except inside `--background-image-beautiful-button`, which is deferred to Plan 3).
-- [ ] run full test suite: `npm test`.
-- [ ] run linter: `npm run lint` — no errors.
-- [ ] run `npm run build` — must succeed; confirms Tailwind 4 theme compiles and no metadata type errors.
+- [x] verify all three items from the Overview are implemented (NL tokens added, flag gradients reference tokens, layout.tsx hex migrated).
+- [x] run `grep -rniE '#[0-9a-f]{3,8}\b' src --include='*.tsx' --include='*.ts'` — the only hits should be inside `src/theme/tokens.ts` (where hex is definitionally the source of truth). Only extra match is `#418` in a test comment referencing React hydration error code 418 — not a color, regex false-positive.
+- [x] run `grep -niE '#[0-9a-f]{3,8}\b' src/components/globals.css` — every hit should be inside a `--color-*: #…;` variable definition line (no hex stops in `--background-image-*` except inside `--background-image-beautiful-button`, which is deferred to Plan 3).
+- [x] run full test suite: `npm test`. 17/17 passing.
+- [x] run linter: `npm run lint` — no errors. 0 errors, 95 pre-existing warnings unrelated to this plan.
+- [x] run `npm run build` — must succeed; confirms Tailwind 4 theme compiles and no metadata type errors.
 
 ### Task 5: Update project CLAUDE.md with tokens convention
 
