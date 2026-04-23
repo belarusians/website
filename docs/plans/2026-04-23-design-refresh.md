@@ -203,7 +203,7 @@ Dependencies / external:
 
 ### Task 6: Logo variants (with / without subtitle)
 
-- [ ] open `src/components/header/logo.tsx`. Change the props type:
+- [x] open `src/components/header/logo.tsx`. Change the props type:
   ```tsx
   interface Props {
     className?: string;
@@ -211,15 +211,15 @@ Dependencies / external:
   }
   ```
   Default `showSubtitle` behaves like today (subtitle group rendered, with its existing `hidden md:block` responsive hide). When `showSubtitle={false}`, omit the subtitle `<g>` entirely (line 37).
-- [ ] in the SVG, wrap the subtitle `<g class="fill-black hidden md:block">` with `{props.showSubtitle !== false && ( ... )}` so callers can opt-out.
-- [ ] keep existing header caller in `src/components/header/header.tsx:16` unchanged (default behavior = subtitle visible ≥ md). If the mobile refresh (Plan 2) wants a subtitle-less logo on the new mobile header, the caller can pass `showSubtitle={false}` explicitly.
-- [ ] verify logo fill color: the inline SVG already uses `fill-primary` classes (correct red). Nothing to do — the chat's concern about a black-rendered logo applied to the separate `public/logo/*.svg` assets, not this inline component.
-- [ ] add a unit test `src/components/header/__tests__/logo.test.tsx`:
+- [x] in the SVG, wrap the subtitle `<g class="fill-black hidden md:block">` with `{props.showSubtitle !== false && ( ... )}` so callers can opt-out.
+- [x] keep existing header caller in `src/components/header/header.tsx:16` unchanged (default behavior = subtitle visible ≥ md). If the mobile refresh (Plan 2) wants a subtitle-less logo on the new mobile header, the caller can pass `showSubtitle={false}` explicitly.
+- [x] verify logo fill color: the inline SVG already uses `fill-primary` classes (correct red). Nothing to do — the chat's concern about a black-rendered logo applied to the separate `public/logo/*.svg` assets, not this inline component.
+- [x] add a unit test `src/components/header/__tests__/logo.test.tsx`:
   - renders `<Logo />` — SVG present, subtitle group present.
   - renders `<Logo showSubtitle={false} />` — SVG present, subtitle group absent (query for the `<g class="fill-black ...">` element and assert null).
-- [ ] run `npx jest logo.test` — must pass.
-- [ ] run `npm run typecheck && npm run lint && npm run build`.
-- [ ] must pass before Task 7.
+- [x] run `npx jest logo.test` — must pass.
+- [x] run `npm run typecheck && npm run lint && npm run build`.
+- [x] must pass before Task 7.
 
 ### Task 7: Spinner — same color family, different opacities
 
