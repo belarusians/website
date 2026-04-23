@@ -117,7 +117,7 @@ Dependencies / external:
 
 ### Task 2: Introduce `bg-rainbow-spin` utility class (seamless conic rotation)
 
-- [ ] in `src/components/globals.css`, **after** the `@theme` block, add a new `@layer utilities` block (or append to the existing base layer) containing:
+- [x] in `src/components/globals.css`, **after** the `@theme` block, add a new `@layer utilities` block (or append to the existing base layer) containing:
   ```css
   @property --mara-angle {
     syntax: '<angle>';
@@ -150,16 +150,16 @@ Dependencies / external:
   @keyframes mara-rainbow-spin { to { --mara-angle: 360deg; } }
   ```
   (Use Tailwind 4's `@utility` directive for the base class; keep the `::before` / `@keyframes` / `@property` declarations at file scope since those directives can't live inside `@utility`.)
-- [ ] also rewrite the `--background-image-beautiful-button` token value in `globals.css:71-80` to the new conic definition so any remaining Tailwind `bg-beautiful-button` consumers inherit the fix:
+- [x] also rewrite the `--background-image-beautiful-button` token value in `globals.css:71-80` to the new conic definition so any remaining Tailwind `bg-beautiful-button` consumers inherit the fix:
   ```css
   --background-image-beautiful-button: conic-gradient(from 0deg,
     #ed1c24 0%, #f36d72 14%, #f59638 28%, #f5c84a 42%,
     #e8528c 60%, #8b2f8f 78%, #4b1d6b 88%, #af0000 96%, #ed1c24 100%);
   ```
   Note: as a Tailwind *background-image token*, it doesn't animate on its own — it just upgrades the static gradient. Task 3 swaps active consumers to `bg-rainbow-spin` where rotation is wanted (the Donate nav pill). The static `bg-beautiful-button` class stays as a reasonable no-animation fallback if any other consumer shows up later.
-- [ ] run `npm run build` — must succeed; Tailwind 4 must accept the `@utility` directive + pseudo-element addendum.
-- [ ] no unit test — CSS-only. Verified by build and by Task 3 smoke-test.
-- [ ] must pass before Task 3.
+- [x] run `npm run build` — must succeed; Tailwind 4 must accept the `@utility` directive + pseudo-element addendum.
+- [x] no unit test — CSS-only. Verified by build and by Task 3 smoke-test.
+- [x] must pass before Task 3.
 
 ### Task 3: Strip wobble + dividers + rewrite Donate pill in `desktopMenu.tsx`
 

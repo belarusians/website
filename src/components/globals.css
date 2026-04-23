@@ -70,15 +70,17 @@
       transparent
     ),
     radial-gradient(farthest-side at bottom left, var(--color-primary-shade) 6.65%, var(--color-primary) 100%);
-  --background-image-beautiful-button: linear-gradient(
-    60deg,
-    #e1bc28,
-    #21c241,
-    #115eb7,
-    #720cb6,
-    #e1bc28,
-    #21c241,
-    #115eb7
+  --background-image-beautiful-button: conic-gradient(
+    from 0deg,
+    #ed1c24 0%,
+    #f36d72 14%,
+    #f59638 28%,
+    #f5c84a 42%,
+    #e8528c 60%,
+    #8b2f8f 78%,
+    #4b1d6b 88%,
+    #af0000 96%,
+    #ed1c24 100%
   );
 
   --scale-101: 1.01;
@@ -215,6 +217,49 @@
     100% {
       background-position: 100% 0;
     }
+  }
+}
+
+@property --mara-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@utility bg-rainbow-spin {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: #231f20;
+}
+
+.bg-rainbow-spin::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(
+    from var(--mara-angle),
+    #ed1c24 0%,
+    #f36d72 14%,
+    #f59638 28%,
+    #f5c84a 42%,
+    #e8528c 60%,
+    #8b2f8f 78%,
+    #4b1d6b 88%,
+    #af0000 96%,
+    #ed1c24 100%
+  );
+  animation: mara-rainbow-spin 6s linear infinite;
+  z-index: -1;
+}
+
+@keyframes mara-rainbow-spin {
+  to {
+    --mara-angle: 360deg;
   }
 }
 
