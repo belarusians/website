@@ -223,18 +223,18 @@ Dependencies / external:
 
 ### Task 7: Spinner — same color family, different opacities
 
-- [ ] open `src/components/spinner.tsx`. Replace the three current ring definitions to use three opacities of `primary` instead of mixed primary/white:
+- [x] open `src/components/spinner.tsx`. Replace the three current ring definitions to use three opacities of `primary` instead of mixed primary/white:
   - outer (`before:`): `before:border-l-[color:rgb(237_28_36_/_0.35)]` (35% red)
   - middle (main span): `border-t-[color:rgb(237_28_36_/_0.65)] border-r-[color:rgb(237_28_36_/_0.65)]` (65% red)
   - inner (`after:`): `after:border-b-primary after:border-l-primary` (100% red)
-- [ ] keep all three animation classes (`animate-rotate-back-fast`, `animate-rotate-slow`, `animate-rotate-back`) and the three sizes (80% / 100% / 60%) as-is. The differentiator is now opacity, not hue.
-- [ ] add a unit test `src/components/__tests__/spinner.test.tsx`:
+- [x] keep all three animation classes (`animate-rotate-back-fast`, `animate-rotate-slow`, `animate-rotate-back`) and the three sizes (80% / 100% / 60%) as-is. The differentiator is now opacity, not hue.
+- [x] add a unit test `src/components/__tests__/spinner.test.tsx`:
   - renders Spinner, asserts the rendered markup contains `border-l-[color:rgb(237_28_36_/_0.35)]` (or similar signature strings).
   - asserts only `primary`-family colors appear, no `border-*-white`.
-- [ ] note: design-system README calls out two spinner surfaces (on red → use white opacities, on white → use red opacities). For now, only the white-surface variant is wired since the app shows Spinner on light backgrounds. A `variant="on-red"` prop can be added later if a red-surface consumer appears; do NOT build it speculatively in this task.
-- [ ] run `npx jest spinner.test` — must pass.
-- [ ] run `npm run typecheck && npm run lint && npm run build`.
-- [ ] must pass before Task 8.
+- [x] note: design-system README calls out two spinner surfaces (on red → use white opacities, on white → use red opacities). For now, only the white-surface variant is wired since the app shows Spinner on light backgrounds. A `variant="on-red"` prop can be added later if a red-surface consumer appears; do NOT build it speculatively in this task.
+- [x] run `npx jest spinner.test` — must pass.
+- [x] run `npm run typecheck && npm run lint && npm run build`.
+- [x] must pass before Task 8.
 
 ### Task 8: Remove dead wobble tokens and keyframes from `globals.css`
 
