@@ -183,7 +183,7 @@ Dependencies / external:
 
 ### Task 5: Stronger button hover/active states
 
-- [ ] open `src/components/button.tsx:38-48`. Extend the `InnerButton` className so disabled buttons get no state change, non-disabled get the full translate + shadow recipe:
+- [x] open `src/components/button.tsx:38-48`. Extend the `InnerButton` className so disabled buttons get no state change, non-disabled get the full translate + shadow recipe:
   ```tsx
   className={`transition-all duration-150 ${
     props.size === 'large' ? 'p-2 md:p-3 lg:p-4 text-lg' : 'p-1 md:p-2 lg:p-3'
@@ -194,12 +194,12 @@ Dependencies / external:
   } ${props.className ?? ''}`}
   ```
   Changes vs current: `hover:shadow-xl active:shadow-2xl` → `hover:shadow-2xl active:shadow-md`; add `hover:-translate-y-0.5 active:translate-y-px`; change `transition-all` to `transition-all duration-150` for a snappier feel (chat preview used `.18s` ease for shadow, `.12s` ease for transform — 150ms is the middle ground at Tailwind's coarsest granularity).
-- [ ] add a unit test `src/components/__tests__/button.test.tsx` (or extend if present):
+- [x] add a unit test `src/components/__tests__/button.test.tsx` (or extend if present):
   - renders a non-disabled button, asserts className contains `hover:shadow-2xl`, `hover:-translate-y-0.5`, `active:translate-y-px`.
   - renders a disabled button, asserts className does **not** contain any of those hover/active tokens.
-- [ ] run `npx jest button.test` — must pass.
-- [ ] run `npm run typecheck && npm run lint && npm run build`.
-- [ ] must pass before Task 6.
+- [x] run `npx jest button.test` — must pass.
+- [x] run `npm run typecheck && npm run lint && npm run build`.
+- [x] must pass before Task 6.
 
 ### Task 6: Logo variants (with / without subtitle)
 

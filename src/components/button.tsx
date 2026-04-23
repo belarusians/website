@@ -36,9 +36,11 @@ function InnerButton(props: ButtonProps) {
 
   return (
     <button
-      className={`transition-all ${
+      className={`transition-all duration-150 ${
         props.size === 'large' ? 'p-2 md:p-3 lg:p-4 text-lg' : 'p-1 md:p-2 lg:p-3'
-      } rounded-md shadow-lg ${props.disabled ? '' : 'hover:shadow-xl active:shadow-2xl'} ${props.className ?? ''}`}
+      } rounded-md shadow-lg ${
+        props.disabled ? '' : 'hover:shadow-2xl hover:-translate-y-0.5 active:shadow-md active:translate-y-px'
+      } ${props.className ?? ''}`}
       disabled={props.disabled}
       onClick={props.click}
       {...buttonAttributes}
