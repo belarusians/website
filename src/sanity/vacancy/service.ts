@@ -2,8 +2,8 @@ import { Lang } from '../../components/types';
 import { sanityFetch } from '../client';
 import { Vacancy } from './type';
 
-export async function getAllVacancies(): Promise<Vacancy[]> {
-  return sanityFetch<Vacancy[]>(
+export async function getAllVacancies(): Promise<{ id: string; _updatedAt: string }[]> {
+  return sanityFetch<{ id: string; _updatedAt: string }[]>(
     `*[_type == "vacancy"]{
     "id": id.current,
     _updatedAt,

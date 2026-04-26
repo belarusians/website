@@ -108,8 +108,7 @@ describe('sitemap', () => {
       { slug: 'n2', _updatedAt: '2026-01-02T00:00:00Z' },
     ]);
     mockGetAllEventsSlugs.mockResolvedValueOnce([{ slug: 'e1', _updatedAt: '2026-01-03T00:00:00Z' }]);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    mockGetAllVacancies.mockResolvedValueOnce([{ id: 'v1', _updatedAt: '2026-01-04T00:00:00Z' } as any]);
+    mockGetAllVacancies.mockResolvedValueOnce([{ id: 'v1', _updatedAt: '2026-01-04T00:00:00Z' }]);
     mockGetAllGuidesSlugs.mockResolvedValueOnce([{ slug: 'g1', _updatedAt: '2026-01-05T00:00:00Z' }]);
 
     const result = await sitemap();
@@ -124,8 +123,7 @@ describe('sitemap', () => {
     mockGetAllNewsSlugs.mockResolvedValueOnce([]);
     mockGetAllEventsSlugs.mockResolvedValueOnce([]);
     mockGetAllVacancies.mockResolvedValueOnce([
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      { id: 'has-date', _updatedAt: '2026-03-01T00:00:00Z' } as any,
+      { id: 'has-date', _updatedAt: '2026-03-01T00:00:00Z' },
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       { id: 'no-date' } as any,
     ]);
