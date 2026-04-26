@@ -6,10 +6,11 @@ import { GuideSchema } from '../../../sanity.config';
 
 export type Slug = {
   slug: string;
+  _updatedAt: string;
 };
 
 export async function getAllGuidesSlugs(): Promise<Slug[]> {
-  return sanityFetch('*[_type == "guide"]{ "slug": slug.current }', ['guide']);
+  return sanityFetch('*[_type == "guide"]{ "slug": slug.current, _updatedAt }', ['guide']);
 }
 
 export async function getGuideBySlug(lang: Lang, slug: string): Promise<Guide | undefined> {

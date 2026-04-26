@@ -19,8 +19,11 @@ export async function getAllEvents(lang: Lang): Promise<EventMeta[]> {
   );
 }
 
-export async function getAllEventsSlugs(): Promise<{ slug: string }[]> {
-  return sanityFetch<{ slug: string }[]>('*[_type == "event"]{ "slug": slug.current }', ['event']);
+export async function getAllEventsSlugs(): Promise<{ slug: string; _updatedAt: string }[]> {
+  return sanityFetch<{ slug: string; _updatedAt: string }[]>(
+    '*[_type == "event"]{ "slug": slug.current, _updatedAt }',
+    ['event'],
+  );
 }
 
 export type EventMeta = Pick<

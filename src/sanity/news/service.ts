@@ -5,8 +5,8 @@ import { sanityFetch } from '../client';
 import { Lang, News, NewsWithoutHTMLContent } from '../../components/types';
 import { NewsSchema } from '../../../sanity.config';
 
-export async function getAllNewsSlugs(): Promise<{ slug: string }[]> {
-  return sanityFetch('*[_type == "news"]{ "slug": slug.current }', ['news']);
+export async function getAllNewsSlugs(): Promise<{ slug: string; _updatedAt: string }[]> {
+  return sanityFetch('*[_type == "news"]{ "slug": slug.current, _updatedAt }', ['news']);
 }
 
 export type NewsMeta = Pick<

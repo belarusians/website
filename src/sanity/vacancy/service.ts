@@ -5,6 +5,7 @@ import { Vacancy } from './type';
 export async function getAllVacancies(): Promise<Vacancy[]> {
   return client.fetch(`*[_type == "vacancy"]{
     "id": id.current,
+    _updatedAt,
   }`);
 }
 

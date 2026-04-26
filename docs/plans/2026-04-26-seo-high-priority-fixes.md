@@ -96,14 +96,14 @@ Smallest mechanical fix. Done first to land an immediate Lighthouse win.
 
 Prerequisite for Task 3. Touch each service file to add `_updatedAt` to GROQ projections that feed the sitemap.
 
-- [ ] add `_updatedAt,` to GROQ projection in `src/sanity/event/service.ts`:`getAllEventsSlugs`
-- [ ] add `_updatedAt,` to GROQ projection in `src/sanity/news/service.ts`:`getAllNewsSlugs`
-- [ ] add `_updatedAt,` to GROQ projection in `src/sanity/guide/service.ts` (the slugs query used by sitemap)
-- [ ] update `src/sanity/vacancy/service.ts`:`getAllVacancies` to project `_updatedAt`
-- [ ] update return-type annotations on each function from `{ slug: string }[]` / `Vacancy[]` to include `updatedAt: string` (or keep `_updatedAt` field name — pick one and be consistent)
-- [ ] run `npm run sanity:types` to regenerate TypeGen types
-- [ ] add a unit test asserting the projection shape for each service (mock `sanityFetch` and assert returned objects include `_updatedAt`) — one test file `src/sanity/__tests__/services-updated-at.test.ts`
-- [ ] run `npm run test` and `npm run typecheck` — must pass before next task
+- [x] add `_updatedAt,` to GROQ projection in `src/sanity/event/service.ts`:`getAllEventsSlugs`
+- [x] add `_updatedAt,` to GROQ projection in `src/sanity/news/service.ts`:`getAllNewsSlugs`
+- [x] add `_updatedAt,` to GROQ projection in `src/sanity/guide/service.ts` (the slugs query used by sitemap)
+- [x] update `src/sanity/vacancy/service.ts`:`getAllVacancies` to project `_updatedAt`
+- [x] update return-type annotations on each function from `{ slug: string }[]` / `Vacancy[]` to include `updatedAt: string` (or keep `_updatedAt` field name — pick one and be consistent)
+- [x] run `npm run sanity:types` to regenerate TypeGen types
+- [x] add a unit test asserting the projection shape for each service (mock `sanityFetch` and assert returned objects include `_updatedAt`) — one test file `src/sanity/__tests__/services-updated-at.test.ts`
+- [x] run `npm run test` and `npm run typecheck` — must pass before next task
 
 ### Task 3: Use real `lastModified` in sitemap (#9)
 
