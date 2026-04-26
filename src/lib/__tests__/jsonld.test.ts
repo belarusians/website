@@ -96,9 +96,17 @@ describe('eventJsonLd', () => {
       location: {
         '@type': 'Place',
         name: 'Amsterdam',
-        address: { '@type': 'PostalAddress', addressLocality: 'Amsterdam', addressCountry: 'NL' },
+        address: { '@type': 'PostalAddress', addressCountry: 'NL' },
       },
     });
+  });
+
+  test('falls back to EventScheduled when rescheduled flag is set without rescheduledTimeframe', () => {
+    const ld = eventJsonLd({ ...baseInput, rescheduled: true });
+    expect(ld.eventStatus).toBe('https://schema.org/EventScheduled');
+    expect(ld.startDate).toBe(baseInput.timeframe.start);
+    expect(ld.endDate).toBe(baseInput.timeframe.end);
+    expect(ld.previousStartDate).toBeUndefined();
   });
 
   test('defaults to EventScheduled status', () => {
@@ -224,6 +232,21 @@ describe('jobPostingJsonLd', () => {
   test('description is plain paragraph when there are no tasks', () => {
     const ld = jobPostingJsonLd({ ...baseInput, tasks: [] });
     expect(ld.description).toBe('<p>Coordinate the volunteer team.</p>');
+  });
+
+  test('escapes HTML special characters from CMS-controlled fields', () => {
+    const ld = jobPostingJsonLd({
+      ...baseInput,
+      description: 'Coordinate <script>alert(1)</script> & co.',
+      tasks: [{ title: { nl: 'A & B' }, description: { nl: '<b>bold</b>' } }],
+      lang: 'nl',
+    });
+    expect(ld.description).not.toContain('<script>');
+    expect(ld.description).not.toContain('<b>bold</b>');
+    expect(ld.description).toContain('&lt;script&gt;alert(1)&lt;/script&gt;');
+    expect(ld.description).toContain('A &amp; B');
+    expect(ld.description).toContain('&lt;b&gt;bold&lt;/b&gt;');
+    expect(ld.description).toContain('&amp; co.');
   });
 
   test('includes optional url when provided', () => {

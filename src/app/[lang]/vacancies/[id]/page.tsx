@@ -28,8 +28,8 @@ export default async function VacancyPage({ params }: VacancyPageParams) {
     description: vacancy.description,
     tasks: vacancy.tasks,
     lang,
-    datePosted: vacancy._createdAt,
-    url: `${SITE_URL}${lang}/vacancies/${vacancy.id}`,
+    datePosted: vacancy._createdAt ?? vacancy._updatedAt ?? new Date().toISOString(),
+    url: `${SITE_URL}${lang}/vacancies/${encodeURIComponent(vacancy.id)}`,
   });
 
   return (

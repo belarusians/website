@@ -66,7 +66,7 @@ export type EventJsonLd = {
   location: {
     '@type': 'Place';
     name: string;
-    address: { '@type': 'PostalAddress'; addressLocality: string; addressCountry: 'NL' };
+    address: { '@type': 'PostalAddress'; addressCountry: 'NL' };
   };
   organizer: { '@type': 'NonprofitOrganization'; name: string; url: string };
   image?: string;
@@ -75,7 +75,7 @@ export type EventJsonLd = {
 
 export function eventJsonLd(input: EventJsonLdInput): EventJsonLd {
   const cancelled = input.cancelled === true;
-  const rescheduled = !cancelled && input.rescheduled === true;
+  const rescheduled = !cancelled && input.rescheduled === true && Boolean(input.rescheduledTimeframe);
 
   let startDate = input.timeframe.start;
   let endDate = input.timeframe.end;
@@ -84,13 +84,11 @@ export function eventJsonLd(input: EventJsonLdInput): EventJsonLd {
 
   if (cancelled) {
     eventStatus = 'https://schema.org/EventCancelled';
-  } else if (rescheduled) {
+  } else if (rescheduled && input.rescheduledTimeframe) {
     eventStatus = 'https://schema.org/EventRescheduled';
-    if (input.rescheduledTimeframe) {
-      previousStartDate = input.timeframe.start;
-      startDate = input.rescheduledTimeframe.start;
-      endDate = input.rescheduledTimeframe.end;
-    }
+    previousStartDate = input.timeframe.start;
+    startDate = input.rescheduledTimeframe.start;
+    endDate = input.rescheduledTimeframe.end;
   }
 
   const ld: EventJsonLd = {
@@ -104,7 +102,7 @@ export function eventJsonLd(input: EventJsonLdInput): EventJsonLd {
     location: {
       '@type': 'Place',
       name: input.location,
-      address: { '@type': 'PostalAddress', addressLocality: input.location, addressCountry: 'NL' },
+      address: { '@type': 'PostalAddress', addressCountry: 'NL' },
     },
     organizer: { '@type': 'NonprofitOrganization', name: SITE_NAME, url: SITE_URL },
   };
@@ -145,20 +143,26 @@ export type JobPostingJsonLd = {
   url?: string;
 };
 
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
 export function jobPostingJsonLd(input: JobPostingJsonLdInput): JobPostingJsonLd {
   const taskItems = input.tasks
     .map((task) => {
-      const title = task.title[input.lang] ?? '';
-      const description = task.description[input.lang] ?? '';
+      const title = escapeHtml(task.title[input.lang] ?? '');
+      const description = escapeHtml(task.description[input.lang] ?? '');
       if (!title && !description) return '';
       if (title && description) return `<li><strong>${title}</strong>: ${description}</li>`;
       return `<li>${title || description}</li>`;
     })
     .filter(Boolean)
     .join('');
-  const description = taskItems
-    ? `<p>${input.description}</p><ul>${taskItems}</ul>`
-    : `<p>${input.description}</p>`;
+  const baseDescription = escapeHtml(input.description);
+  const description = taskItems ? `<p>${baseDescription}</p><ul>${taskItems}</ul>` : `<p>${baseDescription}</p>`;
 
   const ld: JobPostingJsonLd = {
     '@context': 'https://schema.org',
