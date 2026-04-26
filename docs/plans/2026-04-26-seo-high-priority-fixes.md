@@ -86,11 +86,11 @@ Dependencies / external:
 
 Smallest mechanical fix. Done first to land an immediate Lighthouse win.
 
-- [ ] remove `Disallow: /_next/` line from `src/app/robots.txt:6`
-- [ ] keep `Disallow: /api/` (still desirable)
-- [ ] add a brief comment above the kept disallows clarifying *why* `/_next/` is now allowed (Google needs CSS/JS) — one-line comment max
-- [ ] no unit test (static text file) — verified by inspection
-- [ ] run `npm run lint` and `npm run typecheck` — must pass before next task
+- [x] remove `Disallow: /_next/` line from `src/app/robots.txt:6`
+- [x] keep `Disallow: /api/` (still desirable)
+- [x] add a brief comment above the kept disallows clarifying *why* `/_next/` is now allowed (Google needs CSS/JS) — one-line comment max
+- [x] no unit test (static text file) — verified by inspection
+- [x] run `npm run lint` and `npm run typecheck` — must pass before next task
 
 ### Task 2: Project `_updatedAt` from Sanity services
 
