@@ -107,14 +107,14 @@ Prerequisite for Task 3. Touch each service file to add `_updatedAt` to GROQ pro
 
 ### Task 3: Use real `lastModified` in sitemap (#9)
 
-- [ ] change `src/app/sitemap.ts` so dynamic loops pass `_updatedAt` (parsed to `Date`) into a per-URL entry instead of calling `generateTranslatedUrls` for dynamic content
-- [ ] keep `generateTranslatedUrls` for static routes; replace `new Date()` inside it with a stable build-time constant (`const BUILD_TIME = new Date()` at module scope) — avoids "now" recomputed per request
-- [ ] for dynamic items missing `_updatedAt` (defensive — shouldn't happen), fall back to `BUILD_TIME`
-- [ ] write `src/app/__tests__/sitemap.test.ts`:
+- [x] change `src/app/sitemap.ts` so dynamic loops pass `_updatedAt` (parsed to `Date`) into a per-URL entry instead of calling `generateTranslatedUrls` for dynamic content
+- [x] keep `generateTranslatedUrls` for static routes; replace `new Date()` inside it with a stable build-time constant (`const BUILD_TIME = new Date()` at module scope) — avoids "now" recomputed per request
+- [x] for dynamic items missing `_updatedAt` (defensive — shouldn't happen), fall back to `BUILD_TIME`
+- [x] write `src/app/__tests__/sitemap.test.ts`:
   - assert dynamic news entry uses its `_updatedAt` for `lastModified`
   - assert static `/about-us` entry uses `BUILD_TIME`
   - assert URL count matches expected (static + dynamic per locale)
-- [ ] run `npm run test` and `npm run typecheck` — must pass before next task
+- [x] run `npm run test` and `npm run typecheck` — must pass before next task
 
 ### Task 4: Add Organization JSON-LD to root layout (#10)
 
