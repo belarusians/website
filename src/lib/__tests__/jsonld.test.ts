@@ -1,5 +1,5 @@
 import { describe, expect, test } from '@jest/globals';
-import { buildSiteJsonLd, eventJsonLd } from '../jsonld';
+import { buildSiteJsonLd, eventJsonLd, jobPostingJsonLd } from '../jsonld';
 
 describe('buildSiteJsonLd', () => {
   const ld = buildSiteJsonLd();
@@ -140,5 +140,86 @@ describe('eventJsonLd', () => {
 
   test('serialises to valid JSON', () => {
     expect(() => JSON.parse(JSON.stringify(eventJsonLd(baseInput)))).not.toThrow();
+  });
+});
+
+describe('jobPostingJsonLd', () => {
+  const baseInput = {
+    title: 'Volunteer coordinator',
+    description: 'Coordinate the volunteer team.',
+    tasks: [
+      { title: { be: 'Камунікацыя', nl: 'Communicatie' }, description: { be: 'Адказваць на лісты', nl: 'Mail beantwoorden' } },
+      { title: { be: 'Сустрэчы', nl: 'Vergaderingen' }, description: { be: 'Праводзіць сустрэчы', nl: 'Vergaderingen leiden' } },
+    ],
+    lang: 'nl',
+    datePosted: '2026-01-15T10:00:00Z',
+    url: 'https://www.belarusians.nl/nl/vacancies/coordinator',
+  };
+
+  test('uses schema.org context and JobPosting type', () => {
+    const ld = jobPostingJsonLd(baseInput);
+    expect(ld['@context']).toBe('https://schema.org');
+    expect(ld['@type']).toBe('JobPosting');
+  });
+
+  test('includes title, datePosted, and employmentType VOLUNTEER', () => {
+    const ld = jobPostingJsonLd(baseInput);
+    expect(ld.title).toBe('Volunteer coordinator');
+    expect(ld.datePosted).toBe('2026-01-15T10:00:00Z');
+    expect(ld.employmentType).toBe('VOLUNTEER');
+  });
+
+  test('hiringOrganization is MÁRA NonprofitOrganization with sameAs site URL', () => {
+    const ld = jobPostingJsonLd(baseInput);
+    expect(ld.hiringOrganization).toEqual({
+      '@type': 'NonprofitOrganization',
+      name: 'MÁRA',
+      sameAs: 'https://www.belarusians.nl/',
+    });
+  });
+
+  test('jobLocation is a Place with NL PostalAddress', () => {
+    const ld = jobPostingJsonLd(baseInput);
+    expect(ld.jobLocation).toEqual({
+      '@type': 'Place',
+      address: { '@type': 'PostalAddress', addressCountry: 'NL' },
+    });
+  });
+
+  test('description concatenates the base description with localized tasks', () => {
+    const ld = jobPostingJsonLd(baseInput);
+    expect(ld.description).toContain('Coordinate the volunteer team.');
+    expect(ld.description).toContain('Communicatie');
+    expect(ld.description).toContain('Mail beantwoorden');
+    expect(ld.description).toContain('Vergaderingen');
+    expect(ld.description).not.toContain('Камунікацыя');
+  });
+
+  test('description picks the requested language from each task', () => {
+    const ld = jobPostingJsonLd({ ...baseInput, lang: 'be' });
+    expect(ld.description).toContain('Камунікацыя');
+    expect(ld.description).toContain('Адказваць на лісты');
+    expect(ld.description).not.toContain('Communicatie');
+  });
+
+  test('description is plain paragraph when there are no tasks', () => {
+    const ld = jobPostingJsonLd({ ...baseInput, tasks: [] });
+    expect(ld.description).toBe('<p>Coordinate the volunteer team.</p>');
+  });
+
+  test('includes optional url when provided', () => {
+    const ld = jobPostingJsonLd(baseInput);
+    expect(ld.url).toBe('https://www.belarusians.nl/nl/vacancies/coordinator');
+  });
+
+  test('omits url when not provided', () => {
+    const { url: _ignored, ...withoutUrl } = baseInput;
+    void _ignored;
+    const ld = jobPostingJsonLd(withoutUrl);
+    expect(ld.url).toBeUndefined();
+  });
+
+  test('serialises to valid JSON', () => {
+    expect(() => JSON.parse(JSON.stringify(jobPostingJsonLd(baseInput)))).not.toThrow();
   });
 });

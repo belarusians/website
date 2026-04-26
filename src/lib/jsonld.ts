@@ -104,3 +104,68 @@ export function eventJsonLd(input: EventJsonLdInput): EventJsonLd {
 
   return ld;
 }
+
+export type JobPostingTask = {
+  title: Record<string, string>;
+  description: Record<string, string>;
+};
+
+export type JobPostingJsonLdInput = {
+  title: string;
+  description: string;
+  tasks: ReadonlyArray<JobPostingTask>;
+  lang: string;
+  datePosted: string;
+  url?: string;
+};
+
+export type JobPostingJsonLd = {
+  '@context': 'https://schema.org';
+  '@type': 'JobPosting';
+  title: string;
+  description: string;
+  hiringOrganization: { '@type': 'NonprofitOrganization'; name: string; sameAs: string };
+  jobLocation: { '@type': 'Place'; address: { '@type': 'PostalAddress'; addressCountry: 'NL' } };
+  datePosted: string;
+  employmentType: 'VOLUNTEER';
+  url?: string;
+};
+
+export function jobPostingJsonLd(input: JobPostingJsonLdInput): JobPostingJsonLd {
+  const taskItems = input.tasks
+    .map((task) => {
+      const title = task.title[input.lang] ?? '';
+      const description = task.description[input.lang] ?? '';
+      if (!title && !description) return '';
+      if (title && description) return `<li><strong>${title}</strong>: ${description}</li>`;
+      return `<li>${title || description}</li>`;
+    })
+    .filter(Boolean)
+    .join('');
+  const description = taskItems
+    ? `<p>${input.description}</p><ul>${taskItems}</ul>`
+    : `<p>${input.description}</p>`;
+
+  const ld: JobPostingJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'JobPosting',
+    title: input.title,
+    description,
+    hiringOrganization: {
+      '@type': 'NonprofitOrganization',
+      name: SITE_NAME,
+      sameAs: SITE_URL,
+    },
+    jobLocation: {
+      '@type': 'Place',
+      address: { '@type': 'PostalAddress', addressCountry: 'NL' },
+    },
+    datePosted: input.datePosted,
+    employmentType: 'VOLUNTEER',
+  };
+
+  if (input.url) {
+    ld.url = input.url;
+  }
+  return ld;
+}

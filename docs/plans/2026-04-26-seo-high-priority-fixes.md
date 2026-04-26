@@ -140,11 +140,11 @@ Prerequisite for Task 3. Touch each service file to add `_updatedAt` to GROQ pro
 
 ### Task 7: Add JobPosting JSON-LD to vacancy pages (#14)
 
-- [ ] add `jobPostingJsonLd(vacancy, lang)` builder to `src/lib/jsonld.ts`: `@type: 'JobPosting'`, `title: vacancy.title`, `description: vacancy.description` (concatenate `tasks` for richer text), `hiringOrganization: { @type: 'NonprofitOrganization', name: 'MÁRA', sameAs: 'https://www.belarusians.nl/' }`, `jobLocation: { @type: 'Place', address: { @type: 'PostalAddress', addressCountry: 'NL' } }`, `datePosted: vacancy._updatedAt` (or `_createdAt` if available — see note below), `employmentType: 'VOLUNTEER'` (vacancies are non-paid; confirm during impl)
-- [ ] in `src/app/[lang]/vacancies/[id]/page.tsx`, render the JSON-LD via a `<Script type="application/ld+json">` inside the page tree (only when vacancy exists)
-- [ ] project `_createdAt` and `_updatedAt` in `getVacancyById` (extends Task 2 work)
-- [ ] unit test for `jobPostingJsonLd`: required fields present, `employmentType` correct, `hiringOrganization.name === 'MÁRA'`
-- [ ] run `npm run test` and `npm run typecheck` — must pass before next task
+- [x] add `jobPostingJsonLd(vacancy, lang)` builder to `src/lib/jsonld.ts`: `@type: 'JobPosting'`, `title: vacancy.title`, `description: vacancy.description` (concatenate `tasks` for richer text), `hiringOrganization: { @type: 'NonprofitOrganization', name: 'MÁRA', sameAs: 'https://www.belarusians.nl/' }`, `jobLocation: { @type: 'Place', address: { @type: 'PostalAddress', addressCountry: 'NL' } }`, `datePosted: vacancy._updatedAt` (or `_createdAt` if available — see note below), `employmentType: 'VOLUNTEER'` (vacancies are non-paid; confirm during impl)
+- [x] in `src/app/[lang]/vacancies/[id]/page.tsx`, render the JSON-LD via a `<Script type="application/ld+json">` inside the page tree (only when vacancy exists)
+- [x] project `_createdAt` and `_updatedAt` in `getVacancyById` (extends Task 2 work)
+- [x] unit test for `jobPostingJsonLd`: required fields present, `employmentType` correct, `hiringOrganization.name === 'MÁRA'`
+- [x] run `npm run test` and `npm run typecheck` — must pass before next task
 
 ### Task 8: Verify acceptance criteria
 
