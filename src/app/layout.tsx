@@ -15,6 +15,7 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 import '../../node_modules/@fortawesome/fontawesome-svg-core/styles.css';
 import { baseUrl } from './config';
 import { COLORS } from '@/theme/tokens';
+import { buildSiteJsonLd } from '@/lib/jsonld';
 
 config.autoAddCss = false;
 
@@ -25,13 +26,7 @@ const roboto = Roboto({
 
 function addJsonLd() {
   return {
-    __html: `{
-      "@context" : "https://schema.org",
-      "@type" : "WebSite",
-      "name" : "MÁRA",
-      "url" : "https://www.belarusians.nl/"
-    }
-  `,
+    __html: JSON.stringify(buildSiteJsonLd()),
   };
 }
 

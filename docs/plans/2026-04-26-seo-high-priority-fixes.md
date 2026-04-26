@@ -118,11 +118,11 @@ Prerequisite for Task 3. Touch each service file to add `_updatedAt` to GROQ pro
 
 ### Task 4: Add Organization JSON-LD to root layout (#10)
 
-- [ ] in `src/app/layout.tsx`, extend the existing JSON-LD payload to a `@graph` containing both the existing `WebSite` and a new `NonprofitOrganization` entry — single `<Script>` tag, single graph
-- [ ] Organization fields: `@type: 'NonprofitOrganization'`, `name: 'MÁRA'`, `url: 'https://www.belarusians.nl/'`, `logo`, `sameAs` (Facebook, Instagram, Twitter URLs already used in `about-us/page.tsx`), `email: 'mara@belarusians.nl'`, `address` (PostalAddress, Netherlands; if no street kept on file, use `addressCountry: 'NL'` only)
-- [ ] extract the JSON-LD object into a small builder `buildSiteJsonLd()` in the same file (or `src/lib/jsonld.ts` if other tasks need it — see Task 5/6)
-- [ ] write `src/lib/__tests__/jsonld.test.ts` (or colocated): assert builder output has `@context`, `@graph` with two entries, `NonprofitOrganization` includes name/url/logo/sameAs
-- [ ] run `npm run test` and `npm run typecheck` — must pass before next task
+- [x] in `src/app/layout.tsx`, extend the existing JSON-LD payload to a `@graph` containing both the existing `WebSite` and a new `NonprofitOrganization` entry — single `<Script>` tag, single graph
+- [x] Organization fields: `@type: 'NonprofitOrganization'`, `name: 'MÁRA'`, `url: 'https://www.belarusians.nl/'`, `logo`, `sameAs` (Facebook, Instagram, Twitter URLs already used in `about-us/page.tsx`), `email: 'mara@belarusians.nl'`, `address` (PostalAddress, Netherlands; if no street kept on file, use `addressCountry: 'NL'` only)
+- [x] extract the JSON-LD object into a small builder `buildSiteJsonLd()` in the same file (or `src/lib/jsonld.ts` if other tasks need it — see Task 5/6)
+- [x] write `src/lib/__tests__/jsonld.test.ts` (or colocated): assert builder output has `@context`, `@graph` with two entries, `NonprofitOrganization` includes name/url/logo/sameAs
+- [x] run `npm run test` and `npm run typecheck` — must pass before next task
 
 ### Task 5: Set news `og:type: 'article'` + `publishedTime` (#11)
 
