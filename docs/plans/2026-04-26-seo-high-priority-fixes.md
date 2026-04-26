@@ -157,8 +157,8 @@ Prerequisite for Task 3. Touch each service file to add `_updatedAt` to GROQ pro
 
 ### Task 9: [Final] Update documentation
 
-- [ ] update `CLAUDE.md` "Architectural Decisions" with one short bullet for "JSON-LD lives inline per page; builders in `src/lib/jsonld.ts`" — only if a future contributor would otherwise miss the pattern
-- [ ] no README change needed
+- [x] update `CLAUDE.md` "Architectural Decisions" with one short bullet for "JSON-LD lives inline per page; builders in `src/lib/jsonld.ts`" — only if a future contributor would otherwise miss the pattern
+- [x] no README change needed
 
 *Note: ralphex automatically moves completed plans to `docs/plans/completed/`*
 
