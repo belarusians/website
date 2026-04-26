@@ -148,12 +148,12 @@ Prerequisite for Task 3. Touch each service file to add `_updatedAt` to GROQ pro
 
 ### Task 8: Verify acceptance criteria
 
-- [ ] verify all 7 issue items addressed (cross-reference Overview list)
-- [ ] run full `npm run test` — all green
-- [ ] run `npm run lint` — clean
-- [ ] run `npm run typecheck` — clean
-- [ ] run `npm run build` locally — must succeed (catches metadata-related Next.js complaints)
-- [ ] inspect built sitemap output: `curl http://localhost:3000/sitemap.xml | head -40` after `npm run start`, confirm `lastmod` varies
+- [x] verify all 7 issue items addressed (cross-reference Overview list)
+- [x] run full `npm run test` — all green (66/66 passing)
+- [x] run `npm run lint` — clean (0 errors)
+- [x] run `npm run typecheck` — clean
+- [x] run `npm run build` locally — must succeed (catches metadata-related Next.js complaints)
+- [x] inspect built sitemap output: confirmed `lastmod` varies per URL (dynamic content uses real `_updatedAt` like `2025-10-09T05:50:26.000Z`, static routes share BUILD_TIME) — verified via `.next/server/app/sitemap.xml.body` since standalone server start was unavailable in this environment
 
 ### Task 9: [Final] Update documentation
 
