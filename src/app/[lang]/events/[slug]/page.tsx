@@ -11,7 +11,7 @@ import { urlForImage } from '../../../../sanity/lib/image';
 import { isEventPassed } from '../../../../sanity/event/utils';
 import { getAlternates } from '../../../../utils/og';
 import { toLang } from '../../../../utils/lang';
-import { eventJsonLd } from '../../../../lib/jsonld';
+import { eventJsonLd, jsonLdToHtml } from '../../../../lib/jsonld';
 
 type EventPageParams = CommonPageParams & {
   params: Promise<{
@@ -48,7 +48,7 @@ export default async function EventPage({ params, searchParams }: EventPageParam
       <Script
         id={`event-jsonld-${event.slug}`}
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdToHtml(jsonLd) }}
       />
       <EventArticle
         lang={lang}

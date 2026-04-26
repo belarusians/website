@@ -15,7 +15,7 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 import '../../node_modules/@fortawesome/fontawesome-svg-core/styles.css';
 import { baseUrl } from './config';
 import { COLORS } from '@/theme/tokens';
-import { buildSiteJsonLd } from '@/lib/jsonld';
+import { buildSiteJsonLd, jsonLdToHtml } from '@/lib/jsonld';
 
 config.autoAddCss = false;
 
@@ -26,7 +26,7 @@ const roboto = Roboto({
 
 function addJsonLd() {
   return {
-    __html: JSON.stringify(buildSiteJsonLd()),
+    __html: jsonLdToHtml(buildSiteJsonLd()),
   };
 }
 

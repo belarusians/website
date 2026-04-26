@@ -8,5 +8,7 @@ export type Vacancy = Modify<VacancySchema, {
   tasks: {
     title: Record<Lang, string>;
     description: Record<Lang, string>;
-  }[]
+  }[];
+  _createdAt: string;
+  _updatedAt: string;
 }>;

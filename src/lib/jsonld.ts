@@ -8,6 +8,12 @@ export const SITE_SAME_AS: ReadonlyArray<string> = [
   'https://twitter.com/marabynl',
 ];
 
+// Escape `<` so that CMS-controlled strings cannot break out of the surrounding
+// <script type="application/ld+json"> block (e.g., a value containing `</script>`).
+export function jsonLdToHtml(jsonLd: unknown): string {
+  return JSON.stringify(jsonLd).replace(/</g, '\\u003c');
+}
+
 export type JsonLdGraph = {
   '@context': 'https://schema.org';
   '@graph': ReadonlyArray<Record<string, unknown>>;
@@ -57,7 +63,11 @@ export type EventJsonLd = {
   startDate: string;
   endDate: string;
   eventStatus: string;
-  location: { '@type': 'Place'; name: string };
+  location: {
+    '@type': 'Place';
+    name: string;
+    address: { '@type': 'PostalAddress'; addressLocality: string; addressCountry: 'NL' };
+  };
   organizer: { '@type': 'NonprofitOrganization'; name: string; url: string };
   image?: string;
   previousStartDate?: string;
@@ -91,7 +101,11 @@ export function eventJsonLd(input: EventJsonLdInput): EventJsonLd {
     startDate,
     endDate,
     eventStatus,
-    location: { '@type': 'Place', name: input.location },
+    location: {
+      '@type': 'Place',
+      name: input.location,
+      address: { '@type': 'PostalAddress', addressLocality: input.location, addressCountry: 'NL' },
+    },
     organizer: { '@type': 'NonprofitOrganization', name: SITE_NAME, url: SITE_URL },
   };
 

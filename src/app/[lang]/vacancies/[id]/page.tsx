@@ -10,7 +10,7 @@ import VacancyForm from './form';
 import { getVacanciesByLang, getVacancyById } from '../../../../sanity/vacancy/service';
 import { getAlternates } from '../../../../utils/og';
 import { toLang } from '../../../../utils/lang';
-import { jobPostingJsonLd, SITE_URL } from '../../../../lib/jsonld';
+import { jobPostingJsonLd, jsonLdToHtml, SITE_URL } from '../../../../lib/jsonld';
 
 type VacancyPageParams = CommonPageParams & { params: Promise<{ id: string }> };
 
@@ -37,7 +37,7 @@ export default async function VacancyPage({ params }: VacancyPageParams) {
       <Script
         id={`vacancy-jsonld-${vacancy.id}`}
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdToHtml(jsonLd) }}
       />
       <div className="rounded-md shadow-xl bg-white font-light text-black p-4 md:p-8">
         <H1 className="mb-4 md:mb-8">{vacancy.title}</H1>

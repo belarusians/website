@@ -1,5 +1,20 @@
 import { describe, expect, test } from '@jest/globals';
-import { buildSiteJsonLd, eventJsonLd, jobPostingJsonLd } from '../jsonld';
+import { buildSiteJsonLd, eventJsonLd, jobPostingJsonLd, jsonLdToHtml } from '../jsonld';
+
+describe('jsonLdToHtml', () => {
+  test('escapes `<` so CMS content cannot break out of the surrounding <script>', () => {
+    const html = jsonLdToHtml({ name: 'evil </script><script>alert(1)</script>' });
+    expect(html).not.toContain('</script>');
+    expect(html).not.toContain('<script>');
+    expect(html).toContain('\\u003c/script>');
+    expect(html).toContain('\\u003cscript>');
+  });
+
+  test('produces JSON that round-trips to the original object', () => {
+    const input = { '@type': 'Thing', text: 'has <angle> brackets', list: ['a</script>'] };
+    expect(JSON.parse(jsonLdToHtml(input))).toEqual(input);
+  });
+});
 
 describe('buildSiteJsonLd', () => {
   const ld = buildSiteJsonLd();
@@ -78,7 +93,11 @@ describe('eventJsonLd', () => {
       startDate: '2026-06-21T18:00:00Z',
       endDate: '2026-06-21T23:00:00Z',
       image: 'https://cdn.sanity.io/event.png',
-      location: { '@type': 'Place', name: 'Amsterdam' },
+      location: {
+        '@type': 'Place',
+        name: 'Amsterdam',
+        address: { '@type': 'PostalAddress', addressLocality: 'Amsterdam', addressCountry: 'NL' },
+      },
     });
   });
 
