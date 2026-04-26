@@ -126,9 +126,9 @@ Prerequisite for Task 3. Touch each service file to add `_updatedAt` to GROQ pro
 
 ### Task 5: Set news `og:type: 'article'` + `publishedTime` (#11)
 
-- [ ] in `src/app/[lang]/news/[slug]/page.tsx`:`generateMetadata`, add `type: 'article'` and `publishedTime: news.publishingDate` to the `openGraph` object (only when `news` exists; default branch keeps inherited type)
-- [ ] write a snapshot/assertion test: invoke `generateMetadata` with a stub news object, assert `openGraph.type === 'article'` and `openGraph.publishedTime` matches input
-- [ ] run `npm run test` and `npm run typecheck` — must pass before next task
+- [x] in `src/app/[lang]/news/[slug]/page.tsx`:`generateMetadata`, add `type: 'article'` and `publishedTime: news.publishingDate` to the `openGraph` object (only when `news` exists; default branch keeps inherited type)
+- [x] write a snapshot/assertion test: invoke `generateMetadata` with a stub news object, assert `openGraph.type === 'article'` and `openGraph.publishedTime` matches input
+- [x] run `npm run test` and `npm run typecheck` — must pass before next task
 
 ### Task 6: Set event `og:type: 'article'` + add Event JSON-LD (#12, #13)
 

@@ -67,6 +67,10 @@ export async function generateMetadata({ params }: NewsPageParams, parent: Resol
       description: news?.description,
       url: `${lang}/news/${slug}`,
       images,
+      ...(news && {
+        type: 'article',
+        publishedTime: news.publishingDate,
+      }),
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
