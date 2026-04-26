@@ -87,6 +87,11 @@ Donation payments can trigger automatic ClickMeeting invitations. Stripe webhook
 ### Portable Text → HTML
 Sanity stores rich text as Portable Text blocks. Converted to HTML server-side in `src/sanity/*/service.ts` using `@portabletext/to-html`. Adding custom blocks requires serializer updates.
 
+### Visual foundations (refreshed)
+- Buttons translate on hover/active (`hover:-translate-y-0.5`, `active:translate-y-px`) alongside shadow escalation. Defined in `src/components/button.tsx`.
+- The rainbow gradient is a seamless conic rotation driven by `@property --mara-angle` via the `bg-rainbow-spin` utility in `globals.css`. Do not reintroduce `animation-duration` hover changes — they cause a visible jump.
+- Logo has a `showSubtitle` prop for the two approved variants (`src/components/header/logo.tsx`); callers default to the subtitle-visible variant.
+
 ## Webhooks
 
 | Service | Endpoint | Events | Verification |

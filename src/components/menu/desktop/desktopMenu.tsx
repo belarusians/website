@@ -15,9 +15,9 @@ export function DesktopMenu({ lang }: { lang: Lang }) {
 
   return (
     <div className="flex items-center text-primary gap-4">
-      <div className="text-lg flex rounded-md bg-white cursor-pointer shadow-lg divide-solid divide-light-grey divide-x animate-wobble-right mr-auto">
+      <div className="text-lg flex rounded-md bg-white cursor-pointer shadow-lg mr-auto">
         <Dropdown className="p-1 md:p-2 lg:p-3 transition-shadow hover:shadow-tb-xl" label={t('useful-info')}>
-          <div className="animate-t-fade-in absolute mt-2 z-10 divide-solid divide-light-grey divide-y flex flex-col bg-white shadow-lg rounded-md">
+          <div className="animate-t-fade-in absolute mt-2 z-10 flex flex-col bg-white shadow-lg rounded-md">
             <Link
               href="https://t.me/belarusians_nl_bot"
               className="p-1 md:p-2 lg:p-3 transition-shadow no-underline hover:shadow-lr-xl decoration-2"
@@ -37,7 +37,7 @@ export function DesktopMenu({ lang }: { lang: Lang }) {
           className="p-1 md:p-2 lg:p-3 transition-shadow no-underline hover:shadow-tb-xl text-primary"
           label={t('about-us')}
         >
-          <div className="animate-t-fade-in absolute mt-2 z-10 divide-solid divide-light-grey divide-y flex flex-col bg-white shadow-lg rounded-md">
+          <div className="animate-t-fade-in absolute mt-2 z-10 flex flex-col bg-white shadow-lg rounded-md">
             <Link
               className="p-1 md:p-2 lg:p-3 transition-shadow no-underline hover:shadow-lr-xl"
               href={`/${lang}/about-us`}
@@ -72,7 +72,7 @@ export function DesktopMenu({ lang }: { lang: Lang }) {
           className="p-1 md:p-2 lg:p-3 transition-shadow no-underline hover:shadow-tb-xl text-primary"
           label={t('reports')}
         >
-          <div className="animate-t-fade-in absolute mt-2 z-10 divide-solid divide-light-grey divide-y flex flex-col bg-white shadow-lg rounded-md">
+          <div className="animate-t-fade-in absolute mt-2 z-10 flex flex-col bg-white shadow-lg rounded-md">
             <Link
               className="p-1 md:p-2 lg:p-3 transition-shadow no-underline hover:shadow-lr-xl"
               href={`/${lang}/reports/2025`}
@@ -100,7 +100,7 @@ export function DesktopMenu({ lang }: { lang: Lang }) {
           </div>
         </Dropdown>
         <Link
-          className="p-1 md:p-2 lg:p-3 bg-[length:350%_100%] bg-beautiful-button font-normal rounded-r-md text-white transition-shadow no-underline hover:shadow-tbr-xl animate-bg-rotation-slow-wobble-right"
+          className="p-1 md:p-2 lg:p-3 bg-rainbow-spin font-normal rounded-r-md text-white transition-shadow no-underline hover:shadow-tbr-xl"
           data-umami-event="donate-us"
           href={`/${lang}/donate`}
         >

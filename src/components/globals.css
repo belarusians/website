@@ -6,7 +6,7 @@
 @theme {
   --color-red: #ed1c24;
   --color-red-shade: #af0000;
-  --color-red-tint: #ff1111;
+  --color-red-tint: #f36d72;
   --color-primary: var(--color-red);
   --color-primary-shade: var(--color-red-shade);
   --color-primary-tint: var(--color-red-tint);
@@ -70,15 +70,17 @@
       transparent
     ),
     radial-gradient(farthest-side at bottom left, var(--color-primary-shade) 6.65%, var(--color-primary) 100%);
-  --background-image-beautiful-button: linear-gradient(
-    60deg,
-    #e1bc28,
-    #21c241,
-    #115eb7,
-    #720cb6,
-    #e1bc28,
-    #21c241,
-    #115eb7
+  --background-image-beautiful-button: conic-gradient(
+    from 0deg,
+    #ed1c24 0%,
+    #f36d72 14%,
+    #f59638 28%,
+    #f5c84a 42%,
+    #e8528c 60%,
+    #8b2f8f 78%,
+    #4b1d6b 88%,
+    #af0000 96%,
+    #ed1c24 100%
   );
 
   --scale-101: 1.01;
@@ -90,14 +92,6 @@
   --animate-shake: shake 0.6s ease-in-out 1;
   --animate-fade-in: fade-in 0.4s ease-in-out forwards;
   --animate-t-fade-in: t-fade-in 0.2s ease-in-out forwards;
-  --animate-bg-rotation-slow: backgroundRotation 5s infinite linear;
-  --animate-bg-rotation-slow-wobble-right:
-    backgroundRotation 5s infinite linear,
-    wobble-right 6s ease-in-out alternate infinite;
-  --animate-bg-rotation-slow-wobble:
-    backgroundRotation 5s infinite linear,
-    wobble 6s ease-in-out alternate infinite;
-  --animate-wobble-right: wobble-right 6s ease-in-out alternate infinite;
 
   @keyframes rotation {
     0% {
@@ -162,59 +156,48 @@
       transform: translateY(-30px);
     }
   }
-  @keyframes wobble {
-    0% {
-      border-radius: 10px 30px 15px 30px;
-    }
-    20% {
-      border-radius: 30px 10px 30px 15px;
-    }
-    40% {
-      border-radius: 30% 30% 20% 20%;
-    }
-    60% {
-      border-radius: 30px 15px 30px 15px;
-    }
-    80% {
-      border-radius: 30px 20% 30% 30%;
-    }
-    100% {
-      border-radius: 10px 30px 15px 30px;
-    }
-  }
-  @keyframes wobble-right {
-    0% {
-      border-top-right-radius: 30px;
-      border-bottom-right-radius: 15px;
-    }
-    20% {
-      border-top-right-radius: 10px;
-      border-bottom-right-radius: 30px;
-    }
-    40% {
-      border-top-right-radius: 15px;
-      border-bottom-right-radius: 10px;
-    }
-    60% {
-      border-top-right-radius: 15px;
-      border-bottom-right-radius: 30px;
-    }
-    80% {
-      border-top-right-radius: 10px;
-      border-bottom-right-radius: 15px;
-    }
-    100% {
-      border-top-right-radius: 30px;
-      border-bottom-right-radius: 15px;
-    }
-  }
-  @keyframes backgroundRotation {
-    0% {
-      background-position: 0 0;
-    }
-    100% {
-      background-position: 100% 0;
-    }
+}
+
+@property --mara-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@utility bg-rainbow-spin {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: var(--color-black);
+}
+
+.bg-rainbow-spin::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(
+    from var(--mara-angle),
+    #ed1c24 0%,
+    #f36d72 14%,
+    #f59638 28%,
+    #f5c84a 42%,
+    #e8528c 60%,
+    #8b2f8f 78%,
+    #4b1d6b 88%,
+    #af0000 96%,
+    #ed1c24 100%
+  );
+  animation: mara-rainbow-spin 6s linear infinite;
+  z-index: -1;
+}
+
+@keyframes mara-rainbow-spin {
+  to {
+    --mara-angle: 360deg;
   }
 }
 

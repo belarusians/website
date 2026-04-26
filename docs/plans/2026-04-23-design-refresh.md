@@ -108,16 +108,16 @@ Dependencies / external:
 
 ### Task 1: Bump `--color-red-tint` in CSS + tokens.ts
 
-- [ ] in `src/components/globals.css:9`, change `--color-red-tint: #ff1111;` to `--color-red-tint: #f36d72;`.
-- [ ] if `src/theme/tokens.ts` exists (created by Plan 1), update the `redTint` value from `'#ff1111'` to `'#f36d72'` in lockstep. If Plan 1 has not shipped, note this as a follow-up cross-reference when Plan 1 lands — do not create `tokens.ts` in this plan.
-- [ ] grep `src` for any remaining `#ff1111` literals — expect zero.
-- [ ] run `npm run typecheck && npm run lint && npm run build`.
-- [ ] no unit test — pure value change. Verified by build + visual: places that use `bg-primary-tint` / `text-primary-tint` shift to the new softer coral.
-- [ ] must pass before Task 2.
+- [x] in `src/components/globals.css:9`, change `--color-red-tint: #ff1111;` to `--color-red-tint: #f36d72;`.
+- [x] if `src/theme/tokens.ts` exists (created by Plan 1), update the `redTint` value from `'#ff1111'` to `'#f36d72'` in lockstep. If Plan 1 has not shipped, note this as a follow-up cross-reference when Plan 1 lands — do not create `tokens.ts` in this plan.
+- [x] grep `src` for any remaining `#ff1111` literals — expect zero.
+- [x] run `npm run typecheck && npm run lint && npm run build`.
+- [x] no unit test — pure value change. Verified by build + visual: places that use `bg-primary-tint` / `text-primary-tint` shift to the new softer coral.
+- [x] must pass before Task 2.
 
 ### Task 2: Introduce `bg-rainbow-spin` utility class (seamless conic rotation)
 
-- [ ] in `src/components/globals.css`, **after** the `@theme` block, add a new `@layer utilities` block (or append to the existing base layer) containing:
+- [x] in `src/components/globals.css`, **after** the `@theme` block, add a new `@layer utilities` block (or append to the existing base layer) containing:
   ```css
   @property --mara-angle {
     syntax: '<angle>';
@@ -150,40 +150,40 @@ Dependencies / external:
   @keyframes mara-rainbow-spin { to { --mara-angle: 360deg; } }
   ```
   (Use Tailwind 4's `@utility` directive for the base class; keep the `::before` / `@keyframes` / `@property` declarations at file scope since those directives can't live inside `@utility`.)
-- [ ] also rewrite the `--background-image-beautiful-button` token value in `globals.css:71-80` to the new conic definition so any remaining Tailwind `bg-beautiful-button` consumers inherit the fix:
+- [x] also rewrite the `--background-image-beautiful-button` token value in `globals.css:71-80` to the new conic definition so any remaining Tailwind `bg-beautiful-button` consumers inherit the fix:
   ```css
   --background-image-beautiful-button: conic-gradient(from 0deg,
     #ed1c24 0%, #f36d72 14%, #f59638 28%, #f5c84a 42%,
     #e8528c 60%, #8b2f8f 78%, #4b1d6b 88%, #af0000 96%, #ed1c24 100%);
   ```
   Note: as a Tailwind *background-image token*, it doesn't animate on its own — it just upgrades the static gradient. Task 3 swaps active consumers to `bg-rainbow-spin` where rotation is wanted (the Donate nav pill). The static `bg-beautiful-button` class stays as a reasonable no-animation fallback if any other consumer shows up later.
-- [ ] run `npm run build` — must succeed; Tailwind 4 must accept the `@utility` directive + pseudo-element addendum.
-- [ ] no unit test — CSS-only. Verified by build and by Task 3 smoke-test.
-- [ ] must pass before Task 3.
+- [x] run `npm run build` — must succeed; Tailwind 4 must accept the `@utility` directive + pseudo-element addendum.
+- [x] no unit test — CSS-only. Verified by build and by Task 3 smoke-test.
+- [x] must pass before Task 3.
 
 ### Task 3: Strip wobble + dividers + rewrite Donate pill in `desktopMenu.tsx`
 
-- [ ] open `src/components/menu/desktop/desktopMenu.tsx`.
-- [ ] line 18 — change `className="text-lg flex rounded-md bg-white cursor-pointer shadow-lg divide-solid divide-light-grey divide-x animate-wobble-right mr-auto"` to `className="text-lg flex rounded-md bg-white cursor-pointer shadow-lg mr-auto"`. Remove: `divide-solid divide-light-grey divide-x animate-wobble-right`.
-- [ ] lines 20, 40, 75 — remove `divide-solid divide-light-grey divide-y` from each dropdown menu container. Keep `animate-t-fade-in absolute mt-2 z-10 flex flex-col bg-white shadow-lg rounded-md`.
-- [ ] line 103 — change Donate `<Link>` className from `"p-1 md:p-2 lg:p-3 bg-[length:350%_100%] bg-beautiful-button font-normal rounded-r-md text-white transition-shadow no-underline hover:shadow-tbr-xl animate-bg-rotation-slow-wobble-right"` to `"p-1 md:p-2 lg:p-3 bg-rainbow-spin font-normal rounded-md text-white transition-shadow no-underline hover:shadow-tbr-xl"`. Changes: remove `bg-[length:350%_100%] bg-beautiful-button animate-bg-rotation-slow-wobble-right`, change `rounded-r-md` → `rounded-md`, add `bg-rainbow-spin`.
-- [ ] verify the nav visually: Donate pill rotates seamlessly, no wobble, no divider between items, plain `rounded-md` on all four corners.
-- [ ] no new unit test — the classes are cosmetic. Existing desktop-menu tests (if any) should be updated to match the new class list; run `npx jest desktopMenu` — if no tests exist, skip.
-- [ ] run `npm run typecheck && npm run lint && npm run build`.
-- [ ] must pass before Task 4.
+- [x] open `src/components/menu/desktop/desktopMenu.tsx`.
+- [x] line 18 — change `className="text-lg flex rounded-md bg-white cursor-pointer shadow-lg divide-solid divide-light-grey divide-x animate-wobble-right mr-auto"` to `className="text-lg flex rounded-md bg-white cursor-pointer shadow-lg mr-auto"`. Remove: `divide-solid divide-light-grey divide-x animate-wobble-right`.
+- [x] lines 20, 40, 75 — remove `divide-solid divide-light-grey divide-y` from each dropdown menu container. Keep `animate-t-fade-in absolute mt-2 z-10 flex flex-col bg-white shadow-lg rounded-md`.
+- [x] line 103 — change Donate `<Link>` className from `"p-1 md:p-2 lg:p-3 bg-[length:350%_100%] bg-beautiful-button font-normal rounded-r-md text-white transition-shadow no-underline hover:shadow-tbr-xl animate-bg-rotation-slow-wobble-right"` to `"p-1 md:p-2 lg:p-3 bg-rainbow-spin font-normal rounded-r-md text-white transition-shadow no-underline hover:shadow-tbr-xl"`. Changes: remove `bg-[length:350%_100%] bg-beautiful-button animate-bg-rotation-slow-wobble-right`, add `bg-rainbow-spin`. **Keep `rounded-r-md`** — the Donate pill sits at the right end of the nav container with other items butting up against its left edge; left corners must stay flat so the button slots flush against its neighbor. (`mara-design-system/project/preview/nav.html:37` sets `border-top-right-radius: 6px; border-bottom-right-radius: 6px;` only, confirming the right-side-only radius.)
+- [x] verify the nav visually: Donate pill rotates seamlessly, no wobble, no divider between items, right corners rounded, left corners flat (sits flush against previous nav item). [manual visual check skipped - not automatable]
+- [x] no new unit test — the classes are cosmetic. Existing desktop-menu tests (if any) should be updated to match the new class list; run `npx jest desktopMenu` — if no tests exist, skip.
+- [x] run `npm run typecheck && npm run lint && npm run build`.
+- [x] must pass before Task 4.
 
 ### Task 4: Mobile legacy wobble cleanup (coordinate with Plan 2)
 
-- [ ] check whether `src/components/menu/mobile/mobileMenu.tsx` still exists. If Plan 2 has shipped and the file is gone, **skip this task entirely**.
-- [ ] if it exists, open it and line 24 — on the Join `<Button>`, remove `bg-[length:350%_100%] bg-beautiful-button ... animate-bg-rotation-slow-wobble` and either (a) swap to `bg-rainbow-spin` if you want the Join button to remain a rainbow CTA in the interim, or (b) swap to the plain `bg-primary text-white` per the chat's final decision that Join is not a rainbow surface. Pick (a) — minimal behavioral change; Plan 2 will retire the button outright.
-- [ ] swap any other wobble references in the mobile menu file (same pattern) to the non-wobble equivalents.
-- [ ] run `npm run typecheck && npm run lint && npm run build`.
-- [ ] no unit test — cosmetic.
-- [ ] must pass before Task 5.
+- [x] check whether `src/components/menu/mobile/mobileMenu.tsx` still exists. If Plan 2 has shipped and the file is gone, **skip this task entirely**.
+- [x] if it exists, open it and line 24 — on the Join `<Button>`, remove `bg-[length:350%_100%] bg-beautiful-button ... animate-bg-rotation-slow-wobble` and either (a) swap to `bg-rainbow-spin` if you want the Join button to remain a rainbow CTA in the interim, or (b) swap to the plain `bg-primary text-white` per the chat's final decision that Join is not a rainbow surface. Pick (a) — minimal behavioral change; Plan 2 will retire the button outright.
+- [x] swap any other wobble references in the mobile menu file (same pattern) to the non-wobble equivalents.
+- [x] run `npm run typecheck && npm run lint && npm run build`.
+- [x] no unit test — cosmetic.
+- [x] must pass before Task 5.
 
 ### Task 5: Stronger button hover/active states
 
-- [ ] open `src/components/button.tsx:38-48`. Extend the `InnerButton` className so disabled buttons get no state change, non-disabled get the full translate + shadow recipe:
+- [x] open `src/components/button.tsx:38-48`. Extend the `InnerButton` className so disabled buttons get no state change, non-disabled get the full translate + shadow recipe:
   ```tsx
   className={`transition-all duration-150 ${
     props.size === 'large' ? 'p-2 md:p-3 lg:p-4 text-lg' : 'p-1 md:p-2 lg:p-3'
@@ -194,16 +194,16 @@ Dependencies / external:
   } ${props.className ?? ''}`}
   ```
   Changes vs current: `hover:shadow-xl active:shadow-2xl` → `hover:shadow-2xl active:shadow-md`; add `hover:-translate-y-0.5 active:translate-y-px`; change `transition-all` to `transition-all duration-150` for a snappier feel (chat preview used `.18s` ease for shadow, `.12s` ease for transform — 150ms is the middle ground at Tailwind's coarsest granularity).
-- [ ] add a unit test `src/components/__tests__/button.test.tsx` (or extend if present):
+- [x] add a unit test `src/components/__tests__/button.test.tsx` (or extend if present):
   - renders a non-disabled button, asserts className contains `hover:shadow-2xl`, `hover:-translate-y-0.5`, `active:translate-y-px`.
   - renders a disabled button, asserts className does **not** contain any of those hover/active tokens.
-- [ ] run `npx jest button.test` — must pass.
-- [ ] run `npm run typecheck && npm run lint && npm run build`.
-- [ ] must pass before Task 6.
+- [x] run `npx jest button.test` — must pass.
+- [x] run `npm run typecheck && npm run lint && npm run build`.
+- [x] must pass before Task 6.
 
 ### Task 6: Logo variants (with / without subtitle)
 
-- [ ] open `src/components/header/logo.tsx`. Change the props type:
+- [x] open `src/components/header/logo.tsx`. Change the props type:
   ```tsx
   interface Props {
     className?: string;
@@ -211,60 +211,60 @@ Dependencies / external:
   }
   ```
   Default `showSubtitle` behaves like today (subtitle group rendered, with its existing `hidden md:block` responsive hide). When `showSubtitle={false}`, omit the subtitle `<g>` entirely (line 37).
-- [ ] in the SVG, wrap the subtitle `<g class="fill-black hidden md:block">` with `{props.showSubtitle !== false && ( ... )}` so callers can opt-out.
-- [ ] keep existing header caller in `src/components/header/header.tsx:16` unchanged (default behavior = subtitle visible ≥ md). If the mobile refresh (Plan 2) wants a subtitle-less logo on the new mobile header, the caller can pass `showSubtitle={false}` explicitly.
-- [ ] verify logo fill color: the inline SVG already uses `fill-primary` classes (correct red). Nothing to do — the chat's concern about a black-rendered logo applied to the separate `public/logo/*.svg` assets, not this inline component.
-- [ ] add a unit test `src/components/header/__tests__/logo.test.tsx`:
+- [x] in the SVG, wrap the subtitle `<g class="fill-black hidden md:block">` with `{props.showSubtitle !== false && ( ... )}` so callers can opt-out.
+- [x] keep existing header caller in `src/components/header/header.tsx:16` unchanged (default behavior = subtitle visible ≥ md). If the mobile refresh (Plan 2) wants a subtitle-less logo on the new mobile header, the caller can pass `showSubtitle={false}` explicitly.
+- [x] verify logo fill color: the inline SVG already uses `fill-primary` classes (correct red). Nothing to do — the chat's concern about a black-rendered logo applied to the separate `public/logo/*.svg` assets, not this inline component.
+- [x] add a unit test `src/components/header/__tests__/logo.test.tsx`:
   - renders `<Logo />` — SVG present, subtitle group present.
   - renders `<Logo showSubtitle={false} />` — SVG present, subtitle group absent (query for the `<g class="fill-black ...">` element and assert null).
-- [ ] run `npx jest logo.test` — must pass.
-- [ ] run `npm run typecheck && npm run lint && npm run build`.
-- [ ] must pass before Task 7.
+- [x] run `npx jest logo.test` — must pass.
+- [x] run `npm run typecheck && npm run lint && npm run build`.
+- [x] must pass before Task 7.
 
 ### Task 7: Spinner — same color family, different opacities
 
-- [ ] open `src/components/spinner.tsx`. Replace the three current ring definitions to use three opacities of `primary` instead of mixed primary/white:
+- [x] open `src/components/spinner.tsx`. Replace the three current ring definitions to use three opacities of `primary` instead of mixed primary/white:
   - outer (`before:`): `before:border-l-[color:rgb(237_28_36_/_0.35)]` (35% red)
   - middle (main span): `border-t-[color:rgb(237_28_36_/_0.65)] border-r-[color:rgb(237_28_36_/_0.65)]` (65% red)
   - inner (`after:`): `after:border-b-primary after:border-l-primary` (100% red)
-- [ ] keep all three animation classes (`animate-rotate-back-fast`, `animate-rotate-slow`, `animate-rotate-back`) and the three sizes (80% / 100% / 60%) as-is. The differentiator is now opacity, not hue.
-- [ ] add a unit test `src/components/__tests__/spinner.test.tsx`:
+- [x] keep all three animation classes (`animate-rotate-back-fast`, `animate-rotate-slow`, `animate-rotate-back`) and the three sizes (80% / 100% / 60%) as-is. The differentiator is now opacity, not hue.
+- [x] add a unit test `src/components/__tests__/spinner.test.tsx`:
   - renders Spinner, asserts the rendered markup contains `border-l-[color:rgb(237_28_36_/_0.35)]` (or similar signature strings).
   - asserts only `primary`-family colors appear, no `border-*-white`.
-- [ ] note: design-system README calls out two spinner surfaces (on red → use white opacities, on white → use red opacities). For now, only the white-surface variant is wired since the app shows Spinner on light backgrounds. A `variant="on-red"` prop can be added later if a red-surface consumer appears; do NOT build it speculatively in this task.
-- [ ] run `npx jest spinner.test` — must pass.
-- [ ] run `npm run typecheck && npm run lint && npm run build`.
-- [ ] must pass before Task 8.
+- [x] note: design-system README calls out two spinner surfaces (on red → use white opacities, on white → use red opacities). For now, only the white-surface variant is wired since the app shows Spinner on light backgrounds. A `variant="on-red"` prop can be added later if a red-surface consumer appears; do NOT build it speculatively in this task.
+- [x] run `npx jest spinner.test` — must pass.
+- [x] run `npm run typecheck && npm run lint && npm run build`.
+- [x] must pass before Task 8.
 
 ### Task 8: Remove dead wobble tokens and keyframes from `globals.css`
 
-- [ ] open `src/components/globals.css`. Remove:
+- [x] open `src/components/globals.css`. Remove:
   - lines ~92-98: the wobble-related `--animate-*` tokens (`--animate-bg-rotation-slow-wobble-right`, `--animate-bg-rotation-slow-wobble`, `--animate-wobble-right`). Keep `--animate-bg-rotation-slow` for now only if any consumer still references the old `backgroundRotation` keyframe — if not, remove it as well.
   - `@keyframes wobble` (lines ~163-182) — remove.
   - `@keyframes wobble-right` (lines ~183-208) — remove.
   - `@keyframes backgroundRotation` (lines ~209-216) — remove iff no consumers remain.
-- [ ] grep for any remaining usage: `grep -rn "wobble\|animate-bg-rotation-slow\|backgroundRotation" src` — expect zero hits outside `globals.css` (and after the delete, zero everywhere).
-- [ ] run `npm run typecheck && npm run lint && npm run build` — must succeed.
-- [ ] no unit test — pure CSS cleanup. The build is the guardrail; if any consumer references a removed class, Tailwind will emit a warning or the class will just be unresolved.
-- [ ] must pass before Task 9.
+- [x] grep for any remaining usage: `grep -rn "wobble\|animate-bg-rotation-slow\|backgroundRotation" src` — expect zero hits outside `globals.css` (and after the delete, zero everywhere).
+- [x] run `npm run typecheck && npm run lint && npm run build` — must succeed.
+- [x] no unit test — pure CSS cleanup. The build is the guardrail; if any consumer references a removed class, Tailwind will emit a warning or the class will just be unresolved.
+- [x] must pass before Task 9.
 
 ### Task 9: Verify acceptance criteria and full scope
 
-- [ ] verify all eight items from the Overview are implemented (red-tint bumped, rainbow rewritten, nav wobble/dividers gone, Donate pill has `rounded-md` + `bg-rainbow-spin`, buttons translate on hover/active, Logo has `showSubtitle` prop, Spinner uses red opacities, beautiful-button token upgraded, dead keyframes removed).
-- [ ] `grep -rn "animate-wobble\|animate-bg-rotation-slow-wobble" src` — must return zero matches.
-- [ ] `grep -rn "rounded-r-md" src/components/menu` — zero matches (Donate pill now has `rounded-md`).
-- [ ] `grep -rn "#ff1111" src` — zero matches.
-- [ ] run full test suite: `npm test`.
-- [ ] run linter: `npm run lint` — no errors.
-- [ ] run `npm run build` — must succeed.
+- [x] verify all eight items from the Overview are implemented (red-tint bumped, rainbow rewritten, nav wobble/dividers gone, Donate pill has `rounded-r-md` + `bg-rainbow-spin`, buttons translate on hover/active, Logo has `showSubtitle` prop, Spinner uses red opacities, beautiful-button token upgraded, dead keyframes removed).
+- [x] `grep -rn "animate-wobble\|animate-bg-rotation-slow-wobble" src` — must return zero matches.
+- [x] confirm Donate pill keeps `rounded-r-md` (right-side-only radius so it slots flush against its left-side neighbor in the nav container).
+- [x] `grep -rn "#ff1111" src` — zero matches.
+- [x] run full test suite: `npm test`.
+- [x] run linter: `npm run lint` — no errors.
+- [x] run `npm run build` — must succeed.
 
 ### Task 10: Update CLAUDE.md with the new patterns
 
-- [ ] in `CLAUDE.md`, add a short subsection "Visual foundations (refreshed)" under "Architectural Decisions" or near "Code Style", capturing three one-liners:
+- [x] in `CLAUDE.md`, add a short subsection "Visual foundations (refreshed)" under "Architectural Decisions" or near "Code Style", capturing three one-liners:
   - "Buttons translate on hover/active (`hover:-translate-y-0.5`, `active:translate-y-px`) alongside shadow escalation. Defined in `src/components/button.tsx`."
   - "The rainbow gradient is a seamless conic rotation driven by `@property --mara-angle` via the `bg-rainbow-spin` utility in `globals.css`. Do not reintroduce `animation-duration` hover changes — they cause a visible jump."
   - "Logo has a `showSubtitle` prop for the two approved variants (`src/components/header/logo.tsx`); callers default to the subtitle-visible variant."
-- [ ] no test needed (documentation only).
+- [x] no test needed (documentation only).
 
 ## Technical Details
 
