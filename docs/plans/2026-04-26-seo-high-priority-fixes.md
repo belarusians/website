@@ -132,11 +132,11 @@ Prerequisite for Task 3. Touch each service file to add `_updatedAt` to GROQ pro
 
 ### Task 6: Set event `og:type: 'article'` + add Event JSON-LD (#12, #13)
 
-- [ ] in `src/app/[lang]/events/[slug]/page.tsx`:`generateMetadata`, add `type: 'article'` to `openGraph` (only when `event` exists)
-- [ ] add an `EventArticle`-adjacent `<Script type="application/ld+json">` block in the page render path with Event JSON-LD: `@type: 'Event'`, `name: event.title`, `description: event.description`, `startDate: event.timeframe.start`, `endDate: event.timeframe.end`, `eventStatus`: pick from `cancelled` / `rescheduled` / default to `EventScheduled`, `location: { @type: 'Place', name: event.location }`, `image: urlForImage(event.backgroundUrl)`
-- [ ] add `eventJsonLd(event)` builder to `src/lib/jsonld.ts`
-- [ ] unit test for `eventJsonLd`: assert all required fields, status mapping for cancelled/rescheduled
-- [ ] run `npm run test` and `npm run typecheck` — must pass before next task
+- [x] in `src/app/[lang]/events/[slug]/page.tsx`:`generateMetadata`, add `type: 'article'` to `openGraph` (only when `event` exists)
+- [x] add an `EventArticle`-adjacent `<Script type="application/ld+json">` block in the page render path with Event JSON-LD: `@type: 'Event'`, `name: event.title`, `description: event.description`, `startDate: event.timeframe.start`, `endDate: event.timeframe.end`, `eventStatus`: pick from `cancelled` / `rescheduled` / default to `EventScheduled`, `location: { @type: 'Place', name: event.location }`, `image: urlForImage(event.backgroundUrl)`
+- [x] add `eventJsonLd(event)` builder to `src/lib/jsonld.ts`
+- [x] unit test for `eventJsonLd`: assert all required fields, status mapping for cancelled/rescheduled
+- [x] run `npm run test` and `npm run typecheck` — must pass before next task
 
 ### Task 7: Add JobPosting JSON-LD to vacancy pages (#14)
 

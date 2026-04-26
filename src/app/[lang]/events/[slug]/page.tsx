@@ -1,4 +1,5 @@
 import { Metadata, ResolvingMetadata } from 'next/types';
+import Script from 'next/script';
 
 import { Lang, Event } from '../../../../components/types';
 import { Section } from '../../../../components/section';
@@ -10,6 +11,7 @@ import { urlForImage } from '../../../../sanity/lib/image';
 import { isEventPassed } from '../../../../sanity/event/utils';
 import { getAlternates } from '../../../../utils/og';
 import { toLang } from '../../../../utils/lang';
+import { eventJsonLd } from '../../../../lib/jsonld';
 
 type EventPageParams = CommonPageParams & {
   params: Promise<{
@@ -30,8 +32,24 @@ export default async function EventPage({ params, searchParams }: EventPageParam
     return <div>Not found</div>;
   }
 
+  const jsonLd = eventJsonLd({
+    title: event.title,
+    description: event.description,
+    location: event.location,
+    timeframe: event.timeframe,
+    rescheduledTimeframe: event.rescheduledTimeframe,
+    rescheduled: event.rescheduled,
+    cancelled: event.cancelled,
+    image: urlForImage(event.backgroundUrl),
+  });
+
   return (
     <Section>
+      <Script
+        id={`event-jsonld-${event.slug}`}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <EventArticle
         lang={lang}
         event={event}
@@ -81,6 +99,9 @@ export async function generateMetadata({ params }: EventPageParams, parent: Reso
       description: event?.description,
       url: `${lang}/events/${slug}`,
       images,
+      ...(event && {
+        type: 'article',
+      }),
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
