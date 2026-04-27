@@ -88,7 +88,7 @@ Donation payments can trigger automatic ClickMeeting invitations. Stripe webhook
 Sanity stores rich text as Portable Text blocks. Converted to HTML server-side in `src/sanity/*/service.ts` using `@portabletext/to-html`. Adding custom blocks requires serializer updates.
 
 ### JSON-LD (SEO structured data)
-Builders live in `src/lib/jsonld.ts` (`buildSiteJsonLd`, `eventJsonLd`, `jobPostingJsonLd`); pages render the output inline via `<Script type="application/ld+json" dangerouslySetInnerHTML>` — no shared component wrapper.
+Builders live in `src/lib/jsonld.ts` (`buildSiteJsonLd`, `eventJsonLd`); pages render the output inline via `<Script type="application/ld+json" dangerouslySetInnerHTML>` — no shared component wrapper.
 
 ### Visual foundations (refreshed)
 - Buttons translate on hover/active (`hover:-translate-y-0.5`, `active:translate-y-px`) alongside shadow escalation. Defined in `src/components/button.tsx`.

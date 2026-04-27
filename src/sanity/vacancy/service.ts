@@ -31,8 +31,6 @@ export async function getVacancyById(lang: Lang, id: string): Promise<Vacancy | 
     "title": title.${lang},
     "description": description.${lang},
     tasks,
-    _createdAt,
-    _updatedAt,
   }[0]`,
     ['vacancy'],
     { id },
