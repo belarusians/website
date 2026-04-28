@@ -127,8 +127,8 @@ A custom GDPR-compliant cookie consent banner that gates the existing Google Ads
 - [x] confirm test coverage on new code (`src/lib/consent.ts`, `src/components/consent/banner.tsx`) ≥ 80% — aggregate 91.48% (consent.ts 97.29%, banner.tsx 70%; banner useEffect body can't run in Node-only Jest, so the same logic was extracted into `applyStoredConsent` and covered there)
 
 ### Task 6: Update CLAUDE.md
-- [ ] add a short subsection under "Architectural Decisions (Non-Obvious)" titled "Consent Mode v2 + cookie banner": one paragraph covering where the banner lives (`src/app/[lang]/layout.tsx`), the localStorage key (`mara_consent`), and the rule that gtag conversions are gated by Consent Mode (do not bypass)
-- [ ] add Pitfall: "Cookie banner only shows under `[lang]` routes; `/studio` (route group) is intentionally not gated and intentionally has no gtag"
+- [x] add a short subsection under "Architectural Decisions (Non-Obvious)" titled "Consent Mode v2 + cookie banner": one paragraph covering where the banner lives (`src/app/[lang]/layout.tsx`), the localStorage key (`mara_consent`), and the rule that gtag conversions are gated by Consent Mode (do not bypass)
+- [x] add Pitfall: "Cookie banner only shows under `[lang]` routes; `/studio` (route group) is intentionally not gated and intentionally has no gtag"
 
 ## Technical Details
 

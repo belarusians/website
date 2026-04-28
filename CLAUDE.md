@@ -95,6 +95,9 @@ Builders live in `src/lib/jsonld.ts` (`buildSiteJsonLd`, `eventJsonLd`); pages r
 - The rainbow gradient is a seamless conic rotation driven by `@property --mara-angle` via the `bg-rainbow-spin` utility in `globals.css`. Do not reintroduce `animation-duration` hover changes — they cause a visible jump.
 - Logo has a `showSubtitle` prop for the two approved variants (`src/components/header/logo.tsx`); callers default to the subtitle-visible variant.
 
+### Consent Mode v2 + cookie banner
+gtag.js is mounted in `src/app/[lang]/layout.tsx` with all ad signals (`ad_storage`, `ad_user_data`, `ad_personalization`) defaulted to `denied` via an inline `beforeInteractive` script — this must run before gtag.js loads. `<ConsentBanner lang={lang} />` is a sibling of `{children}` and reads/writes localStorage key `mara_consent` (shape `{ choice, timestamp }`); helpers live in `src/lib/consent.ts`. On revisit with a stored `'granted'` choice the banner re-applies consent on mount via `applyStoredConsent`. Conversion tracking (`window.gtag_report_conversion` used by `event-article.tsx`) is gated by Consent Mode — never bypass by calling `gtag('event', 'conversion', ...)` directly without going through consent.
+
 ## Webhooks
 
 | Service | Endpoint | Events | Verification |
@@ -143,3 +146,4 @@ NEXT_PUBLIC_UMAMI_WEBSITE_ID, NEXT_PUBLIC_UMAMI_URL
 5. Google private key: `\n` must be actual newlines, not literal string
 6. Stripe product ID for ClickMeeting invite is hardcoded — update when adding new event products
 7. Clerk redirect URLs must include `[lang]`
+8. Cookie banner only shows under `[lang]` routes; `/studio` (route group) is intentionally not gated and intentionally has no gtag
