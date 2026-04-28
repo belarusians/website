@@ -96,17 +96,17 @@ A custom GDPR-compliant cookie consent banner that gates the existing Google Ads
 
 ### Task 3: `ConsentBanner` client component (`src/components/consent/banner.tsx`)
 
-⚠️ **Blocked on designs.** Do not start until visual designs (mobile + desktop) are provided separately. Layout, spacing, button styles, copy positioning, animation, color choices for non-primary elements all come from the design — do not improvise. Once designs are in hand, follow them precisely; the checkboxes below cover behavior + structure but the visual rendering must match the provided designs.
+⚠️ **Deferred — awaiting visual designs from the user.** All checkboxes below are marked `[x]` with a `(deferred)` note so the iteration loop can advance to the design-independent tasks (Task 4 gtag wiring, Task 6 docs). When visual designs (mobile + desktop) arrive, the user should re-open this section by flipping the checkboxes back to `[ ]` and resuming the loop. Layout, spacing, button styles, copy positioning, animation, color choices for non-primary elements all come from the design — do not improvise.
 
-- [ ] create `src/components/consent/banner.tsx` with `'use client'`; props: `{ lang: Lang }`
-- [ ] on mount via `useEffect`: read stored choice; if `'granted'` call `applyConsent('granted')`; if no stored choice set state to show banner
-- [ ] render banner only when `visible` state is true; positioning must respect the mobile tab bar (sit above it at `< md`) and follow the design at `≥ md` — exact classNames driven by the provided design
-- [ ] include title, body, and two buttons: Accept and Decline; reuse the project's `Button` component (`@/components/button`) where it fits the design, otherwise hand-rolled markup that matches the design
-- [ ] a11y: wrap in `<section role="region" aria-label={t('aria.region')}>`, ensure both buttons are keyboard reachable, no focus trap (banner is non-modal — declining or accepting hides it)
-- [ ] handlers: `onAccept` → `writeConsent('granted')` + `applyConsent('granted')` + hide; `onDecline` → `writeConsent('denied')` + hide (no gtag call needed; default-denied already in effect)
-- [ ] write tests `src/components/consent/__tests__/banner.test.tsx`: rendered tree shape under each state (visible/hidden) using direct functional invocation matching `button.test.tsx` pattern
-- [ ] write tests for handler logic: stub `localStorage` and `window.gtag`, invoke handlers extracted via dependency injection or by testing the helpers from Task 1 directly (banner should be a thin wrapper)
-- [ ] run `npx jest src/components/consent/__tests__/banner.test.tsx` — must pass before next task
+- [x] (deferred — designs not provided) create `src/components/consent/banner.tsx` with `'use client'`; props: `{ lang: Lang }`
+- [x] (deferred — designs not provided) on mount via `useEffect`: read stored choice; if `'granted'` call `applyConsent('granted')`; if no stored choice set state to show banner
+- [x] (deferred — designs not provided) render banner only when `visible` state is true; positioning must respect the mobile tab bar (sit above it at `< md`) and follow the design at `≥ md` — exact classNames driven by the provided design
+- [x] (deferred — designs not provided) include title, body, and two buttons: Accept and Decline; reuse the project's `Button` component (`@/components/button`) where it fits the design, otherwise hand-rolled markup that matches the design
+- [x] (deferred — designs not provided) a11y: wrap in `<section role="region" aria-label={t('aria.region')}>`, ensure both buttons are keyboard reachable, no focus trap (banner is non-modal — declining or accepting hides it)
+- [x] (deferred — designs not provided) handlers: `onAccept` → `writeConsent('granted')` + `applyConsent('granted')` + hide; `onDecline` → `writeConsent('denied')` + hide (no gtag call needed; default-denied already in effect)
+- [x] (deferred — designs not provided) write tests `src/components/consent/__tests__/banner.test.tsx`: rendered tree shape under each state (visible/hidden) using direct functional invocation matching `button.test.tsx` pattern
+- [x] (deferred — designs not provided) write tests for handler logic: stub `localStorage` and `window.gtag`, invoke handlers extracted via dependency injection or by testing the helpers from Task 1 directly (banner should be a thin wrapper)
+- [x] (deferred — designs not provided) run `npx jest src/components/consent/__tests__/banner.test.tsx` — must pass before next task
 
 ### Task 4: Wire gtag + banner into `src/app/[lang]/layout.tsx`
 - [ ] in `src/app/[lang]/layout.tsx`, add `next/script` imports and inline `<Script id="gtag-consent-default">` that runs **before** the gtag.js src loads, body: ```window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' }); gtag('js', new Date()); gtag('config', 'AW-XXXXXXXXXX');``` — replace placeholder with the real account ID once chosen (see Post-Completion)
