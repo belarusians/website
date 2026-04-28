@@ -7,15 +7,22 @@ import { applyConsent, readConsent } from '../../lib/consent';
 
 export type ConsentBannerProps = { lang: Lang };
 
+// Re-apply a previously granted choice so gtag isn't stuck at default-denied
+// for users who already accepted on a prior visit. Exported for direct testing
+// (the project's Jest config runs in Node with no renderer, so useEffect bodies
+// can't be exercised through rendering).
+export function applyStoredConsent(): void {
+  const stored = readConsent();
+  if (stored === 'granted') {
+    applyConsent('granted');
+  }
+}
+
 // Visual rendering is gated on design delivery (plan 2026-04-26-cookie-consent-banner.md, Task 3).
-// Until designs land, the banner stays headless: it re-applies a previously granted choice on revisit
-// so gtag isn't stuck at default-denied for users who already accepted.
+// Until designs land, the banner stays headless and only triggers the mount-time re-apply.
 export function ConsentBanner({ lang }: ConsentBannerProps): null {
   useEffect(() => {
-    const stored = readConsent();
-    if (stored === 'granted') {
-      applyConsent('granted');
-    }
+    applyStoredConsent();
   }, [lang]);
 
   return null;
