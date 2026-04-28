@@ -1,0 +1,196 @@
+/* ============================================================
+   MARA — Colors & Type
+   Source of truth: belarusians/website → src/components/globals.css
+   Font: Roboto (Google Fonts) with Latin + Cyrillic subsets
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+:root {
+  /* ----- BRAND (Red) ----- */
+  --color-red:         #ED1C24;   /* primary */
+  --color-red-shade:   #AF0000;
+  --color-red-tint:    #F36D72;   /* lifted — reads as a distinct tint, not a near-duplicate of primary */
+  --color-primary:        var(--color-red);
+  --color-primary-shade:  var(--color-red-shade);
+  --color-primary-tint:   var(--color-red-tint);
+
+  /* ----- NEUTRALS ----- */
+  --color-white:       #FFFFFF;
+  --color-white-shade: #F6F6F6;   /* page background */
+  --color-black:       #231F20;   /* brand black — slight warmth */
+  --color-black-tint:  #333333;
+  --color-grey:        rgb(128,128,128);
+  --color-light-grey:  rgb(235,235,235);
+
+  /* ----- SOLIDARITY / ALLY FLAGS ----- */
+  --color-blue-ukraine:   #0056B9;
+  --color-yellow-ukraine: #FFD800;
+  --color-nl-red:   #AE1C28;
+  --color-nl-blue:  #21468B;
+
+  /* ----- ACCENT (Kupalle / campaign orange) ----- */
+  --color-king-orange:        #F64D04;
+  --color-king-orange-shade:  #BF3903;
+  --color-king-orange-tint:   #F36227;
+
+  /* ----- SEMANTIC (derived) ----- */
+  --bg-page:   var(--color-white-shade);
+  --bg-card:   var(--color-white);
+  --fg-body:   var(--color-black);
+  --fg-muted:  var(--color-grey);
+  --fg-accent: var(--color-primary);
+  --border-subtle: var(--color-light-grey);
+  --link:       var(--color-primary);
+  --link-hover: var(--color-primary-shade);
+
+  /* ----- ELEVATION ----- */
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / .10), 0 4px 6px -4px rgb(0 0 0 / .10);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / .10), 0 8px 10px -6px rgb(0 0 0 / .10);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / .25);
+  --shadow-lr-xl:
+    15px 0 15px -20px rgb(0 0 0 / .4),
+    -15px 0 15px -20px rgb(0 0 0 / .4);
+  --shadow-lrb-xl:
+    15px 10px 20px -10px rgb(0 0 0 / .1),
+    -15px 10px 20px -10px rgb(0 0 0 / .1);
+  --shadow-tb-xl:
+    0 25px 20px -14px rgb(0 0 0 / .1),
+    0 6px 6px -6px rgb(0 0 0 / .1);
+
+  /* ----- RADII ----- */
+  --radius-sm:   4px;
+  --radius-md:   6px;   /* used throughout UI — rounded-md */
+  --radius-lg:   10px;
+  --radius-pill: 9999px;
+
+  /* ----- SPACING ----- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  /* ----- TYPE ----- */
+  --font-sans: 'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: var(--font-sans);
+
+  /* Fluid scale (mirrors Tailwind text-xl → text-5xl ladder used in H1/H2/H3) */
+  --fs-xs:  0.75rem;   /* 12 */
+  --fs-sm:  0.875rem;  /* 14 */
+  --fs-base:1rem;      /* 16 */
+  --fs-lg:  1.125rem;  /* 18 */
+  --fs-xl:  1.25rem;   /* 20 */
+  --fs-2xl: 1.5rem;    /* 24 */
+  --fs-3xl: 1.875rem;  /* 30 */
+  --fs-4xl: 2.25rem;   /* 36 */
+  --fs-5xl: 3rem;      /* 48 */
+
+  --fw-light:  300;
+  --fw-regular:400;
+  --fw-medium: 500;
+  --fw-bold:   700;
+
+  --lh-tight: 1.15;
+  --lh-snug:  1.3;
+  --lh-normal:1.55;
+
+  /* ----- ALIASES (short names used in UI kit + preview cards) ----- */
+  --primary:        var(--color-primary);
+  --primary-shade:  var(--color-primary-shade);
+  --primary-tint:   var(--color-primary-tint);
+  --white-shade:    var(--color-white-shade);
+  --ink:            var(--color-black);
+  --ink-muted:      var(--color-grey);
+  --line:           var(--color-light-grey);
+  --shadow-tbr-xl:
+    0 25px 20px -14px rgb(0 0 0 / .1),
+    0 6px 6px -6px rgb(0 0 0 / .1),
+    15px 0 15px -18px rgb(0 0 0 / .35);
+  --shadow-lrb-xl-alias: var(--shadow-lrb-xl);
+
+  /* ----- GRADIENTS (signature) ----- */
+  --gradient-nl: linear-gradient(180deg,
+    #AE1C28 0, #AE1C28 33%,
+    #FFF 33%, #FFF 67%,
+    #21468B 67%, #21468B 100%);
+  --gradient-be: linear-gradient(180deg,
+    #FFF 0, #FFF 33%,
+    var(--color-primary) 33%, var(--color-primary) 67%,
+    #FFF 67%, #FFF 100%);
+  --gradient-beautiful:
+    radial-gradient(26.76% 85.52% at 86.73% -12.86%,
+      var(--color-primary-shade) 6.65%, transparent),
+    radial-gradient(farthest-side at bottom left,
+      var(--color-primary-shade) 6.65%, var(--color-primary) 100%);
+  --gradient-beautiful-button: conic-gradient(from 0deg,
+    #ED1C24 0%, #F36D72 14%, #F59638 28%, #F5C84A 42%,
+    #E8528C 60%, #8B2F8F 78%, #4B1D6B 88%, #AF0000 96%, #ED1C24 100%);
+
+  --beautiful-gradient: var(--gradient-beautiful);
+  --beautiful-button:   var(--gradient-beautiful-button);
+}
+
+/* ============================================================
+   Semantic type styles — match Roboto usage in the site
+   ============================================================ */
+
+html, body { background: var(--bg-page); color: var(--fg-body); }
+body {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-base);
+  line-height: var(--lh-normal);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, .h1 {
+  font-family: var(--font-display);
+  font-weight: var(--fw-medium);              /* site H1 is 500 */
+  font-size: clamp(1.25rem, 2.4vw + 0.6rem, 3rem);
+  line-height: var(--lh-tight);
+  letter-spacing: -0.02em;                    /* tracking-tight */
+  margin: 0 0 var(--space-5);
+}
+h2, .h2 {
+  font-family: var(--font-display);
+  font-weight: var(--fw-medium);
+  font-size: clamp(1.25rem, 1.8vw + 0.6rem, 2.25rem);
+  line-height: var(--lh-snug);
+  margin: 0 0 var(--space-4);
+}
+h3, .h3 {
+  font-family: var(--font-display);
+  font-weight: var(--fw-light);               /* H3 is light on this site */
+  font-size: clamp(1.125rem, 1.2vw + 0.6rem, 1.875rem);
+  line-height: var(--lh-snug);
+  margin: 0 0 var(--space-3);
+}
+p, .p { margin: 0 0 var(--space-4); }
+
+small, .small { font-size: var(--fs-sm); color: var(--fg-muted); }
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  transition: text-decoration-color .2s ease, color .2s ease;
+}
+a:hover { text-decoration-color: var(--color-primary); }
+
+blockquote { quotes: none; }
+
+code, pre { font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace; }
