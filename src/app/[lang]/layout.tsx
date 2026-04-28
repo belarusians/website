@@ -23,13 +23,20 @@ export default async function MainLayout({
   const lang = toLang(langParam);
   return (
     <ClerkProvider>
-      <Script id="gtag-consent-default" strategy="beforeInteractive">
-        {`window.dataLayer = window.dataLayer || [];
+      {/* Raw <script> (not next/script): beforeInteractive is only honored in the root layout
+          per Next.js docs. An inline, non-async <script> here renders into the SSR HTML in
+          document order and executes synchronously before the gtag.js <Script> below — which
+          is what Consent Mode v2 requires (defaults must reach dataLayer before gtag.js runs). */}
+      <script
+        id="gtag-consent-default"
+        dangerouslySetInnerHTML={{
+          __html: `window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
 gtag('js', new Date());
-gtag('config', '${GOOGLE_ADS_TAG_ID}');`}
-      </Script>
+gtag('config', '${GOOGLE_ADS_TAG_ID}');`,
+        }}
+      />
       <Script async src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_TAG_ID}`} />
       <Script id="gtm-conversion-reporter">
         {`function gtag_report_conversion(value) {

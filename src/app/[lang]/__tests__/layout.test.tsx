@@ -57,7 +57,7 @@ describe('MainLayout', () => {
     expect(GOOGLE_ADS_TAG_ID).toMatch(/^AW-/);
   });
 
-  test('renders the gtag-consent-default Script with denied defaults before gtag.js loads', async () => {
+  test('renders the gtag-consent-default as a raw inline <script> with denied defaults', async () => {
     const element = (await MainLayout({
       children: null,
       params: Promise.resolve({ lang: 'be' }),
@@ -65,13 +65,34 @@ describe('MainLayout', () => {
 
     const consentDefault = findElementByProp(element, 'id', 'gtag-consent-default');
     expect(consentDefault).not.toBeNull();
-    expect(consentDefault!.props).toMatchObject({ strategy: 'beforeInteractive' });
-    const body = String(consentDefault!.props.children ?? '');
-    expect(body).toContain("gtag('consent', 'default'");
-    expect(body).toContain("ad_storage: 'denied'");
-    expect(body).toContain("ad_user_data: 'denied'");
-    expect(body).toContain("ad_personalization: 'denied'");
-    expect(body).toContain(GOOGLE_ADS_TAG_ID);
+    // Must be a raw <script> (string type), not next/script (which would be a function/object type).
+    // beforeInteractive is only honored in the root layout; in nested layouts it silently degrades.
+    expect(consentDefault!.type).toBe('script');
+    expect(consentDefault!.props).not.toHaveProperty('async');
+    expect(consentDefault!.props).not.toHaveProperty('defer');
+    const html = (consentDefault!.props as { dangerouslySetInnerHTML?: { __html: string } })
+      .dangerouslySetInnerHTML?.__html;
+    expect(html).toBeDefined();
+    expect(html).toContain("gtag('consent', 'default'");
+    expect(html).toContain("ad_storage: 'denied'");
+    expect(html).toContain("ad_user_data: 'denied'");
+    expect(html).toContain("ad_personalization: 'denied'");
+    expect(html).toContain(GOOGLE_ADS_TAG_ID);
+  });
+
+  test('consent default <script> is positioned before the gtag.js <Script> in the tree', async () => {
+    const element = (await MainLayout({
+      children: null,
+      params: Promise.resolve({ lang: 'be' }),
+    })) as ReactElement;
+
+    const expectedSrc = `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_TAG_ID}`;
+    const orderedIds = collectScriptOrder(element, expectedSrc);
+    const defaultIdx = orderedIds.indexOf('gtag-consent-default');
+    const remoteIdx = orderedIds.indexOf('gtag-remote');
+    expect(defaultIdx).toBeGreaterThanOrEqual(0);
+    expect(remoteIdx).toBeGreaterThanOrEqual(0);
+    expect(defaultIdx).toBeLessThan(remoteIdx);
   });
 
   test('loads gtag.js with the configured tag id', async () => {
@@ -143,6 +164,23 @@ function findElementOfTypeFn(node: unknown, type: unknown): ReactElement<Record<
     return findElementOfTypeFn(element.props.children, type);
   }
   return null;
+}
+
+function collectScriptOrder(node: unknown, gtagSrc: string, acc: string[] = []): string[] {
+  if (node === null || node === undefined || typeof node !== 'object') return acc;
+  if (Array.isArray(node)) {
+    for (const n of node) collectScriptOrder(n, gtagSrc, acc);
+    return acc;
+  }
+  const element = node as ReactElement<Record<string, unknown> & { children?: ReactNode }>;
+  const id = element.props?.['id'] as string | undefined;
+  const src = element.props?.['src'] as string | undefined;
+  if (id === 'gtag-consent-default') acc.push('gtag-consent-default');
+  else if (src === gtagSrc) acc.push('gtag-remote');
+  if (element.props && 'children' in element.props) {
+    collectScriptOrder(element.props.children, gtagSrc, acc);
+  }
+  return acc;
 }
 
 function findElementByProp(

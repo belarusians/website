@@ -31,10 +31,10 @@ src/app/api/             API routes: clickmeeting, donate, revalidate, subscribe
 src/app/api/utils.ts     sendError(status, msg, reason?) / sendSuccess(msg) helpers
 src/app/i18n/            i18n config + locales/{be,nl}/*.json
 src/app/types.ts         CommonPageParams, PageSearchParams, PropsWithClass
-src/components/          Reusable UI: button, card, dropdown, header/, headings/, menu/, section, spinner, image
+src/components/          Reusable UI: button, card, consent/, dropdown, header/, headings/, menu/, section, spinner, image
 src/components/types.ts  Lang enum (be, nl), domain types (Event, News, Guide, Feedback)
 src/sanity/              CMS schemas: event/, news/, guide/, feedback/, vacancy/, locale-schemas/
-src/lib/                 Integrations: stripe, s3, email, clickmeeting, google-directory, vacancies
+src/lib/                 Integrations: stripe, s3, email, clickmeeting, google-directory, vacancies, consent
 src/theme/               Design tokens: tokens.ts (COLORS, PRIMARY) — keep in sync with globals.css @theme
 src/utils/               Helpers: og.ts (OG images), lang.ts (validation)
 src/middleware.ts        Clerk auth + locale redirect (default: be, /ru → /be redirect)
@@ -50,7 +50,7 @@ Server components. Receive `{ params }: CommonPageParams`, await params to get `
 Use `'use client'` directive. Import `getTranslation` from `@/app/i18n/client` instead. Call as `const { t } = getTranslation(lang, namespace)`.
 
 ### i18n Namespaces
-Translation files at `src/app/i18n/locales/{be,nl}/`. Namespaces: common, main, about-us, donate, events, guides, join-us, kupalle, vacancies. Default namespace: common. Fallback language: be.
+Translation files at `src/app/i18n/locales/{be,nl}/`. Namespaces: common, main, about-us, consent, donate, events, guides, join-us, kupalle, vacancies. Default namespace: common. Fallback language: be.
 
 ### API Routes
 Export async HTTP method handlers (GET, POST, etc.) in `route.ts`. Use `sendError`/`sendSuccess` from `@/app/api/utils`. Validate with Zod where applicable.
@@ -96,7 +96,7 @@ Builders live in `src/lib/jsonld.ts` (`buildSiteJsonLd`, `eventJsonLd`); pages r
 - Logo has a `showSubtitle` prop for the two approved variants (`src/components/header/logo.tsx`); callers default to the subtitle-visible variant.
 
 ### Consent Mode v2 + cookie banner
-gtag.js is mounted in `src/app/[lang]/layout.tsx` with all ad signals (`ad_storage`, `ad_user_data`, `ad_personalization`) defaulted to `denied` via an inline `beforeInteractive` script — this must run before gtag.js loads. `<ConsentBanner lang={lang} />` is a sibling of `{children}` and reads/writes localStorage key `mara_consent` (shape `{ choice, timestamp }`); helpers live in `src/lib/consent.ts`. On revisit with a stored `'granted'` choice the banner re-applies consent on mount via `applyStoredConsent`. Conversion tracking (`window.gtag_report_conversion` used by `event-article.tsx`) is gated by Consent Mode — never bypass by calling `gtag('event', 'conversion', ...)` directly without going through consent.
+gtag.js is mounted in `src/app/[lang]/layout.tsx` with all ad signals (`ad_storage`, `ad_user_data`, `ad_personalization`) defaulted to `denied`. The defaults are set by a **raw `<script>` tag with `dangerouslySetInnerHTML`** (not `next/script`): Next.js only honors `strategy="beforeInteractive"` in the **root** layout, so a nested-layout `next/script` would silently degrade to `afterInteractive` and could let gtag.js fire ad pixels before the consent default lands. The raw inline `<script>` renders into the SSR HTML in document order and runs synchronously before the subsequent async gtag.js `<Script>` — preserving the "default-denied first" guarantee while keeping gtag scoped to `[lang]` (so `/studio` stays gtag-free). `<ConsentBanner lang={lang} />` is a sibling of `{children}` and reads/writes localStorage key `mara_consent` (shape `{ choice, timestamp }`); helpers live in `src/lib/consent.ts`. On revisit with a stored `'granted'` choice the banner re-applies consent on mount via `applyStoredConsent`. **Today the banner returns `null`** — visual UI is gated on Task 3 of `docs/plans/2026-04-26-cookie-consent-banner.md` (awaiting designs), so first-time visitors currently have no way to grant consent. Conversion tracking (`window.gtag_report_conversion` used by `event-article.tsx`) is gated by Consent Mode — never bypass by calling `gtag('event', 'conversion', ...)` directly without going through consent.
 
 ## Webhooks
 
