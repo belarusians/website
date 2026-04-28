@@ -1,4 +1,5 @@
 import { ClerkProvider } from '@clerk/nextjs';
+import Script from 'next/script';
 
 import { Header } from '../../components/header/header';
 import { Footer } from './footer';
@@ -10,6 +11,9 @@ import { Lang } from '../../components/types';
 import { supportedLngs } from '../i18n/settings';
 import { getAlternates } from '../../utils/og';
 import { toLang } from '../../utils/lang';
+import { ConsentBanner } from '../../components/consent/banner';
+
+export const GOOGLE_ADS_TAG_ID = 'AW-11125506805';
 
 export default async function MainLayout({
   children,
@@ -19,12 +23,32 @@ export default async function MainLayout({
   const lang = toLang(langParam);
   return (
     <ClerkProvider>
+      <Script id="gtag-consent-default" strategy="beforeInteractive">
+        {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+gtag('js', new Date());
+gtag('config', '${GOOGLE_ADS_TAG_ID}');`}
+      </Script>
+      <Script async src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_TAG_ID}`} />
+      <Script id="gtm-conversion-reporter">
+        {`function gtag_report_conversion(value) {
+  var callback = function () {};
+  gtag('event', 'conversion', {
+      'send_to': value,
+      'transaction_id': '',
+      'event_callback': callback
+  });
+  return false;
+}`}
+      </Script>
       <div className="flex flex-col gap-4 lg:gap-6 min-h-screen">
         <LangSync lang={lang} />
         <Header lang={lang} className="lg:container" />
         <main className="flex flex-col gap-4 lg:gap-6">{children}</main>
         <Footer className="lg:container mt-auto" />
       </div>
+      <ConsentBanner lang={lang} />
     </ClerkProvider>
   );
 }

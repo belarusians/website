@@ -109,13 +109,13 @@ A custom GDPR-compliant cookie consent banner that gates the existing Google Ads
 - [x] (deferred — designs not provided) run `npx jest src/components/consent/__tests__/banner.test.tsx` — must pass before next task
 
 ### Task 4: Wire gtag + banner into `src/app/[lang]/layout.tsx`
-- [ ] in `src/app/[lang]/layout.tsx`, add `next/script` imports and inline `<Script id="gtag-consent-default">` that runs **before** the gtag.js src loads, body: ```window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' }); gtag('js', new Date()); gtag('config', 'AW-XXXXXXXXXX');``` — replace placeholder with the real account ID once chosen (see Post-Completion)
-- [ ] add `<Script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXXX" />` after the inline default-consent block
-- [ ] preserve the existing `gtag_report_conversion` helper script (copied verbatim from current `src/app/layout.tsx:97–109`) so `event-article.tsx:65` keeps working unchanged
-- [ ] mount `<ConsentBanner lang={lang} />` as a sibling of `{children}` (alongside the mobile tab bar)
-- [ ] in `src/app/layout.tsx`, **delete** the `ENABLE_GOOGLE_TAG` constant, the `GoogleTag()` function, the conditional render `{ENABLE_GOOGLE_TAG ? <GoogleTag /> : null}`, and the `ReactElement` import if no longer used; also remove the `Script` import if unused after the move
-- [ ] write a layout smoke test asserting the gtag id string is referenced in `src/app/[lang]/layout.tsx` source (a static-text assertion is enough — we don't need to render the layout in a test environment)
-- [ ] run `npx jest` for any layout-touching tests + `npm run typecheck` + `npm run lint` — all must pass before next task
+- [x] in `src/app/[lang]/layout.tsx`, add `next/script` imports and inline `<Script id="gtag-consent-default">` that runs **before** the gtag.js src loads, body: ```window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' }); gtag('js', new Date()); gtag('config', 'AW-XXXXXXXXXX');``` — replace placeholder with the real account ID once chosen (see Post-Completion) — used the existing real ID `AW-11125506805`, exported as `GOOGLE_ADS_TAG_ID`
+- [x] add `<Script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXXX" />` after the inline default-consent block
+- [x] preserve the existing `gtag_report_conversion` helper script (copied verbatim from current `src/app/layout.tsx:97–109`) so `event-article.tsx:65` keeps working unchanged
+- [x] mount `<ConsentBanner lang={lang} />` as a sibling of `{children}` (alongside the mobile tab bar) — banner is currently a headless stub (Task 3 deferred awaiting designs); it re-applies a previously granted choice on mount and renders no UI yet
+- [x] in `src/app/layout.tsx`, **delete** the `ENABLE_GOOGLE_TAG` constant, the `GoogleTag()` function, the conditional render `{ENABLE_GOOGLE_TAG ? <GoogleTag /> : null}`, and the `ReactElement` import if no longer used; also remove the `Script` import if unused after the move (`Script` kept — still used by `<Script id="website-jsonld">` and the Umami script)
+- [x] write a layout smoke test asserting the gtag id string is referenced in `src/app/[lang]/layout.tsx` source (a static-text assertion is enough — we don't need to render the layout in a test environment) — added in `src/app/[lang]/__tests__/layout.test.tsx`
+- [x] run `npx jest` for any layout-touching tests + `npm run typecheck` + `npm run lint` — all must pass before next task
 
 ### Task 5: Verify acceptance criteria
 - [ ] verify all requirements from Overview are implemented (banner shows on first visit; Accept upgrades consent; Decline persists; revisit with stored choice skips banner; gtag default is denied; Umami unaffected)
