@@ -80,12 +80,12 @@ A custom GDPR-compliant cookie consent banner that gates the existing Google Ads
 ## Implementation Steps
 
 ### Task 1: Consent helper module (`src/lib/consent.ts`)
-- [ ] create `src/lib/consent.ts` exporting: `ConsentChoice = 'granted' | 'denied'`, `readConsent(): ConsentChoice | null`, `writeConsent(choice: ConsentChoice): void`, `applyConsent(choice: ConsentChoice): void` (calls `window.gtag('consent', 'update', { ad_storage, ad_user_data, ad_personalization })` mapping granted/denied uniformly across the three signals)
-- [ ] guard against SSR (`typeof window === 'undefined'`) and missing `window.gtag` (no-op gracefully)
-- [ ] use localStorage key `mara_consent` storing `{ choice: ConsentChoice, timestamp: number }` JSON
-- [ ] write tests `src/lib/__tests__/consent.test.ts`: success cases (read after write returns same value, applyConsent calls gtag with correct args)
-- [ ] write tests for error/edge cases (read with no key returns null, read with malformed JSON returns null and clears the key, applyConsent without window.gtag is a no-op)
-- [ ] run `npx jest src/lib/__tests__/consent.test.ts` — must pass before next task
+- [x] create `src/lib/consent.ts` exporting: `ConsentChoice = 'granted' | 'denied'`, `readConsent(): ConsentChoice | null`, `writeConsent(choice: ConsentChoice): void`, `applyConsent(choice: ConsentChoice): void` (calls `window.gtag('consent', 'update', { ad_storage, ad_user_data, ad_personalization })` mapping granted/denied uniformly across the three signals)
+- [x] guard against SSR (`typeof window === 'undefined'`) and missing `window.gtag` (no-op gracefully)
+- [x] use localStorage key `mara_consent` storing `{ choice: ConsentChoice, timestamp: number }` JSON
+- [x] write tests `src/lib/__tests__/consent.test.ts`: success cases (read after write returns same value, applyConsent calls gtag with correct args)
+- [x] write tests for error/edge cases (read with no key returns null, read with malformed JSON returns null and clears the key, applyConsent without window.gtag is a no-op)
+- [x] run `npx jest src/lib/__tests__/consent.test.ts` — must pass before next task
 
 ### Task 2: Consent translation namespace
 - [ ] create `src/app/i18n/locales/be/consent.json` with keys: `title`, `body`, `accept`, `decline`, `aria.region` (Belarusian copy — use placeholder copy if final wording is part of the design deliverable)
