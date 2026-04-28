@@ -2,8 +2,7 @@ User-agent: *
 Allow: /
 Disallow: /studio
 
-# Block Next.js static assets
-Disallow: /_next/
+# /_next/ is intentionally allowed: Google needs CSS/JS to render pages for SEO scoring
 Disallow: /api/
 
 # Block authentication subdomains
