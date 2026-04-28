@@ -88,11 +88,11 @@ A custom GDPR-compliant cookie consent banner that gates the existing Google Ads
 - [x] run `npx jest src/lib/__tests__/consent.test.ts` — must pass before next task
 
 ### Task 2: Consent translation namespace
-- [ ] create `src/app/i18n/locales/be/consent.json` with keys: `title`, `body`, `accept`, `decline`, `aria.region` (Belarusian copy — use placeholder copy if final wording is part of the design deliverable)
-- [ ] create `src/app/i18n/locales/nl/consent.json` with the same keys (Dutch copy)
-- [ ] keep copy short (≤ 2 sentences in `body`) and mention what data goes where: Google Ads measures conversions; Umami stays cookieless; user can decline
-- [ ] write test `src/app/i18n/locales/__tests__/consent.test.ts` that imports both JSON files and asserts each required key is a non-empty string
-- [ ] run `npx jest src/app/i18n/locales/__tests__/consent.test.ts` — must pass before next task
+- [x] create `src/app/i18n/locales/be/consent.json` with keys: `title`, `body`, `accept`, `decline`, `aria.region` (Belarusian copy — use placeholder copy if final wording is part of the design deliverable)
+- [x] create `src/app/i18n/locales/nl/consent.json` with the same keys (Dutch copy)
+- [x] keep copy short (≤ 2 sentences in `body`) and mention what data goes where: Google Ads measures conversions; Umami stays cookieless; user can decline
+- [x] write test `src/app/i18n/locales/__tests__/consent.test.ts` that imports both JSON files and asserts each required key is a non-empty string
+- [x] run `npx jest src/app/i18n/locales/__tests__/consent.test.ts` — must pass before next task
 
 ### Task 3: `ConsentBanner` client component (`src/components/consent/banner.tsx`)
 
