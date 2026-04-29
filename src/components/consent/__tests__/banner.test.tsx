@@ -95,30 +95,30 @@ describe('applyStoredConsent', () => {
     restore = undefined;
   });
 
-  test('does not call gtag when no consent is stored', () => {
+  test('returns null and does not call gtag when no consent is stored', () => {
     const gtag = jest.fn();
     ({ restore } = setupWindow({ gtag } as unknown as Partial<Window>));
-    applyStoredConsent();
+    expect(applyStoredConsent()).toBeNull();
     expect(gtag).not.toHaveBeenCalled();
   });
 
-  test('does not call gtag when stored choice is denied', () => {
+  test('returns "denied" and does not call gtag when stored choice is denied', () => {
     const gtag = jest.fn();
     const storage = makeLocalStorage(
       new Map([[CONSENT_STORAGE_KEY, JSON.stringify({ choice: 'denied', timestamp: 1 })]]),
     );
     ({ restore } = setupWindow({ localStorage: storage, gtag } as unknown as Partial<Window>));
-    applyStoredConsent();
+    expect(applyStoredConsent()).toBe('denied');
     expect(gtag).not.toHaveBeenCalled();
   });
 
-  test('re-applies granted consent when stored choice is granted', () => {
+  test('returns "granted" and re-applies consent when stored choice is granted', () => {
     const gtag = jest.fn();
     const storage = makeLocalStorage(
       new Map([[CONSENT_STORAGE_KEY, JSON.stringify({ choice: 'granted', timestamp: 1 })]]),
     );
     ({ restore } = setupWindow({ localStorage: storage, gtag } as unknown as Partial<Window>));
-    applyStoredConsent();
+    expect(applyStoredConsent()).toBe('granted');
     expect(gtag).toHaveBeenCalledTimes(1);
     expect(gtag).toHaveBeenCalledWith('consent', 'update', {
       ad_storage: 'granted',
@@ -168,7 +168,7 @@ describe('recordAccept / recordDecline', () => {
     });
   });
 
-  test('recordDecline persists denied and does NOT call gtag', () => {
+  test('recordDecline persists denied and downgrades gtag (covers revoke-after-grant)', () => {
     const gtag = jest.fn();
     const storage = makeLocalStorage();
     ({ restore } = setupWindow({ localStorage: storage, gtag } as unknown as Partial<Window>));
@@ -177,7 +177,12 @@ describe('recordAccept / recordDecline', () => {
     expect(raw).not.toBeNull();
     const parsed = JSON.parse(raw as string) as { choice: string };
     expect(parsed.choice).toBe('denied');
-    expect(gtag).not.toHaveBeenCalled();
+    expect(gtag).toHaveBeenCalledTimes(1);
+    expect(gtag).toHaveBeenCalledWith('consent', 'update', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+    });
   });
 });
 

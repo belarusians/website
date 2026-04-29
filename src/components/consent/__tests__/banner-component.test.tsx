@@ -208,7 +208,7 @@ describe('ConsentBanner — direct invocation with mocked hooks', () => {
     expect(hookCtrl.setters[0]).toHaveBeenCalledWith('hidden');
   });
 
-  test('state=visible Decline handler calls recordDecline (no gtag) and hides the banner', () => {
+  test('state=visible Decline handler calls recordDecline (downgrades gtag) and hides the banner', () => {
     const gtag = jest.fn();
     const storage = makeLocalStorage();
     ({ restore } = setupWindow({ localStorage: storage, gtag }));
@@ -219,7 +219,11 @@ describe('ConsentBanner — direct invocation with mocked hooks', () => {
     decline.props.onClick?.();
     const raw = storage.getItem(CONSENT_STORAGE_KEY);
     expect(JSON.parse(raw as string).choice).toBe('denied');
-    expect(gtag).not.toHaveBeenCalled();
+    expect(gtag).toHaveBeenCalledWith('consent', 'update', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+    });
     expect(hookCtrl.setters[1]).toHaveBeenCalledWith(true);
     expect(hookCtrl.setters[0]).toHaveBeenCalledWith('hidden');
   });

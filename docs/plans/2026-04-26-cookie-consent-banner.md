@@ -241,8 +241,8 @@ Same reasoning as the mobile tab bar (see CLAUDE.md "Mobile navigation"): keeps 
 
 **Google Ads side (separate from this plan):**
 - In Google Ads (current account `998-367-8246`), set up a Google tag and a Conversion action for ticket clicks.
-- Update the `AW-XXXXXXXXXX` placeholder in `src/app/[lang]/layout.tsx` (and matching script src) with the real account ID.
-- Set the per-event GTM field in Sanity Studio to `AW-XXXXXXXXXX/<conversion-label>`.
+- The live tag ID `AW-11125506805` is already wired into `src/app/[lang]/layout.tsx` (exported as `GOOGLE_ADS_TAG_ID`). No code change needed for the tag itself.
+- Set the per-event GTM field in Sanity Studio to `AW-11125506805/<conversion-label>`.
 - Visit a live event page once to let Google detect the tag (≤ 24h).
 
 **Deployment:**

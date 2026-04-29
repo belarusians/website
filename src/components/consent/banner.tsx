@@ -4,7 +4,7 @@ import { JSX, useEffect, useState } from 'react';
 
 import { getTranslation } from '../../app/i18n/client';
 import { Lang } from '../types';
-import { applyConsent, readConsent, writeConsent } from '../../lib/consent';
+import { applyConsent, ConsentChoice, readConsent, writeConsent } from '../../lib/consent';
 
 export type ConsentBannerProps = { lang: Lang; privacyHref?: string };
 
@@ -14,15 +14,16 @@ type BannerState = 'visible' | 'hidden';
 
 export type RenderMode = 'banner' | 'pill' | 'none';
 
-// Re-apply a previously granted choice so gtag isn't stuck at default-denied
-// for users who already accepted on a prior visit. Exported for direct testing
-// (the project's Jest config runs in Node with no renderer, so useEffect bodies
-// can't be exercised through rendering).
-export function applyStoredConsent(): void {
+// Re-apply a previously stored choice so gtag isn't stuck at default-denied
+// for returning users who accepted (or revoked back to denied) on a prior
+// visit. Exported for direct testing (the project's Jest config runs in Node
+// with no renderer, so useEffect bodies can't be exercised through rendering).
+export function applyStoredConsent(): ConsentChoice | null {
   const stored = readConsent();
   if (stored === 'granted') {
     applyConsent('granted');
   }
+  return stored;
 }
 
 export function recordAccept(): void {
@@ -32,6 +33,10 @@ export function recordAccept(): void {
 
 export function recordDecline(): void {
   writeConsent('denied');
+  // Downgrade gtag in case consent was previously granted in this session
+  // (e.g. user accepted, opened the reopen pill, then declined). For a
+  // first-time decline gtag is already at default-denied so this is a no-op.
+  applyConsent('denied');
 }
 
 export function decideRenderMode(state: BannerState, hasStoredChoice: boolean): RenderMode {
@@ -158,8 +163,7 @@ export function ConsentBanner({ lang, privacyHref }: ConsentBannerProps): JSX.El
   const [hasStoredChoice, setHasStoredChoice] = useState<boolean>(false);
 
   useEffect(() => {
-    applyStoredConsent();
-    const stored = readConsent();
+    const stored = applyStoredConsent();
     // localStorage cannot be read during SSR, so the post-mount setState is
     // the only place this hydration can happen without a hydration mismatch.
     /* eslint-disable react-hooks/set-state-in-effect */
