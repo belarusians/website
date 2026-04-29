@@ -196,7 +196,7 @@ Buttons in the design use **shadow-only hover, no `translate-y`** — this is in
 ### Task 6: Update CLAUDE.md
 - [x] add a short subsection under "Architectural Decisions (Non-Obvious)" titled "Consent Mode v2 + cookie banner": one paragraph covering where the banner lives (`src/app/[lang]/layout.tsx`), the localStorage key (`mara_consent`), and the rule that gtag conversions are gated by Consent Mode (do not bypass)
 - [x] add Pitfall: "Cookie banner only shows under `[lang]` routes; `/studio` (route group) is intentionally not gated and intentionally has no gtag"
-- [ ] **after Task 3 ships**: revise the "Consent Mode v2 + cookie banner" subsection to remove the "Today the banner returns `null`" paragraph (it will no longer be true). Replace with a description of the visible banner + reopen pill state machine. Note the **intentional deviation** that consent banner buttons use shadow-only hover (no `translate-y`), unlike `src/components/button.tsx` which translates on hover.
+- [x] **after Task 3 ships**: revise the "Consent Mode v2 + cookie banner" subsection to remove the "Today the banner returns `null`" paragraph (it will no longer be true). Replace with a description of the visible banner + reopen pill state machine. Note the **intentional deviation** that consent banner buttons use shadow-only hover (no `translate-y`), unlike `src/components/button.tsx` which translates on hover.
 
 ## Technical Details
 
