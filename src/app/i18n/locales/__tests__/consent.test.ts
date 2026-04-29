@@ -8,12 +8,21 @@ type ConsentNamespace = {
   body: string;
   accept: string;
   decline: string;
+  privacy: string;
+  reopen: string;
   aria: {
     region: string;
   };
 };
 
-const REQUIRED_KEYS: ReadonlyArray<keyof Omit<ConsentNamespace, 'aria'>> = ['title', 'body', 'accept', 'decline'];
+const REQUIRED_KEYS: ReadonlyArray<keyof Omit<ConsentNamespace, 'aria'>> = [
+  'title',
+  'body',
+  'accept',
+  'decline',
+  'privacy',
+  'reopen',
+];
 
 const localeCases: ReadonlyArray<readonly [string, ConsentNamespace]> = [
   ['be', beConsent as ConsentNamespace],

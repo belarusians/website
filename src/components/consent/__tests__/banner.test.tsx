@@ -1,6 +1,15 @@
 import { afterEach, describe, expect, jest, test } from '@jest/globals';
+import type { ReactElement, ReactNode } from 'react';
 
-import { ConsentBanner, applyStoredConsent } from '../banner';
+import {
+  ConsentBanner,
+  applyStoredConsent,
+  decideRenderMode,
+  recordAccept,
+  recordDecline,
+  renderBannerCard,
+  renderReopenPill,
+} from '../banner';
 import { CONSENT_STORAGE_KEY } from '../../../lib/consent';
 import { Lang } from '../../types';
 
@@ -37,6 +46,45 @@ function setupWindow(overrides: Partial<Window> = {}): { restore: () => void } {
       }
     },
   };
+}
+
+function passthroughT(key: string): string {
+  return key;
+}
+
+type AnyElement = ReactElement<{ className?: string; onClick?: () => void; [k: string]: unknown }>;
+
+function isElement(node: ReactNode): node is AnyElement {
+  return typeof node === 'object' && node !== null && 'props' in (node as object);
+}
+
+function flatten(children: ReactNode): AnyElement[] {
+  const out: AnyElement[] = [];
+  const visit = (node: ReactNode): void => {
+    if (Array.isArray(node)) {
+      node.forEach(visit);
+      return;
+    }
+    if (isElement(node)) {
+      out.push(node);
+      const nested = (node.props as { children?: ReactNode }).children;
+      if (nested !== undefined) {
+        visit(nested);
+      }
+    }
+  };
+  visit(children);
+  return out;
+}
+
+function findByType(root: AnyElement, type: string): AnyElement | undefined {
+  const all = [root, ...flatten((root.props as { children?: ReactNode }).children)];
+  return all.find((el) => el.type === type);
+}
+
+function findAllByType(root: AnyElement, type: string): AnyElement[] {
+  const all = [root, ...flatten((root.props as { children?: ReactNode }).children)];
+  return all.filter((el) => el.type === type);
 }
 
 describe('applyStoredConsent', () => {
@@ -80,16 +128,236 @@ describe('applyStoredConsent', () => {
   });
 });
 
-describe('ConsentBanner (headless stub — Task 3 deferred)', () => {
-  test('exports a function component', () => {
-    // The component itself can't be rendered in this Node-only Jest setup
-    // (no React reconciler), so we only verify the export shape. The mount-time
-    // behavior is exercised through applyStoredConsent above.
+describe('decideRenderMode', () => {
+  test("'visible' state always renders the banner regardless of stored choice", () => {
+    expect(decideRenderMode('visible', false)).toBe('banner');
+    expect(decideRenderMode('visible', true)).toBe('banner');
+  });
+
+  test("'hidden' with a stored choice renders the reopen pill", () => {
+    expect(decideRenderMode('hidden', true)).toBe('pill');
+  });
+
+  test("'hidden' without a stored choice renders nothing", () => {
+    expect(decideRenderMode('hidden', false)).toBe('none');
+  });
+});
+
+describe('recordAccept / recordDecline', () => {
+  let restore: (() => void) | undefined;
+
+  afterEach(() => {
+    restore?.();
+    restore = undefined;
+  });
+
+  test('recordAccept persists granted and calls gtag with granted on all three signals', () => {
+    const gtag = jest.fn();
+    const storage = makeLocalStorage();
+    ({ restore } = setupWindow({ localStorage: storage, gtag } as unknown as Partial<Window>));
+    recordAccept();
+    const raw = storage.getItem(CONSENT_STORAGE_KEY);
+    expect(raw).not.toBeNull();
+    const parsed = JSON.parse(raw as string) as { choice: string };
+    expect(parsed.choice).toBe('granted');
+    expect(gtag).toHaveBeenCalledTimes(1);
+    expect(gtag).toHaveBeenCalledWith('consent', 'update', {
+      ad_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: 'granted',
+    });
+  });
+
+  test('recordDecline persists denied and does NOT call gtag', () => {
+    const gtag = jest.fn();
+    const storage = makeLocalStorage();
+    ({ restore } = setupWindow({ localStorage: storage, gtag } as unknown as Partial<Window>));
+    recordDecline();
+    const raw = storage.getItem(CONSENT_STORAGE_KEY);
+    expect(raw).not.toBeNull();
+    const parsed = JSON.parse(raw as string) as { choice: string };
+    expect(parsed.choice).toBe('denied');
+    expect(gtag).not.toHaveBeenCalled();
+  });
+});
+
+describe('renderBannerCard — visible state shape', () => {
+  test('renders a section with role="region" and aria-label from t("aria.region")', () => {
+    const tree = renderBannerCard(passthroughT, {
+      onAccept: () => undefined,
+      onDecline: () => undefined,
+    }) as AnyElement;
+    expect(tree.type).toBe('section');
+    expect(tree.props.role).toBe('region');
+    expect(tree.props['aria-label']).toBe('aria.region');
+  });
+
+  test('section has fixed-position banner classes (mobile + desktop)', () => {
+    const tree = renderBannerCard(passthroughT, {
+      onAccept: () => undefined,
+      onDecline: () => undefined,
+    }) as AnyElement;
+    const className = tree.props.className ?? '';
+    expect(className).toContain('fixed');
+    expect(className).toContain('bg-white');
+    expect(className).toContain('rounded-md');
+    expect(className).toContain('shadow-2xl');
+    expect(className).toContain('animate-cc-in');
+    // Mobile sheet
+    expect(className).toContain('left-3');
+    expect(className).toContain('right-3');
+    expect(className).toContain('bottom-4');
+    expect(className).toContain('pb-[calc(16px+env(safe-area-inset-bottom))]');
+    // Desktop card
+    expect(className).toContain('md:left-[18px]');
+    expect(className).toContain('md:bottom-[18px]');
+    expect(className).toContain('md:w-[360px]');
+  });
+
+  test('renders title and body using i18n keys', () => {
+    const tree = renderBannerCard(passthroughT, {
+      onAccept: () => undefined,
+      onDecline: () => undefined,
+    }) as AnyElement;
+    const heading = findByType(tree, 'h3');
+    const body = findByType(tree, 'p');
+    expect(heading?.props.children).toBe('title');
+    expect(body?.props.children).toBe('body');
+  });
+
+  test('does NOT render the privacy link when privacyHref is omitted', () => {
+    const tree = renderBannerCard(passthroughT, {
+      onAccept: () => undefined,
+      onDecline: () => undefined,
+    }) as AnyElement;
+    expect(findByType(tree, 'a')).toBeUndefined();
+  });
+
+  test('does NOT render the privacy link when privacyHref is empty/whitespace', () => {
+    const tree = renderBannerCard(passthroughT, {
+      onAccept: () => undefined,
+      onDecline: () => undefined,
+      privacyHref: '   ',
+    }) as AnyElement;
+    expect(findByType(tree, 'a')).toBeUndefined();
+  });
+
+  test('renders the privacy link with the given href when privacyHref is non-empty', () => {
+    const tree = renderBannerCard(passthroughT, {
+      onAccept: () => undefined,
+      onDecline: () => undefined,
+      privacyHref: '/be/privacy',
+    }) as AnyElement;
+    const link = findByType(tree, 'a');
+    expect(link).toBeDefined();
+    expect(link?.props.href).toBe('/be/privacy');
+    expect(link?.props.children).toBe('privacy');
+  });
+
+  test('renders Decline before Accept (tab order: privacy → decline → accept)', () => {
+    const tree = renderBannerCard(passthroughT, {
+      onAccept: () => undefined,
+      onDecline: () => undefined,
+    }) as AnyElement;
+    const buttons = findAllByType(tree, 'button');
+    expect(buttons.length).toBe(2);
+    expect(buttons[0]?.props.children).toBe('decline');
+    expect(buttons[1]?.props.children).toBe('accept');
+  });
+
+  test('Decline button uses ghost styling (white bg, no transform)', () => {
+    const tree = renderBannerCard(passthroughT, {
+      onAccept: () => undefined,
+      onDecline: () => undefined,
+    }) as AnyElement;
+    const [decline] = findAllByType(tree, 'button');
+    const cls = decline?.props.className ?? '';
+    expect(cls).toContain('bg-white');
+    expect(cls).toContain('text-black-tint');
+    expect(cls).toContain('shadow-lg');
+    expect(cls).toContain('hover:shadow-xl');
+    expect(cls).not.toContain('hover:-translate-y-0.5');
+    expect(cls).not.toContain('active:translate-y-px');
+  });
+
+  test('Accept button uses primary styling (bg-primary, no transform)', () => {
+    const tree = renderBannerCard(passthroughT, {
+      onAccept: () => undefined,
+      onDecline: () => undefined,
+    }) as AnyElement;
+    const buttons = findAllByType(tree, 'button');
+    const accept = buttons[1];
+    const cls = accept?.props.className ?? '';
+    expect(cls).toContain('bg-primary');
+    expect(cls).toContain('text-white');
+    expect(cls).toContain('shadow-lg');
+    expect(cls).toContain('hover:shadow-xl');
+    expect(cls).not.toContain('hover:-translate-y-0.5');
+    expect(cls).not.toContain('active:translate-y-px');
+  });
+
+  test('Accept button click invokes onAccept handler', () => {
+    const onAccept = jest.fn();
+    const onDecline = jest.fn();
+    const tree = renderBannerCard(passthroughT, { onAccept, onDecline }) as AnyElement;
+    const [, accept] = findAllByType(tree, 'button');
+    accept?.props.onClick?.();
+    expect(onAccept).toHaveBeenCalledTimes(1);
+    expect(onDecline).not.toHaveBeenCalled();
+  });
+
+  test('Decline button click invokes onDecline handler', () => {
+    const onAccept = jest.fn();
+    const onDecline = jest.fn();
+    const tree = renderBannerCard(passthroughT, { onAccept, onDecline }) as AnyElement;
+    const [decline] = findAllByType(tree, 'button');
+    decline?.props.onClick?.();
+    expect(onDecline).toHaveBeenCalledTimes(1);
+    expect(onAccept).not.toHaveBeenCalled();
+  });
+});
+
+describe('renderReopenPill — hidden state with stored choice', () => {
+  test('renders a button with aria-label from t("reopen")', () => {
+    const tree = renderReopenPill(passthroughT, () => undefined) as AnyElement;
+    expect(tree.type).toBe('button');
+    expect(tree.props['aria-label']).toBe('reopen');
+  });
+
+  test('pill has fixed-position styling and a red dot', () => {
+    const tree = renderReopenPill(passthroughT, () => undefined) as AnyElement;
+    const cls = tree.props.className ?? '';
+    expect(cls).toContain('fixed');
+    expect(cls).toContain('rounded-full');
+    expect(cls).toContain('bg-white');
+    expect(cls).toContain('shadow-lg');
+    expect(cls).toContain('left-3');
+    expect(cls).toContain('bottom-4');
+    expect(cls).toContain('md:left-[18px]');
+    expect(cls).toContain('md:bottom-[18px]');
+    const dot = findByType(tree, 'span');
+    expect(dot).toBeDefined();
+    const dotCls = (dot?.props.className as string) ?? '';
+    expect(dotCls).toContain('bg-primary');
+    expect(dotCls).toContain('rounded-full');
+    expect(String(dot?.props['aria-hidden'])).toBe('true');
+  });
+
+  test('clicking the pill invokes the onReopen handler', () => {
+    const onReopen = jest.fn();
+    const tree = renderReopenPill(passthroughT, onReopen) as AnyElement;
+    tree.props.onClick?.();
+    expect(onReopen).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('ConsentBanner export', () => {
+  test('is a function component accepting a single props arg', () => {
     expect(typeof ConsentBanner).toBe('function');
     expect(ConsentBanner.length).toBe(1);
   });
 
-  test('uses both supported Lang values', () => {
+  test('accepts the supported Lang values', () => {
     expect(Lang.be).toBe('be');
     expect(Lang.nl).toBe('nl');
   });
