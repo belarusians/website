@@ -107,12 +107,12 @@ Designs landed at `cookie_consent/` (April 2026). The Task 3 checkboxes below we
 | Body (`body`) | weight 300, size 14px, line-height 1.55, margin-bottom 14px | same |
 | Privacy link (`privacy`) | inline-left in row, size 13px, muted color (`text-grey`), underline on hover transitions to primary | stacks above buttons on its own line |
 | Buttons row (`actions`) | inline-right in same row as privacy link, gap 10px | 2-column equal-width grid below privacy link, gap 10px, full-width buttons |
-| Decline button | white bg, ink text, `shadow-lg`, on hover `shadow-xl`, no transform | same |
-| Accept button | `bg-primary`, white text, otherwise identical | same |
+| Decline button | white bg, ink text, `shadow-lg`; hover `shadow-2xl` + `-translate-y-0.5`; active `shadow-md` + `translate-y-px` + `bg-white-shade` | same |
+| Accept button | `bg-primary`, white text; same hover/active transform; active `bg-primary-shade` (darker red on press) | same |
 | Mount animation | fade + translate-y 8px → 0 over 350ms ease | same |
-| Reopen pill (post-dismiss) | `bottom-left 18px`, white pill, `shadow-lg`, small red dot + "Cookies" label, weight 500 size 12px | `bottom-left 12px` (or matched to banner's mobile gutter) |
+| Reopen pill (post-dismiss) | `bottom-left 18px`, white pill, `shadow-lg`, small red dot + "Cookies" label, weight 500 size 12px; same hover/active transform as the buttons | `bottom-left 12px` (or matched to banner's mobile gutter) |
 
-Buttons in the design use **shadow-only hover, no `translate-y`** — this is intentionally quieter than the project's standard `<Button>` component (which transforms on hover per CLAUDE.md). **Use custom `<button>` markup** with Tailwind utilities; do not reuse `@/components/button`. Document this deviation in CLAUDE.md when Task 6 is updated.
+Buttons share the project's standard hover/active translate-y pattern (matches `src/components/button.tsx`). They are still **custom `<button>` markup** because the consent buttons need consent-specific size/typography (`px-4 py-2.5 text-sm font-normal`) and an extra `:active` background-darken (`active:bg-primary-shade` / `active:bg-white-shade`) that the shared `<Button>` doesn't provide. Do not refactor to `@/components/button` without first generalizing those.
 
 #### Open questions (resolve before / during implementation)
 
@@ -153,9 +153,10 @@ Buttons in the design use **shadow-only hover, no `translate-y`** — this is in
   - small red dot `<span class="w-2 h-2 rounded-full bg-primary">`
   - label `t('reopen')`
 - [x] custom button markup (do not use `@/components/button`):
-  - Decline (ghost): `bg-white text-black-tint shadow-lg hover:shadow-xl active:shadow-2xl rounded-md px-4 py-2.5 text-sm transition-shadow font-normal`
-  - Accept (primary): same shape, `bg-primary text-white`
-  - **no transform** on hover/active — design is intentionally quieter than the standard project button
+  - Shared base: `rounded-md shadow-lg hover:shadow-2xl hover:-translate-y-0.5 active:shadow-md active:translate-y-px px-4 py-2.5 text-sm font-normal transition-all duration-150`
+  - Decline (ghost): base + `bg-white text-black-tint active:bg-white-shade`
+  - Accept (primary): base + `bg-primary text-white active:bg-primary-shade`
+  - matches the standard `<Button>` translate-y interaction; the consent-specific deltas are sizing/typography + the `:active` background-darken
 - [x] mount animation: add `animation-cc-in` keyframes to `src/components/globals.css` (fade + translate-y 8px → 0, 350ms ease both) OR inline via Tailwind `animate-[…]` arbitrary value if simpler. Apply to the banner only on visible-state mounts, not to the reopen pill
 - [x] handlers:
   - `onAccept` → `writeConsent('granted')` + `applyConsent('granted')` + setState `'hidden'`
@@ -196,7 +197,8 @@ Buttons in the design use **shadow-only hover, no `translate-y`** — this is in
 ### Task 6: Update CLAUDE.md
 - [x] add a short subsection under "Architectural Decisions (Non-Obvious)" titled "Consent Mode v2 + cookie banner": one paragraph covering where the banner lives (`src/app/[lang]/layout.tsx`), the localStorage key (`mara_consent`), and the rule that gtag conversions are gated by Consent Mode (do not bypass)
 - [x] add Pitfall: "Cookie banner only shows under `[lang]` routes; `/studio` (route group) is intentionally not gated and intentionally has no gtag"
-- [x] **after Task 3 ships**: revise the "Consent Mode v2 + cookie banner" subsection to remove the "Today the banner returns `null`" paragraph (it will no longer be true). Replace with a description of the visible banner + reopen pill state machine. Note the **intentional deviation** that consent banner buttons use shadow-only hover (no `translate-y`), unlike `src/components/button.tsx` which translates on hover.
+- [x] **after Task 3 ships**: revise the subsection — remove the "Today the banner returns `null`" paragraph and document the visible banner + reopen pill state machine (`decideRenderMode`).
+- [x] **after design refresh (April 2026)**: update the subsection to drop the prior "shadow-only hover, no `translate-y`" deviation language. Buttons + reopen pill now match the standard `<Button>` translate-y hover/active pattern, but stay as custom markup for consent-specific size/typography and the additional `:active` background-darken (`active:bg-primary-shade`, `active:bg-white-shade`).
 
 ## Technical Details
 

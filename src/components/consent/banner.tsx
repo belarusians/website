@@ -84,17 +84,20 @@ const ACTIONS_CLASSES = ['grid', 'grid-cols-2', 'gap-2.5', 'w-full', 'md:flex', 
 const BUTTON_BASE_CLASSES = [
   'rounded-md',
   'shadow-lg',
-  'hover:shadow-xl',
-  'active:shadow-2xl',
+  'hover:shadow-2xl',
+  'hover:-translate-y-0.5',
+  'active:shadow-md',
+  'active:translate-y-px',
   'px-4',
   'py-2.5',
   'text-sm',
   'font-normal',
-  'transition-shadow',
+  'transition-all',
+  'duration-150',
 ].join(' ');
 
-const DECLINE_BUTTON_CLASSES = `${BUTTON_BASE_CLASSES} bg-white text-black-tint`;
-const ACCEPT_BUTTON_CLASSES = `${BUTTON_BASE_CLASSES} bg-primary text-white`;
+const DECLINE_BUTTON_CLASSES = `${BUTTON_BASE_CLASSES} bg-white text-black-tint active:bg-white-shade`;
+const ACCEPT_BUTTON_CLASSES = `${BUTTON_BASE_CLASSES} bg-primary text-white active:bg-primary-shade`;
 
 const PRIVACY_LINK_CLASSES = 'text-[13px] text-grey self-start hover:text-primary';
 
@@ -110,13 +113,17 @@ const PILL_CLASSES = [
   'bg-white',
   'rounded-full',
   'shadow-lg',
-  'hover:shadow-xl',
+  'hover:shadow-2xl',
+  'hover:-translate-y-0.5',
+  'active:shadow-md',
+  'active:translate-y-px',
   'px-3',
   'py-2',
   'text-grey',
   'text-xs',
   'font-medium',
-  'transition-shadow',
+  'transition-all',
+  'duration-150',
   'z-40',
 ].join(' ');
 

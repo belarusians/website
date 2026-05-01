@@ -270,7 +270,7 @@ describe('renderBannerCard — visible state shape', () => {
     expect(buttons[1]?.props.children).toBe('accept');
   });
 
-  test('Decline button uses ghost styling (white bg, no transform)', () => {
+  test('Decline button uses ghost styling (white bg, translate-y on hover/active, active bg darken)', () => {
     const tree = renderBannerCard(passthroughT, {
       onAccept: () => undefined,
       onDecline: () => undefined,
@@ -280,12 +280,13 @@ describe('renderBannerCard — visible state shape', () => {
     expect(cls).toContain('bg-white');
     expect(cls).toContain('text-black-tint');
     expect(cls).toContain('shadow-lg');
-    expect(cls).toContain('hover:shadow-xl');
-    expect(cls).not.toContain('hover:-translate-y-0.5');
-    expect(cls).not.toContain('active:translate-y-px');
+    expect(cls).toContain('hover:shadow-2xl');
+    expect(cls).toContain('hover:-translate-y-0.5');
+    expect(cls).toContain('active:translate-y-px');
+    expect(cls).toContain('active:bg-white-shade');
   });
 
-  test('Accept button uses primary styling (bg-primary, no transform)', () => {
+  test('Accept button uses primary styling (bg-primary, translate-y on hover/active, active bg darken)', () => {
     const tree = renderBannerCard(passthroughT, {
       onAccept: () => undefined,
       onDecline: () => undefined,
@@ -296,9 +297,10 @@ describe('renderBannerCard — visible state shape', () => {
     expect(cls).toContain('bg-primary');
     expect(cls).toContain('text-white');
     expect(cls).toContain('shadow-lg');
-    expect(cls).toContain('hover:shadow-xl');
-    expect(cls).not.toContain('hover:-translate-y-0.5');
-    expect(cls).not.toContain('active:translate-y-px');
+    expect(cls).toContain('hover:shadow-2xl');
+    expect(cls).toContain('hover:-translate-y-0.5');
+    expect(cls).toContain('active:translate-y-px');
+    expect(cls).toContain('active:bg-primary-shade');
   });
 
   test('Accept button click invokes onAccept handler', () => {

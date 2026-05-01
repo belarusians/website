@@ -119,13 +119,16 @@ html, body { margin: 0; padding: 0; }
   background: #fff;
   color: var(--ink);
   box-shadow: var(--shadow-lg);
-  transition: box-shadow .2s, background .2s;
+  transition: box-shadow .18s ease, transform .12s ease, background-color .18s ease, filter .18s ease;
   white-space: nowrap;
+  will-change: transform, box-shadow;
 }
-.btn:hover  { box-shadow: var(--shadow-xl); }
-.btn:active { box-shadow: var(--shadow-2xl); }
+.btn:hover  { box-shadow: var(--shadow-2xl); transform: translateY(-2px); }
+.btn:active { box-shadow: 0 2px 4px rgb(0 0 0 / .18); transform: translateY(1px); }
 .btn--primary { background: var(--primary); color: #fff; }
+.btn--primary:active { background: var(--primary-shade); }
 .btn--ghost   { background: #fff; color: var(--ink); }
+.btn--ghost:active { background: var(--white-shade); }
 
 /* ============================================================
    Banner
@@ -191,9 +194,11 @@ html, body { margin: 0; padding: 0; }
   font: 500 12px/1 var(--font-sans);
   color: var(--ink-muted);
   cursor: pointer;
-  transition: box-shadow .2s, color .15s;
+  transition: box-shadow .18s ease, transform .12s ease, color .15s;
+  will-change: transform, box-shadow;
 }
-.cc-reopen:hover { box-shadow: var(--shadow-xl); color: var(--ink); }
+.cc-reopen:hover  { box-shadow: var(--shadow-2xl); transform: translateY(-2px); color: var(--ink); }
+.cc-reopen:active { box-shadow: 0 2px 4px rgb(0 0 0 / .18); transform: translateY(1px); }
 .cc-reopen__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); }
 .cc-reopen--desktop { left: 18px; bottom: 18px; }
 .cc-reopen--mobile  { left: 12px; bottom: 92px; }
