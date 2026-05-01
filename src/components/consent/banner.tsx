@@ -5,6 +5,7 @@ import { JSX, useEffect, useState } from 'react';
 import { getTranslation } from '../../app/i18n/client';
 import { Lang } from '../types';
 import { applyConsent, ConsentChoice, readConsent, writeConsent } from '../../lib/consent';
+import { Button } from '../button';
 
 export type ConsentBannerProps = { lang: Lang; privacyHref?: string };
 
@@ -81,24 +82,6 @@ const ACTIONS_CLASSES = ['grid', 'grid-cols-2', 'gap-2.5', 'w-full', 'md:flex', 
   ' ',
 );
 
-const BUTTON_BASE_CLASSES = [
-  'rounded-md',
-  'shadow-lg',
-  'hover:shadow-2xl',
-  'hover:-translate-y-0.5',
-  'active:shadow-md',
-  'active:translate-y-px',
-  'px-4',
-  'py-2.5',
-  'text-sm',
-  'font-normal',
-  'transition-all',
-  'duration-150',
-].join(' ');
-
-const DECLINE_BUTTON_CLASSES = `${BUTTON_BASE_CLASSES} bg-white text-black-tint active:bg-white-shade`;
-const ACCEPT_BUTTON_CLASSES = `${BUTTON_BASE_CLASSES} bg-primary text-white active:bg-primary-shade`;
-
 const PRIVACY_LINK_CLASSES = 'text-[13px] text-grey self-start hover:text-primary';
 
 const PILL_CLASSES = [
@@ -143,12 +126,12 @@ export function renderBannerCard(
           </a>
         ) : null}
         <div className={ACTIONS_CLASSES}>
-          <button type="button" className={DECLINE_BUTTON_CLASSES} onClick={handlers.onDecline}>
+          <Button variant="ghost" size="sm" click={handlers.onDecline}>
             {t('decline')}
-          </button>
-          <button type="button" className={ACCEPT_BUTTON_CLASSES} onClick={handlers.onAccept}>
+          </Button>
+          <Button variant="primary" size="sm" click={handlers.onAccept}>
             {t('accept')}
-          </button>
+          </Button>
         </div>
       </div>
     </section>

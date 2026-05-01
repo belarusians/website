@@ -12,6 +12,9 @@ import {
 } from '../banner';
 import { CONSENT_STORAGE_KEY } from '../../../lib/consent';
 import { Lang } from '../../types';
+import { Button } from '../../button';
+
+type ElementTypeFilter = string | ((...args: never[]) => unknown);
 
 function makeLocalStorage(initial?: Map<string, string>): Storage {
   const store = initial ?? new Map<string, string>();
@@ -77,12 +80,12 @@ function flatten(children: ReactNode): AnyElement[] {
   return out;
 }
 
-function findByType(root: AnyElement, type: string): AnyElement | undefined {
+function findByType(root: AnyElement, type: ElementTypeFilter): AnyElement | undefined {
   const all = [root, ...flatten((root.props as { children?: ReactNode }).children)];
   return all.find((el) => el.type === type);
 }
 
-function findAllByType(root: AnyElement, type: string): AnyElement[] {
+function findAllByType(root: AnyElement, type: ElementTypeFilter): AnyElement[] {
   const all = [root, ...flatten((root.props as { children?: ReactNode }).children)];
   return all.filter((el) => el.type === type);
 }
@@ -264,51 +267,38 @@ describe('renderBannerCard — visible state shape', () => {
       onAccept: () => undefined,
       onDecline: () => undefined,
     }) as AnyElement;
-    const buttons = findAllByType(tree, 'button');
+    const buttons = findAllByType(tree, Button);
     expect(buttons.length).toBe(2);
     expect(buttons[0]?.props.children).toBe('decline');
     expect(buttons[1]?.props.children).toBe('accept');
   });
 
-  test('Decline button uses ghost styling (white bg, translate-y on hover/active, active bg darken)', () => {
+  test('Decline uses Button with ghost variant + sm size', () => {
     const tree = renderBannerCard(passthroughT, {
       onAccept: () => undefined,
       onDecline: () => undefined,
     }) as AnyElement;
-    const [decline] = findAllByType(tree, 'button');
-    const cls = decline?.props.className ?? '';
-    expect(cls).toContain('bg-white');
-    expect(cls).toContain('text-black-tint');
-    expect(cls).toContain('shadow-lg');
-    expect(cls).toContain('hover:shadow-2xl');
-    expect(cls).toContain('hover:-translate-y-0.5');
-    expect(cls).toContain('active:translate-y-px');
-    expect(cls).toContain('active:bg-white-shade');
+    const [decline] = findAllByType(tree, Button);
+    expect(decline?.props.variant).toBe('ghost');
+    expect(decline?.props.size).toBe('sm');
   });
 
-  test('Accept button uses primary styling (bg-primary, translate-y on hover/active, active bg darken)', () => {
+  test('Accept uses Button with primary variant + sm size', () => {
     const tree = renderBannerCard(passthroughT, {
       onAccept: () => undefined,
       onDecline: () => undefined,
     }) as AnyElement;
-    const buttons = findAllByType(tree, 'button');
-    const accept = buttons[1];
-    const cls = accept?.props.className ?? '';
-    expect(cls).toContain('bg-primary');
-    expect(cls).toContain('text-white');
-    expect(cls).toContain('shadow-lg');
-    expect(cls).toContain('hover:shadow-2xl');
-    expect(cls).toContain('hover:-translate-y-0.5');
-    expect(cls).toContain('active:translate-y-px');
-    expect(cls).toContain('active:bg-primary-shade');
+    const [, accept] = findAllByType(tree, Button);
+    expect(accept?.props.variant).toBe('primary');
+    expect(accept?.props.size).toBe('sm');
   });
 
   test('Accept button click invokes onAccept handler', () => {
     const onAccept = jest.fn();
     const onDecline = jest.fn();
     const tree = renderBannerCard(passthroughT, { onAccept, onDecline }) as AnyElement;
-    const [, accept] = findAllByType(tree, 'button');
-    accept?.props.onClick?.();
+    const [, accept] = findAllByType(tree, Button);
+    (accept?.props as { click?: () => void }).click?.();
     expect(onAccept).toHaveBeenCalledTimes(1);
     expect(onDecline).not.toHaveBeenCalled();
   });
@@ -317,8 +307,8 @@ describe('renderBannerCard — visible state shape', () => {
     const onAccept = jest.fn();
     const onDecline = jest.fn();
     const tree = renderBannerCard(passthroughT, { onAccept, onDecline }) as AnyElement;
-    const [decline] = findAllByType(tree, 'button');
-    decline?.props.onClick?.();
+    const [decline] = findAllByType(tree, Button);
+    (decline?.props as { click?: () => void }).click?.();
     expect(onDecline).toHaveBeenCalledTimes(1);
     expect(onAccept).not.toHaveBeenCalled();
   });

@@ -18,8 +18,10 @@ let hookCtrl: HookCtrl;
 
 type ConsentBannerProps = { lang: string; privacyHref?: string };
 type ConsentBannerFn = (props: ConsentBannerProps) => ReactElement | null;
+type ButtonFn = (props: unknown) => ReactElement;
 
 let ConsentBanner: ConsentBannerFn;
+let Button: ButtonFn;
 let CONSENT_STORAGE_KEY: string;
 
 function makeLocalStorage(initial?: Map<string, string>): Storage {
@@ -70,7 +72,9 @@ type AnyElement = ReactElement<{
   [k: string]: unknown;
 }>;
 
-function findAllByType(root: AnyElement, type: string): AnyElement[] {
+type ElementTypeFilter = string | ((...args: never[]) => unknown);
+
+function findAllByType(root: AnyElement, type: ElementTypeFilter): AnyElement[] {
   const out: AnyElement[] = [];
   const visit = (n: ReactNode): void => {
     if (Array.isArray(n)) {
@@ -87,7 +91,7 @@ function findAllByType(root: AnyElement, type: string): AnyElement[] {
   return out.filter((el) => el.type === type);
 }
 
-function findByType(root: AnyElement, type: string): AnyElement | undefined {
+function findByType(root: AnyElement, type: ElementTypeFilter): AnyElement | undefined {
   const all = findAllByType(root, type);
   return all[0];
 }
@@ -128,6 +132,9 @@ describe('ConsentBanner — direct invocation with mocked hooks', () => {
     // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
     const bannerMod = require('../banner') as { ConsentBanner: ConsentBannerFn };
     ConsentBanner = bannerMod.ConsentBanner;
+    // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
+    const buttonMod = require('../../button') as { Button: ButtonFn };
+    Button = buttonMod.Button;
     // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
     const consentMod = require('../../../lib/consent') as { CONSENT_STORAGE_KEY: string };
     CONSENT_STORAGE_KEY = consentMod.CONSENT_STORAGE_KEY;
@@ -192,10 +199,10 @@ describe('ConsentBanner — direct invocation with mocked hooks', () => {
     ({ restore } = setupWindow({ localStorage: storage, gtag }));
     hookCtrl.stateOverrides = { 0: 'visible', 1: false };
     const result = ConsentBanner({ lang: 'be' }) as AnyElement;
-    const buttons = findAllByType(result, 'button');
+    const buttons = findAllByType(result, Button);
     expect(buttons.length).toBe(2);
     const accept = buttons[1];
-    accept.props.onClick?.();
+    (accept.props as { click?: () => void }).click?.();
     const raw = storage.getItem(CONSENT_STORAGE_KEY);
     expect(raw).not.toBeNull();
     expect(JSON.parse(raw as string).choice).toBe('granted');
@@ -214,9 +221,9 @@ describe('ConsentBanner — direct invocation with mocked hooks', () => {
     ({ restore } = setupWindow({ localStorage: storage, gtag }));
     hookCtrl.stateOverrides = { 0: 'visible', 1: false };
     const result = ConsentBanner({ lang: 'be' }) as AnyElement;
-    const buttons = findAllByType(result, 'button');
+    const buttons = findAllByType(result, Button);
     const decline = buttons[0];
-    decline.props.onClick?.();
+    (decline.props as { click?: () => void }).click?.();
     const raw = storage.getItem(CONSENT_STORAGE_KEY);
     expect(JSON.parse(raw as string).choice).toBe('denied');
     expect(gtag).toHaveBeenCalledWith('consent', 'update', {

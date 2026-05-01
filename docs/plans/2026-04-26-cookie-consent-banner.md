@@ -112,7 +112,7 @@ Designs landed at `cookie_consent/` (April 2026). The Task 3 checkboxes below we
 | Mount animation | fade + translate-y 8px → 0 over 350ms ease | same |
 | Reopen pill (post-dismiss) | `bottom-left 18px`, white pill, `shadow-lg`, small red dot + "Cookies" label, weight 500 size 12px; same hover/active transform as the buttons | `bottom-left 12px` (or matched to banner's mobile gutter) |
 
-Buttons share the project's standard hover/active translate-y pattern (matches `src/components/button.tsx`). They are still **custom `<button>` markup** because the consent buttons need consent-specific size/typography (`px-4 py-2.5 text-sm font-normal`) and an extra `:active` background-darken (`active:bg-primary-shade` / `active:bg-white-shade`) that the shared `<Button>` doesn't provide. Do not refactor to `@/components/button` without first generalizing those.
+Action buttons use the shared `<Button>` component (`src/components/button.tsx`) with `variant="ghost"` (Decline) and `variant="primary"` (Accept) at `size="sm"`. The `variant` system + `size="sm"` were added to `<Button>` so the consent buttons could share its hover/active translate-y pattern. The reopen pill stays as a raw `<button>` because it needs `rounded-full` + custom typography that don't fit `<Button>`.
 
 #### Open questions (resolve before / during implementation)
 
@@ -152,11 +152,12 @@ Buttons share the project's standard hover/active translate-y pattern (matches `
   - `<button class="fixed bottom-[18px] left-[18px] inline-flex items-center gap-2 bg-white rounded-full shadow-lg px-3 py-2 text-grey text-xs font-medium ...">`
   - small red dot `<span class="w-2 h-2 rounded-full bg-primary">`
   - label `t('reopen')`
-- [x] custom button markup (do not use `@/components/button`):
-  - Shared base: `rounded-md shadow-lg hover:shadow-2xl hover:-translate-y-0.5 active:shadow-md active:translate-y-px px-4 py-2.5 text-sm font-normal transition-all duration-150`
-  - Decline (ghost): base + `bg-white text-black-tint active:bg-white-shade`
-  - Accept (primary): base + `bg-primary text-white active:bg-primary-shade`
-  - matches the standard `<Button>` translate-y interaction; the consent-specific deltas are sizing/typography + the `:active` background-darken
+- [x] action buttons use the shared `<Button>` component (`@/components/button`):
+  - `variant="ghost"` for Decline → `bg-white text-black-tint active:bg-white-shade`
+  - `variant="primary"` for Accept → `bg-primary text-white active:bg-primary-shade`
+  - `size="sm"` for both → `px-4 py-2.5 text-sm font-normal`
+  - hover/active translate-y + shadow escalation comes from the shared `<Button>` base (`hover:shadow-2xl hover:-translate-y-0.5 active:shadow-md active:translate-y-px`)
+  - `variant` and `size="sm"` were added to `<Button>` as part of this work — see `src/components/button.tsx`
 - [x] mount animation: add `animation-cc-in` keyframes to `src/components/globals.css` (fade + translate-y 8px → 0, 350ms ease both) OR inline via Tailwind `animate-[…]` arbitrary value if simpler. Apply to the banner only on visible-state mounts, not to the reopen pill
 - [x] handlers:
   - `onAccept` → `writeConsent('granted')` + `applyConsent('granted')` + setState `'hidden'`
@@ -198,7 +199,8 @@ Buttons share the project's standard hover/active translate-y pattern (matches `
 - [x] add a short subsection under "Architectural Decisions (Non-Obvious)" titled "Consent Mode v2 + cookie banner": one paragraph covering where the banner lives (`src/app/[lang]/layout.tsx`), the localStorage key (`mara_consent`), and the rule that gtag conversions are gated by Consent Mode (do not bypass)
 - [x] add Pitfall: "Cookie banner only shows under `[lang]` routes; `/studio` (route group) is intentionally not gated and intentionally has no gtag"
 - [x] **after Task 3 ships**: revise the subsection — remove the "Today the banner returns `null`" paragraph and document the visible banner + reopen pill state machine (`decideRenderMode`).
-- [x] **after design refresh (April 2026)**: update the subsection to drop the prior "shadow-only hover, no `translate-y`" deviation language. Buttons + reopen pill now match the standard `<Button>` translate-y hover/active pattern, but stay as custom markup for consent-specific size/typography and the additional `:active` background-darken (`active:bg-primary-shade`, `active:bg-white-shade`).
+- [x] **after design refresh (April 2026)**: update the subsection to drop the prior "shadow-only hover, no `translate-y`" deviation language. Buttons + reopen pill now match the standard `<Button>` translate-y hover/active pattern.
+- [x] **after Button consolidation**: update the subsection to reflect that action buttons now use the shared `<Button>` component with `variant="primary"`/`variant="ghost"` + `size="sm"` (the `variant` system and `sm` size were added to Button as part of that consolidation). Note the reopen pill stays as raw `<button>` because of `rounded-full` + typography mismatch.
 
 ## Technical Details
 
