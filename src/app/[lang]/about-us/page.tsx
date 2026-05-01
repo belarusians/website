@@ -20,6 +20,8 @@ import hand from '../../../../public/images/hand.jpg';
 import { getAlternates } from '../../../utils/og';
 import { toLang } from '../../../utils/lang';
 
+export const revalidate = 3600;
+
 export default async function AboutUs({ params }: CommonPageParams) {
   const { lang: langParam } = await params;
   const lang = toLang(langParam);

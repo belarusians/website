@@ -1,0 +1,5 @@
+{
+  "permissions": {
+    "allow": ["Bash(ls:*)", "Bash(grep:*)", "Bash(find:*)", "Bash(npm run typecheck)"]
+  }
+}

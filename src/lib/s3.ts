@@ -1,14 +1,18 @@
 import { PutObjectCommandInput, S3 } from '@aws-sdk/client-s3';
 import { VacancyApplication } from './vacancies';
 
+let s3Instance: S3 | null = null;
+
 function getS3(): S3 {
+  if (s3Instance) return s3Instance;
   if (!process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY || !process.env.REGION_AWS) {
     throw new Error('AWS credentials variable should be set');
   }
-  return new S3({
+  s3Instance = new S3({
     region: process.env.REGION_AWS,
     credentials: { accessKeyId: process.env.AWS_ACCESS_KEY_ID, secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY },
   });
+  return s3Instance;
 }
 
 export async function saveEmail(email: string) {
