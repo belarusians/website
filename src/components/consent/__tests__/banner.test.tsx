@@ -211,6 +211,7 @@ describe('renderBannerCard — visible state shape', () => {
     expect(className).toContain('rounded-md');
     expect(className).toContain('shadow-2xl');
     expect(className).toContain('animate-cc-in');
+    expect(className).not.toContain('animate-cc-out');
     // Mobile sheet
     expect(className).toContain('left-3');
     expect(className).toContain('right-3');
@@ -220,6 +221,20 @@ describe('renderBannerCard — visible state shape', () => {
     expect(className).toContain('md:left-[18px]');
     expect(className).toContain('md:bottom-[18px]');
     expect(className).toContain('md:w-[360px]');
+  });
+
+  test('section swaps to animate-cc-out when exiting=true (exit animation)', () => {
+    const tree = renderBannerCard(
+      passthroughT,
+      {
+        onAccept: () => undefined,
+        onDecline: () => undefined,
+      },
+      true,
+    ) as AnyElement;
+    const className = tree.props.className ?? '';
+    expect(className).toContain('animate-cc-out');
+    expect(className).not.toContain('animate-cc-in');
   });
 
   test('renders title and body using i18n keys', () => {
@@ -345,6 +360,14 @@ describe('renderReopenPill — hidden state with stored choice', () => {
     const tree = renderReopenPill(passthroughT, onReopen) as AnyElement;
     tree.props.onClick?.();
     expect(onReopen).toHaveBeenCalledTimes(1);
+  });
+
+  test('pill has cursor-pointer and no entry/exit animation class', () => {
+    const tree = renderReopenPill(passthroughT, () => undefined) as AnyElement;
+    const cls = tree.props.className ?? '';
+    expect(cls).toContain('cursor-pointer');
+    expect(cls).not.toContain('animate-cc-in');
+    expect(cls).not.toContain('animate-cc-out');
   });
 });
 

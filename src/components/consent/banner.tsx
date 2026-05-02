@@ -46,7 +46,7 @@ export function decideRenderMode(state: BannerState, hasStoredChoice: boolean): 
   return 'none';
 }
 
-const BANNER_CLASSES = [
+const BANNER_BASE_CLASSES = [
   'fixed',
   'left-3',
   'right-3',
@@ -57,7 +57,6 @@ const BANNER_CLASSES = [
   'rounded-md',
   'shadow-2xl',
   'z-50',
-  'animate-cc-in',
   'md:left-[18px]',
   'md:right-auto',
   'md:bottom-[18px]',
@@ -96,6 +95,7 @@ const PILL_CLASSES = [
   'bg-white',
   'rounded-full',
   'shadow-lg',
+  'cursor-pointer',
   'hover:shadow-2xl',
   'hover:-translate-y-0.5',
   'active:shadow-md',
@@ -110,13 +110,17 @@ const PILL_CLASSES = [
   'z-40',
 ].join(' ');
 
+export const BANNER_EXIT_DURATION_MS = 350;
+
 export function renderBannerCard(
   t: Translator,
   handlers: { onAccept: () => void; onDecline: () => void; privacyHref?: string },
+  exiting = false,
 ): JSX.Element {
   const privacyHref = handlers.privacyHref?.trim();
+  const animation = exiting ? 'animate-cc-out' : 'animate-cc-in';
   return (
-    <section role="region" aria-label={t('aria.region')} className={BANNER_CLASSES}>
+    <section role="region" aria-label={t('aria.region')} className={`${BANNER_BASE_CLASSES} ${animation}`}>
       <h3 className="m-0 mb-1.5 text-base font-medium tracking-tight">{t('title')}</h3>
       <p className="m-0 mb-3.5 text-sm font-light leading-[1.55] text-black-tint">{t('body')}</p>
       <div className={ROW_CLASSES}>
@@ -151,6 +155,7 @@ export function ConsentBanner({ lang, privacyHref }: ConsentBannerProps): JSX.El
   const { t } = getTranslation(lang, 'consent');
   const [state, setState] = useState<BannerState>('hidden');
   const [hasStoredChoice, setHasStoredChoice] = useState<boolean>(false);
+  const [bannerExiting, setBannerExiting] = useState<boolean>(false);
 
   useEffect(() => {
     const stored = applyStoredConsent();
@@ -165,22 +170,39 @@ export function ConsentBanner({ lang, privacyHref }: ConsentBannerProps): JSX.El
     /* eslint-enable react-hooks/set-state-in-effect */
   }, []);
 
+  // Keep the banner mounted during its exit animation, then unmount once the
+  // animation has had time to finish (consent is already persisted + applied
+  // synchronously when Accept/Decline fires; only the visible flip is delayed).
+  // The cleanup handles unmount mid-animation (e.g. navigation) so we don't
+  // setState on a stale tree.
+  useEffect(() => {
+    if (!bannerExiting) return;
+    const timer = setTimeout(() => {
+      setHasStoredChoice(true);
+      setState('hidden');
+      setBannerExiting(false);
+    }, BANNER_EXIT_DURATION_MS);
+    return (): void => clearTimeout(timer);
+  }, [bannerExiting]);
+
   const mode = decideRenderMode(state, hasStoredChoice);
 
   if (mode === 'banner') {
-    return renderBannerCard(t, {
-      privacyHref,
-      onAccept: () => {
-        recordAccept();
-        setHasStoredChoice(true);
-        setState('hidden');
+    return renderBannerCard(
+      t,
+      {
+        privacyHref,
+        onAccept: () => {
+          recordAccept();
+          setBannerExiting(true);
+        },
+        onDecline: () => {
+          recordDecline();
+          setBannerExiting(true);
+        },
       },
-      onDecline: () => {
-        recordDecline();
-        setHasStoredChoice(true);
-        setState('hidden');
-      },
-    });
+      bannerExiting,
+    );
   }
 
   if (mode === 'pill') {

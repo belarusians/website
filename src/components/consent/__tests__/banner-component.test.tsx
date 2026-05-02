@@ -193,11 +193,11 @@ describe('ConsentBanner — direct invocation with mocked hooks', () => {
     expect(result.props['aria-label']).toBe('aria.region');
   });
 
-  test('state=visible Accept handler calls recordAccept and hides the banner', () => {
+  test('state=visible Accept handler persists granted, calls gtag, and flags bannerExiting (delays unmount)', () => {
     const gtag = jest.fn();
     const storage = makeLocalStorage();
     ({ restore } = setupWindow({ localStorage: storage, gtag }));
-    hookCtrl.stateOverrides = { 0: 'visible', 1: false };
+    hookCtrl.stateOverrides = { 0: 'visible', 1: false, 2: false };
     const result = ConsentBanner({ lang: 'be' }) as AnyElement;
     const buttons = findAllByType(result, Button);
     expect(buttons.length).toBe(2);
@@ -211,15 +211,21 @@ describe('ConsentBanner — direct invocation with mocked hooks', () => {
       ad_user_data: 'granted',
       ad_personalization: 'granted',
     });
-    expect(hookCtrl.setters[1]).toHaveBeenCalledWith(true);
-    expect(hookCtrl.setters[0]).toHaveBeenCalledWith('hidden');
+    // setters[2] is the bannerExiting setter; state (0) and hasStoredChoice (1)
+    // are NOT flipped to their post-click targets — the exit-animation timer
+    // handles those. (setters[0] gets called with 'visible' by the mount-time
+    // useEffect since localStorage is empty here; that's a benign duplicate of
+    // the override, so we assert specifically against the post-click target.)
+    expect(hookCtrl.setters[2]).toHaveBeenCalledWith(true);
+    expect(hookCtrl.setters[1]).not.toHaveBeenCalledWith(true);
+    expect(hookCtrl.setters[0]).not.toHaveBeenCalledWith('hidden');
   });
 
-  test('state=visible Decline handler calls recordDecline (downgrades gtag) and hides the banner', () => {
+  test('state=visible Decline handler persists denied, calls gtag, and flags bannerExiting', () => {
     const gtag = jest.fn();
     const storage = makeLocalStorage();
     ({ restore } = setupWindow({ localStorage: storage, gtag }));
-    hookCtrl.stateOverrides = { 0: 'visible', 1: false };
+    hookCtrl.stateOverrides = { 0: 'visible', 1: false, 2: false };
     const result = ConsentBanner({ lang: 'be' }) as AnyElement;
     const buttons = findAllByType(result, Button);
     const decline = buttons[0];
@@ -231,8 +237,31 @@ describe('ConsentBanner — direct invocation with mocked hooks', () => {
       ad_user_data: 'denied',
       ad_personalization: 'denied',
     });
+    expect(hookCtrl.setters[2]).toHaveBeenCalledWith(true);
+    expect(hookCtrl.setters[1]).not.toHaveBeenCalledWith(true);
+    expect(hookCtrl.setters[0]).not.toHaveBeenCalledWith('hidden');
+  });
+
+  test('bannerExiting=true after the exit-animation timer flips state to hidden, sets hasStoredChoice, and clears bannerExiting', () => {
+    jest.useFakeTimers();
+    hookCtrl.stateOverrides = { 0: 'visible', 1: false, 2: true };
+    ({ restore } = setupWindow());
+    ConsentBanner({ lang: 'be' });
+    jest.advanceTimersByTime(350);
     expect(hookCtrl.setters[1]).toHaveBeenCalledWith(true);
     expect(hookCtrl.setters[0]).toHaveBeenCalledWith('hidden');
+    expect(hookCtrl.setters[2]).toHaveBeenCalledWith(false);
+    jest.useRealTimers();
+  });
+
+  test('bannerExiting=true renders the banner with animate-cc-out (exit animation)', () => {
+    hookCtrl.stateOverrides = { 0: 'visible', 1: false, 2: true };
+    ({ restore } = setupWindow());
+    const result = ConsentBanner({ lang: 'be' }) as AnyElement;
+    expect(result.type).toBe('section');
+    const cls = (result.props.className as string) ?? '';
+    expect(cls).toContain('animate-cc-out');
+    expect(cls).not.toContain('animate-cc-in');
   });
 
   test('state=hidden with hasStoredChoice=true renders the reopen pill', () => {
@@ -243,9 +272,14 @@ describe('ConsentBanner — direct invocation with mocked hooks', () => {
     expect(result.props['aria-label']).toBe('reopen');
   });
 
-  test('reopen pill click sets state back to visible', () => {
-    hookCtrl.stateOverrides = { 0: 'hidden', 1: true };
-    ({ restore } = setupWindow());
+  test('reopen pill click immediately sets state to visible (banner takes over with animate-cc-in)', () => {
+    // Seed a stored choice so the mount-time useEffect does not itself call
+    // setState('visible') and produce a spurious matching call below.
+    const storage = makeLocalStorage(
+      new Map([[CONSENT_STORAGE_KEY, JSON.stringify({ choice: 'denied', timestamp: 1 })]]),
+    );
+    ({ restore } = setupWindow({ localStorage: storage }));
+    hookCtrl.stateOverrides = { 0: 'hidden', 1: true, 2: false };
     const result = ConsentBanner({ lang: 'be' }) as AnyElement;
     result.props.onClick?.();
     expect(hookCtrl.setters[0]).toHaveBeenCalledWith('visible');
