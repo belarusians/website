@@ -9,6 +9,7 @@ const eslintConfig = defineConfig([
   eslintConfigPrettier,
   globalIgnores([
     '__checks__/**',
+    'cookie_consent/**',
     'next.config.js',
     'deploy/**',
     'dist/**',

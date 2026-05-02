@@ -92,6 +92,8 @@
   --animate-shake: shake 0.6s ease-in-out 1;
   --animate-fade-in: fade-in 0.4s ease-in-out forwards;
   --animate-t-fade-in: t-fade-in 0.2s ease-in-out forwards;
+  --animate-cc-in: cc-in 0.35s ease both;
+  --animate-cc-out: cc-out 0.35s ease both;
 
   @keyframes rotation {
     0% {
@@ -154,6 +156,26 @@
     100% {
       opacity: 0;
       transform: translateY(-30px);
+    }
+  }
+  @keyframes cc-in {
+    0% {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes cc-out {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(8px);
     }
   }
 }

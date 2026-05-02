@@ -31,10 +31,10 @@ src/app/api/             API routes: clickmeeting, donate, revalidate, subscribe
 src/app/api/utils.ts     sendError(status, msg, reason?) / sendSuccess(msg) helpers
 src/app/i18n/            i18n config + locales/{be,nl}/*.json
 src/app/types.ts         CommonPageParams, PageSearchParams, PropsWithClass
-src/components/          Reusable UI: button, card, dropdown, header/, headings/, menu/, section, spinner, image
+src/components/          Reusable UI: button, card, consent/, dropdown, header/, headings/, menu/, section, spinner, image
 src/components/types.ts  Lang enum (be, nl), domain types (Event, News, Guide, Feedback)
 src/sanity/              CMS schemas: event/, news/, guide/, feedback/, vacancy/, locale-schemas/
-src/lib/                 Integrations: stripe, s3, email, clickmeeting, google-directory, vacancies
+src/lib/                 Integrations: stripe, s3, email, clickmeeting, google-directory, vacancies, consent
 src/theme/               Design tokens: tokens.ts (COLORS, PRIMARY) — keep in sync with globals.css @theme
 src/utils/               Helpers: og.ts (OG images), lang.ts (validation)
 src/middleware.ts        Clerk auth + locale redirect (default: be, /ru → /be redirect)
@@ -50,7 +50,7 @@ Server components. Receive `{ params }: CommonPageParams`, await params to get `
 Use `'use client'` directive. Import `getTranslation` from `@/app/i18n/client` instead. Call as `const { t } = getTranslation(lang, namespace)`.
 
 ### i18n Namespaces
-Translation files at `src/app/i18n/locales/{be,nl}/`. Namespaces: common, main, about-us, donate, events, guides, join-us, kupalle, vacancies. Default namespace: common. Fallback language: be.
+Translation files at `src/app/i18n/locales/{be,nl}/`. Namespaces: common, main, about-us, consent, donate, events, guides, join-us, kupalle, vacancies. Default namespace: common. Fallback language: be.
 
 ### API Routes
 Export async HTTP method handlers (GET, POST, etc.) in `route.ts`. Use `sendError`/`sendSuccess` from `@/app/api/utils`. Validate with Zod where applicable.
@@ -94,6 +94,9 @@ Builders live in `src/lib/jsonld.ts` (`buildSiteJsonLd`, `eventJsonLd`); pages r
 - Buttons translate on hover/active (`hover:-translate-y-0.5`, `active:translate-y-px`) alongside shadow escalation. Defined in `src/components/button.tsx`.
 - The rainbow gradient is a seamless conic rotation driven by `@property --mara-angle` via the `bg-rainbow-spin` utility in `globals.css`. Do not reintroduce `animation-duration` hover changes — they cause a visible jump.
 - Logo has a `showSubtitle` prop for the two approved variants (`src/components/header/logo.tsx`); callers default to the subtitle-visible variant.
+
+### Consent Mode v2 + cookie banner
+gtag.js is mounted in `src/app/[lang]/layout.tsx` with all ad signals (`ad_storage`, `ad_user_data`, `ad_personalization`) defaulted to `denied`. The defaults are set by a **raw `<script>` tag with `dangerouslySetInnerHTML`** (not `next/script`): Next.js only honors `strategy="beforeInteractive"` in the **root** layout, so a nested-layout `next/script` would silently degrade to `afterInteractive` and could let gtag.js fire ad pixels before the consent default lands. The raw inline `<script>` renders into the SSR HTML in document order and runs synchronously before the subsequent async gtag.js `<Script>` — preserving the "default-denied first" guarantee while keeping gtag scoped to `[lang]` (so `/studio` stays gtag-free). `<ConsentBanner lang={lang} />` is a sibling of `{children}` and reads/writes localStorage key `mara_consent` (shape `{ choice, timestamp }`); helpers live in `src/lib/consent.ts`. The component is a three-mode state machine driven by `decideRenderMode(state, hasStoredChoice)`: `'banner'` (visible card with Accept/Decline) when `state === 'visible'`, `'pill'` (small "Cookies" reopen pill bottom-left) when `state === 'hidden'` and a stored choice exists, and `'none'` when `state === 'hidden'` with no stored choice (post-SSR, pre-hydration only). On mount the component calls `applyStoredConsent` (re-upgrades gtag if the stored choice was `'granted'`) and then either flips to `'visible'` (no stored choice → first visit) or sets `hasStoredChoice = true` (stored choice → render the pill). Accept calls `recordAccept` (`writeConsent('granted')` + `applyConsent('granted')`), Decline calls `recordDecline` (`writeConsent('denied')` + `applyConsent('denied')` — the explicit downgrade matters because the user may be revoking after a prior grant via the reopen pill; for a first-time decline gtag is already at default-denied so the call is a no-op), and clicking the pill flips state back to `'visible'` without touching gtag. Conversion tracking (`window.gtag_report_conversion` used by `event-article.tsx`) is gated by Consent Mode — never bypass by calling `gtag('event', 'conversion', ...)` directly without going through consent. Action buttons use the shared `<Button>` component (`src/components/button.tsx`) with `variant="ghost"` for Decline and `variant="primary"` for Accept, both at `size="sm"`. The `variant` system was added so the consent banner could share Button's hover/active translate-y pattern instead of duplicating it; `variant="primary"` adds `bg-primary text-white active:bg-primary-shade`, `variant="ghost"` adds `bg-white text-black-tint active:bg-white-shade`, and `size="sm"` resolves to `px-4 py-2.5 text-sm font-normal`. Existing call sites that style via `className` keep working because `variant` is optional and defaults to no color classes. The reopen pill stays as a raw `<button>` in `banner.tsx` because it needs `rounded-full` + custom typography that don't fit `<Button>` without further generalization.
 
 ## Webhooks
 
@@ -143,3 +146,4 @@ NEXT_PUBLIC_UMAMI_WEBSITE_ID, NEXT_PUBLIC_UMAMI_URL
 5. Google private key: `\n` must be actual newlines, not literal string
 6. Stripe product ID for ClickMeeting invite is hardcoded — update when adding new event products
 7. Clerk redirect URLs must include `[lang]`
+8. Cookie banner only shows under `[lang]` routes; `/studio` (route group) is intentionally not gated and intentionally has no gtag

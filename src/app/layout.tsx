@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactElement } from 'react';
+import { PropsWithChildren } from 'react';
 import { Metadata } from 'next/types';
 import Script from 'next/script';
 import { Roboto } from 'next/font/google';
@@ -29,8 +29,6 @@ function addJsonLd() {
     __html: jsonLdToHtml(buildSiteJsonLd()),
   };
 }
-
-const ENABLE_GOOGLE_TAG = true;
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
@@ -72,37 +70,8 @@ export default function RootLayout({ children }: PropsWithChildren) {
         />
         <div className={roboto.className}>{children}</div>
         <SpeedInsights />
-        {ENABLE_GOOGLE_TAG ? <GoogleTag /> : null}
       </body>
     </html>
-  );
-}
-
-function GoogleTag(): ReactElement {
-  return (
-    <>
-      <Script async src="https://www.googletagmanager.com/gtag/js?id=AW-11125506805" />
-      <Script id="google-tag">
-        {`window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'AW-11125506805');`}
-      </Script>
-      <Script id="gtm-conversion-reporter">
-        {`
-        function gtag_report_conversion(value) {
-          var callback = function () {};
-          gtag('event', 'conversion', {
-              'send_to': value,
-              'transaction_id': '',
-              'event_callback': callback
-          });
-          return false;
-        }
-        `}
-      </Script>
-    </>
   );
 }
 
