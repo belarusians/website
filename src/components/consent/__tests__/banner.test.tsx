@@ -215,7 +215,7 @@ describe('renderBannerCard — visible state shape', () => {
     // Mobile sheet
     expect(className).toContain('left-3');
     expect(className).toContain('right-3');
-    expect(className).toContain('bottom-4');
+    expect(className).toContain('bottom-[88px]');
     expect(className).toContain('pb-[calc(16px+env(safe-area-inset-bottom))]');
     // Desktop card
     expect(className).toContain('md:left-[18px]');
@@ -344,7 +344,7 @@ describe('renderReopenPill — hidden state with stored choice', () => {
     expect(cls).toContain('bg-white');
     expect(cls).toContain('shadow-lg');
     expect(cls).toContain('left-3');
-    expect(cls).toContain('bottom-4');
+    expect(cls).toContain('bottom-[88px]');
     expect(cls).toContain('md:left-[18px]');
     expect(cls).toContain('md:bottom-[18px]');
     const dot = findByType(tree, 'span');

@@ -85,7 +85,7 @@ export function TabBar({ lang }: { lang: Lang }) {
               data-umami-event="donate-us"
               className="flex flex-col items-center justify-center min-h-[48px] no-underline"
             >
-              <span className="bg-rainbow-spin -mt-5 h-10 w-10 rounded-full bg-black-tint text-white flex items-center justify-center shadow-lg">
+              <span className="bg-rainbow-spin -mt-5 h-10 w-10 rounded-full bg-black text-white flex items-center justify-center shadow-lg">
                 <FontAwesomeIcon icon={tab.icon} className="w-[18px] h-[18px]" />
               </span>
               <span
