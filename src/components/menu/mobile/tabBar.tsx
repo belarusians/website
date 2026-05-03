@@ -68,7 +68,7 @@ export function TabBar({ lang }: { lang: Lang }) {
   return (
     <nav
       aria-label={t('tab.aria-label')}
-      className="fixed bottom-0 left-0 right-0 z-50 grid grid-cols-5 bg-white pt-2 px-1 pb-[34px] md:hidden"
+      className="fixed bottom-0 left-0 right-0 z-40 grid grid-cols-5 bg-white pt-2 px-1 pb-[34px] md:hidden"
       style={{ boxShadow: '0 -1px 0 #EBEBEB, 0 -10px 20px rgb(0 0 0 / 0.04)' }}
     >
       {TABS.map((tab) => {
