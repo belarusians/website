@@ -186,10 +186,10 @@ Translation to Tailwind 4 utilities currently used in this repo:
 - `backdrop-saturate-180` — Tailwind 4 has `backdrop-saturate-150`; use arbitrary `backdrop-saturate-[1.8]`.
 - `sticky top-0 z-50` — keep existing `z-50` (header sits above the tab bar's `z-50` due to render order; if that proves brittle, raise tab bar to `z-40` per the kit's `.m-tabbar { z-index: 50 }` comment is internal to the kit — flag as ⚠️ if a stacking issue surfaces).
 
-- [ ] edit `src/components/header/header.tsx`: replace `bg-white-shade/80 backdrop-blur-md` with `bg-white-shade/85 backdrop-blur-[16px] backdrop-saturate-[1.8]` (keep `md:bg-white-shade` for desktop where blur is irrelevant).
-- [ ] update `src/components/header/__tests__/header.test.tsx` shape assertion: expect classes `backdrop-blur-[16px]`, `backdrop-saturate-[1.8]`, `bg-white-shade/85`.
-- [ ] run `npm run typecheck && npm run lint` — must pass.
-- [ ] run tests — must pass before Task 5.
+- [x] edit `src/components/header/header.tsx`: replace `bg-white-shade/80 backdrop-blur-md` with `bg-white-shade/85 backdrop-blur-[16px] backdrop-saturate-[1.8]` (keep `md:bg-white-shade` for desktop where blur is irrelevant). (The current branch had `bg-white-shade` without prior blur classes — added the kit-spec mobile classes alongside the desktop override.)
+- [x] update `src/components/header/__tests__/header.test.tsx` shape assertion: expect classes `backdrop-blur-[16px]`, `backdrop-saturate-[1.8]`, `bg-white-shade/85`.
+- [x] run `npm run typecheck && npm run lint` — must pass. (typecheck clean; lint has 5 pre-existing errors only in `ui_kits/mobile/` which is read-only per this plan; no new errors or warnings from header changes.)
+- [x] run tests — must pass before Task 5. (Full suite: 158/158 passing.)
 
 ### Task 5: Verify acceptance against the kit
 
