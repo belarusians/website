@@ -146,7 +146,7 @@ Reads from kit: `ui_kits/mobile/Header.jsx` lines 165–179 (the `labels()` func
 
 Reads from kit: `ui_kits/mobile/Header.jsx` `TabBar` component (lines ~138–162) and `ui_kits/mobile/styles.css` `.m-tabbar` block (lines ~309–351).
 
-- [ ] open `src/components/menu/mobile/tabBar.tsx` and rewrite top to bottom. The skeleton:
+- [x] open `src/components/menu/mobile/tabBar.tsx` and rewrite top to bottom. The skeleton:
   ```tsx
   // Order MUST match ui_kits/mobile/Header.jsx → tabs[]
   const TABS: TabDef[] = [
@@ -157,21 +157,22 @@ Reads from kit: `ui_kits/mobile/Header.jsx` `TabBar` component (lines ~138–162
     { key: 'about',  segment: 'about-us',   labelKey: 'tab.info',   icon: faCircleInfo },
   ];
   ```
-- [ ] update `TabKey` type accordingly: `'home' | 'events' | 'donate' | 'help' | 'about'`.
-- [ ] update `activeTab(pathname, lang)`: drop the old `info` branch; add a `help` branch that matches `/help` and `/alien-passport` (because the help hub links to passport content); keep the `about` branch matching `/about-us | /vacancies | /reports`.
-- [ ] structural change to the donate cell: instead of an `<li>` containing a `<Link>` containing icon-chip + label, the donate cell renders a `<Link>` whose body is **only** the raised dot pill. Per the kit, the donate tab visually overflows the bar (margin-top: -20px) so the dot floats above the surface. Translate kit values:
+- [x] update `TabKey` type accordingly: `'home' | 'events' | 'donate' | 'help' | 'about'`.
+- [x] update `activeTab(pathname, lang)`: drop the old `info` branch; add a `help` branch that matches `/help` and `/alien-passport` (because the help hub links to passport content); keep the `about` branch matching `/about-us | /vacancies | /reports`.
+- [x] structural change to the donate cell: instead of an `<li>` containing a `<Link>` containing icon-chip + label, the donate cell renders a `<Link>` whose body is **only** the raised dot pill. Per the kit, the donate tab visually overflows the bar (margin-top: -20px) so the dot floats above the surface. Translate kit values:
   - dot: `relative isolate overflow-hidden -mt-5 mx-auto h-10 w-10 rounded-full bg-black-tint text-white flex items-center justify-center shadow-lg bg-rainbow-spin` (the existing `bg-rainbow-spin` utility carries the conic + animation).
   - label below: `text-[10px] leading-none font-medium mt-1` ("Steun"/"Падтр.")
-- [ ] non-donate cell: column layout, FA icon at 22px (`w-[22px] h-[22px]`, kit uses `font-size: 22px`), label `text-[10px] font-medium leading-none`. Active color `text-primary` (#ED1C24); inactive `text-grey` (#808080).
-- [ ] outer `<nav>`: `fixed bottom-0 left-0 right-0 z-50 grid grid-cols-5 bg-white pt-2 px-1 pb-[34px] md:hidden` plus the kit's shadow `shadow-tab-bar` (or inline `style={{ boxShadow: '0 -1px 0 #EBEBEB, 0 -10px 20px rgb(0 0 0/0.04)' }}` if Tailwind 4's arbitrary value syntax for multi-shadows is awkward). z-50 matches the kit (`.m-tabbar { z-index: 50 }`).
-- [ ] keep `data-umami-event="donate-us"` on the donate `<Link>`.
-- [ ] keep `aria-current="page"` on the active tab.
-- [ ] update `src/components/menu/mobile/__tests__/tabBar.test.tsx`:
-  - assert tabs render in `[home, events, donate, help, about]` order (use `getAllByRole('link')` and check the third entry has `aria-label`/`href` for donate).
-  - assert the donate `<Link>` contains a child element with the class `bg-rainbow-spin`.
-  - assert `activeTab` for pathnames: `/be` → home, `/be/events` → events, `/be/donate` → donate, `/be/help` → help, `/be/alien-passport` → help, `/be/about-us` → about, `/be/vacancies` → about, `/be/reports/2025` → about.
-  - assert each tab `href` matches `/${lang}/${segment}` (or `/${lang}` for home).
-- [ ] run tests — must pass before Task 4.
+- [x] non-donate cell: column layout, FA icon at 22px (`w-[22px] h-[22px]`, kit uses `font-size: 22px`), label `text-[10px] font-medium leading-none`. Active color `text-primary` (#ED1C24); inactive `text-grey` (#808080).
+- [x] outer `<nav>`: `fixed bottom-0 left-0 right-0 z-50 grid grid-cols-5 bg-white pt-2 px-1 pb-[34px] md:hidden` plus inline `style={{ boxShadow: '0 -1px 0 #EBEBEB, 0 -10px 20px rgb(0 0 0 / 0.04)' }}` (chosen over an arbitrary-value Tailwind utility because Tailwind 4's arbitrary syntax stumbles on multi-shadow values containing commas).
+- [x] keep `data-umami-event="donate-us"` on the donate `<Link>`.
+- [x] keep `aria-current="page"` on the active tab.
+- [x] update `src/components/menu/mobile/__tests__/tabBar.test.tsx` (created fresh — no prior file existed on this branch):
+  - asserts tabs render in `[home, events, donate, help, about]` order via `findAllByType(result, 'a')` (the test mocks `next/link` to the host string `'a'`, since the project's jest env is `node` and we invoke the component as a function).
+  - asserts the donate `<Link>` subtree contains an element whose className includes `bg-rainbow-spin`.
+  - asserts `activeTab` for pathnames `/be`, `/be/events`, `/be/donate`, `/be/help`, `/be/alien-passport`, `/be/about-us`, `/be/vacancies`, `/be/reports/2025`, plus negative + nl-prefix coverage.
+  - asserts each tab `href` matches `/${lang}/${segment}` (or `/${lang}` for home) for both `be` and `nl`.
+  - asserts `aria-current="page"` only on the active tab for each canonical pathname.
+- [x] run tests — must pass before Task 4. (16/16 tabBar tests pass; full suite: 157/157.)
 
 ### Task 4: Retune mobile header backdrop to kit values
 
