@@ -50,7 +50,7 @@ const BANNER_BASE_CLASSES = [
   'fixed',
   'left-3',
   'right-3',
-  // Clear the fixed mobile TabBar (~84px tall: pt-2 + content + pb-[34px]).
+  // Sit just above the fixed mobile TabBar (90px = pt-2 + min-h-[48px] + pb-[34px]).
   'bottom-[88px]',
   'p-[18px]',
   'pb-[calc(16px+env(safe-area-inset-bottom))]',
@@ -86,7 +86,7 @@ const PRIVACY_LINK_CLASSES = 'text-[13px] text-grey self-start hover:text-primar
 
 const PILL_CLASSES = [
   'fixed',
-  // Clear the fixed mobile TabBar (~84px tall: pt-2 + content + pb-[34px]).
+  // Sit just above the fixed mobile TabBar (90px = pt-2 + min-h-[48px] + pb-[34px]).
   'bottom-[88px]',
   'left-3',
   'md:bottom-[18px]',

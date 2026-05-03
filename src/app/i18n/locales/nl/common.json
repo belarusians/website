@@ -18,6 +18,7 @@
     "events": "Agenda",
     "donate": "Steun",
     "help": "Hulp",
-    "info": "Info"
+    "info": "Info",
+    "aria-label": "Mobiele hoofdnavigatie"
   }
 }

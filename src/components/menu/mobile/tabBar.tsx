@@ -67,7 +67,7 @@ export function TabBar({ lang }: { lang: Lang }) {
 
   return (
     <nav
-      aria-label="Mobile primary"
+      aria-label={t('tab.aria-label')}
       className="fixed bottom-0 left-0 right-0 z-50 grid grid-cols-5 bg-white pt-2 px-1 pb-[34px] md:hidden"
       style={{ boxShadow: '0 -1px 0 #EBEBEB, 0 -10px 20px rgb(0 0 0 / 0.04)' }}
     >
@@ -85,7 +85,7 @@ export function TabBar({ lang }: { lang: Lang }) {
               data-umami-event="donate-us"
               className="flex flex-col items-center justify-center min-h-[48px] no-underline"
             >
-              <span className="bg-rainbow-spin -mt-5 h-10 w-10 rounded-full bg-black text-white flex items-center justify-center shadow-lg">
+              <span className="bg-rainbow-spin -mt-5 h-10 w-10 rounded-full text-white flex items-center justify-center shadow-lg">
                 <FontAwesomeIcon icon={tab.icon} className="w-[18px] h-[18px]" />
               </span>
               <span
