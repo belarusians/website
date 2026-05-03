@@ -119,7 +119,7 @@ Reads from kit: nothing — IA decision driven by user-confirmed answer ("Refuge
 
 Reads from kit: `ui_kits/mobile/Header.jsx` lines 165–179 (the `labels()` function).
 
-- [ ] in `src/app/i18n/locales/be/common.json` add a `tab` namespace block:
+- [x] in `src/app/i18n/locales/be/common.json` add a `tab` namespace block:
   ```json
   "tab": {
     "home": "Дом",
@@ -129,7 +129,7 @@ Reads from kit: `ui_kits/mobile/Header.jsx` lines 165–179 (the `labels()` func
     "info": "Інфа"
   }
   ```
-- [ ] in `src/app/i18n/locales/nl/common.json` add the equivalent NL block:
+- [x] in `src/app/i18n/locales/nl/common.json` add the equivalent NL block:
   ```json
   "tab": {
     "home": "Home",
@@ -139,8 +139,8 @@ Reads from kit: `ui_kits/mobile/Header.jsx` lines 165–179 (the `labels()` func
     "info": "Info"
   }
   ```
-- [ ] DO NOT delete the existing `home` / `useful-info` / `about-us` / `donate-us` / `info` top-level keys yet — they may be used elsewhere. Grep for usages of each old key; if a key has zero usages outside the tab bar, delete it; otherwise leave.
-- [ ] no test for json files; verified by Task 3 tests (which read the new keys).
+- [x] DO NOT delete the existing `home` / `useful-info` / `about-us` / `donate-us` / `info` top-level keys yet — they may be used elsewhere. Grep for usages of each old key; if a key has zero usages outside the tab bar, delete it; otherwise leave. (Verified: `useful-info`, `about-us`, `donate-us` are still consumed by `desktopMenu.tsx` / `mobileMenu.tsx` / `help/page.tsx`, so left intact. No `home` or top-level `info` key existed in `common.json` to begin with.)
+- [x] no test for json files; verified by Task 3 tests (which read the new keys).
 
 ### Task 3: Rebuild `TabBar` to match the kit
 
