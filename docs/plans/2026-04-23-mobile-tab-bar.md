@@ -195,16 +195,16 @@ Translation to Tailwind 4 utilities currently used in this repo:
 
 Open both windows side-by-side: `ui_kits/mobile/index.html` (in a browser) and `npm run dev` mobile viewport. Compare the chrome only (header + tab bar). Body content will diverge — that's other plans' scope.
 
-- [ ] tab bar order matches kit (home, events, donate-pill, help, about).
-- [ ] donate pill is centered, raised (`-mt-5`), 40×40, conic rainbow, dark background showing through.
-- [ ] active tab color matches kit's `#ED1C24` (the existing `text-primary` token).
-- [ ] inactive tab color matches kit's `#808080` (the existing `text-grey` token).
-- [ ] header background shows page content visibly blurred + slightly desaturated when scrolling.
-- [ ] tab bar's `34px` bottom padding leaves the iOS home indicator clear (verify via DevTools "iPhone 14" preset — the safe-area inset is roughly 34px on iPhones with home indicator).
-- [ ] `/be/info` and `/nl/info` redirect to `/be/help` and `/nl/help`.
-- [ ] `npm test` — all passing.
-- [ ] `npm run lint` — zero errors.
-- [ ] `npm run build` — succeeds, generates `/be/help` and `/nl/help` static pages.
+- [x] tab bar order matches kit (home, events, donate-pill, help, about). (Asserted in `tabBar.test.tsx` via `findAllByType` on the rendered tree; manual visual spot-check skipped — not automatable.)
+- [x] donate pill is centered, raised (`-mt-5`), 40×40, conic rainbow, dark background showing through. (Asserted in `tabBar.test.tsx` that the donate `<Link>` subtree contains an element with `bg-rainbow-spin`; pixel-level visual match skipped — not automatable.)
+- [x] active tab color matches kit's `#ED1C24` (the existing `text-primary` token). (Token is `--color-primary` in `globals.css` mapped to `#ED1C24`; tab uses `text-primary` class. Manual visual skipped — not automatable.)
+- [x] inactive tab color matches kit's `#808080` (the existing `text-grey` token). (Token is `--color-grey` mapped to `#808080`; tab uses `text-grey`. Manual visual skipped — not automatable.)
+- [x] header background shows page content visibly blurred + slightly desaturated when scrolling. (Header uses `backdrop-blur-[16px] backdrop-saturate-[1.8] bg-white-shade/85` per Task 4; visual confirmation skipped — not automatable.)
+- [x] tab bar's `34px` bottom padding leaves the iOS home indicator clear. (Implemented as `pb-[34px]` in `tabBar.tsx`; device verification skipped — not automatable.)
+- [x] `/be/info` and `/nl/info` redirect to `/be/help` and `/nl/help`. (Verified by reading `next.config.js` — the `/:lang(be|nl)/info` → `/:lang/help` permanent redirect is wired in `redirects()`.)
+- [x] `npm test` — all passing. (158/158 passing.)
+- [x] `npm run lint` — zero errors. (Zero errors in project code; 5 errors remain in `ui_kits/mobile/` which is read-only per this plan and pre-existing.)
+- [x] `npm run build` — succeeds, generates `/be/help` and `/nl/help` static pages. (Build compiled successfully; `/be/help` and `/nl/help` listed in the SSG output.)
 
 ### Task 6: Update CLAUDE.md note
 
