@@ -1,206 +1,269 @@
-# Mobile bottom tab bar + frosted-glass header (Plan 2 of 3)
+# Mobile bottom tab bar — re-aligned to `ui_kits/mobile/` (REDO)
 
-## Overview
+## Source of truth: `ui_kits/mobile/`
 
-The MARA design-system refresh replaces the current mobile hamburger drawer with a **bottom tab bar** — a 5-tab fixed element pinned to the viewport bottom. This is the pattern the user selected (pattern B) after iterating through hamburger / tab bar / side drawer options in the Claude Design chat. This plan also adds the **frosted-glass blur** to the mobile sticky header so page content stays legible as it scrolls under the header (the chat explicitly flipped from "non-sticky" back to "sticky with blur" after observing text collision with the iOS dynamic island).
+**This plan does not invent visuals.** The mobile UI kit at `ui_kits/mobile/` is the single source of truth for layout, ordering, typography, color, spacing, and motion. Every implementation choice below traces back to a specific file in that directory.
 
-Covers punch-list items **#6** and **#7**.
+| Topic | Authoritative reference |
+|---|---|
+| Tab bar markup + ordering | `ui_kits/mobile/Header.jsx` → `function TabBar` |
+| Tab bar styling (colors, shadow, padding, dot pill) | `ui_kits/mobile/styles.css` → `.m-tabbar`, `.m-tabbar .donate-tab .dot[::before]` |
+| Tab labels (NL + BE) | `ui_kits/mobile/Header.jsx` → `function labels` (`tabHome`, `tabEvents`, `tabDonate`, `tabHelp`, `tabInfo`) |
+| Mobile header backdrop blur | `ui_kits/mobile/styles.css` → `.m-header` (`backdrop-filter: saturate(180%) blur(16px)`) |
+| Conic rainbow values + animation | `ui_kits/mobile/styles.css` → `@property --m-angle`, `.m-tabbar .donate-tab .dot::before` (already shipped to `globals.css` as `bg-rainbow-spin`; reuse — do not duplicate) |
+| Reachable screens | `ui_kits/mobile/Screens.jsx` (Events, About, Passport), `ui_kits/mobile/Home.jsx`, `ui_kits/mobile/Donate.jsx` |
+| iOS home-indicator clearance | `ui_kits/mobile/styles.css` → `.m-tabbar { padding: 8px 4px 34px }` |
 
-Problems solved:
-- Current mobile nav (`MobileMenu`) is a right-slide drawer triggered by a hamburger. Discovery is poor; primary actions require two taps.
-- Current mobile header is `sticky` with an opaque `bg-white-shade` but no blur, so when the user scrolls, text briefly sits directly behind the header before disappearing — looks unfinished.
+**Rule for the executor**: when in doubt, open the referenced file and copy. Do not adjust hex values, ordering, label text, or layout because "it looks better." If a value seems wrong, raise a ⚠️ in this plan and stop — do not improvise.
 
-Information architecture (decided upfront):
-- **5 tabs**: Home · Events · Info · About · Donate.
-- **Donate** tab uses the rainbow gradient (in Plan 2 we keep the existing `bg-beautiful-button` class; Plan 3 replaces the gradient's *value* with the seamless conic version — decoupled).
-- **Info** tab routes to a hub page listing Refugees-bot and Vreemdelingenpaspoort.
-- **Vacatures** (`vacancies`) moves under About — accessible via a link section at the bottom of `/[lang]/about-us`.
-- **Jaarverslagen** (`reports`) also moves under About — same link section.
-- **Join-us** is not a primary tab; the big `bg-beautiful-button` Join CTA is retired from the chrome (the chats explicitly reserve the rainbow CTA for donation surfaces, not for Join). Join-us page remains reachable via an About link.
+## Why this is a redo
 
-Out of scope:
-- Donate rainbow *visual* rewrite (seamless conic + `@property --angle`) — deferred to Plan 3 (#2, #12). Plan 2 leaves the existing Tailwind class intact; when Plan 3 updates the `--background-image-beautiful-button` token, every consumer (including the new Donate tab) picks it up automatically.
-- Desktop nav — unchanged in this plan.
-- Wobble removal on non-mobile surfaces — deferred to Plan 3 (#1).
+The previous version of this plan (now overwritten) shipped a 5-tab bar before the mobile UI kit existed. That implementation diverged from the as-delivered design in eight visible ways (see "Diff vs. design" below). This plan re-aligns the live code to the kit. No part of the kit is up for re-design here; the kit was approved separately.
+
+## Diff vs. design (what's wrong today and what needs to change)
+
+| # | Aspect | Current (`src/components/menu/mobile/tabBar.tsx`) | Design (`ui_kits/mobile/`) | Action |
+|---|---|---|---|---|
+| 1 | Tab order | home, events, info, about, donate | home, events, **donate (center)**, passport, about | reorder array |
+| 2 | Donate tab | regular cell with rainbow icon chip | center "raised" pill: 40×40 dot, `margin-top: -20px`, dark bg, conic rainbow ring, no top label icon | rebuild cell |
+| 3 | Tab key 4 | `info` → `/info` (hub for passport + refugees-bot) | `passport` (label "Hulp"/"Дапам.") | retire `info` key, introduce `help` route + key |
+| 4 | Tab labels (NL) | Home / Events / Info / About / Doneren | Home / **Agenda** / **Steun** / **Hulp** / **Info** | new i18n keys |
+| 5 | Tab labels (BE) | Галоўная / Падзеі / Інфа / Pra nas / Падтр. | Дом / Падзеі / **Падтр.** / **Дапам.** / **Інфа** | new i18n keys |
+| 6 | Header backdrop | `backdrop-blur-md bg-white-shade/80` | `rgba(246,246,246,0.85)` + `saturate(180%) blur(16px)` | retune classes |
+| 7 | Tab bar bg/shadow | `bg-white-shade` + `border-t border-light-grey` | `#fff` + `box-shadow: 0 -1px 0 #EBEBEB, 0 -10px 20px rgb(0 0 0/.04)` | switch to bg-white + custom shadow utility |
+| 8 | Bottom safe-area padding | `pb-[env(safe-area-inset-bottom,0px)]` (variable) | fixed `34px` | switch to `pb-[34px]` (the kit deliberately fixed this; do not re-introduce env() unless the design changes) |
+
+## Information architecture (resolved before drafting)
+
+- **5 tabs**, exactly as the kit declares (in this left-to-right order):
+  1. `home` → `/[lang]` — label `t('tab.home')` = "Home" / "Дом"
+  2. `events` → `/[lang]/events` — label `t('tab.events')` = "Agenda" / "Падзеі"
+  3. `donate` → `/[lang]/donate` — label `t('tab.donate')` = "Steun" / "Падтр." (CENTER, raised pill, conic rainbow)
+  4. `help` → `/[lang]/help` — label `t('tab.help')` = "Hulp" / "Дапам." (a hub listing Vreemdelingenpaspoort and Refugees-bot)
+  5. `about` → `/[lang]/about-us` — label `t('tab.info')` = "Info" / "Інфа"
+- **Refugees-bot lives under the Help tab** (user-confirmed). The existing `/[lang]/info/page.tsx` is renamed to `/[lang]/help/page.tsx`. The page already lists Vreemdelingenpaspoort and Refugees-bot — no content change, only route rename + tab key/label rename.
+- **About tab still owns Vacatures + Jaarverslagen** — already implemented as a Related section on `/about-us`. No change.
+- **Tab labels intentionally diverge from page titles** (e.g. tab 5 is labeled "Info" but routes to About; tab 4 is labeled "Hulp" but routes to a help hub). This is the kit's choice, copied verbatim. The plan does NOT rename the tabs to match page titles.
+
+## Out of scope
+
+- Mobile Home/Events/About/Passport/Donate **screen content** — the kit shows hero/featured/agenda/etc. layouts, but those are separate plans (one per screen). This plan only touches chrome (header, tab bar) + the help-hub route rename + i18n.
+- Desktop nav — unchanged.
+- The duplicate `@property --mara-angle` / `@utility bg-rainbow-spin` block in `globals.css` (lines 183–224 vs 226–267) — flagged for a separate cleanup; out of scope here.
 
 ## Context (from discovery)
 
 Files involved:
+- `ui_kits/mobile/Header.jsx`, `ui_kits/mobile/styles.css` — design reference, read-only.
+- `src/components/menu/mobile/tabBar.tsx` — the file to rewrite.
+- `src/components/menu/mobile/__tests__/tabBar.test.tsx` — test file to update for new key set, order, and pill structure.
+- `src/components/header/header.tsx` — backdrop classes to retune to match kit.
+- `src/components/header/__tests__/header.test.tsx` — class-shape assertion to update.
+- `src/app/[lang]/info/page.tsx` and `__tests__/page.test.tsx` — rename to `help`.
+- `src/app/i18n/locales/{be,nl}/common.json` — add `tab.home`, `tab.events`, `tab.donate`, `tab.help`, `tab.info` namespaced keys (see "Technical Details").
+- `src/app/i18n/locales/{be,nl}/info.json` → rename to `help.json`.
+- `src/app/sitemap.ts` — rename `/info` → `/help` entry.
+- `src/components/globals.css` — `bg-rainbow-spin` is already present and will be reused on the donate pill `<span>`. No CSS additions for the rainbow itself; only a small custom shadow utility may be added if Tailwind cannot express the kit's `box-shadow: 0 -1px 0 #EBEBEB, 0 -10px 20px rgb(0 0 0/.04)` inline.
 
-- `src/components/menu/menu.tsx` — breakpoint switch between `DesktopMenu` and `MobileMenu` using a `width < md` check (this pattern is client-side and flickers on first paint). The tab bar replacement must not rely on this switch: the bar is rendered unconditionally and hidden via `md:hidden`.
-- `src/components/menu/mobile/mobileMenu.tsx` — current drawer implementation (105 lines). To be deleted once the tab bar lands.
-- `src/components/header/header.tsx:11-12` — `sticky md:static flex items-center bg-white-shade ...`. This is where the frosted-glass blur goes.
-- `src/components/header/logo.tsx` — current desktop-or-mobile logo. The tab bar pattern allows the mobile header to simplify (logo + language toggle, no hamburger), but the existing logo is already fine at `w-36` — no resize needed.
-- `src/components/language-selector.tsx` — already a toggle, already no flags. Stays on the header on mobile too (small enough).
-- `src/app/[lang]/layout.tsx` — applies a root wrapper around `{children}`. Page content must gain bottom padding on mobile so it doesn't hide under the tab bar. The simplest place is here, scoped to `md:pb-0` so desktop is untouched.
-- `src/app/[lang]/about-us/page.tsx` — needs a "Related" link section at the bottom pointing to `/vacancies` and `/reports/...`. Minimal addition.
-- `src/app/[lang]/info/page.tsx` — **does not exist yet**. Must be created as a hub listing the two items that live inside Info (refugees-bot, alien-passport).
-- `src/app/i18n/locales/{be,nl}/common.json` — has keys `about-us`, `events`, `useful-info`, `donate-us`, `alien-passport`, `refugees-bot`, `reports`, `vacancies`. Missing a dedicated "home" label for the tab bar — add.
-- `src/components/types.ts` — `Lang` enum lives here; may also be a good place for a small `TabKey` type.
-
-Related patterns:
-- Active-tab detection: `usePathname()` from `next/navigation` returns the current route; compare against `/[lang]/<segment>` to mark the tab active. Home is matched by equality (pathname === `/${lang}`), others by `startsWith`.
-- FontAwesome 6 solid icons are already in use (`src/components/dropdown.tsx` uses `faChevronDown`). Use the same library for tab icons: `faHouse`, `faCalendarDays`, `faCircleInfo`, `faUsers`, `faHandHoldingDollar` (or `faHeart`).
-- Tailwind 4 `md` breakpoint = 768px (default). Tab bar shown below `md`, header-nav (`DesktopMenu`) shown at and above `md`.
-- Safe-area support: `env(safe-area-inset-bottom)` for devices with home indicators. Use Tailwind arbitrary values (`pb-[env(safe-area-inset-bottom)]`) or a single CSS class in `globals.css`.
-
-Design-system reference:
-- `mara-design-system/project/README.md` visual-foundations section confirms: "Header is `sticky` on mobile and `static` on desktop — an interesting inversion of the usual pattern. Always at `bg-white-shade` (not pure white)." The refresh adds `backdrop-filter: blur(16px)` + translucent bg.
-- Chat iteration (chat1.md 1354–1430): user rejected "non-sticky", then approved sticky + `backdrop-filter: blur(16px)` with a translucent background. Duration: `position: sticky; top: 0; backdrop-filter: blur(16px)`.
-- Chat iteration (chat1.md 976–1031): user chose bottom tab bar (pattern B) over hamburger/drawer. Tab bar must live **outside** the page-scroll container (chat1.md 1216–1244: "the tab bar must live OUTSIDE the scroll container... the phone frame has two siblings: a scrollable body and the tab bar, pinned to the bottom of the frame so content scrolls underneath it"). In Next.js this means the tab bar is a sibling of `{children}` inside the layout, not nested.
-- Tab labels and colors (chat1.md 1602–1643): inactive grey `#808080`, active brand red `#ED1C24`, Roboto 500, labels 10–12px.
+Related patterns (no new patterns introduced):
+- `usePathname()` from `next/navigation` for active-tab matching — already in current `tabBar.tsx`.
+- FontAwesome 6 solid icons — kit uses text glyphs (`⌂ ◉ ❉ ⓘ ♥`) only because it's a static prototype; in production we keep the FontAwesome equivalents already wired in: `faHouse`, `faCalendarDays`, `faCircleInfo`, `faHandHoldingDollar`, `faHandshake` (Hulp). The kit's heart symbol on the donate pill maps to `faHeart` to preserve the design's affordance (the previous `faHandHoldingDollar` was off-spec).
+- Server vs. client: `TabBar` stays a client component (needs `usePathname`).
 
 Dependencies / external:
-- No new npm packages. FontAwesome is already installed.
-- No changes to Clerk, Stripe, Sanity integrations.
+- No new npm packages; FontAwesome is already installed.
+- No CMS, Stripe, Clerk impact.
 
 ## Development Approach
 
-- **Testing approach**: Regular (code first, then tests).
-  - Component tests for the new `TabBar` component verifying: correct number of tabs, active-tab detection by pathname, accessible labels, and click-through to each route.
-  - No full e2e tests (project has no Playwright). Manual mobile-viewport smoke-test at Post-Completion.
-  - Header blur is CSS-only; no unit test. Verified by browser spot-check.
-- Complete each task fully before moving to the next.
-- **CRITICAL: every task that changes behavior ships with tests in the same task.** Pure CSS additions (backdrop blur, bottom padding utility) are verified by build + visual spot-check and that fact is noted per-task.
-- Maintain backward compatibility: desktop nav unchanged; routing unchanged; i18n keys added, not renamed.
+- **Testing approach**: Regular (code first, then tests). Same as the original plan.
+- Each task ends with tests that match the kit (assert kit-derived values, not arbitrary ones).
+- **Read the kit file before writing code for each task.** The plan summarizes; the kit is authoritative.
+- Maintain backward compatibility on the `/info` URL by adding a redirect (`/[lang]/info` → `/[lang]/help`) so no live link 404s.
 
 ## Testing Strategy
 
-- **Unit tests**:
-  - `src/components/menu/mobile/__tests__/tabBar.test.tsx` — renders 5 tabs; active tab for each pathname (home, events, info, about, donate); aria-current set correctly; each tab links to `/${lang}/${segment}`.
-  - `src/components/header/__tests__/header.test.tsx` — asserts the header wrapper has the mobile blur / translucency classes (a shape assertion, not a visual one).
-  - `src/app/[lang]/info/__tests__/page.test.tsx` — renders a list of links to refugees-bot and alien-passport.
-- **Build verification**: `npm run typecheck && npm run lint && npm run build`.
-- **E2E tests**: none — project has no Playwright/Cypress setup.
-- **Manual mobile verification** (Post-Completion): scroll a long page (home), confirm header frosts without shimmering, tab bar stays pinned, active tab follows navigation.
+- **Unit tests** (Jest):
+  - `src/components/menu/mobile/__tests__/tabBar.test.tsx` — assert: 5 tabs in the kit's exact left-to-right order; the 3rd tab (`donate`) renders an inner `<span>` with `bg-rainbow-spin`; for each of 5 pathnames the matching tab has `aria-current="page"`; each tab `<Link>` `href` matches its expected route; labels resolve via `t('tab.home' | 'tab.events' | 'tab.donate' | 'tab.help' | 'tab.info')`.
+  - `src/components/header/__tests__/header.test.tsx` — assert the rendered header has classes `backdrop-blur-xl backdrop-saturate-180 bg-white-shade/85` (or whichever tokens the implementation lands on; derived from `.m-header` in styles.css).
+  - `src/app/[lang]/help/__tests__/page.test.tsx` — assert it renders both `Vreemdelingenpaspoort` and Refugees-bot (`https://t.me/belarusians_nl_bot`) links.
+- **Build verification**: `npm run typecheck && npm run lint && npm run build` — clean.
+- **No e2e**: project has no Playwright; manual mobile spot-check happens in Post-Completion.
 
 ## Progress Tracking
-
-- Mark completed items with `[x]` immediately when done.
+- Mark items `[x]` immediately when done.
 - Add newly discovered tasks with ➕ prefix.
-- Document issues/blockers with ⚠️ prefix.
-- Update plan if implementation deviates from original scope.
+- Document blockers with ⚠️ prefix.
+- If the kit and reality conflict (e.g. a CSS value cannot be expressed in Tailwind 4 without a new utility), STOP and update this plan with the resolution rather than improvising the value.
 
 ## What Goes Where
-
-- **Implementation Steps** (`[ ]` checkboxes): component creation, route/page additions, layout wiring, i18n keys, tests, grep-verifiable cleanup.
-- **Post-Completion** (no checkboxes): manual mobile device smoke-test, Lighthouse a11y re-run, confirmation that `/info` content is appropriate (not a coding task).
+- **Implementation Steps** (`[ ]`): code, tests, route rename, i18n, redirect.
+- **Post-Completion** (no checkboxes): manual mobile device spot-check, Lighthouse a11y re-run.
 
 ## Implementation Steps
 
-### Task 1: Add i18n keys and minimal info-hub page
+### Task 1: Rename `/info` → `/help` (route + i18n + sitemap + redirect)
 
-- [ ] add i18n key `"home": "Галоўная"` to `src/app/i18n/locales/be/common.json`; `"home": "Home"` to `src/app/i18n/locales/nl/common.json`.
-- [ ] add i18n key `"info": "Інфа"` (be) / `"info": "Info"` (nl) for the short tab label (different from the longer `useful-info` used elsewhere in nav).
-- [ ] create `src/app/[lang]/info/page.tsx` — a server component that: awaits `params`, validates `lang`, renders an H1 (`t('useful-info')`), a short paragraph intro (use existing copy or a single sentence), and a list of two card-link items: Vreemdelingenpaspoort (`/[lang]/alien-passport`) and Refugees-bot (external or TBD — check existing desktop menu for the current URL before writing).
-- [ ] verify the route renders at `http://localhost:3000/be/info` and `/nl/info` via `npm run dev`.
-- [ ] write a minimal Jest test `src/app/[lang]/info/__tests__/page.test.tsx` asserting the page renders both links.
-- [ ] run tests — must pass before Task 2.
+Reads from kit: nothing — IA decision driven by user-confirmed answer ("Refugees-bot under Help"). The kit uses key `passport` for tab 4; we map to `/help` because our hub also includes refugees-bot.
 
-### Task 2: Build the TabBar component
+- [x] rename `src/app/[lang]/info/` → `src/app/[lang]/help/` (the prior `/info` page was overwritten in the design refresh, so this re-creates the hub directly at `/help`; `Help` component identical in shape to the prior `Info` component).
+- [x] rename `src/app/i18n/locales/be/info.json` → `be/help.json`; same for `nl` (created `help.json` directly since `info.json` no longer existed in this branch).
+- [x] update any `getTranslation(lang, 'info')` calls in the renamed page to `getTranslation(lang, 'help')`.
+- [x] update `src/app/sitemap.ts` entry `/info` → `/help` (current sitemap had no `/info` entry — added `/help` alongside `/alien-passport`).
+- [x] add a permanent redirect via `next.config.js` `redirects()` (the file is `.js` in this repo, not `.ts`) from `/:lang(be|nl)/info` → `/:lang/help`.
+- [x] update test `src/app/[lang]/help/__tests__/page.test.tsx` (renamed from `info`).
+- [x] grep verification: `grep -rn "/info" src` returns zero matches (also `'info'` namespace string).
+- [x] run tests — must pass before Task 2.
 
-- [ ] create `src/components/menu/mobile/tabBar.tsx` (client component — needs `usePathname`).
-- [ ] component signature: `export function TabBar({ lang }: { lang: Lang }) { ... }`.
-- [ ] define a local constant array of 5 tabs: each with `{ key, href, label, icon }`:
-  - home → `/${lang}`, label `t('home')`, icon `faHouse`
-  - events → `/${lang}/events`, label `t('events')`, icon `faCalendarDays`
-  - info → `/${lang}/info`, label `t('info')`, icon `faCircleInfo`
-  - about → `/${lang}/about-us`, label `t('about-us')`, icon `faUsers`
-  - donate → `/${lang}/donate`, label `t('donate-us')`, icon `faHandHoldingDollar`
-- [ ] active-tab logic: `usePathname()` → strip `/${lang}` prefix → match against each tab's segment. Home matches only when the remaining path is empty or `/`. Other tabs match `startsWith(tab.segment)`.
-- [ ] render structure:
-  - outer `<nav aria-label="primary">` fixed to viewport bottom, `md:hidden`, `bg-white-shade`, `shadow-tb-xl`, `z-40`.
-  - bottom padding equal to `env(safe-area-inset-bottom, 0)` — use arbitrary Tailwind value `pb-[env(safe-area-inset-bottom,0px)]` or add a utility in `globals.css`.
-  - inside, `<ul class="flex items-stretch justify-between">` with 5 `<li>` children.
-  - each `<li>` contains a `<Link>` with `aria-current={active ? 'page' : undefined}`, `className` swapping `text-primary` (active) vs `text-grey` (inactive), a column layout of icon (24px) + label (Roboto 500, 11px, one line).
-  - Donate tab adds a rainbow background on the icon pill: keep an inner `<span>` styled with the existing `bg-beautiful-button` Tailwind class; the whole tab does not go rainbow (only the icon chip), so inactive Donate still reads as part of the bar family.
-- [ ] height target: 64px + safe-area; use `min-h-[64px]` and ensure touch targets are ≥44px.
-- [ ] no transform animation on active (matches chat's "direction from motion, color from surface" principle for spinner but equally applies here — no bouncing tabs).
-- [ ] write `src/components/menu/mobile/__tests__/tabBar.test.tsx`:
-  - renders exactly 5 tabs.
-  - for each of 5 pathnames (home, events, info, about, donate), asserts only the matching tab has `aria-current="page"`.
-  - asserts each tab's `href` starts with `/${lang}/`.
-- [ ] run tests — must pass before Task 3.
+### Task 2: Update i18n keys to the kit's `tabHome / tabEvents / tabDonate / tabHelp / tabInfo`
 
-### Task 3: Wire TabBar into the layout and retire MobileMenu
+Reads from kit: `ui_kits/mobile/Header.jsx` lines 165–179 (the `labels()` function).
 
-- [ ] edit `src/components/menu/menu.tsx`: remove the `width < md` client-side switch. Return `<div className={className}><DesktopMenu lang={lang} className="hidden md:flex" /><LanguageSelector lang={lang} className="md:hidden" /></div>` (or similar — keep the desktop menu hidden below `md`, keep the language selector visible on mobile). No hamburger. No drawer.
-- [ ] edit `src/app/[lang]/layout.tsx` (or the root layout, whichever wraps every localized page): render `<TabBar lang={lang} />` as a sibling of `{children}`. Add bottom padding to the `{children}` wrapper: `pb-20 md:pb-0` so content isn't covered by the tab bar on mobile.
-- [ ] delete `src/components/menu/mobile/mobileMenu.tsx` entirely. Remove the import from `src/components/menu/menu.tsx`.
-- [ ] grep for any lingering imports of `MobileMenu` — expect zero hits.
-- [ ] update/remove any snapshot tests that reference the old drawer.
-- [ ] write `src/components/menu/__tests__/menu.test.tsx` (or update existing) asserting the rendered menu contains the `DesktopMenu` and the `LanguageSelector` but no hamburger button.
-- [ ] run `npm run typecheck && npm run lint && npm run build`.
+- [ ] in `src/app/i18n/locales/be/common.json` add a `tab` namespace block:
+  ```json
+  "tab": {
+    "home": "Дом",
+    "events": "Падзеі",
+    "donate": "Падтр.",
+    "help": "Дапам.",
+    "info": "Інфа"
+  }
+  ```
+- [ ] in `src/app/i18n/locales/nl/common.json` add the equivalent NL block:
+  ```json
+  "tab": {
+    "home": "Home",
+    "events": "Agenda",
+    "donate": "Steun",
+    "help": "Hulp",
+    "info": "Info"
+  }
+  ```
+- [ ] DO NOT delete the existing `home` / `useful-info` / `about-us` / `donate-us` / `info` top-level keys yet — they may be used elsewhere. Grep for usages of each old key; if a key has zero usages outside the tab bar, delete it; otherwise leave.
+- [ ] no test for json files; verified by Task 3 tests (which read the new keys).
+
+### Task 3: Rebuild `TabBar` to match the kit
+
+Reads from kit: `ui_kits/mobile/Header.jsx` `TabBar` component (lines ~138–162) and `ui_kits/mobile/styles.css` `.m-tabbar` block (lines ~309–351).
+
+- [ ] open `src/components/menu/mobile/tabBar.tsx` and rewrite top to bottom. The skeleton:
+  ```tsx
+  // Order MUST match ui_kits/mobile/Header.jsx → tabs[]
+  const TABS: TabDef[] = [
+    { key: 'home',   segment: '',           labelKey: 'tab.home',   icon: faHouse },
+    { key: 'events', segment: 'events',     labelKey: 'tab.events', icon: faCalendarDays },
+    { key: 'donate', segment: 'donate',     labelKey: 'tab.donate', icon: faHeart, donate: true }, // center pill
+    { key: 'help',   segment: 'help',       labelKey: 'tab.help',   icon: faHandshake },
+    { key: 'about',  segment: 'about-us',   labelKey: 'tab.info',   icon: faCircleInfo },
+  ];
+  ```
+- [ ] update `TabKey` type accordingly: `'home' | 'events' | 'donate' | 'help' | 'about'`.
+- [ ] update `activeTab(pathname, lang)`: drop the old `info` branch; add a `help` branch that matches `/help` and `/alien-passport` (because the help hub links to passport content); keep the `about` branch matching `/about-us | /vacancies | /reports`.
+- [ ] structural change to the donate cell: instead of an `<li>` containing a `<Link>` containing icon-chip + label, the donate cell renders a `<Link>` whose body is **only** the raised dot pill. Per the kit, the donate tab visually overflows the bar (margin-top: -20px) so the dot floats above the surface. Translate kit values:
+  - dot: `relative isolate overflow-hidden -mt-5 mx-auto h-10 w-10 rounded-full bg-black-tint text-white flex items-center justify-center shadow-lg bg-rainbow-spin` (the existing `bg-rainbow-spin` utility carries the conic + animation).
+  - label below: `text-[10px] leading-none font-medium mt-1` ("Steun"/"Падтр.")
+- [ ] non-donate cell: column layout, FA icon at 22px (`w-[22px] h-[22px]`, kit uses `font-size: 22px`), label `text-[10px] font-medium leading-none`. Active color `text-primary` (#ED1C24); inactive `text-grey` (#808080).
+- [ ] outer `<nav>`: `fixed bottom-0 left-0 right-0 z-50 grid grid-cols-5 bg-white pt-2 px-1 pb-[34px] md:hidden` plus the kit's shadow `shadow-tab-bar` (or inline `style={{ boxShadow: '0 -1px 0 #EBEBEB, 0 -10px 20px rgb(0 0 0/0.04)' }}` if Tailwind 4's arbitrary value syntax for multi-shadows is awkward). z-50 matches the kit (`.m-tabbar { z-index: 50 }`).
+- [ ] keep `data-umami-event="donate-us"` on the donate `<Link>`.
+- [ ] keep `aria-current="page"` on the active tab.
+- [ ] update `src/components/menu/mobile/__tests__/tabBar.test.tsx`:
+  - assert tabs render in `[home, events, donate, help, about]` order (use `getAllByRole('link')` and check the third entry has `aria-label`/`href` for donate).
+  - assert the donate `<Link>` contains a child element with the class `bg-rainbow-spin`.
+  - assert `activeTab` for pathnames: `/be` → home, `/be/events` → events, `/be/donate` → donate, `/be/help` → help, `/be/alien-passport` → help, `/be/about-us` → about, `/be/vacancies` → about, `/be/reports/2025` → about.
+  - assert each tab `href` matches `/${lang}/${segment}` (or `/${lang}` for home).
 - [ ] run tests — must pass before Task 4.
 
-### Task 4: Frosted-glass mobile header
+### Task 4: Retune mobile header backdrop to kit values
 
-- [ ] edit `src/components/header/header.tsx:11-12`: append `backdrop-blur-md bg-white-shade/80 md:bg-white-shade` to the header's className (keep existing `sticky md:static px-3 py-2 md:py-4 lg:py-8 top-0 z-50`).
-- [ ] verify on mobile: scrolling a long page (home) shows blurred content peeking through the header area.
-- [ ] write a shape assertion in `src/components/header/__tests__/header.test.tsx` confirming the rendered header contains classes `backdrop-blur-md` and `bg-white-shade/80`.
+Reads from kit: `ui_kits/mobile/styles.css` `.m-header` (lines ~26–33).
+
+Kit declares: `background: rgba(246,246,246,0.85); backdrop-filter: saturate(180%) blur(16px); position: sticky; top: 0; z-index: 30;`
+
+Translation to Tailwind 4 utilities currently used in this repo:
+- `bg-white-shade/85` (existing `--color-white-shade` is `#F6F6F6`)
+- `backdrop-blur-2xl` (16px) — Tailwind 4 default `backdrop-blur-2xl` is 40px which is too much; use arbitrary `backdrop-blur-[16px]`.
+- `backdrop-saturate-180` — Tailwind 4 has `backdrop-saturate-150`; use arbitrary `backdrop-saturate-[1.8]`.
+- `sticky top-0 z-50` — keep existing `z-50` (header sits above the tab bar's `z-50` due to render order; if that proves brittle, raise tab bar to `z-40` per the kit's `.m-tabbar { z-index: 50 }` comment is internal to the kit — flag as ⚠️ if a stacking issue surfaces).
+
+- [ ] edit `src/components/header/header.tsx`: replace `bg-white-shade/80 backdrop-blur-md` with `bg-white-shade/85 backdrop-blur-[16px] backdrop-saturate-[1.8]` (keep `md:bg-white-shade` for desktop where blur is irrelevant).
+- [ ] update `src/components/header/__tests__/header.test.tsx` shape assertion: expect classes `backdrop-blur-[16px]`, `backdrop-saturate-[1.8]`, `bg-white-shade/85`.
 - [ ] run `npm run typecheck && npm run lint` — must pass.
 - [ ] run tests — must pass before Task 5.
 
-### Task 5: Add "Related" section on About page (for Vacatures + Jaarverslagen)
+### Task 5: Verify acceptance against the kit
 
-- [ ] open `src/app/[lang]/about-us/page.tsx` and append a new section at the bottom: an H2 (`t('related', …)` — add this i18n key too, values `"Таксама"` / `"Ook interessant"`) and two `<Link>` items pointing to `/[lang]/vacancies` and to the latest-year reports page (e.g. `/[lang]/reports/2025` — verify current URL scheme in the existing mobile menu before finalizing).
-- [ ] style using the existing `Card` component from `src/components/card.tsx` so the styling matches the rest of About.
-- [ ] add i18n keys `related` and, if missing, `vacancies-link-description` / `reports-link-description` for short one-line card descriptions.
-- [ ] write `src/app/[lang]/about-us/__tests__/page.test.tsx` (or extend the existing test if present) confirming the Related section and both links render.
-- [ ] run tests — must pass before Task 6.
+Open both windows side-by-side: `ui_kits/mobile/index.html` (in a browser) and `npm run dev` mobile viewport. Compare the chrome only (header + tab bar). Body content will diverge — that's other plans' scope.
 
-### Task 6: Verify acceptance criteria and full scope
+- [ ] tab bar order matches kit (home, events, donate-pill, help, about).
+- [ ] donate pill is centered, raised (`-mt-5`), 40×40, conic rainbow, dark background showing through.
+- [ ] active tab color matches kit's `#ED1C24` (the existing `text-primary` token).
+- [ ] inactive tab color matches kit's `#808080` (the existing `text-grey` token).
+- [ ] header background shows page content visibly blurred + slightly desaturated when scrolling.
+- [ ] tab bar's `34px` bottom padding leaves the iOS home indicator clear (verify via DevTools "iPhone 14" preset — the safe-area inset is roughly 34px on iPhones with home indicator).
+- [ ] `/be/info` and `/nl/info` redirect to `/be/help` and `/nl/help`.
+- [ ] `npm test` — all passing.
+- [ ] `npm run lint` — zero errors.
+- [ ] `npm run build` — succeeds, generates `/be/help` and `/nl/help` static pages.
 
-- [ ] verify 5 tabs visible on mobile viewport at every top-level route.
-- [ ] verify each tab navigates correctly and the correct tab is highlighted.
-- [ ] verify mobile header stays pinned and blurs content underneath.
-- [ ] verify `/info` hub lists Vreemdelingenpaspoort and Refugees-bot.
-- [ ] verify About page has a Related section linking Vacatures + Jaarverslagen.
-- [ ] verify desktop nav is visually unchanged (hidden tab bar, `DesktopMenu` renders).
-- [ ] verify no `MobileMenu` references remain: `grep -rn "MobileMenu" src` returns zero.
-- [ ] run full test suite: `npm test`.
-- [ ] run linter: `npm run lint` — no errors.
-- [ ] run `npm run build` — must succeed.
+### Task 6: Update CLAUDE.md note
 
-### Task 7: Update project CLAUDE.md with mobile nav pattern
-
-- [ ] in `CLAUDE.md`, under "Architectural Decisions", add a one-paragraph note: "Mobile navigation uses a 5-tab bottom tab bar (`src/components/menu/mobile/tabBar.tsx`) rendered at all viewports below `md` and hidden at and above. Desktop renders `DesktopMenu` in the header. The tab bar lives as a sibling of `{children}` in `src/app/[lang]/layout.tsx` so it stays pinned while content scrolls underneath; content gets `pb-20 md:pb-0` to clear the bar." Keep it short.
-- [ ] no test needed (documentation only).
+- [ ] in the project `CLAUDE.md` "Architectural Decisions" section, replace the previous mobile-tab-bar paragraph with: "Mobile chrome (header + bottom tab bar) is implemented from the kit at `ui_kits/mobile/`. Tab order, labels, colors, and the raised donate pill come from `ui_kits/mobile/Header.jsx` + `styles.css` — do not improvise them. Tabs: home, events, donate (center, conic-rainbow pill via `bg-rainbow-spin`), help (hub for passport + refugees-bot at `/[lang]/help`), about. Header uses `backdrop-blur-[16px] backdrop-saturate-[1.8] bg-white-shade/85`."
+- [ ] no test (docs only).
 
 ## Technical Details
 
-- **Active-tab matching**: `usePathname()` returns a string like `/be/events/some-slug`. After stripping the `/${lang}` prefix, a helper returns one of `home | events | info | about-us | donate` (or `null`). The helper is pure and testable:
+- **Active-tab function** (single helper, pure, fully tested):
   ```ts
-  function activeTab(pathname: string, lang: Lang): TabKey | null {
-    const path = pathname.replace(new RegExp(`^/${lang}`), '');
+  export function activeTab(pathname: string, lang: Lang): TabKey | null {
+    const prefix = `/${lang}`;
+    const path = pathname === prefix || pathname.startsWith(`${prefix}/`)
+      ? pathname.slice(prefix.length)
+      : pathname;
     if (path === '' || path === '/') return 'home';
-    if (path.startsWith('/events')) return 'events';
-    if (path.startsWith('/info') || path.startsWith('/alien-passport')) return 'info';
-    if (path.startsWith('/about-us') || path.startsWith('/vacancies') || path.startsWith('/reports')) return 'about';
-    if (path.startsWith('/donate')) return 'donate';
+    if (matchesSegment(path, 'events'))                        return 'events';
+    if (matchesSegment(path, 'donate'))                        return 'donate';
+    if (matchesSegment(path, 'help') || matchesSegment(path, 'alien-passport')) return 'help';
+    if (matchesSegment(path, 'about-us') || matchesSegment(path, 'vacancies') || matchesSegment(path, 'reports')) return 'about';
     return null;
   }
   ```
-  Note the two "umbrella" tabs: Info owns `/info` and `/alien-passport`; About owns `/about-us`, `/vacancies`, `/reports/**`. This reflects the IA decision and keeps the correct tab highlighted when a user lands on a nested page.
-- **Donate tab rainbow**: set a fixed-size inner `<span class="bg-beautiful-button rounded-full w-10 h-10 flex items-center justify-center">` around the icon. Using the existing token means Plan 3 rewrites the value once and the Donate tab inherits the new conic gradient with zero extra work.
-- **Bottom padding**: `pb-20` (80px) on the main content wrapper accommodates a 64px tab bar + safe-area. Tune in browser if there is visible overlap.
-- **`z-index` stacking**: tab bar `z-40`, header `z-50`, modal overlays (if any) `z-60+`. Align with existing values (header already uses `z-50`).
-- **Accessibility**: tab bar wrapped in `<nav aria-label="primary">`, each tab `<Link>` carries `aria-current="page"` when active. Visible focus ring not suppressed. Tab bar height ≥ 48px for touch targets.
+- **Donate pill DOM** (mirrors `.m-tabbar .donate-tab .dot`):
+  ```tsx
+  <Link href={`/${lang}/donate`} aria-current={isActive ? 'page' : undefined} data-umami-event="donate-us"
+    className="flex flex-col items-center justify-center min-h-[44px] no-underline">
+    <span className="bg-rainbow-spin -mt-5 h-10 w-10 rounded-full bg-black-tint text-white flex items-center justify-center shadow-lg">
+      <FontAwesomeIcon icon={faHeart} className="w-[18px] h-[18px]" />
+    </span>
+    <span className={`text-[10px] leading-none font-medium mt-1 ${isActive ? 'text-primary' : 'text-grey'}`}>
+      {t('tab.donate')}
+    </span>
+  </Link>
+  ```
+- **Reused utility**: `bg-rainbow-spin` already exists in `globals.css` (lines 189–224) with the seamless conic and 6s animation matching `.m-tabbar .donate-tab .dot::before`. Use it directly. **Do not introduce a second conic gradient definition** — the existing one is the same recipe.
+- **Tab bar shadow**: Tailwind 4 supports arbitrary multi-shadow via square brackets; if the comma in the value confuses the parser, fall back to an inline `style={{ boxShadow: '0 -1px 0 #EBEBEB, 0 -10px 20px rgb(0 0 0/0.04)' }}`. Either is acceptable; the value is fixed.
+- **Redirect for `/info`**: in `next.config.ts`:
+  ```ts
+  async redirects() {
+    return [
+      { source: '/:lang(be|nl)/info', destination: '/:lang/help', permanent: true },
+    ];
+  }
+  ```
 
 ## Post-Completion
 
 *Items requiring manual intervention — no checkboxes.*
 
 **Manual verification**:
-- Real mobile device smoke-test (iOS Safari + Android Chrome): tab bar pinned across all screens, safe-area padding correct on iPhones with home indicator, header blur visible when scrolling.
-- Lighthouse re-run on mobile after changes: accessibility must not regress.
-- Confirm the copy on `/info` matches MARA's voice (the page is new; hand-off the copy review to the content owner).
+- Real-device check on iPhone (Safari) and Android (Chrome): tab bar pinned across all screens; donate pill conic animation runs smoothly (no jank); header blur + saturation visible while scrolling; `/info` URLs redirect.
+- Lighthouse mobile re-run on `/be` and `/nl/help`: accessibility ≥ previous score.
+- Compare chrome side-by-side with `ui_kits/mobile/index.html` (load in a local browser) at the same zoom level.
 
 **External system updates**: none.
 
-**Follow-on plans**:
-- Plan 3: `docs/plans/2026-04-23-design-refresh.md` — the eight chat-driven items. Once Plan 3 rewrites `--background-image-beautiful-button` to the seamless conic gradient, the Donate tab's rainbow upgrades automatically.
+**Follow-on**:
+- Subsequent screen-content plans (Home editorial layout, Events filter+agenda, Passport form, Donate amount picker, About) will each reference `ui_kits/mobile/{Home,Screens,Donate}.jsx` for their respective specs. Same rule: the kit is authoritative, no improvisation.
 
-**Open questions surfaced during IA design — resolve before Task 1**:
-- Refugees-bot currently lives as an item inside the desktop `DesktopMenu` dropdown. Does it route to an internal page or to an external URL? Reuse the exact same URL in `/info`.
-- About-page Related section: which report year is "latest"? At plan-write time the codebase references 2022–2025 in `mobileMenu.tsx`; pick the highest year that has content published.
+**Open questions** (resolve only if encountered during execution; do not invent):
+- If the kit's `box-shadow: 0 -1px 0 #EBEBEB, 0 -10px 20px rgb(0 0 0/.04)` cannot be expressed cleanly in Tailwind 4 arbitrary syntax, fall back to inline `style={{ boxShadow: '...' }}` — value stays exact.
+- If `backdrop-blur-[16px]` + `backdrop-saturate-[1.8]` produce a different pixel result than the kit (Safari iOS sometimes clamps `saturate` differently than Chromium), match the kit's visual rather than its CSS — but document the deviation here before applying.

@@ -73,6 +73,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...generateTranslatedUrls('/news'),
     ...generateTranslatedUrls('/guides'),
     ...generateTranslatedUrls('/kupalle'),
+    ...generateTranslatedUrls('/help'),
     ...generateTranslatedUrls('/alien-passport'),
     ...newsUrls,
     ...eventsUrls,
