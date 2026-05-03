@@ -8,18 +8,18 @@ const securityHeaders = [
     key: 'Content-Security-Policy',
     value: [
       "default-src 'self'",
-      // Scripts: Next.js, Clerk, Stripe, Umami
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://clerk.belarusians.nl https://*.clerk.accounts.dev https://js.stripe.com https://analytics.umami.is https://cloud.umami.is https://www.googletagmanager.com",
+      // Scripts: Next.js, Clerk, Stripe, Umami, Google Tag (GTM + Ads conversion)
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://clerk.belarusians.nl https://*.clerk.accounts.dev https://js.stripe.com https://analytics.umami.is https://cloud.umami.is https://www.googletagmanager.com https://googleads.g.doubleclick.net https://www.google.com",
       // Styles: Next.js inline styles + Google Fonts
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       // Fonts
       "font-src 'self' https://fonts.gstatic.com",
-      // Images: self, Sanity CDN, data URIs
-      "img-src 'self' data: https://cdn.sanity.io",
-      // Frames: Stripe, Google Forms, status badge
-      "frame-src https://js.stripe.com https://docs.google.com https://status.belarusians.nl",
-      // Connections: Sanity API, Clerk, Stripe, ClickMeeting, Umami
-      "connect-src 'self' https://*.sanity.io https://clerk.belarusians.nl https://*.clerk.accounts.dev https://api.stripe.com https://analytics.umami.is https://cloud.umami.is https://api-gateway.umami.dev",
+      // Images: self, Sanity CDN, data URIs, Google Tag pixels (GA4 + Ads)
+      "img-src 'self' data: https://cdn.sanity.io https://*.google-analytics.com https://*.googletagmanager.com https://www.google.com https://googleads.g.doubleclick.net https://pagead2.googlesyndication.com",
+      // Frames: Stripe, Google Forms, status badge, Google Ads conversion iframes
+      "frame-src https://js.stripe.com https://docs.google.com https://status.belarusians.nl https://td.doubleclick.net",
+      // Connections: Sanity API, Clerk, Stripe, ClickMeeting, Umami, Google Tag (GA4 + Ads)
+      "connect-src 'self' https://*.sanity.io https://clerk.belarusians.nl https://*.clerk.accounts.dev https://api.stripe.com https://analytics.umami.is https://cloud.umami.is https://api-gateway.umami.dev https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://www.google.com https://googleads.g.doubleclick.net https://pagead2.googlesyndication.com",
       // Workers: Clerk uses service workers
       "worker-src 'self' blob:",
     ].join('; '),
