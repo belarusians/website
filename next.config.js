@@ -14,8 +14,9 @@ const securityHeaders = [
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       // Fonts
       "font-src 'self' https://fonts.gstatic.com",
-      // Images: self, Sanity CDN, data URIs, Google Tag pixels (GA4 + Ads)
-      "img-src 'self' data: https://cdn.sanity.io https://*.google-analytics.com https://*.googletagmanager.com https://www.google.com https://googleads.g.doubleclick.net https://pagead2.googlesyndication.com",
+      // Images: self, Sanity CDN, data URIs, Google Tag pixels (GA4 + Ads). Google Ads remarketing
+      // fires from www.google.<TLD> based on visitor region — add the TLDs your audience hits.
+      "img-src 'self' data: https://cdn.sanity.io https://*.google-analytics.com https://*.googletagmanager.com https://www.google.com https://www.google.nl https://www.google.be https://www.google.de https://www.google.pl https://googleads.g.doubleclick.net https://pagead2.googlesyndication.com",
       // Frames: Stripe, Google Forms, status badge, Google Ads conversion iframes
       "frame-src https://js.stripe.com https://docs.google.com https://status.belarusians.nl https://td.doubleclick.net",
       // Connections: Sanity API, Clerk, Stripe, ClickMeeting, Umami, Google Tag (GA4 + Ads)
