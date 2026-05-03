@@ -9,7 +9,7 @@ const securityHeaders = [
     value: [
       "default-src 'self'",
       // Scripts: Next.js, Clerk, Stripe, Umami
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://clerk.belarusians.nl https://*.clerk.accounts.dev https://js.stripe.com https://analytics.umami.is https://cloud.umami.is",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://clerk.belarusians.nl https://*.clerk.accounts.dev https://js.stripe.com https://analytics.umami.is https://cloud.umami.is https://www.googletagmanager.com",
       // Styles: Next.js inline styles + Google Fonts
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       // Fonts
