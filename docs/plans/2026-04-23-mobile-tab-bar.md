@@ -208,8 +208,8 @@ Open both windows side-by-side: `ui_kits/mobile/index.html` (in a browser) and `
 
 ### Task 6: Update CLAUDE.md note
 
-- [ ] in the project `CLAUDE.md` "Architectural Decisions" section, replace the previous mobile-tab-bar paragraph with: "Mobile chrome (header + bottom tab bar) is implemented from the kit at `ui_kits/mobile/`. Tab order, labels, colors, and the raised donate pill come from `ui_kits/mobile/Header.jsx` + `styles.css` — do not improvise them. Tabs: home, events, donate (center, conic-rainbow pill via `bg-rainbow-spin`), help (hub for passport + refugees-bot at `/[lang]/help`), about. Header uses `backdrop-blur-[16px] backdrop-saturate-[1.8] bg-white-shade/85`."
-- [ ] no test (docs only).
+- [x] in the project `CLAUDE.md` "Architectural Decisions" section, replace the previous mobile-tab-bar paragraph with: "Mobile chrome (header + bottom tab bar) is implemented from the kit at `ui_kits/mobile/`. Tab order, labels, colors, and the raised donate pill come from `ui_kits/mobile/Header.jsx` + `styles.css` — do not improvise them. Tabs: home, events, donate (center, conic-rainbow pill via `bg-rainbow-spin`), help (hub for passport + refugees-bot at `/[lang]/help`), about. Header uses `backdrop-blur-[16px] backdrop-saturate-[1.8] bg-white-shade/85`." (No prior mobile-tab-bar paragraph existed in CLAUDE.md, so this was added as a new "Mobile chrome (header + tab bar)" subsection under "Architectural Decisions (Non-Obvious)", placed right after "Visual foundations (refreshed)".)
+- [x] no test (docs only).
 
 ## Technical Details
 
