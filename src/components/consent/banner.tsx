@@ -50,8 +50,8 @@ const BANNER_BASE_CLASSES = [
   'fixed',
   'left-3',
   'right-3',
-  // Sit just above the fixed mobile TabBar (90px = pt-2 + min-h-[48px] + pb-[34px]).
-  'bottom-[88px]',
+  // Sit above the fixed mobile TabBar (90px = pt-2 + min-h-[48px] + pb-[34px]) with 14px breathing room.
+  'bottom-[104px]',
   'p-[18px]',
   'pb-[calc(16px+env(safe-area-inset-bottom))]',
   'bg-white',
@@ -86,8 +86,8 @@ const PRIVACY_LINK_CLASSES = 'text-[13px] text-grey self-start hover:text-primar
 
 const PILL_CLASSES = [
   'fixed',
-  // Sit just above the fixed mobile TabBar (90px = pt-2 + min-h-[48px] + pb-[34px]).
-  'bottom-[88px]',
+  // Sit above the fixed mobile TabBar (90px = pt-2 + min-h-[48px] + pb-[34px]) with 14px breathing room.
+  'bottom-[104px]',
   'left-3',
   'md:bottom-[18px]',
   'md:left-[18px]',
@@ -109,7 +109,8 @@ const PILL_CLASSES = [
   'font-medium',
   'transition-all',
   'duration-150',
-  'z-40',
+  // z-50 to match the banner card and stack above the TabBar (z-40); the 14px gap also avoids visual overlap.
+  'z-50',
 ].join(' ');
 
 export const BANNER_EXIT_DURATION_MS = 350;
