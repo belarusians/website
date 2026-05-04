@@ -113,8 +113,8 @@ describe('sitemap', () => {
 
     const result = await sitemap();
 
-    // 10 static paths × 2 locales + (2 news + 1 event + 1 vacancy + 1 guide) × 2 locales
-    const expectedStatic = 10 * 2;
+    // 11 static paths × 2 locales + (2 news + 1 event + 1 vacancy + 1 guide) × 2 locales
+    const expectedStatic = 11 * 2;
     const expectedDynamic = (2 + 1 + 1 + 1) * 2;
     expect(result).toHaveLength(expectedStatic + expectedDynamic);
   });

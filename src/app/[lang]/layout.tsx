@@ -12,6 +12,7 @@ import { supportedLngs } from '../i18n/settings';
 import { getAlternates } from '../../utils/og';
 import { toLang } from '../../utils/lang';
 import { ConsentBanner } from '../../components/consent/banner';
+import { TabBar } from '../../components/menu/mobile/tabBar';
 
 export const GOOGLE_ADS_TAG_ID = 'AW-11125506805';
 
@@ -49,12 +50,13 @@ gtag('config', '${GOOGLE_ADS_TAG_ID}');`,
   return false;
 }`}
       </Script>
-      <div className="flex flex-col gap-4 lg:gap-6 min-h-screen">
+      <div className="flex flex-col gap-4 lg:gap-6 min-h-screen pb-[88px] md:pb-0">
         <LangSync lang={lang} />
         <Header lang={lang} className="lg:container" />
         <main className="flex flex-col gap-4 lg:gap-6">{children}</main>
         <Footer className="lg:container mt-auto" />
       </div>
+      <TabBar lang={lang} />
       <ConsentBanner lang={lang} />
     </ClerkProvider>
   );

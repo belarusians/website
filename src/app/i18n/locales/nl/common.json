@@ -12,5 +12,13 @@
   "refugees-bot": "Сommunicatie bot",
   "donate-us": "Doneren",
   "alien-passport": "Vreemdelingenpaspoort",
-  "reports": "Jaarverslagen"
+  "reports": "Jaarverslagen",
+  "tab": {
+    "home": "Home",
+    "events": "Agenda",
+    "donate": "Steun",
+    "help": "Hulp",
+    "info": "Info",
+    "aria-label": "Mobiele hoofdnavigatie"
+  }
 }
