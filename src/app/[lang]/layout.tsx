@@ -13,7 +13,7 @@ import { getAlternates } from '../../utils/og';
 import { toLang } from '../../utils/lang';
 import { ConsentBanner } from '../../components/consent/banner';
 
-export const GOOGLE_ADS_TAG_ID = 'AW-11125506805';
+const GOOGLE_TAG_ID = 'GT-5NR2HDK8';
 
 export default async function MainLayout({
   children,
@@ -34,16 +34,16 @@ export default async function MainLayout({
 function gtag(){dataLayer.push(arguments);}
 gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
 gtag('js', new Date());
-gtag('config', '${GOOGLE_ADS_TAG_ID}');`,
+gtag('config', '${GOOGLE_TAG_ID}');`,
         }}
       />
-      <Script async src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_TAG_ID}`} />
+      <Script async src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_TAG_ID}`} />
       <Script id="gtm-conversion-reporter">
         {`function gtag_report_conversion(value) {
   var callback = function () {};
   gtag('event', 'conversion', {
       'send_to': value,
-      'transaction_id': '',
+      'transaction_id': crypto.randomUUID(),
       'event_callback': callback
   });
   return false;

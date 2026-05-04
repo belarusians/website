@@ -17,7 +17,7 @@ jest.mock('../../../components/consent/banner', () => ({
   ConsentBanner: (): null => null,
 }));
 
-import MainLayout, { GOOGLE_ADS_TAG_ID } from '../layout';
+import MainLayout from '../layout';
 import { ConsentBanner } from '../../../components/consent/banner';
 
 function containsElementOfType(node: unknown, type: string): boolean {
@@ -52,11 +52,6 @@ describe('MainLayout', () => {
     expect(mainElement!.props.children).toBe('unique-child-marker');
   });
 
-  test('exports a non-empty Google Ads tag id', () => {
-    expect(typeof GOOGLE_ADS_TAG_ID).toBe('string');
-    expect(GOOGLE_ADS_TAG_ID).toMatch(/^AW-/);
-  });
-
   test('renders the gtag-consent-default as a raw inline <script> with denied defaults', async () => {
     const element = (await MainLayout({
       children: null,
@@ -77,7 +72,7 @@ describe('MainLayout', () => {
     expect(html).toContain("ad_storage: 'denied'");
     expect(html).toContain("ad_user_data: 'denied'");
     expect(html).toContain("ad_personalization: 'denied'");
-    expect(html).toContain(GOOGLE_ADS_TAG_ID);
+    expect(html).toMatch(/gtag\('config', 'GT-[A-Z0-9]+'\)/);
   });
 
   test('consent default <script> is positioned before the gtag.js <Script> in the tree', async () => {
@@ -86,8 +81,9 @@ describe('MainLayout', () => {
       params: Promise.resolve({ lang: 'be' }),
     })) as ReactElement;
 
-    const expectedSrc = `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_TAG_ID}`;
-    const orderedIds = collectScriptOrder(element, expectedSrc);
+    const remote = findElementByPropMatch(element, 'src', /^https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=GT-/);
+    expect(remote).not.toBeNull();
+    const orderedIds = collectScriptOrder(element, remote!.props.src as string);
     const defaultIdx = orderedIds.indexOf('gtag-consent-default');
     const remoteIdx = orderedIds.indexOf('gtag-remote');
     expect(defaultIdx).toBeGreaterThanOrEqual(0);
@@ -95,14 +91,13 @@ describe('MainLayout', () => {
     expect(defaultIdx).toBeLessThan(remoteIdx);
   });
 
-  test('loads gtag.js with the configured tag id', async () => {
+  test('loads gtag.js with a Google tag id', async () => {
     const element = (await MainLayout({
       children: null,
       params: Promise.resolve({ lang: 'be' }),
     })) as ReactElement;
 
-    const expectedSrc = `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_TAG_ID}`;
-    const remote = findElementByProp(element, 'src', expectedSrc);
+    const remote = findElementByPropMatch(element, 'src', /^https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=GT-/);
     expect(remote).not.toBeNull();
     expect(remote!.props).toMatchObject({ async: true });
   });
@@ -202,6 +197,30 @@ function findElementByProp(
   }
   if (element.props && 'children' in element.props) {
     return findElementByProp(element.props.children, propName, propValue);
+  }
+  return null;
+}
+
+function findElementByPropMatch(
+  node: unknown,
+  propName: string,
+  pattern: RegExp,
+): ReactElement<Record<string, unknown>> | null {
+  if (node === null || node === undefined || typeof node !== 'object') return null;
+  if (Array.isArray(node)) {
+    for (const n of node) {
+      const found = findElementByPropMatch(n, propName, pattern);
+      if (found) return found;
+    }
+    return null;
+  }
+  const element = node as ReactElement<Record<string, unknown> & { children?: ReactNode }>;
+  const value = element.props?.[propName];
+  if (typeof value === 'string' && pattern.test(value)) {
+    return element as ReactElement<Record<string, unknown>>;
+  }
+  if (element.props && 'children' in element.props) {
+    return findElementByPropMatch(element.props.children, propName, pattern);
   }
   return null;
 }
