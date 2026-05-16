@@ -35,6 +35,7 @@
     "@sanity/vision": "^5.22.0",
     "@vercel/speed-insights": "~1.1.0",
     "googleapis": "^146.0.0",
+    "google-auth-library": "9.15.1",
     "i18next": "~25.2.1",
     "i18next-resources-to-backend": "^1.2.1",
     "next": "16.2.6",
