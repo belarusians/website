@@ -11,6 +11,8 @@ jest.mock('next-sanity', () => ({
     strings.reduce((acc, s, i) => acc + s + (values[i] ?? ''), ''),
 }));
 
+jest.mock('@portabletext/to-html', () => ({ toHTML: () => '' }));
+
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const { getAllEventsSlugs } = require('../event/service') as typeof import('../event/service');
 // eslint-disable-next-line @typescript-eslint/no-require-imports
