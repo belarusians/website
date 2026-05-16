@@ -32,13 +32,14 @@ Website for MARA - a non-profit organization of Belarusians in the Netherlands. 
 
 ### Prerequisites
 
-* [Node.js](https://nodejs.org/en/) 20+
+* [Node.js](https://nodejs.org/en/) 24
+* [pnpm](https://pnpm.io/) (managed via Corepack — `corepack enable` picks up the version pinned in `package.json`)
 
 ### Getting Started
 
 1. Install dependencies:
    ```
-   npm install
+   pnpm install
    ```
 
 2. Set up environment variables:
@@ -46,25 +47,25 @@ Website for MARA - a non-profit organization of Belarusians in the Netherlands. 
 
 3. Start the development server:
    ```
-   npm run dev
+   pnpm dev
    ```
-   
+
    For faster compilation with Turbo:
    ```
-   npm run dev:turbo
+   pnpm dev:turbo
    ```
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
 ## Available Scripts
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run start` - Run production build
-- `npm run lint` - Run ESLint
-- `npm run lint:fix` - Fix linting issues
-- `npm run test` - Run tests
-- `npm run typecheck` - Check TypeScript types
+- `pnpm dev` - Start development server
+- `pnpm build` - Build for production
+- `pnpm start` - Run production build
+- `pnpm lint` - Run ESLint
+- `pnpm lint:fix` - Fix linting issues
+- `pnpm test` - Run tests
+- `pnpm typecheck` - Check TypeScript types
 
 ## Deployment
 
