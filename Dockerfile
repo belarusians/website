@@ -1,23 +1,25 @@
-FROM node:16-alpine3.16
+FROM node:24-alpine
 
 WORKDIR /app
 
 ENV USER=appuser \
     GROUP=appgroup
 
-COPY package.json package-lock.json ./
-RUN npm install
+RUN corepack enable
+
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+RUN pnpm install --frozen-lockfile
 
 COPY . .
 
 RUN addgroup -S ${GROUP} && \
     adduser -S ${USER} ${GROUP} && \
     chown ${USER}:${GROUP} /app && \
-    npx next telemetry disable && \
-    npm run build
+    pnpm exec next telemetry disable && \
+    pnpm build
 
 USER ${USER}
 
 EXPOSE 3000
 
-CMD ["npm", "run", "start"]
+CMD ["pnpm", "start"]

@@ -1,0 +1,11 @@
+allowBuilds:
+  '@clerk/shared': false
+  '@fortawesome/fontawesome-common-types': false
+  '@fortawesome/fontawesome-svg-core': false
+  '@fortawesome/free-brands-svg-icons': false
+  '@fortawesome/free-solid-svg-icons': false
+  '@vercel/speed-insights': false
+  esbuild: false
+  sharp: false
+  unrs-resolver: false
+minimumReleaseAge: 2880

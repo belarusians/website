@@ -3,12 +3,12 @@
 Website for MARA, a non-profit organization of Belarusians in the Netherlands. Next.js 15 App Router, React 19, TypeScript, TailwindCSS 4, Sanity 3 CMS, Clerk auth, Stripe payments, i18next (Belarusian/Dutch), AWS S3 storage.
 
 ## Commands
-- `npm run dev` / `npm run dev:turbo` — dev server
-- `npm run build` — production build
-- `npm run lint` / `npm run lint:fix` — ESLint
-- `npm run typecheck` — TypeScript check
-- `npm run test` / `npx jest -t "pattern"` — Jest tests
-- `npm run sanity:types` — regenerate Sanity TypeGen types (run after schema changes)
+- `pnpm dev` / `pnpm dev:turbo` — dev server
+- `pnpm build` — production build
+- `pnpm lint` / `pnpm lint:fix` — ESLint
+- `pnpm typecheck` — TypeScript check
+- `pnpm test` / `pnpm exec jest -t "pattern"` — Jest tests
+- `pnpm sanity:types` — regenerate Sanity TypeGen types (run after schema changes)
 
 ## Code Style
 - Prettier: 120 chars, single quotes, 2-space indent
