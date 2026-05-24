@@ -35,6 +35,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
     <html lang="be">
       <head>
         <meta name="msapplication-config" content="browserconfig.xml" />
+        <meta name="facebook-domain-verification" content="zscpf55yaitfhy1cr0rccejzn2u8dm" />
         <link rel="mask-icon" type="image/svg+xml" href="/icons/safari-pinned-tab.svg" color={COLORS.red} />
         <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-touch-icon-60x60.png" />
         <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/icons/apple-touch-icon-60x60-precomposed.png" />
