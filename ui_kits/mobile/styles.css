@@ -1,0 +1,455 @@
+/* MARA Mobile UI Kit styles
+   Touch-optimized companion to ui_kits/website/styles.css
+   Design width: 390px (iPhone 14/15)
+   All taps ≥ 44px, generous vertical rhythm, type scaled for hand-reach.
+*/
+@import url('../../colors_and_type.css');
+
+.m-root {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  color: #231F20;
+  background: #F6F6F6;
+  min-height: 100%;
+}
+
+/* ========== Reset inside frame ========== */
+.m-root *, .m-root *::before, .m-root *::after { box-sizing: border-box; }
+.m-root a { color: inherit; text-decoration: none; }
+/* Reset only bare/utility buttons — don't touch components that paint their own bg/color */
+.m-root button:not([class*="m-btn"]):not(.m-iconbtn):not(.m-tabbar *):not(.m-price):not(.m-radio-row *) {
+  font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer;
+}
+.m-root p { margin: 0 0 12px; line-height: 1.55; }
+
+/* ========== Header ========== */
+.m-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 16px 10px;
+  background: rgba(246, 246, 246, 0.85);
+  backdrop-filter: saturate(180%) blur(16px);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+  position: sticky; top: 0; z-index: 30;
+}
+.m-header .logo {
+  width: 34px; height: 34px; display: block;
+}
+.m-iconbtn {
+  width: 44px; height: 44px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: #ED1C24;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 /.08), 0 4px 6px -4px rgb(0 0 0/.08);
+  transition: box-shadow .15s, transform .1s;
+}
+.m-iconbtn:active { transform: translateY(1px); box-shadow: 0 2px 4px rgb(0 0 0 /.14); }
+.m-iconbtn .bar {
+  display: block; width: 20px; height: 2px; background: #ED1C24; border-radius: 2px;
+  position: relative;
+}
+.m-iconbtn .bar::before, .m-iconbtn .bar::after {
+  content: ""; position: absolute; left: 0; width: 100%; height: 2px; background: #ED1C24; border-radius: 2px;
+}
+.m-iconbtn .bar::before { top: -6px; }
+.m-iconbtn .bar::after  { top:  6px; }
+
+/* ========== Typography ========== */
+.m-eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: #ED1C24; margin: 0 0 8px;
+}
+.m-h1 {
+  font-family: 'Roboto', sans-serif; font-weight: 400;
+  font-size: 28px; line-height: 1.18; letter-spacing: -.01em;
+  margin: 0 0 14px; color: #231F20; text-wrap: pretty;
+}
+.m-h2 {
+  font-family: 'Roboto', sans-serif; font-weight: 500;
+  font-size: 20px; line-height: 1.25; margin: 0 0 12px; color: #231F20;
+}
+.m-body { font-size: 15px; color: #231F20; font-weight: 300; }
+.m-muted { color: #808080; font-weight: 300; }
+
+/* ========== Layout ========== */
+.m-section { padding: 24px 16px; }
+.m-section-tight { padding: 16px; }
+.m-divider { height: 1px; background: #EBEBEB; margin: 24px 16px; }
+
+/* ========== Buttons ========== */
+/* ========== Buttons ==========
+   Direct mobile twin of design-system .btn (preview/buttons.html).
+   Same recipe: 6px radius, Roboto 500/16, shadow-lg at rest,
+   hover lifts (-2px + shadow-2xl), active presses (+1px + tight shadow).
+   Only mobile-specific thing: min-height 48px for touch targets,
+   full-width by default for bottom-docked CTAs.
+*/
+.m-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 48px; padding: 12px 22px;
+  font: 500 16px Roboto;
+  border-radius: 6px;
+  border: 0;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 /.10), 0 4px 6px -4px rgb(0 0 0/.10);
+  transition: box-shadow .18s ease, transform .12s ease, background-color .18s ease, filter .18s ease;
+  background: #fff; color: #231F20;
+  cursor: pointer; width: 100%;
+  will-change: transform, box-shadow;
+}
+/* Mobile doesn't fire :hover reliably; active state carries all the animation */
+.m-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgb(0 0 0 /.18);
+}
+/* Primary — brand red + white text, darkens on press (matches DS .btn.primary) */
+.m-btn-primary { background: #ED1C24; color: #fff; }
+.m-btn-primary:active { background: #AF0000; }
+/* Ghost — flat white with no shadow */
+.m-btn-ghost {
+  background: #fff; color: #231F20;
+  box-shadow: none;
+}
+.m-btn-ghost:active { background: #F6F6F6; transform: translateY(1px); }
+
+/* ========== Donate rainbow (seamless conic) ========== */
+@property --m-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+.m-btn-donate {
+  position: relative; isolation: isolate; overflow: hidden;
+  color: #fff; background: #231F20;
+  font-weight: 500;
+}
+.m-btn-donate::before {
+  content: ""; position: absolute;
+  top: 50%; left: 50%;
+  width: 300%; aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(from var(--m-angle),
+    #ED1C24 0%, #F36D72 14%, #F59638 28%, #F5C84A 42%,
+    #E8528C 60%, #8B2F8F 78%, #4B1D6B 88%, #AF0000 96%, #ED1C24 100%);
+  animation: m-spin 6s linear infinite;
+  z-index: -1;
+}
+@keyframes m-spin { to { --m-angle: 360deg; } }
+
+/* ========== Cards ========== */
+.m-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 /.08), 0 4px 6px -4px rgb(0 0 0/.08);
+  overflow: hidden;
+}
+.m-card-body { padding: 16px; }
+
+/* Featured (hero) news card */
+.m-featured {
+  margin: 0 16px 14px;
+}
+.m-featured .hero {
+  height: 200px;
+  background:
+    radial-gradient(ellipse at 30% 40%, rgba(237,28,36,.35), transparent 60%),
+    linear-gradient(135deg, #231F20 0%, #4a2226 100%);
+}
+
+/* Horizontal-scroll event row */
+.m-hscroll {
+  display: flex; gap: 12px;
+  overflow-x: auto;
+  padding: 4px 16px 12px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.m-hscroll::-webkit-scrollbar { display: none; }
+.m-hscroll > * {
+  flex: 0 0 78%; scroll-snap-align: start;
+}
+
+.m-event {
+  background: #fff; border-radius: 10px; padding: 14px;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 /.08), 0 4px 6px -4px rgb(0 0 0/.08);
+}
+.m-event .live {
+  display: inline-block; background: #ED1C24; color: #fff;
+  padding: 3px 8px; font-size: 10px; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase; border-radius: 3px;
+  margin-bottom: 10px;
+}
+.m-event .date  { color: #808080; font-size: 13px; margin-bottom: 6px; }
+.m-event .title { color: #ED1C24; font-weight: 700; font-size: 16px; margin-bottom: 10px; line-height: 1.3; }
+.m-event .loc   { color: #808080; font-size: 13px; }
+
+/* Achievements (Belarus flag radial bg) */
+.m-achievement {
+  margin: 0 16px; padding: 24px 20px;
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at 80% 20%, rgba(175,0,0,.65), transparent 60%),
+    #ED1C24;
+  color: #fff;
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;
+  text-align: center;
+}
+.m-achievement .num { font-size: 28px; font-weight: 500; letter-spacing: -.01em; line-height: 1; }
+.m-achievement .cap { font-size: 11px; font-weight: 300; opacity: .92; margin-top: 6px; line-height: 1.25; }
+
+/* News list (stacked) */
+.m-news { padding: 0 16px; display: flex; flex-direction: column; gap: 12px; }
+.m-news .item { display: flex; gap: 12px; background: #fff; border-radius: 10px;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 /.08), 0 4px 6px -4px rgb(0 0 0/.08);
+  overflow: hidden;
+}
+.m-news .thumb { flex: 0 0 90px; min-height: 80px; }
+.m-news .body { padding: 10px 12px; font-size: 13px; }
+.m-news .d { color: #808080; font-size: 11px; margin-bottom: 4px; }
+
+/* Subscribe form */
+.m-form {
+  padding: 0 16px;
+  display: flex; gap: 10px; flex-direction: column;
+}
+.m-form .input {
+  width: 100%; padding: 14px 16px;
+  background: #fff; border: 0; border-radius: 8px;
+  font: 400 16px Roboto; color: #231F20;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 /.08), 0 4px 6px -4px rgb(0 0 0/.08);
+  outline: none;
+}
+.m-form .input::placeholder { color: #808080; }
+.m-form .input:focus { box-shadow: 0 20px 25px -5px rgb(0 0 0 /.10), 0 8px 10px -6px rgb(0 0 0/.10); }
+
+/* ========== Persistent Donate CTA (floating) ========== */
+/* absolute so it stays inside the iOS frame, not the viewport */
+.m-donate-cta {
+  position: absolute; left: 16px; right: 16px; bottom: 24px;
+  z-index: 40;
+}
+.m-donate-cta .m-btn {
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 /.18), 0 8px 10px -6px rgb(0 0 0/.15);
+}
+
+/* ========== Menu sheet (hamburger) ========== */
+.m-menu-scrim {
+  position: absolute; inset: 0; background: rgb(0 0 0 / .4);
+  z-index: 80;
+  animation: m-fadein .2s ease;
+}
+@keyframes m-fadein { from{opacity:0} to{opacity:1} }
+.m-menu-sheet {
+  position: absolute; left: 0; right: 0; top: 0; bottom: 0;
+  background: #F6F6F6;
+  z-index: 90;
+  display: flex; flex-direction: column;
+  animation: m-slide-down .28s cubic-bezier(.2,.8,.2,1);
+}
+@keyframes m-slide-down {
+  from { transform: translateY(-20px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+.m-menu-sheet .head {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 16px;
+}
+.m-menu-sheet .close {
+  width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center;
+  font-size: 24px; color: #ED1C24;
+  background: #fff; border-radius: 8px;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 /.08);
+}
+.m-menu-sheet .items {
+  flex: 1; overflow-y: auto;
+  padding: 12px 16px 20px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.m-menu-sheet .item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 18px;
+  background: #fff;
+  border-radius: 8px;
+  font: 500 17px Roboto;
+  color: #231F20;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 /.05);
+}
+.m-menu-sheet .item:active { background: #F6F6F6; }
+.m-menu-sheet .item .chev { color: #ED1C24; font-size: 14px; }
+.m-menu-sheet .group-label {
+  font-size: 11px; font-weight: 700; color: #808080;
+  letter-spacing: .12em; text-transform: uppercase;
+  margin: 18px 6px 8px;
+}
+.m-menu-sheet .sub {
+  display: flex; flex-direction: column; gap: 2px;
+  margin: 4px 0 0;
+  padding: 4px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 /.05);
+}
+.m-menu-sheet .sub a {
+  padding: 12px 16px; color: #231F20; font-weight: 400; font-size: 15px;
+}
+.m-menu-sheet .lang-row {
+  display: flex; gap: 12px; margin: 20px 0 0;
+  padding: 4px; background: #fff; border-radius: 8px;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 /.05);
+}
+.m-menu-sheet .lang-row button {
+  flex: 1; padding: 14px;
+  font: 500 15px Roboto;
+  border-radius: 6px;
+  color: #231F20;
+  letter-spacing: .04em;
+}
+.m-menu-sheet .lang-row button.active { background: #ED1C24; color: #fff; }
+
+/* ========== Bottom tab bar variant ========== */
+.m-tabbar {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  background: #fff;
+  box-shadow: 0 -1px 0 #EBEBEB, 0 -10px 20px rgb(0 0 0 /.04);
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  padding: 8px 4px 34px;  /* 34px clears the iOS home-indicator area */
+  z-index: 50;
+}
+.m-tabbar button {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 4px; padding: 8px 4px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: #808080;
+  font: 500 10px Roboto;
+  min-height: 48px;
+}
+.m-tabbar button.active { color: #ED1C24; }
+.m-tabbar .donate-tab {
+  position: relative;
+}
+.m-tabbar .donate-tab .dot {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: #231F20;
+  position: relative; isolation: isolate; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 18px;
+  margin-top: -20px;
+  box-shadow: 0 8px 16px rgb(0 0 0 / .22);
+}
+.m-tabbar .donate-tab .dot::before {
+  content: ""; position: absolute;
+  top: 50%; left: 50%;
+  width: 300%; aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(from var(--m-angle),
+    #ED1C24 0%, #F36D72 14%, #F59638 28%, #F5C84A 42%,
+    #E8528C 60%, #8B2F8F 78%, #4B1D6B 88%, #AF0000 96%, #ED1C24 100%);
+  animation: m-spin 6s linear infinite;
+  z-index: -1;
+}
+
+/* ========== Side drawer variant ========== */
+.m-drawer {
+  position: absolute; top: 0; bottom: 0; left: 0; width: 78%; max-width: 320px;
+  background: #fff;
+  z-index: 90;
+  box-shadow: 0 0 40px rgb(0 0 0 /.2);
+  animation: m-slide-right .28s cubic-bezier(.2,.8,.2,1);
+  display: flex; flex-direction: column;
+}
+@keyframes m-slide-right {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(0); }
+}
+
+/* ========== Donate screen bits ========== */
+.m-price-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  padding: 0 16px;
+}
+.m-price {
+  background: #fff; padding: 18px; text-align: center;
+  border-radius: 8px; font-weight: 500; font-size: 18px;
+  color: #231F20;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 /.08);
+  cursor: pointer;
+  transition: background-color .15s, color .15s, transform .1s;
+}
+.m-price:active { transform: scale(.97); }
+.m-price.active { background: #ED1C24; color: #fff; }
+
+.m-price-custom {
+  width: 100%; padding: 14px 16px;
+  background: #fff; border: 0; border-radius: 8px;
+  font: 500 18px Roboto; color: #231F20;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 /.08);
+  text-align: center; outline: none;
+  margin-top: 10px;
+}
+
+/* Radio-style options */
+.m-radio-row {
+  display: flex; gap: 8px; padding: 0 16px; margin: 16px 0;
+}
+.m-radio-row button {
+  flex: 1; padding: 12px;
+  background: #fff; border: 0; border-radius: 8px; font: 500 14px Roboto;
+  color: #231F20; cursor: pointer;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 /.06);
+  transition: background .15s, color .15s;
+}
+.m-radio-row button.active { background: #ED1C24; color: #fff; }
+
+/* Form row */
+.m-field { padding: 0 16px; margin-bottom: 12px; }
+.m-field label { display: block; font-size: 12px; color: #808080; margin-bottom: 6px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; }
+
+/* Checkbox */
+.m-check {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px;
+  font-size: 15px;
+  cursor: pointer; user-select: none;
+}
+.m-check input { appearance: none; margin: 0; }
+.m-check .cb {
+  width: 24px; height: 24px; border-radius: 4px; background: #fff;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 /.08);
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.m-check .cb::after { content: "✓"; color: transparent; font-size: 14px; font-weight: 700; }
+.m-check input:checked + .cb { background: #ED1C24; }
+.m-check input:checked + .cb::after { color: #fff; }
+
+/* ========== Passport / form-heavy screen ========== */
+.m-steps {
+  display: flex; gap: 8px; padding: 16px; align-items: center;
+}
+.m-steps .step {
+  height: 6px; flex: 1; background: #EBEBEB; border-radius: 3px;
+}
+.m-steps .step.done { background: #ED1C24; }
+.m-steps .count { font-size: 12px; color: #808080; font-weight: 500; white-space: nowrap; margin-left: 6px; }
+
+/* ========== Utility ========== */
+.m-spacer-s { height: 8px; }
+.m-spacer-m { height: 16px; }
+.m-spacer-l { height: 24px; }
+
+/* About page */
+.m-about-photo {
+  margin: 0 16px; height: 180px; border-radius: 12px;
+  background:
+    radial-gradient(ellipse at 50% 35%, rgba(237,28,36,.3), transparent 65%),
+    linear-gradient(160deg, #D9D4D4 0%, #9A9494 100%);
+}
+.m-about-section h3 { color: #ED1C24; font-weight: 500; font-size: 18px; margin: 0 0 8px; }
+.m-partners { display: flex; gap: 16px; justify-content: space-around; padding: 0 16px; flex-wrap: wrap; }
+.m-partner { width: 100px; height: 60px; background: #fff; border-radius: 8px;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 /.06);
+  display: flex; align-items: center; justify-content: center;
+  color: #808080; font-size: 11px; font-weight: 500; letter-spacing: .05em;
+}

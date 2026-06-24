@@ -43,3 +43,14 @@ describe('Header logo link', () => {
     expect(link!.props.href).toBe('/nl');
   });
 });
+
+describe('Header mobile backdrop classes', () => {
+  test('renders kit-derived backdrop blur and saturation on mobile', async () => {
+    const element = (await Header({ className: '', lang: Lang.be })) as ReactElement<{ className: string }>;
+    const className = element.props.className;
+    expect(className).toContain('bg-white-shade/85');
+    expect(className).toContain('backdrop-blur-[16px]');
+    expect(className).toContain('backdrop-saturate-[1.8]');
+    expect(className).toContain('md:bg-white-shade');
+  });
+});

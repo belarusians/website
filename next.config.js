@@ -106,6 +106,12 @@ const nextConfig = {
         destination: "/be/news/guk-viasny",
         permanent: true,
       },
+      // since 03-05-2026: /info hub renamed to /help
+      {
+        source: "/:lang(be|nl)/info",
+        destination: "/:lang/help",
+        permanent: true,
+      },
     ];
   },
   reactStrictMode: true,

@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>MARA — Mobile UI Kit</title>
+  <link rel="icon" href="../../assets/logo_icon.svg"/>
+  <link rel="stylesheet" href="styles.css?v=9"/>
+  <style>
+    html, body { margin: 0; padding: 0; background: #f0eee9; font-family: Roboto, -apple-system, system-ui, sans-serif; }
+    * { box-sizing: border-box; }
+
+    .page { max-width: 1400px; margin: 0 auto; padding: 32px 24px 80px; }
+    @media (max-width: 700px) { .page { padding: 24px 16px 60px; } }
+
+    /* Intro */
+    .intro { margin-bottom: 36px; }
+    .intro .eye {
+      font-size: 11px; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: #ED1C24; margin-bottom: 10px;
+    }
+    .intro h1 {
+      font: 500 clamp(24px, 4vw, 38px)/1.15 Roboto, system-ui, sans-serif;
+      letter-spacing: -.02em; margin: 0 0 12px; color: #231F20;
+    }
+    .intro p {
+      font-size: 15px; line-height: 1.55; color: #555;
+      max-width: 620px; margin: 0;
+    }
+    .intro .meta {
+      display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 20px;
+    }
+    .intro .meta > div { font-size: 12px; color: #666; line-height: 1.4; min-width: 120px; }
+    .intro .meta b { color: #231F20; font-weight: 500; display: block; margin-bottom: 2px; font-size: 10px; letter-spacing: .06em; text-transform: uppercase; }
+
+    /* Zoom toggle */
+    .controls {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(240,238,233,.92); backdrop-filter: blur(8px);
+      padding: 10px 0; margin: 0 -24px 24px; padding: 10px 24px;
+      display: flex; gap: 8px; align-items: center;
+      border-bottom: 1px solid rgba(0,0,0,.06);
+    }
+    .controls label { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #666; font-weight: 500; margin-right: 4px; }
+    .controls button {
+      padding: 6px 12px; border-radius: 6px;
+      background: #fff; border: 1px solid rgba(0,0,0,.08);
+      font-size: 13px; font-weight: 500; cursor: pointer;
+      color: #231F20;
+    }
+    .controls button.active { background: #231F20; color: #fff; border-color: #231F20; }
+
+    /* Section */
+    .section { margin-bottom: 56px; }
+    .section h2 {
+      font: 500 22px/1.2 Roboto; color: #231F20;
+      letter-spacing: -.01em; margin: 0 0 4px;
+    }
+    .section .sub {
+      font-size: 13px; color: #666; margin-bottom: 24px;
+      max-width: 720px; line-height: 1.55;
+    }
+
+    /* Grid of phones — responsive, any viewport */
+    .grid {
+      display: grid;
+      gap: 40px 24px;
+      grid-template-columns: repeat(auto-fill, minmax(var(--card-w, 280px), 1fr));
+      align-items: start;
+    }
+
+    .card { display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 0; }
+    .card .label {
+      font-size: 12px; font-weight: 500; color: #666;
+      text-align: center; line-height: 1.3; max-width: var(--card-w, 280px);
+    }
+
+    /* Phone frame container — CSS zoom scales it down crisply.
+       Using `zoom` (supported in Chromium, Safari, and shimmed in FF) so
+       internal React components still receive native sizing while we shrink
+       visually. Fallback scale uses transform. */
+    .phone-slot {
+      --zoom: 0.7;
+      width: calc(390px * var(--zoom));
+      height: calc(780px * var(--zoom));
+      overflow: hidden;
+      border-radius: 34px;
+    }
+    .phone-inner {
+      width: 390px; height: 780px;
+      transform: scale(var(--zoom));
+      transform-origin: top left;
+    }
+    /* When "large" mode is on, show full-size frames */
+    body.size-lg { --size: 1; }
+    body.size-md { --size: 0.78; }
+    body.size-sm { --size: 0.6; }
+    body.size-lg .phone-slot { --zoom: 1; }
+    body.size-md .phone-slot { --zoom: 0.78; }
+    body.size-sm .phone-slot { --zoom: 0.6; }
+    body.size-lg .grid { --card-w: 400px; }
+    body.size-md .grid { --card-w: 320px; }
+    body.size-sm .grid { --card-w: 250px; }
+
+    /* Hover: subtle lift */
+    .phone-slot { transition: transform .15s ease; }
+    .card:hover .phone-slot { transform: translateY(-2px); filter: drop-shadow(0 10px 24px rgba(0,0,0,.12)); }
+  </style>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body class="size-md">
+<div id="root"></div>
+
+<script type="text/babel" src="ios-frame.jsx"></script>
+<script type="text/babel" src="Header.jsx"></script>
+<script type="text/babel" src="Home.jsx"></script>
+<script type="text/babel" src="Donate.jsx"></script>
+<script type="text/babel" src="Screens.jsx"></script>
+
+<script type="text/babel">
+// ─────────────────────────────────────────────
+// Phone: self-contained iOS frame, one page, nav pattern chosen.
+// ─────────────────────────────────────────────
+function Phone({ page, navPattern = 'hamburger', homeVariant = 'editorial', donateVariant = 'classic', initialLang = 'nl', ctaStyle = 'floating', openMenu = false }) {
+  const [lang, setLang] = React.useState(initialLang);
+  const [menu, setMenu] = React.useState(openMenu);
+  const [currentPage, setPage] = React.useState(page);
+
+  React.useEffect(() => { setPage(page); }, [page]);
+  const navigate = (k) => { setPage(k); setMenu(false); };
+
+  let screen = null;
+  if (currentPage === 'home')     screen = <MobileHome lang={lang} variant={homeVariant} navigate={navigate}/>;
+  if (currentPage === 'about')    screen = <MobileAbout lang={lang}/>;
+  if (currentPage === 'events')   screen = <MobileEvents lang={lang}/>;
+  if (currentPage === 'donate')   screen = <MobileDonate lang={lang} variant={donateVariant}/>;
+  if (currentPage === 'passport') screen = <MobilePassport lang={lang}/>;
+
+  const showFloating = (currentPage !== 'donate') && (ctaStyle === 'floating') && (navPattern !== 'tabbar');
+  const showTabbar = navPattern === 'tabbar';
+
+  return (
+    <div className="phone-slot">
+      <div className="phone-inner">
+        <IOSDevice width={390} height={780}>
+          {/* Outer wrapper: full frame, establishes stacking for absolutely-positioned chrome */}
+          <div className="m-root" style={{ position: 'relative', height: '100%', overflow: 'hidden' }}>
+            {/* Scrollable body — header scrolls with content; bottom-padded so last content isn't hidden behind tab bar */}
+            <div className="m-scroll" style={{
+              height: '100%', overflowY: 'auto', overflowX: 'hidden',
+              paddingBottom: showTabbar ? 110 : (showFloating ? 110 : 24),
+            }}>
+              <MobileHeader navPattern={navPattern} lang={lang} setLang={setLang}
+                            onMenu={() => setMenu(true)} page={currentPage} navigate={navigate}/>
+              {screen}
+            </div>
+
+            {/* Fixed-to-frame chrome (siblings of scroll area) */}
+            {showFloating && (
+              <div className="m-donate-cta">
+                <button className="m-btn m-btn-donate" onClick={() => navigate('donate')}>
+                  {lang === 'nl' ? 'Steun MARA' : 'Падтрымаць MARA'}
+                </button>
+              </div>
+            )}
+            {showTabbar && <TabBar page={currentPage} navigate={navigate} lang={lang}/>}
+
+            {menu && navPattern === 'hamburger' && (
+              <>
+                <div className="m-menu-scrim" onClick={() => setMenu(false)}/>
+                <MenuSheet lang={lang} setLang={setLang} navigate={navigate} onClose={() => setMenu(false)} page={currentPage}/>
+              </>
+            )}
+            {menu && navPattern === 'drawer' && (
+              <>
+                <div className="m-menu-scrim" onClick={() => setMenu(false)}/>
+                <SideDrawer lang={lang} setLang={setLang} navigate={navigate} onClose={() => setMenu(false)} page={currentPage}/>
+              </>
+            )}
+          </div>
+        </IOSDevice>
+      </div>
+    </div>
+  );
+}
+
+function Card({ label, children }) {
+  return (
+    <div className="card">
+      {children}
+      <div className="label">{label}</div>
+    </div>
+  );
+}
+
+function Section({ title, subtitle, children }) {
+  return (
+    <section className="section">
+      <h2>{title}</h2>
+      {subtitle && <div className="sub">{subtitle}</div>}
+      <div className="grid">{children}</div>
+    </section>
+  );
+}
+
+function SizeControls() {
+  const [size, setSize] = React.useState(() => localStorage.getItem('mara-mobile-size') || 'md');
+  React.useEffect(() => {
+    document.body.classList.remove('size-sm', 'size-md', 'size-lg');
+    document.body.classList.add(`size-${size}`);
+    localStorage.setItem('mara-mobile-size', size);
+  }, [size]);
+  return (
+    <div className="controls">
+      <label>Phone size</label>
+      {['sm', 'md', 'lg'].map(s => (
+        <button key={s} className={size === s ? 'active' : ''} onClick={() => setSize(s)}>
+          {s === 'sm' ? 'Small' : s === 'md' ? 'Medium' : 'Full'}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <div className="page">
+      <div className="intro">
+        <div className="eye">MARA · Mobile UI Kit</div>
+        <h1>Mobile companion to the desktop design system</h1>
+        <p>Designed at 390px (iPhone 14/15). Bottom tab bar navigation, editorial home hierarchy, and a brand-tight white/red donate flow. Same brand as desktop — tuned for touch.</p>
+        <div className="meta">
+          <div><b>Design width</b>390 × 780</div>
+          <div><b>Navigation</b>Bottom tab bar</div>
+          <div><b>Primary</b>#ED1C24</div>
+          <div><b>Min hit target</b>44 × 44</div>
+        </div>
+      </div>
+
+      <SizeControls/>
+
+      <Section title="Primary screens" subtitle="The mobile kit uses a fixed bottom tab bar for navigation, an editorial-style home, and a white/red impact-tier donate flow.">
+        <Card label="Home"><Phone page="home" navPattern="tabbar" homeVariant="editorial" ctaStyle="none"/></Card>
+        <Card label="Events · filter + agenda"><Phone page="events" navPattern="tabbar" ctaStyle="none"/></Card>
+        <Card label="Donate · amount picker"><Phone page="donate" navPattern="tabbar" donateVariant="hybrid" ctaStyle="none"/></Card>
+        <Card label="Alien Passport · info + request help"><Phone page="passport" navPattern="tabbar" ctaStyle="none"/></Card>
+        <Card label="About"><Phone page="about" navPattern="tabbar" ctaStyle="none"/></Card>
+        <Card label="Language · Belarusian"><Phone page="donate" navPattern="tabbar" donateVariant="hybrid" initialLang="be" ctaStyle="none"/></Card>
+      </Section>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
