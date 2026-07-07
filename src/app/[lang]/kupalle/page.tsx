@@ -13,6 +13,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import { toLang } from '../../../utils/lang';
 
+export const revalidate = 3600;
+
 export default async function KupallePage({ params }: CommonPageParams) {
   const { lang: langParam } = await params;
   const lang = toLang(langParam);

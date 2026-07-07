@@ -12,6 +12,15 @@ import H1 from '../../../../components/headings/h1';
 import { getAlternates } from '../../../../utils/og';
 import { toLang } from '../../../../utils/lang';
 
+export const revalidate = 3600;
+
+export function generateStaticParams() {
+  return ALLOWED_YEARS.flatMap((year) => [
+    { lang: 'be', year },
+    { lang: 'nl', year },
+  ]);
+}
+
 const ALLOWED_YEARS = ['2022', '2023', '2024', '2025'] as const;
 type ReportYear = (typeof ALLOWED_YEARS)[number];
 

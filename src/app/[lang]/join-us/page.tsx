@@ -8,6 +8,8 @@ import { Lang } from '../../../components/types';
 import { getAlternates } from '../../../utils/og';
 import { toLang } from '../../../utils/lang';
 
+export const revalidate = 3600;
+
 export default async function IndexPage({ params }: CommonPageParams) {
   const { lang: langParam } = await params;
   const lang = toLang(langParam);
